@@ -1,0 +1,260 @@
+/* Código para alterar o fundo do menu selecionado*/
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+	background-color: #6B5344;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+	border-top: 1px solid #6B5344;
+}
+
+/* Defini o tamanho da barra de navegação no celular */
+.navbar-header {
+	height: 110px;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+	color: #6B5344;
+    background-color: rgba(107, 83, 68, .15);
+}
+
+.nav > li.active a {
+	color: #FFF;
+	background-color: #6B5344;
+}
+
+.navbar-toggle {
+    font-size: 20px;
+    color: #6B5344;
+}
+
+/* ############## ÎNPUT INTERFACE ############## */
+
+.bootgrid-header .search .glyphicon, .bootgrid-footer .search .glyphicon {
+	color: #FFF;
+	background-color: #6B5344;
+	border: 1px solid #6B5344;
+}
+
+.input-group-addon {
+	color: #FFF;
+	background-color: #6B5344;
+	border: 1px solid #6B5344;
+	top: 0px;
+}
+
+.input-group-btn {
+	background-color: #6B5344;
+	border-radius: 5px;
+	border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-control {
+	color: #6B5344;
+	border: 1px solid #6B5344;
+}
+
+.btn-default {
+	color: #FFF;
+	background-color: #6B5344;
+	border: 0px;
+}
+
+.btn-default:focus {
+	color: #FFF;
+	background-color: rgba(107, 83, 68, .90);
+	border: 0px;
+}
+
+.btn-default:hover {
+	color: #FFF;
+	background-color: rgba(107, 83, 68, .90);
+	border: 0px;
+}
+
+.btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus {
+	color: #FFF;
+	background-color: rgba(107, 83, 68, .9);
+}
+
+.input-brown {
+	color: #6B5344;
+}
+
+.control-label {
+	font-size: 12px;
+	color: #6B5344;
+}
+
+.thumbnail {
+	display: inherit;
+	border-color: #6B5344;
+}
+
+/* ############## FIM INPUT INTERFACE ############## */
+
+/* ############## FIM DROPDOWM MENU ############## */
+
+.bootgrid-header .actionBar .btn-group > .btn-group .dropdown-menu .dropdown-item, .bootgrid-footer .infoBar .btn-group > .btn-group .dropdown-menu .dropdown-item {
+	color: #6B5344;
+}
+
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+	color: #fff !important;
+	background-color: #6B5344;
+}
+
+/* ############## FIM DROPDOWM MENU ############## */
+
+/* ############## TABELA ############## */
+
+.table > thead > tr > th {
+	border-bottom: 2px solid #6B5344;
+}
+
+.nav-tabs {
+	margin-bottom: 40px !important;
+}
+
+/* ############## FIM TABELA ############## */
+
+
+/* ############## PAGINADOR ############## */
+
+/* Configura a cor da letra e cor de fundo */
+.pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
+    color: #6B5344;
+    background-color: transparent;
+    
+}
+
+/* Configura a cor da borda */
+.pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
+    border-color: #6B5344;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+	color: #FFF;
+	background-color: #6B5344;
+	cursor: pointer;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+	border-color: #6B5344;
+
+}
+
+.pagination > li > a:hover {
+	color: #6B5344;
+	border-color: #6B5344;
+	cursor: pointer;
+}
+
+.pagination > li > a, .pagination > li > span {
+	color: #6B5344;
+	border: 1px solid #6B5344;
+}
+
+/* ############## FIM PAGINADOR ############## */
+
+
+
+a {
+	color: #6B5344;
+}
+
+/**/
+.container-p {
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h1, h2, h3, h4, h5 {
+	color: #6B5344;
+}
+
+.font-xs {
+	font-size: 14px !important;
+	line-height: inherit !important;
+}
+
+
+
+
+
+/* ################## FIX PARA O MENU NO MODO SM ################## */
+
+@media (min-width: 768px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+		top: 0;
+		border-width: 0 0 1px;
+	}
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+
+    .container > .navbar-header, .container-fluid >  .navbar-collapse, .container-fluid > .navbar-collapse {
+	    margin-right: -15px;
+	    margin-left: -15px;
+	}
+
+	.navbar-header {
+		margin: inherit;
+	}
+
+    .navbar-nav {
+        float: none !important;
+		margin-top: 7.5px;
+		margin: inherit;
+	}
+	.navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+  		display:block !important;
+	}
+}
+
+/* ################## FIM DO FIX PARA O MENU NO MODO SM ################## */
+
+
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+	color: #fff;
+	background-color: #6B5344;
+	
+}
+
+.nav-tabs > li > a {
+	border: 1px solid rgba(107, 83, 68, .15);
+}
+
+
+/* ICONS */
+
+.material-icons {
+	vertical-align: middle;
+}
+
+.input-group-addon > i {
+	font-size: 20px;
+}
+}

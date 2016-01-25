@@ -1,0 +1,45 @@
+html, body {
+	background-color: #F1BBBA;
+	height: 100%;
+}
+
+div.margin-top {
+	margin-top: 50px !important;
+}
+
+.logo {
+	margin-bottom: 30px;
+}
+
+.content {
+	background-color: #FFF;
+}
+
+hr {
+    border-top: 1px solid #6B5344;
+	margin-bottom: 30px !important;
+}
+
+.input-margin {
+	margin-bottom: 10px;
+}
+
+.fullwidth {
+	width: 100% !important;
+}
+
+.fullpage {
+	height: auto;
+	min-height: 100%;
+}
+
+.fullheight {
+	height: 100%;
+}
+
+
+/* Muda a cor dos place holders*/
+
+::-webkit-input-placeholder  { color:#6B5344 !important; }
+input:-moz-placeholder { color:#6B5344 !important; }
+textarea:-moz-placeholder { color:#6B5344 !important; }
