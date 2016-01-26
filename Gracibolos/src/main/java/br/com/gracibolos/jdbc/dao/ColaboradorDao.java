@@ -52,6 +52,8 @@ public class ColaboradorDao {
 				colaborador.setComplemento(rs.getString("complemento"));
 				colaborador.setBairro(rs.getString("bairro"));
 				colaborador.setCep(rs.getString("cep"));
+				colaborador.setEstado(rs.getInt("estado"));
+				colaborador.setCidade(rs.getInt("cidade"));
 				colaborador.setTel(rs.getString("tel"));
 				colaborador.setCel(rs.getString("cel"));
 				colaborador.setEmail(rs.getString("email"));

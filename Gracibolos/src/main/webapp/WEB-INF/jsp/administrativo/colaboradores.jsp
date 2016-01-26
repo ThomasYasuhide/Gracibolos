@@ -220,14 +220,18 @@
 								<div class="input-margin col-xs-12 col-sm-2 col-md-3">
 									<label class="control-label" for="estado">Estado*:</label>
 									<select class="form-control" id="estado" name="estado" required/>
-										<option selected value="0">SP</option>
+										<c:forEach var="estado" items="${estados}">
+											<option value="${estado.id}">${estado.sigla}</option>
+										</c:forEach>
 									</select>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="cidade">Cidade*:</label>
 									<select class="form-control" id="cidade" name="cidade" required/>
-										<option selected value="0">São Paulo</option>
+										<c:forEach var="cidade" items="${cidades}">
+											<option value="${cidade.id}">${cidade.nome}</option>
+										</c:forEach>
 									</select>
 								</div>
 
@@ -364,14 +368,18 @@
 								<div class="input-margin col-xs-12 col-sm-2 col-md-3">
 									<label class="control-label" for="estado">Estado*:</label>
 									<select class="form-control" id="edit_estado" name="estado" required/>
-										<option selected value="0">SP</option>
+										<c:forEach var="estado" items="${estados}">
+											<option value="${estado.id}">${estado.sigla}</option>
+										</c:forEach>
 									</select>
 								</div>
-
+								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="cidade">Cidade*:</label>
 									<select class="form-control" id="edit_cidade" name="cidade" required/>
-										<option selected value="0">São Paulo</option>
+										<c:forEach var="cidade" items="${cidades}">
+											<option value="${cidade.id}">${cidade.nome}</option>
+										</c:forEach>
 									</select>
 								</div>
 

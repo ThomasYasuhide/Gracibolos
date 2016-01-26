@@ -6,8 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.gracibolos.jdbc.dao.CidadeDao;
 import br.com.gracibolos.jdbc.dao.ColaboradorDao;
+import br.com.gracibolos.jdbc.dao.EstadoDao;
+import br.com.gracibolos.jdbc.model.Cidade;
 import br.com.gracibolos.jdbc.model.Colaborador;
+import br.com.gracibolos.jdbc.model.Estado;
 
 @Controller
 public class AdministrativoController {
@@ -105,8 +109,20 @@ public class AdministrativoController {
 		
 		ColaboradorDao dao = new ColaboradorDao();
 		List<Colaborador> colaboradores = dao.pesquisa_colaborador(pesquisa);
-		
-		return new ModelAndView("administrativo/colaboradores", "colaboradores", colaboradores);
+
+	    EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+	    
+	    CidadeDao cidadeDao = new CidadeDao();
+	    List<Cidade> cidades = cidadeDao.listar_cidades();
+	    
+	    ModelAndView mv = new ModelAndView();
+	    mv.setViewName("administrativo/colaboradores");
+	    mv.addObject("colaboradores", colaboradores);
+	    mv.addObject("estados", estados);
+	    mv.addObject("cidades", cidades);
+	    
+	    return mv;
 	}
 	
 	
