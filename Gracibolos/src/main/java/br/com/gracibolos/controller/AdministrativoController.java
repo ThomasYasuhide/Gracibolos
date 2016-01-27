@@ -1,9 +1,12 @@
 package br.com.gracibolos.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.gracibolos.jdbc.dao.CidadeDao;
@@ -120,12 +123,22 @@ public class AdministrativoController {
 	    mv.setViewName("administrativo/colaboradores");
 	    mv.addObject("colaboradores", colaboradores);
 	    mv.addObject("estados", estados);
-	    mv.addObject("cidades", cidades);
+	    //mv.addObject("cidades", cidades);
 	    
 	    return mv;
 	}
 	
 	
-	
+	@RequestMapping(value="/administrativo-pesquisar-cidade", method=RequestMethod.POST)
+	public @ResponseBody List<Cidade> pesquisar_cidade(int id){
+				
+		List<Cidade> cidades = new ArrayList<Cidade>();
+		
+		CidadeDao dao = new CidadeDao();
+		cidades = dao.pesquisar_cidades(id);
+		
+	    return cidades;
+		
+	}
 	
 }

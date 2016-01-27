@@ -520,5 +520,29 @@
         } );
 
 	</script>
+	
+	<script type="text/javascript">
+		var combo_estado = $('#edit_estado');
+		var combo_cidade = $('#edit_cidade');
+		
+		combo_estado.change(function(){
+			$.ajax({
+	            url : 'administrativo-pesquisar-cidade',
+	            method: "POST",
+	            data: {id:combo_estado.val()},
+	            success : function(data) {
+		            
+	            	combo_cidade.find('option').remove();
+
+	            	$.each(data, function(val, cidade){
+						combo_cidade.append($('<option></option>').val(cidade.id).html(cidade.nome));
+					});
+
+	            }
+	        });
+			
+		});
+	</script>
+	
 </body>
 </html>

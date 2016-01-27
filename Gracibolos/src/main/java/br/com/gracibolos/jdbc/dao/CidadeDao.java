@@ -38,4 +38,33 @@ public class CidadeDao {
     
   }
   
+  
+  public List<Cidade> pesquisar_cidades(int id){
+	    
+	    List<Cidade> cidades = new ArrayList<Cidade>();
+	    
+	    try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+	      
+	      String sql = "SELECT * FROM cidade where estado = ?";
+	      PreparedStatement ps = conn.prepareStatement(sql);
+	      ps.setInt(1, id);
+	      ResultSet rs = ps.executeQuery();
+	      
+	      while(rs.next()){
+	        Cidade cidade = new Cidade();
+	        cidade.setId(rs.getInt("id"));
+	        cidade.setNome(rs.getString("nome"));
+	        cidade.setId_estado(rs.getInt("estado"));
+	        
+	        cidades.add(cidade);
+	      }
+	      
+	    } catch (Exception e) {
+
+	    }
+	    
+	    return cidades;
+	    
+	  }
+  
 }
