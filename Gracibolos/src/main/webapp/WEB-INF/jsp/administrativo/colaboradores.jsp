@@ -220,6 +220,7 @@
 								<div class="input-margin col-xs-12 col-sm-2 col-md-3">
 									<label class="control-label" for="estado">Estado*:</label>
 									<select class="form-control" id="estado" name="estado" required/>
+										<option selected="selected" disabled="disabled" value="0">Selecione o estado</option>
 										<c:forEach var="estado" items="${estados}">
 											<option value="${estado.id}">${estado.sigla}</option>
 										</c:forEach>
@@ -229,6 +230,7 @@
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="cidade">Cidade*:</label>
 									<select class="form-control" id="cidade" name="cidade" required/>
+										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
 										<c:forEach var="cidade" items="${cidades}">
 											<option value="${cidade.id}">${cidade.nome}</option>
 										</c:forEach>
@@ -368,6 +370,7 @@
 								<div class="input-margin col-xs-12 col-sm-2 col-md-3">
 									<label class="control-label" for="estado">Estado*:</label>
 									<select class="form-control" id="edit_estado" name="estado" required/>
+										<option selected="selected" disabled="disabled" value="0">Selecione o estado</option>
 										<c:forEach var="estado" items="${estados}">
 											<option value="${estado.id}">${estado.sigla}</option>
 										</c:forEach>
@@ -377,6 +380,7 @@
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="cidade">Cidade*:</label>
 									<select class="form-control" id="edit_cidade" name="cidade" required/>
+										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
 										<c:forEach var="cidade" items="${cidades}">
 											<option value="${cidade.id}">${cidade.nome}</option>
 										</c:forEach>
@@ -485,28 +489,32 @@
             $('#colaboradores tbody').on( 'click', '#edit', function () {
                 var data = table.row( $(this).parents('tr') ).data();
 
-	                $('#alterar-colaborador').modal('show');
+              	listar_cidades(data[12], function(){
+              		$('#alterar-colaborador').modal('show');
+                    
+                    $('#edit_id').val(data[0]);
+                    $('#edit_status').val(data[1]);
+                    $('#edit_usuario').val(data[2]);
+                    $('#edit_senha').val(data[3]);
+                    $('#edit_nivel').val(data[4]);
+    				$('#edit_nome').val(data[5]);
+    				$('#edit_cpfcnpj').val(data[6]);
+                    $('#edit_rgie').val(data[7]);
+                    $('#edit_endereco').val(data[8]);
+                    $('#edit_numero').val(data[9]);
+    				$('#edit_complemento').val(data[10]);
+    				$('#edit_bairro').val(data[11]);
+    				$('#edit_estado').val(data[12]);
+                    $('#edit_cidade').val(data[13]);
+                    $('#edit_cep').val(data[14]);
+                    $('#edit_tel').val(data[15]);
+    				$('#edit_cel').val(data[16]);
+                    $('#edit_email').val(data[17]);
+    				$('#edit_obs').val(data[18]);
+                });
 
-	                $('#edit_id').val(data[0]);
-	                $('#edit_status').val(data[1]);
-	                $('#edit_usuario').val(data[2]);
-	                $('#edit_senha').val(data[3]);
-	                $('#edit_nivel').val(data[4]);
-					$('#edit_nome').val(data[5]);
-					$('#edit_cpfcnpj').val(data[6]);
-	                $('#edit_rgie').val(data[7]);
-	                $('#edit_endereco').val(data[8]);
-	                $('#edit_numero').val(data[9]);
-					$('#edit_complemento').val(data[10]);
-					$('#edit_bairro').val(data[11]);
-					$('#edit_estado').val(data[12]);
-	                $('#edit_cidade').val(data[13]);
-	                $('#edit_cep').val(data[14]);
-	                $('#edit_tel').val(data[15]);
-					$('#edit_cel').val(data[16]);
-	                $('#edit_email').val(data[17]);
-					$('#edit_obs').val(data[18]);
-
+              	
+                 
             } );
 
             $('#colaboradores tbody').on( 'click', '#delete', function () {
@@ -526,22 +534,31 @@
 		var combo_cidade = $('#edit_cidade');
 		
 		combo_estado.change(function(){
+			listar_cidades(combo_estado.val());
+		});
+
+		function listar_cidades(id, callback){
+			
 			$.ajax({
 	            url : 'administrativo-pesquisar-cidade',
 	            method: "POST",
-	            data: {id:combo_estado.val()},
+	            data: {id:id},
 	            success : function(data) {
-		            
+
 	            	combo_cidade.find('option').remove();
 
+	            	combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
+					
 	            	$.each(data, function(val, cidade){
 						combo_cidade.append($('<option></option>').val(cidade.id).html(cidade.nome));
 					});
 
+					callback();
+					
 	            }
 	        });
-			
-		});
+
+		}
 	</script>
 	
 </body>

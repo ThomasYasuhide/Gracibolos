@@ -77,7 +77,15 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-colaboradores")
 	public ModelAndView colaboradores(){
 		System.out.println("Entrou na pagina de colaboradores");
-		return new ModelAndView("administrativo/colaboradores");
+		
+		EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+		
+		ModelAndView mv = new ModelAndView();
+	    mv.setViewName("administrativo/colaboradores");
+	    mv.addObject("estados", estados);
+		
+		return mv;
 	}
 	
 	//INCLUIR NOVO COLABORADOR
@@ -116,14 +124,10 @@ public class AdministrativoController {
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
-	    CidadeDao cidadeDao = new CidadeDao();
-	    List<Cidade> cidades = cidadeDao.listar_cidades();
-	    
 	    ModelAndView mv = new ModelAndView();
 	    mv.setViewName("administrativo/colaboradores");
 	    mv.addObject("colaboradores", colaboradores);
 	    mv.addObject("estados", estados);
-	    //mv.addObject("cidades", cidades);
 	    
 	    return mv;
 	}
