@@ -37,6 +37,9 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-incluir-cliente")
 	public ModelAndView incluir_cliente(){
 		System.out.println("Entrou na pagina de inclusão de clientes");
+		
+		//######
+		
 		return new ModelAndView("administrativo/incluir_cliente");
 	}
 	

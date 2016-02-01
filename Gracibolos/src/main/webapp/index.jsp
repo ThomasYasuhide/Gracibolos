@@ -15,7 +15,7 @@
 	<link href="css/reset.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 
-	<!-- Titulo da pÃ¡gina -->
+	<!-- Titulo da página -->
 	<title>Graci Bolos | Login</title>
 
 </head>

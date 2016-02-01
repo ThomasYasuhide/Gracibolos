@@ -41,6 +41,7 @@ public class ColaboradorDao {
 				Colaborador colaborador = new Colaborador();
 				colaborador.setId(rs.getInt("id"));
 				colaborador.setStatus(rs.getByte("status"));
+				colaborador.setNivel(rs.getInt("nivel"));
 				colaborador.setUsuario(rs.getString("usuario"));
 				colaborador.setSenha(rs.getString("senha"));
 				colaborador.setNivel(rs.getInt("nivel"));
@@ -92,19 +93,20 @@ public class ColaboradorDao {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, colaborador.getId());
 			ps.setByte(2, colaborador.getStatus());
-			ps.setString(3, colaborador.getUsuario());
-			ps.setString(4, colaborador.getSenha());
-			ps.setInt(5, colaborador.getNivel());
-			ps.setString(6, colaborador.getNome());
-			ps.setString(7, colaborador.getCpf());
-			ps.setString(8, colaborador.getRg());
-			ps.setString(9, colaborador.getNumero());
-			ps.setString(10, colaborador.getComplemento());
-			ps.setString(11, colaborador.getCep());
-			ps.setString(12, colaborador.getTel());
-			ps.setString(13, colaborador.getCel());
-			ps.setString(14, colaborador.getEmail());
-			ps.setString(15, colaborador.getObs());
+			ps.setInt(3, colaborador.getNivel());
+			ps.setString(4, colaborador.getUsuario());
+			ps.setString(5, colaborador.getSenha());
+			ps.setInt(6, colaborador.getNivel());
+			ps.setString(7, colaborador.getNome());
+			ps.setString(8, colaborador.getCpf());
+			ps.setString(9, colaborador.getRg());
+			ps.setString(10, colaborador.getNumero());
+			ps.setString(11, colaborador.getComplemento());
+			ps.setString(12, colaborador.getCep());
+			ps.setString(13, colaborador.getTel());
+			ps.setString(14, colaborador.getCel());
+			ps.setString(15, colaborador.getEmail());
+			ps.setString(16, colaborador.getObs());
 			
 			status = ps.execute();
 			

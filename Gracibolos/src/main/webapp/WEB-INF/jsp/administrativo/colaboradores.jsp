@@ -1,4 +1,7 @@
+<!-- Define que este documento é uma pagina JSP -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -30,7 +33,7 @@
 		<!-- Cria uma linha para armazenar todo o conteudo -->
 		<div class="row fullheight">
 			
-			<!-- Barra de navegação Mobile e desktop -->
+			<!-- Importação da barra de navegação Mobile e desktop -->
 			<%@ include file="menu.jsp" %>
 			
 			<div class="content fullpage col-xs-12 col-sm-12 col-md-9 col-lg-9">
@@ -44,7 +47,7 @@
 
 					<hr/>
 
-					<!-- ########## CONTEUDO ########## -->
+					<!-- ############################################################ CONTEUDO ############################################################ -->
 
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
@@ -53,7 +56,9 @@
 								<div class="input-group">
 									<input type="text" class="form-control" maxlength="100" placeholder="Informe o nome, CPF ou RG para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
 									<span class="input-group-btn">
-										<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search disabled"></span></button>
+										<button class="btn btn-default" type="submit">
+											<span class="glyphicon glyphicon-search disabled"></span>
+										</button>
 									</span>
 								</div>
 							</form>
@@ -63,14 +68,15 @@
 
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-							<table id="colaboradores" class="table table-hover display" cellspacing="0" width="100%">
+							<table id="lista-colaboradores" class="table table-hover display" cellspacing="0" width="100%">
 								<thead>
+									<!-- Titulos das tabelas  -->
 									<tr>
 										<th>#</th>
 										<th>Status</th>
+										<th>Nivel</th>
 										<th>Usuário</th>
 										<th>Senha</th>
-										<th>Nível</th>
 										<th>Nome</th>
 										<th>CPF / CNPJ</th>
 										<th>RG / IE</th>
@@ -89,13 +95,15 @@
 									</tr>
 								</thead>
 								<tbody>
+
+									<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
 									<c:forEach var="colaborador" items="${colaboradores}">
 										<tr>
 											<td>${colaborador.id}</td>
 											<td>${colaborador.status}</td>
+											<td>${colaborador.nivel}</td>
 											<td>${colaborador.usuario}</td>
 											<td>${colaborador.senha}</td>
-											<td>${colaborador.nivel}</td>
 											<td>${colaborador.nome}</td>
 											<td>${colaborador.cpf}</td>
 											<td>${colaborador.rg}</td>
@@ -111,8 +119,8 @@
 											<td>${colaborador.email}</td>
 											<td>${colaborador.obs}</td>
 		                					<td>
-		                						<button id="edit" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-		                						<button id="delete" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+		                						<button id="edit-colaborador" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
+		                						<button id="delete-colaborador" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
 		                					</td>
 										</tr>
 									</c:forEach>
@@ -123,9 +131,11 @@
 
 					<div class="row">
 						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
-							<a href="" data-toggle="modal" data-target="#incluir-colaborador" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir novo colaborador</a>
+							<a href="" id="incluir-colaborador-modal" data-toggle="modal" data-target="#modal-colaborador" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir novo colaborador</a>
 						</div>
 					</div>
+
+					<!-- ############################################################ FIM DO CONTEUDO ############################################################ -->
 				</div>
 			</div>
 		</div>
@@ -137,38 +147,44 @@
 
 	<!--
 
-	############################ MODAL DE INCLUSÃO DE NOVO COLABORADOR ############################
+	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR ############################################################
 
 	-->
-	<div class="modal fade" id="incluir-colaborador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog modal-lg" role="document">
-	    <div class="modal-content">
+	<div class="modal fade" id="modal-colaborador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
 	    	
-	    	<form action="" method="POST">
+	    		<form id="colaborador-form" method="POST">
 	    
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h3>COLABORADORES</h3>
-				<h4>Incluir novo colaborador</h4>
-		      </div>
-		      <div class="modal-body">
-		        <!-- ########## CONTEUDO ########## -->
-					<div class="row">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h3 id="modal-title">COLABORADORES</h3>
+						<h4 id="modal-subtitle"></h4>
+					</div>
 
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="modal-body">
+						<!-- ################################# CONTEUDO ################################# -->
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-							<form action="#" method="POST">
-								
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+								<div class="hidden">
 									<label class="control-label" for="id">Nº colaborador:</label>
 									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" disabled="true" />
 								</div>
 
 								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
 									<label class="control-label" for="status">Status:</label>
-									<select id="status" name="status" class="form-control" required/>
+									<select id="status" name="status" class="form-control" required>
 										<option selected value="1">Ativado</option>
 										<option value="0">Desativado</option>
+									</select>
+								</div>
+
+								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+									<label class="control-label" for="nivel">Acesso:</label>
+									<select id="nivel" name="nivel" class="form-control" required>
+										<option selected value="1">Operacional</option>
+										<option value="2">Administrador</option>
 									</select>
 								</div>
 
@@ -219,7 +235,7 @@
 
 								<div class="input-margin col-xs-12 col-sm-2 col-md-3">
 									<label class="control-label" for="estado">Estado*:</label>
-									<select class="form-control" id="estado" name="estado" required/>
+									<select class="form-control" id="estado" name="estado" required >
 										<option selected="selected" disabled="disabled" value="0">Selecione o estado</option>
 										<c:forEach var="estado" items="${estados}">
 											<option value="${estado.id}">${estado.sigla}</option>
@@ -229,7 +245,7 @@
 
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="cidade">Cidade*:</label>
-									<select class="form-control" id="cidade" name="cidade" required/>
+									<select class="form-control" id="cidade" name="cidade" required >
 										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
 										<c:forEach var="cidade" items="${cidades}">
 											<option value="${cidade.id}">${cidade.nome}</option>
@@ -261,184 +277,37 @@
 									<label class="control-label" for="obs">Observações:</label>
 									<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o colaborador"></textarea>
 								</div>
-
-							</form>
-							
+							</div>
 						</div>
 					</div>
-				<!-- ########## FIM DO CONTEUDO ########## -->
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-		        <button type="submit" class="btn btn-default"><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir colaborador</button>
-		      </div>
-	      </form>
-	      
-	    </div>
-	  </div>
+
+					<!-- ################################# FIM DO CONTEUDO ################################# -->
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+						<button type="submit" class="btn btn-default" id="modal-action"></button>
+					</div>
+
+
+				</form>
+			</div>
+		</div>
 	</div>
-
-
-
-
-
-
-
 
 	<!--
 
-	############################ MODAL DE ALTERAÇÃO COLABORADOR ############################
+	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR #########################################################
 
 	-->
-	<div class="modal fade" id="alterar-colaborador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog modal-lg" role="document">
-	    <div class="modal-content">
-	    	
-	    	<form action="" method="POST">
-	    
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h3>COLABORADORES</h3>
-				<h4>Alterar colaborador</h4>
-		      </div>
-		      <div class="modal-body">
-		        <!-- ########## CONTEUDO ########## -->
-					<div class="row">
 
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-							<form action="#" method="POST">
-								
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="id">Nº colaborador:</label>
-									<input type="text" id="edit_id" name="id" placeholder="" class="form-control" disabled="true" />
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="status">Status:</label>
-									<select id="edit_status" name="status" class="form-control" required/>
-										<option selected value="1">Ativado</option>
-										<option value="0">Desativado</option>
-									</select>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="usuario">Usuario*:</label>
-									<input type="text" id="edit_usuario" name="usuario" placeholder="Digite o seu usuário" class="form-control" maxlength="20" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="celular">Senha*:</label>
-									<input type="password" id="edit_senha" name="senha" placeholder="Senha" class="form-control" maxlength="20" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-									<label class="control-label" for="nome" id="nome_lbl">Nome*:</label>
-									<input type="text" id="edit_nome" name="nome" placeholder="Digite seu nome aqui" class="form-control" maxlength="100" required/>
-								</div> 
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="cpfcnpj" id="cpfcnpj_lbl">CPF*:</label>
-									<input type="text" id="edit_cpfcnpj" name="cpfcnpj" placeholder="000.000.000-00" class="form-control" maxlength="14" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="rgie" id="rgie_lbl">RG:</label>
-									<input type="text" id="edit_rgie" name="rgie" placeholder="00.000.000-0" class="form-control" maxlength="12"/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
-									<label class="control-label" for="endereco">Endereço*:</label>
-									<input type="text" id="edit_endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-3 col-md-2">
-									<label class="control-label" for="numero">Numero*:</label>
-									<input type="text" id="edit_numero" name="numero" placeholder="Digite seu numero" class="form-control" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
-									<label class="control-label" for="complemento">Complemento:</label>
-									<input type="text" id="edit_complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120"/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="bairro">Bairro*:</label>
-									<input type="text" id="edit_bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-2 col-md-3">
-									<label class="control-label" for="estado">Estado*:</label>
-									<select class="form-control" id="edit_estado" name="estado" required/>
-										<option selected="selected" disabled="disabled" value="0">Selecione o estado</option>
-										<c:forEach var="estado" items="${estados}">
-											<option value="${estado.id}">${estado.sigla}</option>
-										</c:forEach>
-									</select>
-								</div>
-								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="cidade">Cidade*:</label>
-									<select class="form-control" id="edit_cidade" name="cidade" required/>
-										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
-										<c:forEach var="cidade" items="${cidades}">
-											<option value="${cidade.id}">${cidade.nome}</option>
-										</c:forEach>
-									</select>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
-									<label class="control-label" for="cep">CEP*:</label>
-									<input type="text" id="edit_cep" name="cep" placeholder="Digite seu CEP" class="form-control" maxlength="8" required/>
-								</div>
-
-								<div class="clearfix"></div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="tel">Tel:</label>
-									<input type="text" id="edit_tel" name="tel" placeholder="(00) 0000-0000" class="form-control" maxlength="10"/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="cel">Cel:</label>
-									<input type="text" id="edit_cel" name="cel" placeholder="(00) 00000-0000" class="form-control" maxlength="11" />
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
-									<label class="control-label" for="email">E-mail:</label>
-									<input type="text" id="edit_email" name="email" class="form-control" placeholder="email@provedor.com.br" maxlength="120"/>
-								</div>
-
-								<div class="clearfix"></div>
-
-								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
-									<label class="control-label" for="obs">Observações:</label>
-									<textarea id="edit_obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o colaborador"></textarea>
-								</div>
-
-							</form>
-							
-						</div>
-					</div>
-				<!-- ########## FIM DO CONTEUDO ########## -->
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-		        <button type="submit" class="btn btn-default"><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações</button>
-		      </div>
-	      
-	      </form>
-	      
-	    </div>
-	  </div>
-	</div>
 
 
 
 
 	<!--
 
-	############################ MODAL DE EXCLUSÃO DE COLABORADOR ############################
+	############################################################        MODAL DE EXCLUSÃO DE COLABORADOR      ############################################################
 
 	-->
 
@@ -446,27 +315,47 @@
 
 	<!-- Modal de confirmação de exclusão de cliente -->
 	<div class="modal fade" id="excluir-colaborador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Excluir colaborador</h4>
-	      </div>
-	      <div class="modal-body">
-	        <div>
-	        	<p>Deseja realmente excluir o colaborador?</p>
-	        </div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Não, quero excluir</button>
-			<a href="" id="excluirColaborador" class="btn btn-default">Sim, quero excluir</a>
-	      </div>
-	    </div>
-	  </div>
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="colaborador-delete-form" method="POST">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Excluir colaborador</h4>
+					</div>
+					
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+								<div class="hidden">
+									<label class="control-label" for="id">Nº colaborador:</label>
+									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" disabled="true" />
+								</div>
+
+								<p>Deseja realmente excluir o colaborador?</p>
+							</div>
+						</div>
+
+						
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Não, quero manter</button>
+						<button type="submit" class="btn btn-default">Sim, quero excluir</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
 	</div>
 
-	<!-- ########## FIM DO CONTEUDO ########## -->
 
+	<!--
+
+	############################################################ FIM DO  MODAL DE EXCLUSÃO DE COLABORADOR ############################################################
+
+	-->
 
 
 	<!-- Importação dos arquivos java script -->
@@ -477,7 +366,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-            var table = $('#colaboradores').DataTable({
+            var table = $('#lista-colaboradores').DataTable({
                 "columnDefs": [
                     {
                         "targets": [ 0, 1, 2, 3, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ],
@@ -486,52 +375,78 @@
                 ]
             });
 
-            $('#colaboradores tbody').on( 'click', '#edit', function () {
+
+            $('#lista-colaboradores tbody').on( 'click', '#edit-colaborador', function () {
+            	$('#modal-subtitle').text("Alterar colaborador");
+				$("#colaborador-form").attr("action","#ALTERAR");
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações');
+
                 var data = table.row( $(this).parents('tr') ).data();
 
               	listar_cidades(data[12], function(){
-              		$('#alterar-colaborador').modal('show');
+              		$('#modal-colaborador').modal('show');
                     
-                    $('#edit_id').val(data[0]);
-                    $('#edit_status').val(data[1]);
-                    $('#edit_usuario').val(data[2]);
-                    $('#edit_senha').val(data[3]);
-                    $('#edit_nivel').val(data[4]);
-    				$('#edit_nome').val(data[5]);
-    				$('#edit_cpfcnpj').val(data[6]);
-                    $('#edit_rgie').val(data[7]);
-                    $('#edit_endereco').val(data[8]);
-                    $('#edit_numero').val(data[9]);
-    				$('#edit_complemento').val(data[10]);
-    				$('#edit_bairro').val(data[11]);
-    				$('#edit_estado').val(data[12]);
-                    $('#edit_cidade').val(data[13]);
-                    $('#edit_cep').val(data[14]);
-                    $('#edit_tel').val(data[15]);
-    				$('#edit_cel').val(data[16]);
-                    $('#edit_email').val(data[17]);
-    				$('#edit_obs').val(data[18]);
+                    $('#id').val(data[0]);
+                    $('#status').val(data[1]);
+                    $('#nivel').val(data[2]);
+                    $('#usuario').val(data[3]);
+                    $('#senha').val(data[4]);
+    				$('#nome').val(data[5]);
+    				$('#cpfcnpj').val(data[6]);
+                    $('#rgie').val(data[7]);
+                    $('#endereco').val(data[8]);
+                    $('#numero').val(data[9]);
+    				$('#complemento').val(data[10]);
+    				$('#bairro').val(data[11]);
+    				$('#estado').val(data[12]);
+                    $('#cidade').val(data[13]);
+                    $('#cep').val(data[14]);
+                    $('#tel').val(data[15]);
+    				$('#cel').val(data[16]);
+                    $('#email').val(data[17]);
+    				$('#obs').val(data[18]);
+
                 });
 
-              	
-                 
-            } );
+            });
 
-            $('#colaboradores tbody').on( 'click', '#delete', function () {
+            $('#lista-colaboradores tbody').on( 'click', '#delete-colaborador', function () {
                 var data = table.row( $(this).parents('tr') ).data();
 
 				$('#excluir-colaborador').modal('show');
 
-                alert("Deletar linha " + data[0]);
-            } );
+				$('#id_delete').val(data[0]);
+                
 
-        } );
+            });
+
+        });
 
 	</script>
 	
 	<script type="text/javascript">
-		var combo_estado = $('#edit_estado');
-		var combo_cidade = $('#edit_cidade');
+
+		var combo_estado = $('#estado');
+		var combo_cidade = $('#cidade');
+
+
+		$('#incluir-colaborador-modal').click(function() {
+			$('#modal-subtitle').text("Incluir novo colaborador");
+
+			$('#colaborador-form').each(function(){
+				this.reset();
+			});
+
+			$("#colaborador-form").attr("action","#NOVO");
+
+			combo_cidade.find('option').remove();
+			combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
+
+
+			$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir colaborador');
+
+		});
+	
 		
 		combo_estado.change(function(){
 			listar_cidades(combo_estado.val());
