@@ -1,5 +1,5 @@
-<!-- Define que este documento é uma pagina JSP -->
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+﻿<!-- Define que este documento é uma pagina JSP -->
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,7 +9,7 @@
 <head>
 
 	<!-- Defenição dos arquivos meta -->
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -78,8 +78,8 @@
 										<th>Usuário</th>
 										<th>Senha</th>
 										<th>Nome</th>
-										<th>CPF / CNPJ</th>
-										<th>RG / IE</th>
+										<th>CPF</th>
+										<th>RG</th>
 										<th>Endereço</th>
 										<th>Nº</th>
 										<th>Complemento</th>
@@ -169,7 +169,7 @@
 
 								<div class="hidden">
 									<label class="control-label" for="id">Nº colaborador:</label>
-									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" disabled="true" />
+									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
 								</div>
 
 								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
@@ -204,13 +204,13 @@
 								</div> 
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="cpfcnpj" id="cpfcnpj_lbl">CPF*:</label>
-									<input type="text" id="cpfcnpj" name="cpfcnpj" placeholder="000.000.000-00" class="form-control" maxlength="14" required/>
+									<label class="control-label" for="cpf" id="cpf_lbl">CPF*:</label>
+									<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" class="form-control" maxlength="11" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="rgie" id="rgie_lbl">RG:</label>
-									<input type="text" id="rgie" name="rgie" placeholder="00.000.000-0" class="form-control" maxlength="12"/>
+									<label class="control-label" for="rg" id="rg_lbl">RG:</label>
+									<input type="text" id="rg" name="rg" placeholder="00.000.000-0" class="form-control" maxlength="9"/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
@@ -317,7 +317,7 @@
 	<div class="modal fade" id="excluir-colaborador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form id="colaborador-delete-form" method="POST">
+				<form id="colaborador-delete-form" action="administrativo-remover-colaborador" method="POST">
 
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -330,7 +330,7 @@
 
 								<div class="hidden">
 									<label class="control-label" for="id">Nº colaborador:</label>
-									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" disabled="true" />
+									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" />
 								</div>
 
 								<p>Deseja realmente excluir o colaborador?</p>
@@ -378,7 +378,7 @@
 
             $('#lista-colaboradores tbody').on( 'click', '#edit-colaborador', function () {
             	$('#modal-subtitle').text("Alterar colaborador");
-				$("#colaborador-form").attr("action","#ALTERAR");
+				$("#colaborador-form").attr("action","administrativo-alterar-colaborador");
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações');
 
                 var data = table.row( $(this).parents('tr') ).data();
@@ -392,8 +392,8 @@
                     $('#usuario').val(data[3]);
                     $('#senha').val(data[4]);
     				$('#nome').val(data[5]);
-    				$('#cpfcnpj').val(data[6]);
-                    $('#rgie').val(data[7]);
+    				$('#cpf').val(data[6]);
+                    $('#rg').val(data[7]);
                     $('#endereco').val(data[8]);
                     $('#numero').val(data[9]);
     				$('#complemento').val(data[10]);
@@ -437,7 +437,7 @@
 				this.reset();
 			});
 
-			$("#colaborador-form").attr("action","#NOVO");
+			$("#colaborador-form").attr("action","administrativo-incluir-colaborador");
 
 			combo_cidade.find('option').remove();
 			combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));

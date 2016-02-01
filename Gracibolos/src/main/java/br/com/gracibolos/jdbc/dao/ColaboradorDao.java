@@ -23,30 +23,35 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 		boolean status = false;
 		
 		PreparedStatement ps;
-		String sql = "INSERT INTO colaborador (id, status, nivel, usuario, senha, nome, cpf, rg, endereco, numero, complemento, bairro, cep, tel, cel, email, obs) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO colaborador (status, nivel, usuario, senha, nome, cpf, rg, endereco, numero, complemento, bairro, cep, estado, cidade, tel, cel, email, obs) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		System.out.println(colaborador.getStatus() + " " + colaborador.getNivel() + " " + colaborador.getSenha() + " " +  colaborador.getNome() + " " + colaborador.getCpf()  + " " + colaborador.getRg()  + " " +  colaborador.getEndereco()  + " " +  colaborador.getNumero() + " " + colaborador.getBairro() + " " + colaborador.getCep()  + " " + colaborador.getCidade() + " " + colaborador.getEstado());
 		
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
 
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, colaborador.getId());
-			ps.setByte(2, colaborador.getStatus());
-			ps.setInt(3, colaborador.getNivel());
-			ps.setString(4, colaborador.getUsuario());
-			ps.setString(5, colaborador.getSenha());
-			ps.setString(6, colaborador.getNome());
-			ps.setString(7, colaborador.getCpf());
-			ps.setString(8, colaborador.getRg());
-			ps.setString(9, colaborador.getEndereco());
-			ps.setString(10, colaborador.getNumero());
-			ps.setString(11, colaborador.getComplemento());
-			ps.setString(12, colaborador.getBairro());
-			ps.setString(13, colaborador.getCep());
-			ps.setString(14, colaborador.getTel());
-			ps.setString(15, colaborador.getCel());
-			ps.setString(16, colaborador.getEmail());
-			ps.setString(17, colaborador.getObs());
+			ps.setByte(1, colaborador.getStatus());
+			ps.setInt(2, colaborador.getNivel());
+			ps.setString(3, colaborador.getUsuario());
+			ps.setString(4, colaborador.getSenha());
+			ps.setString(5, colaborador.getNome());
+			ps.setString(6, colaborador.getCpf());
+			ps.setString(7, colaborador.getRg());
+			ps.setString(8, colaborador.getEndereco());
+			ps.setString(9, colaborador.getNumero());
+			ps.setString(10, colaborador.getComplemento());
+			ps.setString(11, colaborador.getBairro());
+			ps.setString(12, colaborador.getCep());
+			ps.setInt(13, colaborador.getEstado());
+			ps.setInt(14, colaborador.getCidade());
+			ps.setString(15, colaborador.getTel());
+			ps.setString(16, colaborador.getCel());
+			ps.setString(17, colaborador.getEmail());
+			ps.setString(18, colaborador.getObs());
 			
-			status = ps.execute();
+			if(ps.executeUpdate() != 0) {
+				status = true;
+			}
 			
 			ps.close();
 			conn.close();
@@ -57,14 +62,14 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 		
 		return status;
 	}
-
+	
 
 	@Override
 	public boolean alterar(Colaborador colaborador) {
 		boolean status = false;
-		
+			
 		PreparedStatement ps;
-		String sql = "UPDATE colaborador SET status = ?, nivel = ?, usuario = ?, senha = ?, nome = ?, cpf = ?, rg = ?, endereco = ?, numero = ?, complemento = ?, bairro = ?, cep = ?, tel = ?, cel = ?, email = ?, obs = ? WHERE id = ?";
+		String sql = "UPDATE colaborador SET status = ?, nivel = ?, usuario = ?, senha = ?, nome = ?, cpf = ?, rg = ?, endereco = ?, numero = ?, complemento = ?, bairro = ?, cep = ?, estado = ?, cidade = ?, tel = ?, cel = ?, email = ?, obs = ? WHERE id = ?";
 
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
 
@@ -82,13 +87,17 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 			ps.setString(10, colaborador.getComplemento());
 			ps.setString(11, colaborador.getBairro());
 			ps.setString(12, colaborador.getCep());
-			ps.setString(13, colaborador.getTel());
-			ps.setString(14, colaborador.getCel());
-			ps.setString(15, colaborador.getEmail());
-			ps.setString(16, colaborador.getObs());
-			ps.setInt(17, colaborador.getId());
+			ps.setInt(13, colaborador.getEstado());
+			ps.setInt(14, colaborador.getCidade());
+			ps.setString(15, colaborador.getTel());
+			ps.setString(16, colaborador.getCel());
+			ps.setString(17, colaborador.getEmail());
+			ps.setString(18, colaborador.getObs());
+			ps.setInt(19, colaborador.getId());
 			
-			status = ps.execute();
+			if(ps.executeUpdate() != 0) {
+				status = true;
+			}
 			
 			ps.close();
 			conn.close();
@@ -114,9 +123,11 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, colaborador.getId());
-	
-			status = ps.execute();
-	
+			
+			if(ps.executeUpdate() != 0) {
+				status = true;
+			}
+			
 			ps.close();
 			conn.close();
 	

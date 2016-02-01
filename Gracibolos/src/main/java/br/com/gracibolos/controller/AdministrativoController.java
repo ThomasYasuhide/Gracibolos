@@ -96,24 +96,52 @@ public class AdministrativoController {
 	public ModelAndView incluir_colaborador(Colaborador colaborador){
 		System.out.println("Entrou na servlet de inclusão de um novo colaborador");
 		
+		boolean status = false;
+		/*
 		ColaboradorDao dao = new ColaboradorDao();
-		dao.inserir(colaborador);
-		
-		return new ModelAndView("administrativo/incluir_colaborador");
+		status = dao.inserir(colaborador);
+
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/colaboradores");
+		mv.addObject("status", status);
+		*/
+		return new ModelAndView("administrativo/colaboradores");
 	}
 	
 	//AlTERAR COLABORADOR
 	@RequestMapping("/administrativo-alterar-colaborador")
-	public ModelAndView alterar_colaborador(){
+	public ModelAndView alterar_colaborador(Colaborador colaborador){
 		System.out.println("Entrou na pagina de alteração de colaborador");
-		return new ModelAndView("administrativo/alterar_colaborador");
+		
+		boolean status = false;
+		
+		System.out.println(colaborador.getId());
+		
+		ColaboradorDao colaboradorDao = new ColaboradorDao();
+		status = colaboradorDao.alterar(colaborador);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/colaboradores");
+		mv.addObject("status", status);
+		
+		return mv;
 	}
 	
 	//EXCLUIR COLABORADOR
 	@RequestMapping("/administrativo-remover-colaborador")
-	public ModelAndView excluir_colaborador(){
+	public ModelAndView excluir_colaborador(Colaborador colaborador){
 		System.out.println("Entrou na pagina de exclusão de colaborador");
-		return new ModelAndView("administrativo/colaboradores");
+		
+		boolean status = false;
+		
+		ColaboradorDao colaboradorDao = new ColaboradorDao();
+		status = colaboradorDao.excluir(colaborador);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/colaboradores");
+		mv.addObject("status", status);
+		
+		return mv;
 	}
 	
 	//PESQUISAR COLABORADOR

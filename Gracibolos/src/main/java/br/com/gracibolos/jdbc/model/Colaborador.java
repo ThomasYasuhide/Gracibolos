@@ -8,9 +8,9 @@ public class Colaborador implements Serializable {
 	
 	private int id;
     private byte status;
+    private int nivel;
     private String usuario;
     private String senha;
-    private int nivel;
     private String nome;
     private String cpf;
     private String rg;
