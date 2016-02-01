@@ -78,7 +78,9 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 		return status;
 	}
 
-	public void excluir(Integer id) {
+	public boolean excluir(Estoque estoque) {
+
+		boolean status = false;
 		
 		String sql  = "DELETE FROM estoque WHERE id = ?";
 		PreparedStatement ps;
@@ -87,15 +89,17 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 			
 			Connection conn = ConnectionProvider.getInstance().getConnection();			
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, id);
+			ps.setInt(1, estoque.getId());
 			
-			ps.execute();
+			status = ps.execute();
 			ps.close();
 			conn.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return status;
 	}
 
 	public List<Estoque> listar() 
@@ -138,6 +142,12 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 			System.out.println("Erro ao listar o estoque\n"+e);
 		}
 		return listaDeEstoque;
+	}
+
+	@Override
+	public List<Estoque> pesquisar(String pesquisa) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

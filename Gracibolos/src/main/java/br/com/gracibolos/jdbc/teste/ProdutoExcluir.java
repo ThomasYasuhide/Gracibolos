@@ -1,6 +1,7 @@
 package br.com.gracibolos.jdbc.teste;
 
 import br.com.gracibolos.jdbc.dao.ProdutoDao;
+import br.com.gracibolos.jdbc.model.Produto;
 
 public class ProdutoExcluir {
 
@@ -8,7 +9,10 @@ public class ProdutoExcluir {
 		
 		ProdutoDao dao = new ProdutoDao();
 		
-		dao.excluir(2);
+		Produto produto = new Produto();
+		produto.setId(2);
+				
+		dao.excluir(produto);
 	}
 
 }

@@ -4,13 +4,12 @@ import java.util.List;
 
 public interface GenericoDao <E>{
 	
-	//Padronizar os nomes dos métodos e generalizar
-    //Ctrl + Shift + i, acertar a importação
     public boolean inserir(E e);
     public boolean alterar(E e);
-    public void excluir(Integer id);
-    
-    //List<> interface do ArrayList
+    public boolean excluir(E e);
+    //Interface para listar objetos, retorna uma lista
     public List<E> listar();
+    //Interface de pesquisa, é passado um parametro e é retornado uma lista
+    public List<E> pesquisar(String pesquisa);
 
 }

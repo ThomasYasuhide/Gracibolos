@@ -105,7 +105,9 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 		return status;
 	}
 
-	public void excluir(Integer id) {
+	public boolean excluir(Fornecedor fornecedor) {
+
+		boolean status = false;
 		
 		String sql  = "DELETE FROM fornecedor WHERE id = ?";
 		PreparedStatement ps;
@@ -114,15 +116,17 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 			
 			Connection conn = ConnectionProvider.getInstance().getConnection();			
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, id);
+			ps.setInt(1, fornecedor.getId());
 			
-			ps.execute();
+			status = ps.execute();
 			ps.close();
 			conn.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return status;
 	}
 
 	public List<Fornecedor> listar() 
@@ -175,6 +179,12 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 			System.out.println("Erro ao listar usuário\n"+e);
 		}
 		return listaDeFornecedor;
+	}
+
+	@Override
+	public List<Fornecedor> pesquisar(String pesquisa) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

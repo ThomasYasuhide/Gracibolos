@@ -80,22 +80,28 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		return status;
 	}
 
-	public void excluir(Integer id) {
+	public boolean excluir(Produto produto) {
+
+		boolean status = false;
+		
 		String sql  = "DELETE FROM produto WHERE id = ?";
 		PreparedStatement ps;
 
 		try{			
 			Connection conn = ConnectionProvider.getInstance().getConnection();			
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, id);
+			ps.setInt(1, produto.getId());
 			
-			ps.execute();
+			status = ps.execute();
+			
 			ps.close();
 			conn.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return status;
 	}
 
 	public List<Produto> listar() {
@@ -137,6 +143,12 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			System.out.println("Erro ao listar produtos\n"+e);
 		}
 		return listaDeProduto;
+	}
+
+	@Override
+	public List<Produto> pesquisar(String pesquisa) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

@@ -105,7 +105,9 @@ public class ClienteDao implements GenericoDao<Cliente>{
 		return status;
 	}
 
-	public void excluir(Integer id) {
+	public boolean excluir(Cliente cliente) {
+		
+		boolean status = false;
 		
 		String sql  = "DELETE FROM cliente WHERE id = ?";
 		PreparedStatement ps;
@@ -114,15 +116,17 @@ public class ClienteDao implements GenericoDao<Cliente>{
 			
 			Connection conn = ConnectionProvider.getInstance().getConnection();			
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, id);
+			ps.setInt(1, cliente.getId());
 			
-			ps.execute();
+			status = ps.execute();
 			ps.close();
 			conn.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return status;
 	}
 
 	public List<Cliente> listar() 
@@ -170,6 +174,11 @@ public class ClienteDao implements GenericoDao<Cliente>{
 			System.out.println("Erro ao listar usuário\n"+e);
 		}
 		return listaDeClientes;
+	}
+
+	@Override
+	public List<Cliente> pesquisar(String pesquisa) {
+		return null;
 	}
 
 }

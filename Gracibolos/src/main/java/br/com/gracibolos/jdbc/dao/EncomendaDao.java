@@ -43,17 +43,24 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		return status;
 	}
 
-	public boolean alterar(Encomenda e) {
+	public boolean alterar(Encomenda encomenda) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public void excluir(Integer id) {
+	public boolean excluir(Encomenda encomenda) {
 		// TODO Auto-generated method stub
+		return false;
 		
 	}
 
 	public List<Encomenda> listar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Encomenda> pesquisar(String pesquisa) {
 		// TODO Auto-generated method stub
 		return null;
 	}

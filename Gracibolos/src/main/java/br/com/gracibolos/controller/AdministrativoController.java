@@ -79,7 +79,7 @@ public class AdministrativoController {
 	//COLABORADOR
 	@RequestMapping("/administrativo-colaboradores")
 	public ModelAndView colaboradores(){
-		System.out.println("Entrou na pagina de colaboradores");
+		System.out.println("Entrou na servlet de listagem de colaboradores");
 		
 		EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
@@ -94,10 +94,10 @@ public class AdministrativoController {
 	//INCLUIR NOVO COLABORADOR
 	@RequestMapping("/administrativo-incluir-colaborador")
 	public ModelAndView incluir_colaborador(Colaborador colaborador){
-		System.out.println("Entrou na pagina de inclusão de um novo colaborador");
+		System.out.println("Entrou na servlet de inclusão de um novo colaborador");
 		
 		ColaboradorDao dao = new ColaboradorDao();
-		dao.incluir_colaborador(colaborador);
+		dao.inserir(colaborador);
 		
 		return new ModelAndView("administrativo/incluir_colaborador");
 	}
@@ -122,7 +122,7 @@ public class AdministrativoController {
 		System.out.println("Realizou a pesquisa de colaboradores");
 		
 		ColaboradorDao dao = new ColaboradorDao();
-		List<Colaborador> colaboradores = dao.pesquisa_colaborador(pesquisa);
+		List<Colaborador> colaboradores = dao.pesquisar(pesquisa);
 
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();

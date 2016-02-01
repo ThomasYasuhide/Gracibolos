@@ -1,6 +1,7 @@
 package br.com.gracibolos.jdbc.teste;
 
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
+import br.com.gracibolos.jdbc.model.Fornecedor;
 
 public class FornecedorExcluir {
 
@@ -8,7 +9,10 @@ public class FornecedorExcluir {
 		
 		FornecedorDao dao = new FornecedorDao();
 		
-		dao.excluir(1);
+		Fornecedor fornecedor = new Fornecedor();
+		fornecedor.setId(1);
+		
+		dao.excluir(fornecedor);
 
 	}
 

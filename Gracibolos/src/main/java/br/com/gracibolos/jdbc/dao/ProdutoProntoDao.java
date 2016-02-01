@@ -85,7 +85,9 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 		return status;
 	}
 
-	public void excluir(Integer id) {
+	public boolean excluir(ProdutoPronto produtoPronto) {
+
+		boolean status = false;
 		
 		String sql  = "DELETE FROM produtoPronto WHERE id = ?";
 		PreparedStatement ps;
@@ -93,15 +95,18 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 		try{			
 			Connection conn = ConnectionProvider.getInstance().getConnection();			
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, id);
+			ps.setInt(1, produtoPronto.getId());
 			
-			ps.execute();
+			status = ps.execute();
+			
 			ps.close();
 			conn.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return status;
 	}
 
 	public List<ProdutoPronto> listar() {
@@ -141,6 +146,12 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 			System.out.println("Erro ao listar os produtos Prontos\n"+e);
 		}
 		return listaDeProdutoPronto;
+	}
+
+	@Override
+	public List<ProdutoPronto> pesquisar(String pesquisa) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
