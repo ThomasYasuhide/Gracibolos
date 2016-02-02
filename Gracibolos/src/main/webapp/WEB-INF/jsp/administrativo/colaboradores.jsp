@@ -48,7 +48,67 @@
 					<hr/>
 
 					<!-- ############################################################ CONTEUDO ############################################################ -->
-
+					<c:if test="${incluir == 'true'}">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Colaborador armazenado com sucesso.
+								</div>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${incluir == 'false'}">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar incluir o novo colaborador, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${alterar == 'true'}">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Alteração efetuarda com sucesso.
+								</div>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${alterar == 'false'}">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar alterar o colaborador, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${excluir == 'true'}">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Colaborador foi excluido com sucesso!
+								</div>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${excluir == 'false'}">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar excluir o colaborador, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					</c:if>
+					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
 							<label class="control-label">Pesquisar cliente:</label>
@@ -65,7 +125,6 @@
 						</div>
 					</div>
 					
-
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
 							<table id="lista-colaboradores" class="table table-hover display" cellspacing="0" width="100%">
@@ -220,7 +279,7 @@
 
 								<div class="input-margin col-xs-12 col-sm-3 col-md-2">
 									<label class="control-label" for="numero">Numero*:</label>
-									<input type="text" id="numero" name="numero" placeholder="Digite seu numero" class="form-control" required/>
+									<input type="text" id="numero" name="numero" placeholder="0000" class="form-control" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
@@ -255,7 +314,7 @@
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
 									<label class="control-label" for="cep">CEP*:</label>
-									<input type="text" id="cep" name="cep" placeholder="Digite seu CEP" class="form-control" maxlength="8" required/>
+									<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="8" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">

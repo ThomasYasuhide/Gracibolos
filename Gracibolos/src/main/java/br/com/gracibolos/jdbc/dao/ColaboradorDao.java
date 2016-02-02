@@ -51,6 +51,7 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
+				
 			}
 			
 			ps.close();
@@ -93,7 +94,7 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 			ps.setString(16, colaborador.getCel());
 			ps.setString(17, colaborador.getEmail());
 			ps.setString(18, colaborador.getObs());
-			ps.setInt(19, colaborador.getId());
+			ps.setLong(19, colaborador.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -122,7 +123,7 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
 
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, colaborador.getId());
+			ps.setLong(1, colaborador.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -162,7 +163,7 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 			while(rs.next()){
 							
 				Colaborador colaborador = new Colaborador();
-				colaborador.setId(rs.getInt("id"));
+				colaborador.setId(rs.getLong("id"));
 				colaborador.setStatus(rs.getByte("status"));
 				colaborador.setNivel(rs.getInt("nivel"));
 				colaborador.setUsuario(rs.getString("usuario"));
@@ -224,7 +225,7 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 			while(rs.next()){
 							
 				Colaborador colaborador = new Colaborador();
-				colaborador.setId(rs.getInt("id"));
+				colaborador.setId(rs.getLong("id"));
 				colaborador.setStatus(rs.getByte("status"));
 				colaborador.setNivel(rs.getInt("nivel"));
 				colaborador.setUsuario(rs.getString("usuario"));

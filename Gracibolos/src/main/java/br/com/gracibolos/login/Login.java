@@ -27,7 +27,7 @@ public class Login {
             if(rs.next()){
                 System.out.println("Usuário encontrado");
                 
-                colaborador.setId(rs.getInt("id"));
+                colaborador.setId(rs.getLong("id"));
                 colaborador.setNome(rs.getString("nome"));
                 colaborador.setNivel(rs.getByte("nivel"));
             }else {

@@ -28,11 +28,11 @@ public class Interceptador extends HandlerInterceptorAdapter {
                     if((nivel == 1 && uri.contains("/operacional-")) || (nivel == 2 && uri.contains("/administrativo-"))){
                         return true;
                     }else{
-                		response.sendRedirect("login");
+                		response.sendRedirect("loginview");
                     	return false;
                     }
             	}else {
-            		response.sendRedirect("login");
+            		response.sendRedirect("loginview");
             		return false;
             	}
             	

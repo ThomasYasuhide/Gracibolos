@@ -97,32 +97,48 @@ public class AdministrativoController {
 		System.out.println("Entrou na servlet de inclusão de um novo colaborador");
 		
 		boolean status = false;
-		/*
-		ColaboradorDao dao = new ColaboradorDao();
-		status = dao.inserir(colaborador);
 
+	    EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+	    
+		ColaboradorDao dao = new ColaboradorDao();
+		
+		if(dao.inserir(colaborador)){
+			status = true;
+		}else{
+			status = false;
+		}
+		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("administrativo/colaboradores");
-		mv.addObject("status", status);
-		*/
-		return new ModelAndView("administrativo/colaboradores");
+		mv.addObject("incluir", status);
+		mv.addObject("estados", estados);
+
+		return mv;
 	}
 	
 	//AlTERAR COLABORADOR
 	@RequestMapping("/administrativo-alterar-colaborador")
 	public ModelAndView alterar_colaborador(Colaborador colaborador){
 		System.out.println("Entrou na pagina de alteração de colaborador");
-		
+
 		boolean status = false;
-		
-		System.out.println(colaborador.getId());
-		
+
+	    EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+	    
 		ColaboradorDao colaboradorDao = new ColaboradorDao();
-		status = colaboradorDao.alterar(colaborador);
+		
+		if(colaboradorDao.alterar(colaborador)){
+			status = true;
+		}else{
+			status = false;
+		}
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("administrativo/colaboradores");
-		mv.addObject("status", status);
+		mv.addObject("alterar", status);
+	    mv.addObject("estados", estados);
 		
 		return mv;
 	}
@@ -134,12 +150,22 @@ public class AdministrativoController {
 		
 		boolean status = false;
 		
+	    EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+		
 		ColaboradorDao colaboradorDao = new ColaboradorDao();
-		status = colaboradorDao.excluir(colaborador);
+		
+		if(colaboradorDao.excluir(colaborador)){
+			status = true;
+		}else{
+			status = false;
+		}
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("administrativo/colaboradores");
-		mv.addObject("status", status);
+		mv.addObject("excluir", status);
+	    mv.addObject("estados", estados);
+		
 		
 		return mv;
 	}

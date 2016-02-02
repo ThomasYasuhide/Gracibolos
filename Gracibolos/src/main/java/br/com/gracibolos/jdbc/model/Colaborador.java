@@ -6,7 +6,7 @@ public class Colaborador implements Serializable {
     
 	private static final long serialVersionUID = 1024496831321826252L;
 	
-	private int id;
+	private Long id;
     private byte status;
     private int nivel;
     private String usuario;
@@ -26,14 +26,14 @@ public class Colaborador implements Serializable {
     private String email;
     private String obs;
     
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	
-	public void setId(int id) {
+
+	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public byte getStatus() {
 		return status;
 	}
