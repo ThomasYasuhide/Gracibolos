@@ -39,7 +39,7 @@
 			<div class="content fullpage col-xs-12 col-sm-12 col-md-9 col-lg-9">
 				<div class="margin-top">
 
-					<!-- Titulo e subtitulo da pagina -->
+					<!-- ############################################################ CABEÇALHO ############################################################ -->
 					<header>
 						<h2 class="">Colaboradores</h2>
 						<h4 class="">Lista de colaboradores</h4>
@@ -48,6 +48,9 @@
 					<hr/>
 
 					<!-- ############################################################ CONTEUDO ############################################################ -->
+
+
+					<!-- ################################# ALERTAS ################################# -->
 					<c:if test="${incluir == 'true'}">
 						<div class="row">
 							<div class="col-xs-12">
@@ -108,6 +111,7 @@
 							</div>
 						</div>
 					</c:if>
+					<!-- ################################# FIM DOS ALERTAS ################################# -->
 					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
@@ -425,8 +429,32 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+
+			/*
+			*
+			* DEFINIÇÃO DAS VARIAVEIS
+			*
+			*/
+
+			var combo_estado = $('#estado');
+			var combo_cidade = $('#cidade');
+
+			/*
+			*
+			* INDICADOR DE PAGINA DO MENU
+			*
+			*/
 			
+			$('#menu-mob-colaboradores').addClass('active');
+			$('#menu-colaboradores').addClass('active');
+
+			/*
+			*
+			* CONFIGURAÇÃO DA TABELA
+			*
+			*/
 			
+			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
             var table = $('#lista-colaboradores').DataTable({
                 "columnDefs": [
                     {
@@ -436,17 +464,63 @@
                 ]
             });
 
+            /*
+			*
+			* INCLUSÃO DE COLABORADOR
+			*
+			*/
 
+            $('#incluir-colaborador-modal').click(function() {
+            	
+            	//Altera dinamicamente o titulo do modal.
+				$('#modal-subtitle').text("Incluir novo colaborador");
+				
+				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
+				$("#colaborador-form").attr("action","administrativo-incluir-colaborador");
+				
+				//Altera o nome do botão do modal.
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir colaborador');
+				
+				//Reset autmaticamente todos os campos do formulário.
+				$('#colaborador-form').each(function(){
+					this.reset();
+				});
+				
+				//Remove todas as opções do combo cidade.
+				combo_cidade.find('option').remove();
+				
+				//Adiciona opção onde solicita que o usuário selecione uma cidade.
+				combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
+			});
+
+            /*
+			*
+			* ALTERAÇÃO DE COLABORADOR
+			*
+			*/
+
+            //Define uma ação ao apertar o botão editar de algum item da tabela.
             $('#lista-colaboradores tbody').on( 'click', '#edit-colaborador', function () {
+            	
+            	 //Altera dinamicamente o titulo do modal.
             	$('#modal-subtitle').text("Alterar colaborador");
+            	
+            	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
 				$("#colaborador-form").attr("action","administrativo-alterar-colaborador");
-				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações');
-
+				
+				//Altera o nome do botão do modal.
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
+				
+				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
-
+                
+                //Passa o ID da cidade e caso existe executa a função callback para abrir o modal e preencher os campos com os dados.
               	listar_cidades(data[12], function(){
+
+              		//Apresenta o modal de exclusão na tela.
               		$('#modal-colaborador').modal('show');
-                    
+					
+					//Preenche os determinados campos com os conteudos.
                     $('#id').val(data[0]);
                     $('#status').val(data[1]);
                     $('#nivel').val(data[2]);
@@ -469,76 +543,66 @@
 
                 });
 
-            });
+			});
 
+			/*
+			*
+			* EXCLUSÃO DE COLABORADOR
+			*
+			*/
+	
+			//Define uma ação ao apertar o botão excluir de algum item da tabela.
             $('#lista-colaboradores tbody').on( 'click', '#delete-colaborador', function () {
+				
+				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
 
-				$('#excluir-colaborador').modal('show');
+                //Preenche o modal com o numero do ID a ser deletado.
+                $('#id_delete').val(data[0]);
 
-				$('#id_delete').val(data[0]);
-                
+                //Apresenta o modal de exclusão na tela.
+				$('#excluir-colaborador').modal('show');
 
             });
 
+            /*
+			*
+			* CIDADES
+			*
+			*/
+
+			//Verifica o evento do mudança do campo estado e chama função listar_cidades passando o ID do estado
+            combo_estado.change(function(){
+				listar_cidades(combo_estado.val());
+			});
+
+			//
+			function listar_cidades(id, callback){
+				
+				$.ajax({
+		            url : 'administrativo-pesquisar-cidade',
+		            method: "POST",
+		            data: {id:id},
+		            success : function(data) {
+
+		            	combo_cidade.find('option').remove();
+
+		            	combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
+						
+		            	$.each(data, function(val, cidade){
+							combo_cidade.append($('<option></option>').val(cidade.id).html(cidade.nome));
+						});
+
+						callback();
+						
+		            }
+		        });
+
+			}
         });
 
 	</script>
 	
-	<script type="text/javascript">
-
-	$('#menu-mob-colaboradores').addClass('active');
-	$('#menu-colaboradores').addClass('active');
-
-		var combo_estado = $('#estado');
-		var combo_cidade = $('#cidade');
-
-
-		$('#incluir-colaborador-modal').click(function() {
-			$('#modal-subtitle').text("Incluir novo colaborador");
-
-			$('#colaborador-form').each(function(){
-				this.reset();
-			});
-
-			$("#colaborador-form").attr("action","administrativo-incluir-colaborador");
-
-			combo_cidade.find('option').remove();
-			combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
-
-
-			$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir colaborador');
-
-		});
-	
-		
-		combo_estado.change(function(){
-			listar_cidades(combo_estado.val());
-		});
-
-		function listar_cidades(id, callback){
-			
-			$.ajax({
-	            url : 'administrativo-pesquisar-cidade',
-	            method: "POST",
-	            data: {id:id},
-	            success : function(data) {
-
-	            	combo_cidade.find('option').remove();
-
-	            	combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
-					
-	            	$.each(data, function(val, cidade){
-						combo_cidade.append($('<option></option>').val(cidade.id).html(cidade.nome));
-					});
-
-					callback();
-					
-	            }
-	        });
-
-		}
-	</script>
 	
 </body>
 </html>
