@@ -425,6 +425,8 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			
             var table = $('#lista-colaboradores').DataTable({
                 "columnDefs": [
                     {
@@ -484,6 +486,9 @@
 	</script>
 	
 	<script type="text/javascript">
+
+	$('#menu-mob-colaboradores').addClass('active');
+	$('#menu-colaboradores').addClass('active');
 
 		var combo_estado = $('#estado');
 		var combo_cidade = $('#cidade');

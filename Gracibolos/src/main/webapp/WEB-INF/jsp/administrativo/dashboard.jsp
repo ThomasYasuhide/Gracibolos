@@ -73,6 +73,9 @@
 	<script src="resources/js/chart.js"></script>
 
 	<script>
+		$('#menu-mob-dashboard').addClass('active');
+		$('#menu-dashboard').addClass('active');
+	
 		var lineChartData = {
 			labels : ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
 			datasets : [

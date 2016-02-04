@@ -26,6 +26,12 @@ public class AdministrativoController {
 		return new ModelAndView("administrativo/dashboard");
 	}
 	
+	/*
+	 * 
+	 * ###################### CLIENTES ######################
+	 * 
+	 * */
+	
 	//CLIENTES
 	@RequestMapping("/administrativo-clientes")
 	public ModelAndView clientes(){
@@ -64,17 +70,12 @@ public class AdministrativoController {
 		
 		return new ModelAndView("administrativo/clientes");
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
+	/*
+	 * 
+	 * ###################### COLABORADOR ######################
+	 * 
+	 * */
 	
 	//COLABORADOR
 	@RequestMapping("/administrativo-colaboradores")
@@ -188,7 +189,12 @@ public class AdministrativoController {
 	    
 	    return mv;
 	}
-	
+
+	/*
+	 * 
+	 * ###################### CIDADES ######################
+	 * 
+	 * */
 	
 	@RequestMapping(value="/administrativo-pesquisar-cidade", method=RequestMethod.POST)
 	public @ResponseBody List<Cidade> pesquisar_cidade(int id){
