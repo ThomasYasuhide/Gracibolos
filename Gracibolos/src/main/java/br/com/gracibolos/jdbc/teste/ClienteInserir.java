@@ -10,15 +10,15 @@ public class ClienteInserir {
 		
 		Cliente c1 = new Cliente();
 		
-		c1.setNomeRs("Raul Rufino");
-		c1.setCpfCnpj("1231412");
-		c1.setRgIe("1231232");
+		c1.setNomerazao("Raul Rufino");
+		c1.setCpfcnpj("1231412");
+		c1.setRgie("1231232");
 		c1.setCep(3678000);
 		c1.setNumero("54");
-		c1.setTel1("92323-3232");
+		c1.setTel("92323-3232");
 		c1.setEmail("Raul@hotmail.com");
-		c1.setStatus("ok");
-		c1.setSexo('M');
+		c1.setStatus(0);
+		c1.setSexo(0);
 		c1.setComplemento("10");
 		c1.setSite("");
 		c1.setObs("");

@@ -115,7 +115,7 @@
 					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-							<label class="control-label">Pesquisar cliente:</label>
+							<label class="control-label">Pesquisar colaborador:</label>
 							<form action="administrativo-procurar-colaborador" method="POST">
 								<div class="input-group">
 									<input type="text" class="form-control" maxlength="100" placeholder="Informe o nome, CPF ou RG para realizar a pesquisa." name="pesquisa" id="pesquisa" required />

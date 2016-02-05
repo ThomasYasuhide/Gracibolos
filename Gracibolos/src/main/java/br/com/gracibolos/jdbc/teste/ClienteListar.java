@@ -11,11 +11,11 @@ public class ClienteListar {
 		
 		for(Cliente p : dao.listar()){
             System.out.println(	  "Id : "+p.getId()
-            					+ "\tNome : "+p.getNomeRs()
-                                +"\tCPF/CNPJ : "+p.getCpfCnpj()
-                                +"\tRG/IE : "+p.getRgIe()
+            					+ "\tNome : "+p.getNomerazao()
+                                +"\tCPF/CNPJ : "+p.getCpfcnpj()
+                                +"\tRG/IE : "+p.getRgie()
                                 +"\tCEP : "+p.getCep()
-                                +"\tTel : "+p.getTel1());
+                                +"\tTel : "+p.getTel());
 		
 		
 		}

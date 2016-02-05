@@ -7,7 +7,7 @@ public class Colaborador implements Serializable {
 	private static final long serialVersionUID = 1024496831321826252L;
 	
 	private Long id;
-    private byte status;
+    private int status;
     private int nivel;
     private String usuario;
     private String senha;
@@ -34,14 +34,14 @@ public class Colaborador implements Serializable {
 		this.id = id;
 	}
 
-	public byte getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	
-	public void setStatus(byte status) {
+
+	public void setStatus(int status) {
 		this.status = status;
 	}
-	
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -101,11 +101,11 @@ public class Colaborador implements Serializable {
 	public String getNumero() {
 		return numero;
 	}
-	
+
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	
+
 	public String getComplemento() {
 		return complemento;
 	}

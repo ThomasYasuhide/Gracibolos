@@ -9,14 +9,14 @@ public class ClienteAlterar {
 		
 		Cliente c1 = new Cliente();
 		
-		c1.setId(6);		 	
-		c1.setNomeRs("Lucas");
-		c1.setCpfCnpj("4564452");//BIGINT
-		c1.setRgIe("23434");
+		c1.setId(6);
+		c1.setNomerazao("Lucas");
+		c1.setCpfcnpj("4564452"); //BIGINT
+		c1.setRgie("23434");
 		c1.setCep(43544);
 		c1.setNumero("");
-		c1.setTel1("95454-2345");
-		c1.getTel2();
+		c1.setTel("95454-2345");
+		c1.setCel("95454-2345");
 		c1.setEmail("lucas@hotmail.com");
 		c1.setSexo('M');
 		

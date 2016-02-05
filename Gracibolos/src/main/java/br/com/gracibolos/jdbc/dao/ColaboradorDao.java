@@ -20,17 +20,15 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 	
 	@Override
 	public boolean inserir(Colaborador colaborador) {
+		
 		boolean status = false;
-		
-		PreparedStatement ps;
+		PreparedStatement ps = null;
 		String sql = "INSERT INTO colaborador (status, nivel, usuario, senha, nome, cpf, rg, endereco, numero, complemento, bairro, cep, estado, cidade, tel, cel, email, obs) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		
-		System.out.println(colaborador.getStatus() + " " + colaborador.getNivel() + " " + colaborador.getSenha() + " " +  colaborador.getNome() + " " + colaborador.getCpf()  + " " + colaborador.getRg()  + " " +  colaborador.getEndereco()  + " " +  colaborador.getNumero() + " " + colaborador.getBairro() + " " + colaborador.getCep()  + " " + colaborador.getCidade() + " " + colaborador.getEstado());
 		
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
 
 			ps = conn.prepareStatement(sql);
-			ps.setByte(1, colaborador.getStatus());
+			ps.setInt(1, colaborador.getStatus());
 			ps.setInt(2, colaborador.getNivel());
 			ps.setString(3, colaborador.getUsuario());
 			ps.setString(4, colaborador.getSenha());
@@ -64,19 +62,25 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 		return status;
 	}
 	
+	/*
+	 * ALTERAR COLABORADOR
+	 * 
+	 * Este método tem como principal objetivo receber os dados de um determinado colaborador e alterar os dados do banco de dados.
+	 * 
+	 * */
 
 	@Override
 	public boolean alterar(Colaborador colaborador) {
+		
 		boolean status = false;
-			
-		PreparedStatement ps;
+		PreparedStatement ps = null;
 		String sql = "UPDATE colaborador SET status = ?, nivel = ?, usuario = ?, senha = ?, nome = ?, cpf = ?, rg = ?, endereco = ?, numero = ?, complemento = ?, bairro = ?, cep = ?, estado = ?, cidade = ?, tel = ?, cel = ?, email = ?, obs = ? WHERE id = ?";
 
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
 
 			ps = conn.prepareStatement(sql);
 			
-			ps.setByte(1, colaborador.getStatus());
+			ps.setInt(1, colaborador.getStatus());
 			ps.setInt(2, colaborador.getNivel());
 			ps.setString(3, colaborador.getUsuario());
 			ps.setString(4, colaborador.getSenha());
@@ -109,16 +113,21 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 		
 		return status;
 	}
-
+	
+	/*
+	 * EXCLUIR COLABORADOR
+	 * 
+	 * Este método tem como principal objetivo receber os dados de um determinado colaborador e excluir do banco de dados.
+	 * 
+	 * */
 
 	@Override
 	public boolean excluir(Colaborador colaborador) {
-		boolean status = false;
 		
+		boolean status = false;
+		PreparedStatement ps = null;
 		String sql = "DELETE FROM colaborador WHERE id = ?";
 	
-		PreparedStatement ps;
-		
 		//Tenta realizar uma conexão com o banco de dados
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
 
@@ -148,11 +157,12 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 
 	@Override
 	public List<Colaborador> listar() {
-		List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 		
-		PreparedStatement ps;
+		List<Colaborador> colaboradores = new ArrayList<Colaborador>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		String sql = "SELECT id, status, nivel, usuario, senha, nome, cpf, rg, endereco, numero, complemento, bairro, cep, estado, cidade, tel, cel, email, obs FROM colaborador";
-		ResultSet rs;
+		
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 						
@@ -164,7 +174,7 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 							
 				Colaborador colaborador = new Colaborador();
 				colaborador.setId(rs.getLong("id"));
-				colaborador.setStatus(rs.getByte("status"));
+				colaborador.setStatus(rs.getInt("status"));
 				colaborador.setNivel(rs.getInt("nivel"));
 				colaborador.setUsuario(rs.getString("usuario"));
 				colaborador.setSenha(rs.getString("senha"));
@@ -198,7 +208,7 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 	}
 
 	/*
-	 * LISTAR COLABORADORES
+	 * PESQUISAR COLABORADORES
 	 * 
 	 * Este método tem como principal objetivo realizar uma consulta ao banco e retornar os dados dos colaboradores pesquisados.
 	 * 
@@ -208,11 +218,10 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 	public List<Colaborador> pesquisar(String pesquisa) {
 		
 		List<Colaborador> colaboradores = new ArrayList<Colaborador>();
-		
-		PreparedStatement ps;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		String sql = "SELECT id, status, nivel, usuario, senha, nome, cpf, rg, endereco, numero, complemento, bairro, cep, estado, cidade, tel, cel, email, obs FROM colaborador WHERE cpf = ? OR nome LIKE ? OR rg = ?";
-		ResultSet rs;
-		
+				
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 						
 			ps = conn.prepareStatement(sql);
@@ -226,7 +235,7 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 							
 				Colaborador colaborador = new Colaborador();
 				colaborador.setId(rs.getLong("id"));
-				colaborador.setStatus(rs.getByte("status"));
+				colaborador.setStatus(rs.getInt("status"));
 				colaborador.setNivel(rs.getInt("nivel"));
 				colaborador.setUsuario(rs.getString("usuario"));
 				colaborador.setSenha(rs.getString("senha"));

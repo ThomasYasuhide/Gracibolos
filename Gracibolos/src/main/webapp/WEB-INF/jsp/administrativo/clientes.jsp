@@ -1,11 +1,15 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+﻿<!-- Define que este documento é uma pagina JSP -->
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+
+<!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="PT-BR">
 <head>
 
 	<!-- Defenição dos arquivos meta -->
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,7 +18,7 @@
 	<link href="resources/css/bootstrap.css" rel="stylesheet">
 	<link href="resources/css/reset.css" rel="stylesheet">
 	<link href="resources/css/style.css" rel="stylesheet">
-	<link href="resources/css/jquery.bootgrid.css" rel="stylesheet">
+    <link href="resources/css/datatables.css" rel="stylesheet">
 
 	<!-- Titulo da página -->
 	<title>Graci Bolos | Clientes</title>
@@ -28,217 +32,579 @@
 
 		<!-- Cria uma linha para armazenar todo o conteudo -->
 		<div class="row fullheight">
-
-			<!-- Barra de navegação Mobile e desktop -->
+			
+			<!-- Importação da barra de navegação Mobile e desktop -->
 			<%@ include file="menu.jsp" %>
-
+			
 			<div class="content fullpage col-xs-12 col-sm-12 col-md-9 col-lg-9">
 				<div class="margin-top">
 
-					<!-- Titulo e subtitulo da pagina -->
+					<!-- ############################################################ CABEÇALHO ############################################################ -->
 					<header>
-						<h2 class="">CLIENTES</h2>
+						<h2 class="">Clientes</h2>
 						<h4 class="">Lista de clientes</h4>
 					</header>
 
 					<hr/>
 
-					<!-- ########## CONTEUDO ########## -->
+					<!-- ############################################################ CONTEUDO ############################################################ -->
 
-					<form action="administrativo-procurar-cliente" method="POST">
 
+					<!-- ################################# ALERTAS ################################# -->
+					<c:if test="${incluir == 'true'}">
 						<div class="row">
-
-							<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-								<label class="control-label">Pesquisar cliente:</label>
-								<div class="input-group">
-									<input type="text" class="form-control" maxlength="100" placeholder="Informe o nome, razão social, CNPJ, CPF, IE ou RG para realizar a pesquisa." name="pesquisa" id="pesquisa" required>
-
-									<span class="input-group-btn">
-								        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search disabled"></span></button>
-								    </span>
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Incluente armazenado com sucesso.
 								</div>
 							</div>
-							
 						</div>
-					</form>
-
+					</c:if>
+					<c:if test="${incluir == 'false'}">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar incluir o novo cliente, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${alterar == 'true'}">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Alteração efetuarda com sucesso.
+								</div>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${alterar == 'false'}">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar alterar o cliente, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${excluir == 'true'}">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Cliente foi excluido com sucesso!
+								</div>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${excluir == 'false'}">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar excluir o cliente, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					</c:if>
+					<!-- ################################# FIM DOS ALERTAS ################################# -->
 					
-
-
-					<table id="grid-basic" class="table table-hover">
-						<thead>
-							<tr>
-								<th data-column-id="id" data-visible="false">#</th>
-								<th data-column-id="nome">Nome</th>
-								<th data-column-id="cpf_cnpj">CPF / CNPJ</th>
-								<th data-column-id="rg_ie">RG / IE</th>
-								<th data-column-id="comandos" data-formatter="commands" data-sortable="false">Ações</th>
-							</tr>
-						</thead>
-						<tbody>
-
-							
-
-							<tr>
-								<td>1</td>
-								<td>Thomas Felix Y. Yamamoto</td>
-								<td>123.123.123-12</td>
-								<td>12.123.123-1</td>
-								<td>Rua CanindÃ©</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>RogÃ©rio Yudi</td>
-								<td>123.123.123-12</td>
-								<td>12.123.123-1</td>
-								<td>Rua CanindÃ©</td>
-							</tr>
-
-							<tr>
-								<td>3</td>
-								<td>NatÃ¡lia InÃ¡cio</td>
-								<td>123.123.123-12</td>
-								<td>12.123.123-1</td>
-								<td>Rua CanindÃ©</td>
-							</tr>
-
-							<tr>
-								<td>4</td>
-								<td>Weslley Ruffino</td>
-								<td>123.123.123-12</td>
-								<td>12.123.123-1</td>
-								<td>Rua CanindÃ©</td>
-							</tr>
-
-							<tr>
-								<td>5</td>
-								<td>Breno Ruffino</td>
-								<td>123.123.123-12</td>
-								<td>12.123.123-1</td>
-								<td>Rua CanindÃ©</td>
-							</tr>
-							<tr>
-								<td>6</td>
-								<td>Thomas Felix Y. Yamamoto</td>
-								<td>123.123.123-12</td>
-								<td>12.123.123-1</td>
-								<td>Rua CanindÃ©</td>
-							</tr>
-							<tr>
-								<td>7</td>
-								<td>RogÃ©rio Yudi</td>
-								<td>987.123.123-12</td>
-								<td>12.123.123-1</td>
-								<td>Rua CanindÃ©</td>
-							</tr>
-
-							<tr>
-								<td>8</td>
-								<td>NatÃ¡lia InÃ¡cio</td>
-								<td>123.123.123-12</td>
-								<td>12.123.123-1</td>
-								<td>Rua CanindÃ©</td>
-							</tr>
-
-							<tr>
-								<td>9</td>
-								<td>Weslley Ruffino</td>
-								<td>123.123.123-12</td>
-								<td>12.123.123-1</td>
-								<td>Rua CanindÃ©</td>
-							</tr>
-
-							<tr>
-								<td>10</td>
-								<td>Breno Ruffino</td>
-								<td>123.123.123-12</td>
-								<td>12.123.123-1</td>
-								<td>Rua CanindÃ©</td>
-							</tr>
-
-							<tr>
-								<td>10</td>
-								<td>Breno Ruffino</td>
-								<td>123.123.123-12</td>
-								<td>12.123.123-1</td>
-								<td>Rua CanindÃ©</td>
-							</tr>
-
-						</tbody>
-					</table>
-
 					<div class="row">
-						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
-							<a class="btn btn-default fullwidth" href="administrativo-incluir-cliente"><span class="glyphicon glyphicon-plus disabled"></span>&nbsp;&nbsp;&nbsp;Incluir novo cliente</a>
+						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
+							<label class="control-label">Pesquisar cliente:</label>
+							<form action="administrativo-pesquisar-colaborador" method="POST">
+								<div class="input-group">
+									<input type="text" class="form-control" maxlength="100" placeholder="Informe o nome, CPF, CNPJ, RG ou IE para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="submit">
+											<span class="glyphicon glyphicon-search disabled"></span>
+										</button>
+									</span>
+								</div>
+							</form>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
+							<table id="lista-clientes" class="table table-hover display" cellspacing="0" width="100%">
+								<thead>
+									<!-- Titulos das tabelas  -->
+									<tr>
+										<th>#</th>
+										<th>Status</th>
+										<th>Pessoa</th>
+										<th>Sexo</th>
+										<th>Data Nascimento</th>
+										<th>Nome / Razão Social</th>
+										<th>CPF / CNPJ</th>
+										<th>RG / IE</th>
+										<th>Endereço</th>
+										<th>Nº</th>
+										<th>Complemento</th>
+										<th>Bairro</th>
+										<th>Estado</th>
+										<th>Cidade</th>
+										<th>CEP</th>
+										<th>Telefone</th>
+										<th>Celular</th>
+										<th>E-mail</th>
+										<th>Site</th>
+										<th>Cliente desde</th>
+										<th>Observaçoes</th>
+										<th>Ações</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
+									<c:forEach var="cliente" items="${clientes}">
+										<tr>
+											<td>${cliente.id}</td>
+											<td>${cliente.status}</td>
+											<td>${cliente.pessoa}</td>
+											<td>${cliente.sexo}</td>
+											<td>${cliente.datanascimento}</td>
+											<td>${cliente.nome}</td>
+											<td>${cliente.cpfcnpj}</td>
+											<td>${cliente.rgie}</td>
+											<td>${cliente.endereco}</td>
+											<td>${cliente.numero}</td>
+											<td>${cliente.complemento}</td>
+											<td>${cliente.bairro}</td>
+											<td>${cliente.estado}</td>
+											<td>${cliente.cidade}</td>
+											<td>${cliente.cep}</td>
+											<td>${cliente.tel}</td>
+											<td>${cliente.cel}</td>
+											<td>${cliente.email}</td>
+											<td>${cliente.obs}</td>
+		                					<td>
+		                						<button id="edit-cliente" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
+		                						<button id="delete-cliente" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+		                					</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
 						</div>
 					</div>
 
+					<div class="row">
+						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
+							<a href="" id="incluir-cliente-modal" data-toggle="modal" data-target="#modal-cliente" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir novo cliente</a>
+						</div>
+					</div>
+
+					<!-- ############################################################ FIM DO CONTEUDO ############################################################ -->
 				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	<!-- SÒ FOI FEITO ATÉ AQUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+
+	<!--
+
+	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR ############################################################
+
+	-->
+	<div class="modal fade" id="modal-colaborador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+	    	
+	    		<form id="colaborador-form" method="POST">
+	    
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h3 id="modal-title">COLABORADORES</h3>
+						<h4 id="modal-subtitle"></h4>
+					</div>
+
+					<div class="modal-body">
+						<!-- ################################# CONTEUDO ################################# -->
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+								<div class="hidden">
+									<label class="control-label" for="id">Nº colaborador:</label>
+									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
+								</div>
+
+								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+									<label class="control-label" for="status">Status:</label>
+									<select id="status" name="status" class="form-control" required>
+										<option selected value="1">Ativado</option>
+										<option value="0">Desativado</option>
+									</select>
+								</div>
+
+								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+									<label class="control-label" for="nivel">Acesso:</label>
+									<select id="nivel" name="nivel" class="form-control" required>
+										<option selected value="1">Operacional</option>
+										<option value="2">Administrador</option>
+									</select>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+									<label class="control-label" for="telefone">Usuario*:</label>
+									<input type="text" id="usuario" name="usuario" placeholder="Digite o seu usuário" class="form-control" maxlength="20" required/>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+									<label class="control-label" for="celular">Senha*:</label>
+									<input type="password" id="senha" name="senha" placeholder="Senha" class="form-control" maxlength="20" required/>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+									<label class="control-label" for="nome" id="nome_lbl">Nome*:</label>
+									<input type="text" id="nome" name="nome" placeholder="Digite seu nome aqui" class="form-control" maxlength="100" required/>
+								</div> 
+
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+									<label class="control-label" for="cpf" id="cpf_lbl">CPF*:</label>
+									<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" class="form-control" maxlength="11" required/>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+									<label class="control-label" for="rg" id="rg_lbl">RG:</label>
+									<input type="text" id="rg" name="rg" placeholder="00.000.000-0" class="form-control" maxlength="9"/>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
+									<label class="control-label" for="endereco">Endereço*:</label>
+									<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" required/>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-3 col-md-2">
+									<label class="control-label" for="numero">Numero*:</label>
+									<input type="text" id="numero" name="numero" placeholder="0000" class="form-control" required/>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+									<label class="control-label" for="complemento">Complemento:</label>
+									<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120"/>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+									<label class="control-label" for="bairro">Bairro*:</label>
+									<input type="text" id="bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" required/>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-2 col-md-3">
+									<label class="control-label" for="estado">Estado*:</label>
+									<select class="form-control" id="estado" name="estado" required >
+										<option selected="selected" disabled="disabled" value="0">Selecione o estado</option>
+										<c:forEach var="estado" items="${estados}">
+											<option value="${estado.id}">${estado.sigla}</option>
+										</c:forEach>
+									</select>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+									<label class="control-label" for="cidade">Cidade*:</label>
+									<select class="form-control" id="cidade" name="cidade" required >
+										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
+										<c:forEach var="cidade" items="${cidades}">
+											<option value="${cidade.id}">${cidade.nome}</option>
+										</c:forEach>
+									</select>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
+									<label class="control-label" for="cep">CEP*:</label>
+									<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="8" required/>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+									<label class="control-label" for="tel">Tel:</label>
+									<input type="text" id="tel" name="tel" placeholder="(00) 0000-0000" class="form-control" maxlength="10"/>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+									<label class="control-label" for="cel">Cel:</label>
+									<input type="text" id="cel" name="cel" placeholder="(00) 00000-0000" class="form-control" maxlength="11" />
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+									<label class="control-label" for="email">E-mail:</label>
+									<input type="text" id="email" name="email" class="form-control" placeholder="email@provedor.com.br" maxlength="120"/>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+									<label class="control-label" for="obs">Observações:</label>
+									<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o colaborador"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ################################# FIM DO CONTEUDO ################################# -->
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+						<button type="submit" class="btn btn-default" id="modal-action"></button>
+					</div>
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!--
+
+	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR #########################################################
+
+	-->
+
+
+
+
+
+
+	<!--
+
+	############################################################        MODAL DE EXCLUSÃO DE COLABORADOR      ############################################################
+
+	-->
+
+
+
+	<!-- Modal de confirmação de exclusão de cliente -->
+	<div class="modal fade" id="excluir-colaborador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="colaborador-delete-form" action="administrativo-remover-colaborador" method="POST">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Excluir colaborador</h4>
+					</div>
+					
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+								<div class="hidden">
+									<label class="control-label" for="id">Nº colaborador:</label>
+									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" />
+								</div>
+
+								<p>Deseja realmente excluir o colaborador?</p>
+							</div>
+						</div>
+
+						
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Não, quero manter</button>
+						<button type="submit" class="btn btn-default">Sim, quero excluir</button>
+					</div>
+
+				</form>
 			</div>
 		</div>
 	</div>
 
 
-	<!-- Modal de confirmação de exclusão de cliente -->
-	<div class="modal fade" id="excluirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Excluir cliente</h4>
-	      </div>
-	      <div class="modal-body">
-	        <div>
-	        	<p>Deseja realmente excluir o cliente?</p>
-	        </div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Não, quero excluir</button>
-			<a href="" id="excluirCliente" class="btn btn-default">Sim, quero excluir</a>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+	<!--
 
-	<!-- ########## FIM DO CONTEUDO ########## -->
+	############################################################ FIM DO  MODAL DE EXCLUSÃO DE COLABORADOR ############################################################
 
+	-->
 
 
 	<!-- Importação dos arquivos java script -->
 	<script src="resources/js/jquery-2.1.4.js"></script>
+	<script src="resources/js/datatables.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
-	<script src="resources/js/jquery.bootgrid.js"></script>
+    
 
 	<script type="text/javascript">
-		$( document ).ready(function() {
+		$(document).ready(function() {
 
-			/* Comando javascript para configurar o plugin do bootgrid */
-			var grid = $("#grid-basic").bootgrid({
-				formatters: {
-					"commands": function(column, row)
-					{
-						return "<button type=\"button\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class='glyphicon glyphicon-pencil disabled'></span></button> " + 
-						"<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\"><span class='glyphicon glyphicon-trash disabled'></span></button>";
-					}
-				}
-			}).on("loaded.rs.jquery.bootgrid", function()
-			{
-				/* Executes after data is loaded and rendered */
-				grid.find(".command-edit").on("click", function(e)
-				{
-					window.location="alterar_cliente.html?id="+$(this).data("row-id");
-				}).end().find(".command-delete").on("click", function(e)
-				{
-					$('#excluirModal').modal('show');
+			/*
+			*
+			* DEFINIÇÃO DAS VARIAVEIS
+			*
+			*/
 
-					$('#excluirCliente').attr("href","excluir_cliente.html?id=" + $(this).data("row-id"));
+			var combo_estado = $('#estado');
+			var combo_cidade = $('#cidade');
+
+			/*
+			*
+			* INDICADOR DE PAGINA DO MENU
+			*
+			*/
+			
+			$('#menu-mob-colaboradores').addClass('active');
+			$('#menu-colaboradores').addClass('active');
+
+			/*
+			*
+			* CONFIGURAÇÃO DA TABELA
+			*
+			*/
+			
+			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
+            var table = $('#lista-colaboradores').DataTable({
+                "columnDefs": [
+                    {
+                        "targets": [ 0, 1, 2, 3, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ],
+                        "visible": false
+                    }
+                ]
+            });
+
+            /*
+			*
+			* INCLUSÃO DE COLABORADOR
+			*
+			*/
+
+            $('#incluir-colaborador-modal').click(function() {
+            	
+            	//Altera dinamicamente o titulo do modal.
+				$('#modal-subtitle').text("Incluir novo colaborador");
+				
+				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
+				$("#colaborador-form").attr("action","administrativo-incluir-colaborador");
+				
+				//Altera o nome do botão do modal.
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir colaborador');
+				
+				//Reset autmaticamente todos os campos do formulário.
+				$('#colaborador-form').each(function(){
+					this.reset();
 				});
+				
+				//Remove todas as opções do combo cidade.
+				combo_cidade.find('option').remove();
+				
+				//Adiciona opção onde solicita que o usuário selecione uma cidade.
+				combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
 			});
-			/* Fim do comando javascript para configurar o plugin do bootgrid */
 
-		});
+            /*
+			*
+			* ALTERAÇÃO DE COLABORADOR
+			*
+			*/
+
+            //Define uma ação ao apertar o botão editar de algum item da tabela.
+            $('#lista-colaboradores tbody').on( 'click', '#edit-colaborador', function () {
+            	
+            	 //Altera dinamicamente o titulo do modal.
+            	$('#modal-subtitle').text("Alterar colaborador");
+            	
+            	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
+				$("#colaborador-form").attr("action","administrativo-alterar-colaborador");
+				
+				//Altera o nome do botão do modal.
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
+				
+				//Pega os dados de determinada linha da tabela.
+                var data = table.row( $(this).parents('tr') ).data();
+                
+                //Passa o ID da cidade e caso existe executa a função callback para abrir o modal e preencher os campos com os dados.
+              	listar_cidades(data[12], function(){
+
+              		//Apresenta o modal de exclusão na tela.
+              		$('#modal-colaborador').modal('show');
+					
+					//Preenche os determinados campos com os conteudos.
+                    $('#id').val(data[0]);
+                    $('#status').val(data[1]);
+                    $('#nivel').val(data[2]);
+                    $('#usuario').val(data[3]);
+                    $('#senha').val(data[4]);
+    				$('#nome').val(data[5]);
+    				$('#cpf').val(data[6]);
+                    $('#rg').val(data[7]);
+                    $('#endereco').val(data[8]);
+                    $('#numero').val(data[9]);
+    				$('#complemento').val(data[10]);
+    				$('#bairro').val(data[11]);
+    				$('#estado').val(data[12]);
+                    $('#cidade').val(data[13]);
+                    $('#cep').val(data[14]);
+                    $('#tel').val(data[15]);
+    				$('#cel').val(data[16]);
+                    $('#email').val(data[17]);
+    				$('#obs').val(data[18]);
+
+                });
+
+			});
+
+			/*
+			*
+			* EXCLUSÃO DE COLABORADOR
+			*
+			*/
+	
+			//Define uma ação ao apertar o botão excluir de algum item da tabela.
+            $('#lista-colaboradores tbody').on( 'click', '#delete-colaborador', function () {
+				
+				//Pega os dados de determinada linha da tabela.
+                var data = table.row( $(this).parents('tr') ).data();
+
+                //Preenche o modal com o numero do ID a ser deletado.
+                $('#id_delete').val(data[0]);
+
+                //Apresenta o modal de exclusão na tela.
+				$('#excluir-colaborador').modal('show');
+
+            });
+
+            /*
+			*
+			* CIDADES
+			*
+			*/
+
+			//Verifica o evento do mudança do campo estado e chama função listar_cidades passando o ID do estado
+            combo_estado.change(function(){
+				listar_cidades(combo_estado.val());
+			});
+
+			//
+			function listar_cidades(id, callback){
+				
+				$.ajax({
+		            url : 'administrativo-pesquisar-cidade',
+		            method: "POST",
+		            data: {id:id},
+		            success : function(data) {
+
+		            	combo_cidade.find('option').remove();
+
+		            	combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
+						
+		            	$.each(data, function(val, cidade){
+							combo_cidade.append($('<option></option>').val(cidade.id).html(cidade.nome));
+						});
+
+						callback();
+						
+		            }
+		        });
+
+			}
+        });
 
 	</script>
+	
+	
 </body>
 </html>
