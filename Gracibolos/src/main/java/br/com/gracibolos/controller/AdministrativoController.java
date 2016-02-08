@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.gracibolos.jdbc.dao.CidadeDao;
+import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.ColaboradorDao;
 import br.com.gracibolos.jdbc.dao.EstadoDao;
 import br.com.gracibolos.jdbc.model.Cidade;
+import br.com.gracibolos.jdbc.model.Cliente;
 import br.com.gracibolos.jdbc.model.Colaborador;
 import br.com.gracibolos.jdbc.model.Estado;
 
@@ -35,40 +37,114 @@ public class AdministrativoController {
 	//CLIENTES
 	@RequestMapping("/administrativo-clientes")
 	public ModelAndView clientes(){
-		System.out.println("Entrou na pagina clientes");
-		return new ModelAndView("administrativo/clientes");
+		System.out.println("Entrou na servlet de listagem de clientes");
+		
+		EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+		
+		ModelAndView mv = new ModelAndView();
+	    mv.setViewName("administrativo/clientes");
+	    mv.addObject("estados", estados);
+		
+		return mv;
 	}
 	
 	//INCLUIR NOVO CLIENTE
 	@RequestMapping("/administrativo-incluir-cliente")
-	public ModelAndView incluir_cliente(){
-		System.out.println("Entrou na pagina de inclusão de clientes");
+	public ModelAndView incluir_cliente(Cliente cliente){
+		System.out.println("Entrou na servlet de inclusão de um novo cliente");
 		
-		//######
+		boolean status = false;
+
+	    EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+	    
+		ClienteDao dao = new ClienteDao();
 		
-		return new ModelAndView("administrativo/incluir_cliente");
+		if(dao.inserir(cliente)){
+			status = true;
+		}else{
+			status = false;
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/clientes");
+		mv.addObject("incluir", status);
+		mv.addObject("estados", estados);
+
+		return mv;
 	}
 	
 	//AlTERAR CLIENTE
 	@RequestMapping("/administrativo-alterar-cliente")
-	public ModelAndView alterar_cliente(){
-		System.out.println("Entrou na pagina de alteração de clientes");
-		return new ModelAndView("administrativo/alterar_cliente");
+	public ModelAndView alterar_cliente(Cliente cliente){
+		System.out.println("Entrou na pagina de alteração de cliente");
+
+		boolean status = false;
+
+	    EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+
+		ClienteDao clienteDao = new ClienteDao();
+		
+		if(clienteDao.alterar(cliente)){
+			status = true;
+		}else{
+			status = false;
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/clientes");
+		mv.addObject("alterar", status);
+	    mv.addObject("estados", estados);
+		
+		return mv;
 	}
 	
 	//EXCLUIR CLIENTE
 	@RequestMapping("/administrativo-remover-cliente")
-	public ModelAndView excluir_cliente(){
-		System.out.println("Entrou na pagina de exclusão de clientes");
-		return new ModelAndView("administrativo/excluir_cliente");
+	public ModelAndView excluir_cliente(Cliente cliente){
+		System.out.println("Entrou na pagina de exclusão de cliente");
+		
+		boolean status = false;
+		
+	    EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+
+		ClienteDao clienteDao = new ClienteDao();
+		
+		if(clienteDao.excluir(cliente)){
+			status = true;
+		}else{
+			status = false;
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/clientes");
+		mv.addObject("excluir", status);
+	    mv.addObject("estados", estados);
+		
+		
+		return mv;
 	}
 	
 	//PESQUISAR CLIENTE
-	@RequestMapping("/administrativo-procurar-cliente")
+	@RequestMapping("/administrativo-pesquisar-cliente")
 	public ModelAndView pesquisar_cliente(String pesquisa){
-		System.out.println("Realizou a pesquisa de clientes");
-		
-		return new ModelAndView("administrativo/clientes");
+		System.out.println("Realizou a pesquisa de cliente");
+
+		ClienteDao clienteDao = new ClienteDao();
+		List<Cliente> clientes = clienteDao.pesquisar(pesquisa);
+
+	    EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+	    
+	    ModelAndView mv = new ModelAndView();
+	    mv.setViewName("administrativo/clientes");
+	    mv.addObject("clientes", clientes);
+	    mv.addObject("estados", estados);
+	    
+	    return mv;
 	}
 		
 	/*

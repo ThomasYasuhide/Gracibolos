@@ -116,7 +116,7 @@
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
 							<label class="control-label">Pesquisar cliente:</label>
-							<form action="administrativo-pesquisar-colaborador" method="POST">
+							<form action="administrativo-pesquisar-cliente" method="POST">
 								<div class="input-group">
 									<input type="text" class="form-control" maxlength="100" placeholder="Informe o nome, CPF, CNPJ, RG ou IE para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
 									<span class="input-group-btn">
@@ -166,10 +166,10 @@
 										<tr>
 											<td>${cliente.id}</td>
 											<td>${cliente.status}</td>
-											<td>${cliente.pessoa}</td>
+											<td>${cliente.tipopessoa}</td>
 											<td>${cliente.sexo}</td>
 											<td>${cliente.datanascimento}</td>
-											<td>${cliente.nome}</td>
+											<td>${cliente.nomerazao}</td>
 											<td>${cliente.cpfcnpj}</td>
 											<td>${cliente.rgie}</td>
 											<td>${cliente.endereco}</td>
@@ -182,6 +182,8 @@
 											<td>${cliente.tel}</td>
 											<td>${cliente.cel}</td>
 											<td>${cliente.email}</td>
+											<td>${cliente.site}</td>
+											<td>${cliente.clientedesde}</td>
 											<td>${cliente.obs}</td>
 		                					<td>
 		                						<button id="edit-cliente" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
@@ -205,25 +207,21 @@
 			</div>
 		</div>
 	</div>
-	
-
-	<!-- SÒ FOI FEITO ATÉ AQUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-
 
 	<!--
 
-	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR ############################################################
+	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DE CLIENTE ############################################################
 
 	-->
-	<div class="modal fade" id="modal-colaborador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="modal-cliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 	    	
-	    		<form id="colaborador-form" method="POST">
+	    		<form id="cliente-form" method="POST">
 	    
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h3 id="modal-title">COLABORADORES</h3>
+						<h3 id="modal-title">CLIENTES</h3>
 						<h4 id="modal-subtitle"></h4>
 					</div>
 
@@ -233,7 +231,7 @@
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 								<div class="hidden">
-									<label class="control-label" for="id">Nº colaborador:</label>
+									<label class="control-label" for="id">Nº cliente:</label>
 									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
 								</div>
 
@@ -246,36 +244,40 @@
 								</div>
 
 								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
-									<label class="control-label" for="nivel">Acesso:</label>
-									<select id="nivel" name="nivel" class="form-control" required>
-										<option selected value="1">Operacional</option>
-										<option value="2">Administrador</option>
+									<label class="control-label" for="tipopessoa">Pessoa:</label>
+									<select id="tipopessoa" name="tipopessoa" class="form-control" required>
+										<option selected value="0">Fisica</option>
+										<option value="1">Jurídica</option>
+									</select>
+								</div>
+
+								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+									<label class="control-label" for="sexo">Sexo:</label>
+									<select id="sexo" name="sexo" class="form-control" required>
+										<option selected disabled>Selecione um sexo</option>
+										<option value="0">Masculino</option>
+										<option value="1">Feminino</option>
 									</select>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="telefone">Usuario*:</label>
-									<input type="text" id="usuario" name="usuario" placeholder="Digite o seu usuário" class="form-control" maxlength="20" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="celular">Senha*:</label>
-									<input type="password" id="senha" name="senha" placeholder="Senha" class="form-control" maxlength="20" required/>
+									<label class="control-label" for="telefone">Data Nascimento:</label>
+									<input type="date" id="datanascimento" name="datanascimento" placeholder="Data de nascimento" class="form-control" />
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-									<label class="control-label" for="nome" id="nome_lbl">Nome*:</label>
-									<input type="text" id="nome" name="nome" placeholder="Digite seu nome aqui" class="form-control" maxlength="100" required/>
+									<label class="control-label" for="nomerazao" id="nomerazao_lbl">Nome/Razão Social*:</label>
+									<input type="text" id="nomerazao" name="nomerazao" placeholder="Digite seu nome ou razão social aqui" class="form-control" maxlength="100" required/>
 								</div> 
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="cpf" id="cpf_lbl">CPF*:</label>
-									<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" class="form-control" maxlength="11" required/>
+									<label class="control-label" for="cpfcnpj" id="cpf_lbl">CPF/CNPJ*:</label>
+									<input type="text" id="cpfcnpj" name="cpfcnpj" placeholder="000.000.000-00" class="form-control" maxlength="14" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="rg" id="rg_lbl">RG:</label>
-									<input type="text" id="rg" name="rg" placeholder="00.000.000-0" class="form-control" maxlength="9"/>
+									<label class="control-label" for="rgie" id="rg_lbl">RG:/IE:</label>
+									<input type="text" id="rgie" name="rgie" placeholder="00.000.000-0" class="form-control" maxlength="12"/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
@@ -338,9 +340,19 @@
 									<input type="text" id="email" name="email" class="form-control" placeholder="email@provedor.com.br" maxlength="120"/>
 								</div>
 
+								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+									<label class="control-label" for="site">Site:</label>
+									<input type="text" id="site" name="site" class="form-control" placeholder="www.site.com.br" maxlength="120"/>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+									<label class="control-label" for="clientedesde">Cliente Desde:</label>
+									<input type="date" id="clientedesde" name="clientedesde" class="form-control" />
+								</div>
+
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
 									<label class="control-label" for="obs">Observações:</label>
-									<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o colaborador"></textarea>
+									<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o cliente"></textarea>
 								</div>
 							</div>
 						</div>
@@ -361,7 +373,7 @@
 
 	<!--
 
-	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR #########################################################
+	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE CLIENTE #########################################################
 
 	-->
 
@@ -372,21 +384,21 @@
 
 	<!--
 
-	############################################################        MODAL DE EXCLUSÃO DE COLABORADOR      ############################################################
+	############################################################        MODAL DE EXCLUSÃO DE CLIENTE      ############################################################
 
 	-->
 
 
 
 	<!-- Modal de confirmação de exclusão de cliente -->
-	<div class="modal fade" id="excluir-colaborador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="excluir-cliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form id="colaborador-delete-form" action="administrativo-remover-colaborador" method="POST">
+				<form id="cliente-delete-form" action="administrativo-remover-cliente" method="POST">
 
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Excluir colaborador</h4>
+						<h4 class="modal-title" id="myModalLabel">Excluir cliente</h4>
 					</div>
 					
 					<div class="modal-body">
@@ -394,11 +406,11 @@
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 								<div class="hidden">
-									<label class="control-label" for="id">Nº colaborador:</label>
+									<label class="control-label" for="id">Nº cliente:</label>
 									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" />
 								</div>
 
-								<p>Deseja realmente excluir o colaborador?</p>
+								<p>Deseja realmente excluir o cliente selecionado?</p>
 							</div>
 						</div>
 
@@ -418,7 +430,7 @@
 
 	<!--
 
-	############################################################ FIM DO  MODAL DE EXCLUSÃO DE COLABORADOR ############################################################
+	############################################################ FIM DO  MODAL DE EXCLUSÃO DE CLIENTE ############################################################
 
 	-->
 
@@ -447,8 +459,8 @@
 			*
 			*/
 			
-			$('#menu-mob-colaboradores').addClass('active');
-			$('#menu-colaboradores').addClass('active');
+			$('#menu-mob-clientes').addClass('active');
+			$('#menu-clientes').addClass('active');
 
 			/*
 			*
@@ -457,10 +469,10 @@
 			*/
 			
 			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
-            var table = $('#lista-colaboradores').DataTable({
+            var table = $('#lista-clientes').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 2, 3, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ],
+                        "targets": [ 0, 1, 2, 3, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
                         "visible": false
                     }
                 ]
@@ -468,23 +480,23 @@
 
             /*
 			*
-			* INCLUSÃO DE COLABORADOR
+			* INCLUSÃO DE CLIENTE
 			*
 			*/
 
-            $('#incluir-colaborador-modal').click(function() {
+            $('#incluir-cliente-modal').click(function() {
             	
             	//Altera dinamicamente o titulo do modal.
-				$('#modal-subtitle').text("Incluir novo colaborador");
+				$('#modal-subtitle').text("Incluir novo cliente");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#colaborador-form").attr("action","administrativo-incluir-colaborador");
+				$("#cliente-form").attr("action","administrativo-incluir-cliente");
 				
 				//Altera o nome do botão do modal.
-				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir colaborador');
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir cliente');
 				
 				//Reset autmaticamente todos os campos do formulário.
-				$('#colaborador-form').each(function(){
+				$('#cliente-form').each(function(){
 					this.reset();
 				});
 				
@@ -497,18 +509,18 @@
 
             /*
 			*
-			* ALTERAÇÃO DE COLABORADOR
+			* ALTERAÇÃO DE CLIENTE
 			*
 			*/
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
-            $('#lista-colaboradores tbody').on( 'click', '#edit-colaborador', function () {
+            $('#lista-clientes tbody').on( 'click', '#edit-cliente', function () {
             	
             	 //Altera dinamicamente o titulo do modal.
-            	$('#modal-subtitle').text("Alterar colaborador");
+            	$('#modal-subtitle').text("Alterar cliente");
             	
             	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#colaborador-form").attr("action","administrativo-alterar-colaborador");
+				$("#cliente-form").attr("action","administrativo-alterar-cliente");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
@@ -520,17 +532,17 @@
               	listar_cidades(data[12], function(){
 
               		//Apresenta o modal de exclusão na tela.
-              		$('#modal-colaborador').modal('show');
+              		$('#modal-cliente').modal('show');
 					
 					//Preenche os determinados campos com os conteudos.
                     $('#id').val(data[0]);
                     $('#status').val(data[1]);
-                    $('#nivel').val(data[2]);
-                    $('#usuario').val(data[3]);
-                    $('#senha').val(data[4]);
-    				$('#nome').val(data[5]);
-    				$('#cpf').val(data[6]);
-                    $('#rg').val(data[7]);
+                    $('#tipopessoa').val(data[2]);
+                    $('#sexo').val(data[3]);
+                    $('#datanascimento').val(data[4]);
+    				$('#nomerazao').val(data[5]);
+    				$('#cpfcnpj').val(data[6]);
+                    $('#rgie').val(data[7]);
                     $('#endereco').val(data[8]);
                     $('#numero').val(data[9]);
     				$('#complemento').val(data[10]);
@@ -541,7 +553,9 @@
                     $('#tel').val(data[15]);
     				$('#cel').val(data[16]);
                     $('#email').val(data[17]);
-    				$('#obs').val(data[18]);
+                    $('#site').val(data[18]);
+                    $('#clientedesde').val(data[19]);
+    				$('#obs').val(data[20]);
 
                 });
 
@@ -549,12 +563,12 @@
 
 			/*
 			*
-			* EXCLUSÃO DE COLABORADOR
+			* EXCLUSÃO DE CLIENTE
 			*
 			*/
 	
 			//Define uma ação ao apertar o botão excluir de algum item da tabela.
-            $('#lista-colaboradores tbody').on( 'click', '#delete-colaborador', function () {
+            $('#lista-clientes tbody').on( 'click', '#delete-cliente', function () {
 				
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
@@ -563,7 +577,7 @@
                 $('#id_delete').val(data[0]);
 
                 //Apresenta o modal de exclusão na tela.
-				$('#excluir-colaborador').modal('show');
+				$('#excluir-cliente').modal('show');
 
             });
 
