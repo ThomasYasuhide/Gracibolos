@@ -13,10 +13,12 @@ import br.com.gracibolos.jdbc.dao.CidadeDao;
 import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.ColaboradorDao;
 import br.com.gracibolos.jdbc.dao.EstadoDao;
+import br.com.gracibolos.jdbc.dao.FornecedorDao;
 import br.com.gracibolos.jdbc.model.Cidade;
 import br.com.gracibolos.jdbc.model.Cliente;
 import br.com.gracibolos.jdbc.model.Colaborador;
 import br.com.gracibolos.jdbc.model.Estado;
+import br.com.gracibolos.jdbc.model.Fornecedor;
 
 @Controller
 public class AdministrativoController {
@@ -26,6 +28,124 @@ public class AdministrativoController {
 	public ModelAndView dashboard(){
 		System.out.println("Entrou na pagina dashboard");
 		return new ModelAndView("administrativo/dashboard");
+	}
+	
+	/*
+	 * 
+	 * ###################### FORNECEDORES ######################
+	 * 
+	 * */
+	
+	//FORNECEDORES
+	@RequestMapping("/administrativo-fornecedores")
+	public ModelAndView fornecedores(){
+		System.out.println("Entrou na servlet de listagem de fornecedores");
+		
+		EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+		
+		ModelAndView mv = new ModelAndView();
+	    mv.setViewName("administrativo/fornecedores");
+	    mv.addObject("estados", estados);
+		
+		return mv;
+	}
+	
+	//INCLUIR NOVO FORNECEDOR
+	@RequestMapping("/administrativo-incluir-fornecedor")
+	public ModelAndView incluir_fornecedor(Fornecedor fornecedor){
+		System.out.println("Entrou na servlet de inclusão de um novo fornecedor");
+		
+		boolean status = false;
+
+	    EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+	    
+		FornecedorDao fornecedorDao = new FornecedorDao();
+		
+		if(fornecedorDao.inserir(fornecedor)){
+			status = true;
+		}else{
+			status = false;
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/fornecedores");
+		mv.addObject("incluir", status);
+		mv.addObject("estados", estados);
+
+		return mv;
+	}
+	
+	//AlTERAR CLIENTE
+	@RequestMapping("/administrativo-alterar-fornecedor")
+	public ModelAndView alterar_fornecedor(Fornecedor fornecedor){
+		System.out.println("Entrou na pagina de alteração de fornecedor");
+
+		boolean status = false;
+
+	    EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+
+		FornecedorDao fornecedorDao = new FornecedorDao();
+		
+		if(fornecedorDao.alterar(fornecedor)){
+			status = true;
+		}else{
+			status = false;
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/fornecedores");
+		mv.addObject("alterar", status);
+	    mv.addObject("estados", estados);
+		
+		return mv;
+	}
+	
+	//EXCLUIR CLIENTE
+	@RequestMapping("/administrativo-remover-fornecedor")
+	public ModelAndView excluir_fornecedor(Fornecedor fornecedor){
+		System.out.println("Entrou na pagina de exclusão de fornecedor");
+		
+		boolean status = false;
+		
+	    EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+
+		FornecedorDao fornecedorDao = new FornecedorDao();
+		
+		if(fornecedorDao.excluir(fornecedor)){
+			status = true;
+		}else{
+			status = false;
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/fornecedores");
+		mv.addObject("excluir", status);
+	    mv.addObject("estados", estados);
+		
+		return mv;
+	}
+	
+	//PESQUISAR FORNECEDORES
+	@RequestMapping("/administrativo-pesquisar-fornecedor")
+	public ModelAndView pesquisar_fornecedor(String pesquisa){
+		System.out.println("Realizou a pesquisa de fornecedor");
+
+		FornecedorDao fornecedorDao = new FornecedorDao();
+		List<Fornecedor> fornecedores = fornecedorDao.pesquisar(pesquisa);
+
+	    EstadoDao estadoDao = new EstadoDao();
+	    List<Estado> estados = estadoDao.listar_estados();
+	    
+	    ModelAndView mv = new ModelAndView();
+	    mv.setViewName("administrativo/fornecedores");
+	    mv.addObject("fornecedores", fornecedores);
+	    mv.addObject("estados", estados);
+	    
+	    return mv;
 	}
 	
 	/*

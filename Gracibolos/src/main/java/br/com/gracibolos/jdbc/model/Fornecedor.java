@@ -1,217 +1,163 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 
-/**
- *
- * @author d637942
- */
 public class Fornecedor implements Serializable{
-    
-    public Fornecedor(){
-        
-    }
-    
-    public Fornecedor(Integer id) {
-        this.id = id;
-    }
-    
-    private Integer id;
-    private String nomeRs;
-    private String cpfCnpj;
-    private String rgIe;
-    private Integer cep;
+
+	private static final long serialVersionUID = 3702725812080610435L;
+	
+	private Integer id;
+    private int tipopessoa;
+    private String nomerazao;
+    private String cpfcnpj;
+    private String rgie;
+    private String endereco;
     private String numero;
-    private String telefone1;
-    private String telefone2;
-    private String telefone3;
-    private String cel1;
-    private String cel2;
-    private String site;
-    private String email1;
-    private String email2;
-    private String contato1;
-    private String contato2;
     private String complemento;
+    private String bairro;
+    private int estado;
+    private int cidade;
+    private Integer cep;
+    private String tel;
+    private String cel;
+    private String email;
+    private String site;
     private String obs;
-    private Collection<Compra> compraCollection;
-    private Collection<Conta> contaCollection;
-    private Collection<Suporte> suporteCollection;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNomeRs() {
-        return nomeRs;
-    }
-
-    public void setNomeRs(String nomeRs) {
-        this.nomeRs = nomeRs;
-    }
-
-    public String getCpfCnpj() {
-        return cpfCnpj;
-    }
-
-    public void setCpfCnpj(String cpfCnpj) {
-        this.cpfCnpj = cpfCnpj;
-    }
-
-    public String getRgIe() {
-        return rgIe;
-    }
-
-    public void setRgIe(String rgIe) {
-        this.rgIe = rgIe;
-    }
-
-    public Integer getCep() {
-        return cep;
-    }
-
-    public void setCep(Integer cep) {
-        this.cep = cep;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getTelefone1() {
-        return telefone1;
-    }
-
-    public void setTelefone1(String telefone1) {
-        this.telefone1 = telefone1;
-    }
-
-    public String getTelefone2() {
-        return telefone2;
-    }
-
-    public void setTelefone2(String telefone2) {
-        this.telefone2 = telefone2;
-    }
-
-    public String getTelefone3() {
-        return telefone3;
-    }
-
-    public void setTelefone3(String telefone3) {
-        this.telefone3 = telefone3;
-    }
-
-    public String getCel1() {
-        return cel1;
-    }
-
-    public void setCel1(String cel1) {
-        this.cel1 = cel1;
-    }
-
-    public String getCel2() {
-        return cel2;
-    }
-
-    public void setCel2(String cel2) {
-        this.cel2 = cel2;
-    }
-
-    public String getSite() {
-        return site;
-    }
-
-    public void setSite(String site) {
-        this.site = site;
-    }
-
-    public String getEmail1() {
-        return email1;
-    }
-
-    public void setEmail1(String email1) {
-        this.email1 = email1;
-    }
-
-    public String getEmail2() {
-        return email2;
-    }
-
-    public void setEmail2(String email2) {
-        this.email2 = email2;
-    }
-
-    public String getContato1() {
-        return contato1;
-    }
-
-    public void setContato1(String contato1) {
-        this.contato1 = contato1;
-    }
-
-    public String getContato2() {
-        return contato2;
-    }
-
-    public void setContato2(String contato2) {
-        this.contato2 = contato2;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public String getObs() {
-        return obs;
-    }
-
-    public void setObs(String obs) {
-        this.obs = obs;
-    }
-
-    public Collection<Compra> getCompraCollection() {
-        return compraCollection;
-    }
-
-    public void setCompraCollection(Collection<Compra> compraCollection) {
-        this.compraCollection = compraCollection;
-    }
-
-    public Collection<Conta> getContaCollection() {
-        return contaCollection;
-    }
-
-    public void setContaCollection(Collection<Conta> contaCollection) {
-        this.contaCollection = contaCollection;
-    }
-
-    public Collection<Suporte> getSuporteCollection() {
-        return suporteCollection;
-    }
-
-    public void setSuporteCollection(Collection<Suporte> suporteCollection) {
-        this.suporteCollection = suporteCollection;
-    }
     
-    
-    
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public int getTipopessoa() {
+		return tipopessoa;
+	}
+
+	public void setTipopessoa(int tipopessoa) {
+		this.tipopessoa = tipopessoa;
+	}
+
+	public String getNomerazao() {
+		return nomerazao;
+	}
+
+	public void setNomerazao(String nomerazao) {
+		this.nomerazao = nomerazao;
+	}
+
+	public String getCpfcnpj() {
+		return cpfcnpj;
+	}
+
+	public void setCpfcnpj(String cpfcnpj) {
+		this.cpfcnpj = cpfcnpj;
+	}
+
+	public String getRgie() {
+		return rgie;
+	}
+
+	public void setRgie(String rgie) {
+		this.rgie = rgie;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
+	public int getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(int cidade) {
+		this.cidade = cidade;
+	}
+
+	public Integer getCep() {
+		return cep;
+	}
+
+	public void setCep(Integer cep) {
+		this.cep = cep;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getCel() {
+		return cel;
+	}
+
+	public void setCel(String cel) {
+		this.cel = cel;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
+
+	public String getObs() {
+		return obs;
+	}
+
+	public void setObs(String obs) {
+		this.obs = obs;
+	}
+	
 }
