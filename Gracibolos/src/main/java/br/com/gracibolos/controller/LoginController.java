@@ -1,7 +1,5 @@
 package br.com.gracibolos.controller;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -37,7 +35,7 @@ public class LoginController {
 			
 			servidor = true;
 			
-	        if(colaborador.getId() != 0){
+	        if(colaborador.getId() != null){
 	        	
 	            session.setMaxInactiveInterval(30*60);
 	            session.setAttribute("id", colaborador.getId());
@@ -59,7 +57,6 @@ public class LoginController {
 	            }
 	            
 	        }else{
-	        	servidor = true;
 	            page = "index";
 	        }
 
@@ -67,8 +64,6 @@ public class LoginController {
 			page = "index";
 			status = true;
 		}
-	        
-		
         
         ModelAndView mv = new ModelAndView();
         mv.setViewName(page);
@@ -82,7 +77,7 @@ public class LoginController {
 	@RequestMapping("logout")
 	public ModelAndView logout(HttpSession session) {
 		
-		//System.out.println("Usuário fez logout");
+		System.out.println("Usuário fez logout");
 		session.invalidate();
 		return new ModelAndView("index");
 	}
