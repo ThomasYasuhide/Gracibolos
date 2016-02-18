@@ -32,6 +32,20 @@ public class AdministrativoController {
 	
 	/*
 	 * 
+	 * ###################### PRODUTOS ######################
+	 * 
+	 * */
+	
+	//PRODUTOS
+	@RequestMapping("/administrativo-produtos")
+	public ModelAndView produtos(){
+		System.out.println("Entrou na pagina de listamgem de produtos");
+		return new ModelAndView("administrativo/produtos");
+	}
+	
+	
+	/*
+	 * 
 	 * ###################### FORNECEDORES ######################
 	 * 
 	 * */

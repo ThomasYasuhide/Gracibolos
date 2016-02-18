@@ -18,7 +18,8 @@ public class LoginController {
 	
 	//Método para redirecionar para página de login para dentro do WEB-INF
 	@RequestMapping("/loginview")
-	public ModelAndView loginView(){
+	public ModelAndView loginView(HttpSession session){
+		
 		return new ModelAndView("index");
 	}
 	
@@ -46,7 +47,7 @@ public class LoginController {
 	                case 1:
 	                    System.out.println("Nível de privilégio 1");
 	                    status = true;
-	                    page = "operacional/clientes";
+	                    page = "redirect:operacional/clientes";
 	                    break;
 	                
 	                case 2:
@@ -67,8 +68,11 @@ public class LoginController {
         
         ModelAndView mv = new ModelAndView();
         mv.setViewName(page);
-        mv.addObject("status",status);
-        mv.addObject("servidor",servidor);
+        
+        if(page == "index"){
+        	mv.addObject("status",status);
+            mv.addObject("servidor",servidor);
+        }
         mv.addObject("colaborador",colaborador);
         
 		return mv;

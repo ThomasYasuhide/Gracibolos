@@ -20,7 +20,7 @@
 	<session-config>
 		<session-timeout>3</session-timeout>
 	</session-config>
-	
+		
 	<!-- CORREÇÂO DA CODIFICAÇÃO DE TEXTO DAS JSP -->
 	<filter>
      <filter-name>SetCharacterEncodingFilter</filter-name>
