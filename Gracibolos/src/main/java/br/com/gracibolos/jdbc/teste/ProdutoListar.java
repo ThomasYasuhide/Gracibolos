@@ -10,20 +10,25 @@ public class ProdutoListar {
 		ProdutoDao dao = new ProdutoDao();
 		
 		
-		for( Produto p : dao.listar()){			
-			/*
-			System.out.println(	  
-				
-					 				  "Id : "+p.getId()
-					 			+ "\tNome : "+p.getNome()
-					 		   + "\tValor : "+p.getValor()
-					 		 + "\tReceita : "+p.getReceita()
-					 			+ "\tFoto : "+p.getFoto()
-					   + "\tProdutoPronto : "+p.getProdutoProntoCollection()
-					   + "\tItemEncomenda : "+p.getItemEncomendaCollection()
-					 + "\tTipoProdutoNome : "+p.getTipoProdutoNome()
-					 	 + "\tItemReceita : "+p.getItemReceitaCollection());
-				*/
+		try {
+			for( Produto p : dao.listar()){			
+				/*
+				System.out.println(	  
+					
+						 				  "Id : "+p.getId()
+						 			+ "\tNome : "+p.getNome()
+						 		   + "\tValor : "+p.getValor()
+						 		 + "\tReceita : "+p.getReceita()
+						 			+ "\tFoto : "+p.getFoto()
+						   + "\tProdutoPronto : "+p.getProdutoProntoCollection()
+						   + "\tItemEncomenda : "+p.getItemEncomendaCollection()
+						 + "\tTipoProdutoNome : "+p.getTipoProdutoNome()
+						 	 + "\tItemReceita : "+p.getItemReceitaCollection());
+					*/
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

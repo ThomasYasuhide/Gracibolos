@@ -28,10 +28,15 @@ public class EstoqueInserir {
 		
 		EstoqueDao dao = new EstoqueDao();
 		
-		if(dao.inserir(e1) == true){
-			System.out.println("inserido com sucesso");
-		}else{
-			System.out.println("falha");
+		try {
+			if(dao.inserir(e1) == true){
+				System.out.println("inserido com sucesso");
+			}else{
+				System.out.println("falha");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

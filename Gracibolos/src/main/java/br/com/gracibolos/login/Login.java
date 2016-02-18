@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class Login {
     
-    public static Colaborador login(Colaborador colaborador){
+    public static Colaborador login(Colaborador colaborador) throws Exception {
         
         Connection conn = ConnectionProvider.getInstance().getConnection();
         
@@ -38,7 +38,8 @@ public class Login {
             conn.close();
             
         } catch (SQLException ex) {
-            System.out.println("Houve algum erro na consulta ao usuário");
+            System.out.println("Houve um erro na consulta.");
+            throw new Exception("Não foi possivel realizar a consulta");
         }
         
         return colaborador;

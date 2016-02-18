@@ -21,7 +21,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 	 * */
 	
 	@Override
-	public boolean inserir(Cliente cliente) {
+	public boolean inserir(Cliente cliente) throws Exception {
 		
 		boolean status = false;
 		PreparedStatement ps = null;
@@ -65,6 +65,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 		catch (SQLException e) 
 		{
 			System.out.println("Houve um erro ao inserir o cliente");
+			throw new Exception("Houve um erro ao inserir o cliente");
 		}
 		
 		return status;
@@ -78,7 +79,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 	 * */
 	
 	@Override
-	public boolean alterar(Cliente cliente) {
+	public boolean alterar(Cliente cliente) throws Exception {
 		
 		boolean status = false;
 		PreparedStatement  ps = null;
@@ -118,8 +119,9 @@ public class ClienteDao implements GenericoDao<Cliente>{
 			conn.close();
 			
 		}
-		catch (SQLException e) {
+		catch (Exception e) {
 			System.out.println("Houve um erro ao alterar o colaborador");
+			throw new Exception("Houve um erro ao alterar o colaborador");
 		}
 		
 		return status;
@@ -133,7 +135,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 	 * */
 	
 	@Override
-	public boolean excluir(Cliente cliente) {
+	public boolean excluir(Cliente cliente) throws Exception {
 		
 		boolean status = false;
 		PreparedStatement ps = null;
@@ -154,6 +156,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 
 		} catch (SQLException e) {
 			System.out.println("Houve um erro ao tentar deletar o colaborador");
+			throw new Exception("Houve um erro ao tentar deletar o colaborador");
 		}
 		
 		return status;
@@ -167,7 +170,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 	 * */
 	
 	@Override
-	public List<Cliente> listar() {
+	public List<Cliente> listar() throws Exception {
 		
 		List<Cliente> Clientes = new ArrayList<Cliente>();
 		PreparedStatement ps = null;
@@ -212,8 +215,9 @@ public class ClienteDao implements GenericoDao<Cliente>{
 			rs.close();
 			conn.close();
 		}
-		catch (SQLException e) {
+		catch (Exception e) {
 			System.out.println("Houve um erro ao listar os clientes");
+			throw new Exception("Houve um erro ao listar os clientes");
 		}
 		
 		return Clientes;
@@ -227,7 +231,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 	 * */
 	
 	@Override
-	public List<Cliente> pesquisar(String pesquisa) {
+	public List<Cliente> pesquisar(String pesquisa) throws Exception {
 		
 		List<Cliente> Clientes = new ArrayList<Cliente>();
 		PreparedStatement ps = null;
@@ -277,6 +281,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 		}
 		catch (SQLException e) {
 			System.out.println("Houve um erro ao pesquisar o cliente");
+			throw new Exception("Houve um erro ao pesquisar o cliente");
 		}
 		
 		return Clientes;

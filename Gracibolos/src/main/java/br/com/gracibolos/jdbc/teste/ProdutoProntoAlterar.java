@@ -20,10 +20,15 @@ public class ProdutoProntoAlterar {
 		
 		ProdutoProntoDao dao = new ProdutoProntoDao();
 		
-		if(dao.alterar(pPronto) == true){
-			System.out.println("alterado com sucesso");
-		}else{
-			System.out.println("falha");
+		try {
+			if(dao.alterar(pPronto) == true){
+				System.out.println("alterado com sucesso");
+			}else{
+				System.out.println("falha");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

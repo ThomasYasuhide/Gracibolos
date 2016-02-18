@@ -63,10 +63,14 @@ public class AdministrativoController {
 	    
 		FornecedorDao fornecedorDao = new FornecedorDao();
 		
-		if(fornecedorDao.inserir(fornecedor)){
-			status = true;
-		}else{
-			status = false;
+		try {
+			if(fornecedorDao.inserir(fornecedor)){
+				status = true;
+			}else{
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		ModelAndView mv = new ModelAndView();
@@ -89,10 +93,15 @@ public class AdministrativoController {
 
 		FornecedorDao fornecedorDao = new FornecedorDao();
 		
-		if(fornecedorDao.alterar(fornecedor)){
-			status = true;
-		}else{
-			status = false;
+		try {
+			if(fornecedorDao.alterar(fornecedor)){
+				status = true;
+			}else{
+				status = false;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		ModelAndView mv = new ModelAndView();
@@ -115,10 +124,15 @@ public class AdministrativoController {
 
 		FornecedorDao fornecedorDao = new FornecedorDao();
 		
-		if(fornecedorDao.excluir(fornecedor)){
-			status = true;
-		}else{
-			status = false;
+		try {
+			if(fornecedorDao.excluir(fornecedor)){
+				status = true;
+			}else{
+				status = false;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		ModelAndView mv = new ModelAndView();
@@ -135,7 +149,14 @@ public class AdministrativoController {
 		System.out.println("Realizou a pesquisa de fornecedor");
 
 		FornecedorDao fornecedorDao = new FornecedorDao();
-		List<Fornecedor> fornecedores = fornecedorDao.pesquisar(pesquisa);
+		List<Fornecedor> fornecedores = null;
+		
+		try {
+			fornecedores = fornecedorDao.pesquisar(pesquisa);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
@@ -181,10 +202,14 @@ public class AdministrativoController {
 	    
 		ClienteDao dao = new ClienteDao();
 		
-		if(dao.inserir(cliente)){
-			status = true;
-		}else{
-			status = false;
+		try {
+			if(dao.inserir(cliente)){
+				status = true;
+			}else{
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		ModelAndView mv = new ModelAndView();
@@ -207,10 +232,15 @@ public class AdministrativoController {
 
 		ClienteDao clienteDao = new ClienteDao();
 		
-		if(clienteDao.alterar(cliente)){
-			status = true;
-		}else{
-			status = false;
+		try {
+			if(clienteDao.alterar(cliente)){
+				status = true;
+			}else{
+				status = false;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		ModelAndView mv = new ModelAndView();
@@ -233,10 +263,15 @@ public class AdministrativoController {
 
 		ClienteDao clienteDao = new ClienteDao();
 		
-		if(clienteDao.excluir(cliente)){
-			status = true;
-		}else{
-			status = false;
+		try {
+			if(clienteDao.excluir(cliente)){
+				status = true;
+			}else{
+				status = false;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		ModelAndView mv = new ModelAndView();
@@ -254,7 +289,13 @@ public class AdministrativoController {
 		System.out.println("Realizou a pesquisa de cliente");
 
 		ClienteDao clienteDao = new ClienteDao();
-		List<Cliente> clientes = clienteDao.pesquisar(pesquisa);
+		List<Cliente> clientes = null;
+		try {
+			clientes = clienteDao.pesquisar(pesquisa);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();

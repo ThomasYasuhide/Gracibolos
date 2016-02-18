@@ -1,5 +1,7 @@
 package br.com.gracibolos.controller;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ public class LoginController {
 	
 	private String page;
 	private boolean status;
+	private boolean servidor;
 	
 	//Método para redirecionar para página de login para dentro do WEB-INF
 	@RequestMapping("/loginview")
@@ -27,40 +30,50 @@ public class LoginController {
 		
 		page = "index";
 		status = false;
+		servidor = false;
 		
-		colaborador = Login.login(colaborador);
-        
-        if(colaborador.getId() != 0){
-            
-            session.setMaxInactiveInterval(30*60);
-            session.setAttribute("id", colaborador.getId());
-            session.setAttribute("nome", colaborador.getNome());
-            session.setAttribute("nivel", colaborador.getNivel());
-            
-            switch(colaborador.getNivel()){
-                case 1:
-                    System.out.println("Nível de privilégio 1");
-                    status = true;
-                    page = "operacional/clientes";
-                    break;
-                
-                case 2:
-                    System.out.println("Nível de privilégio 2");
-                    status = true;
-                    page = "redirect:administrativo-dashboard";
-                    break;
-            }
-        }else{
-            page = "index";
-        }
+		try {
+			colaborador = Login.login(colaborador);
+			
+			servidor = true;
+			
+	        if(colaborador.getId() != 0){
+	        	
+	            session.setMaxInactiveInterval(30*60);
+	            session.setAttribute("id", colaborador.getId());
+	            session.setAttribute("nome", colaborador.getNome());
+	            session.setAttribute("nivel", colaborador.getNivel());
+	            
+	            switch(colaborador.getNivel()){
+	                case 1:
+	                    System.out.println("Nível de privilégio 1");
+	                    status = true;
+	                    page = "operacional/clientes";
+	                    break;
+	                
+	                case 2:
+	                    System.out.println("Nível de privilégio 2");
+	                    status = true;
+	                    page = "redirect:administrativo-dashboard";
+	                    break;
+	            }
+	            
+	        }else{
+	        	servidor = true;
+	            page = "index";
+	        }
+
+		} catch (Exception e) {
+			page = "index";
+			status = true;
+		}
+	        
+		
         
         ModelAndView mv = new ModelAndView();
         mv.setViewName(page);
-        
-        if(page == "index"){
-        	mv.addObject("status",status);
-        }
-        
+        mv.addObject("status",status);
+        mv.addObject("servidor",servidor);
         mv.addObject("colaborador",colaborador);
         
 		return mv;

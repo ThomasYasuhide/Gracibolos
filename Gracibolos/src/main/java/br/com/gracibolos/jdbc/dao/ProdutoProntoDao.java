@@ -14,7 +14,7 @@ import br.com.gracibolos.jdbc.model.ProdutoPronto;
 
 public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 
-	public boolean inserir(ProdutoPronto pPronto) {
+	public boolean inserir(ProdutoPronto pPronto) throws Exception {
 		boolean status = false;
 		String sql = "INSERT INTO produtoPronto(finalizado, dataValidade, codigo, encomendaId, produtoId,"
 				+ " VALUES (?, ?, ?, ?, ?);";
@@ -49,7 +49,7 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 		return status;
 	}
 
-	public boolean alterar(ProdutoPronto pPronto) {
+	public boolean alterar(ProdutoPronto pPronto) throws Exception {
 		boolean status = false;
 		String sql = "UPDATE produtoPronto SET finalizado=?, dataValidade=?, codigo=?, encomendaId=?,"
 				+ " produtoId=? where id=?";
@@ -85,7 +85,7 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 		return status;
 	}
 
-	public boolean excluir(ProdutoPronto produtoPronto) {
+	public boolean excluir(ProdutoPronto produtoPronto) throws Exception {
 
 		boolean status = false;
 		
@@ -109,7 +109,7 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 		return status;
 	}
 
-	public List<ProdutoPronto> listar() {
+	public List<ProdutoPronto> listar() throws Exception {
 		
 		String sql = "SELECT * FROM produtoPronto";
 		PreparedStatement ps = null;

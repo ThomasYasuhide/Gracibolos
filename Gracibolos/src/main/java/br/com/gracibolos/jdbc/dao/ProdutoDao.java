@@ -12,7 +12,7 @@ import br.com.gracibolos.jdbc.model.Produto;
 
 public class ProdutoDao implements GenericoDao<Produto>{
 
-	public boolean inserir(Produto produto) {
+	public boolean inserir(Produto produto) throws Exception {
 		boolean status = false;
 		String sql = "INSERT INTO produto(nome, valor, receita, foto, produtoProntoCollection,"
 				+ " itemEncomendaCollection, tipoProdutoNome, itemReceitaCollection,"
@@ -46,7 +46,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		return status;
 	}
 
-	public boolean alterar(Produto produto) {
+	public boolean alterar(Produto produto) throws Exception {
 		boolean status = false;
 		String sql = "UPDATE cliente SET nome=?, valor=?, receita=?, foto=?, produtoProntoCollection=?,"
 				+ " itemEncomendaCollection=?, tipoProdutoNome=?, itemReceitaCollection=? where id=?";
@@ -80,7 +80,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		return status;
 	}
 
-	public boolean excluir(Produto produto) {
+	public boolean excluir(Produto produto) throws Exception {
 
 		boolean status = false;
 		
@@ -104,7 +104,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		return status;
 	}
 
-	public List<Produto> listar() {
+	public List<Produto> listar() throws Exception {
 		
 		String sql = "SELECT * FROM produto";
 		PreparedStatement ps = null;

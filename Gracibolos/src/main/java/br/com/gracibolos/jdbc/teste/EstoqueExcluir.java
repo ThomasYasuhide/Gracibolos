@@ -11,7 +11,12 @@ public class EstoqueExcluir {
 		Estoque estoque = new Estoque();
 		estoque.setId(4);
 		
-		dao.excluir(estoque);
+		try {
+			dao.excluir(estoque);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

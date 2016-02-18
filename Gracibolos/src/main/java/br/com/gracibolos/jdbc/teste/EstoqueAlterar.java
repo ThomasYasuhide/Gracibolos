@@ -32,10 +32,15 @@ public class EstoqueAlterar {
 		
 		EstoqueDao dao = new EstoqueDao();
 		
-		if(dao.alterar(e1) == true){
-			System.out.println("alterado com sucesso");
-		}else{
-			System.out.println("falha");
+		try {
+			if(dao.alterar(e1) == true){
+				System.out.println("alterado com sucesso");
+			}else{
+				System.out.println("falha");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

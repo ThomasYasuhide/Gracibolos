@@ -1,7 +1,6 @@
 package br.com.gracibolos.jdbc.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +20,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 	 * */
 	
 	@Override
-	public boolean inserir(Fornecedor fornecedor) {
+	public boolean inserir(Fornecedor fornecedor) throws Exception {
 		
 		boolean status = false;
 		PreparedStatement ps = null;
@@ -73,7 +72,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 	 * */
 	
 	@Override
-	public boolean alterar(Fornecedor fornecedor) {
+	public boolean alterar(Fornecedor fornecedor) throws Exception {
 		
 		boolean status = false;
 		PreparedStatement  ps = null;
@@ -123,7 +122,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 	 * */
 	
 	@Override
-	public boolean excluir(Fornecedor fornecedor) {
+	public boolean excluir(Fornecedor fornecedor) throws Exception {
 		
 		boolean status = false;
 		PreparedStatement ps = null;
@@ -157,7 +156,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 	 * */
 	
 	@Override
-	public List<Fornecedor> listar() {
+	public List<Fornecedor> listar() throws Exception {
 		
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		PreparedStatement ps = null;
@@ -213,7 +212,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 	 * */
 	
 	@Override
-	public List<Fornecedor> pesquisar(String pesquisa) {
+	public List<Fornecedor> pesquisar(String pesquisa) throws Exception {
 		
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		PreparedStatement ps = null;

@@ -24,10 +24,15 @@ public class ProdutoInserir {
 		
 		ProdutoDao dao = new ProdutoDao();
 		
-		if(dao.inserir(p1) == true){
-			System.out.println("inserido com sucesso");
-		}else{
-			System.out.println("falha");
+		try {
+			if(dao.inserir(p1) == true){
+				System.out.println("inserido com sucesso");
+			}else{
+				System.out.println("falha");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

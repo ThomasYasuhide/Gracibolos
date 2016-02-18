@@ -9,15 +9,20 @@ public class ProdutoProntoListar {
 
 		ProdutoProntoDao dao = new ProdutoProntoDao();
 		
-		for(ProdutoPronto pp : dao.listar()){
-			System.out.println(	  
-									"Id : "+pp.getId()
-						 + "\tFinalizado: "+pp.getFinalizado()
-					   	+"\tDataValidade: "+pp.getDataValidade()
-                    		 +"\tCodigo : "+pp.getCodigo()
-                         +"\tEncomendaId: "+pp.getEncomendaId()
-                      +		"\tProdutoId: "+pp.getProdutoId());
-					
+		try {
+			for(ProdutoPronto pp : dao.listar()){
+				System.out.println(	  
+										"Id : "+pp.getId()
+							 + "\tFinalizado: "+pp.getFinalizado()
+						   	+"\tDataValidade: "+pp.getDataValidade()
+			            		 +"\tCodigo : "+pp.getCodigo()
+			                 +"\tEncomendaId: "+pp.getEncomendaId()
+			              +		"\tProdutoId: "+pp.getProdutoId());
+						
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

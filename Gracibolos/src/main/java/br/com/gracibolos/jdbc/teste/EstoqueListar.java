@@ -9,17 +9,22 @@ public class EstoqueListar {
 
 		EstoqueDao dao = new EstoqueDao();
 		
-		for(Estoque e : dao.listar()){
-			
-			System.out.println(	  
-								"Id : "+e.getId()
-							+ "\tQtd: "+e.getQtd()
-					 + "\tPrecoUnit : "+e.getPrecoUnit()
-						  + "\tVenc : "+e.getVenc()
-						 + "\tTotal : "+e.getTotal()
-					  + "\tCompraId : "+e.getCompraId()
-				+ "\tMateriaPrimaId : "+e.getMateriaPrimaId()
-					  + "\tMedidaId : "+e.getMedidaId());
+		try {
+			for(Estoque e : dao.listar()){
+				
+				System.out.println(	  
+									"Id : "+e.getId()
+								+ "\tQtd: "+e.getQtd()
+						 + "\tPrecoUnit : "+e.getPrecoUnit()
+							  + "\tVenc : "+e.getVenc()
+							 + "\tTotal : "+e.getTotal()
+						  + "\tCompraId : "+e.getCompraId()
+					+ "\tMateriaPrimaId : "+e.getMateriaPrimaId()
+						  + "\tMedidaId : "+e.getMedidaId());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

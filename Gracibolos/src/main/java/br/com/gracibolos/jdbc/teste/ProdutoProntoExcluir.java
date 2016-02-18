@@ -13,7 +13,12 @@ public class ProdutoProntoExcluir {
 		ProdutoPronto produtoPronto = new ProdutoPronto();
 		produtoPronto.setId(2);
 		
-		dao.excluir(produtoPronto);
+		try {
+			dao.excluir(produtoPronto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

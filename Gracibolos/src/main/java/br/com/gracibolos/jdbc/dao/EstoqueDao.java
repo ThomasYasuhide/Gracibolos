@@ -14,7 +14,7 @@ import br.com.gracibolos.jdbc.model.Estoque;
 
 public class EstoqueDao implements GenericoDao<Estoque>{
 
-	public boolean inserir(Estoque estoque) {
+	public boolean inserir(Estoque estoque) throws Exception {
 		boolean status = false;
 		String sql = "INSERT INTO estoque(qtd, precoUnit, venc, total, compraId, materiaPrimaId, medidaId)"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?);";
@@ -47,7 +47,7 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 		return status;
 	}
 
-	public boolean alterar(Estoque estoque) {
+	public boolean alterar(Estoque estoque) throws Exception {
 		boolean status = false;
 		String sql = "UPDATE estoque SET qtd=?, precoUnit=?, venc=?, total=?, compraId=?, materiaPrimaId=?, medidaId=? where id=?";
 		PreparedStatement  ps = null;
@@ -78,7 +78,7 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 		return status;
 	}
 
-	public boolean excluir(Estoque estoque) {
+	public boolean excluir(Estoque estoque) throws Exception {
 
 		boolean status = false;
 		
@@ -102,7 +102,7 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 		return status;
 	}
 
-	public List<Estoque> listar() 
+	public List<Estoque> listar() throws Exception 
 	{
 		String sql = "SELECT * FROM estoque";
 		PreparedStatement ps = null;
@@ -146,7 +146,6 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 
 	@Override
 	public List<Estoque> pesquisar(String pesquisa) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

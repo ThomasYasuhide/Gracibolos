@@ -2,7 +2,6 @@ package br.com.gracibolos.jdbc.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class ConnectionProvider {
     
@@ -14,20 +13,20 @@ public class ConnectionProvider {
     
     private static ConnectionProvider instance = null;
     
+	@SuppressWarnings("unused")
 	private static void ConnectionProvider() {
     	
     }
     
-    public Connection getConnection(){
+    public Connection getConnection() throws Exception {
         Connection conn = null;
 		
         try {
             Class.forName(driver);
             conn = DriverManager.getConnection("jdbc:mysql://"+ addr +"/"+db,username,password);
-        } catch (ClassNotFoundException e) {
-            System.out.println("Não foi possível encontrar a classe ConnectionProvider.");
-        } catch (SQLException e) {
-            System.out.println("Não foi possível conectar-se ao banco.");
+        } catch (Exception e) {
+            System.out.println("Não foi possível conectar-se ao banco de dados.");
+            throw new Exception("Não foi possivel conectar-se ao banco de dados.");
         }
         
         return conn;

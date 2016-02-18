@@ -67,7 +67,17 @@
 						</div>
 
 					</form>
-				
+					
+					<c:if test="${servidor == false}">
+						<div class="alert alert-danger alert-dismissible" role="alert" >
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>Erro: </strong>Não foi possível conectar-se ao banco de dados, tente novamente mais tarde!
+						</div>
+					</c:if>
+					
 					<c:if test="${status == false}">
 						<div class="alert alert-danger alert-dismissible" role="alert" >
 							<button type="button" class="close" data-dismiss="alert"

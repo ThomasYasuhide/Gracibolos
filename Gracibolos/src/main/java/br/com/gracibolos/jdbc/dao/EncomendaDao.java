@@ -12,7 +12,7 @@ import br.com.gracibolos.jdbc.model.Encomenda;
 
 public class EncomendaDao implements GenericoDao<Encomenda>{
 
-	public boolean inserir(Encomenda encomenda) {
+	public boolean inserir(Encomenda encomenda) throws Exception {
 		boolean status = false;
 		String sql = "INSERT INTO encomenda(responsavel, dataInicio, dataFaltaProd, dataProducao, dataFinalizado, dataEntrega,"
 				+ " entregaRetirada, total, descricao, numero, suporteCollection, produtoprontoCollection, caixaCollection, itemencomendaCollection)"
