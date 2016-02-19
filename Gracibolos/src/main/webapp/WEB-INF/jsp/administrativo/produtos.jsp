@@ -189,6 +189,26 @@
 	
 
 
+<!-- 
+
+
+
+
+
+
+
+
+CONTINUAR DAQUI 
+
+
+
+
+
+
+
+
+
+-->
 
 
 	<!--
@@ -213,155 +233,129 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
+								<!-- ABAS -->
+								<ul class="nav nav-tabs">
+									<li class="active"><a data-toggle="tab" href="#info">Informações do produto</a></li>
+									<li><a data-toggle="tab" href="#receita">Receita do produto</a></li>
+								</ul>
 
+									<div class="tab-content">
 
+										<div id="info" class="tab-pane fade in active">
+											
+											<div class="hidden">
+												<label class="control-label" for="id">Nº produto:</label>
+												<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
+											</div>
 
+											<div class="col-xs-6 col-md-3">
+												<label class="control-label">Foto do produto:</label>
+												<a href="">
+													<img class="thumbnail" src="http://s2.glbimg.com/NRTQA92WostkZI5CyNxq1zvdINc=/200x200/filters:quality(80)/g.glbimg.com/og/gs/gsat5/f/thumbs/tag/2015/07/23/bolos-620.jpg" alt="...">
+												</a>
+											</div>
 
+											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+												<label class="control-label" for="status">Status:</label>
+												<select class="form-control" id="status" name="status" required>
+													<option selected value="1">Ativado</option>
+													<option value="0">Desativado</option>
+												</select>
+											</div>
 
+											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+												<label class="control-label" for="status">Tipo*:</label>
+												<select class="form-control" id="status" name="status" required>
+													<option value="" selected="true" disabled="">Selecione</option>
+													<option value="1">Bolo</option>
+													<option value="0">Salgados</option>
+												</select>
+											</div>
 
+											<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+												<label class="control-label" for="codigo">Código*:</label>
+												<input type="text" id="codigo" class="form-control" maxlength="20" placeholder="Digite o código do produto" name="codigo" required>
+											</div> 
 
+											<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+												<label class="control-label" for="nome">Nome*:</label>
+												<input type="text" id="nome" class="form-control" maxlength="100" placeholder="Digite o nome do produto" name="nome" required>
+											</div> 
 
+											<div class="input-margin col-xs-6 col-sm-6 col-md-2">
+												<label class="control-label" for="unid">Unidade*:</label>
+												<select class="form-control" id="unid" name="unid" required>
+													<option value="" selected disabled="true">Selectione</option>
+													<option value="kg">kg</option>
+													<option value="gr">gr</option>
+												</select>
+											</div>
 
-							<!--
+											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
+												<label class="control-label" for="peso">Peso:</label>
+												<input type="text" class="form-control" name="peso" maxlength="20" placeholder="Digite aqui o peso do produto">
+											</div>
 
+											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
+												<label class="control-label" for="custo">Custo:</label>
+												<input type="text" class="form-control" name="custo" maxlength="20" placeholder="Digite aqui o custo do produto">
+											</div>
 
-								CONTINUAR DAQUI
-					
+											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
+												<label class="control-label" for="valor">Valor*:</label>
+												<input type="text" class="form-control" name="valor" maxlength="20" placeholder="Digite aqui o valor do produto" required>
+											</div>
 
+											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+												<label class="control-label" for="estoque">Estoque:</label>
+												<input type="number" class="form-control" name="estoque" value="0">
+											</div>
 
-							-->
+											<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+												<label class="control-label" for="obs">Observação:</label>
+												<textarea class="form-control" name="obs" name="obs" id="obs" placeholder="Digite aqui as observações"></textarea>
+											</div>
+										</div>
 
+										<div id="receita" class="tab-pane fade">
+											<table id="grid-basic" class="table table-hover">
+												<thead>
+													<tr>
+														<th data-column-id="id" data-visible="false">#</th>
+														<th data-column-id="nome">Nome</th>
+														<th data-column-id="medida">Medida</th>
+														<th data-column-id="unidade">Unidade</th>
+														<th data-column-id="comandos" data-formatter="commands" data-sortable="false">Ações</th>
+													</tr>
+												</thead>
+												<tbody>
 
+													<tr>
+														<td>1</td>
+														<td>Farinha de trigo</td>
+														<td>200</td>
+														<td>gr</td>
+													</tr>
 
+													<tr>
+														<td>1</td>
+														<td>Ovos de galinha</td>
+														<td>2</td>
+														<td>un</td>
+													</tr>
 
+												</tbody>
+											</table>
 
+											<div class="row">
+												<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
+													<a class="btn btn-default fullwidth" href="incluir_cliente.html"><span class="glyphicon glyphicon-plus disabled"></span>&nbsp;&nbsp;&nbsp;Incluir novo ingrediente</a>
+												</div>
+											</div>
 
+										</div>
 
-
-
-
-
-
-
-								<div class="hidden">
-									<label class="control-label" for="id">Nº produto:</label>
-									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
-								</div>
-
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
-									<label class="control-label" for="status">Status:</label>
-									<select id="status" name="status" class="form-control" required>
-										<option selected value="1">Ativado</option>
-										<option value="0">Desativado</option>
-									</select>
-								</div>
-
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
-									<label class="control-label" for="nivel">Acesso:</label>
-									<select id="nivel" name="nivel" class="form-control" required>
-										<option selected value="1">Operacional</option>
-										<option value="2">Administrador</option>
-									</select>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="telefone">Usuario*:</label>
-									<input type="text" id="usuario" name="usuario" placeholder="Digite o seu usuário" class="form-control" maxlength="20" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="celular">Senha*:</label>
-									<input type="password" id="senha" name="senha" placeholder="Senha" class="form-control" maxlength="20" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-									<label class="control-label" for="nome" id="nome_lbl">Nome*:</label>
-									<input type="text" id="nome" name="nome" placeholder="Digite seu nome aqui" class="form-control" maxlength="100" required/>
-								</div> 
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="cpf" id="cpf_lbl">CPF*:</label>
-									<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" class="form-control" maxlength="11" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="rg" id="rg_lbl">RG:</label>
-									<input type="text" id="rg" name="rg" placeholder="00.000.000-0" class="form-control" maxlength="9"/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
-									<label class="control-label" for="endereco">Endereço*:</label>
-									<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-3 col-md-2">
-									<label class="control-label" for="numero">Numero*:</label>
-									<input type="text" id="numero" name="numero" placeholder="0000" class="form-control" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
-									<label class="control-label" for="complemento">Complemento:</label>
-									<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120"/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="bairro">Bairro*:</label>
-									<input type="text" id="bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-2 col-md-3">
-									<label class="control-label" for="estado">Estado*:</label>
-									<select class="form-control" id="estado" name="estado" required >
-										<option selected="selected" disabled="disabled" value="0">Selecione o estado</option>
-										<c:forEach var="estado" items="${estados}">
-											<option value="${estado.id}">${estado.sigla}</option>
-										</c:forEach>
-									</select>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="cidade">Cidade*:</label>
-									<select class="form-control" id="cidade" name="cidade" required >
-										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
-										<c:forEach var="cidade" items="${cidades}">
-											<option value="${cidade.id}">${cidade.nome}</option>
-										</c:forEach>
-									</select>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
-									<label class="control-label" for="cep">CEP*:</label>
-									<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="8" required/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="tel">Tel:</label>
-									<input type="text" id="tel" name="tel" placeholder="(00) 0000-0000" class="form-control" maxlength="10"/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="cel">Cel:</label>
-									<input type="text" id="cel" name="cel" placeholder="(00) 00000-0000" class="form-control" maxlength="11" />
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
-									<label class="control-label" for="email">E-mail:</label>
-									<input type="text" id="email" name="email" class="form-control" placeholder="email@provedor.com.br" maxlength="120"/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
-									<label class="control-label" for="obs">Observações:</label>
-									<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o colaborador"></textarea>
-								</div>
-
-
-
-
-
-
-
-
-
+									</div>
 
 
 
