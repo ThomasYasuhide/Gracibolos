@@ -236,7 +236,7 @@ CONTINUAR DAQUI
 								<!-- ABAS -->
 								<ul class="nav nav-tabs">
 									<li class="active"><a data-toggle="tab" href="#info">Informações do produto</a></li>
-									<li><a data-toggle="tab" href="#receita">Receita do produto</a></li>
+									<li ><a data-toggle="tab" href="#receita">Receita do produto</a></li>
 								</ul>
 
 									<div class="tab-content">
@@ -251,7 +251,7 @@ CONTINUAR DAQUI
 											<div class="col-xs-6 col-md-3">
 												<label class="control-label">Foto do produto:</label>
 												<a href="">
-													<img class="thumbnail" src="http://s2.glbimg.com/NRTQA92WostkZI5CyNxq1zvdINc=/200x200/filters:quality(80)/g.glbimg.com/og/gs/gsat5/f/thumbs/tag/2015/07/23/bolos-620.jpg" alt="...">
+													<img class="thumbnail" src="resources/img/model.png" width="100%" height="100%" alt="...">
 												</a>
 											</div>
 
@@ -271,7 +271,12 @@ CONTINUAR DAQUI
 													<option value="0">Salgados</option>
 												</select>
 											</div>
-
+											
+											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+												<label class="control-label" for="estoque">Estoque:</label>
+												<input type="number" class="form-control" name="estoque" value="0">
+											</div>
+											
 											<div class="input-margin col-xs-12 col-sm-12 col-md-3">
 												<label class="control-label" for="codigo">Código*:</label>
 												<input type="text" id="codigo" class="form-control" maxlength="20" placeholder="Digite o código do produto" name="codigo" required>
@@ -282,18 +287,18 @@ CONTINUAR DAQUI
 												<input type="text" id="nome" class="form-control" maxlength="100" placeholder="Digite o nome do produto" name="nome" required>
 											</div> 
 
-											<div class="input-margin col-xs-6 col-sm-6 col-md-2">
+											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
 												<label class="control-label" for="unid">Unidade*:</label>
 												<select class="form-control" id="unid" name="unid" required>
 													<option value="" selected disabled="true">Selectione</option>
-													<option value="kg">kg</option>
-													<option value="gr">gr</option>
+													<option value="kg">Kilo(s)</option>
+													<option value="gr">Grama(s)</option>
 												</select>
 											</div>
 
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
 												<label class="control-label" for="peso">Peso:</label>
-												<input type="text" class="form-control" name="peso" maxlength="20" placeholder="Digite aqui o peso do produto">
+												<input type="text" class="form-control" name="peso" maxlength="20" placeholder="0.000">
 											</div>
 
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
@@ -306,10 +311,7 @@ CONTINUAR DAQUI
 												<input type="text" class="form-control" name="valor" maxlength="20" placeholder="Digite aqui o valor do produto" required>
 											</div>
 
-											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-												<label class="control-label" for="estoque">Estoque:</label>
-												<input type="number" class="form-control" name="estoque" value="0">
-											</div>
+											
 
 											<div class="input-margin col-xs-12 col-sm-12 col-md-12">
 												<label class="control-label" for="obs">Observação:</label>
