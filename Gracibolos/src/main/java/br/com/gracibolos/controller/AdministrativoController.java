@@ -453,7 +453,12 @@ public class AdministrativoController {
 		List<Cidade> cidades = new ArrayList<Cidade>();
 		
 		CidadeDao dao = new CidadeDao();
-		cidades = dao.pesquisar_cidades(id);
+		try {
+			cidades = dao.pesquisar_cidades(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	    return cidades;
 		

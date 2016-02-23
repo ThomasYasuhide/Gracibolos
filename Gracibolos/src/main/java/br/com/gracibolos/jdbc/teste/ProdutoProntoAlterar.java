@@ -5,6 +5,7 @@ import java.util.Calendar;
 import br.com.gracibolos.jdbc.dao.ProdutoProntoDao;
 import br.com.gracibolos.jdbc.model.ProdutoPronto;
 
+//funcionando
 public class ProdutoProntoAlterar {
 
 	public static void main(String[] args) {
@@ -12,11 +13,12 @@ public class ProdutoProntoAlterar {
 		ProdutoPronto pPronto = new ProdutoPronto();
 		
 		pPronto.setId(1);
+		pPronto.setProdutoId(3);
+		pPronto.setEncomendaId(1);
 		pPronto.setFinalizado(Calendar.getInstance());
 		pPronto.setDataValidade(Calendar.getInstance());
-		pPronto.setCodigo("1");
-		pPronto.setEncomendaId(null);
-		pPronto.setProdutoId(null);
+		pPronto.setCodigo("6");
+		
 		
 		ProdutoProntoDao dao = new ProdutoProntoDao();
 		

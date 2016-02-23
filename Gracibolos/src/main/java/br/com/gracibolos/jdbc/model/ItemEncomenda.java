@@ -6,7 +6,6 @@
 package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  *
@@ -14,7 +13,12 @@ import java.math.BigDecimal;
  */
 public class ItemEncomenda implements Serializable{
     
-    public ItemEncomenda(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5136026907602113969L;
+
+	public ItemEncomenda(){
         
     }
     
@@ -23,9 +27,9 @@ public class ItemEncomenda implements Serializable{
     }
     
     private Integer id;
-    private BigDecimal qtd;
-    private Produto produtoId;
-    private Encomenda encomendaId;
+    private Integer qtd;
+    private Integer produtoId;
+    private Integer encomendaId;
 
     public Integer getId() {
         return id;
@@ -35,30 +39,28 @@ public class ItemEncomenda implements Serializable{
         this.id = id;
     }
 
-    public BigDecimal getQtd() {
+    public Integer getQtd() {
         return qtd;
     }
 
-    public void setQtd(BigDecimal qtd) {
+    public void setQtd(Integer qtd) {
         this.qtd = qtd;
     }
 
-    public Produto getProdutoId() {
-        return produtoId;
-    }
+	public Integer getProdutoId() {
+		return produtoId;
+	}
 
-    public void setProdutoId(Produto produtoId) {
-        this.produtoId = produtoId;
-    }
+	public void setProdutoId(Integer produtoId) {
+		this.produtoId = produtoId;
+	}
 
-    public Encomenda getEncomendaId() {
-        return encomendaId;
-    }
+	public Integer getEncomendaId() {
+		return encomendaId;
+	}
 
-    public void setEncomendaId(Encomenda encomendaId) {
-        this.encomendaId = encomendaId;
-    }
-    
-    
+	public void setEncomendaId(Integer encomendaId) {
+		this.encomendaId = encomendaId;
+	}    
     
 }

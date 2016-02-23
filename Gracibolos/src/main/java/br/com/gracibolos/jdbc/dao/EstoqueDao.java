@@ -14,24 +14,23 @@ import br.com.gracibolos.jdbc.model.Estoque;
 
 public class EstoqueDao implements GenericoDao<Estoque>{
 
-	public boolean inserir(Estoque estoque) throws Exception {
+	public boolean inserir(Estoque estoque) throws Exception{
 		boolean status = false;
 		String sql = "INSERT INTO estoque(qtd, precoUnit, venc, total, compraId, materiaPrimaId, medidaId)"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?);";
+				   + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
-		try{
-			Connection conn = ConnectionProvider.getInstance().getConnection();
-			
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{						
 			ps = conn.prepareStatement(sql);
-			ps.setBigDecimal(1, estoque.getQtd());
+			ps.setInt(1, estoque.getQtd());
 			ps.setBigDecimal(2, estoque.getPrecoUnit());
 			Date gravarEstaData = new Date (Calendar.getInstance().getTimeInMillis());
 			ps.setDate(3, gravarEstaData);
 			ps.setBigDecimal(4, estoque.getTotal());
-			//ps.setCompra(5, estoque.getCompraId());
-			//ps.setString(6, estoque.getMateriaPrimaId());
-			//ps.setString(7, estoque.getMedidaId());
+			ps.setInt(5, estoque.getCompraId());
+			ps.setInt(6, estoque.getMateriaPrimaId());
+			ps.setInt(7, estoque.getMedidaId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -47,23 +46,22 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 		return status;
 	}
 
-	public boolean alterar(Estoque estoque) throws Exception {
+	public boolean alterar(Estoque estoque) throws Exception{
 		boolean status = false;
 		String sql = "UPDATE estoque SET qtd=?, precoUnit=?, venc=?, total=?, compraId=?, materiaPrimaId=?, medidaId=? where id=?";
 		PreparedStatement  ps = null;
-		try
-		{
-			Connection conn = ConnectionProvider.getInstance().getConnection();
-			
+		
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{	
 			ps = conn.prepareStatement(sql);
-			ps.setBigDecimal(1, estoque.getQtd());
+			ps.setInt(1, estoque.getQtd());
 			ps.setBigDecimal(2, estoque.getPrecoUnit());
 			Date gravarEstaData = new Date (Calendar.getInstance().getTimeInMillis());
 			ps.setDate(3, gravarEstaData);
 			ps.setBigDecimal(4, estoque.getTotal());
-			//ps.setCompra(5, estoque.getCompraId());
-			//ps.setString(6, estoque.getMateriaPrimaId());
-			//ps.setString(7, estoque.getMedidaId());
+			ps.setInt(5, estoque.getCompraId());
+			ps.setInt(6, estoque.getMateriaPrimaId());
+			ps.setInt(7, estoque.getMedidaId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -78,39 +76,38 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 		return status;
 	}
 
-	public boolean excluir(Estoque estoque) throws Exception {
-
+	public boolean excluir(Estoque estoque) throws Exception{
 		boolean status = false;
 		
 		String sql  = "DELETE FROM estoque WHERE id = ?";
-		PreparedStatement ps;
+		PreparedStatement ps = null;
 
-		try{
-			
-			Connection conn = ConnectionProvider.getInstance().getConnection();			
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, estoque.getId());
 			
-			status = ps.execute();
+			if(ps.executeUpdate() != 0) {
+				status = true;
+			}
 			ps.close();
 			conn.close();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Erro ao deletar o estoque\n" + e);
 		}
 		
 		return status;
 	}
 
-	public List<Estoque> listar() throws Exception 
+	public List<Estoque> listar() throws Exception
 	{
 		String sql = "SELECT * FROM estoque";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Estoque> listaDeEstoque= null;
-		try
-		{	    
-			Connection conn = ConnectionProvider.getInstance().getConnection();
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{	    			
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			listaDeEstoque = new ArrayList<Estoque>();
@@ -118,19 +115,16 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 			{
 				Estoque estoque = new Estoque();
 				
-				estoque.setQtd(rs.getBigDecimal("qtd"));
+				estoque.setQtd(rs.getInt("qtd"));
 				estoque.setPrecoUnit(rs.getBigDecimal("precoUnit"));
 				estoque.setVenc(Calendar.getInstance());
 				estoque.setTotal(rs.getBigDecimal("total"));
-				//estoque.setCompraId(rs.getInt(""));
-				//estoque.setMateriaPrimaId("");
-				//estoque.setMedidaId("");
-				
-			
-				
+				estoque.setCompraId(rs.getInt("compraId"));
+				estoque.setMateriaPrimaId(rs.getInt("materiaPrimaId"));
+				estoque.setMedidaId(rs.getInt("medidaId"));									
 				listaDeEstoque.add(estoque);
 				
-				for(int i = 0;i<listaDeEstoque.size();i++){  //enquanto i for menor, não maior  
+				for(int i = 0; i<listaDeEstoque.size(); i++){  //enquanto i for menor, não maior  
 				     System.out.println(listaDeEstoque.get(i));    
 				}  
 			}
@@ -139,13 +133,14 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 		}
 		catch (SQLException e) 
 		{
-			System.out.println("Erro ao listar o estoque\n"+e);
+			System.out.println("Erro ao listar o estoque\n" + e);
 		}
 		return listaDeEstoque;
 	}
 
 	@Override
-	public List<Estoque> pesquisar(String pesquisa) {
+	public List<Estoque> pesquisar(String pesquisa) throws Exception{
+		// TODO Auto-generated method stub
 		return null;
 	}
 

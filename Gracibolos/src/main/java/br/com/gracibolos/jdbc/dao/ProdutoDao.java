@@ -12,25 +12,20 @@ import br.com.gracibolos.jdbc.model.Produto;
 
 public class ProdutoDao implements GenericoDao<Produto>{
 
-	public boolean inserir(Produto produto) throws Exception {
+	public boolean inserir(Produto produto) throws Exception{
 		boolean status = false;
-		String sql = "INSERT INTO produto(nome, valor, receita, foto, produtoProntoCollection,"
-				+ " itemEncomendaCollection, tipoProdutoNome, itemReceitaCollection,"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+		String sql = "INSERT INTO produto(tipoProdutoNome, nome, valor, receita, foto)"
+				   + " VALUES (?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
-		try{
-			Connection conn = ConnectionProvider.getInstance().getConnection();
-			
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, produto.getNome());
-			ps.setBigDecimal(2, produto.getValor());
-			ps.setString(3, produto.getReceita());
-			ps.setBytes(4, produto.getFoto());
-//			ps.setString(5, produto.getProdutoProntoCollection());
-//			ps.setString(6, produto.getItemEncomendaCollection());
-//			ps.setString(7, produto.getTipoProdutoNome());
-//			ps.setString(8, produto.getItemEncomendaCollection());
+			ps.setString(1, produto.getTipoProdutoNome());
+			ps.setString(2, produto.getNome());
+			ps.setBigDecimal(3, produto.getValor());
+			ps.setString(4, produto.getReceita());
+			ps.setBytes(5, produto.getFoto());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -46,26 +41,20 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		return status;
 	}
 
-	public boolean alterar(Produto produto) throws Exception {
+	public boolean alterar(Produto produto) throws Exception{
 		boolean status = false;
-		String sql = "UPDATE cliente SET nome=?, valor=?, receita=?, foto=?, produtoProntoCollection=?,"
-				+ " itemEncomendaCollection=?, tipoProdutoNome=?, itemReceitaCollection=? where id=?";
+		String sql = "UPDATE produto SET tipoProdutoNome=?, nome=?, valor=?, receita=?, foto=? where id=?";
 		
 		PreparedStatement  ps = null;
-		try
-		{
-			Connection conn = ConnectionProvider.getInstance().getConnection();
-			
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{	
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, produto.getNome());
-			ps.setBigDecimal(2, produto.getValor());
-			ps.setString(3, produto.getReceita());
-			ps.setBytes(4, produto.getFoto());
-//			ps.setString(5, produto.getProdutoProntoCollection());
-//			ps.setString(6, produto.getItemEncomendaCollection());
-//			ps.setString(7, produto.getTipoProdutoNome());
-//			ps.setString(8, produto.getItemEncomendaCollection());
-			ps.setInt(9, produto.getId());
+			ps.setString(1, produto.getTipoProdutoNome());
+			ps.setString(2, produto.getNome());
+			ps.setBigDecimal(3, produto.getValor());
+			ps.setString(4, produto.getReceita());
+			ps.setBytes(5, produto.getFoto());
+			ps.setInt(6, produto.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -75,44 +64,42 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		}
 		catch (SQLException e) 
 		{
-			System.out.println("Erro ao alterar os produtos\n"+e);
+			System.out.println("Erro ao alterar o produto\n"+e);
 		}
 		return status;
 	}
 
-	public boolean excluir(Produto produto) throws Exception {
+	public boolean excluir(Produto produto) throws Exception{
 
 		boolean status = false;
 		
 		String sql  = "DELETE FROM produto WHERE id = ?";
 		PreparedStatement ps;
 
-		try{			
-			Connection conn = ConnectionProvider.getInstance().getConnection();			
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{	
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, produto.getId());
 			
-			status = ps.execute();
-			
-			ps.close();
-			conn.close();
+			if(ps.executeUpdate() != 0) {
+				status = true;
+			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Houve um erro ao tentar deletar o produto\n" + e);
 		}
 		
 		return status;
 	}
 
-	public List<Produto> listar() throws Exception {
+	public List<Produto> listar() throws Exception{
 		
 		String sql = "SELECT * FROM produto";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Produto> listaDeProduto = null;
-		try
-		{
-			Connection conn = ConnectionProvider.getInstance().getConnection();
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{			
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			listaDeProduto = new ArrayList<Produto>();
@@ -120,18 +107,15 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			{
 				Produto produto = new Produto();
 				produto.setId(rs.getInt("id"));
+				produto.setTipoProdutoNome("tipoProdutoNome");
 				produto.setNome(rs.getString("nome"));
 				produto.setValor(rs.getBigDecimal("valor"));
 				produto.setReceita(rs.getString("receita"));
 				produto.setFoto(rs.getBytes("foto"));
-				//produto.setProdutoProntoCollection(null);
-				//produto.setItemEncomendaCollection(null);
-				produto.setTipoProdutoNome(null);
-				//produto.setItemReceitaCollection(null);
 				
 				listaDeProduto.add(produto);
 				
-				for(int i = 0;i<listaDeProduto.size();i++){  //enquanto i for menor, não maior  
+				for(int i = 0; i<listaDeProduto.size(); i++){  //enquanto i for menor, não maior  
 				     System.out.println(listaDeProduto.get(i));    
 				}  
 			}
@@ -146,7 +130,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 	}
 
 	@Override
-	public List<Produto> pesquisar(String pesquisa) {
+	public List<Produto> pesquisar(String pesquisa) throws Exception{
 		// TODO Auto-generated method stub
 		return null;
 	}

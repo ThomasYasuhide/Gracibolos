@@ -8,6 +8,7 @@ import br.com.gracibolos.jdbc.model.Estoque;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Medida;
 
+// não esta funcionando
 public class EstoqueAlterar {
 
 	public static void main(String[] args) {
@@ -21,14 +22,14 @@ public class EstoqueAlterar {
 		Medida m = new Medida();
 		m.setId(1);
 		
-		e1.setId(1);
-		e1.setQtd(null);
+		e1.setId(18);
+		e1.setQtd(50);
 		e1.setPrecoUnit(null);
 		e1.setVenc(Calendar.getInstance());
 		e1.setTotal(null);
-		e1.setCompraId(c);
-		e1.setMateriaPrimaId(mp);
-		e1.setMedidaId(m);
+		e1.setCompraId(c.getId());
+		e1.setMateriaPrimaId(mp.getId());
+		e1.setMedidaId(m.getId());
 		
 		EstoqueDao dao = new EstoqueDao();
 		

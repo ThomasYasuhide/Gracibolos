@@ -3,6 +3,7 @@ package br.com.gracibolos.jdbc.teste;
 import br.com.gracibolos.jdbc.dao.ProdutoDao;
 import br.com.gracibolos.jdbc.model.Produto;
 
+//funcionando
 public class ProdutoListar {
 
 	public static void main(String[] args) {
@@ -11,20 +12,15 @@ public class ProdutoListar {
 		
 		
 		try {
-			for( Produto p : dao.listar()){			
-				/*
+			for( Produto p : dao.listar()){
 				System.out.println(	  
 					
 						 				  "Id : "+p.getId()
-						 			+ "\tNome : "+p.getNome()
-						 		   + "\tValor : "+p.getValor()
-						 		 + "\tReceita : "+p.getReceita()
-						 			+ "\tFoto : "+p.getFoto()
-						   + "\tProdutoPronto : "+p.getProdutoProntoCollection()
-						   + "\tItemEncomenda : "+p.getItemEncomendaCollection()
 						 + "\tTipoProdutoNome : "+p.getTipoProdutoNome()
-						 	 + "\tItemReceita : "+p.getItemReceitaCollection());
-					*/
+									+ "\tNome : "+p.getNome()
+						           + "\tValor : "+p.getValor()
+						 	  	 + "\tReceita : "+p.getReceita()
+						 			+ "\tFoto : "+p.getFoto());
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

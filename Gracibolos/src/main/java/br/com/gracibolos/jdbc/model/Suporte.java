@@ -14,26 +14,35 @@ import java.math.BigDecimal;
  */
 public class Suporte implements Serializable{
     
-    public Suporte(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1319997313642607861L;
+
+
+
+	public Suporte(){
         
     }
     
-    public Suporte(String id) {
+    public Suporte(Integer id) {
         this.id = id;
     }
     
-     private String id;
+    private Integer id;
     private String codigo;
     private String status;
     private BigDecimal valor;
-    private Encomenda encomendaId;
-    private Fornecedor fornecedorId;
+    private Integer encomendaId;
+    private Integer fornecedorId;
 
-    public String getId() {
+   
+
+	public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -61,22 +70,20 @@ public class Suporte implements Serializable{
         this.valor = valor;
     }
 
-    public Encomenda getEncomendaId() {
-        return encomendaId;
-    }
+    public Integer getEncomendaId() {
+		return encomendaId;
+	}
 
-    public void setEncomendaId(Encomenda encomendaId) {
-        this.encomendaId = encomendaId;
-    }
+	public void setEncomendaId(Integer encomendaId) {
+		this.encomendaId = encomendaId;
+	}
 
-    public Fornecedor getFornecedorId() {
-        return fornecedorId;
-    }
+	public Integer getFornecedorId() {
+		return fornecedorId;
+	}
 
-    public void setFornecedorId(Fornecedor fornecedorId) {
-        this.fornecedorId = fornecedorId;
-    }
-    
-    
+	public void setFornecedorId(Integer fornecedorId) {
+		this.fornecedorId = fornecedorId;
+	}    
     
 }

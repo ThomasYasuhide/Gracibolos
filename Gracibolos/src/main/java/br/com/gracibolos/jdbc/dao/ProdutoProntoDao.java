@@ -14,26 +14,26 @@ import br.com.gracibolos.jdbc.model.ProdutoPronto;
 
 public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 
-	public boolean inserir(ProdutoPronto pPronto) throws Exception {
+	public boolean inserir(ProdutoPronto pPronto) throws Exception{
 		boolean status = false;
-		String sql = "INSERT INTO produtoPronto(finalizado, dataValidade, codigo, encomendaId, produtoId,"
-				+ " VALUES (?, ?, ?, ?, ?);";
+		String sql = " INSERT INTO produtopronto (produtoId, encomendaId, finalizado, dataValidade, codigo)"
+				   + " VALUES (?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
-		try{
-			Connection conn = ConnectionProvider.getInstance().getConnection();
-			
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{		
 			ps = conn.prepareStatement(sql);
 			
-			Date gravarEstaData = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(1, gravarEstaData);
+			ps.setInt(1, pPronto.getProdutoId());
+			ps.setInt(2, pPronto.getEncomendaId());
 			
-			Date gravarEstaData2 = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(2, gravarEstaData2);
+			Date finalizado1 = new Date (Calendar.getInstance().getTimeInMillis());
+			ps.setDate(3, finalizado1);
 			
-			ps.setString(3, pPronto.getCodigo());
-			//ps.setString(4, pPronto.getEncomendaId());
-			//ps.setString(5, pPronto.getProdutoId()());
+			Date dataValidade2 = new Date (Calendar.getInstance().getTimeInMillis());
+			ps.setDate(4, dataValidade2);
+			
+			ps.setString(5, pPronto.getCodigo());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -49,27 +49,26 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 		return status;
 	}
 
-	public boolean alterar(ProdutoPronto pPronto) throws Exception {
+	public boolean alterar(ProdutoPronto pPronto) throws Exception{
 		boolean status = false;
-		String sql = "UPDATE produtoPronto SET finalizado=?, dataValidade=?, codigo=?, encomendaId=?,"
-				+ " produtoId=? where id=?";
+		String sql = " UPDATE produtopronto SET produtoId=?, encomendaId=?, finalizado=?, dataValidade=?,"
+				   + " codigo=? where id=?";
 		
 		PreparedStatement  ps = null;
-		try
-		{
-			Connection conn = ConnectionProvider.getInstance().getConnection();
-			
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{		
 			ps = conn.prepareStatement(sql);
 			
-			Date gravarEstaData = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(1, gravarEstaData);
+			ps.setInt(1, pPronto.getProdutoId());
+			ps.setInt(2, pPronto.getEncomendaId());
 			
-			Date gravarEstaData2 = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(2, gravarEstaData2);
+			Date finalizado = new Date (Calendar.getInstance().getTimeInMillis());
+			ps.setDate(3, finalizado);
 			
-			ps.setString(3, pPronto.getCodigo());
-			//ps.setString(4, pPronto.getEncomendaId());
-			//ps.setString(5, pPronto.getProdutoId()());
+			Date dataValidade = new Date (Calendar.getInstance().getTimeInMillis());
+			ps.setDate(4, dataValidade);
+			
+			ps.setString(5, pPronto.getCodigo());
 			ps.setInt(6, pPronto.getId());
 						
 			if(ps.executeUpdate() != 0) {
@@ -85,39 +84,40 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 		return status;
 	}
 
-	public boolean excluir(ProdutoPronto produtoPronto) throws Exception {
+	public boolean excluir(ProdutoPronto produtoPronto) throws Exception{
 
 		boolean status = false;
 		
-		String sql  = "DELETE FROM produtoPronto WHERE id = ?";
+		String sql  = "DELETE FROM produtopronto WHERE id = ?";
 		PreparedStatement ps;
 
-		try{			
-			Connection conn = ConnectionProvider.getInstance().getConnection();			
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{		
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, produtoPronto.getId());
 			
-			status = ps.execute();
+			if(ps.executeUpdate() != 0) {
+				status = true;
+			}
 			
 			ps.close();
 			conn.close();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Houve um erro ao tentar deletar o produto pronto\n" + e);
 		}
 		
 		return status;
 	}
 
-	public List<ProdutoPronto> listar() throws Exception {
+	public List<ProdutoPronto> listar() throws Exception{
 		
-		String sql = "SELECT * FROM produtoPronto";
+		String sql = "SELECT * FROM produtopronto";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<ProdutoPronto> listaDeProdutoPronto = null;
-		try
-		{
-			Connection conn = ConnectionProvider.getInstance().getConnection();
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{			
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			listaDeProdutoPronto = new ArrayList<ProdutoPronto>();
@@ -126,11 +126,11 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 				ProdutoPronto pPronto = new ProdutoPronto();
 				
 				pPronto.setId(rs.getInt("id"));
+				pPronto.setProdutoId(rs.getInt("produtoId"));
+				pPronto.setEncomendaId(rs.getInt("encomendaId"));
 				pPronto.setFinalizado(Calendar.getInstance());
 				pPronto.setDataValidade(Calendar.getInstance());
-				pPronto.setCodigo(rs.getString("codigo"));
-				pPronto.setEncomendaId(null);
-				pPronto.setProdutoId(null);
+				pPronto.setCodigo(rs.getString("codigo"));				
 				
 				listaDeProdutoPronto.add(pPronto);
 				
@@ -149,7 +149,7 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 	}
 
 	@Override
-	public List<ProdutoPronto> pesquisar(String pesquisa) {
+	public List<ProdutoPronto> pesquisar(String pesquisa) throws Exception{
 		// TODO Auto-generated method stub
 		return null;
 	}

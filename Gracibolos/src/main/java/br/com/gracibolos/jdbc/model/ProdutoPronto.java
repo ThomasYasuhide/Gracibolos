@@ -14,7 +14,12 @@ import java.util.Calendar;
  */
 public class ProdutoPronto implements Serializable{
     
-    public ProdutoPronto(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4235054391330860543L;
+
+	public ProdutoPronto(){
         
     }
     
@@ -23,60 +28,58 @@ public class ProdutoPronto implements Serializable{
     }
     
     private Integer id;
+    private Integer produtoId;
+    private Integer encomendaId;
     private Calendar finalizado;
     private Calendar dataValidade;
     private String codigo;
-    private Encomenda encomendaId;
-    private Produto produtoId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Calendar getFinalizado() {
-        return finalizado;
-    }
-
-    public void setFinalizado(Calendar finalizado) {
-        this.finalizado = finalizado;
-    }
-
-    public Calendar getDataValidade() {
-        return dataValidade;
-    }
-
-    public void setDataValidade(Calendar dataValidade) {
-        this.dataValidade = dataValidade;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public Encomenda getEncomendaId() {
-        return encomendaId;
-    }
-
-    public void setEncomendaId(Encomenda encomendaId) {
-        this.encomendaId = encomendaId;
-    }
-
-    public Produto getProdutoId() {
-        return produtoId;
-    }
-
-    public void setProdutoId(Produto produtoId) {
-        this.produtoId = produtoId;
-    }
     
-    
-    
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getProdutoId() {
+		return produtoId;
+	}
+
+	public void setProdutoId(Integer produtoId) {
+		this.produtoId = produtoId;
+	}
+
+	public Integer getEncomendaId() {
+		return encomendaId;
+	}
+
+	public void setEncomendaId(Integer encomendaId) {
+		this.encomendaId = encomendaId;
+	}
+
+	public Calendar getFinalizado() {
+		return finalizado;
+	}
+
+	public void setFinalizado(Calendar finalizado) {
+		this.finalizado = finalizado;
+	}
+
+	public Calendar getDataValidade() {
+		return dataValidade;
+	}
+
+	public void setDataValidade(Calendar dataValidade) {
+		this.dataValidade = dataValidade;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}  
+        
 }

@@ -15,7 +15,12 @@ import java.util.Calendar;
  */
 public class Estoque implements Serializable{
 
-    public Estoque() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8635541850180640498L;
+
+	public Estoque() {
         
     }
     
@@ -24,77 +29,78 @@ public class Estoque implements Serializable{
     }
     
     private Integer id;
-    private BigDecimal qtd;
+    private Integer qtd;
     private BigDecimal precoUnit;
     private Calendar venc;
     private BigDecimal total;
-    private Compra compraId;
-    private MateriaPrima materiaPrimaId;
-    private Medida medidaId;
+    private Integer compraId;
+    private Integer materiaPrimaId;
+    private Integer medidaId;
+    
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getQtd() {
+		return qtd;
+	}
 
-    public BigDecimal getQtd() {
-        return qtd;
-    }
+	public void setQtd(Integer qtd) {
+		this.qtd = qtd;
+	}
 
-    public void setQtd(BigDecimal qtd) {
-        this.qtd = qtd;
-    }
+	public BigDecimal getPrecoUnit() {
+		return precoUnit;
+	}
 
-    public BigDecimal getPrecoUnit() {
-        return precoUnit;
-    }
+	public void setPrecoUnit(BigDecimal precoUnit) {
+		this.precoUnit = precoUnit;
+	}
 
-    public void setPrecoUnit(BigDecimal precoUnit) {
-        this.precoUnit = precoUnit;
-    }
+	public Calendar getVenc() {
+		return venc;
+	}
 
-    public Calendar getVenc() {
-        return venc;
-    }
+	public void setVenc(Calendar venc) {
+		this.venc = venc;
+	}
 
-    public void setVenc(Calendar venc) {
-        this.venc = venc;
-    }
+	public BigDecimal getTotal() {
+		return total;
+	}
 
-    public BigDecimal getTotal() {
-        return total;
-    }
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
 
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
+	public Integer getCompraId() {
+		return compraId;
+	}
 
-    public Compra getCompraId() {
-        return compraId;
-    }
+	public void setCompraId(Integer compraId) {
+		this.compraId = compraId;
+	}
 
-    public void setCompraId(Compra compraId) {
-        this.compraId = compraId;
-    }
+	public Integer getMateriaPrimaId() {
+		return materiaPrimaId;
+	}
 
-    public MateriaPrima getMateriaPrimaId() {
-        return materiaPrimaId;
-    }
+	public void setMateriaPrimaId(Integer materiaPrimaId) {
+		this.materiaPrimaId = materiaPrimaId;
+	}
 
-    public void setMateriaPrimaId(MateriaPrima materiaPrimaId) {
-        this.materiaPrimaId = materiaPrimaId;
-    }
+	public Integer getMedidaId() {
+		return medidaId;
+	}
 
-    public Medida getMedidaId() {
-        return medidaId;
-    }
+	public void setMedidaId(Integer medidaId) {
+		this.medidaId = medidaId;
+	}
 
-    public void setMedidaId(Medida medidaId) {
-        this.medidaId = medidaId;
-    } 
     
     
     

@@ -5,7 +5,6 @@
  */
 package br.com.gracibolos.jdbc.model;
 import java.io.Serializable;
-import java.util.Collection;
 
 /**
  *
@@ -13,7 +12,12 @@ import java.util.Collection;
  */
 public class Status implements Serializable{
     
-    public Status(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5010061579993426738L;
+
+	public Status(){
         
     }
     
@@ -21,32 +25,24 @@ public class Status implements Serializable{
         this.nome = nome;
     }
     
+    private Integer id;
     private String nome;
-    private Collection<Compra> compraCollection;
-    private Collection<Encomenda> encomendaCollection;
+    
+	public Integer getId() {
+		return id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public Collection<Compra> getCompraCollection() {
-        return compraCollection;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setCompraCollection(Collection<Compra> compraCollection) {
-        this.compraCollection = compraCollection;
-    }
-
-    public Collection<Encomenda> getEncomendaCollection() {
-        return encomendaCollection;
-    }
-
-    public void setEncomendaCollection(Collection<Encomenda> encomendaCollection) {
-        this.encomendaCollection = encomendaCollection;
-    }  
         
 }

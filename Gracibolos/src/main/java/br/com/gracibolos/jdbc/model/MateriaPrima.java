@@ -7,7 +7,6 @@ package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 
 /**
  *
@@ -15,7 +14,12 @@ import java.util.Collection;
  */
 public class MateriaPrima implements Serializable{
     
-    public MateriaPrima(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8191626366030745848L;
+
+	public MateriaPrima(){
         
     }
     
@@ -29,8 +33,6 @@ public class MateriaPrima implements Serializable{
     private BigDecimal qtd;
     private String descricao;
     private byte[] foto;
-    private Collection<Estoque> estoqueCollection;
-    private Collection<ItemReceita> itemreceitaCollection;
 
     public Integer getId() {
         return id;
@@ -79,23 +81,4 @@ public class MateriaPrima implements Serializable{
     public void setFoto(byte[] foto) {
         this.foto = foto;
     }
-
-    public Collection<Estoque> getEstoqueCollection() {
-        return estoqueCollection;
-    }
-
-    public void setEstoqueCollection(Collection<Estoque> estoqueCollection) {
-        this.estoqueCollection = estoqueCollection;
-    }
-
-    public Collection<ItemReceita> getItemreceitaCollection() {
-        return itemreceitaCollection;
-    }
-
-    public void setItemreceitaCollection(Collection<ItemReceita> itemreceitaCollection) {
-        this.itemreceitaCollection = itemreceitaCollection;
-    }
-    
-    
-    
 }

@@ -6,7 +6,6 @@
 package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 /**
  *
@@ -14,7 +13,12 @@ import java.util.Collection;
  */
 public class TipoProduto implements Serializable{
     
-    public TipoProduto(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5769500126286990226L;
+
+	public TipoProduto(){
         
     }
     
@@ -23,6 +27,13 @@ public class TipoProduto implements Serializable{
     }
     
     private String nome;
-    private Collection<Produto> produtoCollection;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
     
 }

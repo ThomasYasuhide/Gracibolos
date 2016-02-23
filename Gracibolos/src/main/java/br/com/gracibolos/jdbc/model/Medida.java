@@ -7,7 +7,6 @@ package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 
 /**
  *
@@ -15,7 +14,12 @@ import java.util.Collection;
  */
 public class Medida implements Serializable{
     
-    public Medida(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -364539461070183481L;
+
+	public Medida(){
         
     }
     
@@ -33,8 +37,6 @@ public class Medida implements Serializable{
     private String medida;
     private BigDecimal gramas;
     private BigDecimal litros;
-    private Collection<Estoque> estoqueCollection;
-    private Collection<ItemReceita> itemreceitaCollection;
 
     public Integer getId() {
         return id;
@@ -74,24 +76,5 @@ public class Medida implements Serializable{
 
     public void setLitros(BigDecimal litros) {
         this.litros = litros;
-    }
-
-    public Collection<Estoque> getEstoqueCollection() {
-        return estoqueCollection;
-    }
-
-    public void setEstoqueCollection(Collection<Estoque> estoqueCollection) {
-        this.estoqueCollection = estoqueCollection;
-    }
-
-    public Collection<ItemReceita> getItemreceitaCollection() {
-        return itemreceitaCollection;
-    }
-
-    public void setItemreceitaCollection(Collection<ItemReceita> itemreceitaCollection) {
-        this.itemreceitaCollection = itemreceitaCollection;
-    }
-    
-    
-    
+    }    
 }
