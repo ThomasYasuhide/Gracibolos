@@ -22,7 +22,7 @@ import br.com.gracibolos.jdbc.model.Fornecedor;
 
 @Controller
 public class AdministrativoController {
-	
+	//
 	//DASHBOARD
 	@RequestMapping("/administrativo-dashboard")
 	public ModelAndView dashboard(){
