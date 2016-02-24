@@ -136,16 +136,17 @@
 									<!-- Titulos das tabelas  -->
 									<tr>
 										<th>#</th>
+										<th>Foto</th>
 										<th>Status</th>
 										<th>Tipo</th>
+										<th>Estoque</th>
 										<th>Codigo</th>
 										<th>Nome</th>
+										<th>Peso</th>
+										<th>Unid.</th>
 										<th>Custo</th>
 										<th>Valor</th>
-										<th>Unid.</th>
-										<th>Peso</th>
-										<th>Receita</th>
-										<th>Foto</th>
+										
 									</tr>
 								</thead>
 								<tbody>
@@ -154,16 +155,16 @@
 									<c:forEach var="produto" items="${produtos}">
 										<tr>
 											<td>${produto.id}</td>
+											<td>${produto.foto}</td>
 											<td>${produto.status}</td>
 											<td>${produto.tipo}</td>
+											<td>${produto.estoque}</td>
 											<td>${produto.codigo}</td>
 											<td>${produto.nome}</td>
+											<td>${produto.peso}</td>
+											<td>${produto.unid}</td>
 											<td>${produto.custo}</td>
 											<td>${produto.valor}</td>
-											<td>${produto.unid}</td>
-											<td>${produto.peso}</td>
-											<td>${produto.receita}</td>
-											<td>${produto.foto}</td>
 		                					<td>
 		                						<button id="edit-produto" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
 		                						<button id="delete-produto" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
@@ -187,30 +188,6 @@
 		</div>
 	</div>
 	
-
-
-<!-- 
-
-
-
-
-
-
-
-
-CONTINUAR DAQUI 
-
-
-
-
-
-
-
-
-
--->
-
-
 	<!--
 
 	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DE PRODUTO ############################################################
@@ -236,7 +213,7 @@ CONTINUAR DAQUI
 								<!-- ABAS -->
 								<ul class="nav nav-tabs">
 									<li class="active"><a data-toggle="tab" href="#info">Informações do produto</a></li>
-									<li ><a data-toggle="tab" href="#receita">Receita do produto</a></li>
+									<li><a data-toggle="tab" href="#receita">Receita do produto</a></li>
 								</ul>
 
 									<div class="tab-content">
@@ -287,6 +264,11 @@ CONTINUAR DAQUI
 												<input type="text" id="nome" class="form-control" maxlength="100" placeholder="Digite o nome do produto" name="nome" required>
 											</div> 
 
+											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
+												<label class="control-label" for="peso">Peso:</label>
+												<input type="text" class="form-control" name="peso" maxlength="20" placeholder="0.000">
+											</div>
+
 											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
 												<label class="control-label" for="unid">Unidade*:</label>
 												<select class="form-control" id="unid" name="unid" required>
@@ -297,21 +279,14 @@ CONTINUAR DAQUI
 											</div>
 
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
-												<label class="control-label" for="peso">Peso:</label>
-												<input type="text" class="form-control" name="peso" maxlength="20" placeholder="0.000">
-											</div>
-
-											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
 												<label class="control-label" for="custo">Custo:</label>
-												<input type="text" class="form-control" name="custo" maxlength="20" placeholder="Digite aqui o custo do produto">
+												<input type="text" class="form-control" name="custo" maxlength="20" placeholder="0,00">
 											</div>
 
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
 												<label class="control-label" for="valor">Valor*:</label>
-												<input type="text" class="form-control" name="valor" maxlength="20" placeholder="Digite aqui o valor do produto" required>
+												<input type="text" class="form-control" name="valor" maxlength="20" placeholder="0,00" required>
 											</div>
-
-											
 
 											<div class="input-margin col-xs-12 col-sm-12 col-md-12">
 												<label class="control-label" for="obs">Observação:</label>
@@ -319,39 +294,127 @@ CONTINUAR DAQUI
 											</div>
 										</div>
 
+
+
+
+
+<!-- 
+
+
+
+
+
+
+
+
+CONTINUAR DAQUI 
+
+
+
+
+
+
+
+
+
+-->
+
+
 										<div id="receita" class="tab-pane fade">
-											<table id="grid-basic" class="table table-hover">
+
+											<table class="table table-hover display" cellspacing="0" width="100%">
 												<thead>
+													<!-- Titulos das tabelas  -->
 													<tr>
-														<th data-column-id="id" data-visible="false">#</th>
-														<th data-column-id="nome">Nome</th>
-														<th data-column-id="medida">Medida</th>
-														<th data-column-id="unidade">Unidade</th>
-														<th data-column-id="comandos" data-formatter="commands" data-sortable="false">Ações</th>
+														<th>#</th>
+														<th>Nome</th>
+														<th>Medida</th>
+														<th>Unidade</th>
+														<th>Ações</th>
 													</tr>
 												</thead>
 												<tbody>
 
 													<tr>
-														<td>1</td>
-														<td>Farinha de trigo</td>
-														<td>200</td>
-														<td>gr</td>
+														<td>
+															<input type="text" class="form-control disabled" disabled="disabled" name="id" value="1" />
+														</td>
+														<td>
+															<select class="form-control" name="materiaprima">
+																<option selected="selected">Farinha de trigo</option>
+																<option>Ovo de galinha</option>
+															</select>
+														</td>
+														<td>
+															<input type="text" class="form-control" name="medida" value="200" />
+														</td>
+														<td>
+															<select class="form-control" name="unidade">
+																<option>Unidade(s)</option>
+																<option selected="selected">Grama(s)</option>
+																<option>Kilo(s)</option>
+															</select>
+														</td>
+														<td>
+						                					<button id="delete-itemmateriaprima" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+						                				</td>
 													</tr>
 
 													<tr>
-														<td>1</td>
-														<td>Ovos de galinha</td>
-														<td>2</td>
-														<td>un</td>
+														<td><input type="text" class="form-control disabled" disabled="disabled" name="id" value="2" /></td>
+														<td>
+															<select class="form-control" name="materiaprima">
+																<option>Farinha de trigo</option>
+																<option selected="selected">Ovo de galinha</option>
+															</select>
+														</td>
+														<td>
+															<input type="text" class="form-control" name="medida" value="2" />
+														</td>
+														<td>
+															<select class="form-control" name="unidade">
+																<option selected="selected">Unidade(s)</option>
+																<option>Grama(s)</option>
+																<option>Kilo(s)</option>
+															</select>
+														</td>
+														<td>
+						                					<button id="delete-itemmateriaprima" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+						                				</td>
 													</tr>
 
+													<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
+													
+
+													<!-- 	FALTA IMPLEMENTAR 
+
+
+													<c:forEach var="fornecedor" items="${fornecedores}">
+														<tr>
+															<td>${fornecedor.id}</td>
+															<td>${fornecedor.tipopessoa}</td>
+															<td>${fornecedor.nomerazao}</td>
+															<td>${fornecedor.cpfcnpj}</td>
+															<td>${fornecedor.rgie}</td>
+															<td>${fornecedor.endereco}</td>
+						                					<td>
+						                						<button id="edit-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
+						                						<button id="delete-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+						                					</td>
+														</tr>
+													</c:forEach>
+
+													-->
 												</tbody>
 											</table>
 
 											<div class="row">
 												<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
-													<a class="btn btn-default fullwidth" href="incluir_cliente.html"><span class="glyphicon glyphicon-plus disabled"></span>&nbsp;&nbsp;&nbsp;Incluir novo ingrediente</a>
+													
+													<button class="btn btn-default fullwidth" disabled="disabled" >
+														<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Incluir novo ingrediente
+													</button>
+
 												</div>
 											</div>
 

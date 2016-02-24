@@ -27,6 +27,10 @@
     color: #6B5344;
 }
 
+.btn-default.disabled, .btn-default[disabled], fieldset[disabled] .btn-default, .btn-default.disabled:hover, .btn-default[disabled]:hover, fieldset[disabled] .btn-default:hover, .btn-default.disabled:focus, .btn-default[disabled]:focus, fieldset[disabled] .btn-default:focus, .btn-default.disabled.focus, .btn-default[disabled].focus, fieldset[disabled] .btn-default.focus, .btn-default.disabled:active, .btn-default[disabled]:active, fieldset[disabled] .btn-default:active, .btn-default.disabled.active, .btn-default[disabled].active, fieldset[disabled] .btn-default.active {
+	background-color: rgb(107, 83, 68) !important;
+}
+
 /* ############## ÎNPUT INTERFACE ############## */
 
 .bootgrid-header .search .glyphicon, .bootgrid-footer .search .glyphicon {
@@ -56,7 +60,7 @@
 
 .btn-default {
 	color: #FFF;
-	background-color: #6B5344;
+	background-color: #6B5344 !important;
 	border: 0px;
 }
 
@@ -68,7 +72,7 @@
 
 .btn-default:hover {
 	color: #FFF;
-	background-color: rgba(107, 83, 68, .90);
+	background-color: rgba(107, 83, 68, .90) !important;
 	border: 0px;
 }
 
