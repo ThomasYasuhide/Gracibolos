@@ -1,5 +1,8 @@
 package br.com.gracibolos.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -25,7 +28,7 @@ public class LoginController {
 	
 	//Método de autenticação de usuário
 	@RequestMapping("/login")
-	public ModelAndView login(Colaborador colaborador, HttpSession session){
+	public ModelAndView login(Colaborador colaborador, HttpSession session, HttpServletResponse response, HttpServletRequest request){
 		
 		page = "index";
 		status = false;
@@ -42,6 +45,25 @@ public class LoginController {
 	            session.setAttribute("id", colaborador.getId());
 	            session.setAttribute("nome", colaborador.getNome());
 	            session.setAttribute("nivel", colaborador.getNivel());
+	            
+	            if(colaborador.isLembrarsenha()){
+	            	System.out.println("######################## CRIANDO COOKIES #########################");
+	            	Cookie usuario = new Cookie("usuario", colaborador.getUsuario());
+	            	Cookie senha = new Cookie("senha", colaborador.getSenha());
+	                response.addCookie(usuario);
+	                response.addCookie(senha);
+	            }else{
+	            	System.out.println("######################## EXCLUIR COOKIES #########################");
+	            	Cookie[] cookies = request.getCookies();
+	                if (cookies != null) {
+	                    for (int i = 0; i < cookies.length; i++) {
+	                        cookies[i].setValue("");
+	                        cookies[i].setPath("/");
+	                        cookies[i].setMaxAge(0);
+	                        response.addCookie(cookies[i]);
+	                    }
+	            	}
+	            }
 	            
 	            switch(colaborador.getNivel()){
 	                case 1:

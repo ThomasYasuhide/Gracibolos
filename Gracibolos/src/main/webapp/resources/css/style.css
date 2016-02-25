@@ -38,6 +38,24 @@ hr {
 }
 
 
+input[type="checkbox"],
+.google-checkbox .checked {
+  display: none;
+}
+
+input[type="checkbox"]:checked ~ .checked {
+  display: inline-block;
+}
+
+input[type="checkbox"]:checked ~ .unchecked {
+  display: none;
+}
+
+.checkbox label {
+    padding-left: 0 !important;
+}
+
+
 /* Muda a cor dos place holders*/
 
 ::-webkit-input-placeholder  { color:#6B5344 !important; }

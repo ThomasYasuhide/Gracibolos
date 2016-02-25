@@ -25,6 +25,7 @@ public class Colaborador implements Serializable {
     private String cel;
     private String email;
     private String obs;
+    private boolean lembrarsenha;
     
 	public Long getId() {
 		return id;
@@ -178,6 +179,13 @@ public class Colaborador implements Serializable {
 		this.obs = obs;
 	}
 
-    
+	public boolean isLembrarsenha() {
+		return lembrarsenha;
+	}
+
+	public void setLembrarsenha(boolean lembrarsenha) {
+		this.lembrarsenha = lembrarsenha;
+	}
+
     
 }

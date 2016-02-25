@@ -41,19 +41,21 @@
 						
 						<div class="input-group input-margin">
 							<span class="input-group-addon"><i class="material-icons">perm_identity</i></span>
-							<input type="text" name="usuario" maxlength="20" class="form-control" value="yasuhide" placeholder="Usuário" required>
+							<input type="text" name="usuario" maxlength="20" class="form-control" value="${cookie.usuario.value}" placeholder="Usuário" required>
 						</div>
 
 						<div class="input-group input-margin">
 							<span class="input-group-addon"><i class="material-icons">lock_outline</i></span>
-							<input type="password" name="senha" maxlength="20" class="form-control" value="11220102" placeholder="Senha" required>
+							<input type="password" name="senha" maxlength="20" class="form-control" value="${cookie.senha.value}" placeholder="Senha" required>
 						</div>
 
-						<div class="row input-margin">
+						<div class="row">
 							<div class="col-xs-6 col-sm-6 col-md-6">
 								<div class="checkbox pull-left">
-									<label>
-										<input type="checkbox">
+									<label class="google-checkbox input-brown">
+										<input type="checkbox" name="lembrarsenha" value="true">
+										<i class="material-icons checked">check_box</i>
+										<i class="material-icons unchecked">check_box_outline_blank</i>
 										Lembrar senha?
 									</label>
 								</div>
