@@ -53,7 +53,8 @@
 							<div class="col-xs-6 col-sm-6 col-md-6">
 								<div class="checkbox pull-left">
 									<label class="google-checkbox input-brown">
-										<input type="checkbox" name="lembrarsenha" value="true">
+										
+										<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
 										<i class="material-icons checked">check_box</i>
 										<i class="material-icons unchecked">check_box_outline_blank</i>
 										Lembrar senha?

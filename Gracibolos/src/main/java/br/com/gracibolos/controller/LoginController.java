@@ -50,14 +50,23 @@ public class LoginController {
 	            	System.out.println("######################## CRIANDO COOKIES #########################");
 	            	Cookie usuario = new Cookie("usuario", colaborador.getUsuario());
 	            	Cookie senha = new Cookie("senha", colaborador.getSenha());
+	            	Cookie lembrarsenha = new Cookie("lembrarsenha", String.valueOf(colaborador.isLembrarsenha()));
 	                response.addCookie(usuario);
 	                response.addCookie(senha);
+	                response.addCookie(lembrarsenha);
 	            }else{
 	            	System.out.println("######################## EXCLUIR COOKIES #########################");
 	            	Cookie[] cookies = request.getCookies();
 	                for(int i = 0; i< cookies.length ; ++i){
-                        cookies[i].setMaxAge(0);
-                        response.addCookie(cookies[i]);
+                        //Verifica se existe algum cookie
+	                	if(cookies != null){
+	                		//Verifica se o cookie armazena algum usuário ou senha
+                        	if(cookies[i].getName().equals("usuario") || cookies[i].getName().equals("senha") || cookies[i].getName().equals("lembrarsenha")){
+			                	//Deleta o cookie
+                        		cookies[i].setMaxAge(0);
+		                        response.addCookie(cookies[i]);
+                        	}
+                        }
 	                } 
 	            }
 	            
