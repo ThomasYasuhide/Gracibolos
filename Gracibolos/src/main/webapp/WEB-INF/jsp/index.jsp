@@ -41,12 +41,12 @@
 						
 						<div class="input-group input-margin">
 							<span class="input-group-addon"><i class="material-icons">perm_identity</i></span>
-							<input type="text" name="usuario" maxlength="20" class="form-control" value="${cookie.usuario.value}" placeholder="Usuário" required>
+							<input type="text" name="usuario" maxlength="20" class="form-control" value="${cookie.usuario.value}" placeholder="Usuário" tabindex="1" required>
 						</div>
 
 						<div class="input-group input-margin">
 							<span class="input-group-addon"><i class="material-icons">lock_outline</i></span>
-							<input type="password" name="senha" maxlength="20" class="form-control" value="${cookie.senha.value}" placeholder="Senha" required>
+							<input type="password" name="senha" maxlength="20" class="form-control" value="${cookie.senha.value}" placeholder="Senha" tabindex="2" required>
 						</div>
 
 						<div class="row">
@@ -54,7 +54,7 @@
 								<div class="checkbox pull-left">
 									<label class="google-checkbox input-brown">
 										
-										<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+										<input type="checkbox" tabindex="3" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
 										<i class="material-icons checked">check_box</i>
 										<i class="material-icons unchecked">check_box_outline_blank</i>
 										Lembrar senha?
@@ -64,7 +64,7 @@
 
 							<div class="col-xs-6 col-sm-6 col-md-6">
 								<div class="input-group pull-right">
-									<button type="submit" class="btn btn-default btn-login"><i class="material-icons">fingerprint</i>&nbsp;&nbsp;&nbsp;Autenticar</button>
+									<button type="submit" class="btn btn-default btn-login" tabindex="4"><i class="material-icons">fingerprint</i>&nbsp;&nbsp;&nbsp;Autenticar</button>
 								</div>
 							</div>
 						</div>
