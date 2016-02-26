@@ -294,35 +294,9 @@
 											</div>
 										</div>
 
-
-
-
-
-<!-- 
-
-
-
-
-
-
-
-
-CONTINUAR DAQUI 
-
-
-
-
-
-
-
-
-
--->
-
-
 										<div id="receita" class="tab-pane fade">
 
-											<table class="table table-hover display" cellspacing="0" width="100%">
+											<table id="lista-materiaprima" class="table table-hover display" cellspacing="0" width="100%">
 												<thead>
 													<!-- Titulos das tabelas  -->
 													<tr>
@@ -410,8 +384,8 @@ CONTINUAR DAQUI
 
 											<div class="row">
 												<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
-													
-													<button class="btn btn-default fullwidth" disabled="disabled" >
+
+													<button class="btn btn-default fullwidth" id="inserir-linha"  >
 														<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Incluir novo ingrediente
 													</button>
 
@@ -454,21 +428,21 @@ CONTINUAR DAQUI
 
 	<!--
 
-	############################################################        MODAL DE EXCLUSÃO DE COLABORADOR      ############################################################
+	############################################################        MODAL DE EXCLUSÃO DE PRODUTO      ############################################################
 
 	-->
 
 
 
-	<!-- Modal de confirmação de exclusão de cliente -->
-	<div class="modal fade" id="excluir-colaborador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<!-- Modal de confirmação de exclusão de produto -->
+	<div class="modal fade" id="excluir-produto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form id="colaborador-delete-form" action="administrativo-remover-colaborador" method="POST">
+				<form id="produto-delete-form" action="administrativo-remover-produto" method="POST">
 
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Excluir colaborador</h4>
+						<h4 class="modal-title" id="myModalLabel">Excluir produto</h4>
 					</div>
 					
 					<div class="modal-body">
@@ -476,11 +450,11 @@ CONTINUAR DAQUI
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 								<div class="hidden">
-									<label class="control-label" for="id">Nº colaborador:</label>
+									<label class="control-label" for="id">Nº produto:</label>
 									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" />
 								</div>
 
-								<p>Deseja realmente excluir o colaborador?</p>
+								<p>Deseja realmente excluir o produto selecionado?</p>
 							</div>
 						</div>
 
@@ -500,7 +474,7 @@ CONTINUAR DAQUI
 
 	<!--
 
-	############################################################ FIM DO  MODAL DE EXCLUSÃO DE COLABORADOR ############################################################
+	############################################################ FIM DO  MODAL DE EXCLUSÃO DE PRODUTO ############################################################
 
 	-->
 
@@ -513,15 +487,10 @@ CONTINUAR DAQUI
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-
-			/*
-			*
-			* DEFINIÇÃO DAS VARIAVEIS
-			*
-			*/
-
-			var combo_estado = $('#estado');
-			var combo_cidade = $('#cidade');
+			
+            $('#inserir-linha').click(function() {
+            	alert('teste');
+            });
 
 			/*
 			*
@@ -529,8 +498,8 @@ CONTINUAR DAQUI
 			*
 			*/
 			
-			$('#menu-mob-colaboradores').addClass('active');
-			$('#menu-colaboradores').addClass('active');
+			$('#menu-mob-produtos').addClass('active');
+			$('#menu-produtos').addClass('active');
 
 			/*
 			*
@@ -539,58 +508,54 @@ CONTINUAR DAQUI
 			*/
 			
 			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
-            var table = $('#lista-colaboradores').DataTable({
+            var table = $('#lista-produtos').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 2, 3, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ],
+                        "targets": [ 0, 1,2,  3, 4, 7, 8, 9, 10 ],
                         "visible": false
                     }
                 ]
             });
+			
 
             /*
 			*
-			* INCLUSÃO DE COLABORADOR
+			* INCLUSÃO DE PRODUTO
 			*
 			*/
 
-            $('#incluir-colaborador-modal').click(function() {
+            $('#incluir-produto-modal').click(function() {
             	
             	//Altera dinamicamente o titulo do modal.
-				$('#modal-subtitle').text("Incluir novo colaborador");
+				$('#modal-subtitle').text("Incluir novo produto");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#colaborador-form").attr("action","administrativo-incluir-colaborador");
+				$("#produto-form").attr("action","administrativo-incluir-produto");
 				
 				//Altera o nome do botão do modal.
-				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir colaborador');
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir produto');
 				
 				//Reset autmaticamente todos os campos do formulário.
-				$('#colaborador-form').each(function(){
+				$('#produto-form').each(function(){
 					this.reset();
 				});
 				
-				//Remove todas as opções do combo cidade.
-				combo_cidade.find('option').remove();
-				
-				//Adiciona opção onde solicita que o usuário selecione uma cidade.
-				combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
 			});
 
             /*
 			*
-			* ALTERAÇÃO DE COLABORADOR
+			* ALTERAÇÃO DE PRODUTO
 			*
 			*/
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
-            $('#lista-colaboradores tbody').on( 'click', '#edit-colaborador', function () {
+            $('#lista-produtos tbody').on( 'click', '#edit-produto', function () {
             	
             	 //Altera dinamicamente o titulo do modal.
-            	$('#modal-subtitle').text("Alterar colaborador");
+            	$('#modal-subtitle').text("Alterar produto");
             	
             	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#colaborador-form").attr("action","administrativo-alterar-colaborador");
+				$("#produto-form").attr("action","administrativo-alterar-produto");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
@@ -598,45 +563,32 @@ CONTINUAR DAQUI
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
                 
-                //Passa o ID da cidade e caso existe executa a função callback para abrir o modal e preencher os campos com os dados.
-              	listar_cidades(data[12], function(){
-
-              		//Apresenta o modal de exclusão na tela.
-              		$('#modal-colaborador').modal('show');
+           		//Apresenta o modal de exclusão na tela.
+           		$('#modal-produto').modal('show');
 					
-					//Preenche os determinados campos com os conteudos.
-                    $('#id').val(data[0]);
-                    $('#status').val(data[1]);
-                    $('#nivel').val(data[2]);
-                    $('#usuario').val(data[3]);
-                    $('#senha').val(data[4]);
-    				$('#nome').val(data[5]);
-    				$('#cpf').val(data[6]);
-                    $('#rg').val(data[7]);
-                    $('#endereco').val(data[8]);
-                    $('#numero').val(data[9]);
-    				$('#complemento').val(data[10]);
-    				$('#bairro').val(data[11]);
-    				$('#estado').val(data[12]);
-                    $('#cidade').val(data[13]);
-                    $('#cep').val(data[14]);
-                    $('#tel').val(data[15]);
-    				$('#cel').val(data[16]);
-                    $('#email').val(data[17]);
-    				$('#obs').val(data[18]);
-
-                });
+				//Preenche os determinados campos com os conteudos.
+				$('#id').val(data[0]);
+				$('#foto').val(data[1]);
+				$('#status').val(data[2]);
+				$('#tipo').val(data[3]);
+				$('#estoque').val(data[4]);
+				$('#codigo').val(data[5]);
+				$('#nome').val(data[6]);
+				$('#peso').val(data[7]);
+				$('#unidade').val(data[8]);
+				$('#custo').val(data[9]);
+				$('#valor').val(data[10]);
 
 			});
 
 			/*
 			*
-			* EXCLUSÃO DE COLABORADOR
+			* EXCLUSÃO DE PRODUTO
 			*
 			*/
 	
 			//Define uma ação ao apertar o botão excluir de algum item da tabela.
-            $('#lista-colaboradores tbody').on( 'click', '#delete-colaborador', function () {
+            $('#lista-produtos tbody').on( 'click', '#delete-produto', function () {
 				
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
@@ -645,44 +597,10 @@ CONTINUAR DAQUI
                 $('#id_delete').val(data[0]);
 
                 //Apresenta o modal de exclusão na tela.
-				$('#excluir-colaborador').modal('show');
+				$('#excluir-produto').modal('show');
 
             });
 
-            /*
-			*
-			* CIDADES
-			*
-			*/
-
-			//Verifica o evento do mudança do campo estado e chama função listar_cidades passando o ID do estado
-            combo_estado.change(function(){
-				listar_cidades(combo_estado.val());
-			});
-
-			//
-			function listar_cidades(id, callback){
-				
-				$.ajax({
-		            url : 'administrativo-pesquisar-cidade',
-		            method: "POST",
-		            data: {id:id},
-		            success : function(data) {
-
-		            	combo_cidade.find('option').remove();
-
-		            	combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
-						
-		            	$.each(data, function(val, cidade){
-							combo_cidade.append($('<option></option>').val(cidade.id).html(cidade.nome));
-						});
-
-						callback();
-						
-		            }
-		        });
-
-			}
         });
 
 	</script>
