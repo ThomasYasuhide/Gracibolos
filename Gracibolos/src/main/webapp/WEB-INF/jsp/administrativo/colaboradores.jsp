@@ -246,7 +246,7 @@
 								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
 									<label class="control-label" for="nivel">Acesso:</label>
 									<select id="nivel" name="nivel" class="form-control" required>
-										<option selected value="1">Operacional</option>
+										<option selected value="1">Atendente</option>
 										<option value="2">Administrador</option>
 									</select>
 								</div>

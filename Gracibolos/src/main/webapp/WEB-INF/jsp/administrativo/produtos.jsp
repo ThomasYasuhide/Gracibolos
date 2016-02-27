@@ -296,11 +296,10 @@
 
 										<div id="receita" class="tab-pane fade">
 
-											<table id="lista-materiaprima" class="table table-hover display" cellspacing="0" width="100%">
+											<table id="lista-materiaprima" class="table display" cellspacing="0" width="100%">
 												<thead>
 													<!-- Titulos das tabelas  -->
 													<tr>
-														<th>#</th>
 														<th>Nome</th>
 														<th>Medida</th>
 														<th>Unidade</th>
@@ -310,9 +309,6 @@
 												<tbody>
 
 													<tr>
-														<td>
-															<input type="text" class="form-control disabled" disabled="disabled" name="id" value="1" />
-														</td>
 														<td>
 															<select class="form-control" name="materiaprima">
 																<option selected="selected">Farinha de trigo</option>
@@ -335,7 +331,6 @@
 													</tr>
 
 													<tr>
-														<td><input type="text" class="form-control disabled" disabled="disabled" name="id" value="2" /></td>
 														<td>
 															<select class="form-control" name="materiaprima">
 																<option>Farinha de trigo</option>
@@ -488,10 +483,14 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
+			var lista_materiaprima = $('#lista-materiaprima');
+			
             $('#inserir-linha').click(function() {
-            	alert('teste');
+				lista_materiaprima.append('<tr><td><select class="form-control" name="materiaprima"><option selected="selected" disabled="disabled">Selecione...</option><option>Farinha de trigo</option><option>Ovo de galinha</option></select></td><td><input type="text" class="form-control" name="medida" /></td><td><select class="form-control" name="unidade"><option selected="selected" disabled="disabled">Selecione...</option><option>Unidade(s)</option><option>Grama(s)</option><option>Kilo(s)</option></select></td><td><button id="delete-itemmateriaprima" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button></td></tr>');
             });
-
+	
+            var tr = 
+            
 			/*
 			*
 			* INDICADOR DE PAGINA DO MENU
@@ -511,7 +510,7 @@
             var table = $('#lista-produtos').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1,2,  3, 4, 7, 8, 9, 10 ],
+                        "targets": [ 0, 1, 2, 3, 4, 7, 8, 9, 10 ],
                         "visible": false
                     }
                 ]
