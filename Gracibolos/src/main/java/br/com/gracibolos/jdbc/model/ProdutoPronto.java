@@ -46,8 +46,8 @@ public class ProdutoPronto implements Serializable{
 		return produtoId;
 	}
 
-	public void setProdutoId(Integer produtoId) {
-		this.produtoId = produtoId;
+	public void setProdutoId(Integer id) {
+		this.produtoId = id;
 	}
 
 	public Integer getEncomendaId() {

@@ -14,18 +14,17 @@ public class ProdutoDao implements GenericoDao<Produto>{
 
 	public boolean inserir(Produto produto) throws Exception{
 		boolean status = false;
-		String sql = "INSERT INTO produto(tipoProdutoNome, nome, valor, receita, foto)"
+		String sql = "INSERT INTO produto(tipoProdutoNome, nome, valor, foto)"
 				   + " VALUES (?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, produto.getTipoProdutoNome());
+			ps.setLong(1, produto.getTipo());
 			ps.setString(2, produto.getNome());
 			ps.setBigDecimal(3, produto.getValor());
-			ps.setString(4, produto.getReceita());
-			ps.setBytes(5, produto.getFoto());
+			ps.setBytes(4, produto.getFoto());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -43,18 +42,17 @@ public class ProdutoDao implements GenericoDao<Produto>{
 
 	public boolean alterar(Produto produto) throws Exception{
 		boolean status = false;
-		String sql = "UPDATE produto SET tipoProdutoNome=?, nome=?, valor=?, receita=?, foto=? where id=?";
+		String sql = "UPDATE produto SET tipoProdutoNome=?, nome=?, valor=?, foto=? where id=?";
 		
 		PreparedStatement  ps = null;
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{	
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, produto.getTipoProdutoNome());
+			ps.setLong(1, produto.getTipo());
 			ps.setString(2, produto.getNome());
 			ps.setBigDecimal(3, produto.getValor());
-			ps.setString(4, produto.getReceita());
-			ps.setBytes(5, produto.getFoto());
-			ps.setInt(6, produto.getId());
+			ps.setBytes(4, produto.getFoto());
+			ps.setLong(5, produto.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -79,7 +77,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{	
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, produto.getId());
+			ps.setLong(1, produto.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -106,11 +104,10 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			while(rs.next())
 			{
 				Produto produto = new Produto();
-				produto.setId(rs.getInt("id"));
-				produto.setTipoProdutoNome("tipoProdutoNome");
+				produto.setId(rs.getLong("id"));
+				produto.setTipo(rs.getLong("tipo"));
 				produto.setNome(rs.getString("nome"));
 				produto.setValor(rs.getBigDecimal("valor"));
-				produto.setReceita(rs.getString("receita"));
 				produto.setFoto(rs.getBytes("foto"));
 				
 				listaDeProduto.add(produto);

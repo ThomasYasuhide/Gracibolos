@@ -14,10 +14,9 @@ public class ProdutoInserir {
 		Produto p1 = new Produto();
 		
 		
-		p1.setTipoProdutoNome("A");
+		p1.setTipo((long) 1);
 		p1.setNome("Cobertura");
 		p1.setValor(null);
-		p1.setReceita("teste");
 		p1.setFoto(null);
 		
 		ProdutoDao dao = new ProdutoDao();

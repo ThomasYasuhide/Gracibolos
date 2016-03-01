@@ -14,11 +14,11 @@ public class ProdutoProntoInserir {
 
 		ProdutoPronto pPronto = new ProdutoPronto();
 		Produto p = new Produto();
-		p.setId(4);
+		p.setId((long) 4);
 		Encomenda e = new Encomenda();
 		e.setId(4);
 		
-		pPronto.setProdutoId(p.getId());
+		pPronto.setProdutoId(p.getId().intValue());
 		pPronto.setEncomendaId(e.getId());
 		pPronto.setFinalizado(Calendar.getInstance());
 		pPronto.setDataValidade(Calendar.getInstance());

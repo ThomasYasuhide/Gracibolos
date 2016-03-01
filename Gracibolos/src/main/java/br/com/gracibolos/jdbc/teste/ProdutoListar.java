@@ -16,10 +16,9 @@ public class ProdutoListar {
 				System.out.println(	  
 					
 						 				  "Id : "+p.getId()
-						 + "\tTipoProdutoNome : "+p.getTipoProdutoNome()
+						 + "\tTipoProdutoNome : "+p.getTipo()
 									+ "\tNome : "+p.getNome()
 						           + "\tValor : "+p.getValor()
-						 	  	 + "\tReceita : "+p.getReceita()
 						 			+ "\tFoto : "+p.getFoto());
 			}
 		} catch (Exception e) {

@@ -11,7 +11,7 @@ public class ProdutoExcluir {
 		ProdutoDao dao = new ProdutoDao();
 		
 		Produto produto = new Produto();
-		produto.setId(4);
+		produto.setId((long) 4);
 				
 		try {
 			if(dao.excluir(produto) == true){

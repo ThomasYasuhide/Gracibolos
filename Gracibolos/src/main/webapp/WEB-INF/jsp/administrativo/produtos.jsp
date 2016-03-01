@@ -138,12 +138,14 @@
 										<th>#</th>
 										<th>Foto</th>
 										<th>Status</th>
-										<th>Tipo</th>
-										<th>Estoque</th>
+										<th>Data fabricação</th>
+										<th>Data vencimento</th>
 										<th>Codigo</th>
 										<th>Nome</th>
+										<th>Tipo</th>
 										<th>Peso</th>
 										<th>Unid.</th>
+										<th>Estoque</th>
 										<th>Custo</th>
 										<th>Valor</th>
 										
@@ -157,12 +159,14 @@
 											<td>${produto.id}</td>
 											<td>${produto.foto}</td>
 											<td>${produto.status}</td>
-											<td>${produto.tipo}</td>
-											<td>${produto.estoque}</td>
+											<td>${produto.fabricacao}</td>
+											<td>${produto.vencimento}</td>
 											<td>${produto.codigo}</td>
 											<td>${produto.nome}</td>
+											<td>${produto.tipo}</td>
 											<td>${produto.peso}</td>
 											<td>${produto.unid}</td>
+											<td>${produto.estoque}</td>
 											<td>${produto.custo}</td>
 											<td>${produto.valor}</td>
 		                					<td>
@@ -240,18 +244,14 @@
 												</select>
 											</div>
 
-											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
-												<label class="control-label" for="status">Tipo*:</label>
-												<select class="form-control" id="status" name="status" required>
-													<option value="" selected="selected" disabled="disabled">Selecione</option>
-													<option value="1">Bolo</option>
-													<option value="0">Salgados</option>
-												</select>
+											<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+												<label class="control-label" for="codigo">Data de fabricação*:</label>
+												<input type="date" id="fabricacao" class="form-control" placeholder="Escolha a data de fabricação" name="fabricacao" required>
 											</div>
 											
-											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-												<label class="control-label" for="estoque">Estoque:</label>
-												<input type="number" class="form-control" name="estoque" value="0">
+											<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+												<label class="control-label" for="codigo">Data de vencimento*:</label>
+												<input type="date" id="vencimento" class="form-control" placeholder="Escolha a data de vencimento" name="vencimento" required>
 											</div>
 											
 											<div class="input-margin col-xs-12 col-sm-12 col-md-3">
@@ -263,6 +263,15 @@
 												<label class="control-label" for="nome">Nome*:</label>
 												<input type="text" id="nome" class="form-control" maxlength="100" placeholder="Digite o nome do produto" name="nome" required>
 											</div> 
+											
+											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+												<label class="control-label" for="status">Tipo*:</label>
+												<select class="form-control" id="status" name="status" required>
+													<option value="" selected="selected" disabled="disabled">Selecione</option>
+													<option value="1">Bolo</option>
+													<option value="0">Salgados</option>
+												</select>
+											</div>
 
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
 												<label class="control-label" for="peso">Peso:</label>
@@ -277,7 +286,12 @@
 													<option value="gr">Grama(s)</option>
 												</select>
 											</div>
-
+											
+											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+												<label class="control-label" for="estoque">Estoque:</label>
+												<input type="number" class="form-control" name="estoque" value="0">
+											</div>
+											
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
 												<label class="control-label" for="custo">Custo:</label>
 												<input type="text" class="form-control" name="custo" maxlength="20" placeholder="0,00">
@@ -295,8 +309,8 @@
 										</div>
 
 										<div id="receita" class="tab-pane fade">
-
-											<table id="lista-materiaprima" class="table display" cellspacing="0" width="100%">
+											
+											<table class="input-margin table display" cellspacing="0" width="100%">
 												<thead>
 													<!-- Titulos das tabelas  -->
 													<tr>
@@ -306,57 +320,11 @@
 														<th>Ações</th>
 													</tr>
 												</thead>
-												<tbody>
-
-													<tr>
-														<td>
-															<select class="form-control" name="materiaprima">
-																<option selected="selected">Farinha de trigo</option>
-																<option>Ovo de galinha</option>
-															</select>
-														</td>
-														<td>
-															<input type="text" class="form-control" name="medida" value="200" />
-														</td>
-														<td>
-															<select class="form-control" name="unidade">
-																<option>Unidade(s)</option>
-																<option selected="selected">Grama(s)</option>
-																<option>Kilo(s)</option>
-															</select>
-														</td>
-														<td>
-						                					<button id="delete-itemmateriaprima" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
-						                				</td>
-													</tr>
-
-													<tr>
-														<td>
-															<select class="form-control" name="materiaprima">
-																<option>Farinha de trigo</option>
-																<option selected="selected">Ovo de galinha</option>
-															</select>
-														</td>
-														<td>
-															<input type="text" class="form-control" name="medida" value="2" />
-														</td>
-														<td>
-															<select class="form-control" name="unidade">
-																<option selected="selected">Unidade(s)</option>
-																<option>Grama(s)</option>
-																<option>Kilo(s)</option>
-															</select>
-														</td>
-														<td>
-						                					<button id="delete-itemmateriaprima" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
-						                				</td>
-													</tr>
+												<tbody id="lista-materiaprima" >
 
 													<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
-													
-
+												
 													<!-- 	FALTA IMPLEMENTAR 
-
 
 													<c:forEach var="fornecedor" items="${fornecedores}">
 														<tr>
@@ -376,7 +344,8 @@
 													-->
 												</tbody>
 											</table>
-
+											
+											
 											<div class="row">
 												<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
 
@@ -486,7 +455,106 @@
 			var lista_materiaprima = $('#lista-materiaprima');
 			
             $('#inserir-linha').click(function() {
-			
+            	var tabela;
+            	var linha;
+            	var coluna;
+            	var medida;
+            	var materiaprima;
+            	var option
+            	var unidade;
+
+            	tabela = document.getElementById("lista-materiaprima");
+
+            	    linha = document.createElement("tr");
+                	linha.setAttribute("id", "item");
+
+                		id_column = document.createElement("td");
+            			id_column.setAttribute("class","hidden");
+                		materiaprima_column = document.createElement("td");
+                		medida_column = document.createElement("td");
+                		unidade_column = document.createElement("td");
+                		acoes_column = document.createElement("td");
+
+                			id = document.createElement("input")
+            			    id.setAttribute("type","text");
+            			    id.setAttribute("id","id");
+            			    id.setAttribute("name","id");
+            			    id.setAttribute("class", "form-control");
+
+            				materiaprima = document.createElement("select");
+            				materiaprima.setAttribute("class", "form-control");
+            			    
+            					option = document.createElement("option");
+            					option.text = "Selecione...";
+            					option.value = "";
+            					option.setAttribute("disabled","disabled");
+            					option.setAttribute("selected","selected");
+            					materiaprima.appendChild(option);
+            					for(var i=0; i<5; i++){
+            						option = document.createElement("option");
+            						option.text = "Materia prima "+i;
+            						materiaprima.appendChild(option);
+            					}
+
+            				medida = document.createElement("input");
+            			    medida.setAttribute("type","text");
+            			    medida.setAttribute("name","medida");
+            			    medida.setAttribute("class","form-control");
+
+            				unidade = document.createElement("select");
+            				unidade.setAttribute("class", "form-control");
+            					option = document.createElement("option");
+            					option.text = "Selecione...";
+            					option.value = "";
+            					option.setAttribute("disabled","disabled");
+            					option.setAttribute("selected","selected");
+            					unidade.appendChild(option);
+            					for(var i=0; i<5; i++){
+            						option = document.createElement("option");
+            						option.text = "Unidade "+i;
+            						unidade.appendChild(option);
+            					}
+            	
+            		//Botão de ação salvar
+            		salvar_btn = document.createElement("button");
+            		salvar_btn.type = "button";
+            		salvar_btn.setAttribute("id","salvar-itemmateriaprima");
+            		salvar_btn.setAttribute("class","btn btn-default margin-right");
+            		salvar_btn.innerHTML = "<i class='material-icons'>save</i>";
+            		salvar_btn.onclick = salvar;
+
+            		//Botão de ação de exclusão
+            		excluir_btn = document.createElement("button");
+            		excluir_btn.type = "button";
+            		excluir_btn.setAttribute("id","delete-itemmateriaprima");
+            		excluir_btn.setAttribute("class","btn btn-default");
+            		excluir_btn.innerHTML = "<i class='material-icons'>clear</i>";
+            		excluir_btn.onclick = excluir;
+
+            	id_column.appendChild(id);
+            	materiaprima_column.appendChild(materiaprima);
+                medida_column.appendChild(medida);
+                unidade_column.appendChild(unidade);	
+            	acoes_column.appendChild(salvar_btn);
+            	acoes_column.appendChild(excluir_btn);
+
+            	linha.appendChild(id_column);
+                linha.appendChild(materiaprima_column);
+                linha.appendChild(medida_column);
+                linha.appendChild(unidade_column);
+                linha.appendChild(acoes_column);
+
+            	tabela.appendChild(linha);
+
+                function salvar(){
+                	for(i=0; i<linha.childNodes.length-1;i++){
+                		 alert(linha.childNodes[i].firstChild.value);
+                	}
+            	}
+
+            	function excluir(){
+            	    linha.remove();
+            	}
             });
 	
             
