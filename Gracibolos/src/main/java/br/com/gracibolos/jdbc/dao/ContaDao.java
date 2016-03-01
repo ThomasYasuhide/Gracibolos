@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
@@ -26,11 +25,10 @@ public class ContaDao implements GenericoDao<Conta>{
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, conta.getCodigo());
 
-			Date dataVencimento = new Date(Calendar.getInstance().getTimeInMillis());
-			ps.setDate(2, dataVencimento);
+			ps.setDate(2, Date.valueOf(conta.getDataVencimento()));
 			
-			Date dataPagamento = new Date(Calendar.getInstance().getTimeInMillis());
-			ps.setDate(3, dataPagamento);
+			
+			ps.setDate(3, Date.valueOf(conta.getDataPagamento()));
 			
 			ps.setBigDecimal(4, conta.getValor());
 			ps.setInt(5, conta.getCaixaId());
@@ -61,11 +59,11 @@ public class ContaDao implements GenericoDao<Conta>{
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, conta.getCodigo());
 
-			Date dataVencimento = new Date(Calendar.getInstance().getTimeInMillis());
-			ps.setDate(2, dataVencimento);
 			
-			Date dataPagamento = new Date(Calendar.getInstance().getTimeInMillis());
-			ps.setDate(3, dataPagamento);
+			ps.setDate(2, Date.valueOf(conta.getDataVencimento()));
+			
+			
+			ps.setDate(3, Date.valueOf(conta.getDataPagamento()));
 			
 			ps.setBigDecimal(4, conta.getValor());
 			ps.setInt(5, conta.getCaixaId());
@@ -128,8 +126,8 @@ public class ContaDao implements GenericoDao<Conta>{
 				Conta conta = new Conta();
 				conta.setId(rs.getInt("id"));
 				conta.setCodigo(rs.getString("codigo"));
-				conta.setDataVencimento(Calendar.getInstance());
-				conta.setDataPagamento(Calendar.getInstance());
+				conta.setDataVencimento(rs.getDate("dataVencimento").toLocalDate());
+				conta.setDataPagamento(rs.getDate("dataPagamento").toLocalDate());
 				conta.setValor(rs.getBigDecimal("valor"));
 				conta.setCaixaId(rs.getInt("caixaId"));
 				conta.setFornecedorId(rs.getInt("fornecedorId"));

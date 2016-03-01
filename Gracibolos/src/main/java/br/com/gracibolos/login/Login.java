@@ -29,7 +29,7 @@ public class Login {
                 
                 colaborador.setId(rs.getLong("id"));
                 colaborador.setNome(rs.getString("nome"));
-                colaborador.setNivel(rs.getByte("nivel"));
+                colaborador.setNivel(rs.getInt("nivel"));
             }else {
                 System.out.println("Usuário ou senha inválida");
             }

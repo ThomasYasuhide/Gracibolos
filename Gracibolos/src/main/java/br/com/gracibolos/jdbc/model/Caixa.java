@@ -23,16 +23,16 @@ public class Caixa implements Serializable{
         
     }
     
-    public Caixa(Integer id) {
+    public Caixa(Long id) {
         this.id = id;
     }
 
-    public Caixa(Integer id, BigDecimal valor) {
+    public Caixa(Long id, BigDecimal valor) {
         this.id = id;
         this.valor = valor;
     }
     
-    private Integer id;
+    private Long id;
     private Integer encomendaId;
     private BigDecimal valor;
     private Boolean gasto;
@@ -40,11 +40,11 @@ public class Caixa implements Serializable{
     private String forma;
     private String descricao;
     
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -56,7 +56,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			ps.setBoolean(4, caixa.getRecebimento());
 			ps.setString(5, caixa.getForma());
 			ps.setString(6, caixa.getDescricao());
-			ps.setInt(7, caixa.getId());
+			ps.setLong(7, caixa.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -110,7 +110,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			while(rs.next())
 			{
 				Caixa caixa = new Caixa();
-				caixa.setId(rs.getInt("id"));
+				caixa.setId(rs.getLong("id"));
 				caixa.setEncomendaId(rs.getInt("encomendaId"));
 				caixa.setValor(rs.getBigDecimal("valor"));
 				caixa.setGasto(rs.getBoolean("gasto"));

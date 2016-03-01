@@ -10,7 +10,7 @@ public class CaixaAlterar {
 		
 		Caixa c = new Caixa();
 		
-		c.setId(1);
+		c.setId(1L);
 		c.setEncomendaId(null);
 		c.setValor(null);
 		c.setGasto(true);

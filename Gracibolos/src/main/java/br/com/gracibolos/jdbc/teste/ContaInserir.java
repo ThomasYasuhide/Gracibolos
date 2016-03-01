@@ -1,6 +1,7 @@
 package br.com.gracibolos.jdbc.teste;
 
-import java.util.Calendar;
+
+import java.time.LocalDate;
 
 import br.com.gracibolos.jdbc.dao.ContaDao;
 import br.com.gracibolos.jdbc.model.Conta;
@@ -12,8 +13,8 @@ public class ContaInserir {
 		Conta conta = new Conta();
 		
 		conta.setCodigo("123");
-		conta.setDataVencimento(Calendar.getInstance());
-		conta.setDataPagamento(Calendar.getInstance());
+		conta.setDataVencimento(LocalDate.now());
+		conta.setDataPagamento(LocalDate.now());
 		conta.setValor(null);
 		conta.setCaixaId(1);
 		conta.setFornecedorId(2); 
