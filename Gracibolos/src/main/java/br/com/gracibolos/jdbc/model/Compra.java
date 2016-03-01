@@ -29,12 +29,14 @@ public class Compra implements Serializable{
     }
     
     private Integer id;
+    private Integer fornecedorId;
+    private String statusNome;
     private String tipo;
     private String numero;
     private Calendar data;
     private BigDecimal total;
-    private Integer fornecedorId;
-    private String statusNome;
+    
+    
     
 	public Integer getId() {
 		return id;

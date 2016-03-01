@@ -29,6 +29,7 @@ public class Encomenda implements Serializable{
     }
     
     private Integer id;
+    private Integer clienteId;
     private String responsavel;
     private Calendar dataInicio;
     private Calendar dataFaltaProd;
@@ -39,7 +40,7 @@ public class Encomenda implements Serializable{
     private BigDecimal total;
     private String descricao;
     private Integer numero;
-    private Integer clienteId;
+    
     private String statusNome;
     
 	public Integer getId() {

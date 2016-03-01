@@ -7,7 +7,7 @@ public class Cidade implements Serializable{
 	private static final long serialVersionUID = 3855647080622826030L;
 	private int id;
 	private String nome;
-	private int id_estado;
+	private Integer id_estado;
 	
 	public int getId() {
 		return id;
@@ -21,10 +21,10 @@ public class Cidade implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getId_estado() {
+	public Integer getId_estado() {
 		return id_estado;
 	}
-	public void setId_estado(int id_estado) {
+	public void setId_estado(Integer id_estado) {
 		this.id_estado = id_estado;
 	}
 	

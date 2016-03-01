@@ -7,7 +7,10 @@ package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  *
@@ -28,66 +31,28 @@ public class Conta implements Serializable{
         this.id = id;
     }
 
-    public Conta(Integer id, Calendar dataVencimento) {
+    public Conta(Integer id, LocalDate dataVencimento) {
         this.id = id;
         this.dataVencimento = dataVencimento;
     }
     
     private Integer id;
-    private String codigo;
-    private Calendar dataVencimento;
-    private Calendar dataPagamento;
-    private BigDecimal valor;
-    private Integer caixaId;
     private Integer fornecedorId;
     private Integer colaboradorId;
-    
+    private Integer caixaId;
+    private String codigo;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataVencimento;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataPagamento;
+    private BigDecimal valor;
+
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public Calendar getDataVencimento() {
-		return dataVencimento;
-	}
-
-	public void setDataVencimento(Calendar dataVencimento) {
-		this.dataVencimento = dataVencimento;
-	}
-
-	public Calendar getDataPagamento() {
-		return dataPagamento;
-	}
-
-	public void setDataPagamento(Calendar dataPagamento) {
-		this.dataPagamento = dataPagamento;
-	}
-
-	public BigDecimal getValor() {
-		return valor;
-	}
-
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
-	}
-
-	public Integer getCaixaId() {
-		return caixaId;
-	}
-
-	public void setCaixaId(Integer caixaId) {
-		this.caixaId = caixaId;
 	}
 
 	public Integer getFornecedorId() {
@@ -106,6 +71,47 @@ public class Conta implements Serializable{
 		this.colaboradorId = colaboradorId;
 	}
 
- 
-    
+	public Integer getCaixaId() {
+		return caixaId;
+	}
+
+	public void setCaixaId(Integer caixaId) {
+		this.caixaId = caixaId;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public LocalDate getDataVencimento() {
+		return dataVencimento;
+	}
+
+	public void setDataVencimento(LocalDate dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
+
+	public LocalDate getDataPagamento() {
+		return dataPagamento;
+	}
+
+	public void setDataPagamento(LocalDate dataPagamento) {
+		this.dataPagamento = dataPagamento;
+	}
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }
