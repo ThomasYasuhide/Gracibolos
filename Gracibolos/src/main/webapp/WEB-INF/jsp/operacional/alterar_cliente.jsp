@@ -125,7 +125,7 @@ EstÃ¡ pagina foi criada com o intuito de poder alterar os dados cadastrais dos
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3" id="sexo">
 									<label class="control-label" for="sexo">Sexo:</label>
 									<select class="form-control" id="sexo" name="sexo">
-										<option selected disabled="true">Selecione</option>
+										<option selected disabled>Selecione</option>
 										<option value="M">Masculino</option>
 										<option value="F">Feminino</option>
 									</select>
@@ -220,12 +220,12 @@ EstÃ¡ pagina foi criada com o intuito de poder alterar os dados cadastrais dos
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="desde">Cliente desde:</label>
-									<input type="date" class="form-control input-brown disabled" disabled="true" name="desde" name="desde" id="desde">
+									<input type="date" class="form-control input-brown disabled" disabled name="desde" name="desde" id="desde">
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="qtdcompras">Qtd. de compras:</label>
-									<input type="number" class="form-control input-brown disabled" disabled="true" name="qtdcompras" name="qtdcompras" id="qtdcompras" value="0">
+									<input type="number" class="form-control input-brown disabled" disabled name="qtdcompras" name="qtdcompras" id="qtdcompras" value="0">
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -260,6 +260,10 @@ EstÃ¡ pagina foi criada com o intuito de poder alterar os dados cadastrais dos
 					    </div>
 					  </div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 					<!-- ########## FIM DO CONTEUDO ########## -->
 

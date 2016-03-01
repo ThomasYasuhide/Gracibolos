@@ -52,7 +52,7 @@
 								<thead>
 									<tr>
 										<th>Front-end</th>
-									</th>
+									</tr>
 								</thead>
 
 								<tbody>
@@ -71,7 +71,7 @@
 								<thead>
 									<tr>
 										<th>Back-end</th>
-									</th>
+									</tr>
 								</thead>
 
 								<tbody>
@@ -89,7 +89,7 @@
 								<thead>
 									<tr>
 										<th>Banco de dados</th>
-									</th>
+									</tr>
 								</thead>
 
 								<tbody>
@@ -103,7 +103,7 @@
 								<thead>
 									<tr>
 										<th>Ferramentas de desenvolvimento</th>
-									</th>
+									</tr>
 								</thead>
 
 								<tbody>
@@ -127,7 +127,7 @@
 							<tr>
 								<th>Nome:</th>
 								<th>RA:</th>
-							</th>
+							</tr>
 						</thead>
 
 						<tbody>

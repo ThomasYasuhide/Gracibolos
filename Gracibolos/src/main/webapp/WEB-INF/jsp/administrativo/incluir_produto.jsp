@@ -61,7 +61,7 @@
 										<div id="info" class="tab-pane fade in active">
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 												<label class="control-label">Foto do produto:</label>
-												<a href="#"></a>
+												<a href="#">
 													<img class="thumbnail img-responsive" src="resources/img/modelo.png" alt="...">
 												</a>
 											</div>
@@ -79,7 +79,7 @@
 													<div class="input-margin col-xs-6 col-sm-6 col-md-6 col-lg-8">
 														<label class="control-label" for="status">Tipo*:</label>
 														<select class="form-control" id="status" name="status" required>
-															<option value="" selected="true" disabled="">Selecione</option>
+															<option value="" selected disabled>Selecione</option>
 															<option value="1">Bolo</option>
 															<option value="0">Salgados</option>
 														</select>
@@ -102,7 +102,7 @@
 													<div class="input-margin col-xs-6 col-sm-6 col-md-6 col-lg-4">
 														<label class="control-label" for="status">Unidade*:</label>
 														<select class="form-control" id="status" name="status" required>
-															<option value="" selected disabled="true">Selecione:</option>
+															<option value="" selected disabled>Selecione:</option>
 															<option value="kg">kg</option>
 															<option value="gr">gr</option>
 														</select>
@@ -127,7 +127,7 @@
 
 													<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-lg-4">
 														<label class="control-label" for="qtdcompras">Quantidade no estoque:</label>
-														<input type="number" class="form-control input-brown" nname="estoque" value="0">
+														<input type="number" class="form-control input-brown" name="estoque" value="0">
 													</div>
 												</div>
 											</div>
@@ -185,6 +185,10 @@
 
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 					
 					<!-- ########## FIM DO CONTEUDO ########## -->

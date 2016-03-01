@@ -243,7 +243,7 @@
 											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
 												<label class="control-label" for="status">Tipo*:</label>
 												<select class="form-control" id="status" name="status" required>
-													<option value="" selected="true" disabled="">Selecione</option>
+													<option value="" selected="selected" disabled="disabled">Selecione</option>
 													<option value="1">Bolo</option>
 													<option value="0">Salgados</option>
 												</select>
@@ -272,7 +272,7 @@
 											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
 												<label class="control-label" for="unid">Unidade*:</label>
 												<select class="form-control" id="unid" name="unid" required>
-													<option value="" selected disabled="true">Selectione</option>
+													<option value="" selected disabled>Selectione</option>
 													<option value="kg">Kilo(s)</option>
 													<option value="gr">Grama(s)</option>
 												</select>
@@ -486,10 +486,9 @@
 			var lista_materiaprima = $('#lista-materiaprima');
 			
             $('#inserir-linha').click(function() {
-				lista_materiaprima.append('<tr><td><select class="form-control" name="materiaprima"><option selected="selected" disabled="disabled">Selecione...</option><option>Farinha de trigo</option><option>Ovo de galinha</option></select></td><td><input type="text" class="form-control" name="medida" /></td><td><select class="form-control" name="unidade"><option selected="selected" disabled="disabled">Selecione...</option><option>Unidade(s)</option><option>Grama(s)</option><option>Kilo(s)</option></select></td><td><button id="delete-itemmateriaprima" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button></td></tr>');
+			
             });
 	
-            var tr = 
             
 			/*
 			*

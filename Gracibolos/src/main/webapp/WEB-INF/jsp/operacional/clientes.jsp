@@ -210,7 +210,7 @@
 
 					<div class="row">
 						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
-				<button class="btn btn-default fullwidth" href="incluir_cliente.html"><span class="glyphicon glyphicon-plus disabled"></span>&nbsp;&nbsp;&nbsp;Incluir novo cliente</a>
+				<button class="btn btn-default fullwidth" href="incluir_cliente.html"><span class="glyphicon glyphicon-plus disabled"></span>&nbsp;&nbsp;&nbsp;Incluir novo cliente</button>
 						</div>
 					</div>
 
