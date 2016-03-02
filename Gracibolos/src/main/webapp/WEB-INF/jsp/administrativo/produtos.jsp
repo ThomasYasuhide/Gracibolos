@@ -289,12 +289,12 @@
 											
 											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="estoque">Estoque:</label>
-												<input type="number" class="form-control" name="estoque" value="0">
+												<input type="number" min=0 class="form-control" pattern="[0-9]+" maxlength=""  name="estoque" value="0">
 											</div>
 											
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
 												<label class="control-label" for="custo">Custo:</label>
-												<input type="text" class="form-control" name="custo" maxlength="20" placeholder="0,00">
+												<input type="text" class="form-control" name="custo" max="999999" placeholder="0,00">
 											</div>
 
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
@@ -553,6 +553,7 @@
             	}
 
             	function excluir(){
+            		
             	    linha.remove();
             	}
             });
