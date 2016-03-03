@@ -252,9 +252,10 @@
 								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
 									<label class="control-label" for="sexo">Sexo:</label>
 									<select id="sexo" name="sexo" class="form-control" required>
-										<option selected disabled>Selecione um sexo</option>
-										<option value="0">Masculino</option>
-										<option value="1">Feminino</option>
+										<option selected="selected" disabled="disabled" value="0">Selecione um sexo</option>
+										
+										<option value="1">Masculino</option>
+										<option value="2">Feminino</option>
 									</select>
 								</div>
 

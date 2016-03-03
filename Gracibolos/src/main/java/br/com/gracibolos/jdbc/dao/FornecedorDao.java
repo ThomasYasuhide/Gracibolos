@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +35,19 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, fornecedor.getStatus());
 			ps.setInt(2, fornecedor.getTipopessoa());
-			ps.setInt(3, fornecedor.getSexo());
-			ps.setDate(4, Date.valueOf(fornecedor.getDatanascimento()));
+
+			if(fornecedor.getSexo() != null){
+				ps.setInt(3, fornecedor.getSexo());
+			}else{
+				ps.setNull(3, Types.INTEGER);
+			}
+			
+			if(fornecedor.getDatanascimento() != null){
+				ps.setDate(4, Date.valueOf(fornecedor.getDatanascimento()));
+			}else{
+				ps.setNull(4, Types.DATE);
+			}
+			
 			ps.setString(5, fornecedor.getNomerazao());
 			ps.setString(6, fornecedor.getCpfcnpj());
 			ps.setString(7, fornecedor.getRgie());
@@ -87,8 +99,19 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, fornecedor.getStatus());
 			ps.setInt(2, fornecedor.getTipopessoa());
-			ps.setInt(3, fornecedor.getSexo());
-			ps.setDate(4, Date.valueOf(fornecedor.getDatanascimento()));
+
+			if(fornecedor.getSexo() != null){
+				ps.setInt(3, fornecedor.getSexo());
+			}else{
+				ps.setNull(3, Types.INTEGER);
+			}
+			
+			if(fornecedor.getDatanascimento() != null){
+				ps.setDate(4, Date.valueOf(fornecedor.getDatanascimento()));
+			}else{
+				ps.setNull(4, Types.DATE);
+			}
+			
 			ps.setString(5, fornecedor.getNomerazao());
 			ps.setString(6, fornecedor.getCpfcnpj());
 			ps.setString(7, fornecedor.getRgie());
@@ -182,7 +205,11 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 				fornecedor.setStatus(rs.getInt("status"));
 				fornecedor.setTipopessoa(rs.getInt("tipopessoa"));
 				fornecedor.setSexo(rs.getInt("sexo"));
-				fornecedor.setDatanascimento(rs.getDate("datanascimento").toLocalDate());
+
+				if(rs.getDate("datanascimento") != null){
+					fornecedor.setDatanascimento(rs.getDate("datanascimento").toLocalDate());
+				}
+				
 				fornecedor.setNomerazao(rs.getString("nomerazao"));
 				fornecedor.setCpfcnpj(rs.getString("cpfcnpj"));
 				fornecedor.setRgie(rs.getString("rgie"));
@@ -245,7 +272,11 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 				fornecedor.setStatus(rs.getInt("status"));
 				fornecedor.setTipopessoa(rs.getInt("tipopessoa"));
 				fornecedor.setSexo(rs.getInt("sexo"));
-				fornecedor.setDatanascimento(rs.getDate("datanascimento").toLocalDate());
+
+				if(rs.getDate("datanascimento") != null){
+					fornecedor.setDatanascimento(rs.getDate("datanascimento").toLocalDate());
+				}
+				
 				fornecedor.setNomerazao(rs.getString("nomerazao"));
 				fornecedor.setCpfcnpj(rs.getString("cpfcnpj"));
 				fornecedor.setRgie(rs.getString("rgie"));

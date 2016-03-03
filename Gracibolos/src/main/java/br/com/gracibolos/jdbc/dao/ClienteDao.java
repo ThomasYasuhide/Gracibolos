@@ -5,8 +5,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Cliente;
@@ -35,8 +38,19 @@ public class ClienteDao implements GenericoDao<Cliente>{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, cliente.getStatus());
 			ps.setInt(2, cliente.getTipopessoa());
-			ps.setInt(3, cliente.getSexo());
-			ps.setDate(4, Date.valueOf(cliente.getDatanascimento()));
+			
+			if(cliente.getSexo() != null){
+				ps.setInt(3, cliente.getSexo());
+			}else{
+				ps.setNull(3, Types.INTEGER);
+			}
+			
+			if(cliente.getDatanascimento() != null){
+				ps.setDate(4, Date.valueOf(cliente.getDatanascimento()));
+			}else{
+				ps.setNull(4, Types.DATE);
+			}
+			
 			ps.setString(5, cliente.getNomerazao());
 			ps.setString(6, cliente.getCpfcnpj());
 			ps.setString(7, cliente.getRgie());
@@ -51,7 +65,13 @@ public class ClienteDao implements GenericoDao<Cliente>{
 			ps.setString(16, cliente.getCel());
 			ps.setString(17, cliente.getEmail());
 			ps.setString(18, cliente.getSite());
-			ps.setDate(19, Date.valueOf(cliente.getClientedesde()));
+			
+			if(cliente.getClientedesde() != null){
+				ps.setDate(19, Date.valueOf(cliente.getClientedesde()));
+			}else{
+				ps.setNull(19, Types.DATE);
+			}
+			
 			ps.setString(20, cliente.getObs());
 			
 			if(ps.executeUpdate() != 0) {
@@ -91,8 +111,19 @@ public class ClienteDao implements GenericoDao<Cliente>{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, cliente.getStatus());
 			ps.setInt(2, cliente.getTipopessoa());
-			ps.setInt(3, cliente.getSexo());
-			ps.setDate(4, Date.valueOf(cliente.getDatanascimento()));
+			
+			if(cliente.getSexo() != null){
+				ps.setInt(3, cliente.getSexo());
+			}else{
+				ps.setNull(3, Types.INTEGER);
+			}
+			
+			if(cliente.getDatanascimento() != null){
+				ps.setDate(4, Date.valueOf(cliente.getDatanascimento()));
+			}else{
+				ps.setNull(4, Types.DATE);
+			}
+			
 			ps.setString(5, cliente.getNomerazao());
 			ps.setString(6, cliente.getCpfcnpj());
 			ps.setString(7, cliente.getRgie());
@@ -107,7 +138,13 @@ public class ClienteDao implements GenericoDao<Cliente>{
 			ps.setString(16, cliente.getCel());
 			ps.setString(17, cliente.getEmail());
 			ps.setString(18, cliente.getSite());
-			ps.setDate(19, Date.valueOf(cliente.getClientedesde()));
+
+			if(cliente.getClientedesde() != null){
+				ps.setDate(19, Date.valueOf(cliente.getClientedesde()));
+			}else{
+				ps.setNull(19, Types.DATE);
+			}
+			
 			ps.setString(20, cliente.getObs());
 			ps.setLong(21, cliente.getId());
 			
@@ -189,7 +226,11 @@ public class ClienteDao implements GenericoDao<Cliente>{
 				cliente.setStatus(rs.getInt("status"));
 				cliente.setTipopessoa(rs.getInt("tipopessoa"));
 				cliente.setSexo(rs.getInt("sexo"));
-				cliente.setDatanascimento(rs.getDate("datanascimento").toLocalDate());
+				
+				if(rs.getDate("datanascimento") != null){
+					cliente.setDatanascimento(rs.getDate("datanascimento").toLocalDate());
+				}
+				
 				cliente.setNomerazao(rs.getString("nomerazao"));
 				cliente.setCpfcnpj(rs.getString("cpfcnpj"));
 				cliente.setRgie(rs.getString("rgie"));
@@ -204,7 +245,11 @@ public class ClienteDao implements GenericoDao<Cliente>{
 				cliente.setCel(rs.getString("cel"));
 				cliente.setEmail(rs.getString("email"));
 				cliente.setSite(rs.getString("site"));
-				cliente.setClientedesde(rs.getDate("clientedesde").toLocalDate());
+
+				if(rs.getDate("clientedesde") != null){
+					cliente.setClientedesde(rs.getDate("clientedesde").toLocalDate());
+				}
+				
 				cliente.setObs(rs.getString("obs"));
 				
 				Clientes.add(cliente);
@@ -254,7 +299,11 @@ public class ClienteDao implements GenericoDao<Cliente>{
 				cliente.setStatus(rs.getInt("status"));
 				cliente.setTipopessoa(rs.getInt("tipopessoa"));
 				cliente.setSexo(rs.getInt("sexo"));
-				cliente.setDatanascimento(rs.getDate("datanascimento").toLocalDate());
+				
+				if(rs.getDate("datanascimento") != null){
+					cliente.setDatanascimento(rs.getDate("datanascimento").toLocalDate());
+				}
+				
 				cliente.setNomerazao(rs.getString("nomerazao"));
 				cliente.setCpfcnpj(rs.getString("cpfcnpj"));
 				cliente.setRgie(rs.getString("rgie"));
@@ -269,7 +318,11 @@ public class ClienteDao implements GenericoDao<Cliente>{
 				cliente.setCel(rs.getString("cel"));
 				cliente.setEmail(rs.getString("email"));
 				cliente.setSite(rs.getString("site"));
-				cliente.setClientedesde(rs.getDate("clientedesde").toLocalDate());
+
+				if(rs.getDate("clientedesde") != null){
+					cliente.setClientedesde(rs.getDate("clientedesde").toLocalDate());
+				}
+				
 				cliente.setObs(rs.getString("obs"));
 				
 				Clientes.add(cliente);
