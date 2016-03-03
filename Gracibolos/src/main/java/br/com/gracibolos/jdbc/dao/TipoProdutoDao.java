@@ -8,19 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
-import br.com.gracibolos.jdbc.model.Status;
+import br.com.gracibolos.jdbc.model.TipoProduto;
 
-public class StatusDao implements GenericoDao<Status>{
+public class TipoProdutoDao implements GenericoDao<TipoProduto>{
 
-	public boolean inserir(Status status) throws Exception{
+	public boolean inserir(TipoProduto tipoProduto) throws Exception{
 		Boolean teste = false;
-		String sql = "INSERT INTO status (nome) VALUES (?)";
+		String sql = "INSERT INTO tipoproduto (nome) VALUES (?)";
 		PreparedStatement ps = null;		
 
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, status.getNome());
+			ps.setString(1, tipoProduto.getNome());
 			
 			if(ps.executeUpdate() != 0) {
 				teste = true;
@@ -35,16 +35,16 @@ public class StatusDao implements GenericoDao<Status>{
 		return teste;
 	}
 
-	public boolean alterar(Status status) throws Exception{
+	public boolean alterar (TipoProduto tipoProduto) throws Exception{
 		Boolean teste = false;
-		String sql = "UPDATE status SET nome=? WHERE id=?";
+		String sql = "UPDATE tipoproduto SET nome=? WHERE id=?";
 		PreparedStatement ps = null;		
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, status.getNome());
-			ps.setLong(2, status.getId());
+			ps.setString(1, tipoProduto.getNome());
+			ps.setLong(2, tipoProduto.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				teste = true;
@@ -59,15 +59,15 @@ public class StatusDao implements GenericoDao<Status>{
 		return teste;
 	}
 
-	public boolean excluir(Status status) throws Exception{
+	public boolean excluir(TipoProduto tipoProduto) throws Exception{
 		boolean teste = false;
-		String sql = "DELETE FROM status WHERE id = ?";
+		String sql = "DELETE FROM tipoproduto WHERE id = ?";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{
 			ps = conn.prepareStatement(sql);
-			ps.setLong(1, status.getId());
+			ps.setLong(1, tipoProduto.getId());
 			
 			if(ps.executeUpdate() != 0){
 				teste = true;
@@ -82,25 +82,25 @@ public class StatusDao implements GenericoDao<Status>{
 		return teste;
 	}
 
-	public List<Status> listar() throws Exception{
-		String sql = "SELECT * FROM status";
+	public List<TipoProduto> listar() throws Exception{
+		String sql = "SELECT * FROM tipoproduto";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<Status> listaDeStatus = null;
+		List<TipoProduto> listaDeTipoProduto = null;
 		try (Connection conn = ConnectionProvider.getInstance().getConnection())
 		{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			listaDeStatus = new ArrayList<Status>();
+			listaDeTipoProduto = new ArrayList<TipoProduto>();
 			while(rs.next())
 			{
-				Status status = new Status();
-				status.setId(rs.getLong("id"));
-				status.setNome(rs.getString("nome"));
+				TipoProduto tipoProduto = new TipoProduto();
+				tipoProduto.setId(rs.getLong("id"));
+				tipoProduto.setNome(rs.getString("nome"));
 				
-				listaDeStatus.add(status);
-				for(int i=0; i < listaDeStatus.size(); i++){
-					System.out.println(listaDeStatus.get(i));    
+				listaDeTipoProduto.add(tipoProduto);
+				for(int i=0; i < listaDeTipoProduto.size(); i++){
+					System.out.println(listaDeTipoProduto.get(i));    
 				}				
 			}
 			ps.close();
@@ -110,13 +110,14 @@ public class StatusDao implements GenericoDao<Status>{
 		{
 			System.out.println("Erro ao listar medida\n"+e);
 		}
-		return listaDeStatus;
+		return listaDeTipoProduto;
 	}
 
 	@Override
-	public List<Status> pesquisar(String pesquisa) throws Exception{
+	public List<TipoProduto> pesquisar(String pesquisa) throws Exception{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

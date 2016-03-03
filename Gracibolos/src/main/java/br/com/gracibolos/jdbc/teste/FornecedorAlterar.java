@@ -10,7 +10,7 @@ public class FornecedorAlterar {
 		
 		Fornecedor f1 = new Fornecedor();
 		
-		f1.setId(2);
+		f1.setId(1);
 		f1.setTipopessoa(1);
 		f1.setNomerazao("");
 		f1.setCpfcnpj("");

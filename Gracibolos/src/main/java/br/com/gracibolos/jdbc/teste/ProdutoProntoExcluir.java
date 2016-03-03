@@ -12,7 +12,7 @@ public class ProdutoProntoExcluir {
 		ProdutoProntoDao dao = new ProdutoProntoDao();
 		
 		ProdutoPronto produtoPronto = new ProdutoPronto();
-		produtoPronto.setId(2);
+		produtoPronto.setId(2L);
 		
 		try {
 			if(dao.excluir(produtoPronto) == true)

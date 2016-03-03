@@ -15,25 +15,21 @@ public class ContaDao implements GenericoDao<Conta>{
 
 	public boolean inserir(Conta conta) throws Exception{
 		boolean status = false;
-		String sql = "INSERT INTO conta(codigo, dataVencimento, dataPagamento,"
-				   + " valor, caixaId, fornecedorId, colaboradorId)"
+		String sql = "INSERT INTO conta(fornecedorId, colaboradorId, caixaId,"
+				   + " codigo, dataVencimento, dataPagamento, valor)"
 				   + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, conta.getCodigo());
-
-			ps.setDate(2, Date.valueOf(conta.getDataVencimento()));
-			
-			
-			ps.setDate(3, Date.valueOf(conta.getDataPagamento()));
-			
-			ps.setBigDecimal(4, conta.getValor());
-			ps.setInt(5, conta.getCaixaId());
-			ps.setInt(6, conta.getFornecedorId());
-			ps.setInt(7, conta.getColaboradorId());
+			ps.setInt(1, conta.getFornecedorId());
+			ps.setInt(2, conta.getColaboradorId());
+			ps.setInt(3, conta.getCaixaId());
+			ps.setString(4, conta.getCodigo());
+			ps.setDate(5, Date.valueOf(conta.getDataVencimento()));			
+			ps.setDate(6, Date.valueOf(conta.getDataPagamento()));			
+			ps.setBigDecimal(7, conta.getValor());			
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -50,26 +46,22 @@ public class ContaDao implements GenericoDao<Conta>{
 
 	public boolean alterar(Conta conta) throws Exception{
 		boolean status = false;
-		String sql = "UPDATE conta SET codigo=?, dataVencimento=?, dataPagamento=?, valor=?,"
-				   + " caixaId=?, fornecedorId=?, colaboradorId=? where id=?";
+		String sql = "UPDATE conta SET fornecedorId=?, colaboradorId=?, caixaId=?, codigo=?,"
+				   + " dataVencimento=?, dataPagamento=?, valor=? where id=?";
 		
 		PreparedStatement  ps = null;
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, conta.getCodigo());
-
-			
-			ps.setDate(2, Date.valueOf(conta.getDataVencimento()));
-			
-			
-			ps.setDate(3, Date.valueOf(conta.getDataPagamento()));
-			
-			ps.setBigDecimal(4, conta.getValor());
-			ps.setInt(5, conta.getCaixaId());
-			ps.setInt(6, conta.getFornecedorId());
-			ps.setInt(7, conta.getColaboradorId());
-			ps.setInt(8, conta.getId());
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, conta.getFornecedorId());
+			ps.setInt(2, conta.getColaboradorId());
+			ps.setInt(3, conta.getCaixaId());
+			ps.setString(4, conta.getCodigo());
+			ps.setDate(5, Date.valueOf(conta.getDataVencimento()));			
+			ps.setDate(6, Date.valueOf(conta.getDataPagamento()));			
+			ps.setBigDecimal(7, conta.getValor());
+			ps.setLong(8, conta.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -124,14 +116,16 @@ public class ContaDao implements GenericoDao<Conta>{
 			while(rs.next())
 			{
 				Conta conta = new Conta();
-				conta.setId(rs.getInt("id"));
+				conta.setId(rs.getLong("id"));
+				conta.setFornecedorId(rs.getInt("fornecedorId"));
+				conta.setColaboradorId(rs.getInt("colaboradorId"));
+				conta.setCaixaId(rs.getInt("caixaId"));
 				conta.setCodigo(rs.getString("codigo"));
 				conta.setDataVencimento(rs.getDate("dataVencimento").toLocalDate());
 				conta.setDataPagamento(rs.getDate("dataPagamento").toLocalDate());
 				conta.setValor(rs.getBigDecimal("valor"));
-				conta.setCaixaId(rs.getInt("caixaId"));
-				conta.setFornecedorId(rs.getInt("fornecedorId"));
-				conta.setColaboradorId(rs.getInt("colaboradorId"));
+				
+				
 				
 				listaDeConta.add(conta);
 				

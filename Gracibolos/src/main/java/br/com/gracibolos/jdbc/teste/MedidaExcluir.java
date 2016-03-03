@@ -1,5 +1,6 @@
 package br.com.gracibolos.jdbc.teste;
 
+//funcionando
 import br.com.gracibolos.jdbc.dao.MedidaDao;
 import br.com.gracibolos.jdbc.model.Medida;
 
@@ -9,7 +10,7 @@ public class MedidaExcluir {
 
 		Medida medida = new Medida();
 		
-		medida.setId(4);
+		medida.setId(2L);
 		
 		MedidaDao dao = new MedidaDao();
 		

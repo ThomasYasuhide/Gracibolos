@@ -1,6 +1,7 @@
 package br.com.gracibolos.jdbc.teste;
 
-import java.util.Calendar;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.model.Encomenda;
@@ -11,20 +12,21 @@ public class EncomendaAlterar {
 	public static void main(String[] args) {
 		
 		Encomenda encomenda = new Encomenda();
+		BigDecimal big = new BigDecimal(45.90);
 		
-		encomenda.setId(1);
-		encomenda.setResponsavel("breno");
-		encomenda.setDataInicio(Calendar.getInstance());
-		encomenda.setDataFaltaProd(Calendar.getInstance());
-		encomenda.setDataProducao(Calendar.getInstance());
-		encomenda.setDataFinalizado(Calendar.getInstance());
-		encomenda.setDataEntrega(Calendar.getInstance());
-		encomenda.setEntregaRetirada(false);
-		encomenda.setTotal(null);
-		encomenda.setDescricao("ok");
-		encomenda.setNumero(4354);
+		encomenda.setId(1L);
 		encomenda.setClienteId(7);	
 		encomenda.setStatusNome("teste");
+		encomenda.setResponsavel("responsavel");
+		encomenda.setDataInicio(LocalDate.now());
+		encomenda.setDataFaltaProd(LocalDate.now());
+		encomenda.setDataProducao(LocalDate.now());
+		encomenda.setDataFinalizado(LocalDate.now());
+		encomenda.setDataEntrega(LocalDate.now());
+		encomenda.setEntregaRetirada(true);
+		encomenda.setTotal(big);
+		encomenda.setDescricao("completo");
+		encomenda.setNumero(87);
 		
 		EncomendaDao dao = new EncomendaDao();
 		

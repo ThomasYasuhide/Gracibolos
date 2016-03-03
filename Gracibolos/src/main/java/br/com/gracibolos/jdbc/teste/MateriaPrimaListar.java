@@ -1,5 +1,6 @@
 package br.com.gracibolos.jdbc.teste;
 
+//funcionando, porem está listando (br.com.gracibolos.jdbc.model.MateriaPrima@1c6c3b2..) não sei pq
 import br.com.gracibolos.jdbc.dao.MateriaPrimaDao;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 

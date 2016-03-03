@@ -1,5 +1,8 @@
 package br.com.gracibolos.jdbc.teste;
 
+//funcionando
+import java.math.BigDecimal;
+
 import br.com.gracibolos.jdbc.dao.MedidaDao;
 import br.com.gracibolos.jdbc.model.Medida;
 
@@ -8,12 +11,14 @@ public class MedidaAlterar {
 	public static void main(String[] args) {
 		
 		Medida medida = new Medida();
+		BigDecimal gramas = new BigDecimal(222);
+		BigDecimal litros = new BigDecimal(1);
 		
-		medida.setId(3);
-		medida.setIngrediente("");
-		medida.setMedida("");
-		medida.setGramas(null);
-		medida.setLitros(null);
+		medida.setId(1L);
+		medida.setIngrediente("farinha");
+		medida.setMedida("jarra");
+		medida.setGramas(gramas);
+		medida.setLitros(litros);
 		
 		MedidaDao dao = new MedidaDao();
 		

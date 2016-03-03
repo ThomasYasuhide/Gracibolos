@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
@@ -16,21 +15,20 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 
 	public boolean inserir(Estoque estoque) throws Exception{
 		boolean status = false;
-		String sql = "INSERT INTO estoque(qtd, precoUnit, venc, total, compraId, materiaPrimaId, medidaId)"
+		String sql = "INSERT INTO estoque(materiaPrimaId, medidaId, compraId, qtd, precoUnit, venc, total)"
 				   + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{						
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, estoque.getQtd());
-			ps.setBigDecimal(2, estoque.getPrecoUnit());
-			Date gravarEstaData = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(3, gravarEstaData);
-			ps.setBigDecimal(4, estoque.getTotal());
-			ps.setInt(5, estoque.getCompraId());
-			ps.setInt(6, estoque.getMateriaPrimaId());
-			ps.setInt(7, estoque.getMedidaId());
+			ps.setInt(1, estoque.getMateriaPrimaId());
+			ps.setInt(2, estoque.getMedidaId());
+			ps.setInt(3, estoque.getCompraId());
+			ps.setInt(4, estoque.getQtd());
+			ps.setBigDecimal(5, estoque.getPrecoUnit());			
+			ps.setDate(6, Date.valueOf(estoque.getVenc()));
+			ps.setBigDecimal(7, estoque.getTotal());			
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -48,20 +46,20 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 
 	public boolean alterar(Estoque estoque) throws Exception{
 		boolean status = false;
-		String sql = "UPDATE estoque SET qtd=?, precoUnit=?, venc=?, total=?, compraId=?, materiaPrimaId=?, medidaId=? where id=?";
+		String sql = "UPDATE estoque SET materiaPrimaId=?, medidaId=?, compraId=?, qtd=?, precoUnit=?, venc=?, total=? where id=?";
 		PreparedStatement  ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{	
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, estoque.getQtd());
-			ps.setBigDecimal(2, estoque.getPrecoUnit());
-			Date gravarEstaData = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(3, gravarEstaData);
-			ps.setBigDecimal(4, estoque.getTotal());
-			ps.setInt(5, estoque.getCompraId());
-			ps.setInt(6, estoque.getMateriaPrimaId());
-			ps.setInt(7, estoque.getMedidaId());
+			ps.setInt(1, estoque.getMateriaPrimaId());
+			ps.setInt(2, estoque.getMedidaId());
+			ps.setInt(3, estoque.getCompraId());
+			ps.setInt(4, estoque.getQtd());
+			ps.setBigDecimal(5, estoque.getPrecoUnit());			
+			ps.setDate(6, Date.valueOf(estoque.getVenc()));
+			ps.setBigDecimal(7, estoque.getTotal());
+			ps.setLong(8, estoque.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -85,7 +83,7 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, estoque.getId());
+			ps.setLong(1, estoque.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -115,13 +113,16 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 			{
 				Estoque estoque = new Estoque();
 				
+				estoque.setId(rs.getLong("id"));
+				estoque.setMateriaPrimaId(rs.getInt("materiaPrimaId"));
+				estoque.setMedidaId(rs.getInt("medidaId"));		
+				estoque.setCompraId(rs.getInt("compraId"));
 				estoque.setQtd(rs.getInt("qtd"));
 				estoque.setPrecoUnit(rs.getBigDecimal("precoUnit"));
-				estoque.setVenc(Calendar.getInstance());
+				estoque.setVenc(rs.getDate("venc").toLocalDate());
 				estoque.setTotal(rs.getBigDecimal("total"));
-				estoque.setCompraId(rs.getInt("compraId"));
-				estoque.setMateriaPrimaId(rs.getInt("materiaPrimaId"));
-				estoque.setMedidaId(rs.getInt("medidaId"));									
+				
+						
 				listaDeEstoque.add(estoque);
 				
 				for(int i = 0; i<listaDeEstoque.size(); i++){  //enquanto i for menor, não maior  

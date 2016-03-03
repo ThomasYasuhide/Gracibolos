@@ -14,7 +14,7 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 
 	public boolean inserir(MateriaPrima materiaPrima) throws Exception{
 		boolean status = false;
-		String sql = "INSERT INTO materiaPrima(marca, tipo, qtd, descricao, foto)"
+		String sql = "INSERT INTO materiaPrima (marca, tipo, qtd, descricao, foto)"
 				   + " VALUES (?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
@@ -53,7 +53,7 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 			ps.setBigDecimal(3, materiaPrima.getQtd());
 			ps.setString(4, materiaPrima.getDescricao());
 			ps.setBytes(5, materiaPrima.getFoto());
-			ps.setInt(6, materiaPrima.getId());
+			ps.setLong(6, materiaPrima.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -107,12 +107,13 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 			while(rs.next())
 			{
 				MateriaPrima materiaPrima = new MateriaPrima();
-				materiaPrima.setId(rs.getInt("id"));
+				materiaPrima.setId(rs.getLong("id"));
 				materiaPrima.setMarca(rs.getString("marca"));
 				materiaPrima.setTipo(rs.getString("tipo"));
 				materiaPrima.setQtd(rs.getBigDecimal("qtd"));
 				materiaPrima.setDescricao(rs.getString("descricao"));
 				materiaPrima.setFoto(rs.getBytes("foto"));
+				
 				listaDeMateriaPrima.add(materiaPrima);
 				
 				for(int i = 0;i<listaDeMateriaPrima.size();i++){  //enquanto i for menor, não maior  

@@ -3,7 +3,7 @@ package br.com.gracibolos.jdbc.teste;
 import br.com.gracibolos.jdbc.dao.CaixaDao;
 import br.com.gracibolos.jdbc.model.Caixa;
 
-//funcionando
+//funcionando, porem está listando (br.com.gracibolos.jdbc.model.Caixa@1c6c3b2..) não sei pq
 public class CaixaListar {
 
 	public static void main(String[] args) {

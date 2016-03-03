@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
@@ -16,33 +15,26 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 
 	public boolean inserir(Encomenda encomenda) throws Exception{
 		boolean status = false;
-		String sql = " INSERT INTO encomenda(responsavel, dataInicio, dataFaltaProd, dataProducao, dataFinalizado, dataEntrega,"
-				   + " entregaRetirada, total, descricao, numero, clienteId, statusNome)"
+		String sql = " INSERT INTO encomenda(clienteId, statusNome, responsavel, dataInicio, dataFaltaProd, dataProducao,"
+				   + " dataFinalizado, dataEntrega, entregaRetirada, total, descricao, numero)"
 				   + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, encomenda.getResponsavel());
-			
-			Date dataInicio = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(2, dataInicio);			
-			Date dataFaltaProd = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(3, dataFaltaProd);
-			Date dataProducao = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(4, dataProducao);
-			Date dataFinalizado = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(5, dataFinalizado);
-			Date dataEntrega = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(6, dataEntrega);
-			
-			ps.setBoolean(7, encomenda.getEntregaRetirada());
-			ps.setBigDecimal(8, encomenda.getTotal());
-			ps.setString(9, encomenda.getDescricao());
-			ps.setInt(10, encomenda.getNumero());
-			ps.setInt(11, encomenda.getClienteId());
-			ps.setString(12, encomenda.getStatusNome());
+			ps.setInt(1, encomenda.getClienteId());
+			ps.setString(2, encomenda.getStatusNome());
+			ps.setString(3, encomenda.getResponsavel());
+			ps.setDate(4, Date.valueOf(encomenda.getDataInicio()));
+			ps.setDate(5, Date.valueOf(encomenda.getDataFaltaProd()));
+			ps.setDate(6, Date.valueOf(encomenda.getDataProducao()));
+			ps.setDate(7, Date.valueOf(encomenda.getDataFinalizado()));
+			ps.setDate(8, Date.valueOf(encomenda.getDataEntrega()));			
+			ps.setBoolean(9, encomenda.getEntregaRetirada());
+			ps.setBigDecimal(10, encomenda.getTotal());
+			ps.setString(11, encomenda.getDescricao());
+			ps.setInt(12, encomenda.getNumero());			
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -60,33 +52,26 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 
 	public boolean alterar(Encomenda encomenda) throws Exception{
 		boolean status = false;
-		String sql = " UPDATE encomenda SET responsavel=?, dataInicio=?, dataFaltaProd=?, dataProducao=?, dataFinalizado=?,"
-				   + " dataEntrega=?, entregaRetirada=?, total=?, descricao=?, numero=?, clienteId=?, statusNome=? where id=?";
+		String sql = " UPDATE encomenda SET clienteId=?, statusNome=?, responsavel=?, dataInicio=?, dataFaltaProd=?,"
+				   + " dataProducao=?, dataFinalizado=?, dataEntrega=?, entregaRetirada=?, total=?, descricao=?, numero=? where id=?";
 		
 		PreparedStatement  ps = null;
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, encomenda.getResponsavel());
-			
-			Date dataInicio = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(2, dataInicio);			
-			Date dataFaltaProd = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(3, dataFaltaProd);
-			Date dataProducao = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(4, dataProducao);
-			Date dataFinalizado = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(5, dataFinalizado);
-			Date dataEntrega = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(6, dataEntrega);
-			
-			ps.setBoolean(7, encomenda.getEntregaRetirada());
-			ps.setBigDecimal(8, encomenda.getTotal());
-			ps.setString(9, encomenda.getDescricao());
-			ps.setInt(10, encomenda.getNumero());
-			ps.setInt(11, encomenda.getClienteId());
-			ps.setString(12, encomenda.getStatusNome());
-			ps.setInt(13, encomenda.getId());
+			ps.setInt(1, encomenda.getClienteId());
+			ps.setString(2, encomenda.getStatusNome());
+			ps.setString(3, encomenda.getResponsavel());
+			ps.setDate(4, Date.valueOf(encomenda.getDataInicio()));
+			ps.setDate(5, Date.valueOf(encomenda.getDataFaltaProd()));
+			ps.setDate(6, Date.valueOf(encomenda.getDataProducao()));
+			ps.setDate(7, Date.valueOf(encomenda.getDataFinalizado()));
+			ps.setDate(8, Date.valueOf(encomenda.getDataEntrega()));			
+			ps.setBoolean(9, encomenda.getEntregaRetirada());
+			ps.setBigDecimal(10, encomenda.getTotal());
+			ps.setString(11, encomenda.getDescricao());
+			ps.setInt(12, encomenda.getNumero());			
+			ps.setLong(13, encomenda.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -110,7 +95,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{		
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, encomenda.getId());
+			ps.setLong(1, encomenda.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -135,19 +120,20 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			while(rs.next())
 			{
 				Encomenda encomenda = new Encomenda();
-				encomenda.setId(rs.getInt("id"));
+				encomenda.setId(rs.getLong("id"));
+				encomenda.setClienteId(rs.getInt("clienteId"));	
+				encomenda.setStatusNome(rs.getString("statusNome"));
 				encomenda.setResponsavel(rs.getString("responsavel"));
-				encomenda.setDataInicio(Calendar.getInstance());
-				encomenda.setDataFaltaProd(Calendar.getInstance());
-				encomenda.setDataProducao(Calendar.getInstance());
-				encomenda.setDataFinalizado(Calendar.getInstance());
-				encomenda.setDataEntrega(Calendar.getInstance());
+				encomenda.setDataInicio(rs.getDate("dataInicio").toLocalDate());
+				encomenda.setDataFaltaProd(rs.getDate("dataFaltaProd").toLocalDate());
+				encomenda.setDataProducao(rs.getDate("dataProducao").toLocalDate());
+				encomenda.setDataFinalizado(rs.getDate("dataFinalizado").toLocalDate());
+				encomenda.setDataEntrega(rs.getDate("dataEntrega").toLocalDate());
 				encomenda.setEntregaRetirada(rs.getBoolean("entregaRetirada"));
 				encomenda.setTotal(rs.getBigDecimal("total"));
 				encomenda.setDescricao(rs.getString("descricao"));
 				encomenda.setNumero(rs.getInt("numero"));
-				encomenda.setClienteId(rs.getInt("clienteId"));	
-				encomenda.setStatusNome(rs.getString("statusNome"));
+				
 				
 				listaDeEncomenda.add(encomenda);
 				

@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
@@ -16,21 +15,21 @@ public class CompraDao implements GenericoDao<Compra>{
 
 	public boolean inserir(Compra compra) throws Exception{
 		boolean status = false;
-		String sql = " INSERT INTO compra(tipo, numero, data, total, fornecedorId,"
-				   + " statusNome)"
+		String sql = " INSERT INTO compra(fornecedorId, statusNome, tipo, numero, data,"
+				   + " total)"
 				   + " VALUES (?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, compra.getTipo());
-			ps.setString(2, compra.getNumero());			
-			Date data = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(3, data);			
-			ps.setBigDecimal(4, compra.getTotal());
-			ps.setInt(5, compra.getFornecedorId());
-			ps.setString(6, compra.getStatusNome());
+			ps.setInt(1, compra.getFornecedorId());
+			ps.setString(2, compra.getStatusNome());
+			ps.setString(3, compra.getTipo());
+			ps.setString(4, compra.getNumero());			
+			ps.setDate(5, Date.valueOf(compra.getData()));			
+			ps.setBigDecimal(6, compra.getTotal());
+			
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -47,20 +46,19 @@ public class CompraDao implements GenericoDao<Compra>{
 
 	public boolean alterar(Compra compra) throws Exception{
 		boolean status = false;
-		String sql = "UPDATE compra SET tipo=?, numero=?, data=?, total=?,"
-				   + " fornecedorId=?, statusNome=? where id=?";
+		String sql = "UPDATE compra SET fornecedorId=?, statusNome=?, tipo=?, numero=?,"
+				   + " data=?, total=? where id=?";
 		PreparedStatement  ps = null;
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, compra.getTipo());
-			ps.setString(2, compra.getNumero());			
-			Date data = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(3, data);			
-			ps.setBigDecimal(4, compra.getTotal());
-			ps.setInt(5, compra.getFornecedorId());
-			ps.setString(6, compra.getStatusNome());
-			ps.setInt(7, compra.getId());
+			ps.setInt(1, compra.getFornecedorId());
+			ps.setString(2, compra.getStatusNome());
+			ps.setString(3, compra.getTipo());
+			ps.setString(4, compra.getNumero());			
+			ps.setDate(5, Date.valueOf(compra.getData()));			
+			ps.setBigDecimal(6, compra.getTotal());
+			ps.setLong(7, compra.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -114,13 +112,14 @@ public class CompraDao implements GenericoDao<Compra>{
 			while(rs.next())
 			{
 				Compra compra = new Compra();
-				compra.setId(rs.getInt("id"));
-				compra.setTipo(rs.getString("tipo"));
-				compra.setNumero(rs.getString("numero"));
-				compra.setData(Calendar.getInstance());
-				compra.setTotal(rs.getBigDecimal("total"));
+				compra.setId(rs.getLong("id"));
 				compra.setFornecedorId(rs.getInt("fornecedorId"));
 				compra.setStatusNome(rs.getString("statusNome"));
+				compra.setTipo(rs.getString("tipo"));
+				compra.setNumero(rs.getString("numero"));
+				compra.setData(rs.getDate("data").toLocalDate());
+				compra.setTotal(rs.getBigDecimal("total"));
+				
 				
 				listaDeCompra.add(compra);
 				

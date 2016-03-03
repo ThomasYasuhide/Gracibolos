@@ -11,7 +11,7 @@ public class ClienteExcluir {
 		ClienteDao dao = new ClienteDao();
 		
 		Cliente cliente = new Cliente();
-		cliente.setId(6);
+		cliente.setId(2);
 		
 		try {
 			if(dao.excluir(cliente) == true){

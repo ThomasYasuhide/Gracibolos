@@ -6,7 +6,10 @@
 package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  *
@@ -23,22 +26,24 @@ public class ProdutoPronto implements Serializable{
         
     }
     
-    public ProdutoPronto(Integer id) {
+    public ProdutoPronto(Long id) {
         this.id = id;
     }
     
-    private Integer id;
+    private Long id;
     private Integer produtoId;
     private Integer encomendaId;
-    private Calendar finalizado;
-    private Calendar dataValidade;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate finalizado;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataValidade;
     private String codigo;
-    
-	public Integer getId() {
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -46,8 +51,8 @@ public class ProdutoPronto implements Serializable{
 		return produtoId;
 	}
 
-	public void setProdutoId(Integer id) {
-		this.produtoId = id;
+	public void setProdutoId(Integer produtoId) {
+		this.produtoId = produtoId;
 	}
 
 	public Integer getEncomendaId() {
@@ -58,19 +63,19 @@ public class ProdutoPronto implements Serializable{
 		this.encomendaId = encomendaId;
 	}
 
-	public Calendar getFinalizado() {
+	public LocalDate getFinalizado() {
 		return finalizado;
 	}
 
-	public void setFinalizado(Calendar finalizado) {
+	public void setFinalizado(LocalDate finalizado) {
 		this.finalizado = finalizado;
 	}
 
-	public Calendar getDataValidade() {
+	public LocalDate getDataValidade() {
 		return dataValidade;
 	}
 
-	public void setDataValidade(Calendar dataValidade) {
+	public void setDataValidade(LocalDate dataValidade) {
 		this.dataValidade = dataValidade;
 	}
 
@@ -80,6 +85,10 @@ public class ProdutoPronto implements Serializable{
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
-	}  
-        
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}    
+    
 }

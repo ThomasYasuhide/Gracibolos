@@ -1,5 +1,6 @@
 package br.com.gracibolos.jdbc.teste;
 
+//testar
 import br.com.gracibolos.jdbc.dao.StatusDao;
 import br.com.gracibolos.jdbc.model.Status;
 
@@ -8,7 +9,7 @@ public class StatusExcluir {
 	public static void main(String[] args) {
 
 		Status status = new Status();
-		status.setId(3);
+		status.setId(3L);
 		
 		StatusDao dao = new StatusDao();
 		

@@ -10,10 +10,10 @@ public class ItemEncomendaAlterar {
 
 		ItemEncomenda itemEncomenda = new ItemEncomenda();
 		
-		itemEncomenda.setId(2);
-		itemEncomenda.setQtd(666);
+		itemEncomenda.setId(1L);
 		itemEncomenda.setProdutoId(3);
 		itemEncomenda.setEncomendaId(1);
+		itemEncomenda.setQtd(53);		
 		
 		ItemEncomendaDao dao = new ItemEncomendaDao();
 		

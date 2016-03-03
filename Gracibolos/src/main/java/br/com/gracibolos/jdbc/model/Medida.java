@@ -23,26 +23,26 @@ public class Medida implements Serializable{
         
     }
     
-    public Medida(Integer id) {
+    public Medida(Long id) {
         this.id = id;
     }
 
-    public Medida(Integer id, String medida) {
+    public Medida(Long id, String medida) {
         this.id = id;
         this.medida = medida;
     }
     
-    private Integer id;
+    private Long id;
     private String ingrediente;
     private String medida;
     private BigDecimal gramas;
     private BigDecimal litros;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

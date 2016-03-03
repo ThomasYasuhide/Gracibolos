@@ -1,5 +1,6 @@
 package br.com.gracibolos.jdbc.teste;
 
+//funcionando
 import br.com.gracibolos.jdbc.dao.MateriaPrimaDao;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 
@@ -9,7 +10,7 @@ public class MateriaPrimaExcluir {
 
 		MateriaPrima mp = new MateriaPrima();
 		
-		mp.setId(2);
+		mp.setId(2L);
 		
 		MateriaPrimaDao dao = new MateriaPrimaDao();
 		

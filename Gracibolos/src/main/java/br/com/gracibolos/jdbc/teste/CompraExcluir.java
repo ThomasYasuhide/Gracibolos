@@ -11,7 +11,7 @@ public class CompraExcluir {
 		CompraDao dao = new CompraDao();
 		
 		Compra c = new Compra();
-		c.setId(2);
+		c.setId(7L);
 		
 		
 		try {

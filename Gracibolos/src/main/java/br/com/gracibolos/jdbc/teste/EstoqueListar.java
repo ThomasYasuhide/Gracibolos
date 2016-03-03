@@ -3,7 +3,7 @@ package br.com.gracibolos.jdbc.teste;
 import br.com.gracibolos.jdbc.dao.EstoqueDao;
 import br.com.gracibolos.jdbc.model.Estoque;
 
-//funcionando
+//funcionando, porem está listando (br.com.gracibolos.jdbc.model.Estoque@a8ceb6..) não sei pq
 public class EstoqueListar {
 
 	public static void main(String[] args) {
@@ -15,13 +15,13 @@ public class EstoqueListar {
 				
 				System.out.println(	  
 									"Id : "+e.getId()
-								+ "\tQtd: "+e.getQtd()
+				    + "\tMateriaPrimaId : "+e.getMateriaPrimaId()
+						  + "\tMedidaId : "+e.getMedidaId()
+						  + "\tCompraId : "+e.getCompraId()
+							   + "\tQtd : "+e.getQtd()
 						 + "\tPrecoUnit : "+e.getPrecoUnit()
 							  + "\tVenc : "+e.getVenc()
-							 + "\tTotal : "+e.getTotal()
-						  + "\tCompraId : "+e.getCompraId()
-					+ "\tMateriaPrimaId : "+e.getMateriaPrimaId()
-						  + "\tMedidaId : "+e.getMedidaId());
+							 + "\tTotal : "+e.getTotal());
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

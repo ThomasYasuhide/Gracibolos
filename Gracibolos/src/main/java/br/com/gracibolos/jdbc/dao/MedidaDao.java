@@ -14,7 +14,7 @@ public class MedidaDao implements GenericoDao<Medida>{
 
 	public boolean inserir(Medida medida) throws Exception{
 		boolean status = false;
-		String sql = "INSERT INTO medida(ingrediente, medida, gramas, litros)"
+		String sql = "INSERT INTO medida (ingrediente, medida, gramas, litros)"
 				   + " VALUES (?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
@@ -50,7 +50,7 @@ public class MedidaDao implements GenericoDao<Medida>{
 			ps.setString(2, medida.getMedida());			
 			ps.setBigDecimal(3, medida.getGramas());
 			ps.setBigDecimal(4, medida.getLitros());
-			ps.setInt(5, medida.getId());
+			ps.setLong(5, medida.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -105,7 +105,7 @@ public class MedidaDao implements GenericoDao<Medida>{
 			while(rs.next())
 			{
 				Medida medida = new Medida();
-				medida.setId(rs.getInt("id"));
+				medida.setId(rs.getLong("id"));
 				medida.setIngrediente(rs.getString("ingrediente"));
 				medida.setMedida(rs.getString("medida"));
 				medida.setGramas(rs.getBigDecimal("gramas"));
