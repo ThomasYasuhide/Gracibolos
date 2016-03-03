@@ -23,62 +23,67 @@ public class MateriaPrima implements Serializable{
         
     }
     
-    public MateriaPrima(Integer id) {
+    public MateriaPrima(Long id) {
         this.id = id;
     }
     
-    private Integer id;
+    private Long id;
     private String marca;
     private String tipo;
     private BigDecimal qtd;
     private String descricao;
     private byte[] foto;
 
-    public Integer getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getMarca() {
-        return marca;
-    }
+	public String getMarca() {
+		return marca;
+	}
 
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
 
-    public String getTipo() {
-        return tipo;
-    }
+	public String getTipo() {
+		return tipo;
+	}
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
-    public BigDecimal getQtd() {
-        return qtd;
-    }
+	public BigDecimal getQtd() {
+		return qtd;
+	}
 
-    public void setQtd(BigDecimal qtd) {
-        this.qtd = qtd;
-    }
+	public void setQtd(BigDecimal qtd) {
+		this.qtd = qtd;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public byte[] getFoto() {
-        return foto;
-    }
+	public byte[] getFoto() {
+		return foto;
+	}
 
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+   
 }

@@ -7,7 +7,10 @@ package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  *
@@ -24,65 +27,26 @@ public class Estoque implements Serializable{
         
     }
     
-    public Estoque(Integer id) {
+    public Estoque(Long id) {
         this.id = id;
     }
     
-    private Integer id;
-    private Integer qtd;
-    private BigDecimal precoUnit;
-    private Calendar venc;
-    private BigDecimal total;
-    private Integer compraId;
+    private Long id;
     private Integer materiaPrimaId;
     private Integer medidaId;
-    
-	public Integer getId() {
+    private Integer compraId;
+    private Integer qtd;
+    private BigDecimal precoUnit;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate venc;
+    private BigDecimal total;
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Integer getQtd() {
-		return qtd;
-	}
-
-	public void setQtd(Integer qtd) {
-		this.qtd = qtd;
-	}
-
-	public BigDecimal getPrecoUnit() {
-		return precoUnit;
-	}
-
-	public void setPrecoUnit(BigDecimal precoUnit) {
-		this.precoUnit = precoUnit;
-	}
-
-	public Calendar getVenc() {
-		return venc;
-	}
-
-	public void setVenc(Calendar venc) {
-		this.venc = venc;
-	}
-
-	public BigDecimal getTotal() {
-		return total;
-	}
-
-	public void setTotal(BigDecimal total) {
-		this.total = total;
-	}
-
-	public Integer getCompraId() {
-		return compraId;
-	}
-
-	public void setCompraId(Integer compraId) {
-		this.compraId = compraId;
 	}
 
 	public Integer getMateriaPrimaId() {
@@ -101,7 +65,48 @@ public class Estoque implements Serializable{
 		this.medidaId = medidaId;
 	}
 
-    
-    
-    
+	public Integer getCompraId() {
+		return compraId;
+	}
+
+	public void setCompraId(Integer compraId) {
+		this.compraId = compraId;
+	}
+
+	public Integer getQtd() {
+		return qtd;
+	}
+
+	public void setQtd(Integer qtd) {
+		this.qtd = qtd;
+	}
+
+	public BigDecimal getPrecoUnit() {
+		return precoUnit;
+	}
+
+	public void setPrecoUnit(BigDecimal precoUnit) {
+		this.precoUnit = precoUnit;
+	}
+
+	public LocalDate getVenc() {
+		return venc;
+	}
+
+	public void setVenc(LocalDate venc) {
+		this.venc = venc;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

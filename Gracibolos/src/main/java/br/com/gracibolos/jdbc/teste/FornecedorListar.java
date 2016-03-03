@@ -4,9 +4,7 @@ import br.com.gracibolos.jdbc.dao.FornecedorDao;
 import br.com.gracibolos.jdbc.model.Fornecedor;
 
 
-/*funcionando em partes
- *falta fazer a conversão do valor e da foto
- */
+//funcionando
 public class FornecedorListar {
 
 	public static void main(String[] args) {
@@ -17,20 +15,20 @@ public class FornecedorListar {
 			for(Fornecedor f : dao.listar()){
 				System.out.println(	  
 								 "Id : "+f.getId()
-						   + "\tNome : "+f.getTipopessoa()
-			            +"\tCPF/CNPJ : "+f.getNomerazao()
-			               +"\tRG/IE : "+f.getCpfcnpj()
-			                 +"\tCEP : "+f.getRgie()
-			                 +"\tCEP : "+f.getEndereco()
+						   + "\tTipoPessoa : "+f.getTipopessoa()
+			            +"\tNomeRazao : "+f.getNomerazao()
+			               +"\tCPF/CNPJ : "+f.getCpfcnpj()
+			                 +"\tRG/IE : "+f.getRgie()
+			                 +"\tEndereço : "+f.getEndereco()
 			              +"\tNumero : "+f.getNumero()
-			              +"\tComplemento: "+f.getComplemento()
-			              	+"\tTel1 : "+f.getBairro()
-			              	+"\tTel2 : "+f.getEstado()
-			              	+"\tTel3 : "+f.getCidade()
-			              	+"\tCel1 : "+f.getCep()
-			              	+"\tCel2 : "+f.getTel()
-			                +"\tEmail2 : "+f.getCel()
-			                +"\tEmail1 : "+f.getEmail()
+			          +"\tComplemento: "+f.getComplemento()
+			              	+"\tBairro : "+f.getBairro()
+			              	+"\tEstado : "+f.getEstado()
+			              	+"\tCidade : "+f.getCidade()
+			              	+"\tCEP : "+f.getCep()
+			              	+"\tTel : "+f.getTel()
+			              +"\tCel : "+f.getCel()
+			              +"\tEmail : "+f.getEmail()
 			              	+"\tSite : "+f.getSite()
 			                  +"\tObs: "+f.getObs());
 						

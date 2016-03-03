@@ -7,7 +7,10 @@ package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  *
@@ -24,26 +27,41 @@ public class Compra implements Serializable{
         
     }
     
-    public Compra(Integer id) {
+    public Compra(Long id) {
         this.id = id;
     }
     
-    private Integer id;
+    private Long id;
     private Integer fornecedorId;
     private String statusNome;
     private String tipo;
     private String numero;
-    private Calendar data;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate data;
     private BigDecimal total;
-    
-    
-    
-	public Integer getId() {
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Integer getFornecedorId() {
+		return fornecedorId;
+	}
+
+	public void setFornecedorId(Integer fornecedorId) {
+		this.fornecedorId = fornecedorId;
+	}
+
+	public String getStatusNome() {
+		return statusNome;
+	}
+
+	public void setStatusNome(String statusNome) {
+		this.statusNome = statusNome;
 	}
 
 	public String getTipo() {
@@ -62,11 +80,11 @@ public class Compra implements Serializable{
 		this.numero = numero;
 	}
 
-	public Calendar getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Calendar data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
@@ -78,19 +96,8 @@ public class Compra implements Serializable{
 		this.total = total;
 	}
 
-	public Integer getFornecedorId() {
-		return fornecedorId;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
-
-	public void setFornecedorId(Integer fornecedorId) {
-		this.fornecedorId = fornecedorId;
-	}
-
-	public String getStatusNome() {
-		return statusNome;
-	}
-
-	public void setStatusNome(String statusNome) {
-		this.statusNome = statusNome;
-	}    
+	
 }

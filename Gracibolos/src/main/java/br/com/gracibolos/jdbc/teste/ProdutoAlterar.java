@@ -1,23 +1,32 @@
 package br.com.gracibolos.jdbc.teste;
 
+//funcionando
+import java.math.BigDecimal;
 import br.com.gracibolos.jdbc.dao.ProdutoDao;
 import br.com.gracibolos.jdbc.model.Produto;
-
-/*funcionando em partes
- *falta fazer a conversão do valor e da foto
- */
 
 public class ProdutoAlterar {
 
 	public static void main(String[] args) {
 		
 		Produto p1 = new Produto();
+		BigDecimal custo = new BigDecimal(25.69);
+		BigDecimal valor = new BigDecimal(32.00);
+		//BigDecimal peso = new BigDecimal(4.00);		
+		byte [] foto = new  byte [ 100 ]; 
 		
-		p1.setId((long) 3);
-		p1.setTipo((long) 1);
-		p1.setNome("Cobertura");
-		p1.setValor(null);
-		p1.setFoto(null);
+		p1.setId(1L);
+		p1.setStatus(1);
+		p1.setTipo(3L);
+		p1.setCodigo("sdafaf5");
+		p1.setNome("FlorestaNegra");
+		p1.setCusto(custo);
+		p1.setValor(valor);
+		p1.setUnidade(5L);
+		//p1.setPeso(peso);
+		//p1.setReceita("adsfgahakj d9aja0fdja9");
+		p1.setFoto(foto);
+		
 		
 		ProdutoDao dao = new ProdutoDao();
 		

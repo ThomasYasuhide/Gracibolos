@@ -3,7 +3,7 @@ package br.com.gracibolos.jdbc.teste;
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.model.Encomenda;
 
-//funcionando
+//funcionando, porem está listando (br.com.gracibolos.jdbc.model.Encomenda@1c6c3b2..) não sei pq
 public class EncomendaListar {
 
 	public static void main(String[] args) {
@@ -14,6 +14,8 @@ public class EncomendaListar {
 			for(Encomenda e : dao.listar()){
 				System.out.println(	  
 								 		 "Id : "+e.getId()
+							   +"\tClienteId : "+e.getClienteId()
+						      +"\tStatusNome : "+e.getStatusNome()
 						     + "\tResponsavel: "+e.getResponsavel()
 						   	   +"\tDataInicio: "+e.getDataInicio()
 			               +"\tDataFaltaProd : "+e.getDataFaltaProd()
@@ -24,8 +26,7 @@ public class EncomendaListar {
 			             		   +"\tTotal : "+e.getTotal()
 			             	   +"\tDescricao : "+e.getDescricao()
 			             	   	  +"\tNumero : "+e.getNumero()
-			             	   +"\tClienteId : "+e.getClienteId()
-			             	  +"\tStatusNome : "+e.getStatusNome());					
+			             	  );					
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

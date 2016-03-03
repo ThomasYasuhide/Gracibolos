@@ -15,16 +15,16 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 
 	public boolean inserir(ItemEncomenda itemEncomenda) throws Exception{
 		boolean status = false;
-		String sql = " INSERT INTO itemEncomenda(qtd, produtoId, encomendaId)"
+		String sql = " INSERT INTO itemEncomenda(produtoId, encomendaId, qtd)"
 				   + " VALUES (?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemEncomenda.getQtd());
-			ps.setInt(2, itemEncomenda.getProdutoId());
-			ps.setInt(3, itemEncomenda.getEncomendaId());
+			ps.setInt(1, itemEncomenda.getProdutoId());
+			ps.setInt(2, itemEncomenda.getEncomendaId());
+			ps.setInt(3, itemEncomenda.getQtd());			
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -41,16 +41,16 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 
 	public boolean alterar(ItemEncomenda itemEncomenda) throws Exception{
 		boolean status = false;
-		String sql = "UPDATE itemEncomenda SET qtd=?, produtoId=?, encomendaId=? where id=?";
+		String sql = "UPDATE itemEncomenda SET produtoId=?, encomendaId=?, qtd=? where id=?";
 		PreparedStatement  ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{						
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemEncomenda.getQtd());
-			ps.setInt(2, itemEncomenda.getProdutoId());
-			ps.setInt(3, itemEncomenda.getEncomendaId());
-			ps.setInt(4, itemEncomenda.getId());
+			ps.setInt(1, itemEncomenda.getProdutoId());
+			ps.setInt(2, itemEncomenda.getEncomendaId());
+			ps.setInt(3, itemEncomenda.getQtd());			
+			ps.setLong(4, itemEncomenda.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -104,10 +104,10 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 			while(rs.next())
 			{
 				ItemEncomenda itemEncomenda = new ItemEncomenda();
-				itemEncomenda.setId(rs.getInt("id"));
-				itemEncomenda.setQtd(rs.getInt("qtd"));
+				itemEncomenda.setId(rs.getLong("id"));
 				itemEncomenda.setProdutoId(rs.getInt("produtoId"));
 				itemEncomenda.setEncomendaId(rs.getInt("encomendaId"));
+				itemEncomenda.setQtd(rs.getInt("qtd"));				
 				
 				listaDeItemEncomenda.add(itemEncomenda);
 				

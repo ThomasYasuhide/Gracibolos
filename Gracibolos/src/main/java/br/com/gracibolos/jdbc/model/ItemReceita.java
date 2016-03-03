@@ -23,47 +23,23 @@ public class ItemReceita implements Serializable {
         
     }
     
-    public ItemReceita(Integer id) {
+    public ItemReceita(Long id) {
         this.id = id;
     }
     
-    private Integer id;
-    private BigDecimal qtd;
-    private BigDecimal total;
-    private Integer medidaId;
+    private Long id;
     private Integer materiaPrimaId;
     private Integer produtoId;
-    
-	public Integer getId() {
+    private Integer medidaId;
+    private Integer qtd;
+    private BigDecimal total;
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public BigDecimal getQtd() {
-		return qtd;
-	}
-
-	public void setQtd(BigDecimal qtd) {
-		this.qtd = qtd;
-	}
-
-	public BigDecimal getTotal() {
-		return total;
-	}
-
-	public void setTotal(BigDecimal total) {
-		this.total = total;
-	}
-
-	public Integer getMedidaId() {
-		return medidaId;
-	}
-
-	public void setMedidaId(Integer medidaId) {
-		this.medidaId = medidaId;
 	}
 
 	public Integer getMateriaPrimaId() {
@@ -82,7 +58,32 @@ public class ItemReceita implements Serializable {
 		this.produtoId = produtoId;
 	}
 
+	public Integer getMedidaId() {
+		return medidaId;
+	}
 
-    
-    
+	public void setMedidaId(Integer medidaId) {
+		this.medidaId = medidaId;
+	}
+
+	public Integer getQtd() {
+		return qtd;
+	}
+
+	public void setQtd(Integer qtd) {
+		this.qtd = qtd;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

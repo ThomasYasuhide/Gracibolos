@@ -1,5 +1,6 @@
 package br.com.gracibolos.jdbc.teste;
 
+//funcionando, porem está listando (br.com.gracibolos.jdbc.model.ItemReceita@a8ceb6..) não sei pq
 import br.com.gracibolos.jdbc.dao.ItemReceitaDao;
 import br.com.gracibolos.jdbc.model.ItemReceita;
 
@@ -12,13 +13,11 @@ public class ItemReceitaListar {
 		try {
 			for(ItemReceita p : dao.listar()){
 			    System.out.println(	  			   "Id : "+p.getId()
+			    					+"\tMateriaPrimaId : "+p.getMateriaPrimaId()
+								         +"\tProdutoId : "+p.getProdutoId()
+								       	  +"\tMedidaId : "+p.getMedidaId()
 			    							  + "\tQtd : "+p.getQtd()
-			                        		 +"\tTotal : "+p.getTotal()
-			                        	  +"\tMedidaId : "+p.getMedidaId()
-			                        +"\tMateriaPrimaId : "+p.getMateriaPrimaId()
-			                        	 +"\tProdutoId : "+p.getProdutoId());
-			
-			
+			                        		 +"\tTotal : "+p.getTotal());			
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

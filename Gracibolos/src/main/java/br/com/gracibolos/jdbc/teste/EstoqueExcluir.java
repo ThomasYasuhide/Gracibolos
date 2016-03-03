@@ -11,7 +11,7 @@ public class EstoqueExcluir {
 		EstoqueDao dao = new EstoqueDao();
 
 		Estoque estoque = new Estoque();
-		estoque.setId(18);
+		estoque.setId(2L);
 		
 		try {
 			if(dao.excluir(estoque) == true){

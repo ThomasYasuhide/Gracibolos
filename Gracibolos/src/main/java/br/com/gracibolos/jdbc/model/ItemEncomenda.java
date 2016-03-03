@@ -22,30 +22,22 @@ public class ItemEncomenda implements Serializable{
         
     }
     
-    public ItemEncomenda(Integer id) {
+    public ItemEncomenda(Long id) {
         this.id = id;
     }
     
-    private Integer id;
-    private Integer qtd;
+    private Long id;
     private Integer produtoId;
     private Integer encomendaId;
+    private Integer qtd;
 
-    public Integer getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getQtd() {
-        return qtd;
-    }
-
-    public void setQtd(Integer qtd) {
-        this.qtd = qtd;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Integer getProdutoId() {
 		return produtoId;
@@ -61,6 +53,18 @@ public class ItemEncomenda implements Serializable{
 
 	public void setEncomendaId(Integer encomendaId) {
 		this.encomendaId = encomendaId;
-	}    
-    
+	}
+
+	public Integer getQtd() {
+		return qtd;
+	}
+
+	public void setQtd(Integer qtd) {
+		this.qtd = qtd;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+   
 }

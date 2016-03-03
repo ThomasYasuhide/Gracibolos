@@ -11,7 +11,7 @@ public class FornecedorExcluir {
 		FornecedorDao dao = new FornecedorDao();
 		
 		Fornecedor fornecedor = new Fornecedor();
-		fornecedor.setId(4);
+		fornecedor.setId(2);
 		
 		try {
 			if(dao.excluir(fornecedor) == true){

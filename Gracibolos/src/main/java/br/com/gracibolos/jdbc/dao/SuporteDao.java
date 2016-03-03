@@ -14,18 +14,18 @@ public class SuporteDao implements GenericoDao<Suporte>{
 
 	public boolean inserir(Suporte suporte) throws Exception{
 		boolean status = false;
-		String sql = "INSERT INTO suporte(codigo, status, valor, encomendaId, fornecedorId)"
+		String sql = "INSERT INTO suporte (fornecedorId, encomendaId, codigo, status, valor)"
 				   + " VALUES (?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, suporte.getCodigo());			
-			ps.setString(2, suporte.getStatus());
-			ps.setBigDecimal(3, suporte.getValor());
-			ps.setInt(4, suporte.getEncomendaId());
-			ps.setInt(5, suporte.getFornecedorId());
+			ps.setInt(1, suporte.getFornecedorId());
+			ps.setInt(2, suporte.getEncomendaId());
+			ps.setString(3, suporte.getCodigo());			
+			ps.setString(4, suporte.getStatus());
+			ps.setBigDecimal(5, suporte.getValor());			
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -42,18 +42,18 @@ public class SuporteDao implements GenericoDao<Suporte>{
 
 	public boolean alterar(Suporte suporte) throws Exception{
 		boolean status = false;
-		String sql = "UPDATE suporte SET codigo=?, status=?, valor=?, encomendaId=?,"
-				   + " fornecedorId=? where id=?";
+		String sql = " UPDATE suporte SET fornecedorId=?, encomendaId=?, codigo=?,"
+				   + " status=?, valor=? where id=?";
 		PreparedStatement  ps = null;
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, suporte.getCodigo());			
-			ps.setString(2, suporte.getStatus());
-			ps.setBigDecimal(3, suporte.getValor());
-			ps.setInt(4, suporte.getEncomendaId());
-			ps.setInt(5, suporte.getFornecedorId());
-			ps.setInt(6, suporte.getId());
+			ps.setInt(1, suporte.getFornecedorId());
+			ps.setInt(2, suporte.getEncomendaId());
+			ps.setString(3, suporte.getCodigo());			
+			ps.setString(4, suporte.getStatus());
+			ps.setBigDecimal(5, suporte.getValor());
+			ps.setLong(6, suporte.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -77,7 +77,7 @@ public class SuporteDao implements GenericoDao<Suporte>{
 		try (Connection conn = ConnectionProvider.getInstance().getConnection())
 		{
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, suporte.getId());
+			ps.setLong(1, suporte.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -106,7 +106,7 @@ public class SuporteDao implements GenericoDao<Suporte>{
 			while(rs.next())
 			{
 				Suporte suporte = new Suporte();
-				suporte.setId(rs.getInt("id"));
+				suporte.setId(rs.getLong("id"));
 				suporte.setCodigo(rs.getString("codigo"));
 				suporte.setStatus(rs.getString("status"));
 				suporte.setValor(rs.getBigDecimal("valor"));

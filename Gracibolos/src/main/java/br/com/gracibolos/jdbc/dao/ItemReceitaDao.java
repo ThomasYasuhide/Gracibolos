@@ -14,18 +14,18 @@ public class ItemReceitaDao implements GenericoDao<ItemReceita>{
 
 	public boolean inserir(ItemReceita itemReceita) throws Exception{
 		boolean status = false;
-		String sql = " INSERT INTO itemReceita(qtd, total, medidaId, materiaPrimaId, produtoId)"
+		String sql = " INSERT INTO itemReceita(materiaPrimaId, produtoId, medidaId, qtd, total)"
 				   + " VALUES (?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setBigDecimal(1, itemReceita.getQtd());
-			ps.setBigDecimal(2, itemReceita.getTotal());
-			ps.setInt(3, itemReceita.getMedidaId());
-			ps.setInt(4, itemReceita.getMateriaPrimaId());
-			ps.setInt(5, itemReceita.getProdutoId());
+			ps.setInt(1, itemReceita.getMateriaPrimaId());
+			ps.setInt(2, itemReceita.getProdutoId());
+			ps.setInt(3, itemReceita.getMedidaId());		
+			ps.setInt(4, itemReceita.getQtd());
+			ps.setBigDecimal(5, itemReceita.getTotal());			
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -42,19 +42,19 @@ public class ItemReceitaDao implements GenericoDao<ItemReceita>{
 
 	public boolean alterar(ItemReceita itemReceita) throws Exception{
 		boolean status = false;
-		String sql = " UPDATE itemReceita SET qtd=?, total=?, medidaId=?, materiaPrimaId=?,"
-				   + " produtoId=? where id=?";
+		String sql = " UPDATE itemReceita SET materiaPrimaId=?, produtoId=?, medidaId=?,"
+				   + " qtd=?, total=? where id=?";
 		PreparedStatement  ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{		
 			ps = conn.prepareStatement(sql);
-			ps.setBigDecimal(1, itemReceita.getQtd());
-			ps.setBigDecimal(2, itemReceita.getTotal());
-			ps.setInt(3, itemReceita.getMedidaId());
-			ps.setInt(4, itemReceita.getMateriaPrimaId());
-			ps.setInt(5, itemReceita.getProdutoId());
-			ps.setInt(6, itemReceita.getId());
+			ps.setInt(1, itemReceita.getMateriaPrimaId());
+			ps.setInt(2, itemReceita.getProdutoId());
+			ps.setInt(3, itemReceita.getMedidaId());		
+			ps.setInt(4, itemReceita.getQtd());
+			ps.setBigDecimal(5, itemReceita.getTotal());
+			ps.setLong(6, itemReceita.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -109,12 +109,12 @@ public class ItemReceitaDao implements GenericoDao<ItemReceita>{
 			while(rs.next())
 			{
 				ItemReceita itemReceita = new ItemReceita();
-				itemReceita.setId(rs.getInt("id"));
-				itemReceita.setQtd(rs.getBigDecimal("qtd"));
-				itemReceita.setTotal(rs.getBigDecimal("total"));
-				itemReceita.setMedidaId(rs.getInt("medidaId"));
+				itemReceita.setId(rs.getLong("id"));
 				itemReceita.setMateriaPrimaId(rs.getInt("materiaPrimaId"));
 				itemReceita.setProdutoId(rs.getInt("produtoId"));
+				itemReceita.setMedidaId(rs.getInt("medidaId"));
+				itemReceita.setQtd(rs.getInt("qtd"));
+				itemReceita.setTotal(rs.getBigDecimal("total"));				
 				
 				listaDeItemReceita.add(itemReceita);
 				

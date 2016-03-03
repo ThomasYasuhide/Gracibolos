@@ -25,57 +25,23 @@ public class Suporte implements Serializable{
         
     }
     
-    public Suporte(Integer id) {
+    public Suporte(Long id) {
         this.id = id;
     }
     
-    private Integer id;
+    private Long id;
+    private Integer fornecedorId;
+    private Integer encomendaId;
     private String codigo;
     private String status;
     private BigDecimal valor;
-    private Integer encomendaId;
-    private Integer fornecedorId;
 
-   
-
-	public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
-    public Integer getEncomendaId() {
-		return encomendaId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setEncomendaId(Integer encomendaId) {
-		this.encomendaId = encomendaId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Integer getFornecedorId() {
@@ -84,6 +50,42 @@ public class Suporte implements Serializable{
 
 	public void setFornecedorId(Integer fornecedorId) {
 		this.fornecedorId = fornecedorId;
+	}
+
+	public Integer getEncomendaId() {
+		return encomendaId;
+	}
+
+	public void setEncomendaId(Integer encomendaId) {
+		this.encomendaId = encomendaId;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}    
-    
+
 }

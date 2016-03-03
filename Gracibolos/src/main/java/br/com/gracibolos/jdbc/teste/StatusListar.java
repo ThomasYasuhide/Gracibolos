@@ -1,5 +1,6 @@
 package br.com.gracibolos.jdbc.teste;
 
+//testar
 import br.com.gracibolos.jdbc.dao.StatusDao;
 import br.com.gracibolos.jdbc.model.Status;
 
@@ -11,7 +12,7 @@ public class StatusListar {
 		
 		try {
 			for(Status p : dao.listar()){
-			    System.out.println(	  	  "Id : "+p.getId()
+			    System.out.println(	  	  "\tId : "+p.getId()
 			    					+ "\tNome : "+p.getNome());		
 			}
 		} catch (Exception e) {

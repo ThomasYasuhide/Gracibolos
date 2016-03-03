@@ -1,29 +1,31 @@
 package br.com.gracibolos.jdbc.teste;
 
-import java.util.Calendar;
-
+//funcionando
+import java.time.LocalDate;
 import br.com.gracibolos.jdbc.dao.ProdutoProntoDao;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Produto;
 import br.com.gracibolos.jdbc.model.ProdutoPronto;
 
-//Não está funcionando
 public class ProdutoProntoInserir {
 
 	public static void main(String[] args) {
 
 		ProdutoPronto pPronto = new ProdutoPronto();
+		
+		//seto os IDs do (produto e encomenda)
+		//e converto de Long para int na hora de usar o get
 		Produto p = new Produto();
-		p.setId((long) 4);
+		p.setId(1L);
+		
 		Encomenda e = new Encomenda();
-		e.setId(4);
+		e.setId(1L);
 		
 		pPronto.setProdutoId(p.getId().intValue());
-		pPronto.setEncomendaId(e.getId());
-		pPronto.setFinalizado(Calendar.getInstance());
-		pPronto.setDataValidade(Calendar.getInstance());
-		pPronto.setCodigo("22");
-		
+		pPronto.setEncomendaId(e.getId().intValue());
+		pPronto.setFinalizado(LocalDate.now());
+		pPronto.setDataValidade(LocalDate.now());
+		pPronto.setCodigo("22");		
 		
 		ProdutoProntoDao dao = new ProdutoProntoDao();
 		

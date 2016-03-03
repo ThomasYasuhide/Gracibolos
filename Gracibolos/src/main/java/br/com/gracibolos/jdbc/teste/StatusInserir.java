@@ -1,5 +1,6 @@
 package br.com.gracibolos.jdbc.teste;
 
+//testar
 import br.com.gracibolos.jdbc.dao.StatusDao;
 import br.com.gracibolos.jdbc.model.Status;
 
@@ -9,7 +10,7 @@ public class StatusInserir {
 		
 		Status status = new Status();
 		
-		status.setNome("");
+		status.setNome("teste");
 		
 		StatusDao dao = new StatusDao();
 		

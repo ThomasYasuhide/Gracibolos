@@ -10,9 +10,9 @@ public class ItemEncomendaInserir {
 	
 		ItemEncomenda itemEncomenda = new ItemEncomenda();
 		
-		itemEncomenda.setQtd(543);
 		itemEncomenda.setProdutoId(3);
 		itemEncomenda.setEncomendaId(1);
+		itemEncomenda.setQtd(543);		
 		
 		ItemEncomendaDao dao = new ItemEncomendaDao();
 		

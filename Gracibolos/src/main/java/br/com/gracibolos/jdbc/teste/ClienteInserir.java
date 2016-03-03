@@ -1,6 +1,8 @@
 package br.com.gracibolos.jdbc.teste;
 
 
+import java.time.LocalDate;
+
 import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.model.Cliente;
 
@@ -14,7 +16,7 @@ public class ClienteInserir {
 		c1.setStatus(1);
 		c1.setTipopessoa(2);
 		c1.setSexo(1);
-		c1.setDatanascimento(null);
+		c1.setDatanascimento(LocalDate.now());
 		c1.setNomerazao("");
 		c1.setCpfcnpj("");
 		c1.setRgie("");
@@ -29,7 +31,7 @@ public class ClienteInserir {
 		c1.setCel("");		
 		c1.setEmail("Raul@hotmail.com");
 		c1.setSite("teste");
-		c1.setClientedesde(null);		
+		c1.setClientedesde(LocalDate.now());		
 		c1.setObs("teste");
 		
 		ClienteDao dao = new ClienteDao();

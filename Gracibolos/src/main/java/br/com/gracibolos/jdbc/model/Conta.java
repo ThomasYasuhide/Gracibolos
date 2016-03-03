@@ -27,16 +27,16 @@ public class Conta implements Serializable{
         
     }
     
-    public Conta(Integer id) {
+    public Conta(Long id) {
         this.id = id;
     }
 
-    public Conta(Integer id, LocalDate dataVencimento) {
+    public Conta(Long id, LocalDate dataVencimento) {
         this.id = id;
         this.dataVencimento = dataVencimento;
     }
     
-    private Integer id;
+    private Long id;
     private Integer fornecedorId;
     private Integer colaboradorId;
     private Integer caixaId;
@@ -47,11 +47,11 @@ public class Conta implements Serializable{
     private LocalDate dataPagamento;
     private BigDecimal valor;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -113,5 +113,5 @@ public class Conta implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
+	}	
 }

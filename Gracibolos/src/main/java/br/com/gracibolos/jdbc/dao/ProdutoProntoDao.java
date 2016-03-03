@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
@@ -22,17 +21,11 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{		
-			ps = conn.prepareStatement(sql);
-			
+			ps = conn.prepareStatement(sql);			
 			ps.setInt(1, pPronto.getProdutoId());
-			ps.setInt(2, pPronto.getEncomendaId());
-			
-			Date finalizado1 = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(3, finalizado1);
-			
-			Date dataValidade2 = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(4, dataValidade2);
-			
+			ps.setInt(2, pPronto.getEncomendaId());			
+			ps.setDate(3, Date.valueOf(pPronto.getFinalizado()));
+			ps.setDate(4, Date.valueOf(pPronto.getDataValidade()));	
 			ps.setString(5, pPronto.getCodigo());
 			
 			if(ps.executeUpdate() != 0) {
@@ -57,19 +50,13 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 		PreparedStatement  ps = null;
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{		
-			ps = conn.prepareStatement(sql);
-			
+			ps = conn.prepareStatement(sql);			
 			ps.setInt(1, pPronto.getProdutoId());
-			ps.setInt(2, pPronto.getEncomendaId());
-			
-			Date finalizado = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(3, finalizado);
-			
-			Date dataValidade = new Date (Calendar.getInstance().getTimeInMillis());
-			ps.setDate(4, dataValidade);
-			
+			ps.setInt(2, pPronto.getEncomendaId());			
+			ps.setDate(3, Date.valueOf(pPronto.getFinalizado()));
+			ps.setDate(4, Date.valueOf(pPronto.getDataValidade()));	
 			ps.setString(5, pPronto.getCodigo());
-			ps.setInt(6, pPronto.getId());
+			ps.setLong(6, pPronto.getId());
 						
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -94,7 +81,7 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{		
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, produtoPronto.getId());
+			ps.setLong(1, produtoPronto.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -125,11 +112,11 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 			{
 				ProdutoPronto pPronto = new ProdutoPronto();
 				
-				pPronto.setId(rs.getInt("id"));
+				pPronto.setId(rs.getLong("id"));
 				pPronto.setProdutoId(rs.getInt("produtoId"));
 				pPronto.setEncomendaId(rs.getInt("encomendaId"));
-				pPronto.setFinalizado(Calendar.getInstance());
-				pPronto.setDataValidade(Calendar.getInstance());
+				pPronto.setFinalizado(rs.getDate("finalizado").toLocalDate());
+				pPronto.setDataValidade(rs.getDate("dataValidade").toLocalDate());
 				pPronto.setCodigo(rs.getString("codigo"));				
 				
 				listaDeProdutoPronto.add(pPronto);

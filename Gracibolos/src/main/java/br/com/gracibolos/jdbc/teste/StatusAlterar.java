@@ -1,5 +1,6 @@
 package br.com.gracibolos.jdbc.teste;
 
+//testar
 import br.com.gracibolos.jdbc.dao.StatusDao;
 import br.com.gracibolos.jdbc.model.Status;
 
@@ -9,7 +10,7 @@ public class StatusAlterar {
 
 		Status status = new Status();
 		
-		status.setId(3);
+		status.setId(3L);
 		status.setNome("");
 		
 		StatusDao dao = new StatusDao();

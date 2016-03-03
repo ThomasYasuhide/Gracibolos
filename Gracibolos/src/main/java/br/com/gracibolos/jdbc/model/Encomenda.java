@@ -7,7 +7,10 @@ package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  *
@@ -24,31 +27,53 @@ public class Encomenda implements Serializable{
         
     }
     
-    public Encomenda(Integer id) {
+    public Encomenda(Long id) {
         this.id = id;
     }
     
-    private Integer id;
+    private Long id;
     private Integer clienteId;
+    private String statusNome;
     private String responsavel;
-    private Calendar dataInicio;
-    private Calendar dataFaltaProd;
-    private Calendar dataProducao;
-    private Calendar dataFinalizado;
-    private Calendar dataEntrega;
+    
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataInicio;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataFaltaProd;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataProducao;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataFinalizado;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataEntrega;
+    
     private Boolean entregaRetirada;
     private BigDecimal total;
     private String descricao;
     private Integer numero;
-    
-    private String statusNome;
-    
-	public Integer getId() {
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Integer getClienteId() {
+		return clienteId;
+	}
+
+	public void setClienteId(Integer clienteId) {
+		this.clienteId = clienteId;
+	}
+
+	public String getStatusNome() {
+		return statusNome;
+	}
+
+	public void setStatusNome(String statusNome) {
+		this.statusNome = statusNome;
 	}
 
 	public String getResponsavel() {
@@ -59,43 +84,43 @@ public class Encomenda implements Serializable{
 		this.responsavel = responsavel;
 	}
 
-	public Calendar getDataInicio() {
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Calendar dataInicio) {
+	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public Calendar getDataFaltaProd() {
+	public LocalDate getDataFaltaProd() {
 		return dataFaltaProd;
 	}
 
-	public void setDataFaltaProd(Calendar dataFaltaProd) {
+	public void setDataFaltaProd(LocalDate dataFaltaProd) {
 		this.dataFaltaProd = dataFaltaProd;
 	}
 
-	public Calendar getDataProducao() {
+	public LocalDate getDataProducao() {
 		return dataProducao;
 	}
 
-	public void setDataProducao(Calendar dataProducao) {
+	public void setDataProducao(LocalDate dataProducao) {
 		this.dataProducao = dataProducao;
 	}
 
-	public Calendar getDataFinalizado() {
+	public LocalDate getDataFinalizado() {
 		return dataFinalizado;
 	}
 
-	public void setDataFinalizado(Calendar dataFinalizado) {
+	public void setDataFinalizado(LocalDate dataFinalizado) {
 		this.dataFinalizado = dataFinalizado;
 	}
 
-	public Calendar getDataEntrega() {
+	public LocalDate getDataEntrega() {
 		return dataEntrega;
 	}
 
-	public void setDataEntrega(Calendar dataEntrega) {
+	public void setDataEntrega(LocalDate dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
 
@@ -131,20 +156,8 @@ public class Encomenda implements Serializable{
 		this.numero = numero;
 	}
 
-	public Integer getClienteId() {
-		return clienteId;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
-
-	public void setClienteId(Integer clienteId) {
-		this.clienteId = clienteId;
-	}
-
-	public String getStatusNome() {
-		return statusNome;
-	}
-
-	public void setStatusNome(String statusNome) {
-		this.statusNome = statusNome;
-	}
-
+	
 }

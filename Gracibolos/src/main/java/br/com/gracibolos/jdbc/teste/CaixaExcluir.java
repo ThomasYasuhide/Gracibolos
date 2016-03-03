@@ -10,7 +10,7 @@ public class CaixaExcluir {
 		
 		CaixaDao dao = new CaixaDao();
 		Caixa caixa = new Caixa();
-		caixa.setId(1L);
+		caixa.setId(2L);
 		
 		try {
 			if(dao.excluir(caixa) == true){
