@@ -1,6 +1,7 @@
 package br.com.gracibolos.jdbc.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,28 +26,31 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 		boolean status = false;
 		PreparedStatement ps = null;
 		
-		String sql = "INSERT INTO fornecedor(tipopessoa, nomerazao, cpfcnpj, rgie, endereco, numero, complemento, bairro, estado, cidade, cep, tel, cel, email, site, obs) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		String sql = "INSERT INTO fornecedor(status, tipopessoa, sexo, datanascimento, nomerazao, cpfcnpj, rgie, endereco, numero, complemento, bairro, estado, cidade, cep, tel, cel, email, site, obs) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
 			
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, fornecedor.getTipopessoa());
-			ps.setString(2, fornecedor.getNomerazao());
-			ps.setString(3, fornecedor.getCpfcnpj());
-			ps.setString(4, fornecedor.getRgie());
-			ps.setString(5, fornecedor.getEndereco());
-			ps.setString(6, fornecedor.getNumero());
-			ps.setString(7, fornecedor.getComplemento());
-			ps.setString(8, fornecedor.getBairro());
-			ps.setInt(9, fornecedor.getEstado());
-			ps.setInt(10, fornecedor.getCidade());
-			ps.setInt(11, fornecedor.getCep());
-			ps.setString(12, fornecedor.getTel());
-			ps.setString(13, fornecedor.getCel());
-			ps.setString(14, fornecedor.getEmail());
-			ps.setString(15, fornecedor.getSite());
-			ps.setString(16, fornecedor.getObs());
+			ps.setInt(1, fornecedor.getStatus());
+			ps.setInt(2, fornecedor.getTipopessoa());
+			ps.setInt(3, fornecedor.getSexo());
+			ps.setDate(4, Date.valueOf(fornecedor.getDatanascimento()));
+			ps.setString(5, fornecedor.getNomerazao());
+			ps.setString(6, fornecedor.getCpfcnpj());
+			ps.setString(7, fornecedor.getRgie());
+			ps.setString(8, fornecedor.getEndereco());
+			ps.setString(9, fornecedor.getNumero());
+			ps.setString(10, fornecedor.getComplemento());
+			ps.setString(11, fornecedor.getBairro());
+			ps.setInt(12, fornecedor.getEstado());
+			ps.setInt(13, fornecedor.getCidade());
+			ps.setInt(14, fornecedor.getCep());
+			ps.setString(15, fornecedor.getTel());
+			ps.setString(16, fornecedor.getCel());
+			ps.setString(17, fornecedor.getEmail());
+			ps.setString(18, fornecedor.getSite());
+			ps.setString(19, fornecedor.getObs());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -76,28 +80,31 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 		
 		boolean status = false;
 		PreparedStatement  ps = null;
-		String sql = "UPDATE fornecedor SET tipopessoa=?, nomerazao=?, cpfcnpj=?, rgie=?, endereco=?, numero=?, complemento=?, bairro=?, estado=?, cidade=?, cep=?, tel=?, cel=?, email=?, site=?, obs=? where id=?";
+		String sql = "UPDATE fornecedor SET status=? tipopessoa=?, sexo=?, datanascimento=?, nomerazao=?, cpfcnpj=?, rgie=?, endereco=?, numero=?, complemento=?, bairro=?, estado=?, cidade=?, cep=?, tel=?, cel=?, email=?, site=?, obs=? where id=?";
 				
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())	{
 			
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, fornecedor.getTipopessoa());
-			ps.setString(2, fornecedor.getNomerazao());
-			ps.setString(3, fornecedor.getCpfcnpj());
-			ps.setString(4, fornecedor.getRgie());
-			ps.setString(5, fornecedor.getEndereco());
-			ps.setString(6, fornecedor.getNumero());
-			ps.setString(7, fornecedor.getComplemento());
-			ps.setString(8, fornecedor.getBairro());
-			ps.setInt(9, fornecedor.getEstado());
-			ps.setInt(10, fornecedor.getCidade());
-			ps.setInt(11, fornecedor.getCep());
-			ps.setString(12, fornecedor.getTel());
-			ps.setString(13, fornecedor.getCel());
-			ps.setString(14, fornecedor.getEmail());
-			ps.setString(15, fornecedor.getSite());
-			ps.setString(16, fornecedor.getObs());
-			ps.setLong(17, fornecedor.getId());
+			ps.setInt(1, fornecedor.getStatus());
+			ps.setInt(2, fornecedor.getTipopessoa());
+			ps.setInt(3, fornecedor.getSexo());
+			ps.setDate(4, Date.valueOf(fornecedor.getDatanascimento()));
+			ps.setString(5, fornecedor.getNomerazao());
+			ps.setString(6, fornecedor.getCpfcnpj());
+			ps.setString(7, fornecedor.getRgie());
+			ps.setString(8, fornecedor.getEndereco());
+			ps.setString(9, fornecedor.getNumero());
+			ps.setString(10, fornecedor.getComplemento());
+			ps.setString(11, fornecedor.getBairro());
+			ps.setInt(12, fornecedor.getEstado());
+			ps.setInt(13, fornecedor.getCidade());
+			ps.setInt(14, fornecedor.getCep());
+			ps.setString(15, fornecedor.getTel());
+			ps.setString(16, fornecedor.getCel());
+			ps.setString(17, fornecedor.getEmail());
+			ps.setString(18, fornecedor.getSite());
+			ps.setString(19, fornecedor.getObs());
+			ps.setLong(20, fornecedor.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -161,7 +168,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT id, tipopessoa, nomerazao, cpfcnpj, rgie, endereco, "
+		String sql = "SELECT id, status, tipopessoa, sexo, datanascimento, nomerazao, cpfcnpj, rgie, endereco, "
 				+ "numero, complemento, bairro, estado, cidade, cep, tel, cel, email, site, obs FROM fornecedor";
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
@@ -172,7 +179,10 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 			while(rs.next()) {
 				Fornecedor fornecedor = new Fornecedor();
 				fornecedor.setId(rs.getInt("id"));
+				fornecedor.setStatus(rs.getInt("status"));
 				fornecedor.setTipopessoa(rs.getInt("tipopessoa"));
+				fornecedor.setSexo(rs.getInt("sexo"));
+				fornecedor.setDatanascimento(rs.getDate("datanascimento").toLocalDate());
 				fornecedor.setNomerazao(rs.getString("nomerazao"));
 				fornecedor.setCpfcnpj(rs.getString("cpfcnpj"));
 				fornecedor.setRgie(rs.getString("rgie"));
@@ -217,7 +227,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT id, tipopessoa, nomerazao, cpfcnpj, rgie, endereco, "
+		String sql = "SELECT id, status, sexo, datanascimento, tipopessoa, nomerazao, cpfcnpj, rgie, endereco, "
 				+ "numero, complemento, bairro, estado, cidade, cep, tel, cel, email, site, obs FROM fornecedor WHERE cpfcnpj = ? OR nomerazao LIKE ? OR rgie = ?";
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
@@ -232,7 +242,10 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 			while(rs.next()) {
 				Fornecedor fornecedor = new Fornecedor();
 				fornecedor.setId(rs.getInt("id"));
+				fornecedor.setStatus(rs.getInt("status"));
 				fornecedor.setTipopessoa(rs.getInt("tipopessoa"));
+				fornecedor.setSexo(rs.getInt("sexo"));
+				fornecedor.setDatanascimento(rs.getDate("datanascimento").toLocalDate());
 				fornecedor.setNomerazao(rs.getString("nomerazao"));
 				fornecedor.setCpfcnpj(rs.getString("cpfcnpj"));
 				fornecedor.setRgie(rs.getString("rgie"));

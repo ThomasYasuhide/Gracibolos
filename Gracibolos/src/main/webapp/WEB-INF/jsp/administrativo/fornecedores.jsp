@@ -136,7 +136,10 @@
 									<!-- Titulos das tabelas  -->
 									<tr>
 										<th>#</th>
+										<th>Status</th>
 										<th>Pessoa</th>
+										<th>Sexo</th>
+										<th>Data Nascimento</th>
 										<th>Nome / Razão Social</th>
 										<th>CPF / CNPJ</th>
 										<th>RG / IE</th>
@@ -161,7 +164,10 @@
 									<c:forEach var="fornecedor" items="${fornecedores}">
 										<tr>
 											<td>${fornecedor.id}</td>
+											<td>${fornecedor.status}</td>
 											<td>${fornecedor.tipopessoa}</td>
+											<td>${fornecedor.sexo}</td>
+											<td>${fornecedor.datanascimento}</td>
 											<td>${fornecedor.nomerazao}</td>
 											<td>${fornecedor.cpfcnpj}</td>
 											<td>${fornecedor.rgie}</td>
@@ -226,6 +232,14 @@
 									<label class="control-label" for="id">Nº fornecedor:</label>
 									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
 								</div>
+								
+								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+									<label class="control-label" for="tipopessoa">Status:</label>
+									<select id="status" name="status" class="form-control">
+										<option selected value="1">Ativado</option>
+										<option value="0">Desativado</option>
+									</select>
+								</div>
 
 								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
 									<label class="control-label" for="tipopessoa">Pessoa:</label>
@@ -233,6 +247,20 @@
 										<option selected value="0">Fisica</option>
 										<option value="1">Jurídica</option>
 									</select>
+								</div>
+								
+								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+									<label class="control-label" for="sexo">Sexo:</label>
+									<select id="sexo" name="sexo" class="form-control" required>
+										<option selected disabled>Selecione um sexo</option>
+										<option value="0">Masculino</option>
+										<option value="1">Feminino</option>
+									</select>
+								</div>
+
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+									<label class="control-label" for="telefone">Data Nascimento:</label>
+									<input type="date" id="datanascimento" name="datanascimento" placeholder="Data de nascimento" class="form-control" />
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
@@ -310,7 +338,7 @@
 									<input type="text" id="email" name="email" class="form-control" placeholder="email@provedor.com.br" maxlength="120"/>
 								</div>
 
-								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
 									<label class="control-label" for="site">Site:</label>
 									<input type="text" id="site" name="site" class="form-control" placeholder="www.site.com.br" maxlength="120"/>
 								</div>
@@ -438,7 +466,7 @@
             var table = $('#lista-fornecedores').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ],
+                        "targets": [ 0, 1, 2, 3, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ],
                         "visible": false
                     }
                 ]
@@ -502,22 +530,25 @@
 					
 					//Preenche os determinados campos com os conteudos.
                     $('#id').val(data[0]);
-                    $('#tipopessoa').val(data[1]);
-    				$('#nomerazao').val(data[2]);
-    				$('#cpfcnpj').val(data[3]);
-                    $('#rgie').val(data[4]);
-                    $('#endereco').val(data[5]);
-                    $('#numero').val(data[6]);
-    				$('#complemento').val(data[7]);
-    				$('#bairro').val(data[8]);
-    				$('#estado').val(data[9]);
-                    $('#cidade').val(data[10]);
-                    $('#cep').val(data[11]);
-                    $('#tel').val(data[12]);
-    				$('#cel').val(data[13]);
-                    $('#email').val(data[14]);
-                    $('#site').val(data[15]);
-    				$('#obs').val(data[16]);
+                    $('#status').val(data[1]);
+                    $('#tipopessoa').val(data[2]);
+                    $('#sexo').val(data[3]);
+                    $('#datanascimento').val(data[4]);
+    				$('#nomerazao').val(data[5]);
+    				$('#cpfcnpj').val(data[6]);
+                    $('#rgie').val(data[7]);
+                    $('#endereco').val(data[8]);
+                    $('#numero').val(data[9]);
+    				$('#complemento').val(data[10]);
+    				$('#bairro').val(data[11]);
+    				$('#estado').val(data[12]);
+                    $('#cidade').val(data[13]);
+                    $('#cep').val(data[14]);
+                    $('#tel').val(data[15]);
+    				$('#cel').val(data[16]);
+                    $('#email').val(data[17]);
+                    $('#site').val(data[18]);
+    				$('#obs').val(data[19]);
 
                 });
 

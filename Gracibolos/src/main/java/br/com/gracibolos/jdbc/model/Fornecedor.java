@@ -1,13 +1,21 @@
 package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class Fornecedor implements Serializable{
 
 	private static final long serialVersionUID = 3702725812080610435L;
 	
 	private Integer id;
+    private Integer status;
     private int tipopessoa;
+    private Integer sexo;
+	@DateTimeFormat(iso = ISO.DATE)
+    private LocalDate datanascimento;
     private String nomerazao;
     private String cpfcnpj;
     private String rgie;
@@ -31,6 +39,14 @@ public class Fornecedor implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	public int getTipopessoa() {
 		return tipopessoa;
@@ -42,6 +58,22 @@ public class Fornecedor implements Serializable{
 
 	public String getNomerazao() {
 		return nomerazao;
+	}
+
+	public Integer getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Integer sexo) {
+		this.sexo = sexo;
+	}
+
+	public LocalDate getDatanascimento() {
+		return datanascimento;
+	}
+
+	public void setDatanascimento(LocalDate datanascimento) {
+		this.datanascimento = datanascimento;
 	}
 
 	public void setNomerazao(String nomerazao) {
