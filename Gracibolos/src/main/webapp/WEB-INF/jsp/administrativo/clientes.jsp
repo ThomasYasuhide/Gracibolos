@@ -245,7 +245,7 @@
 
 								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
 									<label class="control-label" for="tipopessoa">Pessoa:</label>
-									<select id="tipopessoa" name="tipopessoa" class="form-control" required>
+									<select id="tipopessoa" name="tipopessoa" onchange="desabilitarCamposCliente(this)" class="form-control" required>
 										<option selected value="0">Fisica</option>
 										<option value="1">Jurídica</option>
 									</select>
@@ -262,23 +262,23 @@
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="telefone">Data Nascimento:</label>
+									<label class="control-label" for="datanascimento">Data Nascimento:</label>
 									<input type="date" id="datanascimento" name="datanascimento" placeholder="Data de nascimento" class="form-control" />
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-									<label class="control-label" for="nomerazao" id="nomerazao_lbl">Nome/Razão Social*:</label>
-									<input type="text" id="nomerazao" name="nomerazao" placeholder="Digite seu nome ou razão social aqui" class="form-control" maxlength="100" required/>
+									<label class="control-label" for="nomerazao_lbl" id="nomerazao_lbl">Nome*:</label>
+									<input type="text" id="nomerazao_inp" name="nomerazao" placeholder="Digite seu nome aqui." class="form-control" maxlength="100" required/>
 								</div> 
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="cpfcnpj" id="cpf_lbl">CPF/CNPJ*:</label>
-									<input type="text" id="cpfcnpj" name="cpfcnpj" placeholder="000.000.000-00" class="form-control" maxlength="14" required/>
+									<label class="control-label" for="cpfcnpj_inp" id="cpfcnpj_lbl">CPF*:</label>
+									<input type="text" id="cpfcnpj_inp" name="cpfcnpj" placeholder="000.000.000-00" class="form-control" maxlength="14" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="rgie" id="rg_lbl">RG:/IE:</label>
-									<input type="text" id="rgie" name="rgie" placeholder="00.000.000-0" class="form-control" maxlength="12"/>
+									<label class="control-label" for="rgie_inp" id="rgie_lbl">RG:</label>
+									<input type="text" id="rgie_inp" name="rgie" placeholder="00.000.000-0" class="form-control" maxlength="12"/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
@@ -440,6 +440,8 @@
 	<script src="resources/js/jquery-2.1.4.js"></script>
 	<script src="resources/js/datatables.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
+	<script src="resources/js/scripts.js"></script>
+	
     
 
 	<script type="text/javascript">
@@ -529,21 +531,24 @@
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
                 
+                desabilitarCamposCliente(data[2]);
+				
                 //Passa o ID da cidade e caso existe executa a função callback para abrir o modal e preencher os campos com os dados.
               	listar_cidades(data[12], function(){
-
+             	
               		//Apresenta o modal de exclusão na tela.
               		$('#modal-cliente').modal('show');
-					
+
+                    
 					//Preenche os determinados campos com os conteudos.
                     $('#id').val(data[0]);
                     $('#status').val(data[1]);
                     $('#tipopessoa').val(data[2]);
                     $('#sexo').val(data[3]);
                     $('#datanascimento').val(data[4]);
-    				$('#nomerazao').val(data[5]);
-    				$('#cpfcnpj').val(data[6]);
-                    $('#rgie').val(data[7]);
+    				$('#nomerazao_inp').val(data[5]);
+    				$('#cpfcnpj_inp').val(data[6]);
+                    $('#rgie_inp').val(data[7]);
                     $('#endereco').val(data[8]);
                     $('#numero').val(data[9]);
     				$('#complemento').val(data[10]);
