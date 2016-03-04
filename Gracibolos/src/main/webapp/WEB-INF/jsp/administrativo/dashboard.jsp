@@ -43,14 +43,7 @@
 					<hr/>
 
 					<!-- ########## CONTEUDO ########## -->
-					<div class="panel panel-default">
-					  <div class="panel-heading">Panel heading without title</div>
-					  <div class="panel-body">
-					    Panel content
-					  </div>
-					</div>
-					
-					
+										
 					<div>
 						<h3>Grafico de valores de venda por mês</h3>
 						<canvas id="valores" height="100px"></canvas>

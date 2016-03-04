@@ -235,7 +235,7 @@
 									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
 								</div>
 
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="status">Status:</label>
 									<select id="status" name="status" class="form-control" required>
 										<option selected value="1">Ativado</option>
@@ -243,15 +243,15 @@
 									</select>
 								</div>
 
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="tipopessoa">Pessoa:</label>
-									<select id="tipopessoa" name="tipopessoa" onchange="desabilitarCamposCliente(this)" class="form-control" required>
+									<select id="tipopessoa" name="tipopessoa" onchange="desabilitarCampos(this)" class="form-control" required>
 										<option selected value="0">Fisica</option>
 										<option value="1">Jurídica</option>
 									</select>
 								</div>
 								
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									
 									<label class="control-label" for="sexo">Sexo:</label>
 									<select id="sexo" name="sexo" class="form-control" required>
@@ -301,7 +301,7 @@
 									<input type="text" id="bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" required/>
 								</div>
 
-								<div class="input-margin col-xs-12 col-sm-2 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="estado">Estado*:</label>
 									<select class="form-control" id="estado" name="estado" required >
 										<option selected="selected" disabled="disabled" value="0">Selecione o estado</option>
@@ -311,7 +311,7 @@
 									</select>
 								</div>
 
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="cidade">Cidade*:</label>
 									<select class="form-control" id="cidade" name="cidade" required >
 										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
@@ -503,6 +503,10 @@
 					this.reset();
 				});
 				
+				//Este método se encontra no arquivo scripts.js
+				//Desabilita e habilita os campos NOME RAZÃO CPF CNPJ RG IE SEXO DATANASCIMENTO
+                desabilitarCampos(document.getElementById("tipopessoa"));
+				
 				//Remove todas as opções do combo cidade.
 				combo_cidade.find('option').remove();
 				
@@ -530,16 +534,13 @@
 				
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
-                
-                desabilitarCamposCliente(data[2]);
-				
+
                 //Passa o ID da cidade e caso existe executa a função callback para abrir o modal e preencher os campos com os dados.
               	listar_cidades(data[12], function(){
              	
               		//Apresenta o modal de exclusão na tela.
               		$('#modal-cliente').modal('show');
 
-                    
 					//Preenche os determinados campos com os conteudos.
                     $('#id').val(data[0]);
                     $('#status').val(data[1]);
@@ -562,7 +563,8 @@
                     $('#site').val(data[18]);
                     $('#clientedesde').val(data[19]);
     				$('#obs').val(data[20]);
-
+					
+                    desabilitarCampos(document.getElementById("tipopessoa"));
                 });
 
 			});
