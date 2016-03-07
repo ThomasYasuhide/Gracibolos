@@ -24,7 +24,6 @@ public class EstoqueListar {
 							 + "\tTotal : "+e.getTotal());
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

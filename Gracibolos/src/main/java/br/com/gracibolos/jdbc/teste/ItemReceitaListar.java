@@ -20,7 +20,6 @@ public class ItemReceitaListar {
 			                        		 +"\tTotal : "+p.getTotal());			
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

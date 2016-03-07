@@ -145,7 +145,6 @@ public class ContaDao implements GenericoDao<Conta>{
 	
 	@Override
 	public List<Conta> pesquisar(String pesquisa) throws Exception{
-		// TODO Auto-generated method stub
 		return null;
 	}
 

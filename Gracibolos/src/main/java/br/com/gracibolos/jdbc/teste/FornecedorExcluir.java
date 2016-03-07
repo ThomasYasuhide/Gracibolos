@@ -22,7 +22,6 @@ public class FornecedorExcluir {
 				System.out.println("Erro ao excluir fornecedor");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

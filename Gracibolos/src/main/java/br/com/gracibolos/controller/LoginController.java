@@ -21,7 +21,7 @@ public class LoginController {
 	
 	//Método para redirecionar para página de login para dentro do WEB-INF
 	@RequestMapping("/loginview")
-	public ModelAndView loginView(HttpSession session){
+	public ModelAndView loginView(){
 		
 		//Direciona para a pagina index dentro da WEB-INF
 		return new ModelAndView("index");

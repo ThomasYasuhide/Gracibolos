@@ -131,7 +131,6 @@ public class SuporteDao implements GenericoDao<Suporte>{
 
 	@Override
 	public List<Suporte> pesquisar(String pesquisa) throws Exception{
-		// TODO Auto-generated method stub
 		return null;
 	}
 

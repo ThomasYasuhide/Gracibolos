@@ -13,8 +13,7 @@ public class ConnectionProvider {
     
     private static ConnectionProvider instance = null;
     
-	@SuppressWarnings("unused")
-	private static void ConnectionProvider() {
+	private ConnectionProvider() {
     	
     }
     

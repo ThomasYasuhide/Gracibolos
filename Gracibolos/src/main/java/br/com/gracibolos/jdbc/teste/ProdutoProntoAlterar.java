@@ -38,7 +38,6 @@ public class ProdutoProntoAlterar {
 				System.out.println("falha");
 			}
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}

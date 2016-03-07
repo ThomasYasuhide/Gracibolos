@@ -37,7 +37,6 @@ public class EncomendaAlterar {
 				System.out.println("falha");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 

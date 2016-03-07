@@ -20,7 +20,6 @@ public class ClienteExcluir {
 				System.out.println("Erro ao excluir cliente");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

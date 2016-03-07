@@ -20,7 +20,6 @@ public class ContaExcluir {
 				System.out.println("Erro ao Excluido cliente");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

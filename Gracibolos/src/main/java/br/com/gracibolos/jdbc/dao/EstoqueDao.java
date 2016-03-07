@@ -141,7 +141,6 @@ public class EstoqueDao implements GenericoDao<Estoque>{
 
 	@Override
 	public List<Estoque> pesquisar(String pesquisa) throws Exception{
-		// TODO Auto-generated method stub
 		return null;
 	}
 

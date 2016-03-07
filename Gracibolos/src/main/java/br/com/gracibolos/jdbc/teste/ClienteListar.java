@@ -35,7 +35,6 @@ public class ClienteListar {
 			                          		   +"\tObs : "+p.getObs());			
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

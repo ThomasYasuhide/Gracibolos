@@ -20,7 +20,6 @@ public class StatusExcluir {
 				System.out.println("Erro ao excluir o status");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

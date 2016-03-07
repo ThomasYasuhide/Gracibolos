@@ -20,7 +20,6 @@ public class SuporteExcluir {
 				System.out.println("Erro ao excluido suporte");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -137,7 +137,6 @@ public class CaixaDao implements GenericoDao<Caixa>{
 	
 	@Override
 	public List<Caixa> pesquisar(String pesquisa) throws Exception{
-		// TODO Auto-generated method stub
 		return null;
 	}
 

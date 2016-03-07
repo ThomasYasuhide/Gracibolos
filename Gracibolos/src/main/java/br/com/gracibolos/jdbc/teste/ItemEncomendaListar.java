@@ -18,7 +18,6 @@ public class ItemEncomendaListar {
 			    					 + "\tQtd : "+i.getQtd());	
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

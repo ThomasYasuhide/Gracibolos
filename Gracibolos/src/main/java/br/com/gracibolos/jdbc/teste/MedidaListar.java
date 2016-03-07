@@ -19,7 +19,6 @@ public class MedidaListar {
 			                            +"\tLitros : "+p.getLitros());			
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

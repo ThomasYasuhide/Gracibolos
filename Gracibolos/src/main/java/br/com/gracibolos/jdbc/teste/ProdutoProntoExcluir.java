@@ -24,7 +24,6 @@ public class ProdutoProntoExcluir {
 				System.out.println("Erro ao excluir o produto pronto");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -34,7 +34,6 @@ public class FornecedorListar {
 						
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -16,7 +16,6 @@ public class StatusListar {
 			    					+ "\tNome : "+p.getNome());		
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -21,7 +21,6 @@ public class CompraListar {
 			                           +"\tTotal: "+c.getTotal());
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

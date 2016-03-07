@@ -31,6 +31,7 @@ public class Produto implements Serializable{
     private int estoque;
     private BigDecimal custo;
     private BigDecimal valor;
+    private String obs;
 
 	public Long getId() {
 		return id;
@@ -134,6 +135,14 @@ public class Produto implements Serializable{
 	
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
-	}    
+	}
+
+	public String getObs() {
+		return obs;
+	}
+
+	public void setObs(String obs) {
+		this.obs = obs;
+	}
     
 }

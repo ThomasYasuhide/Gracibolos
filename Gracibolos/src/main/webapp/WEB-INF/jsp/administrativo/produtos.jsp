@@ -131,7 +131,7 @@
 					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-							<table id="lista-produtos" class="table table-hover display" cellspacing="0" width="100%">
+							<table id="lista-produtos" class="table table-hover display table-settings">
 								<thead>
 									<!-- Titulos das tabelas  -->
 									<tr>
@@ -265,8 +265,8 @@
 											</div> 
 											
 											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
-												<label class="control-label" for="status">Tipo*:</label>
-												<select class="form-control" id="status" name="status" required>
+												<label class="control-label" for="tipo">Tipo*:</label>
+												<select class="form-control" id="tipo" name="tipo" required>
 													<option value="" selected="selected" disabled="disabled">Selecione</option>
 													<option value="1">Bolo</option>
 													<option value="0">Salgados</option>
@@ -310,7 +310,7 @@
 
 										<div id="receita" class="tab-pane fade">
 											
-											<table class="input-margin table display" cellspacing="0" width="100%">
+											<table class="input-margin table display table-settings">
 												<thead>
 													<!-- Titulos das tabelas  -->
 													<tr>

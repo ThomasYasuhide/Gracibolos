@@ -96,6 +96,7 @@
 				
 			</div>
 		</div>
+	</div>
 
 		<!-- ImportaÃ§Ã£o dos arquivos java script -->
 		<script src="resources/js/jquery-2.1.4.js"></script>

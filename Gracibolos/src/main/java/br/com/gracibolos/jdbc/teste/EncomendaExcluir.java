@@ -20,7 +20,6 @@ public class EncomendaExcluir {
 				System.out.println("Erro ao Excluir encomenda");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

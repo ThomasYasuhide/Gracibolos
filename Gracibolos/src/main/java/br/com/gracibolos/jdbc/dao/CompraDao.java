@@ -140,7 +140,6 @@ public class CompraDao implements GenericoDao<Compra>{
 	
 	@Override
 	public List<Compra> pesquisar(String pesquisa) throws Exception{
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -21,7 +21,6 @@ public class MateriaPrimaExcluir {
 				System.out.println("Erro ao excluir materia prima");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -21,7 +21,6 @@ public class ProdutoExcluir {
 				System.out.println("Erro ao excluir o produto");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

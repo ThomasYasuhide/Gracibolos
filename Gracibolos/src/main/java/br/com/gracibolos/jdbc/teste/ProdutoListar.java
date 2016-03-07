@@ -29,7 +29,6 @@ public class ProdutoListar {
 						 				  + "\tFoto : "+p.getFoto());
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

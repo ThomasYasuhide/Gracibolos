@@ -115,7 +115,6 @@ public class StatusDao implements GenericoDao<Status>{
 
 	@Override
 	public List<Status> pesquisar(String pesquisa) throws Exception{
-		// TODO Auto-generated method stub
 		return null;
 	}
 

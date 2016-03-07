@@ -21,7 +21,6 @@ public class CaixaListar {
 			                           +"\tDescrição :"+c.getDescricao());		
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

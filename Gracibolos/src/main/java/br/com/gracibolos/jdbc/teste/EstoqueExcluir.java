@@ -22,7 +22,6 @@ public class EstoqueExcluir {
 				System.out.println("Erro ao excluir o estoque");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

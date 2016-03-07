@@ -20,7 +20,6 @@ public class ItemReceitaExcluir {
 				System.out.println("Erro ao Excluir item da receita");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

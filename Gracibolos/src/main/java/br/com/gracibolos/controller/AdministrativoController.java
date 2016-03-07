@@ -19,6 +19,7 @@ import br.com.gracibolos.jdbc.model.Cliente;
 import br.com.gracibolos.jdbc.model.Colaborador;
 import br.com.gracibolos.jdbc.model.Estado;
 import br.com.gracibolos.jdbc.model.Fornecedor;
+import br.com.gracibolos.jdbc.model.Produto;
 
 @Controller
 public class AdministrativoController {
@@ -43,7 +44,50 @@ public class AdministrativoController {
 		return new ModelAndView("administrativo/produtos");
 	}
 	
-	
+	//INCLUIR NOVO FORNECEDOR
+		@RequestMapping("/administrativo-incluir-produto")
+		public ModelAndView incluir_produto(Produto produto){
+			System.out.println("Entrou na servlet de inclusão de um novo produto");
+			
+			boolean status = false;
+			
+			System.out.println(produto.getId());
+			System.out.println(produto.getFoto());
+			System.out.println(produto.getStatus());
+			System.out.println(produto.getFabricacao());
+			System.out.println(produto.getVencimento());
+			System.out.println(produto.getCodigo());
+			System.out.println(produto.getNome());
+			System.out.println(produto.getTipo());
+			System.out.println(produto.getPeso());
+			System.out.println(produto.getUnidade());
+			System.out.println(produto.getEstoque());
+			System.out.println(produto.getCusto());
+			System.out.println(produto.getValor());
+			System.out.println(produto.getObs());
+		    
+			//FornecedorDao fornecedorDao = new FornecedorDao();  EXCLUIR
+			
+			try {
+				/*
+				if(fornecedorDao.inserir(fornecedor)){
+					status = true;
+				}else{
+					status = false;
+				}
+				*/
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("administrativo/produtos");
+			mv.addObject("incluir", status);
+
+			return mv;
+		}
+		
+		
 	/*
 	 * 
 	 * ###################### FORNECEDORES ######################
@@ -114,7 +158,6 @@ public class AdministrativoController {
 				status = false;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -145,7 +188,6 @@ public class AdministrativoController {
 				status = false;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -168,7 +210,6 @@ public class AdministrativoController {
 		try {
 			fornecedores = fornecedorDao.pesquisar(pesquisa);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -253,7 +294,6 @@ public class AdministrativoController {
 				status = false;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -284,7 +324,6 @@ public class AdministrativoController {
 				status = false;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -307,7 +346,6 @@ public class AdministrativoController {
 		try {
 			clientes = clienteDao.pesquisar(pesquisa);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -456,7 +494,6 @@ public class AdministrativoController {
 		try {
 			cidades = dao.pesquisar_cidades(id);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

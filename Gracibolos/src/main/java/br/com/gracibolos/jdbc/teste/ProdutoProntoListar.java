@@ -21,7 +21,6 @@ public class ProdutoProntoListar {
 			            		 +"\tCodigo : "+pp.getCodigo());		
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

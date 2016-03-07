@@ -131,7 +131,7 @@
 					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-							<table id="lista-fornecedores" class="table table-hover display" cellspacing="0" width="100%">
+							<table id="lista-fornecedores" class="table table-hover display table-settings">
 								<thead>
 									<!-- Titulos das tabelas  -->
 									<tr>

@@ -30,7 +30,6 @@ public class MateriaPrimaAlterar {
 				System.out.println("Não foi possivel alterar");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

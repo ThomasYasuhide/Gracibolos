@@ -133,7 +133,6 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 	
 	@Override
 	public List<MateriaPrima> pesquisar(String pesquisa) throws Exception{
-		// TODO Auto-generated method stub
 		return null;
 	}
 

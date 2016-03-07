@@ -22,7 +22,6 @@ public class CompraExcluir {
 				System.out.println("Erro ao excluido compra");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

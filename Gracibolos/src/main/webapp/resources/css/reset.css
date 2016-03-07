@@ -261,4 +261,10 @@ h1, h2, h3, h4, h5 {
 .input-group-addon > i {
 	font-size: 20px;
 }
+
+.table-settings {
+	
+	cellspacing:0;
+	width:100%;
+
 }

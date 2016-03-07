@@ -147,14 +147,12 @@ public class CidadeDao implements GenericoDao<Cidade>{
 	
 	@Override
 	public List<Cidade> listar() throws Exception{
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	
 	@Override
 	public List<Cidade> pesquisar(String pesquisa) throws Exception{
-		// TODO Auto-generated method stub
 		return null;
 	}
 	  

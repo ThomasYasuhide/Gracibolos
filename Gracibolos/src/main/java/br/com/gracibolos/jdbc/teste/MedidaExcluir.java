@@ -21,7 +21,6 @@ public class MedidaExcluir {
 				System.out.println("Erro ao excluir medida");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

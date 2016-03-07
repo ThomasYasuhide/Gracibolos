@@ -20,7 +20,6 @@ public class SuporteListar {
 			                        	  		+"\tValor : "+s.getValor());			
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
