@@ -165,7 +165,7 @@
 											<td>${produto.nome}</td>
 											<td>${produto.tipo}</td>
 											<td>${produto.peso}</td>
-											<td>${produto.unid}</td>
+											<td>${produto.unidade}</td>
 											<td>${produto.estoque}</td>
 											<td>${produto.custo}</td>
 											<td>${produto.valor}</td>
@@ -279,11 +279,11 @@
 											</div>
 
 											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
-												<label class="control-label" for="unid">Unidade*:</label>
-												<select class="form-control" id="unid" name="unid" required>
+												<label class="control-label" for="unidade">Unidade*:</label>
+												<select class="form-control" id="unidade" name="unidade" required>
 													<option value="" selected disabled>Selectione</option>
-													<option value="kg">Kilo(s)</option>
-													<option value="gr">Grama(s)</option>
+													<option value="1">Kilo(s)</option>
+													<option value="0">Grama(s)</option>
 												</select>
 											</div>
 											
