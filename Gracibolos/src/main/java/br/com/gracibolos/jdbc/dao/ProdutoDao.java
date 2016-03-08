@@ -1,5 +1,8 @@
 package br.com.gracibolos.jdbc.dao;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -25,13 +28,22 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		
 		boolean status = false;
 		PreparedStatement ps = null;
-		
+        InputStream inputStream = null;
+        File file = null;
+        
 		String sql = "INSERT INTO produto(foto, status, fabricacao, vencimento, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){	
 			
 			ps = conn.prepareStatement(sql);
-			ps.setBlob(1, produto.getFoto());
+			
+			file = new File(produto.getFoto());
+    		inputStream = new FileInputStream(file);
+    		
+    		
+			ps.setBlob(1, inputStream);
+			
+			
 			ps.setInt(2, produto.getStatus());
 			
 			if(produto.getFabricacao() != null){
@@ -89,7 +101,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){
 			
 			ps = conn.prepareStatement(sql);
-			ps.setBlob(1, produto.getFoto());
+			//ps.setBlob(1, produto.getFoto());
 			ps.setInt(2, produto.getStatus());
 			
 			if(produto.getFabricacao() != null){
@@ -182,7 +194,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			{
 				Produto produto = new Produto();
 				produto.setId(rs.getLong("id"));
-				produto.setFoto(rs.getBlob("foto"));
+				//produto.setFoto(rs.getBlob("foto"));
 				produto.setStatus(rs.getInt("status"));
 				produto.setFabricacao(rs.getDate("fabricacao").toLocalDate());
 				produto.setVencimento(rs.getDate("vencimento").toLocalDate());
@@ -235,7 +247,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			while(rs.next()) {
 				Produto produto = new Produto();
 				produto.setId(rs.getLong("id"));
-				produto.setFoto(rs.getBlob("foto"));
+				//produto.setFoto(rs.getBlob("foto"));
 				produto.setStatus(rs.getInt("status"));
 				produto.setFabricacao(rs.getDate("fabricacao").toLocalDate());
 				produto.setVencimento(rs.getDate("vencimento").toLocalDate());
@@ -250,6 +262,31 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setObs(rs.getString("obs"));
 				
 				produtos.add(produto);
+				
+				
+				
+				/*
+				 * 
+				 * 
+				 * 
+				 * 		// write binary stream into file
+			            File file = new File(filename);
+			            FileOutputStream output = new FileOutputStream(file);
+			 
+			            System.out.println("Writing to file " + file.getAbsolutePath());
+			            while (rs.next()) {
+			                InputStream input = rs.getBinaryStream("resume");
+			                byte[] buffer = new byte[1024];
+			                while (input.read(buffer) > 0) {
+			                    output.write(buffer);
+			                }
+			            }
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 * */
 				
 			}
 			

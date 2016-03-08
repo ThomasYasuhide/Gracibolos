@@ -18,7 +18,7 @@ public class Produto implements Serializable{
 	private static final long serialVersionUID = 8787266867192367340L;
 
     private Long id;
-    private Blob foto;
+    private String foto;
     private Integer status;
 	@DateTimeFormat(iso = ISO.DATE)
     private LocalDate fabricacao;
@@ -42,11 +42,11 @@ public class Produto implements Serializable{
 		this.id = id;
 	}
 
-	public Blob getFoto() {
+	public String getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Blob foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 
