@@ -116,7 +116,7 @@
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
 							<label class="control-label">Pesquisar produto:</label>
-							<form action="administrativo-procurar-produto" method="POST">
+							<form action="administrativo-pesquisar-produto" method="POST">
 								<div class="input-group">
 									<input type="text" class="form-control" maxlength="100" placeholder="Informe o código ou o nome do produto para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
 									<span class="input-group-btn">
@@ -148,7 +148,8 @@
 										<th>Estoque</th>
 										<th>Custo</th>
 										<th>Valor</th>
-										
+										<th>Obs</th>
+										<th>Ações</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -169,6 +170,7 @@
 											<td>${produto.estoque}</td>
 											<td>${produto.custo}</td>
 											<td>${produto.valor}</td>
+											<td>${produto.obs}</td>
 		                					<td>
 		                						<button id="edit-produto" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
 		                						<button id="delete-produto" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
@@ -231,9 +233,10 @@
 
 											<div class="col-xs-6 col-md-3">
 												<label class="control-label">Foto do produto:</label>
-												<a href="">
-													<img class="thumbnail" src="resources/img/model.png" width="100%" height="100%" alt="...">
-												</a>
+												<label for="foto">
+													<img id="foto_view" class="thumbnail" src="resources/img/model.png" width="100%" height="100%" alt="..." onclick="" >
+												</label>
+												<input type="file" id="foto" name="foto" class="hidden" accept="image/*">
 											</div>
 
 											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
@@ -245,12 +248,12 @@
 											</div>
 
 											<div class="input-margin col-xs-12 col-sm-12 col-md-3">
-												<label class="control-label" for="codigo">Data de fabricação*:</label>
+												<label class="control-label" for="fabricacao">Data de fabricação*:</label>
 												<input type="date" id="fabricacao" class="form-control" placeholder="Escolha a data de fabricação" name="fabricacao" required>
 											</div>
 											
 											<div class="input-margin col-xs-12 col-sm-12 col-md-3">
-												<label class="control-label" for="codigo">Data de vencimento*:</label>
+												<label class="control-label" for="vencimento">Data de vencimento*:</label>
 												<input type="date" id="vencimento" class="form-control" placeholder="Escolha a data de vencimento" name="vencimento" required>
 											</div>
 											
@@ -275,7 +278,7 @@
 
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
 												<label class="control-label" for="peso">Peso:</label>
-												<input type="text" class="form-control" name="peso" maxlength="20" placeholder="0.000">
+												<input id="peso" type="text" class="form-control" name="peso" maxlength="20" placeholder="0.000">
 											</div>
 
 											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
@@ -289,17 +292,17 @@
 											
 											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="estoque">Estoque:</label>
-												<input type="number" min=0 class="form-control" pattern="[0-9]+" maxlength=""  name="estoque" value="0">
+												<input id="estoque" type="number" min=0 class="form-control" pattern="[0-9]+" maxlength=""  name="estoque" value="0">
 											</div>
 											
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
 												<label class="control-label" for="custo">Custo:</label>
-												<input type="text" class="form-control" name="custo" max="999999" placeholder="0,00">
+												<input id="custo" type="text" class="form-control" name="custo" max="999999" placeholder="0,00">
 											</div>
 
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
 												<label class="control-label" for="valor">Valor*:</label>
-												<input type="text" class="form-control" name="valor" maxlength="20" placeholder="0,00" required>
+												<input id="valor" type="text" class="form-control" name="valor" maxlength="20" placeholder="0,00" required>
 											</div>
 
 											<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -578,7 +581,7 @@
             var table = $('#lista-produtos').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 2, 3, 4, 7, 8, 9, 10 ],
+                        "targets": [ 0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12],
                         "visible": false
                     }
                 ]
@@ -617,34 +620,37 @@
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
             $('#lista-produtos tbody').on( 'click', '#edit-produto', function () {
-            	
+
             	 //Altera dinamicamente o titulo do modal.
             	$('#modal-subtitle').text("Alterar produto");
-            	
+
             	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
 				$("#produto-form").attr("action","administrativo-alterar-produto");
-				
+
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
-				
+
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
-                
+
            		//Apresenta o modal de exclusão na tela.
            		$('#modal-produto').modal('show');
-					
+
 				//Preenche os determinados campos com os conteudos.
 				$('#id').val(data[0]);
-				$('#foto').val(data[1]);
+				$('#foto_view').val(data[1]);
 				$('#status').val(data[2]);
-				$('#tipo').val(data[3]);
-				$('#estoque').val(data[4]);
+				$('#fabricacao').val(data[3]);
+				$('#vencimento').val(data[4]);
 				$('#codigo').val(data[5]);
 				$('#nome').val(data[6]);
-				$('#peso').val(data[7]);
-				$('#unidade').val(data[8]);
-				$('#custo').val(data[9]);
-				$('#valor').val(data[10]);
+				$('#tipo').val(data[7]);
+				$('#peso').val(data[8]);
+				$('#unidade').val(data[9]);
+				$('#estoque').val(data[10]);
+				$('#custo').val(data[11]);
+				$('#valor').val(data[12]);
+				$('#obs').val(data[13]);
 
 			});
 

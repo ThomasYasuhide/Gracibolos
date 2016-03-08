@@ -7,6 +7,7 @@ package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Blob;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,7 +18,7 @@ public class Produto implements Serializable{
 	private static final long serialVersionUID = 8787266867192367340L;
 
     private Long id;
-    private byte[] foto;
+    private Blob foto;
     private Integer status;
 	@DateTimeFormat(iso = ISO.DATE)
     private LocalDate fabricacao;
@@ -40,15 +41,15 @@ public class Produto implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public byte[] getFoto() {
+
+	public Blob getFoto() {
 		return foto;
 	}
-	
-	public void setFoto(byte[] foto) {
+
+	public void setFoto(Blob foto) {
 		this.foto = foto;
 	}
-	
+
 	public Integer getStatus() {
 		return status;
 	}

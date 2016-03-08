@@ -153,8 +153,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 			ps.close();
 			conn.close();
 			
-		}
-		catch (Exception e) {
+		}catch (Exception e) {
 			System.out.println("Houve um erro ao alterar o colaborador");
 			throw new Exception("Houve um erro ao alterar o colaborador");
 		}

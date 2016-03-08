@@ -12,8 +12,7 @@ public class ProdutoAlterar {
 		Produto p1 = new Produto();
 		BigDecimal custo = new BigDecimal(25.69);
 		BigDecimal valor = new BigDecimal(32.00);
-		//BigDecimal peso = new BigDecimal(4.00);		
-		byte [] foto = new  byte [ 100 ]; 
+		//BigDecimal peso = new BigDecimal(4.00);	
 		
 		p1.setId(1L);
 		p1.setStatus(1);
@@ -25,7 +24,6 @@ public class ProdutoAlterar {
 		p1.setUnidade(5L);
 		//p1.setPeso(peso);
 		//p1.setReceita("adsfgahakj d9aja0fdja9");
-		p1.setFoto(foto);
 		
 		
 		ProdutoDao dao = new ProdutoDao();

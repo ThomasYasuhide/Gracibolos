@@ -14,6 +14,7 @@ import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.ColaboradorDao;
 import br.com.gracibolos.jdbc.dao.EstadoDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
+import br.com.gracibolos.jdbc.dao.ProdutoDao;
 import br.com.gracibolos.jdbc.model.Cidade;
 import br.com.gracibolos.jdbc.model.Cliente;
 import br.com.gracibolos.jdbc.model.Colaborador;
@@ -40,52 +41,109 @@ public class AdministrativoController {
 	//PRODUTOS
 	@RequestMapping("/administrativo-produtos")
 	public ModelAndView produtos(){
-		System.out.println("Entrou na pagina de listamgem de produtos");
+		System.out.println("Entrou na pagina de listagem de produtos");
 		return new ModelAndView("administrativo/produtos");
 	}
 	
 	//INCLUIR NOVO FORNECEDOR
-		@RequestMapping("/administrativo-incluir-produto")
-		public ModelAndView incluir_produto(Produto produto){
-			System.out.println("Entrou na servlet de inclusão de um novo produto");
-			
-			boolean status = false;
-			
-			System.out.println(produto.getId());
-			System.out.println(produto.getFoto());
-			System.out.println(produto.getStatus());
-			System.out.println(produto.getFabricacao());
-			System.out.println(produto.getVencimento());
-			System.out.println(produto.getCodigo());
-			System.out.println(produto.getNome());
-			System.out.println(produto.getTipo());
-			System.out.println(produto.getPeso());
-			System.out.println(produto.getUnidade());
-			System.out.println(produto.getEstoque());
-			System.out.println(produto.getCusto());
-			System.out.println(produto.getValor());
-			System.out.println(produto.getObs());
-		    
-			//FornecedorDao fornecedorDao = new FornecedorDao();  EXCLUIR
-			
-			try {
-				/*
-				if(fornecedorDao.inserir(fornecedor)){
-					status = true;
-				}else{
-					status = false;
-				}
-				*/
-			} catch (Exception e) {
-				e.printStackTrace();
+	@RequestMapping("/administrativo-incluir-produto")
+	public ModelAndView incluir_produto(Produto produto){
+		System.out.println("Entrou na servlet de inclusão de um novo produto");
+		
+		boolean status = false;
+		
+	    ProdutoDao produtoDao = new ProdutoDao();
+		
+		try {
+			if(produtoDao.inserir(produto)){
+				status = true;
+			}else{
+				status = false;
 			}
-			
-			ModelAndView mv = new ModelAndView();
-			mv.setViewName("administrativo/produtos");
-			mv.addObject("incluir", status);
-
-			return mv;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/produtos");
+		mv.addObject("incluir", status);
+
+		return mv;
+	}
+	
+	//AlTERAR PRODUTO
+	@RequestMapping("/administrativo-alterar-produto")
+	public ModelAndView alterar_produto(Produto produto){
+		System.out.println("Entrou na pagina de alteração de produto");
+
+		boolean status = false;
+		
+		ProdutoDao produtoDao = new ProdutoDao();
+		
+		try {
+			if(produtoDao.alterar(produto)){
+				status = true;
+			}else{
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/fornecedores");
+		mv.addObject("alterar", status);
+		
+		return mv;
+	}
+	
+	//EXCLUIR PRODUTO
+	@RequestMapping("/administrativo-remover-produto")
+	public ModelAndView excluir_produto(Produto produto){
+		System.out.println("Entrou na pagina de exclusão de produto");
+		
+		boolean status = false;
+		
+		ProdutoDao produtoDao = new ProdutoDao();
+		
+		try {
+			if(produtoDao.excluir(produto)){
+				status = true;
+			}else{
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/produtos");
+		mv.addObject("excluir", status);
+		
+		return mv;
+	}
+	
+	//PESQUISAR PRODUTOS
+	@RequestMapping("/administrativo-pesquisar-produto")
+	public ModelAndView pesquisar_produto(String pesquisa){
+		System.out.println("Realizou a pesquisa de produto");
+		
+		ProdutoDao produtoDao = new ProdutoDao();
+		
+		List<Produto> produtos = null;
+		
+		try {
+			produtos = produtoDao.pesquisar(pesquisa);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    
+	    ModelAndView mv = new ModelAndView();
+	    mv.setViewName("administrativo/produtos");
+	    mv.addObject("produtos", produtos);
+	    
+	    return mv;
+	}
 		
 		
 	/*
@@ -139,7 +197,7 @@ public class AdministrativoController {
 		return mv;
 	}
 	
-	//AlTERAR CLIENTE
+	//AlTERAR FORNECEDOR
 	@RequestMapping("/administrativo-alterar-fornecedor")
 	public ModelAndView alterar_fornecedor(Fornecedor fornecedor){
 		System.out.println("Entrou na pagina de alteração de fornecedor");
