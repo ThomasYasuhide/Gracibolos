@@ -1,7 +1,5 @@
 package br.com.gracibolos.jdbc.dao;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.Part;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Produto;
@@ -28,8 +28,6 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		
 		boolean status = false;
 		PreparedStatement ps = null;
-        InputStream inputStream = null;
-        File file = null;
         
 		String sql = "INSERT INTO produto(foto, status, fabricacao, vencimento, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
@@ -37,12 +35,14 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			
 			ps = conn.prepareStatement(sql);
 			
-			file = new File(produto.getFoto());
-    		inputStream = new FileInputStream(file);
-    		
-    		
-			ps.setBlob(1, inputStream);
+			System.out.println(produto.getFoto().getOriginalFilename());
+			System.out.println(produto.getFoto().getName());
+			System.out.println(produto.getFoto().getSize());
+			System.out.println(produto.getFoto().getContentType());
 			
+			InputStream is = produto.getFoto().getInputStream();
+			    		
+			ps.setBlob(1, is);
 			
 			ps.setInt(2, produto.getStatus());
 			

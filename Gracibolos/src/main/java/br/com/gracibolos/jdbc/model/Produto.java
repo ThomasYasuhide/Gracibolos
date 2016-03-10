@@ -1,4 +1,5 @@
 /*
+
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -7,18 +8,18 @@ package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Blob;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Produto implements Serializable{
     
 	private static final long serialVersionUID = 8787266867192367340L;
 
     private Long id;
-    private String foto;
+    private MultipartFile foto;
     private Integer status;
 	@DateTimeFormat(iso = ISO.DATE)
     private LocalDate fabricacao;
@@ -42,11 +43,11 @@ public class Produto implements Serializable{
 		this.id = id;
 	}
 
-	public String getFoto() {
+	public MultipartFile getFoto() {
 		return foto;
 	}
 
-	public void setFoto(String foto) {
+	public void setFoto(MultipartFile foto) {
 		this.foto = foto;
 	}
 
