@@ -1,5 +1,6 @@
 package br.com.gracibolos.controller;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,9 @@ public class AdministrativoController {
 		
 	    ProdutoDao produtoDao = new ProdutoDao();
 		
+	    //InputStream is = produto.getFoto().getInputStream();
+		
+	    
 		try {
 			if(produtoDao.inserir(produto)){
 				status = true;

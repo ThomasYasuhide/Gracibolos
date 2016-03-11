@@ -12,14 +12,13 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-import org.springframework.web.multipart.MultipartFile;
 
 public class Produto implements Serializable{
     
 	private static final long serialVersionUID = 8787266867192367340L;
 
     private Long id;
-    private MultipartFile foto;
+    private String foto;
     private Integer status;
 	@DateTimeFormat(iso = ISO.DATE)
     private LocalDate fabricacao;
@@ -43,11 +42,11 @@ public class Produto implements Serializable{
 		this.id = id;
 	}
 
-	public MultipartFile getFoto() {
+	public String getFoto() {
 		return foto;
 	}
 
-	public void setFoto(MultipartFile foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 

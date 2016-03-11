@@ -1,6 +1,5 @@
 package br.com.gracibolos.jdbc.dao;
 
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -9,8 +8,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.Part;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Produto;
@@ -35,16 +32,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			
 			ps = conn.prepareStatement(sql);
 			
-			System.out.println(produto.getFoto().getOriginalFilename());
-			System.out.println(produto.getFoto().getName());
-			System.out.println(produto.getFoto().getSize());
-			System.out.println(produto.getFoto().getContentType());
-			
-			InputStream is = produto.getFoto().getInputStream();
-			    		
-			ps.setBlob(1, is);
-			
-			ps.setInt(2, produto.getStatus());
+			ps.setString(1, produto.getFoto());
 			
 			if(produto.getFabricacao() != null){
 				ps.setDate(3, Date.valueOf(produto.getFabricacao()));
@@ -101,7 +89,9 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){
 			
 			ps = conn.prepareStatement(sql);
-			//ps.setBlob(1, produto.getFoto());
+
+			ps.setString(1, produto.getFoto());
+			
 			ps.setInt(2, produto.getStatus());
 			
 			if(produto.getFabricacao() != null){
@@ -194,7 +184,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			{
 				Produto produto = new Produto();
 				produto.setId(rs.getLong("id"));
-				//produto.setFoto(rs.getBlob("foto"));
+				produto.setFoto(rs.getString("foto"));
 				produto.setStatus(rs.getInt("status"));
 				produto.setFabricacao(rs.getDate("fabricacao").toLocalDate());
 				produto.setVencimento(rs.getDate("vencimento").toLocalDate());
@@ -224,7 +214,14 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		}
 		return produtos;
 	}
-
+	
+	/*
+	 * PESQUISAR CLIENTES
+	 * 
+	 * Este método tem como principal objetivo realizar uma consulta ao banco e retornar todos os dados dos produtos.
+	 * 
+	 * */
+	
 	@Override
 	public List<Produto> pesquisar(String pesquisa) throws Exception{
 		
@@ -247,7 +244,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			while(rs.next()) {
 				Produto produto = new Produto();
 				produto.setId(rs.getLong("id"));
-				//produto.setFoto(rs.getBlob("foto"));
+				produto.setFoto("resources/img/produtos/"+rs.getString("foto"));
 				produto.setStatus(rs.getInt("status"));
 				produto.setFabricacao(rs.getDate("fabricacao").toLocalDate());
 				produto.setVencimento(rs.getDate("vencimento").toLocalDate());
@@ -262,31 +259,6 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setObs(rs.getString("obs"));
 				
 				produtos.add(produto);
-				
-				
-				
-				/*
-				 * 
-				 * 
-				 * 
-				 * 		// write binary stream into file
-			            File file = new File(filename);
-			            FileOutputStream output = new FileOutputStream(file);
-			 
-			            System.out.println("Writing to file " + file.getAbsolutePath());
-			            while (rs.next()) {
-			                InputStream input = rs.getBinaryStream("resume");
-			                byte[] buffer = new byte[1024];
-			                while (input.read(buffer) > 0) {
-			                    output.write(buffer);
-			                }
-			            }
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 * */
 				
 			}
 			
