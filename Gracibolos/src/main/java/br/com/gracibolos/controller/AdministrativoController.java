@@ -14,12 +14,14 @@ import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.ColaboradorDao;
 import br.com.gracibolos.jdbc.dao.EstadoDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
+import br.com.gracibolos.jdbc.dao.MateriaPrimaDao;
 import br.com.gracibolos.jdbc.dao.ProdutoDao;
 import br.com.gracibolos.jdbc.model.Cidade;
 import br.com.gracibolos.jdbc.model.Cliente;
 import br.com.gracibolos.jdbc.model.Colaborador;
 import br.com.gracibolos.jdbc.model.Estado;
 import br.com.gracibolos.jdbc.model.Fornecedor;
+import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Produto;
 
 @Controller
@@ -557,6 +559,139 @@ public class AdministrativoController {
 		
 	    return cidades;
 		
+	}
+	
+	/*
+	 * 
+	 * ###################### MATÉRIA PRIMA ######################
+	 * 
+	 * */
+	
+	//MATÉRIA PRIMA
+	@RequestMapping("/administrativo-materiaprima")
+	public ModelAndView materiaPrima(){
+		System.out.println("Entrou na servlet de listagem de matéria prima");
+						
+		return new ModelAndView("administrativo/materiaprima");
+	}
+		
+	//INCLUIR NOVA MATÉRIA PRIMA
+	@RequestMapping("/administrativo-incluir-materiaprima")
+	public ModelAndView incluir_materiaPrima(MateriaPrima materiaPrima){
+		System.out.println("Entrou na servlet de inclusão de uma nova materiaPrima");
+			
+		boolean status = false;
+		    
+		MateriaPrimaDao dao = new MateriaPrimaDao();			
+			
+		try 
+		{
+			if(dao.inserir(materiaPrima))
+			{
+				status = true;
+			}
+			else
+			{
+				status = false;
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/materiaprima");
+		mv.addObject("incluir", status);
+
+		return mv;
+	}
+		
+	//AlTERAR MATÉRIA PRIMA
+	@RequestMapping("/administrativo-alterar-materiaprima")
+	public ModelAndView alterar_materiaPrima(MateriaPrima materiaPrima){
+		System.out.println("Entrou na pagina de alteração de materiaPrima");
+
+		boolean status = false;		   
+		    
+		MateriaPrimaDao materiaPrimaDao = new MateriaPrimaDao();			
+			
+		try
+		{
+			if(materiaPrimaDao.alterar(materiaPrima))
+			{
+				status = true;
+			}
+			else
+			{
+				status = false;
+			}
+		}
+		catch (Exception e) 
+		{			
+			e.printStackTrace();
+		}
+			
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/materiaprima");
+		mv.addObject("alterar", status);
+			
+		return mv;
+	}
+		
+	//EXCLUIR MATÉRIA PRIMA
+	@RequestMapping("/administrativo-remover-materiaprima")
+	public ModelAndView excluir_materiaPrima(MateriaPrima materiaPrima){
+		System.out.println("Entrou na pagina de exclusão de materiaprima");
+			
+		boolean status = false;	
+			
+	    MateriaPrimaDao materiaPrimaDao = new MateriaPrimaDao();
+			
+		try 
+		{
+			if(materiaPrimaDao.excluir(materiaPrima))
+			{
+				status = true;
+			}
+			else
+			{
+				status = false;
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+			
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/materiaprima");
+		mv.addObject("excluir", status);			
+			
+		return mv;
+	}
+		
+	//PESQUISAR MATÉRIA PRIMA
+	@RequestMapping("/administrativo-procurar-materiaprima")
+	public ModelAndView pesquisar_materiaPrima(String pesquisa){
+		System.out.println("Realizou a pesquisa de matéria prima");
+			
+		MateriaPrimaDao dao = new MateriaPrimaDao();
+		List<MateriaPrima> listaDeMateriaPrima = null;
+		try
+		{
+			listaDeMateriaPrima = dao.pesquisar(pesquisa);
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+				    
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/materiaprima");
+		mv.addObject("materiaprima", listaDeMateriaPrima);
+		    
+	    return mv;
 	}
 	
 }

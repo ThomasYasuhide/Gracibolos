@@ -133,7 +133,43 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 	
 	@Override
 	public List<MateriaPrima> pesquisar(String pesquisa) throws Exception{
-		return null;
+		
+		List<MateriaPrima> materiasPrimas = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT id, marca, tipo, qtd, descricao, foto FROM materiaPrima WHERE marca = ? OR tipo LIKE ? OR descricao = ?";
+				
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+						
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, pesquisa);
+			ps.setString(2, "%"+pesquisa+"%");
+			ps.setString(3, pesquisa);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()){
+							
+				MateriaPrima mp = new MateriaPrima();
+				
+				mp.setId(rs.getLong("id"));
+				mp.setMarca(rs.getString("marca"));
+				mp.setTipo(rs.getString("tipo"));
+				mp.setQtd(rs.getBigDecimal("qtd"));
+				mp.setDescricao(rs.getString("descricao"));
+				mp.setFoto(rs.getBytes("foto"));
+				materiasPrimas.add(mp);
+			}
+			
+			ps.close();
+			rs.close();
+			conn.close();
+					
+		} catch (Exception e) {
+			System.out.println("Houve um erro ao pesquisar o matéria prima");
+		}
+		
+		return materiasPrimas;
 	}
 
 }

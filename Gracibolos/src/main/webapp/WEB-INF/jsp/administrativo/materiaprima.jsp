@@ -21,7 +21,7 @@
     <link href="resources/css/datatables.css" rel="stylesheet">
 
 	<!-- Titulo da página -->
-	<title>Graci Bolos | Colaboradores</title>
+	<title>Graci Bolos | Matéria-prima</title>
 
 </head>
 
@@ -41,11 +41,9 @@
 
 					<!-- ############################################################ CABEÇALHO ############################################################ -->
 					<header>
-						<h2 class="">Colaboradores</h2>
-						<h4 class="">Lista de colaboradores</h4>
+						<h2 class="">Matéria-prima</h2>
+						<h4 class="">Lista de matérias-primas</h4>
 					</header>
-
-					<hr/>
 
 					<!-- ############################################################ CONTEUDO ############################################################ -->
 
@@ -56,7 +54,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Colaborador armazenado com sucesso.
+								  <strong>Sucesso!</strong> Matéria-prima armazenada com sucesso.
 								</div>
 							</div>
 						</div>
@@ -66,7 +64,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar incluir o novo colaborador, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar incluir uma nova matéria-prima, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -86,7 +84,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar alterar o colaborador, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar alterar a matéria-prima, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -96,7 +94,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Colaborador foi excluido com sucesso!
+								  <strong>Sucesso!</strong> Matéria-prima foi excluido com sucesso!
 								</div>
 							</div>
 						</div>
@@ -106,7 +104,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar excluir o colaborador, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar excluir a matéria-prima, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -115,10 +113,10 @@
 					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-							<label class="control-label">Pesquisar colaborador:</label>
-							<form action="administrativo-procurar-colaborador" method="POST">
+							<label class="control-label">Pesquisar matéria-prima:</label>
+							<form action="administrativo-procurar-materiaprima" method="POST">
 								<div class="input-group">
-									<input type="text" class="form-control" maxlength="100" placeholder="Informe o nome, CPF ou RG para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
+									<input type="text" class="form-control" maxlength="100" placeholder="Informe o código ou o nome da matéria-prima para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
 									<span class="input-group-btn">
 										<button class="btn btn-default" type="submit">
 											<span class="glyphicon glyphicon-search disabled"></span>
@@ -131,59 +129,33 @@
 					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-							<table id="lista-colaboradores" class="table table-hover display table-settings">
+							<table id="lista-materiasPrimas" class="table table-hover display" cellspacing="0" width="100%">
 								<thead>
 									<!-- Titulos das tabelas  -->
 									<tr>
 										<th>#</th>
-										<th>Status</th>
-										<th>Nivel</th>
-										<th>Usuário</th>
-										<th>Senha</th>
-										<th>Nome</th>
-										<th>CPF</th>
-										<th>RG</th>
-										<th>Endereço</th>
-										<th>Nº</th>
-										<th>Complemento</th>
-										<th>Bairro</th>
-										<th>Estado</th>
-										<th>Cidade</th>
-										<th>CEP</th>
-										<th>Telefone</th>
-										<th>Celular</th>
-										<th>E-mail</th>
-										<th>Observaçoes</th>
-										<th>Ações</th>
+										<th>Marca</th>
+										<th>Tipo</th>
+										<th>Quantidade</th>
+										<th>Descrição</th>
+										<th>Foto</th>										
 									</tr>
 								</thead>
 								<tbody>
 
 									<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
-									<c:forEach var="colaborador" items="${colaboradores}">
+									<!-- esse items="materiaprima" está vindo da onde? -->
+									<c:forEach var="materiaprima" items="${materiaprima}">
 										<tr>
-											<td>${colaborador.id}</td>
-											<td>${colaborador.status}</td>
-											<td>${colaborador.nivel}</td>
-											<td>${colaborador.usuario}</td>
-											<td>${colaborador.senha}</td>
-											<td>${colaborador.nome}</td>
-											<td>${colaborador.cpf}</td>
-											<td>${colaborador.rg}</td>
-											<td>${colaborador.endereco}</td>
-											<td>${colaborador.numero}</td>
-											<td>${colaborador.complemento}</td>
-											<td>${colaborador.bairro}</td>
-											<td>${colaborador.estado}</td>
-											<td>${colaborador.cidade}</td>
-											<td>${colaborador.cep}</td>
-											<td>${colaborador.tel}</td>
-											<td>${colaborador.cel}</td>
-											<td>${colaborador.email}</td>
-											<td>${colaborador.obs}</td>
+											<td>${materiaprima.id}</td>
+											<td>${materiaprima.marca}</td>
+											<td>${materiaprima.tipo}</td>
+											<td>${materiaprima.qtd}</td>
+											<td>${materiaprima.descricao}</td>
+											<td>${materiaprima.foto}</td>
 		                					<td>
-		                						<button id="edit-colaborador" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-		                						<button id="delete-colaborador" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+		                						<button id="edit-materiaPrima" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
+		                						<button id="delete-materiaPrima" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
 		                					</td>
 										</tr>
 									</c:forEach>
@@ -194,7 +166,7 @@
 
 					<div class="row">
 						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
-							<a href="" id="incluir-colaborador-modal" data-toggle="modal" data-target="#modal-colaborador" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir novo colaborador</a>
+							<a href="" id="incluir-materiaPrima-modal" data-toggle="modal" data-target="#modal-materiaPrima" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova matéria-prima</a>
 						</div>
 					</div>
 
@@ -204,24 +176,20 @@
 		</div>
 	</div>
 	
-
-
-
-
 	<!--
 
-	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR ############################################################
+	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DA MATÉRIA-PRIMA ############################################################
 
 	-->
-	<div class="modal fade" id="modal-colaborador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="modal-materiaPrima" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 	    	
-	    		<form id="colaborador-form" method="POST">
+	    		<form id="materiaPrima-form" method="POST">
 	    
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h3 id="modal-title">COLABORADORES</h3>
+						<h3 id="modal-title">MATÉRIA-PRIMA</h3>
 						<h4 id="modal-subtitle"></h4>
 					</div>
 
@@ -230,116 +198,104 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-								<div class="hidden">
-									<label class="control-label" for="id">Nº colaborador:</label>
-									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
-								</div>
+								<!-- ABAS -->
+								<ul class="nav nav-tabs">
+									<li class="active"><a data-toggle="tab" href="#info">Informações da matéria-prima</a></li>
+									<li><a data-toggle="tab" href="#receita">Receita do produto</a></li>
+								</ul>
 
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
-									<label class="control-label" for="status">Status:</label>
-									<select id="status" name="status" class="form-control" required>
-										<option selected value="1">Ativado</option>
-										<option value="0">Desativado</option>
-									</select>
-								</div>
+									<div class="tab-content">
 
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
-									<label class="control-label" for="nivel">Acesso:</label>
-									<select id="nivel" name="nivel" class="form-control" required>
-										<option selected value="1">Operacional</option>
-										<option value="2">Administrador</option>
-									</select>
-								</div>
+										<div id="info" class="tab-pane fade in active">
+											
+											<div class="hidden">
+												<label class="control-label" for="id">Nº matéria-prima:</label>
+												<input type="text" id="id" name="id" placeholder="Digite o número de ID" class="form-control" />
+											</div>
 
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="telefone">Usuario*:</label>
-									<input type="text" id="usuario" name="usuario" placeholder="Digite o seu usuário" class="form-control" maxlength="20" required/>
-								</div>
+											<div class="col-xs-6 col-md-3">
+												<label class="control-label">Foto da matéria-prima:</label>
+												<a href="">
+													<img class="thumbnail" src="resources/img/model.png" width="100%" height="100%" alt="...">
+												</a>
+											</div>												
+											
+											<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+												<label class="control-label" for="marca">Marca*:</label>
+												<input type="text" id="marca" class="form-control" maxlength="20" placeholder="Digite a marca da matéria-prima" name="marca" required>
+											</div> 
 
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="celular">Senha*:</label>
-									<input type="password" id="senha" name="senha" placeholder="Senha" class="form-control" maxlength="20" required/>
-								</div>
+											<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+												<label class="control-label" for="tipo">Tipo*:</label>
+												<input type="text" id="tipo" class="form-control" maxlength="100" placeholder="Digite o tipo da matéria-prima" name="tipo" required>
+											</div> 		
+											
+											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
+												<label class="control-label" for="qtd">Quantidade:</label>
+												<input type="text" class="form-control" name="qtd" max="999999" placeholder="0,00">
+											</div>
+											
+											<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+												<label class="control-label" for="descricao">Descrição*:</label>
+												<input type="text" id="descricao" class="form-control" maxlength="100" placeholder="Digite uma descrição da matéria-prima" name="descricao" required>
+											</div> 	
 
-								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-									<label class="control-label" for="nome" id="nome_lbl">Nome*:</label>
-									<input type="text" id="nome" name="nome" placeholder="Digite seu nome aqui" class="form-control" maxlength="100" required/>
-								</div> 
+											
+										<!-- Depois tem q excluir a aba receita, da pagina matéria-prima -->
+										<div id="receita" class="tab-pane fade">
+											
+											<table class="input-margin table display" cellspacing="0" width="100%">
+												<thead>
+													<!-- Titulos das tabelas  -->
+													<tr>
+														<th>Nome</th>
+														<th>Medida</th>
+														<th>Unidade</th>
+														<th>Ações</th>
+													</tr>
+												</thead>
+												<tbody id="lista-materiaprima" >
 
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="cpf" id="cpf_lbl">CPF*:</label>
-									<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" class="form-control" maxlength="11" required/>
-								</div>
+													<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
+												
+													<!-- 	FALTA IMPLEMENTAR 
 
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="rg" id="rg_lbl">RG:</label>
-									<input type="text" id="rg" name="rg" placeholder="00.000.000-0" class="form-control" maxlength="9"/>
-								</div>
+													<c:forEach var="fornecedor" items="${fornecedores}">
+														<tr>
+															<td>${fornecedor.id}</td>
+															<td>${fornecedor.tipopessoa}</td>
+															<td>${fornecedor.nomerazao}</td>
+															<td>${fornecedor.cpfcnpj}</td>
+															<td>${fornecedor.rgie}</td>
+															<td>${fornecedor.endereco}</td>
+						                					<td>
+						                						<button id="edit-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
+						                						<button id="delete-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+						                					</td>
+														</tr>
+													</c:forEach>
 
-								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
-									<label class="control-label" for="endereco">Endereço*:</label>
-									<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" required/>
-								</div>
+													-->
+												</tbody>
+											</table>
+											
+											
+											<div class="row">
+												<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
 
-								<div class="input-margin col-xs-12 col-sm-3 col-md-2">
-									<label class="control-label" for="numero">Numero*:</label>
-									<input type="text" id="numero" name="numero" placeholder="0000" class="form-control" required/>
-								</div>
+													<button class="btn btn-default fullwidth" id="inserir-linha"  >
+														<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Incluir novo ingrediente
+													</button>
 
-								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
-									<label class="control-label" for="complemento">Complemento:</label>
-									<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120"/>
-								</div>
+												</div>
+											</div>
 
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="bairro">Bairro*:</label>
-									<input type="text" id="bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" required/>
-								</div>
+										</div>
 
-								<div class="input-margin col-xs-12 col-sm-2 col-md-3">
-									<label class="control-label" for="estado">Estado*:</label>
-									<select class="form-control" id="estado" name="estado" required >
-										<option selected="selected" disabled="disabled" value="0">Selecione o estado</option>
-										<c:forEach var="estado" items="${estados}">
-											<option value="${estado.id}">${estado.sigla}</option>
-										</c:forEach>
-									</select>
-								</div>
+									</div>
 
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="cidade">Cidade*:</label>
-									<select class="form-control" id="cidade" name="cidade" required >
-										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
-										<c:forEach var="cidade" items="${cidades}">
-											<option value="${cidade.id}">${cidade.nome}</option>
-										</c:forEach>
-									</select>
-								</div>
 
-								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
-									<label class="control-label" for="cep">CEP*:</label>
-									<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="8" required/>
-								</div>
 
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="tel">Tel:</label>
-									<input type="text" id="tel" name="tel" placeholder="(00) 0000-0000" class="form-control" maxlength="10"/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="cel">Cel:</label>
-									<input type="text" id="cel" name="cel" placeholder="(00) 00000-0000" class="form-control" maxlength="11" />
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
-									<label class="control-label" for="email">E-mail:</label>
-									<input type="text" id="email" name="email" class="form-control" placeholder="email@provedor.com.br" maxlength="120"/>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
-									<label class="control-label" for="obs">Observações:</label>
-									<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o colaborador"></textarea>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -359,7 +315,7 @@
 
 	<!--
 
-	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR #########################################################
+	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DA MATÉRIA-PRIMA #########################################################
 
 	-->
 
@@ -370,21 +326,21 @@
 
 	<!--
 
-	############################################################        MODAL DE EXCLUSÃO DE COLABORADOR      ############################################################
+	############################################################        MODAL DE EXCLUSÃO DA MATÉRIA-PRIMA      ############################################################
 
 	-->
 
 
 
-	<!-- Modal de confirmação de exclusão de cliente -->
-	<div class="modal fade" id="excluir-colaborador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<!-- Modal de confirmação de exclusão da matéria-prima -->
+	<div class="modal fade" id="excluir-materiaPrima" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form id="colaborador-delete-form" action="administrativo-remover-colaborador" method="POST">
+				<form id="materiaPrima-delete-form" action="administrativo-remover-materiaprima" method="POST">
 
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Excluir colaborador</h4>
+						<h4 class="modal-title" id="myModalLabel">Excluir matéria-prima</h4>
 					</div>
 					
 					<div class="modal-body">
@@ -392,11 +348,11 @@
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 								<div class="hidden">
-									<label class="control-label" for="id">Nº colaborador:</label>
-									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" />
+									<label class="control-label" for="id">Nº matéria-prima:</label>
+									<input type="text" id="id_delete" name="id" placeholder="Digite o número de ID" class="form-control" />
 								</div>
 
-								<p>Deseja realmente excluir o colaborador?</p>
+								<p>Deseja realmente excluir a matéria-prima selecionada?</p>
 							</div>
 						</div>
 
@@ -416,7 +372,7 @@
 
 	<!--
 
-	############################################################ FIM DO  MODAL DE EXCLUSÃO DE COLABORADOR ############################################################
+	############################################################ FIM DO MODAL DE EXCLUSÃO DA MATÉRIA-PRIMA ############################################################
 
 	-->
 
@@ -429,24 +385,122 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			var lista_materiaprima = $('#lista-materiaprima');
+			
+            $('#inserir-linha').click(function() {
+            	var tabela;
+            	var linha;
+            	var coluna;
+            	var medida;
+            	var materiaprima;
+            	var option
+            	var unidade;
 
-			/*
-			*
-			* DEFINIÇÃO DAS VARIAVEIS
-			*
-			*/
+            	tabela = document.getElementById("lista-materiaprima");
 
-			var combo_estado = $('#estado');
-			var combo_cidade = $('#cidade');
+            	    linha = document.createElement("tr");
+                	linha.setAttribute("id", "item");
 
+                		id_column = document.createElement("td");
+            			id_column.setAttribute("class","hidden");
+                		materiaprima_column = document.createElement("td");
+                		medida_column = document.createElement("td");
+                		unidade_column = document.createElement("td");
+                		acoes_column = document.createElement("td");
+
+                			id = document.createElement("input")
+            			    id.setAttribute("type","text");
+            			    id.setAttribute("id","id");
+            			    id.setAttribute("name","id");
+            			    id.setAttribute("class", "form-control");
+
+            				materiaprima = document.createElement("select");
+            				materiaprima.setAttribute("class", "form-control");
+            			    
+            					option = document.createElement("option");
+            					option.text = "Selecione...";
+            					option.value = "";
+            					option.setAttribute("disabled","disabled");
+            					option.setAttribute("selected","selected");
+            					materiaprima.appendChild(option);
+            					for(var i=0; i<5; i++){
+            						option = document.createElement("option");
+            						option.text = "Materia prima "+i;
+            						materiaprima.appendChild(option);
+            					}
+
+            				medida = document.createElement("input");
+            			    medida.setAttribute("type","text");
+            			    medida.setAttribute("name","medida");
+            			    medida.setAttribute("class","form-control");
+
+            				unidade = document.createElement("select");
+            				unidade.setAttribute("class", "form-control");
+            					option = document.createElement("option");
+            					option.text = "Selecione...";
+            					option.value = "";
+            					option.setAttribute("disabled","disabled");
+            					option.setAttribute("selected","selected");
+            					unidade.appendChild(option);
+            					for(var i=0; i<5; i++){
+            						option = document.createElement("option");
+            						option.text = "Unidade "+i;
+            						unidade.appendChild(option);
+            					}
+            	
+            		//Botão de ação salvar
+            		salvar_btn = document.createElement("button");
+            		salvar_btn.type = "button";
+            		salvar_btn.setAttribute("id","salvar-itemmateriaprima");
+            		salvar_btn.setAttribute("class","btn btn-default margin-right");
+            		salvar_btn.innerHTML = "<i class='material-icons'>save</i>";
+            		salvar_btn.onclick = salvar;
+
+            		//Botão de ação de exclusão
+            		excluir_btn = document.createElement("button");
+            		excluir_btn.type = "button";
+            		excluir_btn.setAttribute("id","delete-itemmateriaprima");
+            		excluir_btn.setAttribute("class","btn btn-default");
+            		excluir_btn.innerHTML = "<i class='material-icons'>clear</i>";
+            		excluir_btn.onclick = excluir;
+
+            	id_column.appendChild(id);
+            	materiaprima_column.appendChild(materiaprima);
+                medida_column.appendChild(medida);
+                unidade_column.appendChild(unidade);	
+            	acoes_column.appendChild(salvar_btn);
+            	acoes_column.appendChild(excluir_btn);
+
+            	linha.appendChild(id_column);
+                linha.appendChild(materiaprima_column);
+                linha.appendChild(medida_column);
+                linha.appendChild(unidade_column);
+                linha.appendChild(acoes_column);
+
+            	tabela.appendChild(linha);
+
+                function salvar(){
+                	for(i=0; i<linha.childNodes.length-1;i++){
+                		 alert(linha.childNodes[i].firstChild.value);
+                	}
+            	}
+
+            	function excluir(){
+            		
+            	    linha.remove();
+            	}
+            });
+	
+            
 			/*
 			*
 			* INDICADOR DE PAGINA DO MENU
 			*
 			*/
 			
-			$('#menu-mob-colaboradores').addClass('active');
-			$('#menu-colaboradores').addClass('active');
+			$('#menu-mob-materiaprima').addClass('active');
+			$('#menu-materiaprima').addClass('active');
 
 			/*
 			*
@@ -455,58 +509,54 @@
 			*/
 			
 			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
-            var table = $('#lista-colaboradores').DataTable({
+            var table = $('#lista-produtos').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 2, 3, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ],
+                        "targets": [ 0, 1, 2, 3, 4, 7, 8, 9, 10 ],
                         "visible": false
                     }
                 ]
             });
+			
 
             /*
 			*
-			* INCLUSÃO DE COLABORADOR
+			* INCLUSÃO DE PRODUTO
 			*
 			*/
 
-            $('#incluir-colaborador-modal').click(function() {
+            $('#incluir-produto-modal').click(function() {
             	
             	//Altera dinamicamente o titulo do modal.
-				$('#modal-subtitle').text("Incluir novo colaborador");
+				$('#modal-subtitle').text("Incluir novo produto");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#colaborador-form").attr("action","administrativo-incluir-colaborador");
+				$("#produto-form").attr("action","administrativo-incluir-produto");
 				
 				//Altera o nome do botão do modal.
-				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir colaborador');
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir produto');
 				
 				//Reset autmaticamente todos os campos do formulário.
-				$('#colaborador-form').each(function(){
+				$('#produto-form').each(function(){
 					this.reset();
 				});
 				
-				//Remove todas as opções do combo cidade.
-				combo_cidade.find('option').remove();
-				
-				//Adiciona opção onde solicita que o usuário selecione uma cidade.
-				combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
 			});
 
             /*
 			*
-			* ALTERAÇÃO DE COLABORADOR
+			* ALTERAÇÃO DE PRODUTO
 			*
 			*/
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
-            $('#lista-colaboradores tbody').on( 'click', '#edit-colaborador', function () {
+            $('#lista-produtos tbody').on( 'click', '#edit-produto', function () {
             	
             	 //Altera dinamicamente o titulo do modal.
-            	$('#modal-subtitle').text("Alterar colaborador");
+            	$('#modal-subtitle').text("Alterar produto");
             	
             	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#colaborador-form").attr("action","administrativo-alterar-colaborador");
+				$("#produto-form").attr("action","administrativo-alterar-produto");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
@@ -514,45 +564,32 @@
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
                 
-                //Passa o ID da cidade e caso existe executa a função callback para abrir o modal e preencher os campos com os dados.
-              	listar_cidades(data[12], function(){
-
-              		//Apresenta o modal de exclusão na tela.
-              		$('#modal-colaborador').modal('show');
+           		//Apresenta o modal de exclusão na tela.
+           		$('#modal-produto').modal('show');
 					
-					//Preenche os determinados campos com os conteudos.
-                    $('#id').val(data[0]);
-                    $('#status').val(data[1]);
-                    $('#nivel').val(data[2]);
-                    $('#usuario').val(data[3]);
-                    $('#senha').val(data[4]);
-    				$('#nome').val(data[5]);
-    				$('#cpf').val(data[6]);
-                    $('#rg').val(data[7]);
-                    $('#endereco').val(data[8]);
-                    $('#numero').val(data[9]);
-    				$('#complemento').val(data[10]);
-    				$('#bairro').val(data[11]);
-    				$('#estado').val(data[12]);
-                    $('#cidade').val(data[13]);
-                    $('#cep').val(data[14]);
-                    $('#tel').val(data[15]);
-    				$('#cel').val(data[16]);
-                    $('#email').val(data[17]);
-    				$('#obs').val(data[18]);
-
-                });
+				//Preenche os determinados campos com os conteudos.
+				$('#id').val(data[0]);
+				$('#foto').val(data[1]);
+				$('#status').val(data[2]);
+				$('#tipo').val(data[3]);
+				$('#estoque').val(data[4]);
+				$('#codigo').val(data[5]);
+				$('#nome').val(data[6]);
+				$('#peso').val(data[7]);
+				$('#unidade').val(data[8]);
+				$('#custo').val(data[9]);
+				$('#valor').val(data[10]);
 
 			});
 
 			/*
 			*
-			* EXCLUSÃO DE COLABORADOR
+			* EXCLUSÃO DE PRODUTO
 			*
 			*/
 	
 			//Define uma ação ao apertar o botão excluir de algum item da tabela.
-            $('#lista-colaboradores tbody').on( 'click', '#delete-colaborador', function () {
+            $('#lista-produtos tbody').on( 'click', '#delete-produto', function () {
 				
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
@@ -561,44 +598,10 @@
                 $('#id_delete').val(data[0]);
 
                 //Apresenta o modal de exclusão na tela.
-				$('#excluir-colaborador').modal('show');
+				$('#excluir-produto').modal('show');
 
             });
 
-            /*
-			*
-			* CIDADES
-			*
-			*/
-
-			//Verifica o evento do mudança do campo estado e chama função listar_cidades passando o ID do estado
-            combo_estado.change(function(){
-				listar_cidades(combo_estado.val());
-			});
-
-			//
-			function listar_cidades(id, callback){
-				
-				$.ajax({
-		            url : 'administrativo-pesquisar-cidade',
-		            method: "POST",
-		            data: {id:id},
-		            success : function(data) {
-
-		            	combo_cidade.find('option').remove();
-
-		            	combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
-						
-		            	$.each(data, function(val, cidade){
-							combo_cidade.append($('<option></option>').val(cidade.id).html(cidade.nome));
-						});
-
-						callback();
-						
-		            }
-		        });
-
-			}
         });
 
 	</script>
