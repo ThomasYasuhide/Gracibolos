@@ -689,7 +689,7 @@ public class AdministrativoController {
 				    
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("administrativo/materiaprima");
-		mv.addObject("materiaprima", listaDeMateriaPrima);
+		mv.addObject("listaDeMateriaPrima", listaDeMateriaPrima);
 		    
 	    return mv;
 	}

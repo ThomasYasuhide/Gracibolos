@@ -129,7 +129,7 @@
 					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-							<table id="lista-materiasPrimas" class="table table-hover display" cellspacing="0" width="100%">
+							<table id="lista-materiaPrima" class="table table-hover display table-settings">
 								<thead>
 									<!-- Titulos das tabelas  -->
 									<tr>
@@ -144,8 +144,7 @@
 								<tbody>
 
 									<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
-									<!-- esse items="materiaprima" está vindo da onde? -->
-									<c:forEach var="materiaprima" items="${materiaprima}">
+									<c:forEach var="materiaprima" items="${listaDeMateriaPrima}">
 										<tr>
 											<td>${materiaprima.id}</td>
 											<td>${materiaprima.marca}</td>
@@ -192,113 +191,48 @@
 						<h3 id="modal-title">MATÉRIA-PRIMA</h3>
 						<h4 id="modal-subtitle"></h4>
 					</div>
-
+					
 					<div class="modal-body">
 						<!-- ################################# CONTEUDO ################################# -->
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-								<!-- ABAS -->
-								<ul class="nav nav-tabs">
-									<li class="active"><a data-toggle="tab" href="#info">Informações da matéria-prima</a></li>
-									<li><a data-toggle="tab" href="#receita">Receita do produto</a></li>
-								</ul>
+								<div class="hidden"> -->
+									<label class="control-label" for="id">Nº matéria-prima:</label>
+									<input type="text" id="id" name="id" placeholder="Digite o número de ID" class="form-control" />
+								</div>
 
-									<div class="tab-content">
-
-										<div id="info" class="tab-pane fade in active">
+								<div class="col-xs-6 col-md-3">
+									<label class="control-label">Foto da matéria-prima:</label>
+									<a href="">
+										<img class="thumbnail" src="resources/img/model.png" width="100%" height="100%" alt="...">
+									</a>
+								</div>												
 											
-											<div class="hidden">
-												<label class="control-label" for="id">Nº matéria-prima:</label>
-												<input type="text" id="id" name="id" placeholder="Digite o número de ID" class="form-control" />
-											</div>
+								<div class="input-margin col-xs-12 col-sm-12 col-md-4">
+									<label class="control-label" for="marca">Marca*:</label>
+									<input type="text" id="marca" class="form-control" maxlength="20" placeholder="Digite a marca da matéria-prima" name="marca" required>
+								</div> 
 
-											<div class="col-xs-6 col-md-3">
-												<label class="control-label">Foto da matéria-prima:</label>
-												<a href="">
-													<img class="thumbnail" src="resources/img/model.png" width="100%" height="100%" alt="...">
-												</a>
-											</div>												
+								<div class="input-margin col-xs-12 col-sm-12 col-md-5">
+									<label class="control-label" for="tipo">Tipo*:</label>
+									<input type="text" id="tipo" class="form-control" maxlength="100" placeholder="Digite o tipo da matéria-prima" name="tipo" required>
+								</div> 		
 											
-											<div class="input-margin col-xs-12 col-sm-12 col-md-3">
-												<label class="control-label" for="marca">Marca*:</label>
-												<input type="text" id="marca" class="form-control" maxlength="20" placeholder="Digite a marca da matéria-prima" name="marca" required>
-											</div> 
-
-											<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-												<label class="control-label" for="tipo">Tipo*:</label>
-												<input type="text" id="tipo" class="form-control" maxlength="100" placeholder="Digite o tipo da matéria-prima" name="tipo" required>
-											</div> 		
+								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
+									<label class="control-label" for="qtd">Quantidade:</label>
+									<input type="text" class="form-control" name="qtd" max="999999" placeholder="0,00">
+								</div>
 											
-											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
-												<label class="control-label" for="qtd">Quantidade:</label>
-												<input type="text" class="form-control" name="qtd" max="999999" placeholder="0,00">
-											</div>
-											
-											<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-												<label class="control-label" for="descricao">Descrição*:</label>
-												<input type="text" id="descricao" class="form-control" maxlength="100" placeholder="Digite uma descrição da matéria-prima" name="descricao" required>
-											</div> 	
+								<div class="input-margin col-xs-12 col-sm-12 col-md-5">
+									<label class="control-label" for="descricao">Descrição*:</label>
+									<input type="text" id="descricao" class="form-control" maxlength="100" placeholder="Digite uma descrição da matéria-prima" name="descricao" required>
+								</div> 	
 
-											
-										<!-- Depois tem q excluir a aba receita, da pagina matéria-prima -->
-										<div id="receita" class="tab-pane fade">
-											
-											<table class="input-margin table display" cellspacing="0" width="100%">
-												<thead>
-													<!-- Titulos das tabelas  -->
-													<tr>
-														<th>Nome</th>
-														<th>Medida</th>
-														<th>Unidade</th>
-														<th>Ações</th>
-													</tr>
-												</thead>
-												<tbody id="lista-materiaprima" >
-
-													<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
-												
-													<!-- 	FALTA IMPLEMENTAR 
-
-													<c:forEach var="fornecedor" items="${fornecedores}">
-														<tr>
-															<td>${fornecedor.id}</td>
-															<td>${fornecedor.tipopessoa}</td>
-															<td>${fornecedor.nomerazao}</td>
-															<td>${fornecedor.cpfcnpj}</td>
-															<td>${fornecedor.rgie}</td>
-															<td>${fornecedor.endereco}</td>
-						                					<td>
-						                						<button id="edit-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-						                						<button id="delete-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
-						                					</td>
-														</tr>
-													</c:forEach>
-
-													-->
-												</tbody>
-											</table>
-											
-											
-											<div class="row">
-												<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
-
-													<button class="btn btn-default fullwidth" id="inserir-linha"  >
-														<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Incluir novo ingrediente
-													</button>
-
-												</div>
-											</div>
-
-										</div>
-
-									</div>
-
-
-
+								
 							</div>
 						</div>
-					</div>
+					</div><!-- 					
 
 					<!-- ################################# FIM DO CONTEUDO ################################# -->
 
@@ -306,7 +240,6 @@
 						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 						<button type="submit" class="btn btn-default" id="modal-action"></button>
 					</div>
-
 
 				</form>
 			</div>
@@ -354,9 +287,7 @@
 
 								<p>Deseja realmente excluir a matéria-prima selecionada?</p>
 							</div>
-						</div>
-
-						
+						</div>						
 					</div>
 
 					<div class="modal-footer">
@@ -509,10 +440,10 @@
 			*/
 			
 			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
-            var table = $('#lista-produtos').DataTable({
+            var table = $('#lista-materiaPrima').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 2, 3, 4, 7, 8, 9, 10 ],
+                        "targets": [ 0, 1],
                         "visible": false
                     }
                 ]
@@ -521,23 +452,23 @@
 
             /*
 			*
-			* INCLUSÃO DE PRODUTO
+			* INCLUSÃO DE MATÉRIA-PRIMA
 			*
 			*/
 
-            $('#incluir-produto-modal').click(function() {
+            $('#incluir-materiaPrima-modal').click(function() {
             	
             	//Altera dinamicamente o titulo do modal.
-				$('#modal-subtitle').text("Incluir novo produto");
+				$('#modal-subtitle').text("Incluir nova materia-prima");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#produto-form").attr("action","administrativo-incluir-produto");
+				$("#materiaPrima-form").attr("action","administrativo-incluir-materiaprima");
 				
 				//Altera o nome do botão do modal.
-				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir produto');
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir materia-prima');
 				
 				//Reset autmaticamente todos os campos do formulário.
-				$('#produto-form').each(function(){
+				$('#materiaPrima-form').each(function(){
 					this.reset();
 				});
 				
@@ -550,13 +481,13 @@
 			*/
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
-            $('#lista-produtos tbody').on( 'click', '#edit-produto', function () {
+            $('#lista-materiaPrima tbody').on( 'click', '#edit-materiaPrima', function () {
             	
             	 //Altera dinamicamente o titulo do modal.
-            	$('#modal-subtitle').text("Alterar produto");
+            	$('#modal-subtitle').text("Alterar materia-prima");
             	
             	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#produto-form").attr("action","administrativo-alterar-produto");
+				$("#materiaPrima-form").attr("action","administrativo-alterar-materiaprima");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
@@ -565,20 +496,15 @@
                 var data = table.row( $(this).parents('tr') ).data();
                 
            		//Apresenta o modal de exclusão na tela.
-           		$('#modal-produto').modal('show');
+           		$('#modal-materiaPrima').modal('show');
 					
 				//Preenche os determinados campos com os conteudos.
 				$('#id').val(data[0]);
-				$('#foto').val(data[1]);
-				$('#status').val(data[2]);
-				$('#tipo').val(data[3]);
-				$('#estoque').val(data[4]);
-				$('#codigo').val(data[5]);
-				$('#nome').val(data[6]);
-				$('#peso').val(data[7]);
-				$('#unidade').val(data[8]);
-				$('#custo').val(data[9]);
-				$('#valor').val(data[10]);
+				$('#marca').val(data[1]);
+				$('#tipo').val(data[2]);
+				$('#qtd').val(data[3]);
+				$('#descricao').val(data[4]);
+				$('#foto').val(data[5]);
 
 			});
 
@@ -589,7 +515,7 @@
 			*/
 	
 			//Define uma ação ao apertar o botão excluir de algum item da tabela.
-            $('#lista-produtos tbody').on( 'click', '#delete-produto', function () {
+            $('#lista-materiaPrima tbody').on( 'click', '#delete-materiaPrima', function () {
 				
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
@@ -598,7 +524,7 @@
                 $('#id_delete').val(data[0]);
 
                 //Apresenta o modal de exclusão na tela.
-				$('#excluir-produto').modal('show');
+				$('#excluir-materiaPrima').modal('show');
 
             });
 
