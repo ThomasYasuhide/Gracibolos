@@ -1,13 +1,24 @@
 package br.com.gracibolos.controller;
 
-import java.io.InputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.gracibolos.jdbc.dao.CidadeDao;
@@ -50,14 +61,42 @@ public class AdministrativoController {
 	
 	//INCLUIR NOVO FORNECEDOR
 	@RequestMapping("/administrativo-incluir-produto")
-	public ModelAndView incluir_produto(Produto produto){
+	public ModelAndView incluir_produto(Produto produto, @RequestParam("file") MultipartFile file, HttpServletRequest request){
 		System.out.println("Entrou na servlet de inclusão de um novo produto");
 		
 		boolean status = false;
 		
 	    ProdutoDao produtoDao = new ProdutoDao();
-		
-	    //InputStream is = produto.getFoto().getInputStream();
+			    
+	    if(file != null) {
+		    produto.setFoto(file.getOriginalFilename().toString());
+		    
+		    try {
+		    	
+		    	// Root Directory.
+		        String uploadRootPath = request.getServletContext().getRealPath("\\resources\\img\\produtos");
+		        System.out.println("uploadRootPath=" + uploadRootPath);
+		 
+		        File uploadRootDir = new File(uploadRootPath);
+		        //
+		        // Create directory if it not exists.
+		        if (!uploadRootDir.exists()) {
+		            uploadRootDir.mkdirs();
+		        }
+		        
+		        File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+		    	
+		    	BufferedOutputStream stream = null;
+		    	stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				FileCopyUtils.copy(file.getInputStream(), stream);
+
+				stream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		    
+	    }
+	    
 		
 	    
 		try {

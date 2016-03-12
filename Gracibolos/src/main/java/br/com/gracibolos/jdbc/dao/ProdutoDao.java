@@ -23,6 +23,22 @@ public class ProdutoDao implements GenericoDao<Produto>{
 	
 	public boolean inserir(Produto produto) throws Exception{
 		
+		/*
+		System.out.println(produto.getFoto());
+		System.out.println(produto.getStatus());
+		System.out.println(produto.getFabricacao());
+		System.out.println(produto.getVencimento());
+		System.out.println(produto.getCodigo());
+		System.out.println(produto.getNome());
+		System.out.println(produto.getTipo());
+		System.out.println(produto.getPeso());
+		System.out.println(produto.getUnidade());
+		System.out.println(produto.getEstoque());
+		System.out.println(produto.getCusto());
+		System.out.println(produto.getValor());
+		System.out.println(produto.getObs());
+		*/
+		
 		boolean status = false;
 		PreparedStatement ps = null;
         
@@ -33,6 +49,8 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			ps = conn.prepareStatement(sql);
 			
 			ps.setString(1, produto.getFoto());
+
+			ps.setInt(2, produto.getStatus());
 			
 			if(produto.getFabricacao() != null){
 				ps.setDate(3, Date.valueOf(produto.getFabricacao()));

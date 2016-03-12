@@ -233,10 +233,10 @@
 
 											<div class="col-xs-6 col-md-3">
 												<label class="control-label">Foto do produto:</label>
-												<label for="foto_upload">
+												<label for="file">
 													<img id="foto" name="foto" class="thumbnail" src="resources/img/model.png" width="100%" height="100%" alt="..." onclick="" >
 												</label>
-												<input type="file" id="foto_upload" name="foto_upload" class="hidden" accept="image/*">
+												<input type="file" id="file" name="file" class="hidden" accept="image/*">
 											</div>
 
 											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
@@ -581,7 +581,7 @@
             var table = $('#lista-produtos').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12],
+                        "targets": [ 0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13 ],
                         "visible": false
                     }
                 ]
@@ -609,6 +609,8 @@
 				$('#produto-form').each(function(){
 					this.reset();
 				});
+				
+				$('#foto').attr("src", "resources/img/model.png");
 				
 			});
 
