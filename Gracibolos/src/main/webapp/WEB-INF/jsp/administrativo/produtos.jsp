@@ -1,7 +1,4 @@
-﻿<!-- http://matheuspiscioneri.com.br/blog/preview-de-imagem-antes-do-upload-filereader/ -->
-
-
-<!-- Define que este documento é uma pagina JSP -->
+﻿<!-- Define que este documento é uma pagina JSP -->
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->
@@ -457,6 +454,24 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			$('#file').on('change', function(){
+				readURL(this);
+			});
+			
+			function readURL(input){
+				
+				if (input.files && input.files[0]) {
+		            var reader = new FileReader();
+		            
+		            reader.onload = function (e) {
+		                $('#foto').attr('src', e.target.result);
+		            }
+		            
+		            reader.readAsDataURL(input.files[0]);
+		        }
+				
+			}
 			
 			var lista_materiaprima = $('#lista-materiaprima');
 			
