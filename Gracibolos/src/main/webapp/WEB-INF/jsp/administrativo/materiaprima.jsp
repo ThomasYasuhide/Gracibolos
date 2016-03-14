@@ -41,9 +41,12 @@
 
 					<!-- ############################################################ CABEÇALHO ############################################################ -->
 					<header>
-						<h2 class="">MATÉRIAS-PRIMAS</h2>
+						<h2 class="">Matéria-prima</h2>
 						<h4 class="">Lista de matérias-primas</h4>
+
 					</header>
+
+					<hr/>
 
 					<!-- ############################################################ CONTEUDO ############################################################ -->
 
@@ -84,7 +87,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar alterar a matéria-prima, favor tente novamente.
+								 <strong>Erro!</strong> Houve algum erro ao tentar alterar a matéria-prima, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -104,7 +107,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar excluir a matéria-prima, favor tente novamente.
+								 <strong>Erro!</strong> Houve algum erro ao tentar excluir a matéria-prima, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -138,7 +141,7 @@
 										<th>Tipo</th>
 										<th>Quantidade</th>
 										<th>Descrição</th>
-										<th>Foto</th>										
+										<th>Foto</th>	
 									</tr>
 								</thead>
 								<tbody>
@@ -175,9 +178,13 @@
 		</div>
 	</div>
 	
+
+
+
+
 	<!--
 
-	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DA MATÉRIA-PRIMA ############################################################
+	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR ############################################################
 
 	-->
 	<div class="modal fade" id="modal-materiaPrima" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -191,7 +198,7 @@
 						<h3 id="modal-title">MATÉRIA-PRIMA</h3>
 						<h4 id="modal-subtitle"></h4>
 					</div>
-					
+
 					<div class="modal-body">
 						<!-- ################################# CONTEUDO ################################# -->
 						<div class="row">
@@ -227,12 +234,11 @@
 								<div class="input-margin col-xs-12 col-sm-12 col-md-5">
 									<label class="control-label" for="descricao">Descrição*:</label>
 									<input type="text" id="descricao" class="form-control" maxlength="100" placeholder="Digite uma descrição da matéria-prima" name="descricao" required>
-								</div> 	
-
+								</div>
 								
 							</div>
 						</div>
-					</div><!-- 					
+					</div>
 
 					<!-- ################################# FIM DO CONTEUDO ################################# -->
 
@@ -241,6 +247,7 @@
 						<button type="submit" class="btn btn-default" id="modal-action"></button>
 					</div>
 
+
 				</form>
 			</div>
 		</div>
@@ -248,7 +255,7 @@
 
 	<!--
 
-	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DA MATÉRIA-PRIMA #########################################################
+	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR #########################################################
 
 	-->
 
@@ -259,13 +266,13 @@
 
 	<!--
 
-	############################################################        MODAL DE EXCLUSÃO DA MATÉRIA-PRIMA      ############################################################
+	############################################################        MODAL DE EXCLUSÃO DE COLABORADOR      ############################################################
 
 	-->
 
 
 
-	<!-- Modal de confirmação de exclusão da matéria-prima -->
+	<!-- Modal de confirmação de exclusão de cliente -->
 	<div class="modal fade" id="excluir-materiaPrima" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -282,12 +289,14 @@
 
 								<div class="hidden">
 									<label class="control-label" for="id">Nº matéria-prima:</label>
-									<input type="text" id="id_delete" name="id" placeholder="Digite o número de ID" class="form-control" />
+									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" />
 								</div>
 
 								<p>Deseja realmente excluir a matéria-prima selecionada?</p>
 							</div>
-						</div>						
+						</div>
+
+						
 					</div>
 
 					<div class="modal-footer">
@@ -303,127 +312,23 @@
 
 	<!--
 
-	############################################################ FIM DO MODAL DE EXCLUSÃO DA MATÉRIA-PRIMA ############################################################
+	############################################################ FIM DO  MODAL DE EXCLUSÃO DE COLABORADOR ############################################################
 
 	-->
 
 
 	<!-- Importação dos arquivos java script -->
 	<script src="resources/js/jquery-2.1.4.js"></script>
-	<script src="resources/js/datatables.js"></script>
+	<script src="resources/js/datatables.js"></script>	
+	<script src="resources/js/maskedinput.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
     
 
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
-			var lista_materiaprima = $('#lista-materiaprima');
 			
-            $('#inserir-linha').click(function() {
-            	var tabela;
-            	var linha;
-            	var coluna;
-            	var medida;
-            	var materiaprima;
-            	var option
-            	var unidade;
 
-            	tabela = document.getElementById("lista-materiaprima");
-
-            	    linha = document.createElement("tr");
-                	linha.setAttribute("id", "item");
-
-                		id_column = document.createElement("td");
-            			id_column.setAttribute("class","hidden");
-                		materiaprima_column = document.createElement("td");
-                		medida_column = document.createElement("td");
-                		unidade_column = document.createElement("td");
-                		acoes_column = document.createElement("td");
-
-                			id = document.createElement("input")
-            			    id.setAttribute("type","text");
-            			    id.setAttribute("id","id");
-            			    id.setAttribute("name","id");
-            			    id.setAttribute("class", "form-control");
-
-            				materiaprima = document.createElement("select");
-            				materiaprima.setAttribute("class", "form-control");
-            			    
-            					option = document.createElement("option");
-            					option.text = "Selecione...";
-            					option.value = "";
-            					option.setAttribute("disabled","disabled");
-            					option.setAttribute("selected","selected");
-            					materiaprima.appendChild(option);
-            					for(var i=0; i<5; i++){
-            						option = document.createElement("option");
-            						option.text = "Materia prima "+i;
-            						materiaprima.appendChild(option);
-            					}
-
-            				medida = document.createElement("input");
-            			    medida.setAttribute("type","text");
-            			    medida.setAttribute("name","medida");
-            			    medida.setAttribute("class","form-control");
-
-            				unidade = document.createElement("select");
-            				unidade.setAttribute("class", "form-control");
-            					option = document.createElement("option");
-            					option.text = "Selecione...";
-            					option.value = "";
-            					option.setAttribute("disabled","disabled");
-            					option.setAttribute("selected","selected");
-            					unidade.appendChild(option);
-            					for(var i=0; i<5; i++){
-            						option = document.createElement("option");
-            						option.text = "Unidade "+i;
-            						unidade.appendChild(option);
-            					}
-            	
-            		//Botão de ação salvar
-            		salvar_btn = document.createElement("button");
-            		salvar_btn.type = "button";
-            		salvar_btn.setAttribute("id","salvar-itemmateriaprima");
-            		salvar_btn.setAttribute("class","btn btn-default margin-right");
-            		salvar_btn.innerHTML = "<i class='material-icons'>save</i>";
-            		salvar_btn.onclick = salvar;
-
-            		//Botão de ação de exclusão
-            		excluir_btn = document.createElement("button");
-            		excluir_btn.type = "button";
-            		excluir_btn.setAttribute("id","delete-itemmateriaprima");
-            		excluir_btn.setAttribute("class","btn btn-default");
-            		excluir_btn.innerHTML = "<i class='material-icons'>clear</i>";
-            		excluir_btn.onclick = excluir;
-
-            	id_column.appendChild(id);
-            	materiaprima_column.appendChild(materiaprima);
-                medida_column.appendChild(medida);
-                unidade_column.appendChild(unidade);	
-            	acoes_column.appendChild(salvar_btn);
-            	acoes_column.appendChild(excluir_btn);
-
-            	linha.appendChild(id_column);
-                linha.appendChild(materiaprima_column);
-                linha.appendChild(medida_column);
-                linha.appendChild(unidade_column);
-                linha.appendChild(acoes_column);
-
-            	tabela.appendChild(linha);
-
-                function salvar(){
-                	for(i=0; i<linha.childNodes.length-1;i++){
-                		 alert(linha.childNodes[i].firstChild.value);
-                	}
-            	}
-
-            	function excluir(){
-            		
-            	    linha.remove();
-            	}
-            });
-	
-            
 			/*
 			*
 			* INDICADOR DE PAGINA DO MENU
@@ -443,12 +348,11 @@
             var table = $('#lista-materiaPrima').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1],
+                        "targets": [ 0 ],
                         "visible": false
                     }
                 ]
             });
-			
 
             /*
 			*
@@ -458,30 +362,32 @@
 
             $('#incluir-materiaPrima-modal').click(function() {
             	
+            	
             	//Altera dinamicamente o titulo do modal.
-				$('#modal-subtitle').text("Incluir nova materia-prima");
+				$('#modal-subtitle').text("Incluir nova matéria-prima");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
 				$("#materiaPrima-form").attr("action","administrativo-incluir-materiaprima");
 				
 				//Altera o nome do botão do modal.
-				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir materia-prima');
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir matéria-prima');
 				
 				//Reset autmaticamente todos os campos do formulário.
 				$('#materiaPrima-form').each(function(){
 					this.reset();
 				});
 				
+				
 			});
 
             /*
 			*
-			* ALTERAÇÃO DE PRODUTO
+			* ALTERAÇÃO DE MATÉRIA-PRIMA
 			*
 			*/
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
-            $('#lista-materiaPrima tbody').on( 'click', '#edit-materiaPrima', function () {
+            $('#lista-materiaPrima tbody').on( 'click', '#edit-materiaPrima', function () {            	
             	
             	 //Altera dinamicamente o titulo do modal.
             	$('#modal-subtitle').text("Alterar materia-prima");
@@ -494,23 +400,24 @@
 				
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
-                
-           		//Apresenta o modal de exclusão na tela.
-           		$('#modal-materiaPrima').modal('show');
+
+              	//Apresenta o modal de exclusão na tela.
+              	$('#modal-materiaPrima').modal('show');
 					
 				//Preenche os determinados campos com os conteudos.
-				$('#id').val(data[0]);
+              	$('#id').val(data[0]);
 				$('#marca').val(data[1]);
 				$('#tipo').val(data[2]);
 				$('#qtd').val(data[3]);
 				$('#descricao').val(data[4]);
 				$('#foto').val(data[5]);
 
-			});
+            });
+
 
 			/*
 			*
-			* EXCLUSÃO DE PRODUTO
+			* EXCLUSÃO DA MATÉRIA-PRIMA
 			*
 			*/
 	
@@ -527,7 +434,7 @@
 				$('#excluir-materiaPrima').modal('show');
 
             });
-
+	
         });
 
 	</script>
