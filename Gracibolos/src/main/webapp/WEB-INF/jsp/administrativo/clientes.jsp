@@ -41,7 +41,7 @@
 
 					<!-- ############################################################ CABEÇALHO ############################################################ -->
 					<header>
-						<h2 class="">Clientes</h2>
+						<h2 class="">CLIENTES</h2>
 						<h4 class="">Lista de clientes</h4>
 					</header>
 
@@ -273,37 +273,37 @@
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="cpfcnpj_inp" id="cpfcnpj_lbl">CPF*:</label>
-									<input type="text" id="cpfcnpj_inp" name="cpfcnpj" placeholder="000.000.000-00" class="form-control" maxlength="14" required/>
+									<input type="text" id="cpfcnpj_inp" name="cpfcnpj" placeholder="000.000.000-00" class="form-control" maxlength="11" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="rgie_inp" id="rgie_lbl">RG:</label>
-									<input type="text" id="rgie_inp" name="rgie" placeholder="00.000.000-0" class="form-control" maxlength="12"/>
+									<input type="text" id="rgie_inp" name="rgie" placeholder="00.000.000-0" class="form-control" maxlength="9"/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
 									<label class="control-label" for="endereco">Endereço*:</label>
-									<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" required/>
+									<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" disabled required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-3 col-md-2">
 									<label class="control-label" for="numero">Numero*:</label>
-									<input type="text" id="numero" name="numero" placeholder="0000" class="form-control" required/>
+									<input type="text" id="numero" name="numero" placeholder="0" class="form-control" disabled required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
 									<label class="control-label" for="complemento">Complemento:</label>
-									<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120"/>
+									<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120" disabled />
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="bairro">Bairro*:</label>
-									<input type="text" id="bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" required/>
+									<input type="text" id="bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" disabled required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="estado">Estado*:</label>
-									<select class="form-control" id="estado" name="estado" required >
+									<select class="form-control" id="estado" name="estado" disabled required >
 										<option selected="selected" disabled="disabled" value="0">Selecione o estado</option>
 										<c:forEach var="estado" items="${estados}">
 											<option value="${estado.id}">${estado.sigla}</option>
@@ -313,7 +313,7 @@
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="cidade">Cidade*:</label>
-									<select class="form-control" id="cidade" name="cidade" required >
+									<select class="form-control" id="cidade" name="cidade" disabled required >
 										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
 										<c:forEach var="cidade" items="${cidades}">
 											<option value="${cidade.id}">${cidade.nome}</option>
@@ -338,7 +338,7 @@
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
 									<label class="control-label" for="email">E-mail:</label>
-									<input type="text" id="email" name="email" class="form-control" placeholder="email@provedor.com.br" maxlength="120"/>
+									<input type="email" id="email" name="email" class="form-control" placeholder="email@provedor.com.br" maxlength="120"/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
@@ -440,12 +440,109 @@
 	<script src="resources/js/jquery-2.1.4.js"></script>
 	<script src="resources/js/datatables.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
+	<script src="resources/js/maskedinput.js"></script>
 	<script src="resources/js/scripts.js"></script>
 	
     
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+	
+			$("#cep").mask("99999-999");
+			$("#cpfcnpj_inp").mask("999.999.999-99");
+			$("#tel").mask("(99) 9999-9999");
+			$("#cel").mask("(99) 99999-9999");
+			
+			$('#tipopessoa').on('change', function(){
+				if($('#tipopessoa').val() == 0){
+					$("#cpfcnpj_inp").mask("999.999.999-99");
+				} else {
+					$("#cpfcnpj_inp").mask("99.999.999/9999-99");
+				}
+			});
+			
+			
+			function limpa_formulário_cep() {
+                // Limpa valores do formulário de cep.
+                $("#endereco").val("");
+                $("#bairro").val("");
+                $("#estado").val(0);
+              	//Remove todas as opções do combo cidade.
+				combo_cidade.find('option').remove();
+				
+				//Adiciona opção onde solicita que o usuário selecione uma cidade.
+				combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
+            }
+            
+            //Quando o campo cep perde o foco.
+            $("#cep").blur(function() {
+				
+            	$("#endereco").prop( "disabled", false );
+            	$("#numero").prop( "disabled", false );
+            	$("#complemento").prop( "disabled", false ); 
+            	$("#bairro").prop( "disabled", false );
+                $("#cidade").prop( "disabled", false );
+                $("#estado").prop( "disabled", false );
+            	
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if(validacep.test(cep)) {
+
+                        //Preenche os campos com "Pesquisando..." enquanto consulta webservice.
+                        $("#endereco").val("Pesquisando...")
+                        $("#bairro").val("Pesquisando...")
+                        $("#estado").val("Pesquisando...")
+                        $("#cidade").val("Pesquisando...")
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                            if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#endereco").val(dados.logradouro);
+                                $("#bairro").val(dados.bairro);
+                                
+                                $("#estado option").filter(function() {
+                                    return $(this).text() == dados.uf;
+                                }).prop("selected", true);
+                                
+                                listar_cidades(combo_estado.val(), function(){
+                                	$("#cidade option").filter(function() {
+                                        return $(this).text() == dados.localidade;
+                                    }).prop("selected", true);
+                                });
+                                
+                            } //end if.
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        alert("Formato de CEP inválido.");
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            });
+			
+			
+			
+			
 
 			/*
 			*
@@ -489,6 +586,13 @@
 
             $('#incluir-cliente-modal').click(function() {
             	
+            	$("#endereco").prop( "disabled", true );
+            	$("#numero").prop( "disabled", true );
+            	$("#complemento").prop( "disabled", true); 
+            	$("#bairro").prop( "disabled", true );
+                $("#cidade").prop( "disabled", true );
+                $("#estado").prop( "disabled", true );
+            	
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir novo cliente");
 				
@@ -522,6 +626,13 @@
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
             $('#lista-clientes tbody').on( 'click', '#edit-cliente', function () {
+            	
+            	$("#endereco").prop( "disabled", false );
+            	$("#numero").prop( "disabled", false );
+            	$("#complemento").prop( "disabled", false ); 
+            	$("#bairro").prop( "disabled", false );
+                $("#cidade").prop( "disabled", false );
+                $("#estado").prop( "disabled", false );
             	
             	 //Altera dinamicamente o titulo do modal.
             	$('#modal-subtitle').text("Alterar cliente");

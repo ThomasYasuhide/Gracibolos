@@ -16,7 +16,7 @@
 							<li id="menu-mob-encomendas"><a href="#"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;Encomendas</a></li>
 							<li id="menu-mob-clientes"><a href="administrativo-clientes"><i class="material-icons">people</i>&nbsp;&nbsp;Clientes</a></li>
 							<li id="menu-mob-produtos"><a href="administrativo-produtos"><i class="material-icons">local_grocery_store</i>&nbsp;&nbsp;Produtos</a></li>
-							<li id="menu-mob-materiaprima"><a href="administrativo-materiaprima"><i class="material-icons">cake</i>&nbsp;&nbsp;Matéria-prima</a></li>
+							<li id="menu-mob-materiaprima"><a href="administrativo-materiaprima"><i class="material-icons">cake</i>&nbsp;&nbsp;Matérias-primas</a></li>
 							<li id="menu-mob-fornecedores"><a href="administrativo-fornecedores"><i class="material-icons">shopping_basket</i>&nbsp;&nbsp; Fornecedores</a></li>
 							<li id="menu-mob-colaboradores"><a href="administrativo-colaboradores"><i class="material-icons">person</i>&nbsp;&nbsp;Colaboradores</a></li>
 							<!-- O href está vazio para o botão não perder o tipo de ponteiro (Deixar assim) -->
