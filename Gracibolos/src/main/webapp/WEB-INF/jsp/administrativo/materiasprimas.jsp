@@ -41,7 +41,7 @@
 
 					<!-- ############################################################ CABEÇALHO ############################################################ -->
 					<header>
-						<h2 class="">Matéria-prima</h2>
+						<h2 class="">MATÉRIAS-PRIMAS</h2>
 						<h4 class="">Lista de matérias-primas</h4>
 					</header>
 

@@ -1,4 +1,7 @@
-﻿<!-- Define que este documento é uma pagina JSP -->
+﻿<!-- http://matheuspiscioneri.com.br/blog/preview-de-imagem-antes-do-upload-filereader/ -->
+
+
+<!-- Define que este documento é uma pagina JSP -->
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->
@@ -41,7 +44,7 @@
 
 					<!-- ############################################################ CABEÇALHO ############################################################ -->
 					<header>
-						<h2 class="">Produtos</h2>
+						<h2 class="">PRODUTOS</h2>
 						<h4 class="">Lista de produtos</h4>
 					</header>
 

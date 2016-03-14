@@ -41,7 +41,7 @@
 
 					<!-- ############################################################ CABEÇALHO ############################################################ -->
 					<header>
-						<h2 class="">Colaboradores</h2>
+						<h2 class="">COLABORADORES</h2>
 						<h4 class="">Lista de colaboradores</h4>
 					</header>
 
@@ -554,6 +554,13 @@
 
             $('#incluir-colaborador-modal').click(function() {
             	
+            	$("#endereco").prop( "disabled", true );
+            	$("#numero").prop( "disabled", true );
+            	$("#complemento").prop( "disabled", true); 
+            	$("#bairro").prop( "disabled", true );
+                $("#cidade").prop( "disabled", true );
+                $("#estado").prop( "disabled", true );
+            	
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir novo colaborador");
 				
@@ -583,6 +590,13 @@
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
             $('#lista-colaboradores tbody').on( 'click', '#edit-colaborador', function () {
+            	
+            	$("#endereco").prop( "disabled", false );
+            	$("#numero").prop( "disabled", false );
+            	$("#complemento").prop( "disabled", false ); 
+            	$("#bairro").prop( "disabled", false );
+                $("#cidade").prop( "disabled", false );
+                $("#estado").prop( "disabled", false );
             	
             	 //Altera dinamicamente o titulo do modal.
             	$('#modal-subtitle').text("Alterar colaborador");

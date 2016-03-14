@@ -41,7 +41,7 @@
 
 					<!-- ############################################################ CABEÇALHO ############################################################ -->
 					<header>
-						<h2 class="">Fornecedores</h2>
+						<h2 class="">FORNECEDORES</h2>
 						<h4 class="">Lista de fornecedores</h4>
 					</header>
 
@@ -271,12 +271,12 @@
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="cpfcnpj_inp" id="cpfcnpj_lbl">CPF*:</label>
-									<input type="text" id="cpfcnpj_inp" name="cpfcnpj" placeholder="000.000.000-00" class="form-control" maxlength="14" required/>
+									<input type="text" id="cpfcnpj_inp" name="cpfcnpj" placeholder="000.000.000-00" class="form-control" maxlength="11" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="rgie_inp" id="rgie_lbl">RG:</label>
-									<input type="text" id="rgie_inp" name="rgie" placeholder="00.000.000-0" class="form-control" maxlength="12"/>
+									<input type="text" id="rgie_inp" name="rgie" placeholder="00.000.000-0" class="form-control" maxlength="9"/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
@@ -562,7 +562,7 @@
             var table = $('#lista-fornecedores').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 2, 3, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ],
+                        "targets": [ 0, 1, 2, 3, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ],
                         "visible": false
                     }
                 ]
@@ -575,6 +575,13 @@
 			*/
 
             $('#incluir-fornecedor-modal').click(function() {
+            	
+            	$("#endereco").prop( "disabled", true );
+            	$("#numero").prop( "disabled", true );
+            	$("#complemento").prop( "disabled", true); 
+            	$("#bairro").prop( "disabled", true );
+                $("#cidade").prop( "disabled", true );
+                $("#estado").prop( "disabled", true );
             	
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir novo fornecedor");
@@ -610,6 +617,13 @@
             //Define uma ação ao apertar o botão editar de algum item da tabela.
             $('#lista-fornecedores tbody').on( 'click', '#edit-fornecedor', function () {
             	
+            	$("#endereco").prop( "disabled", false );
+            	$("#numero").prop( "disabled", false );
+            	$("#complemento").prop( "disabled", false ); 
+            	$("#bairro").prop( "disabled", false );
+                $("#cidade").prop( "disabled", false );
+                $("#estado").prop( "disabled", false );
+            	
             	 //Altera dinamicamente o titulo do modal.
             	$('#modal-subtitle').text("Alterar fornecedor");
             	
@@ -623,7 +637,7 @@
                 var data = table.row( $(this).parents('tr') ).data();
                 
                 //Passa o ID da cidade e caso existe executa a função callback para abrir o modal e preencher os campos com os dados.
-              	listar_cidades(data[9], function(){
+              	listar_cidades(data[12], function(){
 
               		//Apresenta o modal de exclusão na tela.
               		$('#modal-fornecedor').modal('show');
