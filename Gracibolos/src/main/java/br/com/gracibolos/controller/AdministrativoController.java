@@ -59,7 +59,7 @@ public class AdministrativoController {
 		return new ModelAndView("administrativo/produtos");
 	}
 	
-	//INCLUIR NOVO FORNECEDOR
+	//INCLUIR NOVO PRODUTO
 	@RequestMapping("/administrativo-incluir-produto")
 	public ModelAndView incluir_produto(Produto produto, @RequestParam("file") MultipartFile file, HttpServletRequest request){
 		System.out.println("Entrou na servlet de inclusão de um novo produto");
