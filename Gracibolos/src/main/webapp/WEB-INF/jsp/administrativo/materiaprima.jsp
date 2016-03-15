@@ -141,7 +141,8 @@
 										<th>Tipo</th>
 										<th>Quantidade</th>
 										<th>Descrição</th>
-										<th>Foto</th>	
+										<th>Foto</th>
+										<th>Ações</th>
 									</tr>
 								</thead>
 								<tbody>

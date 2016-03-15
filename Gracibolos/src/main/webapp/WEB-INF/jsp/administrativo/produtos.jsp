@@ -297,12 +297,18 @@
 											
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
 												<label class="control-label" for="custo">Custo:</label>
-												<input id="custo" type="text" class="form-control" name="custo" max="999999" placeholder="0,00">
+												<div class="input-group">
+													<span class="input-group-addon">R$</span>
+													<input id="custo" type="text" class="form-control" name="custo" max="999999" placeholder="0,00">
+												</div>
 											</div>
 
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
 												<label class="control-label" for="valor">Valor*:</label>
-												<input id="valor" type="text" class="form-control" name="valor" maxlength="20" placeholder="0,00" required>
+												<div class="input-group">
+													<span class="input-group-addon">R$</span>
+													<input id="valor" type="text" class="form-control" name="valor" maxlength="20"  placeholder="0,00" required>
+												</div>
 											</div>
 
 											<div class="input-margin col-xs-12 col-sm-12 col-md-12">
