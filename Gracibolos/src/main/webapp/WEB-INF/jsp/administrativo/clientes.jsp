@@ -1,4 +1,4 @@
-﻿﻿<!-- Define que este documento é uma pagina JSP -->
+﻿<!-- Define que este documento é uma pagina JSP -->
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->

@@ -57,7 +57,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 			ps.setString(11, fornecedor.getBairro());
 			ps.setInt(12, fornecedor.getEstado());
 			ps.setInt(13, fornecedor.getCidade());
-			ps.setInt(14, fornecedor.getCep());
+			ps.setString(14, fornecedor.getCep());
 			ps.setString(15, fornecedor.getTel());
 			ps.setString(16, fornecedor.getCel());
 			ps.setString(17, fornecedor.getEmail());
@@ -121,7 +121,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 			ps.setString(11, fornecedor.getBairro());
 			ps.setInt(12, fornecedor.getEstado());
 			ps.setInt(13, fornecedor.getCidade());
-			ps.setInt(14, fornecedor.getCep());
+			ps.setString(14, fornecedor.getCep());
 			ps.setString(15, fornecedor.getTel());
 			ps.setString(16, fornecedor.getCel());
 			ps.setString(17, fornecedor.getEmail());
@@ -219,7 +219,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 				fornecedor.setBairro(rs.getString("bairro"));
 				fornecedor.setEstado(rs.getInt("estado"));
 				fornecedor.setCidade(rs.getInt("cidade"));
-				fornecedor.setCep(rs.getInt("cep"));
+				fornecedor.setCep(rs.getString("cep"));
 				fornecedor.setTel(rs.getString("tel"));
 				fornecedor.setCel(rs.getString("cel"));
 				fornecedor.setEmail(rs.getString("email"));
@@ -286,7 +286,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 				fornecedor.setBairro(rs.getString("bairro"));
 				fornecedor.setEstado(rs.getInt("estado"));
 				fornecedor.setCidade(rs.getInt("cidade"));
-				fornecedor.setCep(rs.getInt("cep"));
+				fornecedor.setCep(rs.getString("cep"));
 				fornecedor.setTel(rs.getString("tel"));
 				fornecedor.setCel(rs.getString("cel"));
 				fornecedor.setEmail(rs.getString("email"));

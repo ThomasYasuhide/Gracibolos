@@ -25,7 +25,7 @@ public class Fornecedor implements Serializable{
     private String bairro;
     private int estado;
     private int cidade;
-    private Integer cep;
+    private String cep;
     private String tel;
     private String cel;
     private String email;
@@ -144,11 +144,11 @@ public class Fornecedor implements Serializable{
 		this.cidade = cidade;
 	}
 
-	public Integer getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(Integer cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 

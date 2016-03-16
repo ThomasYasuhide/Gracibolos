@@ -271,7 +271,7 @@
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="cpfcnpj_inp" id="cpfcnpj_lbl">CPF*:</label>
-									<input type="text" id="cpfcnpj_inp" name="cpfcnpj" placeholder="000.000.000-00" class="form-control" maxlength="11" required/>
+									<input type="text" id="cpfcnpj_inp" name="cpfcnpj" placeholder="000.000.000-00" class="form-control" maxlength="14" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
@@ -321,17 +321,17 @@
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
 									<label class="control-label" for="cep">CEP*:</label>
-									<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="8" required/>
+									<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="9" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="tel">Tel:</label>
-									<input type="text" id="tel" name="tel" placeholder="(00) 0000-0000" class="form-control" maxlength="10"/>
+									<input type="text" id="tel" name="tel" placeholder="(00) 0000-0000" class="form-control" maxlength="14"/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="cel">Cel:</label>
-									<input type="text" id="cel" name="cel" placeholder="(00) 00000-0000" class="form-control" maxlength="11" />
+									<input type="text" id="cel" name="cel" placeholder="(00) 00000-0000" class="form-control" maxlength="15" />
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
@@ -434,27 +434,35 @@
 	<script src="resources/js/jquery-2.1.4.js"></script>
 	<script src="resources/js/datatables.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
-	<script src="resources/js/maskedinput.js"></script>
+	<script src="resources/js/mask.js"></script>
 	<script src="resources/js/scripts.js"></script>
     
 
 	<script type="text/javascript">
 		$(document).ready(function() {
 
-			
-			$("#cep").mask("99999-999");
-			$("#cpfcnpj_inp").mask("999.999.999-99");
-			$("#tel").mask("(99) 9999-9999");
-			$("#cel").mask("(99) 99999-9999");
-			
-			$('#tipopessoa').on('change', function(){
-				if($('#tipopessoa').val() == 0){
-					$("#cpfcnpj_inp").mask("999.999.999-99");
-				} else {
-					$("#cpfcnpj_inp").mask("99.999.999/9999-99");
-				}
+			//Remove as mascaras quando apertar o submit
+			$("#fornecedor-form").submit(function() {
+				$("#cep").unmask();
+				$("#cpfcnpj_inp").unmask();
+				$("#tel").unmask();
+				$("#cel").unmask();
 			});
 			
+			//Aplica as mascaras nos campos
+			$("#cep").mask("00000-000");
+			$("#cpfcnpj_inp").mask("000.000.000-00");
+			$("#tel").mask("(00) 0000-0000");
+			$("#cel").mask("(00) 00000-0000");
+			
+			//Altera o tipo da mascara quando o usuário muda o tipo de pessoa
+			$('#tipopessoa').on('change', function(){
+				if($('#tipopessoa').val() == 0){
+					$("#cpfcnpj_inp").mask("000.000.000-00");
+				} else {
+					$("#cpfcnpj_inp").mask("00.000.000/0000-00");
+				}
+			});
 			
 			function limpa_formulário_cep() {
                 // Limpa valores do formulário de cep.
@@ -649,7 +657,7 @@
                     $('#sexo').val(data[3]);
                     $('#datanascimento').val(data[4]);
     				$('#nomerazao_inp').val(data[5]);
-    				$('#cpfcnpj_inp').val(data[6]);
+    				$('#cpfcnpj_inp').val(data[6]).trigger('input');
                     $('#rgie_inp').val(data[7]);
                     $('#endereco').val(data[8]);
                     $('#numero').val(data[9]);
@@ -657,9 +665,9 @@
     				$('#bairro').val(data[11]);
     				$('#estado').val(data[12]);
                     $('#cidade').val(data[13]);
-                    $('#cep').val(data[14]);
-                    $('#tel').val(data[15]);
-    				$('#cel').val(data[16]);
+                    $('#cep').val(data[14]).trigger('input');
+                    $('#tel').val(data[15]).trigger('input');
+    				$('#cel').val(data[16]).trigger('input');
                     $('#email').val(data[17]);
                     $('#site').val(data[18]);
     				$('#obs').val(data[19]);

@@ -20,7 +20,7 @@ public class FornecedorInserir {
 		f1.setBairro("");
 		f1.setEstado(2);
 		f1.setCidade(3);		
-		f1.setCep(365450);
+		f1.setCep("365450");
 		f1.setTel("");
 		f1.setCel("");
 		f1.setEmail("");		
