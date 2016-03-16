@@ -1,7 +1,7 @@
 package br.com.gracibolos.jdbc.teste;
 
 //funcionando
-import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import br.com.gracibolos.jdbc.dao.MateriaPrimaDao;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
@@ -11,14 +11,14 @@ public class MateriaPrimaInserir {
 	public static void main(String[] args) {
 
 		MateriaPrima mp = new MateriaPrima();
-		BigDecimal big = new BigDecimal(30);
-		byte[] foto = new byte[12];
-		
-		mp.setMarca("Nestle");
-		mp.setTipo("A");
-		mp.setQtd(big);
+				
+		mp.setNome("Nestle");
+		mp.setEstoque(23.0);
+		mp.setPeso(3.6);
+		mp.setUnidade(1L);
+		mp.setFabricacao(LocalDate.now());
+		mp.setVencimento(LocalDate.now());
 		mp.setDescricao("leite condensado");
-		mp.setFoto(foto);
 		
 		MateriaPrimaDao dao = new MateriaPrimaDao();
 		

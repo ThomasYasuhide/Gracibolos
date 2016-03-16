@@ -6,7 +6,10 @@
 package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  *
@@ -28,11 +31,15 @@ public class MateriaPrima implements Serializable{
     }
     
     private Long id;
-    private String marca;
-    private String tipo;
-    private BigDecimal qtd;
-    private String descricao;
-    private byte[] foto;
+    private String nome;
+    private Double estoque;
+    private Double peso;
+    private Long unidade; 
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate fabricacao;
+	@DateTimeFormat(iso = ISO.DATE)
+    private LocalDate vencimento;
+	private String descricao;
 
 	public Long getId() {
 		return id;
@@ -42,28 +49,52 @@ public class MateriaPrima implements Serializable{
 		this.id = id;
 	}
 
-	public String getMarca() {
-		return marca;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setMarca(String marca) {
-		this.marca = marca;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public Double getEstoque() {
+		return estoque;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setEstoque(Double estoque) {
+		this.estoque = estoque;
 	}
 
-	public BigDecimal getQtd() {
-		return qtd;
+	public Double getPeso() {
+		return peso;
 	}
 
-	public void setQtd(BigDecimal qtd) {
-		this.qtd = qtd;
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
+
+	public Long getUnidade() {
+		return unidade;
+	}
+
+	public void setUnidade(Long unidade) {
+		this.unidade = unidade;
+	}
+
+	public LocalDate getFabricacao() {
+		return fabricacao;
+	}
+
+	public void setFabricacao(LocalDate fabricacao) {
+		this.fabricacao = fabricacao;
+	}
+
+	public LocalDate getVencimento() {
+		return vencimento;
+	}
+
+	public void setVencimento(LocalDate vencimento) {
+		this.vencimento = vencimento;
 	}
 
 	public String getDescricao() {
@@ -74,16 +105,7 @@ public class MateriaPrima implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public byte[] getFoto() {
-		return foto;
-	}
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-   
-}
+	}	
+}	

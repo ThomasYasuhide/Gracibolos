@@ -606,11 +606,11 @@ public class AdministrativoController {
 	 * */
 	
 	//MATÉRIA PRIMA
-	@RequestMapping("/administrativo-materiaprima")
+	@RequestMapping("/administrativo-materiasprimas")
 	public ModelAndView materiaPrima(){
 		System.out.println("Entrou na servlet de listagem de matéria prima");
 						
-		return new ModelAndView("administrativo/materiaprima");
+		return new ModelAndView("administrativo/materiasprimas");
 	}
 		
 	//INCLUIR NOVA MATÉRIA PRIMA
@@ -639,7 +639,7 @@ public class AdministrativoController {
 		}
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("administrativo/materiaprima");
+		mv.setViewName("administrativo/materiasprimas");
 		mv.addObject("incluir", status);
 
 		return mv;
@@ -671,7 +671,7 @@ public class AdministrativoController {
 		}
 			
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("administrativo/materiaprima");
+		mv.setViewName("administrativo/materiasprimas");
 		mv.addObject("alterar", status);
 			
 		return mv;
@@ -703,7 +703,7 @@ public class AdministrativoController {
 		}
 			
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("administrativo/materiaprima");
+		mv.setViewName("administrativo/materiasprimas");
 		mv.addObject("excluir", status);			
 			
 		return mv;
@@ -726,7 +726,7 @@ public class AdministrativoController {
 		}
 				    
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("administrativo/materiaprima");
+		mv.setViewName("administrativo/materiasprimas");
 		mv.addObject("listaDeMateriaPrima", listaDeMateriaPrima);
 		    
 	    return mv;

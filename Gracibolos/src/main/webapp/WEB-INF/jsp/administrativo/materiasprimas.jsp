@@ -137,11 +137,13 @@
 									<!-- Titulos das tabelas  -->
 									<tr>
 										<th>#</th>
-										<th>Marca</th>
-										<th>Tipo</th>
-										<th>Quantidade</th>
+										<th>Nome</th>
+										<th>Estoque</th>
+										<th>Peso</th>
+										<th>Unidade</th>
+										<th>Fabricação</th>
+										<th>Vencimento</th>
 										<th>Descrição</th>
-										<th>Foto</th>
 										<th>Ações</th>
 									</tr>
 								</thead>
@@ -151,11 +153,13 @@
 									<c:forEach var="materiaprima" items="${listaDeMateriaPrima}">
 										<tr>
 											<td>${materiaprima.id}</td>
-											<td>${materiaprima.marca}</td>
-											<td>${materiaprima.tipo}</td>
-											<td>${materiaprima.qtd}</td>
+											<td>${materiaprima.nome}</td>
+											<td>${materiaprima.estoque}</td>
+											<td>${materiaprima.peso}</td>
+											<td>${materiaprima.unidade}</td>
+											<td>${materiaprima.fabricacao}</td>
+											<td>${materiaprima.vencimento}</td>
 											<td>${materiaprima.descricao}</td>
-											<td>${materiaprima.foto}</td>
 		                					<td>
 		                						<button id="edit-materiaPrima" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
 		                						<button id="delete-materiaPrima" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
@@ -208,33 +212,45 @@
 								<div class="hidden"> -->
 									<label class="control-label" for="id">Nº matéria-prima:</label>
 									<input type="text" id="id" name="id" placeholder="Digite o número de ID" class="form-control" />
-								</div>
-
-								<div class="col-xs-6 col-md-3">
-									<label class="control-label">Foto da matéria-prima:</label>
-									<a href="">
-										<img class="thumbnail" src="resources/img/model.png" width="100%" height="100%" alt="...">
-									</a>
-								</div>												
+								</div>																	
 											
-								<div class="input-margin col-xs-12 col-sm-12 col-md-4">
-									<label class="control-label" for="marca">Marca*:</label>
-									<input type="text" id="marca" class="form-control" maxlength="20" placeholder="Digite a marca da matéria-prima" name="marca" required>
+								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+									<label class="control-label" for="nome">Nome*:</label>
+									<input type="text" id="nome" class="form-control" maxlength="20" placeholder="Digite o nome da matéria-prima" name="nome" required>
 								</div> 
-
-								<div class="input-margin col-xs-12 col-sm-12 col-md-5">
-									<label class="control-label" for="tipo">Tipo*:</label>
-									<input type="text" id="tipo" class="form-control" maxlength="100" placeholder="Digite o tipo da matéria-prima" name="tipo" required>
-								</div> 		
-											
-								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
-									<label class="control-label" for="qtd">Quantidade:</label>
-									<input type="text" class="form-control" name="qtd" max="999999" placeholder="0,00">
+								
+								<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+									<label class="control-label" for="fabricacao">Data de fabricação*:</label>
+									<input type="date" id="fabricacao" class="form-control" placeholder="Escolha a data de fabricação" name="fabricacao" required>
 								</div>
 											
-								<div class="input-margin col-xs-12 col-sm-12 col-md-5">
-									<label class="control-label" for="descricao">Descrição*:</label>
-									<input type="text" id="descricao" class="form-control" maxlength="100" placeholder="Digite uma descrição da matéria-prima" name="descricao" required>
+								<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+									<label class="control-label" for="vencimento">Data de vencimento*:</label>
+									<input type="date" id="vencimento" class="form-control" placeholder="Escolha a data de vencimento" name="vencimento" required>
+								</div>
+								
+								<div class="input-margin col-xs-12 col-sm-9 col-md-6">
+									<label class="control-label" for="estoque">Estoque*:</label>
+									<input id="estoque" type="text" class="form-control" name="estoque" maxlength="20" placeholder="0.000">
+								</div>		
+											
+								<div class="input-margin col-xs-12 col-sm-9 col-md-3">
+									<label class="control-label" for="peso">Peso:</label>
+									<input id="peso" type="text" class="form-control" name="peso" maxlength="20" placeholder="0.000">
+								</div>
+								
+								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+									<label class="control-label" for="unidade">Unidade*:</label>
+									<select class="form-control" id="unidade" name="unidade" required>
+										<option value="" selected disabled>Selectione</option>
+										<option value="1">Kilo(s)</option>
+										<option value="0">Grama(s)</option>
+									</select>
+								</div>							
+											
+								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+									<label class="control-label" for="descricao">Descrição:</label>
+									<textarea class="form-control" name="descricao" id="descricao" placeholder="Digite aqui a descrição	"></textarea>
 								</div>
 								
 							</div>
@@ -349,7 +365,7 @@
             var table = $('#lista-materiaPrima').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0 ],
+                        "targets": [ 0, 5, 7 ],
                         "visible": false
                     }
                 ]

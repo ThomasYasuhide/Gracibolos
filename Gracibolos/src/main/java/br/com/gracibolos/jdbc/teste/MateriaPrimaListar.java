@@ -12,12 +12,14 @@ public class MateriaPrimaListar {
 		
 		try {
 			for(MateriaPrima mp : dao.listar()){
-			    System.out.println(	    	  "Id : "+mp.getId()
-			    				       + "\tMarca : "+mp.getMarca()
-			    						 +"\tTipo : "+mp.getTipo()
-			                        	  +"\tQtd : "+mp.getQtd()
-			                        +"\tDescricao : "+mp.getDescricao()
-			                        	 +"\tFoto : "+mp.getFoto());
+			    System.out.println(	    	  		 "Id : "+mp.getId()
+			    				       		   + "\tNome : "+mp.getNome()
+			    						 	 +"\tEstoque : "+mp.getEstoque()
+			    						 	 	+"\tPeso : "+mp.getPeso()
+			                        	  	 +"\tUnidade : "+mp.getUnidade()
+			                        	  +"\tFabricação : "+mp.getFabricacao()
+			                        	  +"\tVencimento : "+mp.getVencimento()
+			                        	   +"\tDescricao : "+mp.getDescricao());
 			
 			
 			}

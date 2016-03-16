@@ -1,9 +1,11 @@
 package br.com.gracibolos.jdbc.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,18 +16,31 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 
 	public boolean inserir(MateriaPrima materiaPrima) throws Exception{
 		boolean status = false;
-		String sql = "INSERT INTO materiaPrima (marca, tipo, qtd, descricao, foto)"
-				   + " VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO materiaprima (nome, estoque, peso, unidade, fabricacao, vencimento, descricao)"
+				   + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{		
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, materiaPrima.getMarca());
-			ps.setString(2, materiaPrima.getTipo());
-			ps.setBigDecimal(3, materiaPrima.getQtd());
-			ps.setString(4, materiaPrima.getDescricao());
-			ps.setBytes(5, materiaPrima.getFoto());
+			ps.setString(1, materiaPrima.getNome());
+			ps.setDouble(2, materiaPrima.getEstoque());
+			ps.setDouble(3, materiaPrima.getPeso());
+			ps.setLong(4, materiaPrima.getUnidade());
+			
+			if(materiaPrima.getFabricacao() != null){
+				ps.setDate(5, Date.valueOf(materiaPrima.getFabricacao()));
+			}else{
+				ps.setNull(5, Types.DATE);
+			}
+			
+			if(materiaPrima.getVencimento() != null){
+				ps.setDate(6, Date.valueOf(materiaPrima.getVencimento()));
+			}else{
+				ps.setNull(6, Types.DATE);
+			}
+			
+			ps.setString(7, materiaPrima.getDescricao());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -42,18 +57,31 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 
 	public boolean alterar(MateriaPrima materiaPrima) throws Exception{
 		boolean status = false;
-		String sql = "UPDATE materiaPrima SET marca=?, tipo=?, qtd=?, descricao=?,"
-				   + " foto=? where id=?";
+		String sql = " UPDATE materiaprima SET nome=?, estoque=?, peso=?, unidade=?, fabricacao=?,"
+				   + " vencimento=?, descricao=? where id=?";
 		PreparedStatement  ps = null;
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, materiaPrima.getMarca());
-			ps.setString(2, materiaPrima.getTipo());
-			ps.setBigDecimal(3, materiaPrima.getQtd());
-			ps.setString(4, materiaPrima.getDescricao());
-			ps.setBytes(5, materiaPrima.getFoto());
-			ps.setLong(6, materiaPrima.getId());
+			ps.setString(1, materiaPrima.getNome());
+			ps.setDouble(2, materiaPrima.getEstoque());
+			ps.setDouble(3, materiaPrima.getPeso());
+			ps.setLong(4, materiaPrima.getUnidade());
+			
+			if(materiaPrima.getFabricacao() != null){
+				ps.setDate(5, Date.valueOf(materiaPrima.getFabricacao()));
+			}else{
+				ps.setNull(5, Types.DATE);
+			}
+			
+			if(materiaPrima.getVencimento() != null){
+				ps.setDate(6, Date.valueOf(materiaPrima.getVencimento()));
+			}else{
+				ps.setNull(6, Types.DATE);
+			}
+			
+			ps.setString(7, materiaPrima.getDescricao());
+			ps.setLong(8, materiaPrima.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -70,7 +98,7 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 
 	public boolean excluir(MateriaPrima materiaPrima) throws Exception{
 		boolean status = false;
-		String sql = "DELETE FROM materiaPrima WHERE id = ?";
+		String sql = "DELETE FROM materiaprima WHERE id = ?";
 		
 		PreparedStatement ps;
 		
@@ -95,7 +123,7 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 	}
 
 	public List<MateriaPrima> listar() throws Exception{
-		String sql = "SELECT * FROM materiaPrima";
+		String sql = "SELECT * FROM materiaprima";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<MateriaPrima> listaDeMateriaPrima= null;
@@ -108,11 +136,13 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 			{
 				MateriaPrima materiaPrima = new MateriaPrima();
 				materiaPrima.setId(rs.getLong("id"));
-				materiaPrima.setMarca(rs.getString("marca"));
-				materiaPrima.setTipo(rs.getString("tipo"));
-				materiaPrima.setQtd(rs.getBigDecimal("qtd"));
+				materiaPrima.setNome(rs.getString("nome"));
+				materiaPrima.setEstoque(rs.getDouble("estoque"));
+				materiaPrima.setPeso(rs.getDouble("peso"));
+				materiaPrima.setUnidade(rs.getLong("unidade"));
+				materiaPrima.setFabricacao(rs.getDate("fabricacao").toLocalDate());
+				materiaPrima.setVencimento(rs.getDate("vencimento").toLocalDate());
 				materiaPrima.setDescricao(rs.getString("descricao"));
-				materiaPrima.setFoto(rs.getBytes("foto"));
 				
 				listaDeMateriaPrima.add(materiaPrima);
 				
@@ -137,7 +167,7 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 		List<MateriaPrima> materiasPrimas = new ArrayList<>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT id, marca, tipo, qtd, descricao, foto FROM materiaPrima WHERE marca = ? OR tipo LIKE ? OR descricao = ?";
+		String sql = "SELECT id, nome, estoque, peso, unidade, fabricacao, vencimento, descricao FROM materiaprima WHERE unidade = ? OR nome LIKE ? OR vencimento = ?";
 				
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 						
@@ -153,11 +183,13 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 				MateriaPrima mp = new MateriaPrima();
 				
 				mp.setId(rs.getLong("id"));
-				mp.setMarca(rs.getString("marca"));
-				mp.setTipo(rs.getString("tipo"));
-				mp.setQtd(rs.getBigDecimal("qtd"));
+				mp.setNome(rs.getString("nome"));
+				mp.setEstoque(rs.getDouble("estoque"));
+				mp.setPeso(rs.getDouble("peso"));
+				mp.setUnidade(rs.getLong("unidade"));
+				mp.setFabricacao(rs.getDate("fabricacao").toLocalDate());
+				mp.setVencimento(rs.getDate("vencimento").toLocalDate());
 				mp.setDescricao(rs.getString("descricao"));
-				mp.setFoto(rs.getBytes("foto"));
 				materiasPrimas.add(mp);
 			}
 			
