@@ -278,21 +278,24 @@
 
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
 												<label class="control-label" for="peso">Peso:</label>
-												<input id="peso" type="text" class="form-control" name="peso" maxlength="20" placeholder="0.000">
+												<input id="peso" type="text" class="form-control" name="peso" maxlength="10" placeholder="0.000">
 											</div>
 
 											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
 												<label class="control-label" for="unidade">Unidade*:</label>
 												<select class="form-control" id="unidade" name="unidade" required>
 													<option value="" selected disabled>Selectione</option>
-													<option value="1">Kilo(s)</option>
-													<option value="0">Grama(s)</option>
+													<option value="0">Gramas (gr)</option>
+													<option value="1">Kilos (kg)</option>
+													<option value="2">Mililitros (ml)</option>
+													<option value="3">Litros (L)</option>
+													<option value="4">Unidades (un)</option>
 												</select>
 											</div>
 											
 											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="estoque">Estoque:</label>
-												<input id="estoque" type="number" min=0 class="form-control" pattern="[0-9]+" maxlength=""  name="estoque" value="0">
+												<input id="estoque" type="number" min=0 max=9999999 class="form-control" pattern="[0-9]+" maxlength="7"  name="estoque" value="0">
 											</div>
 											
 											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
@@ -456,10 +459,31 @@
 	<script src="resources/js/jquery-2.1.4.js"></script>
 	<script src="resources/js/datatables.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
+	<script src="resources/js/mask.js"></script>
     
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			//Remove as mascaras quando apertar o submit
+			$("#produto-form").submit(function() {
+				var custo = $("#custo").val();
+				custo = custo.replace(".","");
+				custo = custo.replace(",",".");
+				$("#custo").val(custo);
+				
+				var valor = $("#valor").val();
+				valor = valor.replace(".","");
+				valor = valor.replace(",",".");
+				$("#valor").val(valor);
+				
+				alert($("#custo").val());
+				alert($("#valor").val());
+			});
+			
+			//Aplica as mascaras nos campos
+			$("#custo").mask("000.000.000.000.000,00", {reverse: true});
+			$("#valor").mask("000.000.000.000.000,00", {reverse: true});
 			
 			$('#file').on('change', function(){
 				readURL(this);
