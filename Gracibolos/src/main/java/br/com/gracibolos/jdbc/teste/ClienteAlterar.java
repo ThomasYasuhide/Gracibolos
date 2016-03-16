@@ -26,7 +26,7 @@ public class ClienteAlterar {
 		c1.setBairro("");
 		c1.setEstado(3);
 		c1.setCidade(3);		
-		c1.setCep(367832);
+		c1.setCep("367832");
 		c1.setTel("");
 		c1.setCel("");		
 		c1.setEmail("Raul@hotmail.com");

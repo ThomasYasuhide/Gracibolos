@@ -36,7 +36,7 @@ function desabilitarCampos (id){
 
 		if(cpfcnpj_inp.placeholder == '00.000.000/0000-00'){
 			cpfcnpj_inp.placeholder = '000.000.000-00';
-			cpfcnpj_inp.maxLength = '11';
+			cpfcnpj_inp.maxLength = '14';
 		}
 			
 		if(rgie_lbl.innerHTML == 'IE:'){
@@ -73,7 +73,7 @@ function desabilitarCampos (id){
 
 		if(cpfcnpj_inp.placeholder == '000.000.000-00'){
 			cpfcnpj_inp.placeholder = '00.000.000/0000-00';
-			cpfcnpj_inp.maxLength = '14';
+			cpfcnpj_inp.maxLength = '18';
 		}
 		
 		if(rgie_lbl.innerHTML == 'RG:'){

@@ -25,7 +25,7 @@ public class Cliente implements Serializable{
     private String bairro;
     private Integer estado;
     private Integer cidade;
-    private Integer cep;
+    private String cep;
     private String tel;
     private String cel;
     private String email;
@@ -119,10 +119,10 @@ public class Cliente implements Serializable{
 	public void setCidade(Integer cidade) {
 		this.cidade = cidade;
 	}
-	public Integer getCep() {
+	public String getCep() {
 		return cep;
 	}
-	public void setCep(Integer cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 	public String getTel() {
@@ -160,9 +160,6 @@ public class Cliente implements Serializable{
 	}
 	public void setObs(String obs) {
 		this.obs = obs;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
    
 }

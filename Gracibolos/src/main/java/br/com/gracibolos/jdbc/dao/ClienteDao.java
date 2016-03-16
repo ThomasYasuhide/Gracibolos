@@ -58,7 +58,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 			ps.setString(11, cliente.getBairro());
 			ps.setInt(12, cliente.getEstado());
 			ps.setInt(13, cliente.getCidade());
-			ps.setInt(14, cliente.getCep());
+			ps.setString(14, cliente.getCep());
 			ps.setString(15, cliente.getTel());
 			ps.setString(16, cliente.getCel());
 			ps.setString(17, cliente.getEmail());
@@ -131,7 +131,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 			ps.setString(11, cliente.getBairro());
 			ps.setInt(12, cliente.getEstado());
 			ps.setInt(13, cliente.getCidade());
-			ps.setInt(14, cliente.getCep());
+			ps.setString(14, cliente.getCep());
 			ps.setString(15, cliente.getTel());
 			ps.setString(16, cliente.getCel());
 			ps.setString(17, cliente.getEmail());
@@ -237,7 +237,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 				cliente.setBairro(rs.getString("bairro"));
 				cliente.setEstado(rs.getInt("estado"));
 				cliente.setCidade(rs.getInt("cidade"));
-				cliente.setCep(rs.getInt("cep"));
+				cliente.setCep(rs.getString("cep"));
 				cliente.setTel(rs.getString("tel"));
 				cliente.setCel(rs.getString("cel"));
 				cliente.setEmail(rs.getString("email"));
@@ -310,7 +310,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 				cliente.setBairro(rs.getString("bairro"));
 				cliente.setEstado(rs.getInt("estado"));
 				cliente.setCidade(rs.getInt("cidade"));
-				cliente.setCep(rs.getInt("cep"));
+				cliente.setCep(rs.getString("cep"));
 				cliente.setTel(rs.getString("tel"));
 				cliente.setCel(rs.getString("cel"));
 				cliente.setEmail(rs.getString("email"));
