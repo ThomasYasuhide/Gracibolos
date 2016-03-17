@@ -62,10 +62,8 @@ public class AdministrativoController {
 		boolean status = false;
 		
 	    ProdutoDao produtoDao = new ProdutoDao();
-			    
-	    System.out.println(file.toString() + "#############################");
-	    
-	    if(file != null) {
+
+	    if(!file.isEmpty()) {
 		    produto.setFoto(file.getOriginalFilename().toString());
 		    
 		    try {
@@ -86,8 +84,9 @@ public class AdministrativoController {
 		    	BufferedOutputStream stream = null;
 		    	stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				FileCopyUtils.copy(file.getInputStream(), stream);
-
+				
 				stream.close();
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -123,10 +122,18 @@ public class AdministrativoController {
 		
 		ProdutoDao produtoDao = new ProdutoDao();
 	    
+		System.out.println(produto.getFoto() + " ###################");
+		
 		if(!file.isEmpty()) {
 		    produto.setFoto(file.getOriginalFilename().toString());
 		    
 		    try {
+		    	
+		    	/*
+		    	if(produto.getFoto()){
+		    		
+		    	}
+		    	*/
 		    	
 		    	// Root Directory.
 		        String uploadRootPath = request.getServletContext().getRealPath("\\resources\\img\\produtos");
@@ -147,11 +154,14 @@ public class AdministrativoController {
 
 				stream.close();
 			} catch (IOException e) {
+				System.out.println("Não foi possível fazer o upload da imagem.");
 				e.printStackTrace();
 			}
 		    
 	    } else {
-			    produto.setFoto("model.png");
+	    	
+	    	produto.setFoto("model.png");
+	    	
 	    }
 				
 		try {

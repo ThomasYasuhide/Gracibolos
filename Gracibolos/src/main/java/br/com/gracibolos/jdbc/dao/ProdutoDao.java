@@ -102,8 +102,8 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		boolean status = false;
 		PreparedStatement  ps = null;
 		String sql = "UPDATE produto SET foto=?, status=?, fabricacao=?, vencimento=?, codigo=?, nome=?, tipo=?, peso=?, unidade=?, estoque=?, custo=?, valor=?, obs=? where id=?";
-			
-		try(Connection conn = ConnectionProvider.getInstance().getConnection()){
+		
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())	{
 			
 			ps = conn.prepareStatement(sql);
 			
@@ -133,6 +133,10 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			ps.setBigDecimal(12, produto.getValor());
 			ps.setString(13, produto.getObs());
 			ps.setLong(14, produto.getId());
+			
+			if(ps.executeUpdate() != 0) {
+				status = true;
+			}
 			
 			ps.close();
 			conn.close();

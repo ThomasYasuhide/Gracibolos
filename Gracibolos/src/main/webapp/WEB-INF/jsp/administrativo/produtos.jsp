@@ -234,7 +234,8 @@
 											<div class="col-xs-6 col-md-3">
 												<label class="control-label">Foto do produto:</label>
 												<label for="file">
-													<img id="foto" class="thumbnail" src="resources/img/produtos/model.png" width="100%" height="100%" alt="..." onclick="" >
+													<img id="foto-view" class="thumbnail" src="resources/img/produtos/model.png" width="100%" height="100%" alt="..." onclick="" >
+													<input type="text" id="foto-inp" name="foto" class="hidden" maxlength="100">
 												</label>
 												<input type="file" id="file" name="file" class="hidden" accept="image/*">
 											</div>
@@ -685,7 +686,8 @@
 
 				//Preenche os determinados campos com os conteudos.
 				$('#id').val(data[0]);
-				$('#foto').attr("src", data[1]);
+				$('#foto-view').attr("src", data[1]);
+				$('#foto-inp').val(data[1]);
 				$('#status').val(data[2]);
 				$('#fabricacao').val(data[3]);
 				$('#vencimento').val(data[4]);
