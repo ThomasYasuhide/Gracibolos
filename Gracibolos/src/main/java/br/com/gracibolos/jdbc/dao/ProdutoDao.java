@@ -51,7 +51,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			ps.setString(5, produto.getCodigo());
 			ps.setString(6, produto.getNome());
 			ps.setLong(7, produto.getTipo());
-			ps.setDouble(8, produto.getPeso());
+			ps.setBigDecimal(8, produto.getPeso());
 			ps.setLong(9, produto.getUnidade());
 			ps.setLong(10, produto.getEstoque());
 			ps.setBigDecimal(11, produto.getCusto());
@@ -84,14 +84,29 @@ public class ProdutoDao implements GenericoDao<Produto>{
 	
 	public boolean alterar(Produto produto) throws Exception{
 		
+		System.out.println(produto.getId());
+		System.out.println(produto.getStatus());
+		System.out.println(produto.getFoto());
+		System.out.println(produto.getFabricacao());
+		System.out.println(produto.getVencimento());
+		System.out.println(produto.getCodigo());
+		System.out.println(produto.getNome());
+		System.out.println(produto.getTipo());
+		System.out.println(produto.getPeso());
+		System.out.println(produto.getUnidade());
+		System.out.println(produto.getEstoque());
+		System.out.println(produto.getCusto());
+		System.out.println(produto.getValor());
+		System.out.println(produto.getObs());
+		
 		boolean status = false;
 		PreparedStatement  ps = null;
 		String sql = "UPDATE produto SET foto=?, status=?, fabricacao=?, vencimento=?, codigo=?, nome=?, tipo=?, peso=?, unidade=?, estoque=?, custo=?, valor=?, obs=? where id=?";
-		
+			
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){
 			
 			ps = conn.prepareStatement(sql);
-
+			
 			ps.setString(1, produto.getFoto());
 			
 			ps.setInt(2, produto.getStatus());
@@ -111,7 +126,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			ps.setString(5, produto.getCodigo());
 			ps.setString(6, produto.getNome());
 			ps.setLong(7, produto.getTipo());
-			ps.setDouble(8, produto.getPeso());
+			ps.setBigDecimal(8, produto.getPeso());
 			ps.setLong(9, produto.getUnidade());
 			ps.setLong(10, produto.getEstoque());
 			ps.setBigDecimal(11, produto.getCusto());
@@ -193,7 +208,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setCodigo(rs.getString("codigo"));
 				produto.setNome(rs.getString("nome"));
 				produto.setTipo(rs.getLong("tipo"));
-				produto.setPeso(rs.getDouble("peso"));
+				produto.setPeso(rs.getBigDecimal("peso"));
 				produto.setUnidade(rs.getLong("unidade"));
 				produto.setEstoque(rs.getInt("estoque"));
 				produto.setCusto(rs.getBigDecimal("custo"));
@@ -253,7 +268,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setCodigo(rs.getString("codigo"));
 				produto.setNome(rs.getString("nome"));
 				produto.setTipo(rs.getLong("tipo"));
-				produto.setPeso(rs.getDouble("peso"));
+				produto.setPeso(rs.getBigDecimal("peso"));
 				produto.setUnidade(rs.getLong("unidade"));
 				produto.setEstoque(rs.getInt("estoque"));
 				produto.setCusto(rs.getBigDecimal("custo"));

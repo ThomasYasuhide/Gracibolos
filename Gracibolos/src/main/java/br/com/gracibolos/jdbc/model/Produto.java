@@ -27,7 +27,7 @@ public class Produto implements Serializable{
     private String codigo;
     private String nome;
     private Long tipo;
-    private Double peso;
+    private BigDecimal peso;
     private Long unidade;
     private int estoque;
     private BigDecimal custo;
@@ -97,15 +97,15 @@ public class Produto implements Serializable{
 	public void setTipo(Long tipo) {
 		this.tipo = tipo;
 	}
-	
-	public Double getPeso() {
+
+	public BigDecimal getPeso() {
 		return peso;
 	}
-	
-	public void setPeso(Double peso) {
+
+	public void setPeso(BigDecimal peso) {
 		this.peso = peso;
 	}
-	
+
 	public Long getUnidade() {
 		return unidade;
 	}

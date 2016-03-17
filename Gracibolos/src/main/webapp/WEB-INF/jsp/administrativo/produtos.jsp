@@ -234,7 +234,7 @@
 											<div class="col-xs-6 col-md-3">
 												<label class="control-label">Foto do produto:</label>
 												<label for="file">
-													<img id="foto" class="thumbnail" src="resources/img/model.png" width="100%" height="100%" alt="..." onclick="" >
+													<img id="foto" class="thumbnail" src="resources/img/produtos/model.png" width="100%" height="100%" alt="..." onclick="" >
 												</label>
 												<input type="file" id="file" name="file" class="hidden" accept="image/*">
 											</div>
@@ -476,9 +476,6 @@
 				valor = valor.replace(".","");
 				valor = valor.replace(",",".");
 				$("#valor").val(valor);
-				
-				alert($("#custo").val());
-				alert($("#valor").val());
 			});
 			
 			//Aplica as mascaras nos campos
@@ -658,7 +655,7 @@
 					this.reset();
 				});
 				
-				$('#foto').attr("src", "resources/img/model.png");
+				$('#foto').attr("src", "resources/img/produtos/model.png");
 				
 			});
 
