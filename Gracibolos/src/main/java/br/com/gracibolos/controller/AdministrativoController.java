@@ -63,6 +63,8 @@ public class AdministrativoController {
 		
 	    ProdutoDao produtoDao = new ProdutoDao();
 			    
+	    System.out.println(file.toString() + "#############################");
+	    
 	    if(file != null) {
 		    produto.setFoto(file.getOriginalFilename().toString());
 		    
@@ -113,13 +115,45 @@ public class AdministrativoController {
 	
 	//AlTERAR PRODUTO
 	@RequestMapping("/administrativo-alterar-produto")
-	public ModelAndView alterar_produto(Produto produto){
+	public ModelAndView alterar_produto(Produto produto, @RequestParam("file") MultipartFile file, HttpServletRequest request){
+				
 		System.out.println("Entrou na pagina de alteração de produto");
 
 		boolean status = false;
 		
 		ProdutoDao produtoDao = new ProdutoDao();
-		
+	    
+		if(!file.isEmpty()) {
+		    produto.setFoto(file.getOriginalFilename().toString());
+		    
+		    try {
+		    	
+		    	// Root Directory.
+		        String uploadRootPath = request.getServletContext().getRealPath("\\resources\\img\\produtos");
+		        System.out.println("uploadRootPath=" + uploadRootPath);
+		 
+		        File uploadRootDir = new File(uploadRootPath);
+		        
+		        // Create directory if it not exists.
+		        if (!uploadRootDir.exists()) {
+		            uploadRootDir.mkdirs();
+		        }
+		        
+		        File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+		    	
+		    	BufferedOutputStream stream = null;
+		    	stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				FileCopyUtils.copy(file.getInputStream(), stream);
+
+				stream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		    
+	    } else {
+			    produto.setFoto("model.png");
+	    }
+				
 		try {
 			if(produtoDao.alterar(produto)){
 				status = true;
@@ -129,9 +163,9 @@ public class AdministrativoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+				
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("administrativo/fornecedores");
+		mv.setViewName("administrativo/produtos");
 		mv.addObject("alterar", status);
 		
 		return mv;

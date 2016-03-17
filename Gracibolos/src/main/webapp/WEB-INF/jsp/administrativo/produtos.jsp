@@ -234,11 +234,11 @@
 											<div class="col-xs-6 col-md-3">
 												<label class="control-label">Foto do produto:</label>
 												<label for="file">
-													<img id="foto" name="foto" class="thumbnail" src="resources/img/model.png" width="100%" height="100%" alt="..." onclick="" >
+													<img id="foto" class="thumbnail" src="resources/img/model.png" width="100%" height="100%" alt="..." onclick="" >
 												</label>
 												<input type="file" id="file" name="file" class="hidden" accept="image/*">
 											</div>
-
+											
 											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
 												<label class="control-label" for="status">Status:</label>
 												<select class="form-control" id="status" name="status" required>
@@ -698,8 +698,8 @@
 				$('#peso').val(data[8]);
 				$('#unidade').val(data[9]);
 				$('#estoque').val(data[10]);
-				$('#custo').val(data[11]);
-				$('#valor').val(data[12]);
+				$('#custo').val(data[11]).trigger('input');
+				$('#valor').val(data[12]).trigger('input');
 				$('#obs').val(data[13]);
 
 			});
