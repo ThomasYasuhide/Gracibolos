@@ -283,14 +283,11 @@
 											</div>
 
 											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
-												<label class="control-label" for="unidade">Unidade*:</label>
-												<select class="form-control" id="unidade" name="unidade" required>
+												<label class="control-label" for="unidade">Unidade:</label>
+												<select class="form-control" id="unidade" name="unidade">
 													<option value="" selected disabled>Selectione</option>
-													<option value="0">Gramas (gr)</option>
-													<option value="1">Kilos (kg)</option>
-													<option value="2">Mililitros (ml)</option>
-													<option value="3">Litros (L)</option>
-													<option value="4">Unidades (un)</option>
+													<option value="0">Kilos (kg)</option>
+													<option value="1">Litros (l)</option>
 												</select>
 											</div>
 											
@@ -466,8 +463,14 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
+			
 			//Remove as mascaras quando apertar o submit
 			$("#produto-form").submit(function() {
+				var peso = $("#peso").val();
+				peso = peso.replace(".","");
+				peso = peso.replace(",",".");
+				$("#peso").val(peso);
+				
 				var custo = $("#custo").val();
 				custo = custo.replace(".","");
 				custo = custo.replace(",",".");
@@ -480,6 +483,7 @@
 			});
 			
 			//Aplica as mascaras nos campos
+			$('#peso').mask("0.000.000.000,000", {reverse: true});
 			$("#custo").mask("000.000.000.000.000,00", {reverse: true});
 			$("#valor").mask("000.000.000.000.000,00", {reverse: true});
 			
@@ -493,7 +497,7 @@
 		            var reader = new FileReader();
 		            
 		            reader.onload = function (e) {
-		                $('#foto').attr('src', e.target.result);
+		                $('#foto-view').attr('src', e.target.result);
 		            }
 		            
 		            reader.readAsDataURL(input.files[0]);
@@ -509,7 +513,7 @@
             	var coluna;
             	var medida;
             	var materiaprima;
-            	var option
+            	var option;
             	var unidade;
 
             	tabela = document.getElementById("lista-materiaprima");
@@ -656,7 +660,7 @@
 					this.reset();
 				});
 				
-				$('#foto').attr("src", "resources/img/produtos/model.png");
+				$('#foto-view').attr("src", "resources/img/produtos/model.png");
 				
 			});
 
@@ -686,7 +690,7 @@
 
 				//Preenche os determinados campos com os conteudos.
 				$('#id').val(data[0]);
-				$('#foto-view').attr("src", data[1]);
+				$('#foto-view').attr("src", "resources/img/produtos/"+data[1]);
 				$('#foto-inp').val(data[1]);
 				$('#status').val(data[2]);
 				$('#fabricacao').val(data[3]);
@@ -694,7 +698,7 @@
 				$('#codigo').val(data[5]);
 				$('#nome').val(data[6]);
 				$('#tipo').val(data[7]);
-				$('#peso').val(data[8]);
+				$('#peso').val(data[8]).trigger('input');
 				$('#unidade').val(data[9]);
 				$('#estoque').val(data[10]);
 				$('#custo').val(data[11]).trigger('input');

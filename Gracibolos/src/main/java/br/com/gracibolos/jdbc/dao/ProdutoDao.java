@@ -265,7 +265,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			while(rs.next()) {
 				Produto produto = new Produto();
 				produto.setId(rs.getLong("id"));
-				produto.setFoto("resources/img/produtos/"+rs.getString("foto"));
+				produto.setFoto(rs.getString("foto"));
 				produto.setStatus(rs.getInt("status"));
 				produto.setFabricacao(rs.getDate("fabricacao").toLocalDate());
 				produto.setVencimento(rs.getDate("vencimento").toLocalDate());

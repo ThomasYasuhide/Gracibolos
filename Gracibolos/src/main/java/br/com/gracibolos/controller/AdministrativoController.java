@@ -73,7 +73,6 @@ public class AdministrativoController {
 		        System.out.println("uploadRootPath=" + uploadRootPath);
 		 
 		        File uploadRootDir = new File(uploadRootPath);
-		        //
 		        // Create directory if it not exists.
 		        if (!uploadRootDir.exists()) {
 		            uploadRootDir.mkdirs();
@@ -122,18 +121,10 @@ public class AdministrativoController {
 		
 		ProdutoDao produtoDao = new ProdutoDao();
 	    
-		System.out.println(produto.getFoto() + " ###################");
-		
 		if(!file.isEmpty()) {
 		    produto.setFoto(file.getOriginalFilename().toString());
 		    
 		    try {
-		    	
-		    	/*
-		    	if(produto.getFoto()){
-		    		
-		    	}
-		    	*/
 		    	
 		    	// Root Directory.
 		        String uploadRootPath = request.getServletContext().getRealPath("\\resources\\img\\produtos");
@@ -160,7 +151,9 @@ public class AdministrativoController {
 		    
 	    } else {
 	    	
-	    	produto.setFoto("model.png");
+	    	if(produto.getFoto() == null){
+		    	produto.setFoto("model.png");
+	    	}
 	    	
 	    }
 				
