@@ -14,8 +14,8 @@ public class EncomendaInserir {
 		Encomenda encomenda = new Encomenda();
 		BigDecimal big = new BigDecimal(45.90);
 		
-		encomenda.setClienteId(7);	
-		encomenda.setStatusNome("teste");
+		//encomenda.setClienteId(7);	
+		//encomenda.setStatusNome("teste");
 		encomenda.setResponsavel("responsavel");
 		encomenda.setDataInicio(LocalDate.now());
 		encomenda.setDataFaltaProd(LocalDate.now());

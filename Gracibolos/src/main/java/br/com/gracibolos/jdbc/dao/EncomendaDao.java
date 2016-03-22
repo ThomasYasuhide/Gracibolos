@@ -23,8 +23,8 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, encomenda.getClienteId());
-			ps.setString(2, encomenda.getStatusNome());
+			ps.setLong(1, encomenda.getCliente());
+			ps.setLong(2, encomenda.getStatus());
 			ps.setString(3, encomenda.getResponsavel());
 			ps.setDate(4, Date.valueOf(encomenda.getDataInicio()));
 			ps.setDate(5, Date.valueOf(encomenda.getDataFaltaProd()));
@@ -59,8 +59,8 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, encomenda.getClienteId());
-			ps.setString(2, encomenda.getStatusNome());
+			ps.setLong(1, encomenda.getCliente());
+			ps.setLong(2, encomenda.getStatus());
 			ps.setString(3, encomenda.getResponsavel());
 			ps.setDate(4, Date.valueOf(encomenda.getDataInicio()));
 			ps.setDate(5, Date.valueOf(encomenda.getDataFaltaProd()));
@@ -121,8 +121,8 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			{
 				Encomenda encomenda = new Encomenda();
 				encomenda.setId(rs.getLong("id"));
-				encomenda.setClienteId(rs.getInt("clienteId"));	
-				encomenda.setStatusNome(rs.getString("statusNome"));
+				encomenda.setCliente(rs.getInt("cliente"));	
+				encomenda.setStatus(rs.getInt("status"));
 				encomenda.setResponsavel(rs.getString("responsavel"));
 				encomenda.setDataInicio(rs.getDate("dataInicio").toLocalDate());
 				encomenda.setDataFaltaProd(rs.getDate("dataFaltaProd").toLocalDate());

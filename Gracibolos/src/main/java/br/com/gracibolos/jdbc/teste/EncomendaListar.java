@@ -14,8 +14,8 @@ public class EncomendaListar {
 			for(Encomenda e : dao.listar()){
 				System.out.println(	  
 								 		 "Id : "+e.getId()
-							   +"\tClienteId : "+e.getClienteId()
-						      +"\tStatusNome : "+e.getStatusNome()
+							//   +"\tClienteId : "+e.getClienteId()
+						     // +"\tStatusNome : "+e.getStatusNome()
 						     + "\tResponsavel: "+e.getResponsavel()
 						   	   +"\tDataInicio: "+e.getDataInicio()
 			               +"\tDataFaltaProd : "+e.getDataFaltaProd()

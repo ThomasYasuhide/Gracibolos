@@ -175,17 +175,17 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 			
 			while(rs.next()){
 							
-				MateriaPrima mp = new MateriaPrima();
+				MateriaPrima materiaprima = new MateriaPrima();
 				
-				mp.setId(rs.getLong("id"));
-				mp.setCodigo(rs.getString("codigo"));
-				mp.setNome(rs.getString("nome"));
-				mp.setEstoque(rs.getDouble("estoque"));
-				mp.setUnidade(rs.getLong("unidade"));
-				mp.setFabricacao(rs.getDate("fabricacao").toLocalDate());
-				mp.setVencimento(rs.getDate("vencimento").toLocalDate());
-				mp.setDescricao(rs.getString("descricao"));
-				materiasPrimas.add(mp);
+				materiaprima.setId(rs.getLong("id"));
+				materiaprima.setCodigo(rs.getString("codigo"));
+				materiaprima.setNome(rs.getString("nome"));
+				materiaprima.setEstoque(rs.getDouble("estoque"));
+				materiaprima.setUnidade(rs.getLong("unidade"));
+				materiaprima.setFabricacao(rs.getDate("fabricacao").toLocalDate());
+				materiaprima.setVencimento(rs.getDate("vencimento").toLocalDate());
+				materiaprima.setDescricao(rs.getString("descricao"));
+				materiasPrimas.add(materiaprima);
 			}
 			
 			ps.close();

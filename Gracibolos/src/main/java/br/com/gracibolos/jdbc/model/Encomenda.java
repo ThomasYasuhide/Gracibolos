@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
@@ -12,29 +7,16 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-/**
- *
- * @author d637942
- */
 public class Encomenda implements Serializable{
     
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -2187641155037646683L;
-
-	public Encomenda(){
-        
-    }
-    
-    public Encomenda(Long id) {
-        this.id = id;
-    }
-    
+	
     private Long id;
-    private Integer clienteId;
-    private String statusNome;
+    private Integer cliente;
+    private Integer status;
     private String responsavel;
+    
+    
     
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate dataInicio;
@@ -60,20 +42,20 @@ public class Encomenda implements Serializable{
 		this.id = id;
 	}
 
-	public Integer getClienteId() {
-		return clienteId;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setClienteId(Integer clienteId) {
-		this.clienteId = clienteId;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
-	public String getStatusNome() {
-		return statusNome;
+	public Integer getCliente() {
+		return cliente;
 	}
 
-	public void setStatusNome(String statusNome) {
-		this.statusNome = statusNome;
+	public void setCliente(Integer cliente) {
+		this.cliente = cliente;
 	}
 
 	public String getResponsavel() {
@@ -154,10 +136,6 @@ public class Encomenda implements Serializable{
 
 	public void setNumero(Integer numero) {
 		this.numero = numero;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	
 }
