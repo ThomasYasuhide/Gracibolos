@@ -14,7 +14,6 @@ public class MateriaPrimaInserir {
 				
 		mp.setNome("Nestle");
 		mp.setEstoque(23.0);
-		mp.setPeso(3.6);
 		mp.setUnidade(1L);
 		mp.setFabricacao(LocalDate.now());
 		mp.setVencimento(LocalDate.now());

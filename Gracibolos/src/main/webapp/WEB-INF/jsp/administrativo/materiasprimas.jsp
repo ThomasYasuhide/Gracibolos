@@ -21,7 +21,7 @@
     <link href="resources/css/datatables.css" rel="stylesheet">
 
 	<!-- Titulo da página -->
-	<title>Graci Bolos | Matéria-prima</title>
+	<title>Graci Bolos | Matérias-primas</title>
 
 </head>
 
@@ -41,9 +41,8 @@
 
 					<!-- ############################################################ CABEÇALHO ############################################################ -->
 					<header>
-						<h2 class="">Matéria-prima</h2>
+						<h2 class="">MATÉRIAS-PRIMAS</h2>
 						<h4 class="">Lista de matérias-primas</h4>
-
 					</header>
 
 					<hr/>
@@ -77,7 +76,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Alteração efetuarda com sucesso.
+								  <strong>Sucesso!</strong> Alteração efetuada com sucesso.
 								</div>
 							</div>
 						</div>
@@ -97,7 +96,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Matéria-prima foi excluido com sucesso!
+								  <strong>Sucesso!</strong> Matéria-prima foi excluida com sucesso!
 								</div>
 							</div>
 						</div>
@@ -137,9 +136,9 @@
 									<!-- Titulos das tabelas  -->
 									<tr>
 										<th>#</th>
+										<th>Codigo</th>
 										<th>Nome</th>
 										<th>Estoque</th>
-										<th>Peso</th>
 										<th>Unidade</th>
 										<th>Fabricação</th>
 										<th>Vencimento</th>
@@ -155,7 +154,6 @@
 											<td>${materiaprima.id}</td>
 											<td>${materiaprima.nome}</td>
 											<td>${materiaprima.estoque}</td>
-											<td>${materiaprima.peso}</td>
 											<td>${materiaprima.unidade}</td>
 											<td>${materiaprima.fabricacao}</td>
 											<td>${materiaprima.vencimento}</td>
@@ -172,7 +170,7 @@
 					</div>
 
 					<div class="row">
-						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
+						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-4">
 							<a href="" id="incluir-materiaPrima-modal" data-toggle="modal" data-target="#modal-materiaPrima" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova matéria-prima</a>
 						</div>
 					</div>
@@ -213,11 +211,30 @@
 									<label class="control-label" for="id">Nº matéria-prima:</label>
 									<input type="text" id="id" name="id" placeholder="Digite o número de ID" class="form-control" />
 								</div>																	
-											
-								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-									<label class="control-label" for="nome">Nome*:</label>
-									<input type="text" id="nome" class="form-control" maxlength="20" placeholder="Digite o nome da matéria-prima" name="nome" required>
+										
+								<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+									<label class="control-label" for="nome">Código*:</label>
+									<input type="text" id="codigo" class="form-control" maxlength="30" placeholder="Digite o código da matéria-prima" name="codigo" required>
 								</div> 
+									
+								<div class="input-margin col-xs-12 col-sm-12 col-md-9">
+									<label class="control-label" for="nome">Nome*:</label>
+									<input type="text" id="nome" class="form-control" maxlength="255" placeholder="Digite o nome da matéria-prima" name="nome" required>
+								</div> 
+								
+								<div class="input-margin col-xs-12 col-sm-9 col-md-3">
+									<label class="control-label" for="estoque">Estoque*:</label>
+									<input id="estoque" type="text" class="form-control" name="estoque" maxlength="20" placeholder="0.000">
+								</div>
+								
+								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+									<label class="control-label" for="unidade">Unidade*:</label>
+									<select class="form-control" id="unidade" name="unidade">
+										<option value="" selected disabled>Selectione</option>
+										<option value="0">Gramas (g)</option>
+										<option value="1">Mililitros (ml)</option>
+									</select>
+								</div>	
 								
 								<div class="input-margin col-xs-12 col-sm-12 col-md-3">
 									<label class="control-label" for="fabricacao">Data de fabricação*:</label>
@@ -228,26 +245,7 @@
 									<label class="control-label" for="vencimento">Data de vencimento*:</label>
 									<input type="date" id="vencimento" class="form-control" placeholder="Escolha a data de vencimento" name="vencimento" required>
 								</div>
-								
-								<div class="input-margin col-xs-12 col-sm-9 col-md-6">
-									<label class="control-label" for="estoque">Estoque*:</label>
-									<input id="estoque" type="text" class="form-control" name="estoque" maxlength="20" placeholder="0.000">
-								</div>		
-											
-								<div class="input-margin col-xs-12 col-sm-9 col-md-3">
-									<label class="control-label" for="peso">Peso:</label>
-									<input id="peso" type="text" class="form-control" name="peso" maxlength="20" placeholder="0.000">
-								</div>
-								
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
-									<label class="control-label" for="unidade">Unidade*:</label>
-									<select class="form-control" id="unidade" name="unidade" required>
-										<option value="" selected disabled>Selectione</option>
-										<option value="1">Kilo(s)</option>
-										<option value="0">Grama(s)</option>
-									</select>
-								</div>							
-											
+
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
 									<label class="control-label" for="descricao">Descrição:</label>
 									<textarea class="form-control" name="descricao" id="descricao" placeholder="Digite aqui a descrição	"></textarea>
@@ -337,7 +335,7 @@
 	<!-- Importação dos arquivos java script -->
 	<script src="resources/js/jquery-2.1.4.js"></script>
 	<script src="resources/js/datatables.js"></script>	
-	<script src="resources/js/maskedinput.js"></script>
+	<script src="resources/js/mask.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
     
 
@@ -352,8 +350,8 @@
 			*
 			*/
 			
-			$('#menu-mob-materiaprima').addClass('active');
-			$('#menu-materiaprima').addClass('active');
+			$('#menu-mob-materiasprimas').addClass('active');
+			$('#menu-materiasprimas').addClass('active');
 
 			/*
 			*
@@ -378,7 +376,6 @@
 			*/
 
             $('#incluir-materiaPrima-modal').click(function() {
-            	
             	
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova matéria-prima");
@@ -427,8 +424,6 @@
 				$('#tipo').val(data[2]);
 				$('#qtd').val(data[3]);
 				$('#descricao').val(data[4]);
-				$('#foto').val(data[5]);
-
             });
 
 

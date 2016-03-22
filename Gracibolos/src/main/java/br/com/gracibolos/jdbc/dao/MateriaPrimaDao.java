@@ -16,16 +16,16 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 
 	public boolean inserir(MateriaPrima materiaPrima) throws Exception{
 		boolean status = false;
-		String sql = "INSERT INTO materiaprima (nome, estoque, peso, unidade, fabricacao, vencimento, descricao)"
+		String sql = "INSERT INTO materiaprima (codigo, nome, estoque, unidade, fabricacao, vencimento, descricao)"
 				   + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{		
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, materiaPrima.getNome());
-			ps.setDouble(2, materiaPrima.getEstoque());
-			ps.setDouble(3, materiaPrima.getPeso());
+			ps.setString(1, materiaPrima.getCodigo());
+			ps.setString(2, materiaPrima.getNome());
+			ps.setDouble(3, materiaPrima.getEstoque());
 			ps.setLong(4, materiaPrima.getUnidade());
 			
 			if(materiaPrima.getFabricacao() != null){
@@ -57,15 +57,15 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 
 	public boolean alterar(MateriaPrima materiaPrima) throws Exception{
 		boolean status = false;
-		String sql = " UPDATE materiaprima SET nome=?, estoque=?, peso=?, unidade=?, fabricacao=?,"
+		String sql = " UPDATE materiaprima SET nome=?, estoque=?, unidade=?, fabricacao=?,"
 				   + " vencimento=?, descricao=? where id=?";
 		PreparedStatement  ps = null;
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, materiaPrima.getNome());
-			ps.setDouble(2, materiaPrima.getEstoque());
-			ps.setDouble(3, materiaPrima.getPeso());
+			ps.setString(1, materiaPrima.getCodigo());
+			ps.setString(2, materiaPrima.getNome());
+			ps.setDouble(3, materiaPrima.getEstoque());
 			ps.setLong(4, materiaPrima.getUnidade());
 			
 			if(materiaPrima.getFabricacao() != null){
@@ -138,7 +138,6 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 				materiaPrima.setId(rs.getLong("id"));
 				materiaPrima.setNome(rs.getString("nome"));
 				materiaPrima.setEstoque(rs.getDouble("estoque"));
-				materiaPrima.setPeso(rs.getDouble("peso"));
 				materiaPrima.setUnidade(rs.getLong("unidade"));
 				materiaPrima.setFabricacao(rs.getDate("fabricacao").toLocalDate());
 				materiaPrima.setVencimento(rs.getDate("vencimento").toLocalDate());
@@ -167,14 +166,13 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 		List<MateriaPrima> materiasPrimas = new ArrayList<>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT id, nome, estoque, peso, unidade, fabricacao, vencimento, descricao FROM materiaprima WHERE unidade = ? OR nome LIKE ? OR vencimento = ?";
+		String sql = "SELECT id, codigo,  nome, estoque, peso, unidade, fabricacao, vencimento, descricao FROM materiaprima WHERE codigo = ? OR nome LIKE ?";
 				
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 						
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, pesquisa);
 			ps.setString(2, "%"+pesquisa+"%");
-			ps.setString(3, pesquisa);
 			
 			rs = ps.executeQuery();
 			
@@ -183,9 +181,9 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 				MateriaPrima mp = new MateriaPrima();
 				
 				mp.setId(rs.getLong("id"));
+				mp.setCodigo(rs.getString("codigo"));
 				mp.setNome(rs.getString("nome"));
 				mp.setEstoque(rs.getDouble("estoque"));
-				mp.setPeso(rs.getDouble("peso"));
 				mp.setUnidade(rs.getLong("unidade"));
 				mp.setFabricacao(rs.getDate("fabricacao").toLocalDate());
 				mp.setVencimento(rs.getDate("vencimento").toLocalDate());

@@ -15,7 +15,6 @@ public class MateriaPrimaListar {
 			    System.out.println(	    	  		 "Id : "+mp.getId()
 			    				       		   + "\tNome : "+mp.getNome()
 			    						 	 +"\tEstoque : "+mp.getEstoque()
-			    						 	 	+"\tPeso : "+mp.getPeso()
 			                        	  	 +"\tUnidade : "+mp.getUnidade()
 			                        	  +"\tFabricação : "+mp.getFabricacao()
 			                        	  +"\tVencimento : "+mp.getVencimento()

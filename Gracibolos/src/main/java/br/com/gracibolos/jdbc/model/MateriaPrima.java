@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
@@ -11,29 +6,14 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-/**
- *
- * @author d637942
- */
 public class MateriaPrima implements Serializable{
     
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -8191626366030745848L;
-
-	public MateriaPrima(){
         
-    }
-    
-    public MateriaPrima(Long id) {
-        this.id = id;
-    }
-    
     private Long id;
+    private String codigo;
     private String nome;
     private Double estoque;
-    private Double peso;
     private Long unidade; 
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate fabricacao;
@@ -47,6 +27,14 @@ public class MateriaPrima implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getNome() {
@@ -63,14 +51,6 @@ public class MateriaPrima implements Serializable{
 
 	public void setEstoque(Double estoque) {
 		this.estoque = estoque;
-	}
-
-	public Double getPeso() {
-		return peso;
-	}
-
-	public void setPeso(Double peso) {
-		this.peso = peso;
 	}
 
 	public Long getUnidade() {
