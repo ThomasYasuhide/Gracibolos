@@ -652,26 +652,20 @@ public class AdministrativoController {
 		
 	//INCLUIR NOVA MATÉRIA PRIMA
 	@RequestMapping("/administrativo-incluir-materiaprima")
-	public ModelAndView incluir_materiaPrima(MateriaPrima materiaPrima){
+	public ModelAndView incluir_materiaPrima(MateriaPrima materiaprima){
 		System.out.println("Entrou na servlet de inclusão de uma nova materiaPrima");
 			
 		boolean status = false;
 		    
 		MateriaPrimaDao dao = new MateriaPrimaDao();			
 			
-		try 
-		{
-			if(dao.inserir(materiaPrima))
-			{
+		try {
+			if(dao.inserir(materiaprima)) {
 				status = true;
-			}
-			else
-			{
+			} else {
 				status = false;
 			}
-		} 
-		catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -684,26 +678,21 @@ public class AdministrativoController {
 		
 	//AlTERAR MATÉRIA PRIMA
 	@RequestMapping("/administrativo-alterar-materiaprima")
-	public ModelAndView alterar_materiaPrima(MateriaPrima materiaPrima){
+	public ModelAndView alterar_materiaPrima(MateriaPrima materiaprima){
 		System.out.println("Entrou na pagina de alteração de materiaPrima");
 
-		boolean status = false;		   
-		    
+		boolean status = false;
+
 		MateriaPrimaDao materiaPrimaDao = new MateriaPrimaDao();			
 			
 		try
 		{
-			if(materiaPrimaDao.alterar(materiaPrima))
-			{
+			if(materiaPrimaDao.alterar(materiaprima)) {
 				status = true;
-			}
-			else
-			{
+			} else {
 				status = false;
 			}
-		}
-		catch (Exception e) 
-		{			
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}
 			
@@ -716,26 +705,20 @@ public class AdministrativoController {
 		
 	//EXCLUIR MATÉRIA PRIMA
 	@RequestMapping("/administrativo-remover-materiaprima")
-	public ModelAndView excluir_materiaPrima(MateriaPrima materiaPrima){
+	public ModelAndView excluir_materiaPrima(MateriaPrima materiaprima){
 		System.out.println("Entrou na pagina de exclusão de materiaprima");
 			
 		boolean status = false;	
 			
 	    MateriaPrimaDao materiaPrimaDao = new MateriaPrimaDao();
 			
-		try 
-		{
-			if(materiaPrimaDao.excluir(materiaPrima))
-			{
+		try {
+			if(materiaPrimaDao.excluir(materiaprima)) {
 				status = true;
-			}
-			else
-			{
+			} else {
 				status = false;
 			}
-		} 
-		catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 			
@@ -752,19 +735,16 @@ public class AdministrativoController {
 		System.out.println("Realizou a pesquisa de matéria prima");
 			
 		MateriaPrimaDao dao = new MateriaPrimaDao();
-		List<MateriaPrima> listaDeMateriaPrima = null;
-		try
-		{
-			listaDeMateriaPrima = dao.pesquisar(pesquisa);
-		}
-		catch (Exception e) 
-		{
+		List<MateriaPrima> materiasprimas = null;
+		try {
+			materiasprimas = dao.pesquisar(pesquisa);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 				    
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("administrativo/materiasprimas");
-		mv.addObject("listaDeMateriaPrima", listaDeMateriaPrima);
+		mv.addObject("materiasprimas", materiasprimas);
 		    
 	    return mv;
 	}

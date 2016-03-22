@@ -57,7 +57,7 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 
 	public boolean alterar(MateriaPrima materiaPrima) throws Exception{
 		boolean status = false;
-		String sql = " UPDATE materiaprima SET nome=?, estoque=?, unidade=?, fabricacao=?,"
+		String sql = " UPDATE materiaprima SET codigo=?, nome=?, estoque=?, unidade=?, fabricacao=?,"
 				   + " vencimento=?, descricao=? where id=?";
 		PreparedStatement  ps = null;
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
@@ -123,17 +123,17 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 	}
 
 	public List<MateriaPrima> listar() throws Exception{
-		String sql = "SELECT * FROM materiaprima";
+		
+		String sql = "SELECT id, codigo,  nome, estoque, unidade, fabricacao, vencimento, descricao FROM materiaprima";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<MateriaPrima> listaDeMateriaPrima= null;
-		try(Connection conn = ConnectionProvider.getInstance().getConnection())
-		{
+		List<MateriaPrima> materiasprimas= null;
+		
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			listaDeMateriaPrima = new ArrayList<MateriaPrima>();
-			while(rs.next())
-			{
+			materiasprimas = new ArrayList<MateriaPrima>();
+			while(rs.next()) {
 				MateriaPrima materiaPrima = new MateriaPrima();
 				materiaPrima.setId(rs.getLong("id"));
 				materiaPrima.setNome(rs.getString("nome"));
@@ -143,20 +143,17 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 				materiaPrima.setVencimento(rs.getDate("vencimento").toLocalDate());
 				materiaPrima.setDescricao(rs.getString("descricao"));
 				
-				listaDeMateriaPrima.add(materiaPrima);
-				
-				for(int i = 0;i<listaDeMateriaPrima.size();i++){  //enquanto i for menor, não maior  
-				     System.out.println(listaDeMateriaPrima.get(i));    
-				}  
+				materiasprimas.add(materiaPrima);
 			}
+			
 			ps.close();
 			conn.close();
-		}
-		catch (SQLException e) 
-		{
+			
+		} catch (SQLException e) {
 			System.out.println("Erro ao listar materiaPrima\n"+e);
 		}
-		return listaDeMateriaPrima;
+		
+		return materiasprimas;
 	}
 
 	
@@ -166,7 +163,7 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 		List<MateriaPrima> materiasPrimas = new ArrayList<>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT id, codigo,  nome, estoque, peso, unidade, fabricacao, vencimento, descricao FROM materiaprima WHERE codigo = ? OR nome LIKE ?";
+		String sql = "SELECT id, codigo,  nome, estoque, unidade, fabricacao, vencimento, descricao FROM materiaprima WHERE codigo = ? OR nome LIKE ?";
 				
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 						

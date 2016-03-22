@@ -131,7 +131,7 @@
 					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-							<table id="lista-materiaPrima" class="table table-hover display table-settings">
+							<table id="lista-materiaprima" class="table table-hover display table-settings">
 								<thead>
 									<!-- Titulos das tabelas  -->
 									<tr>
@@ -149,9 +149,10 @@
 								<tbody>
 
 									<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
-									<c:forEach var="materiaprima" items="${listaDeMateriaPrima}">
+									<c:forEach var="materiaprima" items="${materiasprimas}">
 										<tr>
 											<td>${materiaprima.id}</td>
+											<td>${materiaprima.codigo}</td>
 											<td>${materiaprima.nome}</td>
 											<td>${materiaprima.estoque}</td>
 											<td>${materiaprima.unidade}</td>
@@ -159,8 +160,8 @@
 											<td>${materiaprima.vencimento}</td>
 											<td>${materiaprima.descricao}</td>
 		                					<td>
-		                						<button id="edit-materiaPrima" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-		                						<button id="delete-materiaPrima" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+		                						<button id="edit-materiaprima" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
+		                						<button id="delete-materiaprima" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
 		                					</td>
 										</tr>
 									</c:forEach>
@@ -171,7 +172,7 @@
 
 					<div class="row">
 						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-4">
-							<a href="" id="incluir-materiaPrima-modal" data-toggle="modal" data-target="#modal-materiaPrima" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova matéria-prima</a>
+							<a href="" id="incluir-materiaprima-modal" data-toggle="modal" data-target="#modal-materiaprima" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova matéria-prima</a>
 						</div>
 					</div>
 
@@ -190,11 +191,11 @@
 	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR ############################################################
 
 	-->
-	<div class="modal fade" id="modal-materiaPrima" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="modal-materiaprima" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 	    	
-	    		<form id="materiaPrima-form" method="POST">
+	    		<form id="materiaprima-form" method="POST">
 	    
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -288,10 +289,10 @@
 
 
 	<!-- Modal de confirmação de exclusão de cliente -->
-	<div class="modal fade" id="excluir-materiaPrima" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="excluir-materiaprima" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form id="materiaPrima-delete-form" action="administrativo-remover-materiaprima" method="POST">
+				<form id="materiaprima-delete-form" action="administrativo-remover-materiaprima" method="POST">
 
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -360,10 +361,10 @@
 			*/
 			
 			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
-            var table = $('#lista-materiaPrima').DataTable({
+            var table = $('#lista-materiaprima').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 5, 7 ],
+                        "targets": [ 0, 3, 4, 5, 7 ],
                         "visible": false
                     }
                 ]
@@ -375,19 +376,19 @@
 			*
 			*/
 
-            $('#incluir-materiaPrima-modal').click(function() {
+            $('#incluir-materiaprima-modal').click(function() {
             	
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova matéria-prima");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#materiaPrima-form").attr("action","administrativo-incluir-materiaprima");
+				$("#materiaprima-form").attr("action","administrativo-incluir-materiaprima");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir matéria-prima');
 				
 				//Reset autmaticamente todos os campos do formulário.
-				$('#materiaPrima-form').each(function(){
+				$('#materiaprima-form').each(function(){
 					this.reset();
 				});
 				
@@ -401,13 +402,13 @@
 			*/
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
-            $('#lista-materiaPrima tbody').on( 'click', '#edit-materiaPrima', function () {            	
+            $('#lista-materiaprima tbody').on( 'click', '#edit-materiaprima', function () {            	
             	
             	 //Altera dinamicamente o titulo do modal.
             	$('#modal-subtitle').text("Alterar materia-prima");
             	
             	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#materiaPrima-form").attr("action","administrativo-alterar-materiaprima");
+				$("#materiaprima-form").attr("action","administrativo-alterar-materiaprima");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
@@ -416,14 +417,17 @@
                 var data = table.row( $(this).parents('tr') ).data();
 
               	//Apresenta o modal de exclusão na tela.
-              	$('#modal-materiaPrima').modal('show');
+              	$('#modal-materiaprima').modal('show');
 					
 				//Preenche os determinados campos com os conteudos.
               	$('#id').val(data[0]);
-				$('#marca').val(data[1]);
-				$('#tipo').val(data[2]);
-				$('#qtd').val(data[3]);
-				$('#descricao').val(data[4]);
+				$('#codigo').val(data[1]);
+				$('#nome').val(data[2]);
+				$('#estoque').val(data[3]);
+				$('#unidade').val(data[4]);
+				$('#fabricacao').val(data[5]);
+				$('#vencimento').val(data[6]);
+				$('#descricao').val(data[7]);
             });
 
 
@@ -434,7 +438,7 @@
 			*/
 	
 			//Define uma ação ao apertar o botão excluir de algum item da tabela.
-            $('#lista-materiaPrima tbody').on( 'click', '#delete-materiaPrima', function () {
+            $('#lista-materiaprima tbody').on( 'click', '#delete-materiaprima', function () {
 				
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
@@ -443,7 +447,7 @@
                 $('#id_delete').val(data[0]);
 
                 //Apresenta o modal de exclusão na tela.
-				$('#excluir-materiaPrima').modal('show');
+				$('#excluir-materiaprima').modal('show');
 
             });
 	
