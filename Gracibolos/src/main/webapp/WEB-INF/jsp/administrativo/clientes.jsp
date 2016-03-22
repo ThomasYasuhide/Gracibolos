@@ -348,7 +348,7 @@
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
 									<label class="control-label" for="clientedesde">Cliente Desde:</label>
-									<input type="date" id="clientedesde" name="clientedesde" class="form-control" />
+									<input type="date" id="clientedesde" name="clientedesde" readonly="readonly" class="form-control"/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -441,6 +441,7 @@
 	<script src="resources/js/datatables.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
 	<script src="resources/js/mask.js"></script>
+	<script src="resources/js/moment.js"></script>
 	<script src="resources/js/scripts.js"></script>
 	
 	<script type="text/javascript">
@@ -600,7 +601,7 @@
             	$("#bairro").prop( "disabled", true );
                 $("#cidade").prop( "disabled", true );
                 $("#estado").prop( "disabled", true );
-            	
+            	                
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir novo cliente");
 				
@@ -614,6 +615,9 @@
 				$('#cliente-form').each(function(){
 					this.reset();
 				});
+				
+				var now = moment().format('YYYY-MM-DD');
+                $('#clientedesde').val(now);
 				
 				//Este método se encontra no arquivo scripts.js
 				//Desabilita e habilita os campos NOME RAZÃO CPF CNPJ RG IE SEXO DATANASCIMENTO
