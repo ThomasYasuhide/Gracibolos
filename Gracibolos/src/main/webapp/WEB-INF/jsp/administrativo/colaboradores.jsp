@@ -235,7 +235,7 @@
 									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
 								</div>
 
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="status">Status:</label>
 									<select id="status" name="status" class="form-control" required>
 										<option selected value="1">Ativado</option>
@@ -243,7 +243,7 @@
 									</select>
 								</div>
 
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="nivel">Acesso:</label>
 									<select id="nivel" name="nivel" class="form-control" required>
 										<option selected value="1">Atendente</option>
@@ -331,7 +331,7 @@
 									<input type="text" id="cel" name="cel" placeholder="(00) 00000-0000" class="form-control" maxlength="15" />
 								</div>
 
-								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
 									<label class="control-label" for="email">E-mail:</label>
 									<input type="email" id="email" name="email" class="form-control" placeholder="email@provedor.com.br" maxlength="120"/>
 								</div>

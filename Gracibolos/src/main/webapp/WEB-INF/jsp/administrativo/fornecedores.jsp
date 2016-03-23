@@ -233,7 +233,7 @@
 									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
 								</div>
 								
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="tipopessoa">Status:</label>
 									<select id="status" name="status" class="form-control">
 										<option selected value="1">Ativado</option>
@@ -241,7 +241,7 @@
 									</select>
 								</div>
 
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="tipopessoa">Pessoa:</label>
 									<select id="tipopessoa" name="tipopessoa" onchange="desabilitarCampos(this)" class="form-control" required>
 										<option selected value="0">Fisica</option>
@@ -249,7 +249,7 @@
 									</select>
 								</div>
 								
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="sexo">Sexo:</label>
 									<select id="sexo" name="sexo" class="form-control" required>
 										<option selected="selected" disabled="disabled" value="0">Selecione um sexo</option>
@@ -339,7 +339,7 @@
 									<input type="email" id="email" name="email" class="form-control" placeholder="email@provedor.com.br" maxlength="120"/>
 								</div>
 
-								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-12">
 									<label class="control-label" for="site">Site:</label>
 									<input type="text" id="site" name="site" class="form-control" placeholder="www.site.com.br" maxlength="120"/>
 								</div>

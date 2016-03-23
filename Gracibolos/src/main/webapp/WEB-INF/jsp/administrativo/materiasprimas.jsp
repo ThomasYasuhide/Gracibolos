@@ -213,22 +213,22 @@
 									<input type="text" id="id" name="id" placeholder="Digite o número de ID" class="form-control" />
 								</div>																	
 										
-								<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="nome">Código*:</label>
 									<input type="text" id="codigo" class="form-control" maxlength="30" placeholder="Digite o código da matéria-prima" name="codigo" required>
 								</div> 
 									
-								<div class="input-margin col-xs-12 col-sm-12 col-md-9">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-9">
 									<label class="control-label" for="nome">Nome*:</label>
 									<input type="text" id="nome" class="form-control" maxlength="255" placeholder="Digite o nome da matéria-prima" name="nome" required>
 								</div> 
 								
-								<div class="input-margin col-xs-12 col-sm-9 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="estoque">Estoque*:</label>
 									<input id="estoque" type="text" class="form-control" name="estoque" maxlength="20" placeholder="0.000">
 								</div>
 								
-								<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="unidade">Unidade*:</label>
 									<select class="form-control" id="unidade" name="unidade">
 										<option value="" selected disabled>Selectione</option>
@@ -237,12 +237,12 @@
 									</select>
 								</div>	
 								
-								<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="fabricacao">Data de fabricação*:</label>
 									<input type="date" id="fabricacao" class="form-control" placeholder="Escolha a data de fabricação" name="fabricacao" required>
 								</div>
 											
-								<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="vencimento">Data de vencimento*:</label>
 									<input type="date" id="vencimento" class="form-control" placeholder="Escolha a data de vencimento" name="vencimento" required>
 								</div>

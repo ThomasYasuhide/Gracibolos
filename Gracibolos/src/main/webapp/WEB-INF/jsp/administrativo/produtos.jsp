@@ -228,10 +228,10 @@
 											
 											<div class="hidden">
 												<label class="control-label" for="id">Nº produto:</label>
-												<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
+												<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" readonly/>
 											</div>
 
-											<div class="col-xs-6 col-md-3">
+											<div class="col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label">Foto do produto:</label>
 												<label for="file">
 													<img id="foto-view" class="thumbnail" src="resources/img/produtos/model.png" width="100%" height="100%" alt="..." onclick="" >
@@ -240,7 +240,7 @@
 												<input type="file" id="file" name="file" class="hidden" accept="image/*">
 											</div>
 											
-											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="status">Status:</label>
 												<select class="form-control" id="status" name="status" required>
 													<option selected value="1">Ativado</option>
@@ -248,17 +248,17 @@
 												</select>
 											</div>
 
-											<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="fabricacao">Data de fabricação*:</label>
 												<input type="date" id="fabricacao" class="form-control" placeholder="Escolha a data de fabricação" name="fabricacao" required>
 											</div>
 											
-											<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="vencimento">Data de vencimento*:</label>
 												<input type="date" id="vencimento" class="form-control" placeholder="Escolha a data de vencimento" name="vencimento" required>
 											</div>
 											
-											<div class="input-margin col-xs-12 col-sm-12 col-md-3">
+											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="codigo">Código*:</label>
 												<input type="text" id="codigo" class="form-control" maxlength="20" placeholder="Digite o código do produto" name="codigo" required>
 											</div> 
@@ -268,7 +268,7 @@
 												<input type="text" id="nome" class="form-control" maxlength="100" placeholder="Digite o nome do produto" name="nome" required>
 											</div> 
 											
-											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="tipo">Tipo*:</label>
 												<select class="form-control" id="tipo" name="tipo" required>
 													<option value="" selected="selected" disabled="disabled">Selecione</option>
@@ -277,12 +277,12 @@
 												</select>
 											</div>
 
-											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
+											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="peso">Peso:</label>
 												<input id="peso" type="text" class="form-control" name="peso" maxlength="10" placeholder="0.000">
 											</div>
 
-											<div class="input-margin col-xs-6 col-sm-6 col-md-3">
+											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="unidade">Unidade:</label>
 												<select class="form-control" id="unidade" name="unidade">
 													<option value="" selected disabled>Selectione</option>
@@ -296,7 +296,7 @@
 												<input id="estoque" type="number" min=0 max=9999999 class="form-control" pattern="[0-9]+" maxlength="7"  name="estoque" value="0">
 											</div>
 											
-											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
+											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="custo">Custo:</label>
 												<div class="input-group">
 													<span class="input-group-addon">R$</span>
@@ -304,7 +304,7 @@
 												</div>
 											</div>
 
-											<div class="input-margin col-xs-12 col-sm-9 col-md-3">
+											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="valor">Valor*:</label>
 												<div class="input-group">
 													<span class="input-group-addon">R$</span>
