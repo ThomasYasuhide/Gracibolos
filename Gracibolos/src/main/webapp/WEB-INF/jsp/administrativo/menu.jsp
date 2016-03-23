@@ -13,7 +13,7 @@
 					<div class="collapse navbar-collapse" id="navbar-collapse">
 						<ul class="nav navbar-nav">
 							<li id="menu-mob-dashboard"><a href="administrativo-dashboard"><i class="material-icons">trending_up</i>&nbsp;&nbsp;Dashboard</a></li>
-							<li id="menu-mob-caixa"><a href="#"><i class="material-icons">account_balance</i>&nbsp;&nbsp;Caixa</a></li>
+							<li id="menu-mob-caixa"><a href="administrativo-caixa"><i class="material-icons">account_balance</i>&nbsp;&nbsp;Caixa</a></li>
 							<li id="menu-mob-encomendas"><a href="#"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;Encomendas</a></li>
 							<li id="menu-mob-clientes"><a href="administrativo-clientes"><i class="material-icons">people</i>&nbsp;&nbsp;Clientes</a></li>
 							<li id="menu-mob-produtos"><a href="administrativo-produtos"><i class="material-icons">local_grocery_store</i>&nbsp;&nbsp;Produtos</a></li>
@@ -38,7 +38,7 @@
 
 				<ul class="nav nav-pills nav-stacked">
 					<li id="menu-dashboard"><a href="administrativo-dashboard"><i class="material-icons">trending_up</i>&nbsp;&nbsp;Dashboard</a></li>
-					<li id="menu-caixa"><a href="#"><i class="material-icons">account_balance</i>&nbsp;&nbsp;Caixa</a></li>
+					<li id="menu-caixa"><a href="administrativo-caixa"><i class="material-icons">account_balance</i>&nbsp;&nbsp;Caixa</a></li>
 					<li id="menu-encomendas"><a href="#"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;Encomendas</a></li>
 					<li id="menu-clientes"><a href="administrativo-clientes"><i class="material-icons">people</i>&nbsp;&nbsp;Clientes</a></li>
 					<li id="menu-produtos"><a href="administrativo-produtos"><i class="material-icons">local_grocery_store</i>&nbsp;&nbsp;Produtos</a></li>
