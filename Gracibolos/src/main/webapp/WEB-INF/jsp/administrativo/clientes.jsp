@@ -232,7 +232,7 @@
 
 								<div class="hidden">
 									<label class="control-label" for="id">Nº cliente:</label>
-									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
+									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
@@ -348,7 +348,7 @@
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
 									<label class="control-label" for="clientedesde">Cliente Desde:</label>
-									<input type="date" id="clientedesde" name="clientedesde" readonly="readonly" class="form-control"/>
+									<input type="date" id="clientedesde" name="clientedesde" class="form-control" readonly />
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -408,7 +408,7 @@
 
 								<div class="hidden">
 									<label class="control-label" for="id">Nº cliente:</label>
-									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" />
+									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
 								</div>
 
 								<p>Deseja realmente excluir o cliente selecionado?</p>

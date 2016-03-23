@@ -425,7 +425,7 @@
 
 								<div class="hidden">
 									<label class="control-label" for="id">Nº produto:</label>
-									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" />
+									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
 								</div>
 
 								<p>Deseja realmente excluir o produto selecionado?</p>

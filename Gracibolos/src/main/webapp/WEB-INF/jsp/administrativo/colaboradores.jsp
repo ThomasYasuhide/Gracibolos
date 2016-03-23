@@ -232,7 +232,7 @@
 
 								<div class="hidden">
 									<label class="control-label" for="id">Nº colaborador:</label>
-									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" />
+									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
@@ -393,7 +393,7 @@
 
 								<div class="hidden">
 									<label class="control-label" for="id">Nº colaborador:</label>
-									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" />
+									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
 								</div>
 
 								<p>Deseja realmente excluir o colaborador?</p>
