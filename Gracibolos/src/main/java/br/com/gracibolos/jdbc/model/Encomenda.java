@@ -15,127 +15,115 @@ public class Encomenda implements Serializable{
     private Integer cliente;
     private Integer status;
     private String responsavel;
-    
-    
-    
     @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate dataInicio;
+    private LocalDate dataentrega;
     @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate dataFaltaProd;
+    private LocalDate dataencomenda;
     @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate dataProducao;
+    private LocalDate datafaturamento;
     @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate dataFinalizado;
+    private LocalDate dataproducao;
     @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate dataEntrega;
-    
-    private Boolean entregaRetirada;
+    private LocalDate datafinalizado;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate datacancelado;
     private BigDecimal total;
-    private String descricao;
-    private Integer numero;
-
+    private String obs;
+    
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
+	
 	public Integer getCliente() {
 		return cliente;
 	}
-
+	
 	public void setCliente(Integer cliente) {
 		this.cliente = cliente;
 	}
-
+	
+	public Integer getStatus() {
+		return status;
+	}
+	
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
 	public String getResponsavel() {
 		return responsavel;
 	}
-
+	
 	public void setResponsavel(String responsavel) {
 		this.responsavel = responsavel;
 	}
-
-	public LocalDate getDataInicio() {
-		return dataInicio;
+	
+	public LocalDate getDataencomenda() {
+		return dataencomenda;
 	}
-
-	public void setDataInicio(LocalDate dataInicio) {
-		this.dataInicio = dataInicio;
+	
+	public void setDataencomenda(LocalDate dataencomenda) {
+		this.dataencomenda = dataencomenda;
 	}
-
-	public LocalDate getDataFaltaProd() {
-		return dataFaltaProd;
+	
+	public LocalDate getDataentrega() {
+		return dataentrega;
 	}
-
-	public void setDataFaltaProd(LocalDate dataFaltaProd) {
-		this.dataFaltaProd = dataFaltaProd;
+	
+	public void setDataentrega(LocalDate dataentrega) {
+		this.dataentrega = dataentrega;
 	}
-
-	public LocalDate getDataProducao() {
-		return dataProducao;
+	
+	public LocalDate getDatafaturamento() {
+		return datafaturamento;
 	}
-
-	public void setDataProducao(LocalDate dataProducao) {
-		this.dataProducao = dataProducao;
+	
+	public void setDatafaturamento(LocalDate datafaturamento) {
+		this.datafaturamento = datafaturamento;
 	}
-
-	public LocalDate getDataFinalizado() {
-		return dataFinalizado;
+	
+	public LocalDate getDataproducao() {
+		return dataproducao;
 	}
-
-	public void setDataFinalizado(LocalDate dataFinalizado) {
-		this.dataFinalizado = dataFinalizado;
+	
+	public void setDataproducao(LocalDate dataproducao) {
+		this.dataproducao = dataproducao;
 	}
-
-	public LocalDate getDataEntrega() {
-		return dataEntrega;
+	
+	public LocalDate getDatafinalizado() {
+		return datafinalizado;
 	}
-
-	public void setDataEntrega(LocalDate dataEntrega) {
-		this.dataEntrega = dataEntrega;
+	
+	public void setDatafinalizado(LocalDate datafinalizado) {
+		this.datafinalizado = datafinalizado;
 	}
-
-	public Boolean getEntregaRetirada() {
-		return entregaRetirada;
+	
+	public LocalDate getDatacancelado() {
+		return datacancelado;
 	}
-
-	public void setEntregaRetirada(Boolean entregaRetirada) {
-		this.entregaRetirada = entregaRetirada;
+	
+	public void setDatacancelado(LocalDate datacancelado) {
+		this.datacancelado = datacancelado;
 	}
-
+	
 	public BigDecimal getTotal() {
 		return total;
 	}
-
+	
 	public void setTotal(BigDecimal total) {
 		this.total = total;
 	}
-
-	public String getDescricao() {
-		return descricao;
+	
+	public String getObs() {
+		return obs;
 	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Integer getNumero() {
-		return numero;
-	}
-
-	public void setNumero(Integer numero) {
-		this.numero = numero;
+	
+	public void setObs(String obs) {
+		this.obs = obs;
 	}
 	
 }

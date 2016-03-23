@@ -68,17 +68,18 @@ public class AdministrativoController {
 		    
 		    try {
 		    	
-		    	// Root Directory.
-		        String uploadRootPath = request.getServletContext().getRealPath("\\resources\\img\\produtos");
-		        System.out.println("uploadRootPath=" + uploadRootPath);
+		    	//Pasta de destino
+		        String Path = request.getServletContext().getRealPath("\\resources\\img\\produtos");
+		        System.out.println("uploadRootPath=" + Path);
 		 
-		        File uploadRootDir = new File(uploadRootPath);
-		        // Create directory if it not exists.
-		        if (!uploadRootDir.exists()) {
-		            uploadRootDir.mkdirs();
+		        File diretorio = new File(Path);
+		        
+		        //Verifica se o diretório já existe, senão cria o diretorio
+		        if (!diretorio.exists()) {
+		        	diretorio.mkdirs();
 		        }
 		        
-		        File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+		        File serverFile = new File(diretorio.getAbsolutePath() + File.separator + file.getOriginalFilename());
 		    	
 		    	BufferedOutputStream stream = null;
 		    	stream = new BufferedOutputStream(new FileOutputStream(serverFile));
@@ -126,18 +127,18 @@ public class AdministrativoController {
 		    
 		    try {
 		    	
-		    	// Root Directory.
-		        String uploadRootPath = request.getServletContext().getRealPath("\\resources\\img\\produtos");
-		        System.out.println("uploadRootPath=" + uploadRootPath);
+		    	//Pasta de destino
+		        String Path = request.getServletContext().getRealPath("\\resources\\img\\produtos");
+		        System.out.println("uploadRootPath=" + Path);
 		 
-		        File uploadRootDir = new File(uploadRootPath);
+		        File diretorio = new File(Path);
 		        
-		        // Create directory if it not exists.
-		        if (!uploadRootDir.exists()) {
-		            uploadRootDir.mkdirs();
+		        //Verifica se o diretório já existe, senão cria o diretorio
+		        if (!diretorio.exists()) {
+		        	diretorio.mkdirs();
 		        }
 		        
-		        File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+		        File serverFile = new File(diretorio.getAbsolutePath() + File.separator + file.getOriginalFilename());
 		    	
 		    	BufferedOutputStream stream = null;
 		    	stream = new BufferedOutputStream(new FileOutputStream(serverFile));
