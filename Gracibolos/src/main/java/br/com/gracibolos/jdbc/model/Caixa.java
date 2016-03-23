@@ -38,8 +38,9 @@ public class Caixa implements Serializable{
     private Boolean gasto;
     private Boolean recebimento;
     private String forma;
+    private Integer parcela;
     private String descricao;
-    
+
 	public Long getId() {
 		return id;
 	}
@@ -95,5 +96,17 @@ public class Caixa implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public Integer getParcela() {
+		return parcela;
+	}
+
+	public void setParcela(Integer parcela) {
+		this.parcela = parcela;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}	
 	
 }

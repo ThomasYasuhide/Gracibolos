@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.gracibolos.jdbc.dao.CaixaDao;
 import br.com.gracibolos.jdbc.dao.CidadeDao;
 import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.ColaboradorDao;
@@ -23,6 +24,7 @@ import br.com.gracibolos.jdbc.dao.EstadoDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
 import br.com.gracibolos.jdbc.dao.MateriaPrimaDao;
 import br.com.gracibolos.jdbc.dao.ProdutoDao;
+import br.com.gracibolos.jdbc.model.Caixa;
 import br.com.gracibolos.jdbc.model.Cidade;
 import br.com.gracibolos.jdbc.model.Cliente;
 import br.com.gracibolos.jdbc.model.Colaborador;
@@ -746,6 +748,119 @@ public class AdministrativoController {
 		mv.setViewName("administrativo/materiasprimas");
 		mv.addObject("materiasprimas", materiasprimas);
 		    
+	    return mv;
+	}
+	
+	/*
+	 * 
+	 * ###################### CAIXA ######################
+	 * 
+	 * */
+	
+	//CAIXA
+	@RequestMapping("/administrativo-caixa")
+	public ModelAndView caixa(){
+		System.out.println("Entrou na servlet de listagem de matéria prima");
+						
+		return new ModelAndView("administrativo/caixa");
+	}
+	
+	//INCLUIR NOVO CAIXA
+	@RequestMapping("/administrativo-incluir-caixa")
+	public ModelAndView incluir_caixa(Caixa caixa){
+		System.out.println("Entrou na servlet de inclusão de um novo caixa");
+				
+		boolean status = false;
+		    
+		CaixaDao dao = new CaixaDao();			
+			
+		try {
+			if(dao.inserir(caixa)) {
+				status = true;
+			} else {
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/caixa");
+		mv.addObject("incluir", status);
+
+		return mv;
+	}
+	
+	//AlTERAR CAIXA
+	@RequestMapping("/administrativo-alterar-caixa")
+	public ModelAndView alterar_caixa (Caixa caixa){
+		System.out.println("Entrou na pagina de alteração do caixa");
+
+		boolean status = false;
+
+		CaixaDao dao = new CaixaDao();			
+			
+		try
+		{
+			if(dao.alterar(caixa)) {
+				status = true;
+			} else {
+				status = false;
+			}
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
+			
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/caixa");
+		mv.addObject("alterar", status);
+				
+		return mv;
+	}
+			
+	//EXCLUIR CAIXA
+	@RequestMapping("/administrativo-remover-caixa")
+	public ModelAndView excluir_caixa (Caixa caixa){
+		System.out.println("Entrou na pagina de exclusão do caixa");
+				
+		boolean status = false;	
+				
+		CaixaDao dao = new CaixaDao();			
+				
+		try {
+			if(dao.excluir(caixa)) {
+				status = true;
+			} else {
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/caixa");
+		mv.addObject("excluir", status);			
+				
+		return mv;
+	}
+			
+	//PESQUISAR CAIXA
+	@RequestMapping("/administrativo-pesquisar-caixa")
+	public ModelAndView pesquisar_caixa (String pesquisa){
+		System.out.println("Realizou a pesquisa do caixa");
+				
+		CaixaDao dao = new CaixaDao();		
+		List<Caixa> caixas = null;
+		try {
+			caixas = dao.pesquisar(pesquisa);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+					    
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/caixa");
+		mv.addObject("caixas", caixas);
+			    
 	    return mv;
 	}
 	

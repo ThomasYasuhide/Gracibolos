@@ -14,9 +14,9 @@ public class CaixaDao implements GenericoDao<Caixa>{
 
 	public boolean inserir(Caixa caixa) throws Exception{
 		boolean status = false;
-		String sql = "INSERT INTO caixa(encomendaId, valor, gasto, recebimento, forma,"
-				+ " descricao)"
-				+ " VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = " INSERT INTO caixa(encomendaId, valor, gasto, recebimento, forma,"
+				   + " parcela, descricao)"
+				   + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
@@ -27,7 +27,8 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			ps.setBoolean(3, caixa.getGasto());
 			ps.setBoolean(4, caixa.getRecebimento());
 			ps.setString(5, caixa.getForma());
-			ps.setString(6, caixa.getDescricao());
+			ps.setInt(6, caixa.getParcela());
+			ps.setString(7, caixa.getDescricao());
 						
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -45,7 +46,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 	public boolean alterar(Caixa caixa) throws Exception{
 		boolean status = false;
 		String sql = " UPDATE caixa SET encomendaId=?, valor=?, gasto=?, recebimento=?, forma=?,"
-				   + " descricao=? where id=?";
+				   + " parcela=?, descricao=? where id=?";
 		PreparedStatement  ps = null;
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
@@ -55,8 +56,9 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			ps.setBoolean(3, caixa.getGasto());
 			ps.setBoolean(4, caixa.getRecebimento());
 			ps.setString(5, caixa.getForma());
-			ps.setString(6, caixa.getDescricao());
-			ps.setLong(7, caixa.getId());
+			ps.setInt(6, caixa.getParcela());
+			ps.setString(7, caixa.getDescricao());
+			ps.setLong(8, caixa.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -116,6 +118,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 				caixa.setGasto(rs.getBoolean("gasto"));
 				caixa.setRecebimento(rs.getBoolean("recebimento"));
 				caixa.setForma(rs.getString("forma"));
+				caixa.setParcela(rs.getInt("parcela"));
 				caixa.setDescricao(rs.getString("descricao"));				
 				
 				listaDeCaixa.add(caixa);
