@@ -17,7 +17,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 	public boolean inserir(Encomenda encomenda) throws Exception{
 		boolean status = false;
 		String sql = " INSERT INTO encomenda(cliente, status, responsavel, dataentrega, dataencomenda, total, obs)"
-				   + " VALUES (?, ?, ?, ?, ?, ?, ,?)";
+				   + " VALUES (?, ?, ?, ?, ?, ? ,?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
