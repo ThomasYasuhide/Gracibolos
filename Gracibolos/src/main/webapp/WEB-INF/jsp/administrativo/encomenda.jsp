@@ -21,7 +21,7 @@
     <link href="resources/css/datatables.css" rel="stylesheet">
 
 	<!-- Titulo da página -->
-	<title>Graci Bolos | Clientes</title>
+	<title>Graci Bolos | Encomendas</title>
 
 </head>
 
@@ -41,8 +41,8 @@
 
 					<!-- ############################################################ CABEÇALHO ############################################################ -->
 					<header>
-						<h2 class="">CLIENTES</h2>
-						<h4 class="">Lista de clientes</h4>
+						<h2 class="">ENCOMENDAS</h2>
+						<h4 class="">Lista de encomendas</h4>
 					</header>
 
 					<hr/>
@@ -56,7 +56,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Cliente armazenado com sucesso.
+								  <strong>Sucesso!</strong> Encomenda armazenado com sucesso.
 								</div>
 							</div>
 						</div>
@@ -66,7 +66,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar incluir o novo cliente, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar incluir a nova encomenda, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -86,7 +86,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar alterar o cliente, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar alterar a encomenda, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -96,7 +96,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Cliente foi excluido com sucesso!
+								  <strong>Sucesso!</strong> Encomenda foi excluida com sucesso!
 								</div>
 							</div>
 						</div>
@@ -106,12 +106,30 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar excluir o cliente, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar excluir a encomenda, favor tente novamente.
 								</div>
 							</div>
 						</div>
 					</c:if>
 					<!-- ################################# FIM DOS ALERTAS ################################# -->
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">

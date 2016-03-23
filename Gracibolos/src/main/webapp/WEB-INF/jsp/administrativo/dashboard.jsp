@@ -37,7 +37,7 @@
 					<!-- Titulo e subtitulo da pagina -->
 					<header>
 						<h2 class="">DASHBOARD</h2>
-						<h4 class="">Tabela de estatistícas</h4>
+						<h4 class="">Tabelas estatistícas</h4>
 					</header>
 
 					<hr/>
