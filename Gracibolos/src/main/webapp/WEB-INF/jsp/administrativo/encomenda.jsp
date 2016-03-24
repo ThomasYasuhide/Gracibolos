@@ -113,30 +113,12 @@
 					</c:if>
 					<!-- ################################# FIM DOS ALERTAS ################################# -->
 					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-							<label class="control-label">Pesquisar cliente:</label>
-							<form action="administrativo-pesquisar-cliente" method="POST">
+							<label class="control-label">Pesquisar encomenda:</label>
+							<form action="administrativo-pesquisar-encomenda" method="POST">
 								<div class="input-group">
-									<input type="text" class="form-control" maxlength="100" placeholder="Informe o nome, CPF, CNPJ, RG ou IE para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
+									<input type="text" class="form-control" maxlength="100" placeholder="Informe o numero de encomenda para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
 									<span class="input-group-btn">
 										<button class="btn btn-default" type="submit">
 											<span class="glyphicon glyphicon-search disabled"></span>
@@ -149,31 +131,22 @@
 					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-							<table id="lista-clientes" class="table table-hover display table-settings">
+							<table id="lista-encomendas" class="table table-hover display table-settings">
 								<thead>
 									<!-- Titulos das tabelas  -->
 									<tr>
-										<th>#</th>
+										<th>Pedido</th>
 										<th>Status</th>
-										<th>Pessoa</th>
-										<th>Sexo</th>
-										<th>Data Nascimento</th>
-										<th>Nome / Razão Social</th>
-										<th>CPF / CNPJ</th>
-										<th>RG / IE</th>
-										<th>Endereço</th>
-										<th>Nº</th>
-										<th>Complemento</th>
-										<th>Bairro</th>
-										<th>Estado</th>
-										<th>Cidade</th>
-										<th>CEP</th>
-										<th>Telefone</th>
-										<th>Celular</th>
-										<th>E-mail</th>
-										<th>Site</th>
-										<th>Cliente desde</th>
-										<th>Observaçoes</th>
+										<th>Cliente</th>
+										<th>Responsável</th>
+										<th>Data da encomenda</th>
+										<th>Data da entrega</th>
+										<th>Data do faturamento</th>
+										<th>Data da produção</th>
+										<th>Data da finalização</th>
+										<th>Data do cancelamento</th>
+										<th>Total</th>
+										<th>Obs</th>
 										<th>Ações</th>
 									</tr>
 								</thead>
@@ -184,26 +157,28 @@
 										<tr>
 											<td>${cliente.id}</td>
 											<td>${cliente.status}</td>
-											<td>${cliente.tipopessoa}</td>
-											<td>${cliente.sexo}</td>
-											<td>${cliente.datanascimento}</td>
-											<td>${cliente.nomerazao}</td>
-											<td>${cliente.cpfcnpj}</td>
-											<td>${cliente.rgie}</td>
-											<td>${cliente.endereco}</td>
-											<td>${cliente.numero}</td>
-											<td>${cliente.complemento}</td>
-											<td>${cliente.bairro}</td>
-											<td>${cliente.estado}</td>
-											<td>${cliente.cidade}</td>
-											<td>${cliente.cep}</td>
-											<td>${cliente.tel}</td>
-											<td>${cliente.cel}</td>
-											<td>${cliente.email}</td>
-											<td>${cliente.site}</td>
-											<td>${cliente.clientedesde}</td>
+											<td>${cliente.cliente}</td>
+											<td>${cliente.responsavel}</td>
+											<td>${cliente.dataencomenda}</td>
+											<td>${cliente.dataentrega}</td>
+											<td>${cliente.datafaturamento}</td>
+											<td>${cliente.dataproducao}</td>
+											<td>${cliente.datafinalizado}</td>
+											<td>${cliente.datacancelamento}</td>
+											<td>${cliente.total}</td>
 											<td>${cliente.obs}</td>
 		                					<td>
+		                					
+		                					
+		                					
+		                					
+		                					
+		                					
+		                					
+		                					
+		                					
+		                					
+		                					
 		                						<button id="edit-cliente" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
 		                						<button id="delete-cliente" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
 		                					</td>
