@@ -15,9 +15,10 @@ public class CaixaInserir {
 		
 		c.setEncomendaId(1);
 		c.setValor(valor);
-		c.setGasto(true);
+		c.setGasto(valor);
 		c.setRecebimento(true);
-		c.setForma("quadrada");
+		c.setForma("debito");
+		c.setParcela(1);
 		c.setDescricao("testee");
 		
 		CaixaDao dao = new CaixaDao();

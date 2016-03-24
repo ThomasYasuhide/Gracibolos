@@ -24,7 +24,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, caixa.getEncomendaId());
 			ps.setBigDecimal(2, caixa.getValor());
-			ps.setBoolean(3, caixa.getGasto());
+			ps.setBigDecimal(3, caixa.getGasto());
 			ps.setBoolean(4, caixa.getRecebimento());
 			ps.setString(5, caixa.getForma());
 			ps.setInt(6, caixa.getParcela());
@@ -53,7 +53,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, caixa.getEncomendaId());
 			ps.setBigDecimal(2, caixa.getValor());
-			ps.setBoolean(3, caixa.getGasto());
+			ps.setBigDecimal(3, caixa.getGasto());
 			ps.setBoolean(4, caixa.getRecebimento());
 			ps.setString(5, caixa.getForma());
 			ps.setInt(6, caixa.getParcela());
@@ -115,7 +115,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 				caixa.setId(rs.getLong("id"));
 				caixa.setEncomendaId(rs.getInt("encomendaId"));
 				caixa.setValor(rs.getBigDecimal("valor"));
-				caixa.setGasto(rs.getBoolean("gasto"));
+				caixa.setGasto(rs.getBigDecimal("gasto"));
 				caixa.setRecebimento(rs.getBoolean("recebimento"));
 				caixa.setForma(rs.getString("forma"));
 				caixa.setParcela(rs.getInt("parcela"));
@@ -140,7 +140,43 @@ public class CaixaDao implements GenericoDao<Caixa>{
 	
 	@Override
 	public List<Caixa> pesquisar(String pesquisa) throws Exception{
-		return null;
+		List<Caixa> caixas = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT id, encomendaId, valor, gasto, recebimento, forma, parcela, descricao FROM caixa WHERE encomendaId = ? OR recebimento LIKE ?";
+				
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+						
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, pesquisa);
+			ps.setString(2, "%"+pesquisa+"%");
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()){
+							
+				Caixa caixa = new Caixa();
+				
+				caixa.setId(rs.getLong("id"));
+				caixa.setEncomendaId(rs.getInt("encomendaId"));
+				caixa.setValor(rs.getBigDecimal("valor"));
+				caixa.setGasto(rs.getBigDecimal("gasto"));
+				caixa.setRecebimento(rs.getBoolean("recebimento"));				
+				caixa.setParcela(rs.getInt("parcela"));
+				caixa.setForma(rs.getString("forma"));
+				caixa.setDescricao(rs.getString("descricao"));
+				caixas.add(caixa);
+			}
+			
+			ps.close();
+			rs.close();
+			conn.close();
+					
+		} catch (Exception e) {
+			System.out.println("Houve um erro ao pesquisar o matéria prima");
+		}
+		
+		return caixas;
 	}
 
 }

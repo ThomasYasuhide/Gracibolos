@@ -21,7 +21,7 @@
     <link href="resources/css/datatables.css" rel="stylesheet">
 
 	<!-- Titulo da página -->
-	<title>Graci Bolos | Matérias-primas</title>
+	<title>Graci Bolos | Caixa</title>
 
 </head>
 
@@ -118,7 +118,7 @@
 							<label class="control-label">Pesquisar caixa:</label>
 							<form action="administrativo-pesquisar-caixa" method="POST">
 								<div class="input-group">
-									<input type="text" class="form-control" maxlength="100" placeholder="Informe o código ou o nome da matéria-prima para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
+									<input type="text" class="form-control" maxlength="100" placeholder="Informe o nome, CPF, CNPJ, RG ou IE para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
 									<span class="input-group-btn">
 										<button class="btn btn-default" type="submit">
 											<span class="glyphicon glyphicon-search disabled"></span>
@@ -139,7 +139,7 @@
 										<th>Encomenda Id</th>
 										<th>Valor</th>
 										<th>Gasto</th>
-										<th>recebimento</th>
+										<th>Recebimento</th>
 										<th>Forma</th>
 										<th>Parcela</th>
 										<th>Descrição</th>
@@ -239,12 +239,13 @@
 									<input type="text" id="forma" class="form-control" maxlength="20" placeholder="Digite a forma de pagamento" name="forma" required>
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
-									<label class="control-label" for="custo">Recebimento:</label>
-									<div class="input-group">
-										<span class="input-group-addon">R$</span>
-										<input id="recebimento" type="text" class="form-control" name="recebimento" max="999999" placeholder="0,00">
-									</div>
+								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+									<label class="control-label" for="recebimento">Recebimento*:</label>
+									<select class="form-control" id="recebimento" name="recebimento">
+										<option value="" selected disabled>Selectione</option>
+										<option value="true">Tudo pago</option>
+										<option value="false">Pendente</option>
+									</select>
 								</div>
 											
 								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
@@ -369,7 +370,7 @@
             var table = $('#lista-materiaprima').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 3, 5, 6, 7],
+                        "targets": [ 0, 3, 5, 6, 7 ],
                         "visible": false
                     }
                 ]
@@ -390,7 +391,7 @@
 				$("#caixa-form").attr("action","administrativo-incluir-caixa");
 				
 				//Altera o nome do botão do modal.
-				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Concluir novo pagamento');
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Concluir P');
 				
 				//Reset autmaticamente todos os campos do formulário.
 				$('#caixa-form').each(function(){

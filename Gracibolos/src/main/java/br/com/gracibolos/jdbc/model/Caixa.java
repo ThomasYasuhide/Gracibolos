@@ -35,7 +35,7 @@ public class Caixa implements Serializable{
     private Long id;
     private Integer encomendaId;
     private BigDecimal valor;
-    private Boolean gasto;
+    private BigDecimal gasto;
     private Boolean recebimento;
     private String forma;
     private Integer parcela;
@@ -65,11 +65,11 @@ public class Caixa implements Serializable{
 		this.valor = valor;
 	}
 
-	public Boolean getGasto() {
+	public BigDecimal getGasto() {
 		return gasto;
 	}
 
-	public void setGasto(Boolean gasto) {
+	public void setGasto(BigDecimal gasto) {
 		this.gasto = gasto;
 	}
 
@@ -89,14 +89,6 @@ public class Caixa implements Serializable{
 		this.forma = forma;
 	}
 
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
 	public Integer getParcela() {
 		return parcela;
 	}
@@ -105,8 +97,16 @@ public class Caixa implements Serializable{
 		this.parcela = parcela;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}	
+	}
 	
 }
