@@ -245,7 +245,7 @@
 										<option selected value="0">Thomas F. Yasuhide Yamamoto</option>
 										<option value="1">Rogério Yudi</option>
 										<option value="2">Weslley Ruffino</option>
-										<option value="3">Breno Ruffino</option>
+										<option value="3">Breno Ruffin</option>
 										<option value="4">Natália Inácio Lula da silva</option>
 									</select>
 								</div>
