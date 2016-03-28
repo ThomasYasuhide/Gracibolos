@@ -13,13 +13,13 @@ public class CaixaAlterar {
 		Caixa c = new Caixa();
 		BigDecimal valor = new BigDecimal(33);
 		
-		c.setId(1L);
-		c.setEncomendaId(1);
-		c.setValor(valor);
-		c.setGasto(valor);
-		c.setRecebimento(true);
-		c.setForma("redonda");
-		c.setDescricao("testee");
+//		c.setId(1L);
+//		c.setEncomendaId(1);
+//		c.setValor(valor);
+//		c.setGasto(valor);
+//		c.setRecebimento(true);
+//		c.setForma("redonda");
+//		c.setDescricao("testee");
 		
 		CaixaDao dao = new CaixaDao();
 		

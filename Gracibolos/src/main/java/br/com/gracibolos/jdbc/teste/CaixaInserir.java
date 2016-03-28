@@ -13,10 +13,9 @@ public class CaixaInserir {
 		Caixa c = new Caixa();
 		BigDecimal valor = new BigDecimal(33);
 		
-		c.setEncomendaId(1);
-		c.setValor(valor);
-		c.setGasto(valor);
-		c.setRecebimento(true);
+		c.setTipoId(2);
+		c.setNumeroId(1);
+		c.setRecebidoGasto(valor);
 		c.setForma("debito");
 		c.setParcela(1);
 		c.setDescricao("testee");

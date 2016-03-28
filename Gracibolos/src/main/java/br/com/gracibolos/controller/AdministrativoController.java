@@ -6,7 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import br.com.gracibolos.jdbc.dao.CaixaDao;
 import br.com.gracibolos.jdbc.dao.CidadeDao;
 import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.ColaboradorDao;
+import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.dao.EstadoDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
 import br.com.gracibolos.jdbc.dao.MateriaPrimaDao;
@@ -28,6 +31,7 @@ import br.com.gracibolos.jdbc.model.Caixa;
 import br.com.gracibolos.jdbc.model.Cidade;
 import br.com.gracibolos.jdbc.model.Cliente;
 import br.com.gracibolos.jdbc.model.Colaborador;
+import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Estado;
 import br.com.gracibolos.jdbc.model.Fornecedor;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
@@ -820,7 +824,7 @@ public class AdministrativoController {
 	}
 			
 	//EXCLUIR CAIXA
-	@RequestMapping("/administrativo-remover-caixa")
+	@RequestMapping("/administrativo-excluir-caixa")
 	public ModelAndView excluir_caixa (Caixa caixa){
 		System.out.println("Entrou na pagina de exclusão do caixa");
 				
@@ -862,6 +866,120 @@ public class AdministrativoController {
 		mv.setViewName("administrativo/caixa");
 		mv.addObject("caixas", caixas);
 			    
+	    return mv;
+	}
+	
+	/*
+	 * 
+	 * ###################### ENCOMENDA ######################
+	 * 
+	 * */
+	
+	//ENCOMENDA
+	@RequestMapping("/administrativo-encomendas")
+	public ModelAndView encomenda(){
+		System.out.println("Entrou na servlet de listagem de matéria prima");
+						
+		return new ModelAndView("administrativo/encomendas");
+	}
+		
+	//INCLUIR NOVA ENCOMENDA
+	@RequestMapping("/administrativo-incluir-encomenda")
+	public ModelAndView incluir_encomenda(Encomenda encomenda){
+		System.out.println("Entrou na servlet de inclusão de uma nova materiaPrima");
+			
+		boolean status = false;
+		    
+		EncomendaDao dao = new EncomendaDao();			
+			
+		try {
+			if(dao.inserir(encomenda)) {
+				status = true;
+			} else {
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/encomendas");
+		mv.addObject("incluir", status);
+
+		return mv;
+	}
+		
+	//AlTERAR ENCOMENDA
+	@RequestMapping("/administrativo-alterar-encomenda")
+	public ModelAndView alterar_encomenda(Encomenda encomenda){
+		System.out.println("Entrou na pagina de alteração de materiaPrima");
+
+		boolean status = false;
+
+		EncomendaDao dao = new EncomendaDao();			
+			
+		try
+		{
+			if(dao.alterar(encomenda)) {
+				status = true;
+			} else {
+				status = false;
+			}
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
+			
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/encomendas");
+		mv.addObject("alterar", status);
+			
+		return mv;
+	}
+		
+	//EXCLUIR ENCOMENDA
+	@RequestMapping("/administrativo-excluir-encomenda")
+	public ModelAndView excluir_encomenda(Encomenda encomenda){
+		System.out.println("Entrou na pagina de exclusão de materiaprima");
+			
+		boolean status = false;	
+			
+		EncomendaDao dao = new EncomendaDao();
+			
+		try {
+			if(dao.excluir(encomenda)) {
+				status = true;
+			} else {
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/encomendas");
+		mv.addObject("excluir", status);			
+			
+		return mv;
+	}
+		
+	//PESQUISAR ENCOMENDA
+	@RequestMapping("/administrativo-pesquisar-encomenda")
+	public ModelAndView pesquisar_encomenda(String pesquisa){
+		System.out.println("Realizou a pesquisa de matéria prima");
+			
+		EncomendaDao dao = new EncomendaDao();
+		
+		List<Encomenda> encomendas = null;
+		try {
+			encomendas = dao.pesquisar(pesquisa);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				    
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/encomendas");
+		mv.addObject("encomendas", encomendas);
+		    
 	    return mv;
 	}
 	

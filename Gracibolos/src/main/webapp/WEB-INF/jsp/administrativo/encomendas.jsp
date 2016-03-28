@@ -561,8 +561,8 @@
 			*
 			*/
 			
-			$('#menu-mob-clientes').addClass('active');
-			$('#menu-clientes').addClass('active');
+			$('#menu-mob-encomendas').addClass('active');
+			$('#menu-encomendas').addClass('active');
 
 			/*
 			*

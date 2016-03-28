@@ -14,21 +14,20 @@ public class CaixaDao implements GenericoDao<Caixa>{
 
 	public boolean inserir(Caixa caixa) throws Exception{
 		boolean status = false;
-		String sql = " INSERT INTO caixa(encomendaId, valor, gasto, recebimento, forma,"
+		String sql = " INSERT INTO caixa(tipoId, numeroId, recebidoGasto, forma,"
 				   + " parcela, descricao)"
-				   + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+				   + " VALUES (?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, caixa.getEncomendaId());
-			ps.setBigDecimal(2, caixa.getValor());
-			ps.setBigDecimal(3, caixa.getGasto());
-			ps.setBoolean(4, caixa.getRecebimento());
-			ps.setString(5, caixa.getForma());
-			ps.setInt(6, caixa.getParcela());
-			ps.setString(7, caixa.getDescricao());
+			ps.setInt(1, caixa.getTipoId());
+			ps.setInt(2, caixa.getNumeroId());
+			ps.setBigDecimal(3, caixa.getRecebidoGasto());
+			ps.setString(4, caixa.getForma());
+			ps.setInt(5, caixa.getParcela());
+			ps.setString(6, caixa.getDescricao());
 						
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -45,20 +44,19 @@ public class CaixaDao implements GenericoDao<Caixa>{
 
 	public boolean alterar(Caixa caixa) throws Exception{
 		boolean status = false;
-		String sql = " UPDATE caixa SET encomendaId=?, valor=?, gasto=?, recebimento=?, forma=?,"
+		String sql = " UPDATE caixa SET tipoId=?, numeroId=?, recebidoGasto=?, forma=?,"
 				   + " parcela=?, descricao=? where id=?";
 		PreparedStatement  ps = null;
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, caixa.getEncomendaId());
-			ps.setBigDecimal(2, caixa.getValor());
-			ps.setBigDecimal(3, caixa.getGasto());
-			ps.setBoolean(4, caixa.getRecebimento());
-			ps.setString(5, caixa.getForma());
-			ps.setInt(6, caixa.getParcela());
-			ps.setString(7, caixa.getDescricao());
-			ps.setLong(8, caixa.getId());
+			ps.setInt(1, caixa.getTipoId());
+			ps.setInt(2, caixa.getNumeroId());
+			ps.setBigDecimal(3, caixa.getRecebidoGasto());
+			ps.setString(4, caixa.getForma());
+			ps.setInt(5, caixa.getParcela());
+			ps.setString(6, caixa.getDescricao());
+			ps.setLong(7, caixa.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -100,7 +98,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 
 	public List<Caixa> listar() throws Exception{
 		
-		String sql = "SELECT * FROM caixa";
+		String sql = "SELECT id, tipoId, numeroId, recebidoGasto, forma, parcela, descricao FROM caixa";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Caixa> listaDeCaixa= null;
@@ -113,13 +111,12 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			{
 				Caixa caixa = new Caixa();
 				caixa.setId(rs.getLong("id"));
-				caixa.setEncomendaId(rs.getInt("encomendaId"));
-				caixa.setValor(rs.getBigDecimal("valor"));
-				caixa.setGasto(rs.getBigDecimal("gasto"));
-				caixa.setRecebimento(rs.getBoolean("recebimento"));
+				caixa.setTipoId(rs.getInt("tipoId"));
+				caixa.setNumeroId(rs.getInt("numeroId"));
+				caixa.setRecebidoGasto(rs.getBigDecimal("recebidoGasto"));
 				caixa.setForma(rs.getString("forma"));
 				caixa.setParcela(rs.getInt("parcela"));
-				caixa.setDescricao(rs.getString("descricao"));				
+				caixa.setDescricao(rs.getString("descricao"));
 				
 				listaDeCaixa.add(caixa);
 				
@@ -143,7 +140,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 		List<Caixa> caixas = new ArrayList<>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT id, encomendaId, valor, gasto, recebimento, forma, parcela, descricao FROM caixa WHERE encomendaId = ? OR recebimento LIKE ?";
+		String sql = "SELECT id, tipoId, numeroId, recebidoGasto, forma, parcela, descricao FROM caixa WHERE tipoId = ? OR recebidoGasto LIKE ?";
 				
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 						
@@ -158,12 +155,11 @@ public class CaixaDao implements GenericoDao<Caixa>{
 				Caixa caixa = new Caixa();
 				
 				caixa.setId(rs.getLong("id"));
-				caixa.setEncomendaId(rs.getInt("encomendaId"));
-				caixa.setValor(rs.getBigDecimal("valor"));
-				caixa.setGasto(rs.getBigDecimal("gasto"));
-				caixa.setRecebimento(rs.getBoolean("recebimento"));				
-				caixa.setParcela(rs.getInt("parcela"));
+				caixa.setTipoId(rs.getInt("tipoId"));
+				caixa.setNumeroId(rs.getInt("numeroId"));
+				caixa.setRecebidoGasto(rs.getBigDecimal("recebidoGasto"));
 				caixa.setForma(rs.getString("forma"));
+				caixa.setParcela(rs.getInt("parcela"));
 				caixa.setDescricao(rs.getString("descricao"));
 				caixas.add(caixa);
 			}

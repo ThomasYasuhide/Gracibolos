@@ -12,13 +12,13 @@ public class CaixaListar {
 		
 		try {
 			for(Caixa c : dao.listar()){
-			    System.out.println(	     		 "Id : "+c.getId()
-			    					 + "\tEncomendaId: "+c.getEncomendaId()
-			                        		+"\tValor: "+c.getValor()
-			                        		+"\tGasto: "+c.getGasto()
-			                         +"\tRecebimento : "+c.getRecebimento()
-			                               +"\tForma : "+c.getForma()
-			                           +"\tDescrição :"+c.getDescricao());		
+//			    System.out.println(	     		 "Id : "+c.getId()
+//			    					 + "\tEncomendaId: "+c.getEncomendaId()
+//			                        		+"\tValor: "+c.getValor()
+//			                        		+"\tGasto: "+c.getGasto()
+//			                         +"\tRecebimento : "+c.getRecebimento()
+//			                               +"\tForma : "+c.getForma()
+//			                           +"\tDescrição :"+c.getDescricao());		
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

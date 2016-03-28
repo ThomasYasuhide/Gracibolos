@@ -27,17 +27,16 @@ public class Caixa implements Serializable{
         this.id = id;
     }
 
-    public Caixa(Long id, BigDecimal valor) {
+    public Caixa(Long id, BigDecimal recebidoGasto) {
         this.id = id;
-        this.valor = valor;
+        this.recebidoGasto = recebidoGasto;
     }
     
-    private Long id;
-    private Integer encomendaId;
-    private BigDecimal valor;
-    private BigDecimal gasto;
-    private Boolean recebimento;
-    private String forma;
+    private Long id; 
+    private Integer tipoId; //encomenda Id ou materia Prima Id
+    private Integer numeroId;
+    private BigDecimal recebidoGasto; // valor recebido da encomenda, ou valor gasto na compra de materia prima
+    private String forma; // de pagamento
     private Integer parcela;
     private String descricao;
 
@@ -49,36 +48,28 @@ public class Caixa implements Serializable{
 		this.id = id;
 	}
 
-	public Integer getEncomendaId() {
-		return encomendaId;
+	public Integer getTipoId() {
+		return tipoId;
 	}
 
-	public void setEncomendaId(Integer encomendaId) {
-		this.encomendaId = encomendaId;
+	public void setTipoId(Integer tipoId) {
+		this.tipoId = tipoId;
 	}
 
-	public BigDecimal getValor() {
-		return valor;
+	public Integer getNumeroId() {
+		return numeroId;
 	}
 
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
+	public void setNumeroId(Integer numeroId) {
+		this.numeroId = numeroId;
 	}
 
-	public BigDecimal getGasto() {
-		return gasto;
+	public BigDecimal getRecebidoGasto() {
+		return recebidoGasto;
 	}
 
-	public void setGasto(BigDecimal gasto) {
-		this.gasto = gasto;
-	}
-
-	public Boolean getRecebimento() {
-		return recebimento;
-	}
-
-	public void setRecebimento(Boolean recebimento) {
-		this.recebimento = recebimento;
+	public void setRecebidoGasto(BigDecimal recebidoGasto) {
+		this.recebidoGasto = recebidoGasto;
 	}
 
 	public String getForma() {
