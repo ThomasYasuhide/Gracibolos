@@ -56,7 +56,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Cliente armazenado com sucesso.
+								  <strong>Sucesso!</strong> pagamento armazenado com sucesso.
 								</div>
 							</div>
 						</div>
@@ -66,7 +66,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar incluir o novo cliente, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar incluir o novo pagamento, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -86,7 +86,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar alterar o cliente, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar alterar o pagamento, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -96,7 +96,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Cliente foi excluido com sucesso!
+								  <strong>Sucesso!</strong> Pagamento foi excluido com sucesso!
 								</div>
 							</div>
 						</div>
@@ -106,7 +106,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar excluir o cliente, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar excluir o pagamento, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -115,7 +115,7 @@
 					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-							<label class="control-label">Pesquisar caixa:</label>
+							<label class="control-label">Pesquisar pagamento:</label>
 							<form action="administrativo-pesquisar-caixa" method="POST">
 								<div class="input-group">
 									<input type="text" class="form-control" maxlength="100" placeholder="Informe o nome, CPF, CNPJ, RG ou IE para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
@@ -224,7 +224,7 @@
 									<label class="control-label" for="recebidoGasto_inp" id="recebidoGasto_lbl">Valor recebido*:</label>
 									<div class="input-group">
 										<span class="input-group-addon">R$</span>
-										<input type="text" id="recebidoGasto_inp" name="recebidoGasto" placeholder="0,00" class="form-control" maxlength="14" required/>
+										<input type="text" id="recebidoGasto_inp" name="recebidoGasto" placeholder="0.00" class="form-control" maxlength="14" required/>
 									</div>
 								</div>
 								
@@ -287,7 +287,7 @@
 
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Excluir caixa</h4>
+						<h4 class="modal-title" id="myModalLabel">Excluir pagamento</h4>
 					</div>
 					
 					<div class="modal-body">
@@ -335,107 +335,107 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
-			//Remove as mascaras quando apertar o submit
-			$("#caixa-form").submit(function() {
-				$("#cep").unmask();
-				$("#recebidoGasto_inp").unmask();
-				$("#tel").unmask();
-				$("#cel").unmask();
-			});
+// 			//Remove as mascaras quando apertar o submit
+// 			$("#caixa-form").submit(function() {
+// 				$("#cep").unmask();
+// 				$("#recebidoGasto_inp").unmask();
+// 				$("#tel").unmask();
+// 				$("#cel").unmask();
+// 			});
 			
-			//Aplica as mascaras nos campos
-			$("#cep").mask("00000-000");
-			$("#recebidoGasto_inp").mask("0.00");
-			$("#tel").mask("(00) 0000-0000");
-			$("#cel").mask("(00) 00000-0000");
+// 			//Aplica as mascaras nos campos
+// 			$("#cep").mask("00000-000");
+// 			$("#recebidoGasto_inp").mask("0.00");
+// 			$("#tel").mask("(00) 0000-0000");
+// 			$("#cel").mask("(00) 00000-0000");
 			
-			//Altera o tipo da mascara quando o usuário muda o tipo de pessoa
-			$('#tipoId').on('change', function(){
-				if($('#tipoId').val() == 0){
-					$("#recebidoGasto_inp").mask("0.00");
-				} else {
-					$("#recebidoGasto_inp").mask("0.000");
-				}
-			});
+// 			//Altera o tipo da mascara quando o usuário muda o tipo de pessoa
+// 			$('#tipoId').on('change', function(){
+// 				if($('#tipoId').val() == 0){
+// 					$("#recebidoGasto_inp").mask("0.00");
+// 				} else {
+// 					$("#recebidoGasto_inp").mask("0.000");
+// 				}
+// 			});
 			
 			
-			function limpa_formulário_cep() {
-                // Limpa valores do formulário de cep.
-                $("#endereco").val("");
-                $("#bairro").val("");
-                $("#estado").val(0);
-              	//Remove todas as opções do combo cidade.
-				combo_cidade.find('option').remove();
+// 			function limpa_formulário_cep() {
+//                 // Limpa valores do formulário de cep.
+//                 $("#endereco").val("");
+//                 $("#bairro").val("");
+//                 $("#estado").val(0);
+//               	//Remove todas as opções do combo cidade.
+// 				combo_cidade.find('option').remove();
 				
-				//Adiciona opção onde solicita que o usuário selecione uma cidade.
-				combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
-            }
+// 				//Adiciona opção onde solicita que o usuário selecione uma cidade.
+// 				combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
+//             }
             
             //Quando o campo cep perde o foco.
-            $("#cep").blur(function() {
+//             $("#cep").blur(function() {
 				
-            	$("#endereco").prop( "disabled", false );
-            	$("#numero").prop( "disabled", false );
-            	$("#complemento").prop( "disabled", false ); 
-            	$("#bairro").prop( "disabled", false );
-                $("#cidade").prop( "disabled", false );
-                $("#estado").prop( "disabled", false );
+//             	$("#endereco").prop( "disabled", false );
+//             	$("#numero").prop( "disabled", false );
+//             	$("#complemento").prop( "disabled", false ); 
+//             	$("#bairro").prop( "disabled", false );
+//                 $("#cidade").prop( "disabled", false );
+//                 $("#estado").prop( "disabled", false );
             	
-                //Nova variável "cep" somente com dígitos.
-                var cep = $(this).val().replace(/\D/g, '');
+//                 //Nova variável "cep" somente com dígitos.
+//                 var cep = $(this).val().replace(/\D/g, '');
 
-                //Verifica se campo cep possui valor informado.
-                if (cep != "") {
+//                 //Verifica se campo cep possui valor informado.
+//                 if (cep != "") {
 
-                    //Expressão regular para validar o CEP.
-                    var validacep = /^[0-9]{8}$/;
+//                     //Expressão regular para validar o CEP.
+//                     var validacep = /^[0-9]{8}$/;
 
-                    //Valida o formato do CEP.
-                    if(validacep.test(cep)) {
+//                     //Valida o formato do CEP.
+//                     if(validacep.test(cep)) {
 
-                        //Preenche os campos com "Pesquisando..." enquanto consulta webservice.
-                        $("#endereco").val("Pesquisando...")
-                        $("#bairro").val("Pesquisando...")
-                        $("#estado").val("Pesquisando...")
-                        $("#cidade").val("Pesquisando...")
+//                         //Preenche os campos com "Pesquisando..." enquanto consulta webservice.
+//                         $("#endereco").val("Pesquisando...")
+//                         $("#bairro").val("Pesquisando...")
+//                         $("#estado").val("Pesquisando...")
+//                         $("#cidade").val("Pesquisando...")
 
-                        //Consulta o webservice viacep.com.br/
-                        $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+//                         //Consulta o webservice viacep.com.br/
+//                         $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
 
-                            if (!("erro" in dados)) {
-                                //Atualiza os campos com os valores da consulta.
-                                $("#endereco").val(dados.logradouro);
-                                $("#bairro").val(dados.bairro);
+//                             if (!("erro" in dados)) {
+//                                 //Atualiza os campos com os valores da consulta.
+//                                 $("#endereco").val(dados.logradouro);
+//                                 $("#bairro").val(dados.bairro);
                                 
-                                $("#estado option").filter(function() {
-                                    return $(this).text() == dados.uf;
-                                }).prop("selected", true);
+//                                 $("#estado option").filter(function() {
+//                                     return $(this).text() == dados.uf;
+//                                 }).prop("selected", true);
                                 
-                                listar_cidades(combo_estado.val(), function(){
-                                	$("#cidade option").filter(function() {
-                                        return $(this).text() == dados.localidade;
-                                    }).prop("selected", true);
-                                });
+//                                 listar_cidades(combo_estado.val(), function(){
+//                                 	$("#cidade option").filter(function() {
+//                                         return $(this).text() == dados.localidade;
+//                                     }).prop("selected", true);
+//                                 });
                                 
-                            } //end if.
-                            else {
-                                //CEP pesquisado não foi encontrado.
-                                limpa_formulário_cep();
-                                alert("CEP não encontrado.");
-                            }
-                        });
-                    } //end if.
-                    else {
-                        //cep é inválido.
-                        limpa_formulário_cep();
-                        alert("Formato de CEP inválido.");
-                    }
-                } //end if.
-                else {
-                    //cep sem valor, limpa formulário.
-                    limpa_formulário_cep();
-                }
-            });
+//                             } //end if.
+//                             else {
+//                                 //CEP pesquisado não foi encontrado.
+//                                 limpa_formulário_cep();
+//                                 alert("CEP não encontrado.");
+//                             }
+//                         });
+//                     } //end if.
+//                     else {
+//                         //cep é inválido.
+//                         limpa_formulário_cep();
+//                         alert("Formato de CEP inválido.");
+//                     }
+//                 } //end if.
+//                 else {
+//                     //cep sem valor, limpa formulário.
+//                     limpa_formulário_cep();
+//                 }
+//             });
 			
 			
 			
@@ -447,8 +447,8 @@
 			*
 			*/
 
-			var combo_estado = $('#estado');
-			var combo_cidade = $('#cidade');
+// 			var combo_estado = $('#estado');
+// 			var combo_cidade = $('#cidade');
 
 			/*
 			*
@@ -483,21 +483,21 @@
 
             $('#incluir-caixa-modal').click(function() {
             	
-            	$("#endereco").prop( "disabled", true );
-            	$("#numero").prop( "disabled", true );
-            	$("#complemento").prop( "disabled", true); 
-            	$("#bairro").prop( "disabled", true );
-                $("#cidade").prop( "disabled", true );
-                $("#estado").prop( "disabled", true );
+//             	$("#endereco").prop( "disabled", true );
+//             	$("#numero").prop( "disabled", true );
+//             	$("#complemento").prop( "disabled", true); 
+//             	$("#bairro").prop( "disabled", true );
+//                 $("#cidade").prop( "disabled", true );
+//                 $("#estado").prop( "disabled", true );
             	                
             	//Altera dinamicamente o titulo do modal.
-				$('#modal-subtitle').text("Incluir novo caixa");
+				$('#modal-subtitle').text("Incluir novo pagamento");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
 				$("#caixa-form").attr("action","administrativo-incluir-caixa");
 				
 				//Altera o nome do botão do modal.
-				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir caixa');
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir pagamento');
 				
 				//Reset autmaticamente todos os campos do formulário.
 				$('#caixa-form').each(function(){
@@ -526,16 +526,9 @@
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
             $('#lista-caixa tbody').on( 'click', '#edit-caixa', function () {
-            	
-            	$("#endereco").prop( "disabled", false );
-            	$("#numero").prop( "disabled", false );
-            	$("#complemento").prop( "disabled", false ); 
-            	$("#bairro").prop( "disabled", false );
-                $("#cidade").prop( "disabled", false );
-                $("#estado").prop( "disabled", false );
-            	
+                        	
             	 //Altera dinamicamente o titulo do modal.
-            	$('#modal-subtitle').text("Alterar caixa");
+            	$('#modal-subtitle').text("Alterar pagamento");
             	
             	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
 				$("#caixa-form").attr("action","administrativo-alterar-caixa");
@@ -544,10 +537,7 @@
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
 				
 				//Pega os dados de determinada linha da tabela.
-                var data = table.row( $(this).parents('tr') ).data();
-
-                //Passa o ID da cidade e caso existe executa a função callback para abrir o modal e preencher os campos com os dados.
-              	listar_cidades(data[12], function(){
+                var data = table.row( $(this).parents('tr') ).data();                
              	
               		//Apresenta o modal de exclusão na tela.
               		$('#modal-caixa').modal('show');
@@ -556,13 +546,6 @@
                     $('#id').val(data[0]);
                     $('#tipoId').val(data[1]);
                     $('#numeroId').val(data[2]);
-                    
-    				
-    				if(data[1] == 0){
-    					$("#recebidoGasto_inp").mask("0.00");
-    				} else {
-    					$("#recebidoGasto_inp").mask("0.000");
-    				}
     				
     				$('#recebidoGasto_inp').val(data[3]).trigger('input');
     				
@@ -570,8 +553,7 @@
                     $('#parcela').val(data[5]);
                     $('#descricao').val(data[6]);
 					    				
-                    desabilitarCampos(document.getElementById("tipoId"));
-                });
+                    desabilitarCampos(document.getElementById("tipoId"));                
 
 			});
 
@@ -594,41 +576,7 @@
 				$('#excluir-caixa').modal('show');
 
             });
-
-            /*
-			*
-			* CIDADES
-			*
-			*/
-
-			//Verifica o evento do mudança do campo estado e chama função listar_cidades passando o ID do estado
-            combo_estado.change(function(){
-				listar_cidades(combo_estado.val());
-			});
-
-			//
-			function listar_cidades(id, callback){
-				
-				$.ajax({
-		            url : 'administrativo-pesquisar-cidade',
-		            method: "POST",
-		            data: {id:id},
-		            success : function(data) {
-
-		            	combo_cidade.find('option').remove();
-
-		            	combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
-						
-		            	$.each(data, function(val, cidade){
-							combo_cidade.append($('<option></option>').val(cidade.id).html(cidade.nome));
-						});
-
-						callback();
-						
-		            }
-		        });
-
-			}
+			
         });
 
 	</script>
