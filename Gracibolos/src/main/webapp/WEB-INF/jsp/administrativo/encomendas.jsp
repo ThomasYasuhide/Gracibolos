@@ -214,106 +214,135 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 								
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="id">Nº da encomenda:</label>
-									<input type="text" id="id" name="id" placeholder="Gerado automaticamente" class="form-control" readonly />
-								</div>
+								<!-- ABAS -->
+								<ul class="nav nav-tabs">
+									<li class="active"><a data-toggle="tab" href="#info">Informações do produto</a></li>
+									<li><a data-toggle="tab" href="#receita">Receita do produto</a></li>
+								</ul>
 
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="status">Status:</label>
-									<select id="status" name="status" class="form-control">
-										<option value="0" selected>Nova Encomenda</option>
-										<option value="1" disabled>Faturado</option>
-										<option value="2" disabled>Produzido</option>
-										<option value="3" disabled>Finalizado</option>
-									</select>
-								</div>
-								
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="dataencomenda">Data da encomenda:</label>
-									<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" readonly />
-								</div>
-								
-								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-									<label class="control-label" for="dataentrega">Data de entrega:</label>
-									<input type="date" id="dataentrega" name="dataentrega" class="form-control" />
-								</div>
+								<div class="tab-content">
 
-								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-									<label class="control-label" for="cliente">Cliente:</label>
-									<select id="cliente" name="cliente" class="form-control" required>
-										<option selected value="0">Thomas F. Yasuhide Yamamoto</option>
-										<option value="1">Rogério Yudi</option>
-										<option value="2">Weslley Ruffino</option>
-										<option value="3">Breno Ruffin</option>
-										<option value="4">Natália Inácio Lula da silva</option>
-									</select>
-								</div>
-								
-								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-									<label class="control-label" for="responsavel" id="responsavel">Responsável pela retirada:</label>
-									<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada aqui." class="form-control" maxlength="100"/>
-								</div>
-								
-								<div class="row">
-									<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
-
-										<button class="btn btn-default fullwidth" id="inserir-linha">
-											<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Incluir novo produto
-										</button>
-
+									<div id="info" class="tab-pane fade in active">
+							
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="id">Nº da encomenda:</label>
+											<input type="text" id="id" name="id" placeholder="Gerado automaticamente" class="form-control" readonly />
+										</div>
+		
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="status">Status:</label>
+											<select id="status" name="status" class="form-control">
+												<option value="0" selected>Nova Encomenda</option>
+												<option value="1" disabled>Faturado</option>
+												<option value="2" disabled>Produzido</option>
+												<option value="3" disabled>Finalizado</option>
+											</select>
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="dataencomenda">Data da encomenda:</label>
+											<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" readonly />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="dataentrega">Data de entrega:</label>
+											<input type="date" id="dataentrega" name="dataentrega" class="form-control" />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="datafaturamento">Data de faturamento:</label>
+											<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="dataproducao">Data da produção:</label>
+											<input type="date" id="dataproducao" name="dataproducao" class="form-control" readonly />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="datafinalizado">Data da finalização:</label>
+											<input type="date" id="datafinalizado" name="datafinalizado" class="form-control" readonly />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="datacancelado">Data de cancelamento:</label>
+											<input type="date" id="datacancelado" name="datacancelado" class="form-control" readonly />
+										</div>
+		
+										<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+											<label class="control-label" for="cliente">Cliente:</label>
+											<select id="cliente" name="cliente" class="form-control" required>
+												<option selected value="0">Thomas F. Yasuhide Yamamoto</option>
+												<option value="1">Rogério Yudi</option>
+												<option value="2">Weslley Ruffino</option>
+												<option value="3">Breno Ruffin</option>
+												<option value="4">Natália Inácio Lula da silva</option>
+											</select>
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+											<label class="control-label" for="responsavel" id="responsavel">Responsável pela retirada:</label>
+											<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada aqui." class="form-control" maxlength="100"/>
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+											<label class="control-label" for="obs">Observações:</label>
+											<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o cliente"></textarea>
+										</div>
 									</div>
-								</div>
-								
-								<div class="row">
-									<div class="input-margin pull-right col-xs-12 col-sm-12 col-md-12">
-										<table class="input-margin table display table-settings">
-											<thead>
-												<!-- Titulos das tabelas  -->
-												<tr>
-													<th>Código</th>
-													<th>Produto</th>
-													<th>Quantidade</th>
-													<th>Valor unitário</th>
-													<th>Ações</th>
-												</tr>
-											</thead>
-											<tbody id="lista-produtos" >
-		
-												<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
-											
-												<!-- 	FALTA IMPLEMENTAR 
-		
-												<c:forEach var="produto" items="${produtos}">
+
+									<div id="receita" class="tab-pane fade">
+										<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
+											<button class="btn btn-default fullwidth" onclick="return false" id="inserir-linha">
+												<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Incluir novo produto
+											</button>
+										</div>
+									
+										<div class="input-margin pull-right col-xs-12 col-sm-12 col-md-12">
+											<table class="input-margin table display table-settings">
+												<thead>
+													<!-- Titulos das tabelas  -->
 													<tr>
-														<td>${produto.id}</td>
-														<td>${produto.nome}</td>
-														<td>${produto.quantidade}</td>
-														<td>${produto.valor}</td>
-					                					<td>
-					                						<button id="edit-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-					                						<button id="delete-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
-					                					</td>
+														<th>Produto</th>
+														<th>Quantidade</th>
+														<th>Valor unitário</th>
+														<th>Valor total</th>
+														<th>Ações</th>
 													</tr>
-												</c:forEach>
-		
-												-->
-											</tbody>
-										</table>
+												</thead>
+												<tbody id="lista-produtos" >
+			
+													<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
+												
+													<!-- 	FALTA IMPLEMENTAR 
+			
+													<c:forEach var="produto" items="${produtos}">
+														<tr>
+															<td>${produto.id}</td>
+															<td>${produto.nome}</td>
+															<td>${produto.quantidade}</td>
+															<td>${produto.valor}</td>
+						                					<td>
+						                						<button id="edit-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
+						                						<button id="delete-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+						                					</td>
+														</tr>
+													</c:forEach>
+			
+													-->
+												</tbody>
+											</table>
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+											<label class="control-label" for="total">Valor total da encomenda:</label>
+											<div class="input-group">
+												<span class="input-group-addon">R$</span>
+												<input id="total" type="text" class="form-control" name="total" max="999999999" placeholder="0,00">
+											</div>
+										</div>
+										
 									</div>
-								</div>
-								
-								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
-									<label class="control-label" for="custo">Valor total da encomenda:</label>
-									<div class="input-group">
-										<span class="input-group-addon">R$</span>
-										<input id="total" type="text" class="form-control" name="total" max="999999999" placeholder="0,00">
-									</div>
-								</div>
-								
-								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
-									<label class="control-label" for="obs">Observações:</label>
-									<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o cliente"></textarea>
 								</div>
 							</div>
 						</div>
@@ -416,6 +445,11 @@
 			*/
 			
 			$('#inserir-linha').click(function() {
+            	line_product();
+            });
+	
+            function line_product() {
+
             	var tabela;
             	var linha;
             	var coluna;
@@ -424,62 +458,64 @@
             	var option;
             	var unidade;
 
-            	tabela = document.getElementById("lista-materiaprima");
+            	tabela = document.getElementById("lista-produtos");
 
             	    linha = document.createElement("tr");
                 	linha.setAttribute("id", "item");
-
-                		id_column = document.createElement("td");
-            			id_column.setAttribute("class","hidden");
-                		materiaprima_column = document.createElement("td");
-                		medida_column = document.createElement("td");
-                		unidade_column = document.createElement("td");
+						
+	                	id_column = document.createElement("td");
+	        			id_column.setAttribute("class","hidden");
+                		nome_column = document.createElement("td");
+                		quantidade_column = document.createElement("td");
+                		valor_column = document.createElement("td");
+                		total_column = document.createElement("td");
                 		acoes_column = document.createElement("td");
-
-                			id = document.createElement("input")
-            			    id.setAttribute("type","text");
-            			    id.setAttribute("id","id");
-            			    id.setAttribute("name","id");
-            			    id.setAttribute("class", "form-control");
-
-            				materiaprima = document.createElement("select");
-            				materiaprima.setAttribute("class", "form-control");
+							
+	                		id = document.createElement("input");
+	        			    id.setAttribute("type","text");
+	        			    id.setAttribute("id","id");
+	        			    id.setAttribute("name","id");
+	        			    id.setAttribute("class", "form-control");
+	        			    id.setAttribute("class", "readonly");
+	        					
+            				produto = document.createElement("select");
+            				produto.setAttribute("class", "form-control");
             			    
             					option = document.createElement("option");
             					option.text = "Selecione...";
             					option.value = "";
             					option.setAttribute("disabled","disabled");
             					option.setAttribute("selected","selected");
-            					materiaprima.appendChild(option);
+            					produto.appendChild(option);
+            					
             					for(var i=0; i<5; i++){
             						option = document.createElement("option");
-            						option.text = "Materia prima "+i;
-            						materiaprima.appendChild(option);
+            						option.text = "Produto "+i;
+            						produto.appendChild(option);
             					}
-
-            				medida = document.createElement("input");
-            			    medida.setAttribute("type","text");
-            			    medida.setAttribute("name","medida");
-            			    medida.setAttribute("class","form-control");
-
-            				unidade = document.createElement("select");
-            				unidade.setAttribute("class", "form-control");
-            					option = document.createElement("option");
-            					option.text = "Selecione...";
-            					option.value = "";
-            					option.setAttribute("disabled","disabled");
-            					option.setAttribute("selected","selected");
-            					unidade.appendChild(option);
-            					for(var i=0; i<5; i++){
-            						option = document.createElement("option");
-            						option.text = "Unidade "+i;
-            						unidade.appendChild(option);
-            					}
+							
+           					quantidade = document.createElement("input");
+               			    quantidade.setAttribute("type","number");
+           					quantidade.setAttribute("name","quantidade");
+           					quantidade.setAttribute("class", "form-control");
+           					quantidade.setAttribute("min", "0");
+           					quantidade.setAttribute("max", "9999999");
+           					
+           					valor = document.createElement("input");
+               			    valor.setAttribute("type","text");
+           					valor.setAttribute("name","valor");
+           					valor.setAttribute("class", "form-control");
+           					
+           					total = document.createElement("input");
+               			    total.setAttribute("type","text");
+           					total.setAttribute("name","total");
+           					total.setAttribute("class", "form-control");
+           					total.setAttribute("readonly", "readonly");
             	
             		//Botão de ação salvar
             		salvar_btn = document.createElement("button");
             		salvar_btn.type = "button";
-            		salvar_btn.setAttribute("id","salvar-itemmateriaprima");
+            		salvar_btn.setAttribute("id","salvar-produto");
             		salvar_btn.setAttribute("class","btn btn-default margin-right");
             		salvar_btn.innerHTML = "<i class='material-icons'>save</i>";
             		salvar_btn.onclick = salvar;
@@ -487,22 +523,24 @@
             		//Botão de ação de exclusão
             		excluir_btn = document.createElement("button");
             		excluir_btn.type = "button";
-            		excluir_btn.setAttribute("id","delete-itemmateriaprima");
+            		excluir_btn.setAttribute("id","delete-produto");
             		excluir_btn.setAttribute("class","btn btn-default");
             		excluir_btn.innerHTML = "<i class='material-icons'>clear</i>";
             		excluir_btn.onclick = excluir;
 
-            	id_column.appendChild(id);
-            	materiaprima_column.appendChild(materiaprima);
-                medida_column.appendChild(medida);
-                unidade_column.appendChild(unidade);	
+           		id_column.appendChild(id);
+            	nome_column.appendChild(produto);
+                quantidade_column.appendChild(quantidade);
+                valor_column.appendChild(valor);
+                total_column.appendChild(total);
             	acoes_column.appendChild(salvar_btn);
             	acoes_column.appendChild(excluir_btn);
 
             	linha.appendChild(id_column);
-                linha.appendChild(materiaprima_column);
-                linha.appendChild(medida_column);
-                linha.appendChild(unidade_column);
+                linha.appendChild(nome_column);
+                linha.appendChild(quantidade_column);
+                linha.appendChild(valor_column);
+                linha.appendChild(total_column);
                 linha.appendChild(acoes_column);
 
             	tabela.appendChild(linha);
@@ -514,11 +552,9 @@
             	}
 
             	function excluir(){
-            		
             	    linha.remove();
             	}
-            });
-	
+            }
             
 			
 			
@@ -573,7 +609,9 @@
 				
 				var now = moment().format('YYYY-MM-DD');
                 $('#dataencomenda').val(now);
-			
+				
+                line_product();
+                
             });
 
             /*

@@ -533,6 +533,7 @@
             			    id.setAttribute("id","id");
             			    id.setAttribute("name","id");
             			    id.setAttribute("class", "form-control");
+            			    id.setAttribute("class", "readonly");
 
             				materiaprima = document.createElement("select");
             				materiaprima.setAttribute("class", "form-control");
