@@ -273,7 +273,7 @@
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="cpfcnpj_inp" id="cpfcnpj_lbl">CPF*:</label>
-									<input type="text" id="cpfcnpj_inp" name="cpfcnpj" placeholder="000.000.000-00" class="form-control" maxlength="14" required/>
+									<input type="text" id="cpfcnpj_inp" name="cpfcnpj" placeholder="000.000.000-00" class="form-control cpfcnpj_inp" maxlength="14" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
@@ -442,10 +442,21 @@
 	<script src="resources/js/bootstrap.js"></script>
 	<script src="resources/js/mask.js"></script>
 	<script src="resources/js/moment.js"></script>
+    <script src="resources/js/cpfcnpj.js"></script>
 	<script src="resources/js/scripts.js"></script>
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			//Valida o cpf ou cnpj
+			$('#cpfcnpj_inp').cpfcnpj({
+                mask: true,
+                validate: 'cpfcnpj',
+                event: 'blur',
+                handler: '#cpfcnpj_inp',
+                ifValid: function () { },
+                ifInvalid: function () { alert('ATENÇÃO! CPF ou CNPJ inválido, favor tente novamente.'); }
+            });
 			
 			//Remove as mascaras quando apertar o submit
 			$("#cliente-form").submit(function() {

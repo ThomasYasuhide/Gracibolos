@@ -435,11 +435,22 @@
 	<script src="resources/js/datatables.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
 	<script src="resources/js/mask.js"></script>
+    <script src="resources/js/cpfcnpj.js"></script>
 	<script src="resources/js/scripts.js"></script>
     
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			//Valida o cpf ou cnpj
+			$('#cpfcnpj_inp').cpfcnpj({
+                mask: true,
+                validate: 'cpfcnpj',
+                event: 'blur',
+                handler: '#cpfcnpj_inp',
+                ifValid: function () { },
+                ifInvalid: function () { alert('ATENÇÃO! CPF ou CNPJ inválido, favor tente novamente.'); }
+            });
 
 			//Remove as mascaras quando apertar o submit
 			$("#fornecedor-form").submit(function() {

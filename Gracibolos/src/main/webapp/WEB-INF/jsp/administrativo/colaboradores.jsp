@@ -426,9 +426,20 @@
 	<script src="resources/js/datatables.js"></script>
 	<script src="resources/js/mask.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
+    <script src="resources/js/cpfcnpj.js"></script>
     
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			//Valida o cpf
+			$('#cpf').cpfcnpj({
+                mask: true,
+                validate: 'cpf',
+                event: 'blur',
+                handler: '#cpf',
+                ifValid: function () { },
+                ifInvalid: function () { alert('ATENÇÃO! CPF inválido, favor tente novamente.'); }
+            });
 			
 			//Remove as mascaras quando apertar o submit
 			$("#colaborador-form").submit(function() {
