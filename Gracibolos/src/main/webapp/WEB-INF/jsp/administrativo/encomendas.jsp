@@ -19,7 +19,7 @@
 	<link href="resources/css/reset.css" rel="stylesheet">
 	<link href="resources/css/style.css" rel="stylesheet">
     <link href="resources/css/datatables.css" rel="stylesheet">
-    <link href="resources/css/select2.css" rel="stylesheet">
+    <link href="resources/css/selectize.css" rel="stylesheet">
 
 	<!-- Titulo da página -->
 	<title>Graci Bolos | Encomendas</title>
@@ -272,7 +272,7 @@
 		
 										<div class="input-margin col-xs-12 col-sm-12 col-md-6">
 											<label class="control-label" for="cliente">Cliente:</label>
-											<select id="cliente" name="cliente" class="form-control select-cliente" required>
+											<select id="cliente" name="cliente" class="form-control" required>
 												<option selected value="0">Thomas F. Yasuhide Yamamoto</option>
 												<option value="1">Rogério Yudi</option>
 												<option value="2">Weslley Ruffino</option>
@@ -426,12 +426,12 @@
 	<script src="resources/js/bootstrap.js"></script>
 	<script src="resources/js/mask.js"></script>
 	<script src="resources/js/moment.js"></script>
-	<script src="resources/js/select2.js"></script>
+	<script src="resources/js/selectize.js"></script>
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
-			$('#cliente').select2();
+			$('#cliente').selectize();
 			
 			//Remove as mascaras quando apertar o submit
 			$("#encomenda-form").submit(function() {				
