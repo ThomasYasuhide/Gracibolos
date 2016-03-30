@@ -455,7 +455,7 @@
                 event: 'blur',
                 handler: '#cpfcnpj_inp',
                 ifValid: function () { },
-                ifInvalid: function () { alert('ATENÇÃO! CPF ou CNPJ inválido, favor tente novamente.'); }
+                ifInvalid: function () { alert('ATENÇÃO! CPF ou CNPJ inválido, favor tente novamente.'); $('#cpfcnpj_inp').val(""); }
             });
 			
 			//Remove as mascaras quando apertar o submit

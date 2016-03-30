@@ -438,7 +438,7 @@
                 event: 'blur',
                 handler: '#cpf',
                 ifValid: function () { },
-                ifInvalid: function () { alert('ATENÇÃO! CPF inválido, favor tente novamente.'); }
+                ifInvalid: function () { alert('ATENÇÃO! CPF inválido, favor tente novamente.'); $('#cpf').val(""); }
             });
 			
 			//Remove as mascaras quando apertar o submit

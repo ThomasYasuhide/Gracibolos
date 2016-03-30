@@ -553,7 +553,7 @@
                     $('#parcela').val(data[5]);
                     $('#descricao').val(data[6]);
 					    				
-                    desabilitarCampos(document.getElementById("tipoId"));                
+                    desabilitarCampos(document.getElementById("tipoId").value);                
 
 			});
 
