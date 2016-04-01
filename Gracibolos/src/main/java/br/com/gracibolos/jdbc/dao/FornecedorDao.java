@@ -92,7 +92,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 		
 		boolean status = false;
 		PreparedStatement  ps = null;
-		String sql = "UPDATE fornecedor SET status=? tipopessoa=?, sexo=?, datanascimento=?, nomerazao=?, cpfcnpj=?, rgie=?, endereco=?, numero=?, complemento=?, bairro=?, estado=?, cidade=?, cep=?, tel=?, cel=?, email=?, site=?, obs=? where id=?";
+		String sql = "UPDATE fornecedor SET status=?, tipopessoa=?, sexo=?, datanascimento=?, nomerazao=?, cpfcnpj=?, rgie=?, endereco=?, numero=?, complemento=?, bairro=?, estado=?, cidade=?, cep=?, tel=?, cel=?, email=?, site=?, obs=? where id=?";
 				
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())	{
 			
