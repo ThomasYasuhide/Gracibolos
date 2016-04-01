@@ -99,8 +99,6 @@ public class AdministrativoController {
 		    
 	    }
 	    
-		
-	    
 		try {
 			if(produtoDao.inserir(produto)){
 				status = true;
@@ -228,6 +226,28 @@ public class AdministrativoController {
 	    
 	    return mv;
 	}
+	
+	//LISTAR PRODUTOS
+		@RequestMapping("/administrativo-listar-produtos")
+		public ModelAndView listar_produtos(){
+			System.out.println("Realizou a listagem de produtos");
+			
+			ProdutoDao produtoDao = new ProdutoDao();
+			
+			List<Produto> produtos = null;
+			
+			try {
+				produtos = produtoDao.listar();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		    
+		    ModelAndView mv = new ModelAndView();
+		    mv.setViewName("administrativo/produtos");
+		    mv.addObject("produtos", produtos);
+		    
+		    return mv;
+		}
 		
 		
 	/*
@@ -311,7 +331,7 @@ public class AdministrativoController {
 		return mv;
 	}
 	
-	//EXCLUIR CLIENTE
+	//EXCLUIR FORNECEDOR
 	@RequestMapping("/administrativo-remover-fornecedor")
 	public ModelAndView excluir_fornecedor(Fornecedor fornecedor){
 		System.out.println("Entrou na pagina de exclusão de fornecedor");
@@ -365,6 +385,31 @@ public class AdministrativoController {
 	    
 	    return mv;
 	}
+	
+	//LISTAR FORNECEDORES
+		@RequestMapping("/administrativo-listar-fornecedores")
+		public ModelAndView listar_fornecedores(){
+			System.out.println("Realizou a listagem de fornecedores");
+
+			FornecedorDao fornecedorDao = new FornecedorDao();
+			List<Fornecedor> fornecedores = null;
+			
+			try {
+				fornecedores = fornecedorDao.listar();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		    EstadoDao estadoDao = new EstadoDao();
+		    List<Estado> estados = estadoDao.listar_estados();
+		    
+		    ModelAndView mv = new ModelAndView();
+		    mv.setViewName("administrativo/fornecedores");
+		    mv.addObject("fornecedores", fornecedores);
+		    mv.addObject("estados", estados);
+		    
+		    return mv;
+		}
 	
 	/*
 	 * 
@@ -501,6 +546,30 @@ public class AdministrativoController {
 	    
 	    return mv;
 	}
+	
+	//LISTAR CLIENTES
+		@RequestMapping("/administrativo-listar-clientes")
+		public ModelAndView listar_cliente(){
+			System.out.println("Realizou a listagem de clientes");
+
+			ClienteDao clienteDao = new ClienteDao();
+			List<Cliente> clientes = null;
+			try {
+				clientes = clienteDao.listar();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		    EstadoDao estadoDao = new EstadoDao();
+		    List<Estado> estados = estadoDao.listar_estados();
+		    
+		    ModelAndView mv = new ModelAndView();
+		    mv.setViewName("administrativo/clientes");
+		    mv.addObject("clientes", clientes);
+		    mv.addObject("estados", estados);
+		    
+		    return mv;
+		}
 		
 	/*
 	 * 
@@ -620,6 +689,25 @@ public class AdministrativoController {
 	    
 	    return mv;
 	}
+	
+	//LISTAR COLABORADOR
+		@RequestMapping("/administrativo-listar-colaboradores")
+		public ModelAndView listar_colaborador(){
+			System.out.println("Realizou a listagem de colaboradores");
+			
+			ColaboradorDao colaboradorDao = new ColaboradorDao();
+			List<Colaborador> colaboradores = colaboradorDao.listar();
+
+		    EstadoDao estadoDao = new EstadoDao();
+		    List<Estado> estados = estadoDao.listar_estados();
+		    
+		    ModelAndView mv = new ModelAndView();
+		    mv.setViewName("administrativo/colaboradores");
+		    mv.addObject("colaboradores", colaboradores);
+		    mv.addObject("estados", estados);
+		    
+		    return mv;
+		}
 
 	/*
 	 * 
@@ -745,6 +833,27 @@ public class AdministrativoController {
 		List<MateriaPrima> materiasprimas = null;
 		try {
 			materiasprimas = dao.pesquisar(pesquisa);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				    
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/materiasprimas");
+		mv.addObject("materiasprimas", materiasprimas);
+		    
+	    return mv;
+	}
+	
+	//LISTAR MATÉRIA PRIMA
+	@RequestMapping("/administrativo-listar-materiasprimas")
+	public ModelAndView listar_materiasprimas(){
+		System.out.println("Realizou a listagem de matérias primas");
+			
+		MateriaPrimaDao dao = new MateriaPrimaDao();
+		List<MateriaPrima> materiasprimas = null;
+		
+		try {
+			materiasprimas = dao.listar();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

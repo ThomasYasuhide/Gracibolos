@@ -136,6 +136,7 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 			while(rs.next()) {
 				MateriaPrima materiaPrima = new MateriaPrima();
 				materiaPrima.setId(rs.getLong("id"));
+				materiaPrima.setCodigo(rs.getString("codigo"));
 				materiaPrima.setNome(rs.getString("nome"));
 				materiaPrima.setEstoque(rs.getDouble("estoque"));
 				materiaPrima.setUnidade(rs.getLong("unidade"));

@@ -114,7 +114,7 @@
 					<!-- ################################# FIM DOS ALERTAS ################################# -->
 					
 					<div class="row">
-						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
+						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
 							<label class="control-label">Pesquisar produto:</label>
 							<form action="administrativo-pesquisar-produto" method="POST">
 								<div class="input-group">
@@ -126,6 +126,11 @@
 									</span>
 								</div>
 							</form>
+						</div>
+						
+						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">
+							<label class="control-label hidden-xs">Listar produtos</label>
+							<a href="administrativo-listar-produtos" class="btn btn-default fullwidth">Listar produtos</a>
 						</div>
 					</div>
 					

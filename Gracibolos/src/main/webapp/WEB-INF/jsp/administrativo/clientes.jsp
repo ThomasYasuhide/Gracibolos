@@ -114,7 +114,7 @@
 					<!-- ################################# FIM DOS ALERTAS ################################# -->
 					
 					<div class="row">
-						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
+						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
 							<label class="control-label">Pesquisar cliente:</label>
 							<form action="administrativo-pesquisar-cliente" method="POST">
 								<div class="input-group">
@@ -127,6 +127,12 @@
 								</div>
 							</form>
 						</div>
+						
+						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">
+							<label class="control-label hidden-xs">Listar clientes</label>
+							<a href="administrativo-listar-clientes" class="btn btn-default fullwidth">Listar clientes</a>
+						</div>
+						
 					</div>
 					
 					<div class="row">

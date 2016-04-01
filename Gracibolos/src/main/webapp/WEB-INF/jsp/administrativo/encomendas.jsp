@@ -115,7 +115,7 @@
 					<!-- ################################# FIM DOS ALERTAS ################################# -->
 					
 					<div class="row">
-						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
+						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
 							<label class="control-label">Pesquisar encomenda:</label>
 							<form action="administrativo-pesquisar-encomenda" method="POST">
 								<div class="input-group">
@@ -127,6 +127,11 @@
 									</span>
 								</div>
 							</form>
+						</div>
+						
+						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">
+							<label class="control-label hidden-xs">Listar encomendas</label>
+							<a href="administrativo-listar-encomendas" class="btn btn-default fullwidth">Listar encomendas</a>
 						</div>
 					</div>
 					
