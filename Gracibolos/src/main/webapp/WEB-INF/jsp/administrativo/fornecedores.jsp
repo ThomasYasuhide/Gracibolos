@@ -478,7 +478,8 @@
 			function limpa_formulário_cep() {
                 // Limpa valores do formulário de cep.
                 $("#endereco").val("");
-                $("#bairro").val(""); $("#estado").val(0);
+                $("#bairro").val("");
+                $("#estado").val(0);
               	//Remove todas as opções do combo cidade.
 				combo_cidade.find('option').remove();
 				
@@ -668,6 +669,13 @@
                     $('#sexo').val(data[3]);
                     $('#datanascimento').val(data[4]);
     				$('#nomerazao_inp').val(data[5]);
+    				
+    				if(data[6] == 0){
+    					$("#cpfcnpj_inp").mask("000.000.000-00");
+    				} else {
+    					$("#cpfcnpj_inp").mask("00.000.000/0000-00");
+    				}
+    				
     				$('#cpfcnpj_inp').val(data[6]).trigger('input');
                     $('#rgie_inp').val(data[7]);
                     $('#endereco').val(data[8]);
