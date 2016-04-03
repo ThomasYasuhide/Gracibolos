@@ -601,6 +601,9 @@
 
             $('#incluir-fornecedor-modal').click(function() {
             	
+
+    			$("#cpfcnpj_inp").mask("000.000.000-00");
+            	
             	$("#endereco").prop( "disabled", true );
             	$("#numero").prop( "disabled", true );
             	$("#complemento").prop( "disabled", true); 

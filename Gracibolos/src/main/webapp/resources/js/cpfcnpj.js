@@ -89,7 +89,7 @@
     }
 
     function validate_cnpj(val) {
-
+    	
         if (val.match(/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/) != null) {
             var val1 = val.substring(0, 2);
             var val2 = val.substring(3, 6);
@@ -140,6 +140,10 @@
 
     function validate_cpf(val) {
 
+    	if(val == "111.111.111-11" || val == "222.222.222-22" || val == "333.333.333-33" || val == "444.444.444-44" || val == "555.555.555-55" || val == "666.666.666-66" || val == "777.777.777-77" || val == "888.888.888-88" || val == "999.999.999-99"){
+    		return false;
+    	}
+    	
         if (val.match(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/) != null) {
             var val1 = val.substring(0, 3);
             var val2 = val.substring(4, 7);
@@ -183,7 +187,7 @@
 
             return result;
         }
-
+        
         return false;
     }
 }(jQuery));

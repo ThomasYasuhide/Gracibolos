@@ -611,12 +611,15 @@
 
             $('#incluir-cliente-modal').click(function() {
             	
+    			$("#cpfcnpj_inp").mask("000.000.000-00");
+            	
             	$("#endereco").prop( "disabled", true );
             	$("#numero").prop( "disabled", true );
             	$("#complemento").prop( "disabled", true); 
             	$("#bairro").prop( "disabled", true );
                 $("#cidade").prop( "disabled", true );
                 $("#estado").prop( "disabled", true );
+                
             	                
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir novo cliente");
