@@ -27,12 +27,15 @@ public class ClienteDao implements GenericoDao<Cliente>{
 		boolean status = false;
 		PreparedStatement ps = null;
 		
+		//string query do banco
 		String sql = "INSERT INTO cliente(status, tipopessoa, sexo, datanascimento, nomerazao, cpfcnpj, rgie, endereco, "
 				+ "numero, complemento, bairro, estado, cidade, cep, tel, cel, email, site, clientedesde, obs) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
 			
+			//seta os atributos do objeto cliente
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, cliente.getStatus());
 			ps.setInt(2, cliente.getTipopessoa());
@@ -76,16 +79,18 @@ public class ClienteDao implements GenericoDao<Cliente>{
 				status = true;
 			}
 			
+			//fecha as conexões
 			ps.close();	
 			conn.close();			
 					
-		} 
+		}
+		//trata, caso de uma exceção
 		catch (SQLException e) 
 		{
 			System.out.println("Houve um erro ao inserir o cliente");
 			throw new Exception("Houve um erro ao inserir o cliente");
 		}
-		
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 	
@@ -101,11 +106,15 @@ public class ClienteDao implements GenericoDao<Cliente>{
 		
 		boolean status = false;
 		PreparedStatement  ps = null;
+		
+		//string query do banco
 		String sql = "UPDATE cliente SET status=?, tipopessoa=?, sexo=?, datanascimento=?, nomerazao=?, cpfcnpj=?, rgie=?, endereco=?,"
 				+ " numero=?, complemento=?, bairro=?, estado=?, cidade=?, cep=?, tel=?, cel=?, email=?, site=?, clientedesde=?, obs=? where id=?";
-				
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())	{
 			
+			//seta os atributos do objeto cliente, fazendo a alteração.
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, cliente.getStatus());
 			ps.setInt(2, cliente.getTipopessoa());
@@ -150,14 +159,17 @@ public class ClienteDao implements GenericoDao<Cliente>{
 				status = true;
 			}
 			
+			//fecha as conexões
 			ps.close();
 			conn.close();
 			
-		}catch (Exception e) {
+		}
+		//trata, caso de uma exceção
+		catch (Exception e) {
 			System.out.println("Houve um erro ao alterar o colaborador");
 			throw new Exception("Houve um erro ao alterar o colaborador");
 		}
-		
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 	
@@ -173,26 +185,32 @@ public class ClienteDao implements GenericoDao<Cliente>{
 		
 		boolean status = false;
 		PreparedStatement ps = null;
+		
+		//string query do banco
 		String sql  = "DELETE FROM cliente WHERE id = ?";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
 			
-			ps = conn.prepareStatement(sql);
-			
+			//seta o id do caixa, e excluir o objeto
+			ps = conn.prepareStatement(sql);			
 			ps.setLong(1, cliente.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
 			}
 			
+			//fecha as conexões
 			ps.close();
 			conn.close();
 
-		} catch (SQLException e) {
+		} 
+		//trata, caso de uma exceção
+		catch (SQLException e) {
 			System.out.println("Houve um erro ao tentar deletar o colaborador");
 			throw new Exception("Houve um erro ao tentar deletar o colaborador");
 		}
-		
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 	
@@ -209,15 +227,19 @@ public class ClienteDao implements GenericoDao<Cliente>{
 		List<Cliente> Clientes = new ArrayList<Cliente>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		
+		//string query do banco
 		String sql = "SELECT id, status, tipopessoa, sexo, datanascimento, nomerazao, cpfcnpj, rgie, endereco, "
 				+ "numero, complemento, bairro, estado, cidade, cep, tel, cel, email, site, clientedesde, obs FROM cliente";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 			
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
+				//da um get nos atributos do objeto cliente
 				Cliente cliente = new Cliente();
 				cliente.setId(rs.getInt("id"));
 				cliente.setStatus(rs.getInt("status"));
@@ -249,19 +271,22 @@ public class ClienteDao implements GenericoDao<Cliente>{
 				
 				cliente.setObs(rs.getString("obs"));
 				
+				//adiciona o objeto cliente no arrayList
 				Clientes.add(cliente);
 				
 			}
 			
+			//fecha as conexões
 			ps.close();
 			rs.close();
 			conn.close();
 		}
+		//trata, caso de uma exceção
 		catch (Exception e) {
 			System.out.println("Houve um erro ao listar os clientes");
 			throw new Exception("Houve um erro ao listar os clientes");
 		}
-		
+		//retorna o array
 		return Clientes;
 	}
 	
@@ -278,11 +303,15 @@ public class ClienteDao implements GenericoDao<Cliente>{
 		List<Cliente> Clientes = new ArrayList<Cliente>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		
+		//string query do banco
 		String sql = "SELECT id, status, tipopessoa, sexo, datanascimento, nomerazao, cpfcnpj, rgie, endereco, "
 				+ "numero, complemento, bairro, estado, cidade, cep, tel, cel, email, site, clientedesde, obs FROM cliente WHERE cpfcnpj = ? OR nomerazao LIKE ? OR rgie = ?";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 			
+			//seta a string para fazer a busca
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, pesquisa);
 			ps.setString(2, "%"+pesquisa+"%");
@@ -291,6 +320,8 @@ public class ClienteDao implements GenericoDao<Cliente>{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
+				
+				//da um get nos atributos do objeto cliente
 				Cliente cliente = new Cliente();
 				cliente.setId(rs.getInt("id"));
 				cliente.setStatus(rs.getInt("status"));
@@ -322,18 +353,21 @@ public class ClienteDao implements GenericoDao<Cliente>{
 				
 				cliente.setObs(rs.getString("obs"));
 				
+				//adiciona o objeto cliente no arrayList
 				Clientes.add(cliente);
 			}
 			
+			//fecha as conexões
 			ps.close();
 			rs.close();
 			conn.close();
 		}
+		//trata, caso de uma exceção
 		catch (SQLException e) {
 			System.out.println("Houve um erro ao pesquisar o cliente");
 			throw new Exception("Houve um erro ao pesquisar o cliente");
 		}
-		
+		//retorna o array
 		return Clientes;
 	}
 

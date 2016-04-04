@@ -14,14 +14,25 @@ import br.com.gracibolos.jdbc.model.Encomenda;
 
 public class EncomendaDao implements GenericoDao<Encomenda>{
 
+	/*
+	 * INCLUIR ENCOMENDA
+	 * 
+	 * Este método tem como principal objetivo receber os dados de uma nova encomenda e persistir no banco de dados.
+	 * 
+	 * */
+	
 	public boolean inserir(Encomenda encomenda) throws Exception{
 		boolean status = false;
+		
+		//string query do banco
 		String sql = " INSERT INTO encomenda(cliente, status, responsavel, dataentrega, dataencomenda, total, obs)"
 				   + " VALUES (?, ?, ?, ?, ?, ? ,?)";
 		PreparedStatement ps = null;
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
 			
+			//seta os atributos do objeto encomenda
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, encomenda.getCliente());
 			ps.setLong(2, encomenda.getStatus());
@@ -38,22 +49,36 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			ps.close();	
 			conn.close();			
 					
-		} 
+		}
+		//trata, caso de uma exceção
 		catch (SQLException e) 
 		{
 			System.out.println("Erro ao inserir usuário\n"+e);
 		}
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 
+	/*
+	 * ALTERAR ENCOMENDA
+	 * 
+	 * Este método tem como principal objetivo receber os dados de uma determinada encomenda e alterar os dados do banco de dados.
+	 * 
+	 * */
+	
 	public boolean alterar(Encomenda encomenda) throws Exception{
 		boolean status = false;
+		
+		//string query do banco
 		String sql = " UPDATE encomenda SET cliente=?, status=?, responsavel=?, dataencomenda=?, dataentrega=?,"
 				   + " datafaturamento=?, dataproducao=?, datafinalizado=?, datacancelamento=?, total=?, obs=? WHERE id=?";
 		
 		PreparedStatement  ps = null;
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+			
+			//seta os atributos do objeto encomenda, fazendo a alteração.
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, encomenda.getCliente());
 			ps.setLong(2, encomenda.getStatus());
@@ -104,42 +129,64 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			}
 			ps.close();	
 			conn.close();			
-		} 
+		}
+		//trata, caso de uma exceção
 		catch (SQLException e) 
 		{
 			System.out.println("Erro ao alterar a encomenda\n"+e);
 		}
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 
+	/*
+	 * EXCLUIR ENCOMENDA
+	 * 
+	 * Este método tem como principal objetivo receber os dados de uma determinada encomenda e excluir do banco de dados.
+	 * 
+	 * */	
+	
 	public boolean excluir(Encomenda encomenda) throws Exception{
 		boolean status = false;
 		
+		//string query do banco
 		String sql  = "DELETE FROM encomenda WHERE id = ?";
 		PreparedStatement ps;
-
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
-		{		
+		{	
+			//seta o id da encomenda, e excluir o objeto
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, encomenda.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
 			}
-
-		} catch (SQLException e) {
+		}
+		//trata, caso de uma exceção
+		catch (SQLException e) {
 			System.out.println("Erro ao deletar encomenda \n" + e);
-		}		
+		}
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 
+	/*
+	 * LISTAR ENCOMENDA
+	 * Este método tem como principal objetivo realizar uma consulta ao banco e retornar todas as encomendas.
+	 * 
+	 */
+	
 	public List<Encomenda> listar() throws Exception{
 		
+		//string query do banco
 		String sql = "SELECT id, cliemte, status, responsavel, dataencomenda, dataentrega, datafaturamento, dataproducao, datafinalizado, datacancelado, total, obs FROM encomenda";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Encomenda> encomendas= null;
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 			
 			ps = conn.prepareStatement(sql);
@@ -147,7 +194,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			encomendas = new ArrayList<Encomenda>();
 			
 			while(rs.next()) {
-				
+				//da um get nos atributos do objeto encomenda
 				Encomenda encomenda = new Encomenda();
 				encomenda.setId(rs.getLong("id"));
 				encomenda.setCliente(rs.getInt("cliente"));	
@@ -162,29 +209,45 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				encomenda.setTotal(rs.getBigDecimal("total"));
 				encomenda.setObs(rs.getString("obs"));
 				
+				//adiciona o objeto encomenda no arrayList
 				encomendas.add(encomenda);
+				
+				//AQUI NÃO ESTÁ FALTANDO UM FOR PARA PERCORRER O ARRAY ENCOMENDAS??
 				 
 			}
 			
 			ps.close();
-			conn.close();
-			
-		} catch (SQLException e) {
+			conn.close();			
+		}
+		//trata, caso de uma exceção
+		catch (SQLException e) {
 			System.out.println("Erro ao listar as encomendas\n"+e);
 		}
 		
+		//retorna o array 
 		return encomendas;
 	}
+	
+	/*
+	 * PESQUISAR ENCOMENDA
+	 * 
+	 * Este método tem como principal objetivo realizar uma consulta ao banco e retornar os dados das encomendas pesquisados.
+	 * 
+	 * */
 
 	@Override
 	public List<Encomenda> pesquisar(String pesquisa) throws Exception{
+		
+		//string query do banco
 		String sql = "SELECT id, cliente, status, responsavel, dataencomenda, dataentrega, datafaturamento, dataproducao, datafinalizado, datacancelado, total, obs FROM encomenda WHERE id=?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Encomenda> encomendas = null;
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 			
+			//seta a string para fazer a busca
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, pesquisa);
 			
@@ -192,7 +255,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			encomendas = new ArrayList<Encomenda>();
 			
 			while(rs.next()) {
-				
+				//da um get nos atributos do objeto encomenda
 				Encomenda encomenda = new Encomenda();
 				encomenda.setId(rs.getLong("id"));
 				encomenda.setCliente(rs.getInt("cliente"));	
@@ -207,17 +270,20 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				encomenda.setTotal(rs.getBigDecimal("total"));
 				encomenda.setObs(rs.getString("obs"));
 				
+				//adiciona o objeto encomenda no arrayList
 				encomendas.add(encomenda);
 				 
 			}
 			
 			ps.close();
-			conn.close();
-			
-		} catch (SQLException e) {
+			conn.close();			
+		} 
+		//trata, caso de uma exceção
+		catch (SQLException e) {
 			System.out.println("Erro ao listar as encomendas\n"+e);
 		}
 		
+		//retorna o array
 		return encomendas;
 	}
 

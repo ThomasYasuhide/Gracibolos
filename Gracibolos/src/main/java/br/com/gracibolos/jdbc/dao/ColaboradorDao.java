@@ -23,10 +23,14 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 		
 		boolean status = false;
 		PreparedStatement ps = null;
+		
+		//string query do banco
 		String sql = "INSERT INTO colaborador (status, nivel, usuario, senha, nome, cpf, rg, endereco, numero, complemento, bairro, cep, estado, cidade, tel, cel, email, obs) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
-
+			
+			//seta os atributos do objeto colaborador
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, colaborador.getStatus());
 			ps.setInt(2, colaborador.getNivel());
@@ -52,13 +56,16 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 				
 			}
 			
+			//fecha as conexões
 			ps.close();
 			conn.close();
 			
-		} catch (Exception e) {
+		} 
+		//trata, caso de uma exceção
+		catch (Exception e) {
 			System.out.println("Houve um erro ao inserir o colaborador");
 		}
-		
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 	
@@ -74,12 +81,15 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 		
 		boolean status = false;
 		PreparedStatement ps = null;
+		
+		//string query do banco
 		String sql = "UPDATE colaborador SET status = ?, nivel = ?, usuario = ?, senha = ?, nome = ?, cpf = ?, rg = ?, endereco = ?, numero = ?, complemento = ?, bairro = ?, cep = ?, estado = ?, cidade = ?, tel = ?, cel = ?, email = ?, obs = ? WHERE id = ?";
-
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
-
-			ps = conn.prepareStatement(sql);
 			
+			//seta os atributos do objeto colaborador, fazendo a alteração.
+			ps = conn.prepareStatement(sql);			
 			ps.setInt(1, colaborador.getStatus());
 			ps.setInt(2, colaborador.getNivel());
 			ps.setString(3, colaborador.getUsuario());
@@ -104,13 +114,16 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 				status = true;
 			}
 			
+			//fecha as conexões
 			ps.close();
 			conn.close();
 			
-		} catch (Exception e) {
+		} 
+		//trata, caso de uma exceção
+		catch (Exception e) {
 			System.out.println("Houve um erro ao alterar o colaborador");
 		}
-		
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 	
@@ -126,11 +139,14 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 		
 		boolean status = false;
 		PreparedStatement ps = null;
+
+		//string query do banco
 		String sql = "DELETE FROM colaborador WHERE id = ?";
 	
-		//Tenta realizar uma conexão com o banco de dados
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
-
+			
+			//seta o id do caixa, e excluir o objeto
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, colaborador.getId());
 			
@@ -138,13 +154,16 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 				status = true;
 			}
 			
+			//fecha as conexões
 			ps.close();
 			conn.close();
 	
-		} catch (Exception e) {
+		} 
+		//trata, caso de uma exceção
+		catch (Exception e) {
 			System.out.println("Houve um erro ao tentar deletar o colaborador");
 		}
-		
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 	
@@ -161,17 +180,19 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 		List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		
+		//string query do banco
 		String sql = "SELECT id, status, nivel, usuario, senha, nome, cpf, rg, endereco, numero, complemento, bairro, cep, estado, cidade, tel, cel, email, obs FROM colaborador";
 		
-		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 						
 			ps = conn.prepareStatement(sql);
-
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
-							
+				
+				//da um get nos atributos do objeto colaborador
 				Colaborador colaborador = new Colaborador();
 				colaborador.setId(rs.getLong("id"));
 				colaborador.setStatus(rs.getInt("status"));
@@ -193,17 +214,21 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 				colaborador.setEmail(rs.getString("email"));
 				colaborador.setObs(rs.getString("obs"));
 				
+				//adiciona o objeto colaborador no arrayList
 				colaboradores.add(colaborador);
 			}
 			
+			//fecha as conexões
 			ps.close();
 			rs.close();
 			conn.close();
 					
-		} catch (Exception e) {
+		} 
+		//trata, caso de uma exceção
+		catch (Exception e) {
 			System.out.println("Houve um erro ao listar os colaboradores");
 		}
-		
+		//retorna o array
 		return colaboradores;
 	}
 
@@ -220,10 +245,14 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 		List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		
+		//string query do banco
 		String sql = "SELECT id, status, nivel, usuario, senha, nome, cpf, rg, endereco, numero, complemento, bairro, cep, estado, cidade, tel, cel, email, obs FROM colaborador WHERE cpf = ? OR nome LIKE ? OR rg = ?";
-				
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
-						
+			
+			//seta a string para fazer a busca
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, pesquisa);
 			ps.setString(2, "%"+pesquisa+"%");
@@ -232,7 +261,8 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
-							
+				
+				//da um get nos atributos do objeto colaborador		
 				Colaborador colaborador = new Colaborador();
 				colaborador.setId(rs.getLong("id"));
 				colaborador.setStatus(rs.getInt("status"));
@@ -254,17 +284,21 @@ public class ColaboradorDao implements GenericoDao<Colaborador> {
 				colaborador.setEmail(rs.getString("email"));
 				colaborador.setObs(rs.getString("obs"));
 				
+				//adiciona o objeto colaborador no arrayList
 				colaboradores.add(colaborador);
 			}
 			
+			//fecha as conexões
 			ps.close();
 			rs.close();
 			conn.close();
 					
-		} catch (Exception e) {
+		} 
+		//trata, caso de uma exceção
+		catch (Exception e) {
 			System.out.println("Houve um erro ao pesquisar o colaborador");
 		}
-		
+		//retorna o array
 		return colaboradores;
 	}
 	
