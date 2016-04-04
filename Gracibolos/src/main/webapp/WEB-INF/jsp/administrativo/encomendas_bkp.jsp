@@ -20,7 +20,7 @@
 	<link href="resources/css/style.css" rel="stylesheet">
     <link href="resources/css/datatables.css" rel="stylesheet">
     <link href="resources/css/selectize.css" rel="stylesheet">
-    <link href="resources/css/wizard.css" rel="stylesheet">
+    <link href="resources/css/jquery.steps.css" rel="stylesheet">
 
 	<!-- Titulo da página -->
 	<title>Graci Bolos | Encomendas</title>
@@ -221,216 +221,186 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 								
-								<div class="wizard">
-						            <div class="wizard-inner">
-						                <div class="connecting-line"></div>
-						                <ul class="nav nav-tabs" role="tablist">
-						
-						                    <li role="presentation" class="active">
-						                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Informações do pedido">
-						                            <span class="round-tab">
-						                                <i class="glyphicon glyphicon-pencil"></i>
-						                            </span>
-						                        </a>
-						                    </li>
-						
-						                    <li role="presentation" class="disabled">
-						                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
-						                            <span class="round-tab">
-						                                <i class="glyphicon glyphicon-list-alt"></i>
-						                            </span>
-						                        </a>
-						                    </li>
-						                    <li role="presentation" class="disabled">
-						                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Faturar encomenda">
-						                            <span class="round-tab">
-						                                <i class="glyphicon glyphicon-usd"></i>
-						                            </span>
-						                        </a>
-						                    </li>
-						
-						                    <li role="presentation" class="disabled">
-						                        <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Produzir encomenda">
-						                            <span class="round-tab">
-						                                <i class="glyphicon glyphicon-time"></i>
-						                            </span>
-						                        </a>
-						                    </li>
-						
-						                    <li role="presentation" class="disabled">
-						                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Finalizar encomenda">
-						                            <span class="round-tab">
-						                                <i class="glyphicon glyphicon-ok"></i>
-						                            </span>
-						                        </a>
-						                    </li>
-						
-						                </ul>
-						            </div>
-						
-						            <div class="tab-content">
-						                <div class="tab-pane active" role="tabpanel" id="step1">
-						                    
-						                    <div class="row">
-						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="id">Nº da encomenda:</label>
-													<input type="text" id="id" name="id" placeholder="Gerado automaticamente" class="form-control" readonly />
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="dataencomenda">Data da encomenda:</label>
-													<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" readonly />
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="dataentrega">Data de entrega:</label>
-													<input type="date" id="dataentrega" name="dataentrega" class="form-control" />
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-													<label class="control-label" for="cliente">Cliente:</label>
-													<select id="cliente" name="cliente" class="form-control" required>
-														<option selected value="0">Thomas F. Yasuhide Yamamoto</option>
-														<option value="1">Rogério Yudi</option>
-														<option value="2">Weslley Ruffino</option>
-														<option value="3">Breno Ruffin</option>
-														<option value="4">Natália Inácio Lula da silva</option>
-													</select>
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-													<label class="control-label" for="responsavel" id="responsavel">Responsável pela retirada:</label>
-													<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada aqui." class="form-control" maxlength="100"/>
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-12 col-md-12">
-													<label class="control-label" for="obs">Observações:</label>
-													<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o cliente"></textarea>
-												</div>
-						                    </div>
-						
-						                    <ul class="list-inline pull-right">
-						                        <li><button type="button" class="btn btn-default next-step">Selecionar produtos</button></li>
-						                    </ul>
-						                </div>
-						
-						                <div class="tab-pane" role="tabpanel" id="step2">
-						                    
-						                    <div class="row">
-						                    	<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
-													<button class="btn btn-default fullwidth" onclick="return false" id="inserir-linha">
-														<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Incluir novo produto
-													</button>
-												</div>
-						                    
-						                        <div class="input-margin pull-right col-xs-12 col-sm-12 col-md-12">
-													<table class="input-margin table display table-settings">
-														<thead>
-															<!-- Titulos das tabelas  -->
-															<tr>
-																<th>Produto</th>
-																<th>Quantidade</th>
-																<th>Valor unitário</th>
-																<th>Valor total</th>
-																<th>Ações</th>
-															</tr>
-														</thead>
-														<tbody id="lista-produtos" >
-					
-															<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
-														
-															<!-- 	FALTA IMPLEMENTAR 
-					
-															<c:forEach var="produto" items="${produtos}">
-																<tr>
-																	<td>${produto.id}</td>
-																	<td>${produto.nome}</td>
-																	<td>${produto.quantidade}</td>
-																	<td>${produto.valor}</td>
-								                					<td>
-								                						<button id="edit-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-								                						<button id="delete-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
-								                					</td>
-																</tr>
-															</c:forEach>
-					
-															-->
-														</tbody>
-													</table>
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-12 col-md-12">
-													<label class="control-label" for="total">Valor total da encomenda:</label>
-													<div class="input-group">
-														<span class="input-group-addon">R$</span>
-														<input id="total" type="text" class="form-control" name="total" max="999999999" placeholder="0,00">
-													</div>
-												</div>
-						                    </div>
-						
-						                    <ul class="list-inline pull-right">
-						                        <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-						                        <li><button type="button" class="btn btn-default next-step">Faturar encomenda</button></li>
-						                    </ul>
-						                </div>
-						
-						                <div class="tab-pane" role="tabpanel" id="step3">
-						                    
-						                    <div class="row">
-						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="datafaturamento">Data de faturamento:</label>
-													<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
-												</div>
-						                    </div>
-						
-						                    <ul class="list-inline pull-right">
-						                        <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-						                        <li><button type="button" class="btn btn-default next-step">Produzir encomenda</button></li>
-						                    </ul>
-						                </div>
-						
-						                <div class="tab-pane" role="tabpanel" id="step4">
-						                    
-						                    <div class="row">
-						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="dataproducao">Data da produção:</label>
-													<input type="date" id="dataproducao" name="dataproducao" class="form-control" readonly />
-												</div>
-						                    </div>
-						
-						                    <ul class="list-inline pull-right">
-						                        <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-						                        <li><button type="button" class="btn btn-default next-step">Finalizar encomenda</button></li>
-						                    </ul>
-						                </div>
-						
-						                <div class="tab-pane" role="tabpanel" id="complete">
-						                    <div class="row">
-						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="datafinalizado">Data da finalização:</label>
-													<input type="date" id="datafinalizado" name="datafinalizado" class="form-control" readonly />
-												</div>
-						                    </div>
-						                </div>
-						
-						            </div>
-						        </div>
+								<div id="steps">
+								    <h3>Informações do cliente</h3>
+								    <div class="row">
+										<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+											<label class="control-label" for="id">Nº da encomenda:</label>
+											<input type="text" id="id" name="id" placeholder="Gerado automaticamente" class="form-control" readonly />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+											<label class="control-label" for="dataencomenda">Data da encomenda:</label>
+											<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" readonly />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+											<label class="control-label" for="dataentrega">Data de entrega:</label>
+											<input type="date" id="dataentrega" name="dataentrega" class="form-control" />
+										</div>
+									</div>
+								 	
+								 	<h3>Selecione os produtos</h3>
+								    <div>Content</div>
+								 	
+								    <h3>Faturar encomenda</h3>
+								    <div class="row">
+										<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+											<label class="control-label" for="datafaturamento">Data de faturamento:</label>
+											<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
+										</div>
+									</div>
+								    
+								    <h3>Produzir encomenda</h3>
+								    <div class="row">
+										<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+											<label class="control-label" for="dataproducao">Data da produção:</label>
+											<input type="date" id="dataproducao" name="dataproducao" class="form-control" readonly />
+										</div>
+									</div>
+								 
+								    <h3>Finalizar encomenda</h3>
+								    <div class="row">
+										<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+											<label class="control-label" for="datafinalizado">Data da finalização:</label>
+											<input type="date" id="datafinalizado" name="datafinalizado" class="form-control" readonly />
+										</div>
+									</div>
+								</div>
+								
+								<!-- ABAS -->
+								<ul class="nav nav-tabs">
+									<li class="active"><a data-toggle="tab" href="#info">Informações da produto</a></li>
+									<li><a data-toggle="tab" href="#produtos">Lista de produtos</a></li>
+								</ul>
+
+								<div class="tab-content">
+
+									<div id="info" class="tab-pane fade in active">
 							
-							</div>
-						</div>
-					</div>
-					
-					
-						
-										<!-- 
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="id">Nº da encomenda:</label>
+											<input type="text" id="id" name="id" placeholder="Gerado automaticamente" class="form-control" readonly />
+										</div>
+		
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="status">Status:</label>
+											<select id="status" name="status" class="form-control">
+												<option value="0" selected>Nova Encomenda</option>
+												<option value="1" disabled>Faturado</option>
+												<option value="2" disabled>Produzido</option>
+												<option value="3" disabled>Finalizado</option>
+											</select>
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="dataencomenda">Data da encomenda:</label>
+											<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" readonly />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="dataentrega">Data de entrega:</label>
+											<input type="date" id="dataentrega" name="dataentrega" class="form-control" />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="datafaturamento">Data de faturamento:</label>
+											<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="dataproducao">Data da produção:</label>
+											<input type="date" id="dataproducao" name="dataproducao" class="form-control" readonly />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<label class="control-label" for="datafinalizado">Data da finalização:</label>
+											<input type="date" id="datafinalizado" name="datafinalizado" class="form-control" readonly />
+										</div>
+										
 										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 											<label class="control-label" for="datacancelado">Data de cancelamento:</label>
 											<input type="date" id="datacancelado" name="datacancelado" class="form-control" readonly />
 										</div>
 		
-										 -->
+										<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+											<label class="control-label" for="cliente">Cliente:</label>
+											<select id="cliente" name="cliente" class="form-control" required>
+												<option selected value="0">Thomas F. Yasuhide Yamamoto</option>
+												<option value="1">Rogério Yudi</option>
+												<option value="2">Weslley Ruffino</option>
+												<option value="3">Breno Ruffin</option>
+												<option value="4">Natália Inácio Lula da silva</option>
+											</select>
+										</div>
 										
-							
+										<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+											<label class="control-label" for="responsavel" id="responsavel">Responsável pela retirada:</label>
+											<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada aqui." class="form-control" maxlength="100"/>
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+											<label class="control-label" for="obs">Observações:</label>
+											<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o cliente"></textarea>
+										</div>
+									</div>
+
+									<div id="produtos" class="tab-pane fade">
+										<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
+											<button class="btn btn-default fullwidth" onclick="return false" id="inserir-linha">
+												<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Incluir novo produto
+											</button>
+										</div>
+									
+										<div class="input-margin pull-right col-xs-12 col-sm-12 col-md-12">
+											<table class="input-margin table display table-settings">
+												<thead>
+													<!-- Titulos das tabelas  -->
+													<tr>
+														<th>Produto</th>
+														<th>Quantidade</th>
+														<th>Valor unitário</th>
+														<th>Valor total</th>
+														<th>Ações</th>
+													</tr>
+												</thead>
+												<tbody id="lista-produtos" >
+			
+													<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
+												
+													<!-- 	FALTA IMPLEMENTAR 
+			
+													<c:forEach var="produto" items="${produtos}">
+														<tr>
+															<td>${produto.id}</td>
+															<td>${produto.nome}</td>
+															<td>${produto.quantidade}</td>
+															<td>${produto.valor}</td>
+						                					<td>
+						                						<button id="edit-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
+						                						<button id="delete-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+						                					</td>
+														</tr>
+													</c:forEach>
+			
+													-->
+												</tbody>
+											</table>
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+											<label class="control-label" for="total">Valor total da encomenda:</label>
+											<div class="input-group">
+												<span class="input-group-addon">R$</span>
+												<input id="total" type="text" class="form-control" name="total" max="999999999" placeholder="0,00">
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
 					<!-- ################################# FIM DO CONTEUDO ################################# -->
 
@@ -513,7 +483,7 @@
 	<script src="resources/js/mask.js"></script>
 	<script src="resources/js/moment.js"></script>
 	<script src="resources/js/selectize.js"></script>
-	<script src="resources/js/wizard.js"></script>
+	<script src="resources/js/jquery.steps.js"></script>
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
