@@ -20,6 +20,7 @@
 	<link href="resources/css/style.css" rel="stylesheet">
     <link href="resources/css/datatables.css" rel="stylesheet">
     <link href="resources/css/selectize.css" rel="stylesheet">
+    <link href="resources/css/jquery.steps.css" rel="stylesheet">
 
 	<!-- Titulo da página -->
 	<title>Graci Bolos | Encomendas</title>
@@ -205,7 +206,7 @@
 	<div class="modal fade" id="modal-encomenda" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-	    	
+				
 	    		<form id="encomenda-form" method="POST">
 	    
 					<div class="modal-header">
@@ -220,10 +221,57 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 								
+								<div id="steps">
+								    <h3>Informações do cliente</h3>
+								    <div class="row">
+										<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+											<label class="control-label" for="id">Nº da encomenda:</label>
+											<input type="text" id="id" name="id" placeholder="Gerado automaticamente" class="form-control" readonly />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+											<label class="control-label" for="dataencomenda">Data da encomenda:</label>
+											<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" readonly />
+										</div>
+										
+										<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+											<label class="control-label" for="dataentrega">Data de entrega:</label>
+											<input type="date" id="dataentrega" name="dataentrega" class="form-control" />
+										</div>
+									</div>
+								 	
+								 	<h3>Selecione os produtos</h3>
+								    <div>Content</div>
+								 	
+								    <h3>Faturar encomenda</h3>
+								    <div class="row">
+										<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+											<label class="control-label" for="datafaturamento">Data de faturamento:</label>
+											<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
+										</div>
+									</div>
+								    
+								    <h3>Produzir encomenda</h3>
+								    <div class="row">
+										<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+											<label class="control-label" for="dataproducao">Data da produção:</label>
+											<input type="date" id="dataproducao" name="dataproducao" class="form-control" readonly />
+										</div>
+									</div>
+								 
+								    <h3>Finalizar encomenda</h3>
+								    <div class="row">
+										<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+											<label class="control-label" for="datafinalizado">Data da finalização:</label>
+											<input type="date" id="datafinalizado" name="datafinalizado" class="form-control" readonly />
+										</div>
+									</div>
+								</div>
+								
 								<!-- ABAS -->
 								<ul class="nav nav-tabs">
-									<li class="active"><a data-toggle="tab" href="#info">Informações do produto</a></li>
-									<li><a data-toggle="tab" href="#receita">Receita do produto</a></li>
+									<li class="active"><a data-toggle="tab" href="#info">Informações da produto</a></li>
+									<li><a data-toggle="tab" href="#produtos">Lista de produtos</a></li>
 								</ul>
 
 								<div class="tab-content">
@@ -297,7 +345,7 @@
 										</div>
 									</div>
 
-									<div id="receita" class="tab-pane fade">
+									<div id="produtos" class="tab-pane fade">
 										<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
 											<button class="btn btn-default fullwidth" onclick="return false" id="inserir-linha">
 												<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Incluir novo produto
@@ -359,6 +407,9 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 						<button type="submit" class="btn btn-default" id="modal-action"></button>
+						<button type="submit" class="btn btn-default">Faturar encomenda</button>
+						<button type="submit" class="btn btn-default">Produzir encomenda</button>
+						<button type="submit" class="btn btn-default">Finalizar encomenda</button>
 					</div>
 
 
@@ -432,9 +483,18 @@
 	<script src="resources/js/mask.js"></script>
 	<script src="resources/js/moment.js"></script>
 	<script src="resources/js/selectize.js"></script>
+	<script src="resources/js/jquery.steps.js"></script>
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			$("#steps").steps({
+			 	headerTag: "h3",
+			    bodyTag: "div",
+			    transitionEffect: "slideLeft",
+                stepsOrientation: "vertical",
+			    autoFocus: true
+			});
 			
 			$('#cliente').selectize();
 			
