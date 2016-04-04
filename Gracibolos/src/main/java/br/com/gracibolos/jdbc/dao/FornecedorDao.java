@@ -27,11 +27,14 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 		boolean status = false;
 		PreparedStatement ps = null;
 		
+		//string query do banco
 		String sql = "INSERT INTO fornecedor(status, tipopessoa, sexo, datanascimento, nomerazao, cpfcnpj, rgie, endereco, numero, complemento, bairro, estado, cidade, cep, tel, cel, email, site, obs) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
 			
+			//seta os atributos do objeto fornecedor
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, fornecedor.getStatus());
 			ps.setInt(2, fornecedor.getTipopessoa());
@@ -68,15 +71,17 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 				status = true;
 			}
 			
+			//fecha as conexões
 			ps.close();	
 			conn.close();			
 					
-		} 
+		}
+		//trata, caso de uma exceção
 		catch (SQLException e) 
 		{
 			System.out.println("Houve um erro ao inserir o fornecedor");
 		}
-		
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 	
@@ -92,10 +97,14 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 		
 		boolean status = false;
 		PreparedStatement  ps = null;
+		
+		//string query do banco
 		String sql = "UPDATE fornecedor SET status=?, tipopessoa=?, sexo=?, datanascimento=?, nomerazao=?, cpfcnpj=?, rgie=?, endereco=?, numero=?, complemento=?, bairro=?, estado=?, cidade=?, cep=?, tel=?, cel=?, email=?, site=?, obs=? where id=?";
-				
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())	{
 			
+			//seta os atributos do objeto fornecedor, fazendo a alteração.
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, fornecedor.getStatus());
 			ps.setInt(2, fornecedor.getTipopessoa());
@@ -133,14 +142,16 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 				status = true;
 			}
 			
+			//fecha as conexões
 			ps.close();
 			conn.close();
 			
 		}
+		//trata, caso de uma exceção
 		catch (SQLException e) {
 			System.out.println("Houve um erro ao alterar o fornecedor");
 		}
-		
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 	
@@ -156,25 +167,31 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 		
 		boolean status = false;
 		PreparedStatement ps = null;
+		
+		//string query do banco
 		String sql  = "DELETE FROM fornecedor WHERE id = ?";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
 			
-			ps = conn.prepareStatement(sql);
-			
+			//seta o id do fornecedor, e excluir o objeto
+			ps = conn.prepareStatement(sql);			
 			ps.setLong(1, fornecedor.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
 			}
 			
+			//fecha as conexões
 			ps.close();
 			conn.close();
 
-		} catch (SQLException e) {
+		} 
+		//trata, caso de uma exceção
+		catch (SQLException e) {
 			System.out.println("Houve um erro ao tentar deletar o fornecedor");
 		}
-		
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 	
@@ -191,15 +208,20 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		
+		//string query do banco
 		String sql = "SELECT id, status, tipopessoa, sexo, datanascimento, nomerazao, cpfcnpj, rgie, endereco, "
 				+ "numero, complemento, bairro, estado, cidade, cep, tel, cel, email, site, obs FROM fornecedor";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 			
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
+				
+				//da um get nos atributos do objeto fornecedor
 				Fornecedor fornecedor = new Fornecedor();
 				fornecedor.setId(rs.getInt("id"));
 				fornecedor.setStatus(rs.getInt("status"));
@@ -226,18 +248,20 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 				fornecedor.setSite(rs.getString("site"));
 				fornecedor.setObs(rs.getString("obs"));
 				
+				//adiciona o objeto fornecedor no arrayList
 				fornecedores.add(fornecedor);
 				
 			}
-			
+			//fecha as conexões
 			ps.close();
 			rs.close();
 			conn.close();
 		}
+		//trata, caso de uma exceção
 		catch (SQLException e) {
 			System.out.println("Houve um erro ao listar os clientes");
 		}
-		
+		//retorna o array
 		return fornecedores;
 	}
 	
@@ -254,11 +278,15 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		
+		//string query do banco
 		String sql = "SELECT id, status, sexo, datanascimento, tipopessoa, nomerazao, cpfcnpj, rgie, endereco, "
 				+ "numero, complemento, bairro, estado, cidade, cep, tel, cel, email, site, obs FROM fornecedor WHERE cpfcnpj = ? OR nomerazao LIKE ? OR rgie = ?";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 			
+			//seta a string para fazer a busca
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, pesquisa);
 			ps.setString(2, "%"+pesquisa+"%");
@@ -267,6 +295,7 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
+				//da um get nos atributos do objeto fornecedor
 				Fornecedor fornecedor = new Fornecedor();
 				fornecedor.setId(rs.getInt("id"));
 				fornecedor.setStatus(rs.getInt("status"));
@@ -293,17 +322,19 @@ public class FornecedorDao implements GenericoDao<Fornecedor>{
 				fornecedor.setSite(rs.getString("site"));
 				fornecedor.setObs(rs.getString("obs"));
 				
+				//adiciona o objeto fornecedor no arrayList
 				fornecedores.add(fornecedor);
 			}
-			
+			//fecha as conexões
 			ps.close();
 			rs.close();
 			conn.close();
 		}
+		//trata, caso de uma exceção
 		catch (SQLException e) {
 			System.out.println("Houve um erro ao pesquisar o fornecedor");
 		}
-		
+		//retorna o array
 		return fornecedores;
 	}
 

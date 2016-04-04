@@ -13,15 +13,26 @@ import br.com.gracibolos.jdbc.model.Conta;
 
 public class ContaDao implements GenericoDao<Conta>{
 
+	/*
+	 * INCLUIR CONTA
+	 * 
+	 * Este método tem como principal objetivo receber os dados de uma nova conta e persistir no banco de dados.
+	 * 
+	 * */
+	
 	public boolean inserir(Conta conta) throws Exception{
 		boolean status = false;
+		
+		//string query do banco
 		String sql = "INSERT INTO conta(fornecedorId, colaboradorId, caixaId,"
 				   + " codigo, dataVencimento, dataPagamento, valor)"
 				   + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
-		{			
+		{	
+			//seta os atributos do objeto conta
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, conta.getFornecedorId());
 			ps.setInt(2, conta.getColaboradorId());
@@ -36,22 +47,36 @@ public class ContaDao implements GenericoDao<Conta>{
 			}
 			ps.close();	
 			conn.close();								
-		} 
+		}
+		//trata, caso de uma exceção
 		catch (SQLException e) 
 		{
 			System.out.println("Erro ao inserir conta\n"+e);
 		}
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
-
+	
+	/*
+	 * ALTERAR CONTA
+	 * 
+	 * Este método tem como principal objetivo receber os dados de uma determinada conta e alterar os dados do banco de dados.
+	 * 
+	 * */
+	
 	public boolean alterar(Conta conta) throws Exception{
 		boolean status = false;
+		
+		//string query do banco
 		String sql = "UPDATE conta SET fornecedorId=?, colaboradorId=?, caixaId=?, codigo=?,"
 				   + " dataVencimento=?, dataPagamento=?, valor=? where id=?";
 		
 		PreparedStatement  ps = null;
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
-		{			
+		{	
+			//seta os atributos do objeto conta, fazendo a alteração.
 			ps = conn.prepareStatement(sql);
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, conta.getFornecedorId());
@@ -69,22 +94,34 @@ public class ContaDao implements GenericoDao<Conta>{
 			ps.close();
 			conn.close();
 		}
+		//trata, caso de uma exceção
 		catch (SQLException e) 
 		{
 			System.out.println("Erro ao alterar o conta\n"+e);
 		}
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
+	
+	/*
+	 * EXCLUIR CONTA
+	 * 
+	 * Este método tem como principal objetivo receber os dados de uma determinada conta e excluir do banco de dados.
+	 * 
+	 * */
 
 	public boolean excluir(Conta conta) throws Exception{
 		boolean status = false;
+		
+		//string query do banco
 		String sql = "DELETE FROM conta WHERE id = ?";
 		
 		PreparedStatement ps;
 		
-		//Tenta realizar uma conexão com o banco de dados
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()){
-
+			
+			//seta o id da conta, e excluir o objeto
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, conta.getId());
 			
@@ -93,28 +130,39 @@ public class ContaDao implements GenericoDao<Conta>{
 			}
 			
 			ps.close();
-			conn.close();
-	
-		} catch (Exception e) {
+			conn.close();	
+		} 
+		//trata, caso de uma exceção
+		catch (Exception e) {
 			System.out.println("Houve um erro ao tentar deletar a conta");
 		}
-		
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
+	
+	/*
+	 * LISTAR CONTA
+	 * Este método tem como principal objetivo realizar uma consulta ao banco e retornar todas as contas.
+	 * 
+	 */
 
 	public List<Conta> listar() throws Exception{
-
+		
+		//string query do banco
 		String sql = "SELECT * FROM conta";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Conta> listaDeConta= null;
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			listaDeConta = new ArrayList<Conta>();
 			while(rs.next())
-			{
+			{				
+				//da um get nos atributos do objeto conta
 				Conta conta = new Conta();
 				conta.setId(rs.getLong("id"));
 				conta.setFornecedorId(rs.getInt("fornecedorId"));
@@ -125,10 +173,10 @@ public class ContaDao implements GenericoDao<Conta>{
 				conta.setDataPagamento(rs.getDate("dataPagamento").toLocalDate());
 				conta.setValor(rs.getBigDecimal("valor"));
 				
-				
-				
+				//adiciona o objeto caixa no arrayList
 				listaDeConta.add(conta);
 				
+				//enquanto o arraylist tiver objeto conta, ele vai listando
 				for(int i = 0;i<listaDeConta.size();i++){  //enquanto i for menor, não maior  
 				     System.out.println(listaDeConta.get(i));    
 				}  
@@ -136,10 +184,12 @@ public class ContaDao implements GenericoDao<Conta>{
 			ps.close();
 			conn.close();
 		}
+		//trata, caso de uma exceção
 		catch (SQLException e) 
 		{
 			System.out.println("Erro ao listar contas\n"+e);
 		}
+		//retorna o array
 		return listaDeConta;
 	}
 	

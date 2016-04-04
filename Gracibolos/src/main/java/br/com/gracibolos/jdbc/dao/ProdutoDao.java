@@ -26,14 +26,15 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		boolean status = false;
 		PreparedStatement ps = null;
         
+		//string query do banco
 		String sql = "INSERT INTO produto(foto, status, fabricacao, vencimento, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){	
 			
-			ps = conn.prepareStatement(sql);
-			
+			//seta os atributos do objeto produto
+			ps = conn.prepareStatement(sql);			
 			ps.setString(1, produto.getFoto());
-
 			ps.setInt(2, produto.getStatus());
 			
 			if(produto.getFabricacao() != null){
@@ -62,16 +63,18 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				status = true;
 			}
 			
+			//fecha as conexões
 			ps.close();	
 			conn.close();			
 					
-		} 
+		}
+		//trata, caso de uma exceção
 		catch (SQLException e) 
 		{
 			System.out.println("Houve um erro ao inserir o produto");
 			throw new Exception("Houve um erro ao inserir o produto");
 		}
-		
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 	
@@ -101,14 +104,16 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		
 		boolean status = false;
 		PreparedStatement  ps = null;
+		
+		//string query do banco
 		String sql = "UPDATE produto SET foto=?, status=?, fabricacao=?, vencimento=?, codigo=?, nome=?, tipo=?, peso=?, unidade=?, estoque=?, custo=?, valor=?, obs=? where id=?";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())	{
 			
-			ps = conn.prepareStatement(sql);
-			
-			ps.setString(1, produto.getFoto());
-			
+			//seta os atributos do objeto produto, fazendo a alteração.
+			ps = conn.prepareStatement(sql);			
+			ps.setString(1, produto.getFoto());			
 			ps.setInt(2, produto.getStatus());
 			
 			if(produto.getFabricacao() != null){
@@ -138,12 +143,17 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				status = true;
 			}
 			
+			//fecha as conexões
 			ps.close();
 			conn.close();
-		}catch (SQLException e){
+			
+		}
+		//trata, caso de uma exceção
+		catch (SQLException e){
 			System.out.println("Houve um erro ao alterar o produto");
 			throw new Exception("Houve um erro ao alterar o produto");
 		}
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 
@@ -159,28 +169,36 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		boolean status = false;
 		PreparedStatement ps = null;
 		
+		//string query do banco
 		String sql  = "DELETE FROM produto WHERE id = ?";
 
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){
 			
-			ps = conn.prepareStatement(sql);
-			
+			//seta o id do caixa, e excluir o objeto
+			ps = conn.prepareStatement(sql);			
 			ps.setLong(1, produto.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
 			}
+			
+			//fecha as conexões
+			ps.close();
+			conn.close();
 
-		} catch (SQLException e) {
+		} 
+		//trata, caso de uma exceção
+		catch (SQLException e) {
 			System.out.println("Houve um erro ao tentar deletar o produto");
 			throw new Exception("Houve um erro ao tentar deletar o produto");
 		}
-		
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
 	}
 	
 	/*
-	 * LISTAR CLIENTES
+	 * LISTAR PRODUTOS
 	 * 
 	 * Este método tem como principal objetivo realizar uma consulta ao banco e retornar todos os dados dos produtos.
 	 * 
@@ -191,18 +209,20 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Produto> produtos = null;
+		
+		//string query do banco
 		String sql = "SELECT id, foto, status, fabricacao, vencimento, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs FROM produto";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
 			
-			ps = conn.prepareStatement(sql);
-			
-			rs = ps.executeQuery();
-			
+			ps = conn.prepareStatement(sql);			
+			rs = ps.executeQuery();			
 			produtos = new ArrayList<Produto>();
 			
 			while(rs.next())
 			{
+				//da um get nos atributos do objeto produto
 				Produto produto = new Produto();
 				produto.setId(rs.getLong("id"));
 				produto.setFoto(rs.getString("foto"));
@@ -219,25 +239,28 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setValor(rs.getBigDecimal("valor"));
 				produto.setObs(rs.getString("obs"));
 				
+				//adiciona o objeto produto no arrayList
 				produtos.add(produto);
 				
 			}
-			
+			//fecha as conexões
 			ps.close();
 			rs.close();
 			conn.close();
 			
 		}
+		//trata, caso de uma exceção
 		catch (SQLException e) 
 		{
 			System.out.println("Houve um erro ao listar os produtos");
 			throw new Exception("Houve um erro ao listar os produtos");
 		}
+		//retorna o array
 		return produtos;
 	}
 	
 	/*
-	 * PESQUISAR CLIENTES
+	 * PESQUISAR PRODUTOS
 	 * 
 	 * Este método tem como principal objetivo realizar uma consulta ao banco e retornar todos os dados dos produtos.
 	 * 
@@ -250,10 +273,13 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		ResultSet rs = null;
 		List<Produto> produtos = null;
 		
+		//string query do banco
 		String sql = "SELECT id, foto, status, fabricacao, vencimento, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs FROM produto WHERE codigo = ? OR nome LIKE ?";
 		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
 			
+			//seta a string para fazer a busca
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, pesquisa);
 			ps.setString(2, "%"+pesquisa+"%");
@@ -263,6 +289,8 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			produtos = new ArrayList<Produto>();
 			
 			while(rs.next()) {
+				
+				//da um get nos atributos do objeto produto
 				Produto produto = new Produto();
 				produto.setId(rs.getLong("id"));
 				produto.setFoto(rs.getString("foto"));
@@ -279,20 +307,24 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setValor(rs.getBigDecimal("valor"));
 				produto.setObs(rs.getString("obs"));
 				
+				//adiciona o objeto produto no arrayList
 				produtos.add(produto);
 				
 			}
 			
+			//fecha as conexões
 			ps.close();
 			rs.close();
 			conn.close();
 			
 		}
+		
+		//trata, caso de uma exceção
 		catch (SQLException e) {
 			System.out.println("Houve um erro ao pesquisar os produtos");
 			throw new Exception("Houve um erro ao pesquisar os produtos");
 		}
-		
+		//retorna o array
 		return produtos;
 	}
 
