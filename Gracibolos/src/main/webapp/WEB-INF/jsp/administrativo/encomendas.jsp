@@ -274,7 +274,7 @@
 						                    <div class="row">
 						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
 													<label class="control-label" for="id">Nº da encomenda:</label>
-													<input type="text" id="id" name="id" placeholder="Gerado automaticamente" class="form-control" readonly />
+													<input type="text" id="id" name="id" placeholder="228" class="form-control" readonly />
 												</div>
 												
 												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
@@ -283,14 +283,20 @@
 												</div>
 												
 												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="dataentrega">Data de entrega:</label>
-													<input type="date" id="dataentrega" name="dataentrega" class="form-control" />
+													<label class="control-label" for="dataentrega">Data de entrega*:</label>
+													<input type="date" id="dataentrega" name="dataentrega" class="form-control" required />
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="datacancelado">Data do cancelamento:</label>
+													<input type="date" id="datacancelado" name="datacancelado" class="form-control" readonly />
 												</div>
 												
 												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-													<label class="control-label" for="cliente">Cliente:</label>
+													<label class="control-label" for="cliente">Cliente*:</label>
 													<select id="cliente" name="cliente" class="form-control" required>
-														<option selected value="0">Thomas F. Yasuhide Yamamoto</option>
+														<option selected disabled>Selecione...</option>
+														<option value="0">Thomas F. Yasuhide Yamamoto</option>
 														<option value="1">Rogério Yudi</option>
 														<option value="2">Weslley Ruffino</option>
 														<option value="3">Breno Ruffin</option>
@@ -309,9 +315,10 @@
 												</div>
 						                    </div>
 						
-						                    <ul class="list-inline pull-right">
-						                        <li><button type="button" class="btn btn-default next-step">Selecionar produtos</button></li>
-						                    </ul>
+						                    <div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+												<button type="button" class="btn btn-default next-step"><i class="material-icons">arrow_forward</i>&nbsp;&nbsp;&nbsp;Selecionar produtos</button>
+											</div>
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step2">
@@ -368,10 +375,11 @@
 												</div>
 						                    </div>
 						
-						                    <ul class="list-inline pull-right">
-						                        <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-						                        <li><button type="button" class="btn btn-default next-step">Faturar encomenda</button></li>
-						                    </ul>
+						                    <div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+												<button type="button" class="btn btn-default prev-step"><i class="material-icons">arrow_back</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+							                    <button type="button" class="btn btn-default next-step"><i class="material-icons">arrow_forward</i>&nbsp;&nbsp;&nbsp;Faturar encomenda</button>
+											</div>
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step3">
@@ -382,11 +390,13 @@
 													<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
 												</div>
 						                    </div>
-						
-						                    <ul class="list-inline pull-right">
-						                        <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-						                        <li><button type="button" class="btn btn-default next-step">Produzir encomenda</button></li>
-						                    </ul>
+											
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+												<button type="button" class="btn btn-default prev-step"><i class="material-icons">arrow_back</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+							                    <button type="button" class="btn btn-default next-step"><i class="material-icons">arrow_forward</i>&nbsp;&nbsp;&nbsp;Produzir encomenda</button>
+											</div>
+						                    
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step4">
@@ -398,10 +408,11 @@
 												</div>
 						                    </div>
 						
-						                    <ul class="list-inline pull-right">
-						                        <li><button type="button" class="btn btn-default prev-step">Voltar</button></li>
-						                        <li><button type="button" class="btn btn-default next-step">Finalizar encomenda</button></li>
-						                    </ul>
+						                    <div class="modal-footer">	
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+												<button type="button" class="btn btn-default prev-step"><i class="material-icons">arrow_back</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+							                    <button type="button" class="btn btn-default next-step"><i class="material-icons">arrow_forward</i>&nbsp;&nbsp;&nbsp;Finalizar encomenda</button>
+											</div>
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="complete">
@@ -411,6 +422,11 @@
 													<input type="date" id="datafinalizado" name="datafinalizado" class="form-control" readonly />
 												</div>
 						                    </div>
+						                    
+						                    <div class="modal-footer">
+												<button type="button" class="btn btn-default prev-step"><i class="material-icons">arrow_back</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
+							                </div>
 						                </div>
 						
 						            </div>
@@ -420,28 +436,7 @@
 						</div>
 					</div>
 					
-					
-						
-										<!-- 
-										<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-											<label class="control-label" for="datacancelado">Data de cancelamento:</label>
-											<input type="date" id="datacancelado" name="datacancelado" class="form-control" readonly />
-										</div>
-		
-										 -->
-										
-							
-
 					<!-- ################################# FIM DO CONTEUDO ################################# -->
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-						<button type="submit" class="btn btn-default" id="modal-action"></button>
-						<button type="submit" class="btn btn-default">Faturar encomenda</button>
-						<button type="submit" class="btn btn-default">Produzir encomenda</button>
-						<button type="submit" class="btn btn-default">Finalizar encomenda</button>
-					</div>
-
 
 				</form>
 			</div>
@@ -517,14 +512,6 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
-			$("#steps").steps({
-			 	headerTag: "h3",
-			    bodyTag: "div",
-			    transitionEffect: "slideLeft",
-                stepsOrientation: "vertical",
-			    autoFocus: true
-			});
 			
 			$('#cliente').selectize();
 			
