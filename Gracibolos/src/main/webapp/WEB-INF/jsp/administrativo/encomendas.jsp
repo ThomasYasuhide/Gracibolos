@@ -16,11 +16,11 @@
 	<!-- Importação dos arquivos CSS -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="resources/css/bootstrap.css" rel="stylesheet">
-	<link href="resources/css/reset.css" rel="stylesheet">
 	<link href="resources/css/style.css" rel="stylesheet">
     <link href="resources/css/datatables.css" rel="stylesheet">
     <link href="resources/css/selectize.css" rel="stylesheet">
     <link href="resources/css/wizard.css" rel="stylesheet">
+	<link href="resources/css/reset.css" rel="stylesheet">
 
 	<!-- Titulo da página -->
 	<title>Graci Bolos | Encomendas</title>
@@ -269,56 +269,60 @@
 						            </div>
 						
 						            <div class="tab-content">
+						            
 						                <div class="tab-pane active" role="tabpanel" id="step1">
 						                    
-						                    <div class="row">
-						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="id">Nº da encomenda:</label>
-													<input type="text" id="id" name="id" placeholder="228" class="form-control" readonly />
+						                    <form action="#" method="POST">
+							                    <div class="row">
+							                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
+														<label class="control-label" for="id">Nº da encomenda:</label>
+														<input type="text" id="id" name="id" placeholder="228" class="form-control" readonly />
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+														<label class="control-label" for="dataencomenda">Data da encomenda:</label>
+														<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" readonly />
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+														<label class="control-label" for="dataentrega">Data de entrega*:</label>
+														<input type="date" id="dataentrega" name="dataentrega" class="form-control" required />
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+														<label class="control-label" for="datacancelado">Data do cancelamento:</label>
+														<input type="date" id="datacancelado" name="datacancelado" class="form-control" readonly />
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+														<label class="control-label" for="cliente">Cliente*:</label>
+														<select id="cliente" name="cliente" class="form-control" required>
+															<option selected disabled>Selecione...</option>
+															<option value="0">Thomas F. Yasuhide Yamamoto</option>
+															<option value="1">Rogério Yudi</option>
+															<option value="2">Weslley Ruffino</option>
+															<option value="3">Breno Ruffin</option>
+															<option value="4">Natália Inácio Lula da silva</option>
+														</select>
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+														<label class="control-label" for="responsavel" id="responsavel">Responsável pela retirada:</label>
+														<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada aqui." class="form-control" maxlength="100"/>
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+														<label class="control-label" for="obs">Observações:</label>
+														<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o cliente"></textarea>
+													</div>
+							                    </div>
+							
+							                    <div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+													<button type="submit" class="btn btn-default next-step"><i class="material-icons">arrow_forward</i>&nbsp;&nbsp;&nbsp;Selecionar produtos</button>
 												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="dataencomenda">Data da encomenda:</label>
-													<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" readonly />
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="dataentrega">Data de entrega*:</label>
-													<input type="date" id="dataentrega" name="dataentrega" class="form-control" required />
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="datacancelado">Data do cancelamento:</label>
-													<input type="date" id="datacancelado" name="datacancelado" class="form-control" readonly />
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-													<label class="control-label" for="cliente">Cliente*:</label>
-													<select id="cliente" name="cliente" class="form-control" required>
-														<option selected disabled>Selecione...</option>
-														<option value="0">Thomas F. Yasuhide Yamamoto</option>
-														<option value="1">Rogério Yudi</option>
-														<option value="2">Weslley Ruffino</option>
-														<option value="3">Breno Ruffin</option>
-														<option value="4">Natália Inácio Lula da silva</option>
-													</select>
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-													<label class="control-label" for="responsavel" id="responsavel">Responsável pela retirada:</label>
-													<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada aqui." class="form-control" maxlength="100"/>
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-12 col-md-12">
-													<label class="control-label" for="obs">Observações:</label>
-													<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o cliente"></textarea>
-												</div>
-						                    </div>
-						
-						                    <div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-												<button type="button" class="btn btn-default next-step"><i class="material-icons">arrow_forward</i>&nbsp;&nbsp;&nbsp;Selecionar produtos</button>
-											</div>
+											
+						                    </form>
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step2">
@@ -344,24 +348,48 @@
 														</thead>
 														<tbody id="lista-produtos" >
 					
-															<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
-														
-															<!-- 	FALTA IMPLEMENTAR 
-					
-															<c:forEach var="produto" items="${produtos}">
-																<tr>
-																	<td>${produto.id}</td>
-																	<td>${produto.nome}</td>
-																	<td>${produto.quantidade}</td>
-																	<td>${produto.valor}</td>
-								                					<td>
-								                						<button id="edit-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-								                						<button id="delete-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
-								                					</td>
+															<c:forEach var="item" items="${itens}">
+																<tr id="item">
+																
+																	<td class="hidden">
+																		<input type="text" id="id" name="item[${item.numero}].id" value="${item.id}" class="readonly">
+																	</td>
+																	
+																	<script>
+																	     $(document).ready(function(){
+																	           $("#department").val("${requestScope.selectedDepartment}").attr('selected', 'selected');
+																	     });
+																     </script>
+																	
+																	<td>
+																		<select class="form-control" name="item[${item.numero}].produtoId">
+																			<option value="1">Produto 0</option>
+																			<option value="2" >Produto 1</option>
+																			<option value="2" ${item.produtoId == '2' ? 'selected' : ''}>Produto 2</option>
+																			<option value="3" ${item.produtoId == '3' ? 'selected' : ''}>Produto 3</option>
+																			<option value="4">Produto 4</option>
+																		</select>
+																	</td>
+																	
+																	<td>
+																		<input type="number" name="item[${item.numero}].quantidade" class="form-control" value="${item.quantidade}" min="0" max="9999999">
+																	</td>
+																	
+																	<td>
+																		<input type="text" name="item[${item.numero}].valor" value="${item.valor}" class="form-control">
+																	</td>
+																	
+																	<td>
+																		<input type="text" name="item[${item.numero}].total" value="${item.total}" class="form-control" readonly="readonly">
+																	</td>
+																	
+																	<td>
+																		<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">clear</i></button>
+																	</td>
+																	
 																</tr>
 															</c:forEach>
-					
-															-->
+															
 														</tbody>
 													</table>
 												</div>
@@ -515,6 +543,8 @@
 			
 			$('#cliente').selectize();
 			
+			
+			
 			//Remove as mascaras quando apertar o submit
 			$("#encomenda-form").submit(function() {				
 				var total = $("#total").val();
@@ -597,14 +627,6 @@
            					total.setAttribute("name","total");
            					total.setAttribute("class", "form-control");
            					total.setAttribute("readonly", "readonly");
-            	
-            		//Botão de ação salvar
-            		salvar_btn = document.createElement("button");
-            		salvar_btn.type = "button";
-            		salvar_btn.setAttribute("id","salvar-produto");
-            		salvar_btn.setAttribute("class","btn btn-default margin-right");
-            		salvar_btn.innerHTML = "<i class='material-icons'>save</i>";
-            		salvar_btn.onclick = salvar;
 
             		//Botão de ação de exclusão
             		excluir_btn = document.createElement("button");
@@ -619,7 +641,6 @@
                 quantidade_column.appendChild(quantidade);
                 valor_column.appendChild(valor);
                 total_column.appendChild(total);
-            	acoes_column.appendChild(salvar_btn);
             	acoes_column.appendChild(excluir_btn);
 
             	linha.appendChild(id_column);
@@ -630,12 +651,6 @@
                 linha.appendChild(acoes_column);
 
             	tabela.appendChild(linha);
-
-                function salvar(){
-                	for(i=0; i<linha.childNodes.length-1;i++){
-                		 alert(linha.childNodes[i].firstChild.value);
-                	}
-            	}
 
             	function excluir(){
             	    linha.remove();

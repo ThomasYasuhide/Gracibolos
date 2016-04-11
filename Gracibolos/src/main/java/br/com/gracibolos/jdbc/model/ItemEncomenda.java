@@ -6,30 +6,19 @@
 package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
-/**
- *
- * @author d637942
- */
 public class ItemEncomenda implements Serializable{
     
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -5136026907602113969L;
 
-	public ItemEncomenda(){
-        
-    }
-    
-    public ItemEncomenda(Long id) {
-        this.id = id;
-    }
-    
     private Long id;
+    private int numero;
     private Integer produtoId;
     private Integer encomendaId;
-    private Integer qtd;
+    private Integer quantidade;
+    private BigDecimal valor;
+    private BigDecimal total;
 
 	public Long getId() {
 		return id;
@@ -37,6 +26,14 @@ public class ItemEncomenda implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 	public Integer getProdutoId() {
@@ -55,16 +52,28 @@ public class ItemEncomenda implements Serializable{
 		this.encomendaId = encomendaId;
 	}
 
-	public Integer getQtd() {
-		return qtd;
+	public Integer getQuantidade() {
+		return quantidade;
 	}
 
-	public void setQtd(Integer qtd) {
-		this.qtd = qtd;
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
 	}
    
 }

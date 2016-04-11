@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,7 @@ import br.com.gracibolos.jdbc.model.Colaborador;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Estado;
 import br.com.gracibolos.jdbc.model.Fornecedor;
+import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Produto;
 
@@ -988,15 +990,70 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-encomendas")
 	public ModelAndView encomenda(){
 		System.out.println("Entrou na servlet de listagem de matéria prima");
-						
-		return new ModelAndView("administrativo/encomendas");
+			
+			//TESTES
+				List<ItemEncomenda> itens = new ArrayList<ItemEncomenda>();
+		
+				ItemEncomenda item = new ItemEncomenda();
+				item.setId((long) 1);
+				item.setNumero(1);
+				item.setProdutoId(3);
+				item.setQuantidade(20);
+				item.setValor(new BigDecimal("10.00"));
+				item.setTotal(new BigDecimal("200.00"));
+				
+				ItemEncomenda item2 = new ItemEncomenda();
+				item2.setId((long) 2);
+				item2.setNumero(2);
+				item2.setProdutoId(2);
+				item2.setQuantidade(20);
+				item2.setValor(new BigDecimal("5.00"));
+				item2.setTotal(new BigDecimal("100.00"));
+				
+				itens.add(item);
+				itens.add(item2);
+			//FIM DOS TESTES
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/encomendas");
+		mv.addObject("itens", itens);
+
+		return mv;
 	}
 		
 	//INCLUIR NOVA ENCOMENDA
 	@RequestMapping("/administrativo-incluir-encomenda")
 	public ModelAndView incluir_encomenda(Encomenda encomenda){
 		System.out.println("Entrou na servlet de inclusão de uma nova materiaPrima");
-			
+		
+		
+		/*
+		 
+		 
+		 
+		 Código para ler os produtos de um input array html
+		 
+		 
+		 
+		 System.out.println(encomendas.getProdutos().size());
+		
+		for(int i=0; i<encomendas.getProdutos().size();i++){
+			if(encomendas.getProdutos().get(i).getNome() != ""){
+				
+				Produto produto = new Produto();
+				produto.setId(encomendas.getProdutos().get(i).getId());
+				produto.setNome(encomendas.getProdutos().get(i).getNome());
+
+				System.out.println(produto.getId());
+				System.out.println(produto.getNome());
+			}
+		}
+		 
+		 
+		 */
+		
+		
+		
 		boolean status = false;
 		    
 		EncomendaDao dao = new EncomendaDao();			

@@ -13,7 +13,7 @@ public class ItemEncomendaAlterar {
 		itemEncomenda.setId(1L);
 		itemEncomenda.setProdutoId(3);
 		itemEncomenda.setEncomendaId(1);
-		itemEncomenda.setQtd(53);		
+		itemEncomenda.setQuantidade(53);		
 		
 		ItemEncomendaDao dao = new ItemEncomendaDao();
 		

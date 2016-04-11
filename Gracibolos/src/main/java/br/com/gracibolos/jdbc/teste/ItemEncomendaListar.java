@@ -15,7 +15,7 @@ public class ItemEncomendaListar {
 			    System.out.println(	     "Id  : "+i.getId()
 			    					+"\tProdutoId : "+i.getProdutoId()
 			    					+"\tEncomendaId : "+i.getEncomendaId()
-			    					 + "\tQtd : "+i.getQtd());	
+			    					 + "\tQtd : "+i.getQuantidade());	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
