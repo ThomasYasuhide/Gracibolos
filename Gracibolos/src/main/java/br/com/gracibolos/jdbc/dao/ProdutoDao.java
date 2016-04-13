@@ -175,7 +175,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){
 			
-			//seta o id do caixa, e excluir o objeto
+			//seta o id do produto, e excluir o objeto
 			ps = conn.prepareStatement(sql);			
 			ps.setLong(1, produto.getId());
 			
@@ -257,6 +257,53 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		}
 		//retorna o array
 		return produtos;
+	}
+	
+	public Produto pesquisarPorId(int id) throws Exception{
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		//string query do banco
+		String sql = "SELECT id, foto, status, fabricacao, vencimento, codigo, nome, tipo, "
+				+ "peso, unidade, estoque, custo, valor, obs FROM produto WHERE id="+id;
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
+			
+			ps = conn.prepareStatement(sql);	
+			rs = ps.executeQuery();			
+			rs.next();	
+			
+			//da um get nos atributos do objeto produto
+			Produto produto = new Produto();
+			produto.setId(rs.getLong("id"));
+			produto.setFoto(rs.getString("foto"));
+			produto.setStatus(rs.getInt("status"));
+			produto.setFabricacao(rs.getDate("fabricacao").toLocalDate());
+			produto.setVencimento(rs.getDate("vencimento").toLocalDate());
+			produto.setCodigo(rs.getString("codigo"));
+			produto.setNome(rs.getString("nome"));
+			produto.setTipo(rs.getLong("tipo"));
+			produto.setPeso(rs.getBigDecimal("peso"));
+			produto.setUnidade(rs.getLong("unidade"));
+			produto.setEstoque(rs.getInt("estoque"));
+			produto.setCusto(rs.getBigDecimal("custo"));
+			produto.setValor(rs.getBigDecimal("valor"));
+			produto.setObs(rs.getString("obs"));	
+			
+			//fecha as conexões
+			ps.close();
+			rs.close();
+			conn.close();
+			
+			return produto;	
+		}
+		//trata, caso de uma exceção
+		catch (SQLException e) {
+			System.out.println("Houve um erro ao encontrar o produto");
+			throw new Exception("Houve um erro ao tentar encontrar o produto");
+		}
+	
 	}
 	
 	/*
