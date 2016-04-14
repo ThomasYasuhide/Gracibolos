@@ -562,9 +562,9 @@
 		$(document).ready(function() {
 			
 			$('#cliente').selectize({
-			    valueField: 'url',
-			    labelField: 'name',
-			    searchField: 'name',
+			    valueField: 'nomerazao',
+			    labelField: 'nomerazao',
+			    searchField: 'nomerazao',
 			    create: false,
 			    render: {
 			        option: function(item, escape) {
@@ -573,8 +573,8 @@
 			        	
 			            return '<div>' +
 			                '<span class="title">' +
-			                    '<span class="name"><i class="icon ' + (item.fork ? 'fork' : 'source') + '"></i>' + escape(item.name) + '</span><br/>' +
-			                    '<span class="by">' + escape(item.username) + '</span>' +
+			                    '<span class="name">' + escape(item.nomerazao) + '</span><br/>' +
+			                    '<span class="name">' + escape(item.cpfcnpj) + '</span><br/>' +
 			                '</span>' +
 			            '</div>';
 			        }
@@ -582,13 +582,14 @@
 			    load: function(query, callback) {
 			        if (!query.length) return callback();
 			        $.ajax({
-			            url: 'https://api.github.com/legacy/repos/search/' + encodeURIComponent(query),
+			            
+			            url: 'http://localhost:8080/Gracibolos/rest-clientes/' + encodeURIComponent(query),
 			            type: 'GET',
 			            error: function() {
 			                callback();
 			            },
 			            success: function(res) {
-			                callback(res.repositories.slice(0, 10));
+			                callback(res);
 			            }
 			        });
 			    }
