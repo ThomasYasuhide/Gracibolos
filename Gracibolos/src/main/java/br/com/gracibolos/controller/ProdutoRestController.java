@@ -17,7 +17,6 @@ public class ProdutoRestController {
 	private ProdutoDao dao;
 	private List<Produto> produtosList;
 	
-	
 	@RequestMapping(value = "/rest-produtos", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Produto> listAllProdutos() {    
 		try {
@@ -36,7 +35,6 @@ public class ProdutoRestController {
 		try {
 			p = dao.pesquisarPorId(id);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}    
 	  return p;  

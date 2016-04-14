@@ -334,7 +334,7 @@
 													</button>
 												</div>
 						                    
-						                        <div class="input-margin pull-right col-xs-12 col-sm-12 col-md-12">
+						                        <div class="input-margin col-xs-12 col-sm-12 col-md-12">
 													<table class="input-margin table display table-settings">
 														<thead>
 															<!-- Titulos das tabelas  -->
@@ -348,19 +348,13 @@
 														</thead>
 														<tbody id="lista-produtos" >
 					
-															<c:forEach var="item" items="${itens}">
+															<c:forEach var="item" items="${itens}" varStatus="loop">
 																<tr id="item">
 																
 																	<td class="hidden">
-																		<input type="text" id="id" name="item[${item.numero}].id" value="${item.id}" class="readonly">
+																		<input type="text" id="id_${loop.index} }" name="item[${loop.index}].id" value="${item.id}" class="readonly">
 																	</td>
-																	
-																	<script>
-																	     $(document).ready(function(){
-																	           $("#department").val("${requestScope.selectedDepartment}").attr('selected', 'selected');
-																	     });
-																     </script>
-																	
+
 																	<td>
 																		<select class="form-control" name="item[${item.numero}].produtoId">
 																			<option value="1">Produto 0</option>
@@ -393,8 +387,8 @@
 														</tbody>
 													</table>
 												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+																								
+												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
 													<label class="control-label" for="total">Valor total da encomenda:</label>
 													<div class="input-group">
 														<span class="input-group-addon">R$</span>
@@ -541,8 +535,35 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
-			$('#cliente').selectize();
-			
+			$('#cliente').selectize({
+			    valueField: 'url',
+			    labelField: 'name',
+			    searchField: 'name',
+			    create: false,
+			    render: {
+			        option: function(item, escape) {
+			            return '<div>' +
+			                '<span class="title">' +
+			                    '<span class="name"><i class="icon ' + (item.fork ? 'fork' : 'source') + '"></i>' + escape(item.name) + '</span>' +
+			                    '<span class="by">' + escape(item.username) + '</span>' +
+			                '</span>' +
+			            '</div>';
+			        }
+			    },
+			    load: function(query, callback) {
+			        if (!query.length) return callback();
+			        $.ajax({
+			            url: 'https://api.github.com/legacy/repos/search/' + encodeURIComponent(query),
+			            type: 'GET',
+			            error: function() {
+			                callback();
+			            },
+			            success: function(res) {
+			                callback(res.repositories.slice(0, 10));
+			            }
+			        });
+			    }
+			});
 			
 			
 			//Remove as mascaras quando apertar o submit
