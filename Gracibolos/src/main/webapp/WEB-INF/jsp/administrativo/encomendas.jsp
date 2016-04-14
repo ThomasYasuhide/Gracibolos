@@ -352,29 +352,29 @@
 																<tr id="item">
 																
 																	<td class="hidden">
-																		<input type="text" id="id_${loop.index} }" name="item[${loop.index}].id" value="${item.id}" class="readonly">
+																		<input type="text" id="id_${loop.index}" name="item[${loop.index}].id" value="${item.id}" class="readonly">
 																	</td>
 
 																	<td>
-																		<select class="form-control" name="item[${item.numero}].produtoId">
-																			<option value="1">Produto 0</option>
-																			<option value="2" >Produto 1</option>
+																		<select class="form-control" name="item[${loop.index}].produtoId">
+																			<option value="1" ${item.produtoId == '1' ? 'selected' : ''}>Produto 1</option>
 																			<option value="2" ${item.produtoId == '2' ? 'selected' : ''}>Produto 2</option>
 																			<option value="3" ${item.produtoId == '3' ? 'selected' : ''}>Produto 3</option>
-																			<option value="4">Produto 4</option>
+																			<option value="4" ${item.produtoId == '4' ? 'selected' : ''}>Produto 4</option>
+																			<option value="5" ${item.produtoId == '5' ? 'selected' : ''}>Produto 5</option>
 																		</select>
 																	</td>
 																	
 																	<td>
-																		<input type="number" name="item[${item.numero}].quantidade" class="form-control" value="${item.quantidade}" min="0" max="9999999">
+																		<input type="number" name="item[${loop.index}].quantidade" value="${item.quantidade}" id="quantidade_${loop.index}" onchange="calculaTotal(this)" class="form-control"  min="0" max="9999999">
 																	</td>
 																	
 																	<td>
-																		<input type="text" name="item[${item.numero}].valor" value="${item.valor}" class="form-control">
+																		<input type="text" name="item[${loop.index}].valor" value="${item.valor}" id="valor_${loop.index}" onchange="calculaTotal(this)" class="form-control">
 																	</td>
 																	
 																	<td>
-																		<input type="text" name="item[${item.numero}].total" value="${item.total}" class="form-control" readonly="readonly">
+																		<input type="text" name="item[${loop.index}].total" value="${item.total}" id="total_${loop.index}" class="form-control" readonly="readonly">
 																	</td>
 																	
 																	<td>
@@ -533,6 +533,32 @@
 	<script src="resources/js/wizard.js"></script>
 	
 	<script type="text/javascript">
+	
+		//Método para calculo do valor dos produtos
+		function calculaTotal(input){
+			//Recupera o numero do item
+			var item = input.id.replace("quantidade_","").replace("valor_","");
+			
+			//Recupera os valores dos campos
+			var quantidade = (document.getElementById('quantidade_'+item).value.replace(",","."));
+			var valor = (document.getElementById('valor_'+item).value.replace(",","."));
+			var total = document.getElementById('total_'+item);
+			
+			//Verifica se o campo está vazio, se estiver preenche o valor como 0
+			if(valor == "" || valor == null){
+				valor = 0;
+			}
+
+			//Verifica se o campo está vazio, se estiver preenche o valor como 0
+			if(quantidade == "" || quantidade == null){
+				quantidade = 0;
+			}
+			
+			//Insere o valor calculado total de determinado item
+			total.value = parseFloat((quantidade * valor).toFixed(2));
+		}
+	
+		
 		$(document).ready(function() {
 			
 			$('#cliente').selectize({
@@ -542,9 +568,12 @@
 			    create: false,
 			    render: {
 			        option: function(item, escape) {
+			        	
+			        	//JAPA TENTA DEIXAR O NOME DO CLIENTE e CNPJ, acho que fica melhor pra identificar
+			        	
 			            return '<div>' +
 			                '<span class="title">' +
-			                    '<span class="name"><i class="icon ' + (item.fork ? 'fork' : 'source') + '"></i>' + escape(item.name) + '</span>' +
+			                    '<span class="name"><i class="icon ' + (item.fork ? 'fork' : 'source') + '"></i>' + escape(item.name) + '</span><br/>' +
 			                    '<span class="by">' + escape(item.username) + '</span>' +
 			                '</span>' +
 			            '</div>';
