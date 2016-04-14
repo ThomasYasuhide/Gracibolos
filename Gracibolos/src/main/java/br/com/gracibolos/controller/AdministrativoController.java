@@ -56,9 +56,11 @@ public class AdministrativoController {
 	 * */
 	
 	//PRODUTOS
+	//mapeamento da jsp admin produtos
 	@RequestMapping("/administrativo-produtos")
 	public ModelAndView produtos(){
 		System.out.println("Entrou na pagina de listagem de produtos");
+		//retorna a página produtos
 		return new ModelAndView("administrativo/produtos");
 	}
 	
@@ -67,10 +69,13 @@ public class AdministrativoController {
 	public ModelAndView incluir_produto(Produto produto, @RequestParam("file") MultipartFile file, HttpServletRequest request){
 		System.out.println("Entrou na servlet de inclusão de um novo produto");
 		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
 		
+		//cria uma nova instância DAO do produto
 	    ProdutoDao produtoDao = new ProdutoDao();
 
+	    
 	    if(!file.isEmpty()) {
 		    produto.setFoto(file.getOriginalFilename().toString());
 		    
@@ -102,19 +107,24 @@ public class AdministrativoController {
 	    }
 	    
 		try {
+			//se o método inserir passando um produto, for executado corretamente, status recebe verdadeiro
 			if(produtoDao.inserir(produto)){
 				status = true;
-			}else{
+			}
+			//caso contrário, status recebe falso
+			else{
 				status = false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/produtos");
+		//passa o retorno do status para a Expression Language chamada incluir
 		mv.addObject("incluir", status);
-
+		//retorna o mv
 		return mv;
 	}
 	
@@ -123,9 +133,10 @@ public class AdministrativoController {
 	public ModelAndView alterar_produto(Produto produto, @RequestParam("file") MultipartFile file, HttpServletRequest request){
 				
 		System.out.println("Entrou na pagina de alteração de produto");
-
-		boolean status = false;
 		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
+		boolean status = false;
+		//cria uma nova instância DAO do produto
 		ProdutoDao produtoDao = new ProdutoDao();
 	    
 		if(!file.isEmpty()) {
@@ -165,19 +176,24 @@ public class AdministrativoController {
 	    }
 				
 		try {
+			//se o método alterar passando um produto, for executado corretamente, status recebe verdadeiro
 			if(produtoDao.alterar(produto)){
 				status = true;
-			}else{
+			}
+			//caso contrário, status recebe falso
+			else{
 				status = false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				
+		//instância uma nova modelView		
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/produtos");
+		//passa o retorno do status para a Expression Language chamada alterar
 		mv.addObject("alterar", status);
-		
+		//retorna o mv
 		return mv;
 	}
 	
@@ -186,34 +202,41 @@ public class AdministrativoController {
 	public ModelAndView excluir_produto(Produto produto){
 		System.out.println("Entrou na pagina de exclusão de produto");
 		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-		
+		//cria uma nova instância DAO do produto
 		ProdutoDao produtoDao = new ProdutoDao();
 		
 		try {
+			//se o método excluir passando um produto, for executado corretamente, status recebe verdadeiro
 			if(produtoDao.excluir(produto)){
 				status = true;
-			}else{
+			}
+			//caso contrário, status recebe falso
+			else{
 				status = false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/produtos");
+		//passa o retorno do status para a Expression Language chamada excluir
 		mv.addObject("excluir", status);
-		
+		//retorna o mv
 		return mv;
-	}
+	}	
 	
 	//PESQUISAR PRODUTOS
 	@RequestMapping("/administrativo-pesquisar-produto")
 	public ModelAndView pesquisar_produto(String pesquisa){
 		System.out.println("Realizou a pesquisa de produto");
 		
+		//cria uma nova instância DAO do produto
 		ProdutoDao produtoDao = new ProdutoDao();
-		
+				
 		List<Produto> produtos = null;
 		
 		try {
@@ -222,10 +245,13 @@ public class AdministrativoController {
 			e.printStackTrace();
 		}
 	    
-	    ModelAndView mv = new ModelAndView();
-	    mv.setViewName("administrativo/produtos");
-	    mv.addObject("produtos", produtos);
-	    
+		//instância uma nova modelView
+		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
+		mv.setViewName("administrativo/produtos");
+		//passa a lista de produtos para a Expression Language chamada produtos
+		mv.addObject("produtos", produtos);
+		//retorna o mv	    
 	    return mv;
 	}
 	
@@ -234,6 +260,7 @@ public class AdministrativoController {
 		public ModelAndView listar_produtos(){
 			System.out.println("Realizou a listagem de produtos");
 			
+			//cria uma nova instância DAO do produto
 			ProdutoDao produtoDao = new ProdutoDao();
 			
 			List<Produto> produtos = null;
@@ -244,14 +271,16 @@ public class AdministrativoController {
 				e.printStackTrace();
 			}
 		    
-		    ModelAndView mv = new ModelAndView();
-		    mv.setViewName("administrativo/produtos");
-		    mv.addObject("produtos", produtos);
-		    
+			//instância uma nova modelView
+			ModelAndView mv = new ModelAndView();
+			//seta o caminho e o nome da jsp
+			mv.setViewName("administrativo/produtos");
+			//passa a lista de produtos para a Expression Language chamada produtos
+			mv.addObject("produtos", produtos);
+			//retorna o mv	    
 		    return mv;
 		}
-		
-		
+				
 	/*
 	 * 
 	 * ###################### FORNECEDORES ######################
@@ -263,6 +292,7 @@ public class AdministrativoController {
 	public ModelAndView fornecedores(){
 		System.out.println("Entrou na servlet de listagem de fornecedores");
 		
+		//cria uma nova instância DAO do estado
 		EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
 		
@@ -278,28 +308,37 @@ public class AdministrativoController {
 	public ModelAndView incluir_fornecedor(Fornecedor fornecedor){
 		System.out.println("Entrou na servlet de inclusão de um novo fornecedor");
 		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-
+		
+		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
+	  //cria uma nova instância DAO do fornecedor
 		FornecedorDao fornecedorDao = new FornecedorDao();
 		
 		try {
+			//se o método inserir passando um fornecedor, for executado corretamente, status recebe verdadeiro
 			if(fornecedorDao.inserir(fornecedor)){
 				status = true;
-			}else{
+			}
+			//caso contrário, status recebe falso
+			else{
 				status = false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+     	//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/fornecedores");
+		//passa o retorno do status para a Expression Language chamada incluir
 		mv.addObject("incluir", status);
+		//passa a lista de estados para a Expression Language chamada estados
 		mv.addObject("estados", estados);
-
+		//retorna o mv
 		return mv;
 	}
 	
@@ -307,29 +346,39 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-alterar-fornecedor")
 	public ModelAndView alterar_fornecedor(Fornecedor fornecedor){
 		System.out.println("Entrou na pagina de alteração de fornecedor");
-
+		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-
+		
+		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
-
+	    
+	  //cria uma nova instância DAO do fornecedor
 		FornecedorDao fornecedorDao = new FornecedorDao();
 		
 		try {
+			//se o método alterar passando um fornecedor, for executado corretamente, status recebe verdadeiro
 			if(fornecedorDao.alterar(fornecedor)){
 				status = true;
-			}else{
+			}
+			//caso contrário, status recebe falso
+			else{
 				status = false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/fornecedores");
+		//passa o retorno do status para a Expression Language chamada alterar
 		mv.addObject("alterar", status);
-	    mv.addObject("estados", estados);
-		
+		//passa a lista de estados para a Expression Language chamada estados
+	    mv.addObject("estados", estados);		
+	    //retorna o mv
 		return mv;
 	}
 	
@@ -338,28 +387,37 @@ public class AdministrativoController {
 	public ModelAndView excluir_fornecedor(Fornecedor fornecedor){
 		System.out.println("Entrou na pagina de exclusão de fornecedor");
 		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
 		
+		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
-
+	    
+	  //cria uma nova instância DAO do fornecedor
 		FornecedorDao fornecedorDao = new FornecedorDao();
 		
 		try {
+			//se o método excluir passando um fornecedor, for executado corretamente, status recebe verdadeiro
 			if(fornecedorDao.excluir(fornecedor)){
 				status = true;
-			}else{
+			}
+			//caso contrário, status recebe falso
+			else{
 				status = false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/fornecedores");
+		//passa o retorno do status para a Expression Language chamada excluir
 		mv.addObject("excluir", status);
-	    mv.addObject("estados", estados);
-		
+		//passa a lista de estados para a Expression Language chamada estados
+	    mv.addObject("estados", estados);		
+	    //retorna o mv
 		return mv;
 	}
 	
@@ -367,7 +425,8 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-pesquisar-fornecedor")
 	public ModelAndView pesquisar_fornecedor(String pesquisa){
 		System.out.println("Realizou a pesquisa de fornecedor");
-
+		
+		//cria uma nova instância DAO do fornecedor
 		FornecedorDao fornecedorDao = new FornecedorDao();
 		List<Fornecedor> fornecedores = null;
 		
@@ -376,15 +435,20 @@ public class AdministrativoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
+		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
+	    //instância uma nova modelView
 	    ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 	    mv.setViewName("administrativo/fornecedores");
+	    //passa a lista de fornecedores para a Expression Language chamada fornecedores
 	    mv.addObject("fornecedores", fornecedores);
-	    mv.addObject("estados", estados);
-	    
+		//passa a lista de estados para a Expression Language chamada estados
+	    mv.addObject("estados", estados);	    
+	    //retorna o mv
 	    return mv;
 	}
 	
@@ -392,7 +456,8 @@ public class AdministrativoController {
 		@RequestMapping("/administrativo-listar-fornecedores")
 		public ModelAndView listar_fornecedores(){
 			System.out.println("Realizou a listagem de fornecedores");
-
+			
+			//cria uma nova instância DAO do fornecedor
 			FornecedorDao fornecedorDao = new FornecedorDao();
 			List<Fornecedor> fornecedores = null;
 			
@@ -400,16 +465,20 @@ public class AdministrativoController {
 				fornecedores = fornecedorDao.listar();
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
-
+			}			
+			//cria uma nova instância DAO do estado
 		    EstadoDao estadoDao = new EstadoDao();
 		    List<Estado> estados = estadoDao.listar_estados();
 		    
+		    //instância uma nova modelView
 		    ModelAndView mv = new ModelAndView();
+			//seta o caminho e o nome da jsp
 		    mv.setViewName("administrativo/fornecedores");
+			//passa a lista de fornecedores para a Expression Language chamada fornecedores
 		    mv.addObject("fornecedores", fornecedores);
+			//passa a lista de estados para a Expression Language chamada estados	
 		    mv.addObject("estados", estados);
-		    
+			//retorna o mv		    
 		    return mv;
 		}
 	
@@ -424,6 +493,7 @@ public class AdministrativoController {
 	public ModelAndView clientes(){
 		System.out.println("Entrou na servlet de listagem de clientes");
 		
+		//cria uma nova instância DAO do estado
 		EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
 		
@@ -439,28 +509,37 @@ public class AdministrativoController {
 	public ModelAndView incluir_cliente(Cliente cliente){
 		System.out.println("Entrou na servlet de inclusão de um novo cliente");
 		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-
+		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
+	  //cria uma nova instância DAO do cliente
 		ClienteDao dao = new ClienteDao();
 		
 		try {
+			//se o método inserir passando um cliente, for executado corretamente, status recebe verdadeiro
 			if(dao.inserir(cliente)){
 				status = true;
-			}else{
+			}
+			//caso contrário, status recebe falso
+			else{
 				status = false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/clientes");
+		//passa o retorno do status para a Expression Language chamada incluir
 		mv.addObject("incluir", status);
+		//passa a lista de estados para a Expression Language chamada estados	
 		mv.addObject("estados", estados);
-
+	    //retorna o mv
 		return mv;
 	}
 	
@@ -468,29 +547,38 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-alterar-cliente")
 	public ModelAndView alterar_cliente(Cliente cliente){
 		System.out.println("Entrou na pagina de alteração de cliente");
-
+		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-
+		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
-
+	    
+	  //cria uma nova instância DAO do cliente
 		ClienteDao clienteDao = new ClienteDao();
 		
 		try {
+			//se o método alterar passando um cliente, for executado corretamente, status recebe verdadeiro
 			if(clienteDao.alterar(cliente)){
 				status = true;
-			}else{
+			}
+			//caso contrário, status recebe falso
+			else{
 				status = false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/clientes");
+		//passa o retorno do status para a Expression Language chamada alterar
 		mv.addObject("alterar", status);
-	    mv.addObject("estados", estados);
-		
+		//passa a lista de estados para a Expression Language chamada estados	
+		mv.addObject("estados", estados);
+	    //retorna o mv		
 		return mv;
 	}
 	
@@ -499,29 +587,36 @@ public class AdministrativoController {
 	public ModelAndView excluir_cliente(Cliente cliente){
 		System.out.println("Entrou na pagina de exclusão de cliente");
 		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-		
+		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
-
+	    
+	  //cria uma nova instância DAO do cliente
 		ClienteDao clienteDao = new ClienteDao();
 		
 		try {
+			//se o método excluir passando um cliente, for executado corretamente, status recebe verdadeiro
 			if(clienteDao.excluir(cliente)){
 				status = true;
-			}else{
+			}
+			//caso contrário, status recebe falso
+			else{
 				status = false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/clientes");
+		//passa o retorno do status para a Expression Language chamada excluir
 		mv.addObject("excluir", status);
-	    mv.addObject("estados", estados);
-		
-		
+		//passa a lista de estados para a Expression Language chamada estados	
+		mv.addObject("estados", estados);
+		//retorna o mv		
 		return mv;
 	}
 	
@@ -529,7 +624,8 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-pesquisar-cliente")
 	public ModelAndView pesquisar_cliente(String pesquisa){
 		System.out.println("Realizou a pesquisa de cliente");
-
+		
+		//cria uma nova instância DAO do cliente
 		ClienteDao clienteDao = new ClienteDao();
 		List<Cliente> clientes = null;
 		try {
@@ -537,7 +633,7 @@ public class AdministrativoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
@@ -553,7 +649,8 @@ public class AdministrativoController {
 		@RequestMapping("/administrativo-listar-clientes")
 		public ModelAndView listar_cliente(){
 			System.out.println("Realizou a listagem de clientes");
-
+			
+			//cria uma nova instância DAO do cliente
 			ClienteDao clienteDao = new ClienteDao();
 			List<Cliente> clientes = null;
 			try {
@@ -561,7 +658,7 @@ public class AdministrativoController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+			//cria uma nova instância DAO do estado
 		    EstadoDao estadoDao = new EstadoDao();
 		    List<Estado> estados = estadoDao.listar_estados();
 		    
@@ -584,6 +681,7 @@ public class AdministrativoController {
 	public ModelAndView colaboradores(){
 		System.out.println("Entrou na servlet de listagem de colaboradores");
 		
+		//cria uma nova instância DAO do estado
 		EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
 		
@@ -599,16 +697,21 @@ public class AdministrativoController {
 	public ModelAndView incluir_colaborador(Colaborador colaborador){
 		System.out.println("Entrou na servlet de inclusão de um novo colaborador");
 		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-
+		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
+	  //cria uma nova instância DAO do colaborador
 		ColaboradorDao dao = new ColaboradorDao();
 		
+		//se o método inserir passando um colaborador, for executado corretamente, status recebe verdadeiro
 		if(dao.inserir(colaborador)){
 			status = true;
-		}else{
+		}
+		//caso contrário, status recebe falso
+		else{
 			status = false;
 		}
 		
@@ -624,17 +727,22 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-alterar-colaborador")
 	public ModelAndView alterar_colaborador(Colaborador colaborador){
 		System.out.println("Entrou na pagina de alteração de colaborador");
-
+		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-
+		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
+	  //cria uma nova instância DAO do colaborador
 		ColaboradorDao colaboradorDao = new ColaboradorDao();
 		
+		//se o método alterar passando um colaborador, for executado corretamente, status recebe verdadeiro
 		if(colaboradorDao.alterar(colaborador)){
 			status = true;
-		}else{
+		}
+		//caso contrário, status recebe falso
+		else{
 			status = false;
 		}
 		
@@ -651,16 +759,21 @@ public class AdministrativoController {
 	public ModelAndView excluir_colaborador(Colaborador colaborador){
 		System.out.println("Entrou na pagina de exclusão de colaborador");
 		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-		
+		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
-		
+	    
+	  //cria uma nova instância DAO do colaborador
 		ColaboradorDao colaboradorDao = new ColaboradorDao();
 		
+		//se o método excluir passando um colaborador, for executado corretamente, status recebe verdadeiro
 		if(colaboradorDao.excluir(colaborador)){
 			status = true;
-		}else{
+		}
+		//caso contrário, status recebe falso
+		else{
 			status = false;
 		}
 		
@@ -678,9 +791,11 @@ public class AdministrativoController {
 	public ModelAndView pesquisar_colaborador(String pesquisa){
 		System.out.println("Realizou a pesquisa de colaboradores");
 		
+		//cria uma nova instância DAO do colaborador
 		ColaboradorDao dao = new ColaboradorDao();
 		List<Colaborador> colaboradores = dao.pesquisar(pesquisa);
-
+		
+		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
@@ -697,9 +812,11 @@ public class AdministrativoController {
 		public ModelAndView listar_colaborador(){
 			System.out.println("Realizou a listagem de colaboradores");
 			
+			//cria uma nova instância DAO do colaborador
 			ColaboradorDao colaboradorDao = new ColaboradorDao();
 			List<Colaborador> colaboradores = colaboradorDao.listar();
-
+			
+			//cria uma nova instância DAO do estado
 		    EstadoDao estadoDao = new EstadoDao();
 		    List<Estado> estados = estadoDao.listar_estados();
 		    
@@ -721,7 +838,8 @@ public class AdministrativoController {
 	public @ResponseBody List<Cidade> pesquisar_cidade(int id){
 				
 		List<Cidade> cidades = new ArrayList<Cidade>();
-		
+
+		//cria uma nova instância DAO do estado
 		CidadeDao dao = new CidadeDao();
 		try {
 			cidades = dao.pesquisar_cidades(id);
@@ -740,10 +858,12 @@ public class AdministrativoController {
 	 * */
 	
 	//MATÉRIA PRIMA
+	//mapeamento da jsp admin materias-primas
 	@RequestMapping("/administrativo-materiasprimas")
 	public ModelAndView materiaPrima(){
 		System.out.println("Entrou na servlet de listagem de matéria prima");
-						
+		
+		//retorna a página materias-primas
 		return new ModelAndView("administrativo/materiasprimas");
 	}
 		
@@ -751,25 +871,32 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-incluir-materiaprima")
 	public ModelAndView incluir_materiaPrima(MateriaPrima materiaprima){
 		System.out.println("Entrou na servlet de inclusão de uma nova materiaPrima");
-			
+		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-		    
+		
+		//cria uma nova instância dao da materia-prima
 		MateriaPrimaDao dao = new MateriaPrimaDao();			
-			
+		
 		try {
+			//se o método inserir passando uma materiaprima, for executado corretamente, status recebe verdadeiro
 			if(dao.inserir(materiaprima)) {
-				status = true;
-			} else {
+				status = true;			
+			}
+			//caso contrário, status recebe falso
+			else {
 				status = false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/materiasprimas");
+		//passa o retorno do status para a Expression Language chamada incluir
 		mv.addObject("incluir", status);
-
+		//retorna o mv
 		return mv;
 	}
 		
@@ -777,16 +904,20 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-alterar-materiaprima")
 	public ModelAndView alterar_materiaPrima(MateriaPrima materiaprima){
 		System.out.println("Entrou na pagina de alteração de materiaPrima");
-
+		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-
+		
+		//cria uma nova instância DAO da materia-prima
 		MateriaPrimaDao materiaPrimaDao = new MateriaPrimaDao();			
 			
 		try
 		{
+			//se o método alterar passando uma materiaprima, for executado corretamente, status recebe verdadeiro
 			if(materiaPrimaDao.alterar(materiaprima)) {
 				status = true;
 			} else {
+			//caso contrário, status recebe falso
 				status = false;
 			}
 		} catch (Exception e) {			
@@ -804,15 +935,20 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-remover-materiaprima")
 	public ModelAndView excluir_materiaPrima(MateriaPrima materiaprima){
 		System.out.println("Entrou na pagina de exclusão de materiaprima");
-			
+		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;	
-			
+		
+		//cria uma nova instância dao da materia-prima
 	    MateriaPrimaDao materiaPrimaDao = new MateriaPrimaDao();
 			
 		try {
+			//se o método excluir passando uma materiaprima, for executado corretamente, status recebe verdadeiro
 			if(materiaPrimaDao.excluir(materiaprima)) {
 				status = true;
-			} else {
+			} 
+			//caso contrário, status recebe falso
+			else {
 				status = false;
 			}
 		} catch (Exception e) {
@@ -830,7 +966,8 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-procurar-materiaprima")
 	public ModelAndView pesquisar_materiaPrima(String pesquisa){
 		System.out.println("Realizou a pesquisa de matéria prima");
-			
+		
+		//cria uma nova instância dao da materia-prima
 		MateriaPrimaDao dao = new MateriaPrimaDao();
 		List<MateriaPrima> materiasprimas = null;
 		try {
@@ -850,7 +987,8 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-listar-materiasprimas")
 	public ModelAndView listar_materiasprimas(){
 		System.out.println("Realizou a listagem de matérias primas");
-			
+		
+		//cria uma nova instância dao da materia-prima
 		MateriaPrimaDao dao = new MateriaPrimaDao();
 		List<MateriaPrima> materiasprimas = null;
 		
@@ -885,15 +1023,20 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-incluir-caixa")
 	public ModelAndView incluir_caixa(Caixa caixa){
 		System.out.println("Entrou na servlet de inclusão de um novo caixa");
-				
+		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-		    
+		 
+		//cria uma nova instância DAO do caixa
 		CaixaDao dao = new CaixaDao();			
 			
 		try {
+			//se o método inserir passando um caixa, for executado corretamente, status recebe verdadeiro
 			if(dao.inserir(caixa)) {
 				status = true;
-			} else {
+			} 
+			//caso contrário, status recebe falso
+			else {
 				status = false;
 			}
 		} catch (Exception e) {
@@ -911,16 +1054,20 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-alterar-caixa")
 	public ModelAndView alterar_caixa (Caixa caixa){
 		System.out.println("Entrou na pagina de alteração do caixa");
-
+		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-
+		//cria uma nova instância DAO do caixa
 		CaixaDao dao = new CaixaDao();			
 			
 		try
 		{
+			//se o método alterar passando um caixa, for executado corretamente, status recebe verdadeiro
 			if(dao.alterar(caixa)) {
 				status = true;
-			} else {
+			}
+			//caso contrário, status recebe falso
+			else {
 				status = false;
 			}
 		} catch (Exception e) {			
@@ -938,15 +1085,19 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-excluir-caixa")
 	public ModelAndView excluir_caixa (Caixa caixa){
 		System.out.println("Entrou na pagina de exclusão do caixa");
-				
+		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;	
-				
+		//cria uma nova instância DAO do caixa		
 		CaixaDao dao = new CaixaDao();			
 				
 		try {
+			//se o método excluir passando um caixa, for executado corretamente, status recebe verdadeiro
 			if(dao.excluir(caixa)) {
 				status = true;
-			} else {
+			}
+			//caso contrário, status recebe falso
+			else {
 				status = false;
 			}
 		} catch (Exception e) {
@@ -964,7 +1115,8 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-pesquisar-caixa")
 	public ModelAndView pesquisar_caixa (String pesquisa){
 		System.out.println("Realizou a pesquisa do caixa");
-				
+		
+		//cria uma nova instância DAO do caixa
 		CaixaDao dao = new CaixaDao();		
 		List<Caixa> caixas = null;
 		try {
@@ -1053,15 +1205,18 @@ public class AdministrativoController {
 		 */
 		
 		
-		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-		    
+		//cria uma nova instância DAO da encomenda
 		EncomendaDao dao = new EncomendaDao();			
 			
 		try {
+			//se o método inserir passando uma encomenda, for executado corretamente, status recebe verdadeiro
 			if(dao.inserir(encomenda)) {
 				status = true;
-			} else {
+			} 
+			//caso contrário, status recebe falso
+			else {
 				status = false;
 			}
 		} catch (Exception e) {
@@ -1079,16 +1234,20 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-alterar-encomenda")
 	public ModelAndView alterar_encomenda(Encomenda encomenda){
 		System.out.println("Entrou na pagina de alteração de materiaPrima");
-
+		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
-
+		//cria uma nova instância DAO da encomenda
 		EncomendaDao dao = new EncomendaDao();			
 			
 		try
 		{
+			//se o método alterar passando uma encomenda, for executado corretamente, status recebe verdadeiro
 			if(dao.alterar(encomenda)) {
 				status = true;
-			} else {
+			}
+			//caso contrário, status recebe falso
+			else {
 				status = false;
 			}
 		} catch (Exception e) {			
@@ -1106,15 +1265,19 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-excluir-encomenda")
 	public ModelAndView excluir_encomenda(Encomenda encomenda){
 		System.out.println("Entrou na pagina de exclusão de materiaprima");
-			
+		
+		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;	
-			
+		//cria uma nova instância DAO da encomenda	
 		EncomendaDao dao = new EncomendaDao();
 			
 		try {
+			//se o método excluir passando uma encomenda, for executado corretamente, status recebe verdadeiro
 			if(dao.excluir(encomenda)) {
 				status = true;
-			} else {
+			} 
+			//caso contrário, status recebe falso
+			else {
 				status = false;
 			}
 		} catch (Exception e) {
@@ -1132,7 +1295,8 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-pesquisar-encomenda")
 	public ModelAndView pesquisar_encomenda(String pesquisa){
 		System.out.println("Realizou a pesquisa de matéria prima");
-			
+		
+		//cria uma nova instância DAO da encomenda
 		EncomendaDao dao = new EncomendaDao();
 		
 		List<Encomenda> encomendas = null;
