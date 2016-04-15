@@ -41,7 +41,6 @@ import br.com.gracibolos.jdbc.model.Produto;
 
 @Controller
 public class AdministrativoController {
-	//teste
 	//DASHBOARD
 	@RequestMapping("/administrativo-dashboard")
 	public ModelAndView dashboard(){

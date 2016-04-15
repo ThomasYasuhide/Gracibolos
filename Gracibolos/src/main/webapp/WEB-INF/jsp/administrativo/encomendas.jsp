@@ -297,12 +297,7 @@
 													<div class="input-margin col-xs-12 col-sm-12 col-md-6">
 														<label class="control-label" for="cliente">Cliente*:</label>
 														<select id="cliente" name="cliente" class="form-control" required>
-															<option selected disabled>Selecione...</option>
-															<option value="0">Thomas F. Yasuhide Yamamoto</option>
-															<option value="1">Rogério Yudi</option>
-															<option value="2">Weslley Ruffino</option>
-															<option value="3">Breno Ruffino</option>
-															<option value="4">Natália Inácio</option>
+															
 														</select>
 													</div>
 													
@@ -578,14 +573,12 @@
 			$(".total").mask("000.000.000.000.000,00", {reverse: true});
 			
 			$('#cliente').selectize({
-			    valueField: 'nomerazao',
+			    valueField: 'id',
 			    labelField: 'nomerazao',
-			    searchField: 'nomerazao',
+			    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
 			    create: false,
 			    render: {
 			        option: function(item, escape) {
-			        	
-			        	//JAPA TENTA DEIXAR O NOME DO CLIENTE e CNPJ, acho que fica melhor pra identificar
 			        	
 			            return '<div>' +
 			                '<span class="title">' +
