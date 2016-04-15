@@ -301,14 +301,14 @@
 															<option value="0">Thomas F. Yasuhide Yamamoto</option>
 															<option value="1">Rogério Yudi</option>
 															<option value="2">Weslley Ruffino</option>
-															<option value="3">Breno Ruffin</option>
-															<option value="4">Natália Inácio Lula da silva</option>
+															<option value="3">Breno Ruffino</option>
+															<option value="4">Natália Inácio</option>
 														</select>
 													</div>
 													
 													<div class="input-margin col-xs-12 col-sm-12 col-md-6">
 														<label class="control-label" for="responsavel" id="responsavel">Responsável pela retirada:</label>
-														<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada aqui." class="form-control" maxlength="100"/>
+														<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada, se houver." class="form-control" maxlength="100"/>
 													</div>
 													
 													<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -339,11 +339,11 @@
 														<thead>
 															<!-- Titulos das tabelas  -->
 															<tr>
-																<th>Produto</th>
-																<th>Quantidade</th>
-																<th>Valor unitário</th>
-																<th>Valor total</th>
-																<th>Ações</th>
+																<th width="35%">Produto</th>
+																<th width="10%">Quantidade</th>
+																<th width="25%">Valor unitário</th>
+																<th width="25%">Valor total</th>
+																<th width="5%">Ações</th>
 															</tr>
 														</thead>
 														<tbody id="lista-produtos" >
@@ -370,16 +370,23 @@
 																	</td>
 																	
 																	<td>
-																		<input type="text" name="item[${loop.index}].valor" value="${item.valor}" id="valor_${loop.index}" onchange="calculaTotal(this)" class="form-control">
+																		<div class="input-group">
+																			<span class="input-group-addon">R$</span>
+																			<input type="text" name="item[${loop.index}].valor" value="${item.valor}" id="valor_${loop.index}" onchange="calculaTotal(this)" class="form-control valor">
+																		</div>
 																	</td>
 																	
 																	<td>
-																		<input type="text" name="item[${loop.index}].total" value="${item.total}" id="total_${loop.index}" class="form-control" readonly="readonly">
+																		<div class="input-group">
+																			<span class="input-group-addon">R$</span>
+																			<input type="text" name="item[${loop.index}].total" value="${item.total}" id="total_${loop.index}" class="form-control total" readonly="readonly">
+																		</div>
 																	</td>
 																	
 																	<td>
 																		<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">clear</i></button>
 																	</td>
+																	
 																	
 																</tr>
 															</c:forEach>
@@ -540,8 +547,14 @@
 			var item = input.id.replace("quantidade_","").replace("valor_","");
 			
 			//Recupera os valores dos campos
-			var quantidade = (document.getElementById('quantidade_'+item).value.replace(",","."));
-			var valor = (document.getElementById('valor_'+item).value.replace(",","."));
+			var quantidade = document.getElementById('quantidade_'+item).value;
+			quantidade = quantidade.split(".").join("");
+			quantidade = quantidade.split(",").join("");
+			
+			var valor = document.getElementById('valor_'+item).value;
+			valor = valor.split(".").join("");
+			valor = valor.split(",").join(".");
+			
 			var total = document.getElementById('total_'+item);
 			
 			//Verifica se o campo está vazio, se estiver preenche o valor como 0
@@ -560,6 +573,9 @@
 	
 		
 		$(document).ready(function() {
+			
+			$(".valor").mask("000.000.000.000.000,00", {reverse: true});
+			$(".total").mask("000.000.000.000.000,00", {reverse: true});
 			
 			$('#cliente').selectize({
 			    valueField: 'url',
@@ -598,8 +614,8 @@
 			//Remove as mascaras quando apertar o submit
 			$("#encomenda-form").submit(function() {				
 				var total = $("#total").val();
-				valor = total.replace(".","");
-				valor = total.replace(",",".");
+				valor = total.split(".").join("");
+				valor = total.split(",").join(".");
 				$("#total").val(total);
 			});
 			
@@ -666,17 +682,20 @@
            					quantidade.setAttribute("class", "form-control");
            					quantidade.setAttribute("min", "0");
            					quantidade.setAttribute("max", "9999999");
+           					quantidade.setAttribute("value", "0");
            					
            					valor = document.createElement("input");
                			    valor.setAttribute("type","text");
            					valor.setAttribute("name","valor");
            					valor.setAttribute("class", "form-control");
+           					valor.setAttribute("value", "0,00");
            					
            					total = document.createElement("input");
                			    total.setAttribute("type","text");
            					total.setAttribute("name","total");
            					total.setAttribute("class", "form-control");
            					total.setAttribute("readonly", "readonly");
+           					total.setAttribute("value", "0,00");
 
             		//Botão de ação de exclusão
             		excluir_btn = document.createElement("button");
