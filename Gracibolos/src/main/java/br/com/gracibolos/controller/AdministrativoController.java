@@ -265,6 +265,7 @@ public class AdministrativoController {
 			List<Produto> produtos = null;
 			
 			try {
+				//Guarda a lista de produtos num List
 				produtos = produtoDao.listar();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -293,12 +294,16 @@ public class AdministrativoController {
 		
 		//cria uma nova instância DAO do estado
 		EstadoDao estadoDao = new EstadoDao();
+		//Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 		
+	    //instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 	    mv.setViewName("administrativo/fornecedores");
+	    //passa a lista de estados para a Expression Language chamada estados
 	    mv.addObject("estados", estados);
-		
+	    //retorna o mv
 		return mv;
 	}
 	
@@ -312,9 +317,10 @@ public class AdministrativoController {
 		
 		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
-	  //cria uma nova instância DAO do fornecedor
+	    //cria uma nova instância DAO do fornecedor
 		FornecedorDao fornecedorDao = new FornecedorDao();
 		
 		try {
@@ -351,9 +357,10 @@ public class AdministrativoController {
 		
 		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
-	  //cria uma nova instância DAO do fornecedor
+	    //cria uma nova instância DAO do fornecedor
 		FornecedorDao fornecedorDao = new FornecedorDao();
 		
 		try {
@@ -391,9 +398,10 @@ public class AdministrativoController {
 		
 		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
-	  //cria uma nova instância DAO do fornecedor
+	    //cria uma nova instância DAO do fornecedor
 		FornecedorDao fornecedorDao = new FornecedorDao();
 		
 		try {
@@ -437,6 +445,7 @@ public class AdministrativoController {
 		
 		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
 	    //instância uma nova modelView
@@ -461,12 +470,14 @@ public class AdministrativoController {
 			List<Fornecedor> fornecedores = null;
 			
 			try {
+				//Guarda a lista de fornecedores num List
 				fornecedores = fornecedorDao.listar();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}			
 			//cria uma nova instância DAO do estado
 		    EstadoDao estadoDao = new EstadoDao();
+		    //Guarda a lista de estados num List
 		    List<Estado> estados = estadoDao.listar_estados();
 		    
 		    //instância uma nova modelView
@@ -494,12 +505,16 @@ public class AdministrativoController {
 		
 		//cria uma nova instância DAO do estado
 		EstadoDao estadoDao = new EstadoDao();
+		//Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 		
+	    //instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 	    mv.setViewName("administrativo/clientes");
+	    //passa a lista de estados para a Expression Language chamada estados	
 	    mv.addObject("estados", estados);
-		
+	    //retorna o mv	
 		return mv;
 	}
 	
@@ -512,9 +527,10 @@ public class AdministrativoController {
 		boolean status = false;
 		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
-	  //cria uma nova instância DAO do cliente
+	    //cria uma nova instância DAO do cliente
 		ClienteDao dao = new ClienteDao();
 		
 		try {
@@ -551,6 +567,7 @@ public class AdministrativoController {
 		boolean status = false;
 		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
 	  //cria uma nova instância DAO do cliente
@@ -590,9 +607,10 @@ public class AdministrativoController {
 		boolean status = false;
 		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
-	  //cria uma nova instância DAO do cliente
+	    //cria uma nova instância DAO do cliente
 		ClienteDao clienteDao = new ClienteDao();
 		
 		try {
@@ -634,16 +652,21 @@ public class AdministrativoController {
 		}
 		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de clientes num List
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
+	    //instância uma nova modelView
 	    ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 	    mv.setViewName("administrativo/clientes");
+	    //passa a lista de clientes para a Expression Language chamada clientes	
 	    mv.addObject("clientes", clientes);
+	    //passa a lista de estados para a Expression Language chamada estados	
 	    mv.addObject("estados", estados);
-	    
+	    //retorna mv
 	    return mv;
 	}
-	
+
 	//LISTAR CLIENTES
 		@RequestMapping("/administrativo-listar-clientes")
 		public ModelAndView listar_cliente(){
@@ -653,22 +676,28 @@ public class AdministrativoController {
 			ClienteDao clienteDao = new ClienteDao();
 			List<Cliente> clientes = null;
 			try {
+				//Guarda a lista de clientes num List
 				clientes = clienteDao.listar();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			//cria uma nova instância DAO do estado
 		    EstadoDao estadoDao = new EstadoDao();
+		    //Guarda a lista de estados num List
 		    List<Estado> estados = estadoDao.listar_estados();
 		    
+		    //instância uma nova modelView
 		    ModelAndView mv = new ModelAndView();
+		    //seta o caminho e o nome da jsp
 		    mv.setViewName("administrativo/clientes");
+		    //passa a lista de clientes para a Expression Language chamada clientes	
 		    mv.addObject("clientes", clientes);
+		    //passa a lista de estados para a Expression Language chamada estados	
 		    mv.addObject("estados", estados);
-		    
+		    //retorna mv
 		    return mv;
 		}
-		
+
 	/*
 	 * 
 	 * ###################### COLABORADOR ######################
@@ -682,12 +711,16 @@ public class AdministrativoController {
 		
 		//cria uma nova instância DAO do estado
 		EstadoDao estadoDao = new EstadoDao();
+		//Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 		
+	    //instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 	    mv.setViewName("administrativo/colaboradores");
+	    //passa a lista de estados para a Expression Language chamada estados
 	    mv.addObject("estados", estados);
-		
+	    //retorna mv		
 		return mv;
 	}
 	
@@ -700,9 +733,10 @@ public class AdministrativoController {
 		boolean status = false;
 		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
-	  //cria uma nova instância DAO do colaborador
+	    //cria uma nova instância DAO do colaborador
 		ColaboradorDao dao = new ColaboradorDao();
 		
 		//se o método inserir passando um colaborador, for executado corretamente, status recebe verdadeiro
@@ -714,13 +748,17 @@ public class AdministrativoController {
 			status = false;
 		}
 		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/colaboradores");
+		//passa o retorno do status para a Expression Language chamada incluir
 		mv.addObject("incluir", status);
+		//passa a lista de estados para a Expression Language chamada estados
 		mv.addObject("estados", estados);
-
+		//retorna mv
 		return mv;
-	}
+	}	
 	
 	//AlTERAR COLABORADOR
 	@RequestMapping("/administrativo-alterar-colaborador")
@@ -731,9 +769,10 @@ public class AdministrativoController {
 		boolean status = false;
 		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
-	  //cria uma nova instância DAO do colaborador
+	    //cria uma nova instância DAO do colaborador
 		ColaboradorDao colaboradorDao = new ColaboradorDao();
 		
 		//se o método alterar passando um colaborador, for executado corretamente, status recebe verdadeiro
@@ -745,13 +784,18 @@ public class AdministrativoController {
 			status = false;
 		}
 		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/colaboradores");
+		//passa o retorno do status para a Expression Language chamada alterar
 		mv.addObject("alterar", status);
+		//passa a lista de clientes para a Expression Language chamada clientes
 	    mv.addObject("estados", estados);
-		
+	    //retorna mv		
 		return mv;
 	}
+	
 	
 	//EXCLUIR COLABORADOR
 	@RequestMapping("/administrativo-remover-colaborador")
@@ -762,6 +806,7 @@ public class AdministrativoController {
 		boolean status = false;
 		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
 	  //cria uma nova instância DAO do colaborador
@@ -775,13 +820,15 @@ public class AdministrativoController {
 		else{
 			status = false;
 		}
-		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/colaboradores");
+		//passa o retorno do status para a Expression Language chamada excluir
 		mv.addObject("excluir", status);
-	    mv.addObject("estados", estados);
-		
-		
+	    //passa a lista de clientes para a Expression Language chamada clientes
+		mv.addObject("estados", estados);
+	    //retorna mv		
 		return mv;
 	}
 	
@@ -796,13 +843,18 @@ public class AdministrativoController {
 		
 		//cria uma nova instância DAO do estado
 	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 	    
+	    //instância uma nova modelView
 	    ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 	    mv.setViewName("administrativo/colaboradores");
+		//passa a lista de colaborador para a Expression Language chamada colaboradores
 	    mv.addObject("colaboradores", colaboradores);
+	    //passa a lista de clientes para a Expression Language chamada clientes
 	    mv.addObject("estados", estados);
-	    
+	    //retorna mv    
 	    return mv;
 	}
 	
@@ -813,17 +865,23 @@ public class AdministrativoController {
 			
 			//cria uma nova instância DAO do colaborador
 			ColaboradorDao colaboradorDao = new ColaboradorDao();
+			//Guarda a lista de colaborador num List
 			List<Colaborador> colaboradores = colaboradorDao.listar();
 			
 			//cria uma nova instância DAO do estado
 		    EstadoDao estadoDao = new EstadoDao();
+		    //Guarda a lista de estados num List
 		    List<Estado> estados = estadoDao.listar_estados();
 		    
+		    //instância uma nova modelView
 		    ModelAndView mv = new ModelAndView();
+		    //seta o caminho e o nome da jsp
 		    mv.setViewName("administrativo/colaboradores");
+			//passa a lista de colaborador para a Expression Language chamada colaboradores
 		    mv.addObject("colaboradores", colaboradores);
+		    //passa a lista de clientes para a Expression Language chamada clientes
 		    mv.addObject("estados", estados);
-		    
+		    //retorna mv    
 		    return mv;
 		}
 
@@ -922,12 +980,16 @@ public class AdministrativoController {
 		} catch (Exception e) {			
 			e.printStackTrace();
 		}
-			
+		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/materiasprimas");
+		//passa o retorno do status para a Expression Language chamada alterar
 		mv.addObject("alterar", status);
-			
+	    //retorna mv
 		return mv;
+			
 	}
 		
 	//EXCLUIR MATÉRIA PRIMA
@@ -953,11 +1015,14 @@ public class AdministrativoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			
+		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/materiasprimas");
+		//passa o retorno do status para a Expression Language chamada excluir
 		mv.addObject("excluir", status);			
-			
+	    //retorna mv
 		return mv;
 	}
 		
@@ -974,11 +1039,14 @@ public class AdministrativoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				    
+		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/materiasprimas");
+		//passa a lita de materia-prima para a Expression Language chamada materiasprimas
 		mv.addObject("materiasprimas", materiasprimas);
-		    
+	    //retorna mv		    
 	    return mv;
 	}
 	
@@ -992,15 +1060,19 @@ public class AdministrativoController {
 		List<MateriaPrima> materiasprimas = null;
 		
 		try {
+			//Guarda a lista de materia-prima num List
 			materiasprimas = dao.listar();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				    
+		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/materiasprimas");
+		//passa a lita de materia-prima para a Expression Language chamada materiasprimas
 		mv.addObject("materiasprimas", materiasprimas);
-		    
+	    //retorna mv		    
 	    return mv;
 	}
 	
@@ -1042,10 +1114,13 @@ public class AdministrativoController {
 			e.printStackTrace();
 		}
 		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/caixa");
+		//passa o retorno do status para a Expression Language chamada incluir
 		mv.addObject("incluir", status);
-
+	    //retorna mv
 		return mv;
 	}
 	
@@ -1072,11 +1147,14 @@ public class AdministrativoController {
 		} catch (Exception e) {			
 			e.printStackTrace();
 		}
-			
+		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/caixa");
+		//passa o retorno do status para a Expression Language chamada alterar
 		mv.addObject("alterar", status);
-				
+	    //retorna mv
 		return mv;
 	}
 			
@@ -1102,11 +1180,14 @@ public class AdministrativoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				
+		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/caixa");
+		//passa o retorno do status para a Expression Language chamada excluir
 		mv.addObject("excluir", status);			
-				
+	    //retorna mv
 		return mv;
 	}
 			
@@ -1123,11 +1204,14 @@ public class AdministrativoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-					    
+		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/caixa");
+	    //passa a lista do caixa para a Expression Language chamada caixas
 		mv.addObject("caixas", caixas);
-			    
+	    //retorna mv
 	    return mv;
 	}
 	
@@ -1164,11 +1248,14 @@ public class AdministrativoController {
 				itens.add(item);
 				itens.add(item2);
 			//FIM DOS TESTES
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("administrativo/encomendas");
-		mv.addObject("itens", itens);
 
+		//instância uma nova modelView
+		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
+		mv.setViewName("administrativo/encomendas");
+		//passa a lista de item para a Expression Language chamada itens
+		mv.addObject("itens", itens);
+		//retorna mv
 		return mv;
 	}
 		
@@ -1222,10 +1309,13 @@ public class AdministrativoController {
 			e.printStackTrace();
 		}
 		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/encomendas");
+		//passa o retorno do status para a Expression Language chamada incluir
 		mv.addObject("incluir", status);
-
+	    //retorna mv
 		return mv;
 	}
 		
@@ -1252,11 +1342,14 @@ public class AdministrativoController {
 		} catch (Exception e) {			
 			e.printStackTrace();
 		}
-			
+		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/encomendas");
+		//passa o retorno do status para a Expression Language chamada alterar
 		mv.addObject("alterar", status);
-			
+	    //retorna mv			
 		return mv;
 	}
 		
@@ -1282,11 +1375,14 @@ public class AdministrativoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			
+		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/encomendas");
+		//passa o retorno do status para a Expression Language chamada excluir
 		mv.addObject("excluir", status);			
-			
+	    //retorna mv			
 		return mv;
 	}
 		
@@ -1304,11 +1400,14 @@ public class AdministrativoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				    
+		
+		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/encomendas");
+	    //passa a lista de encomenda para a Expression Language chamada encomendas
 		mv.addObject("encomendas", encomendas);
-		    
+	    //retorna mv		    
 	    return mv;
 	}
 	
