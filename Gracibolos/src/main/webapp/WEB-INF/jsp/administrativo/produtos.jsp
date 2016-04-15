@@ -472,18 +472,18 @@
 			//Remove as mascaras quando apertar o submit
 			$("#produto-form").submit(function() {
 				var peso = $("#peso").val();
-				peso = peso.replace(".","");
-				peso = peso.replace(",",".");
+				peso = peso.split(".").join("");
+				peso = peso.split(",").join(".");
 				$("#peso").val(peso);
 				
 				var custo = $("#custo").val();
-				custo = custo.replace(".","");
-				custo = custo.replace(",",".");
+				custo = custo.split(".").join("");
+				custo = custo.split(",").join(".");
 				$("#custo").val(custo);
 				
 				var valor = $("#valor").val();
-				valor = valor.replace(".","");
-				valor = valor.replace(",",".");
+				valor = valor.split(".").join("");
+				valor = valor.split(",").join(".");
 				$("#valor").val(valor);
 			});
 			
