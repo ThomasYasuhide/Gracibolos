@@ -237,8 +237,8 @@
 									<label class="control-label" for="unidade">Unidade*:</label>
 									<select class="form-control" id="unidade" name="unidade">
 										<option value="" selected disabled>Selectione</option>
-										<option value="0">Gramas (g)</option>
-										<option value="1">Mililitros (ml)</option>
+										<option value="0">Kilos (kg)</option>
+										<option value="1">Litros (l)</option>
 									</select>
 								</div>	
 								

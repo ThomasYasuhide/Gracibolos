@@ -272,52 +272,42 @@
 						            
 						                <div class="tab-pane active" role="tabpanel" id="step1">
 						                    
-						                    <form action="#" method="POST">
-							                    <div class="row">
-							                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
-														<label class="control-label" for="id">Nº da encomenda:</label>
-														<input type="text" id="id" name="id" placeholder="228" class="form-control" readonly />
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-														<label class="control-label" for="dataencomenda">Data da encomenda:</label>
-														<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" readonly />
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-														<label class="control-label" for="dataentrega">Data de entrega*:</label>
-														<input type="date" id="dataentrega" name="dataentrega" class="form-control" required />
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-														<label class="control-label" for="datacancelado">Data do cancelamento:</label>
-														<input type="date" id="datacancelado" name="datacancelado" class="form-control" readonly />
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-														<label class="control-label" for="cliente">Cliente*:</label>
-														<select id="cliente" name="cliente" class="form-control" required>
-															
-														</select>
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-														<label class="control-label" for="responsavel" id="responsavel">Responsável pela retirada:</label>
-														<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada, se houver." class="form-control" maxlength="100"/>
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-12 col-md-12">
-														<label class="control-label" for="obs">Observações:</label>
-														<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o cliente"></textarea>
-													</div>
-							                    </div>
-							
-							                    <div class="modal-footer">
-													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-													<button type="submit" class="btn btn-default next-step"><i class="material-icons">arrow_forward</i>&nbsp;&nbsp;&nbsp;Selecionar produtos</button>
+						                    <div class="row">
+						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="id">Nº da encomenda:</label>
+													<input type="text" id="id" name="id" placeholder="228" class="form-control" readonly />
 												</div>
-											
-						                    </form>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="dataencomenda">Data da encomenda:</label>
+													<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" readonly />
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="dataentrega">Data de entrega*:</label>
+													<input type="date" id="dataentrega" name="dataentrega" class="form-control" required />
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="datacancelado">Data do cancelamento:</label>
+													<input type="date" id="datacancelado" name="datacancelado" class="form-control" readonly />
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+													<label class="control-label" for="cliente">Cliente*:</label>
+													<select id="cliente" name="cliente" class="form-control" placeholder="Insira o nome, RG, CPF, CNPJ ou IE." required></select>
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+													<label class="control-label" for="responsavel" id="responsavel">Responsável pela retirada:</label>
+													<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada." class="form-control" maxlength="100"/>
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+													<label class="control-label" for="obs">Observações:</label>
+													<textarea id="obs" name="obs" rows="5" class="form-control" placeholder="Insira uma observação sobre o cliente"></textarea>
+												</div>
+						                    </div>
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step2">
@@ -345,11 +335,11 @@
 					
 															<c:forEach var="item" items="${itens}" varStatus="loop">
 																<tr id="item">
-																
+																	
 																	<td class="hidden">
 																		<input type="text" id="id_${loop.index}" name="item[${loop.index}].id" value="${item.id}" class="readonly">
 																	</td>
-
+																	
 																	<td>
 																		<select class="form-control" name="item[${loop.index}].produtoId">
 																			<option value="1" ${item.produtoId == '1' ? 'selected' : ''}>Produto 1</option>
@@ -379,7 +369,7 @@
 																	</td>
 																	
 																	<td>
-																		<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">clear</i></button>
+																		<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>
 																	</td>
 																	
 																	
@@ -390,20 +380,14 @@
 													</table>
 												</div>
 																								
-												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+												<div class="input-margin col-xs-12 col-sm-12 col-md-offset-8 col-md-4">
 													<label class="control-label" for="total">Valor total da encomenda:</label>
 													<div class="input-group">
 														<span class="input-group-addon">R$</span>
-														<input id="total" type="text" class="form-control" name="total" max="999999999" placeholder="0,00">
+														<input id="total" type="text" class="form-control" name="total" max="999999999" placeholder="0,00" readonly>
 													</div>
 												</div>
 						                    </div>
-						
-						                    <div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-												<button type="button" class="btn btn-default prev-step"><i class="material-icons">arrow_back</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-							                    <button type="button" class="btn btn-default next-step"><i class="material-icons">arrow_forward</i>&nbsp;&nbsp;&nbsp;Faturar encomenda</button>
-											</div>
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step3">
@@ -414,13 +398,6 @@
 													<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
 												</div>
 						                    </div>
-											
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-												<button type="button" class="btn btn-default prev-step"><i class="material-icons">arrow_back</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-							                    <button type="button" class="btn btn-default next-step"><i class="material-icons">arrow_forward</i>&nbsp;&nbsp;&nbsp;Produzir encomenda</button>
-											</div>
-						                    
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step4">
@@ -431,12 +408,6 @@
 													<input type="date" id="dataproducao" name="dataproducao" class="form-control" readonly />
 												</div>
 						                    </div>
-						
-						                    <div class="modal-footer">	
-												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-												<button type="button" class="btn btn-default prev-step"><i class="material-icons">arrow_back</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-							                    <button type="button" class="btn btn-default next-step"><i class="material-icons">arrow_forward</i>&nbsp;&nbsp;&nbsp;Finalizar encomenda</button>
-											</div>
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="complete">
@@ -446,18 +417,20 @@
 													<input type="date" id="datafinalizado" name="datafinalizado" class="form-control" readonly />
 												</div>
 						                    </div>
-						                    
-						                    <div class="modal-footer">
-												<button type="button" class="btn btn-default prev-step"><i class="material-icons">arrow_back</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
-							                </div>
 						                </div>
 						
 						            </div>
 						        </div>
-							
 							</div>
 						</div>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+	                    <button type="button" class="btn btn-default hidden" id="cancelar-encomenda" disabled><i class="material-icons">delete_forever</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
+						<button type="button" class="btn btn-default prev-step hidden" id="pagina-anterior"><i class="material-icons">arrow_back</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+	                    <button type="button" class="btn btn-default next-step" id="proxima-pagina"><i class="material-icons">arrow_forward</i>&nbsp;&nbsp;&nbsp;Selecionar produtos</button>
+	                    <button type="submit" class="btn btn-default hidden" id="finalizar-encomenda" disabled><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar encomenda</button>
 					</div>
 					
 					<!-- ################################# FIM DO CONTEUDO ################################# -->
@@ -536,6 +509,10 @@
 	
 	<script type="text/javascript">
 	
+		$('#proxima-pagina').on('click', function(){
+			alert($('.wizard .nav-tabs li.active'));
+		});
+	
 		//Método para calculo do valor dos produtos
 		function calculaTotal(input){
 			//Recupera o numero do item
@@ -568,6 +545,14 @@
 	
 		
 		$(document).ready(function() {
+			
+			$('#novaencomenda').on('submit', function(){
+				
+				var $active = $('.wizard .nav-tabs li.active');
+		        $active.next().removeClass('disabled');
+		        nextTab($active);
+				
+			});
 			
 			$(".valor").mask("000.000.000.000.000,00", {reverse: true});
 			$(".total").mask("000.000.000.000.000,00", {reverse: true});
