@@ -120,7 +120,7 @@
 						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
 							<label class="control-label">Pesquisar cliente:</label>
 							<!-- Quando clicar no botão envia o form para a url abaixo -->
-							<form action="administrativo-pesquisar-cliente" method="POST">
+							<form action="operacional-pesquisar-cliente" method="POST">
 								<div class="input-group">
 									<input type="text" class="form-control" maxlength="100" placeholder="Informe o nome, CPF, CNPJ, RG ou IE para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
 									<span class="input-group-btn">
@@ -135,7 +135,7 @@
 						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">
 							<label class="control-label hidden-xs">Listar clientes</label>
 							<!-- Quando clicar no botão direciona a página para a url abaixo -->
-							<a href="administrativo-listar-clientes" class="btn btn-default fullwidth">Listar clientes</a>
+							<a href="operacional-listar-clientes" class="btn btn-default fullwidth">Listar clientes</a>
 						</div>
 						
 					</div>
@@ -202,7 +202,7 @@
 											<!-- Aqui nessa td, estão os botões de editar e excluir, que aparecem junto com a lista de clientes na tabela -->
 		                					<td>
 		                						<button id="edit-cliente" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-		                						<button id="delete-cliente" class="btn btn-xs btn-default "><i class="material-icons font-xs">clear</i></button>
+		                						<button id="delete-cliente" class="btn btn-xs btn-default hidden"><i class="material-icons font-xs">clear</i></button>
 		                					</td>
 										</tr>
 									</c:forEach>
@@ -438,7 +438,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 			<!-- Envia o form para o url abaixo  -->
-				<form id="cliente-delete-form" action="administrativo-remover-cliente" method="POST">
+				<form id="cliente-delete-form" action="operacional-remover-cliente" method="POST">
 					
 					<!--Essa div tem o título do modal, e o "X" de fechar o modal   -->
 					<div class="modal-header">
@@ -670,7 +670,7 @@
 				$('#modal-subtitle').text("Incluir novo cliente");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#cliente-form").attr("action","administrativo-incluir-cliente");
+				$("#cliente-form").attr("action","operacional-incluir-cliente");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir cliente');
@@ -714,7 +714,7 @@
             	$('#modal-subtitle').text("Alterar cliente");
             	
             	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#cliente-form").attr("action","administrativo-alterar-cliente");
+				$("#cliente-form").attr("action","operacional-alterar-cliente");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
@@ -801,7 +801,7 @@
 			function listar_cidades(id, callback){
 				
 				$.ajax({
-		            url : 'administrativo-pesquisar-cidade',
+		            url : 'operacional-pesquisar-cidade',
 		            method: "POST",
 		            data: {id:id},
 		            success : function(data) {
