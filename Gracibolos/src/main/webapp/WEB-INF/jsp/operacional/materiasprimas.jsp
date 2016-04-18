@@ -120,7 +120,7 @@
 						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
 							<label class="control-label">Pesquisar matéria-prima:</label>
 							<!-- Quando clicar no botão, envia o form para a url abaixo -->
-							<form action="administrativo-procurar-materiaprima" method="POST">
+							<form action="operacional-procurar-materiaprima" method="POST">
 								<div class="input-group">
 									<input type="text" class="form-control" maxlength="100" placeholder="Informe o código ou o nome da matéria-prima para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
 									<span class="input-group-btn">
@@ -134,7 +134,7 @@
 						<!-- Esse botão lista todas as matérias-primas -->
 						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">
 							<label class="control-label hidden-xs">Listar matérias-primas</label>
-							<a href="administrativo-listar-materiasprimas" class="btn btn-default fullwidth">Listar matérias-primas</a>
+							<a href="operacional-listar-materiasprimas" class="btn btn-default fullwidth">Listar matérias-primas</a>
 						</div>
 					</div>
 					
@@ -173,7 +173,7 @@
 											<!-- Aqui nessa td, estão os botões de editar e excluir, que aparecem junto com a lista de matérias-primas na tabela -->
 		                					<td>
 		                						<button id="edit-materiaprima" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-		                						<button id="delete-materiaprima" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+		                						<button id="delete-materiaprima" class="btn btn-xs btn-default hidden"><i class="material-icons font-xs">clear</i></button>
 		                					</td>
 										</tr>
 									</c:forEach>
@@ -318,7 +318,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<!-- Envia o form para a url abaixo  -->
-				<form id="materiaprima-delete-form" action="administrativo-remover-materiaprima" method="POST">
+				<form id="materiaprima-delete-form" action="operacional-remover-materiaprima" method="POST">
 					
 					<!--Essa div tem o título do modal, e o "X" de fechar o modal   -->
 					<div class="modal-header">
@@ -414,7 +414,7 @@
 				$('#modal-subtitle').text("Incluir nova matéria-prima");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#materiaprima-form").attr("action","administrativo-incluir-materiaprima");
+				$("#materiaprima-form").attr("action","operacional-incluir-materiaprima");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir matéria-prima');
@@ -440,7 +440,7 @@
             	$('#modal-subtitle').text("Alterar materia-prima");
             	
             	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#materiaprima-form").attr("action","administrativo-alterar-materiaprima");
+				$("#materiaprima-form").attr("action","operacional-alterar-materiaprima");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 

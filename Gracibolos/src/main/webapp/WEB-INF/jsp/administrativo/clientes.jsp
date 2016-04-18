@@ -116,7 +116,7 @@
 					
 					<!-- Essa div agrupa os campos de pesquisa e de listar os clientes -->
 					<div class="row">
-					<!-- Campo de pesquisar os clientes -->
+						<!-- Campo de pesquisar os clientes -->
 						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
 							<label class="control-label">Pesquisar cliente:</label>
 							<!-- Quando clicar no botão envia o form para a url abaixo -->
@@ -407,8 +407,7 @@
 						<!-- botão de incluir ou alterar o cliente, assim finalizando o formulário  -->
 						<button type="submit" class="btn btn-default" id="modal-action"></button>
 					</div>
-
-
+					
 				</form>
 			</div>
 		</div>
@@ -437,7 +436,7 @@
 	<div class="modal fade" id="excluir-cliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-			<!-- Envia o form para o url abaixo  -->
+			<!-- Envia o form para a url abaixo  -->
 				<form id="cliente-delete-form" action="administrativo-remover-cliente" method="POST">
 					
 					<!--Essa div tem o título do modal, e o "X" de fechar o modal   -->
