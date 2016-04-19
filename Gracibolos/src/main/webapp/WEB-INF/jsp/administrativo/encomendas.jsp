@@ -320,7 +320,7 @@
 												</div>
 						                    
 						                        <div class="input-margin col-xs-12 col-sm-12 col-md-12">
-													<table class="input-margin table display table-settings">
+													<table id="produtos" class="input-margin table display table-settings">
 														<thead>
 															<!-- Titulos das tabelas  -->
 															<tr>
@@ -351,7 +351,7 @@
 																	</td>
 																	
 																	<td>
-																		<input type="number" name="item[${loop.index}].quantidade" value="${item.quantidade}" id="quantidade_${loop.index}" onchange="calculaTotal(this)" class="form-control"  min="0" max="9999999">
+																		<input type="number" name="item[${loop.index}].quantidade" value="${item.quantidade}" id="quantidade_${loop.index}" onchange="calculaTotal(this)" class="form-control quantidade"  min="0" max="9999999">
 																	</td>
 																	
 																	<td>
@@ -381,10 +381,10 @@
 												</div>
 																								
 												<div class="input-margin col-xs-12 col-sm-12 col-md-offset-8 col-md-4">
-													<label class="control-label" for="total">Valor total da encomenda:</label>
+													<label class="control-label" for="totalprodutos">Valor total dos produtos:</label>
 													<div class="input-group">
 														<span class="input-group-addon">R$</span>
-														<input id="total" type="text" class="form-control" name="total" max="999999999" placeholder="0,00" readonly>
+														<input id="totalprodutos" type="text" class="form-control" name="totalprodutos" max="999999999" placeholder="0,00" readonly>
 													</div>
 												</div>
 						                    </div>
@@ -508,54 +508,95 @@
 	<script src="resources/js/wizard.js"></script>
 	
 	<script type="text/javascript">
-	
-		$('#proxima-pagina').on('click', function(){
-			alert($('.wizard .nav-tabs li.active'));
-		});
-	
-		//Método para calculo do valor dos produtos
-		function calculaTotal(input){
-			//Recupera o numero do item
-			var item = input.id.replace("quantidade_","").replace("valor_","");
-			
-			//Recupera os valores dos campos
-			var quantidade = document.getElementById('quantidade_'+item).value;
-			quantidade = quantidade.split(".").join("");
-			quantidade = quantidade.split(",").join("");
-			
-			var valor = document.getElementById('valor_'+item).value;
-			valor = valor.split(".").join("");
-			valor = valor.split(",").join(".");
-			
-			var total = document.getElementById('total_'+item);
-			
-			//Verifica se o campo está vazio, se estiver preenche o valor como 0
-			if(valor == "" || valor == null){
-				valor = 0;
-			}
-
-			//Verifica se o campo está vazio, se estiver preenche o valor como 0
-			if(quantidade == "" || quantidade == null){
-				quantidade = 0;
-			}
-			
-			//Insere o valor calculado total de determinado item
-			total.value = parseFloat((quantidade * valor).toFixed(2));
-		}
-	
-		
 		$(document).ready(function() {
 			
-			$('#novaencomenda').on('submit', function(){
-				
-				var $active = $('.wizard .nav-tabs li.active');
-		        $active.next().removeClass('disabled');
-		        nextTab($active);
-				
+			$("#produtos").on('change', '.valor, .quantidade', function() {
+			    var linha = this.id.replace("quantidade_", "").replace("valor_", "");
+
+			    calcularTotal(linha);
 			});
+
+
+		  function calcularTotal(linha) {
+		    var quantidade = $('#quantidade_' + linha);
+		    var valor = $('#valor_' + linha);
+		    var total = $('#total_' + linha);
+
+		    total.val(parseFloat(quantidade.val() * valor.val()).toFixed(2));
+
+		    calculaTotalProdutos(total.val());
+		  }
+
+		function calculaTotalProdutos() {
+		
+			var total = 0;
 			
-			$(".valor").mask("000.000.000.000.000,00", {reverse: true});
-			$(".total").mask("000.000.000.000.000,00", {reverse: true});
+			$('.total').each(function() {
+				var valor = Number($(this).val());
+				
+				total += valor;
+			})
+			
+			total = parseFloat(total).toFixed(2);
+			
+			$('#totalprodutos').val((total));
+			
+		}
+
+		/*EXCLUR LINHA*/
+		$('#produtos').on('click', '#delete-produto', function() {
+		  $(this).parent().parent().remove();
+		
+		  calculaTotalProdutos();
+		});
+
+		var produtos = $('#produtos');
+		var i = $('#produtos tr').size() + 1;
+
+		/* Inserir linha */
+		$('#inserir-linha').on('click', function() {
+		
+		  if($('#produtos tr').size() <= 100){
+		  	
+		    var item = '<tr id="item">';
+		    item +=			'<td class="hidden">';
+		    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
+		    item += 		'</td>';
+		    item +=			'<td>';
+		    item += 			'<select class="form-control" name="item['+i+'].produtoId">';
+		    item += 				'<option value="1" ${item.produtoId == "1" ? "selected" : ''}>Produto 1</option>';
+		    item += 				'<option value="2" ${item.produtoId == "2" ? "selected" : ''}>Produto 2</option>';
+		    item += 				'<option value="1" ${item.produtoId == "1" ? "selected" : ''}>Produto 1</option>';
+		    item += 			'</select>';
+		    item += 		'</td>';
+		    item +=			'<td>';
+		    item += 			'<input type="number" name="item['+i+'].quantidade" value="${item.quantidade}" id="quantidade_'+i+'" onchange="calculaTotal(this)" class="form-control quantidade"  min="0" max="9999999">';
+		    item += 		'</td>';
+		    item +=			'<td>';
+		    item += 			'<div class="input-group">';
+		    item += 				'<span class="input-group-addon">R$</span>';
+		    item += 				'<input type="text" name="item['+i+'].valor" value="${item.valor}" id="valor_'+i+'" onchange="calculaTotal(this)" class="form-control valor">';
+		    item += 			'</div>';
+		    item += 		'</td>';
+		    item +=			'<td>';
+		    item += 			'<div class="input-group">';
+		    item += 				'<span class="input-group-addon">R$</span>';
+		    item += 				'<input type="text" name="item['+i+'].total" value="${item.total}" id="total_'+i+'" class="form-control total" readonly="readonly">';
+		    item += 			'</div>';
+		    item += 		'</td>';
+		    item +=			'<td>';
+		    item += 			'<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>';
+		    item += 		'</td>';
+		    item += 	'</tr>';
+		    
+		    produtos.append(item);
+		    
+		    i++;
+		  }else {
+		  	alert('Você atingiu o limite máximo de produtos na encomenda');	
+		  }
+		
+		});
 			
 			$('#cliente').selectize({
 			    valueField: 'id',
@@ -598,115 +639,7 @@
 				$("#total").val(total);
 			});
 			
-			
-			/*
-			*
-			* ADICIONA LINHA PARA PRODUTOS
-			*
-			*/
-			
-			$('#inserir-linha').click(function() {
-            	line_product();
-            });
-	
-            function line_product() {
 
-            	var tabela;
-            	var linha;
-            	var coluna;
-            	var medida;
-            	var materiaprima;
-            	var option;
-            	var unidade;
-
-            	tabela = document.getElementById("lista-produtos");
-
-            	    linha = document.createElement("tr");
-                	linha.setAttribute("id", "item");
-						
-	                	id_column = document.createElement("td");
-	        			id_column.setAttribute("class","hidden");
-                		nome_column = document.createElement("td");
-                		quantidade_column = document.createElement("td");
-                		valor_column = document.createElement("td");
-                		total_column = document.createElement("td");
-                		acoes_column = document.createElement("td");
-							
-	                		id = document.createElement("input");
-	        			    id.setAttribute("type","text");
-	        			    id.setAttribute("id","id");
-	        			    id.setAttribute("name","id");
-	        			    id.setAttribute("class", "form-control");
-	        			    id.setAttribute("class", "readonly");
-	        					
-            				produto = document.createElement("select");
-            				produto.setAttribute("class", "form-control");
-            			    
-            					option = document.createElement("option");
-            					option.text = "Selecione...";
-            					option.value = "";
-            					option.setAttribute("disabled","disabled");
-            					option.setAttribute("selected","selected");
-            					produto.appendChild(option);
-            					
-            					for(var i=0; i<5; i++){
-            						option = document.createElement("option");
-            						option.text = "Produto "+i;
-            						produto.appendChild(option);
-            					}
-							
-           					quantidade = document.createElement("input");
-               			    quantidade.setAttribute("type","number");
-           					quantidade.setAttribute("name","quantidade");
-           					quantidade.setAttribute("class", "form-control");
-           					quantidade.setAttribute("min", "0");
-           					quantidade.setAttribute("max", "9999999");
-           					quantidade.setAttribute("value", "0");
-           					
-           					valor = document.createElement("input");
-               			    valor.setAttribute("type","text");
-           					valor.setAttribute("name","valor");
-           					valor.setAttribute("class", "form-control");
-           					valor.setAttribute("value", "0,00");
-           					
-           					total = document.createElement("input");
-               			    total.setAttribute("type","text");
-           					total.setAttribute("name","total");
-           					total.setAttribute("class", "form-control");
-           					total.setAttribute("readonly", "readonly");
-           					total.setAttribute("value", "0,00");
-
-            		//Botão de ação de exclusão
-            		excluir_btn = document.createElement("button");
-            		excluir_btn.type = "button";
-            		excluir_btn.setAttribute("id","delete-produto");
-            		excluir_btn.setAttribute("class","btn btn-default");
-            		excluir_btn.innerHTML = "<i class='material-icons'>clear</i>";
-            		excluir_btn.onclick = excluir;
-
-           		id_column.appendChild(id);
-            	nome_column.appendChild(produto);
-                quantidade_column.appendChild(quantidade);
-                valor_column.appendChild(valor);
-                total_column.appendChild(total);
-            	acoes_column.appendChild(excluir_btn);
-
-            	linha.appendChild(id_column);
-                linha.appendChild(nome_column);
-                linha.appendChild(quantidade_column);
-                linha.appendChild(valor_column);
-                linha.appendChild(total_column);
-                linha.appendChild(acoes_column);
-
-            	tabela.appendChild(linha);
-
-            	function excluir(){
-            	    linha.remove();
-            	}
-            }
-            
-			
-			
 			
 			
 			/*

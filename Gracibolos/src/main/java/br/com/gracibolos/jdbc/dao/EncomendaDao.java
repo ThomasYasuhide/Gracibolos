@@ -39,7 +39,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			ps.setString(3, encomenda.getResponsavel());
 			ps.setDate(4, Date.valueOf(encomenda.getDataentrega()));
 			ps.setDate(5, Date.valueOf(encomenda.getDataencomenda()));
-			ps.setBigDecimal(10, encomenda.getTotal());
+			ps.setBigDecimal(10, encomenda.getTotalprodutos());
 			ps.setString(11, encomenda.getObs());
 			
 			if(ps.executeUpdate() != 0) {
@@ -120,7 +120,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				ps.setNull(9, Types.DATE);
 			}
 			
-			ps.setBigDecimal(10, encomenda.getTotal());
+			ps.setBigDecimal(10, encomenda.getTotalprodutos());
 			ps.setString(11, encomenda.getObs());		
 			ps.setLong(12, encomenda.getId());
 			
@@ -206,7 +206,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
 				encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
 				encomenda.setDatacancelado(rs.getDate("datacancelado").toLocalDate());
-				encomenda.setTotal(rs.getBigDecimal("total"));
+				encomenda.setTotalprodutos(rs.getBigDecimal("total"));
 				encomenda.setObs(rs.getString("obs"));
 				
 				//adiciona o objeto encomenda no arrayList
@@ -267,7 +267,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
 				encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
 				encomenda.setDatacancelado(rs.getDate("datacancelado").toLocalDate());
-				encomenda.setTotal(rs.getBigDecimal("total"));
+				encomenda.setTotalprodutos(rs.getBigDecimal("total"));
 				encomenda.setObs(rs.getString("obs"));
 				
 				//adiciona o objeto encomenda no arrayList

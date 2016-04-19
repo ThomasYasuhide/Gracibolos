@@ -27,7 +27,7 @@ public class Encomenda implements Serializable{
     private LocalDate datafinalizado;
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate datacancelado;
-    private BigDecimal total;
+    private BigDecimal totalprodutos;
     private String obs;
     
 	public Long getId() {
@@ -110,14 +110,14 @@ public class Encomenda implements Serializable{
 		this.datacancelado = datacancelado;
 	}
 	
-	public BigDecimal getTotal() {
-		return total;
+	public BigDecimal getTotalprodutos() {
+		return totalprodutos;
 	}
-	
-	public void setTotal(BigDecimal total) {
-		this.total = total;
+
+	public void setTotalprodutos(BigDecimal totalprodutos) {
+		this.totalprodutos = totalprodutos;
 	}
-	
+
 	public String getObs() {
 		return obs;
 	}
