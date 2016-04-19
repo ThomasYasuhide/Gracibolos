@@ -114,8 +114,8 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				ps.setNull(8, Types.DATE);
 			}
 			
-			if(encomenda.getDatacancelado() != null){
-				ps.setDate(9, Date.valueOf(encomenda.getDatacancelado()));
+			if(encomenda.getDatacancelamento() != null){
+				ps.setDate(9, Date.valueOf(encomenda.getDatacancelamento()));
 			}else{
 				ps.setNull(9, Types.DATE);
 			}
@@ -205,7 +205,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				encomenda.setDatafaturamento(rs.getDate("datafaturamento").toLocalDate());
 				encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
 				encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
-				encomenda.setDatacancelado(rs.getDate("datacancelado").toLocalDate());
+				encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
 				encomenda.setTotalprodutos(rs.getBigDecimal("total"));
 				encomenda.setObs(rs.getString("obs"));
 				
@@ -266,7 +266,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				encomenda.setDatafaturamento(rs.getDate("datafaturamento").toLocalDate());
 				encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
 				encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
-				encomenda.setDatacancelado(rs.getDate("datacancelado").toLocalDate());
+				encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
 				encomenda.setTotalprodutos(rs.getBigDecimal("total"));
 				encomenda.setObs(rs.getString("obs"));
 				

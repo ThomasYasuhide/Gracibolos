@@ -275,22 +275,22 @@
 						                    <div class="row">
 						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
 													<label class="control-label" for="id">Nº da encomenda:</label>
-													<input type="text" id="id" name="id" placeholder="228" class="form-control" readonly />
+													<input type="text" id="id" name="id" value="${encomenda.id}" class="form-control" readonly />
 												</div>
 												
 												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 													<label class="control-label" for="dataencomenda">Data da encomenda:</label>
-													<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" readonly />
+													<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" value="${encomenda.dataencomenda}" readonly />
 												</div>
 												
 												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 													<label class="control-label" for="dataentrega">Data de entrega*:</label>
-													<input type="date" id="dataentrega" name="dataentrega" class="form-control" required />
+													<input type="date" id="dataentrega" name="dataentrega" class="form-control" value="${encomenda.dataentrega}" required />
 												</div>
 												
 												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 													<label class="control-label" for="datacancelado">Data do cancelamento:</label>
-													<input type="date" id="datacancelado" name="datacancelado" class="form-control" readonly />
+													<input type="date" id="datacancelado" name="datacancelado" class="form-control" value="${encomenda.datacancelamento}" readonly />
 												</div>
 												
 												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
@@ -300,12 +300,12 @@
 												
 												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
 													<label class="control-label" for="responsavel" id="responsavel">Responsável pela retirada:</label>
-													<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada." class="form-control" maxlength="100"/>
+													<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada." value="${encomenda.responsavel}" class="form-control" maxlength="100"/>
 												</div>
 												
 												<div class="input-margin col-xs-12 col-sm-12 col-md-12">
 													<label class="control-label" for="obs">Observações:</label>
-													<textarea id="obs" name="obs" rows="5" class="form-control" placeholder="Insira uma observação sobre o cliente"></textarea>
+													<textarea id="obs" name="obs" rows="5" class="form-control" placeholder="Insira uma observação sobre o cliente">${encomenda.obs}</textarea>
 												</div>
 						                    </div>
 						                </div>
@@ -384,7 +384,7 @@
 													<label class="control-label" for="totalprodutos">Valor total dos produtos:</label>
 													<div class="input-group">
 														<span class="input-group-addon">R$</span>
-														<input id="totalprodutos" type="text" class="form-control" name="totalprodutos" max="999999999" placeholder="0,00" readonly>
+														<input id="totalprodutos" type="text" class="form-control" name="totalprodutos" max="999999999" value="${encomenda.totalprodutos}" placeholder="0,00" readonly>
 													</div>
 												</div>
 						                    </div>
@@ -551,7 +551,7 @@
 		});
 
 		var produtos = $('#produtos');
-		var i = $('#produtos tr').size() + 1;
+		var i = $('#produtos tr').size() - 1;
 
 		/* Inserir linha */
 		$('#inserir-linha').on('click', function() {
@@ -566,7 +566,7 @@
 		    item += 			'<select class="form-control" name="item['+i+'].produtoId">';
 		    item += 				'<option value="1" ${item.produtoId == "1" ? "selected" : ''}>Produto 1</option>';
 		    item += 				'<option value="2" ${item.produtoId == "2" ? "selected" : ''}>Produto 2</option>';
-		    item += 				'<option value="1" ${item.produtoId == "1" ? "selected" : ''}>Produto 1</option>';
+		    item += 				'<option value="1" ${item.produtoId == "3" ? "selected" : ''}>Produto 3</option>';
 		    item += 			'</select>';
 		    item += 		'</td>';
 		    item +=			'<td>';

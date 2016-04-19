@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1227,6 +1228,15 @@ public class AdministrativoController {
 		System.out.println("Entrou na servlet de listagem de matéria prima");
 			
 			//TESTES
+				Encomenda encomenda = new Encomenda();
+				encomenda.setId((long) 667);
+				encomenda.setCliente(3);
+				encomenda.setTotalprodutos(new BigDecimal("300.00"));
+				encomenda.setResponsavel("Teste");
+				encomenda.setDataencomenda(LocalDate.now());
+				encomenda.setDataentrega(LocalDate.now().plusDays(2));
+				encomenda.setObs("Teste de obs");
+		
 				List<ItemEncomenda> itens = new ArrayList<ItemEncomenda>();
 		
 				ItemEncomenda item = new ItemEncomenda();
@@ -1253,6 +1263,8 @@ public class AdministrativoController {
 		ModelAndView mv = new ModelAndView();
 		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/encomendas");
+		//passa os dados da encomenda para a Expression Language chamada encomenda
+		mv.addObject("encomenda", encomenda);
 		//passa a lista de item para a Expression Language chamada itens
 		mv.addObject("itens", itens);
 		//retorna mv

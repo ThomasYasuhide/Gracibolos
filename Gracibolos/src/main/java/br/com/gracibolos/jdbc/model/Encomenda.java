@@ -26,7 +26,7 @@ public class Encomenda implements Serializable{
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate datafinalizado;
     @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate datacancelado;
+    private LocalDate datacancelamento;
     private BigDecimal totalprodutos;
     private String obs;
     
@@ -102,14 +102,14 @@ public class Encomenda implements Serializable{
 		this.datafinalizado = datafinalizado;
 	}
 	
-	public LocalDate getDatacancelado() {
-		return datacancelado;
+	public LocalDate getDatacancelamento() {
+		return datacancelamento;
 	}
-	
-	public void setDatacancelado(LocalDate datacancelado) {
-		this.datacancelado = datacancelado;
+
+	public void setDatacancelamento(LocalDate datacancelamento) {
+		this.datacancelamento = datacancelamento;
 	}
-	
+
 	public BigDecimal getTotalprodutos() {
 		return totalprodutos;
 	}
