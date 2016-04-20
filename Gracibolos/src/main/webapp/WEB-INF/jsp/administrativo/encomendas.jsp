@@ -351,13 +351,13 @@
 																	</td>
 																	
 																	<td>
-																		<input type="number" name="item[${loop.index}].quantidade" value="${item.quantidade}" id="quantidade_${loop.index}" onchange="calculaTotal(this)" class="form-control quantidade"  min="0" max="9999999">
+																		<input type="number" name="item[${loop.index}].quantidade" value="${item.quantidade}" id="quantidade_${loop.index}" class="form-control quantidade"  min="0" max="9999999">
 																	</td>
 																	
 																	<td>
 																		<div class="input-group">
 																			<span class="input-group-addon">R$</span>
-																			<input type="text" name="item[${loop.index}].valor" value="${item.valor}" id="valor_${loop.index}" onchange="calculaTotal(this)" class="form-control valor">
+																			<input type="text" name="item[${loop.index}].valor" value="${item.valor}" id="valor_${loop.index}" class="form-control valor">
 																		</div>
 																	</td>
 																	
@@ -384,7 +384,7 @@
 													<label class="control-label" for="totalprodutos">Valor total dos produtos:</label>
 													<div class="input-group">
 														<span class="input-group-addon">R$</span>
-														<input id="totalprodutos" type="text" class="form-control" name="totalprodutos" max="999999999" value="${encomenda.totalprodutos}" placeholder="0,00" readonly>
+														<input id="totalprodutos" type="text" class="form-control totalprodutos" name="totalprodutos" max="999999999" value="${encomenda.totalprodutos}" placeholder="0,00" readonly>
 													</div>
 												</div>
 						                    </div>
@@ -510,20 +510,27 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
+			$(".valor").mask("000.000.000.000.000,00", {reverse: true});
+			$(".total").mask("000.000.000.000.000,00", {reverse: true});
+			$(".totalprodutos").mask("000.000.000.000.000,00", {reverse: true});
+			
 			$("#produtos").on('change', '.valor, .quantidade', function() {
 			    var linha = this.id.replace("quantidade_", "").replace("valor_", "");
 
 			    calcularTotal(linha);
 			});
 
-
 		  function calcularTotal(linha) {
 		    var quantidade = $('#quantidade_' + linha);
 		    var valor = $('#valor_' + linha);
 		    var total = $('#total_' + linha);
-
-		    total.val(parseFloat(quantidade.val() * valor.val()).toFixed(2));
-
+			
+		    var valor_temp = valor.val();
+		    valor_temp = valor_temp.split(".").join("");
+		    valor_temp = valor_temp.split(",").join(".");
+		    
+		    total.val(parseFloat(parseInt(quantidade.val()) * valor_temp).toFixed(2)).trigger('input');
+		    
 		    calculaTotalProdutos(total.val());
 		  }
 
@@ -532,14 +539,17 @@
 			var total = 0;
 			
 			$('.total').each(function() {
-				var valor = Number($(this).val());
 				
-				total += valor;
+				var valor_temp = $(this).val();
+			    valor_temp = valor_temp.split(".").join("");
+			    valor_temp = valor_temp.split(",").join(".");
+				
+				total += Number(valor_temp);
 			})
 			
 			total = parseFloat(total).toFixed(2);
 			
-			$('#totalprodutos').val((total));
+			$('#totalprodutos').val(total).trigger('input');
 			
 		}
 
@@ -608,8 +618,8 @@
 			        	
 			            return '<div>' +
 			                '<span class="title">' +
-			                    '<span class="name">' + escape(item.nomerazao) + '</span><br/>' +
-			                    '<span class="name">' + escape(item.cpfcnpj) + '</span><br/>' +
+			                    '<span>' + escape(item.nomerazao) + '</span><br/>' +
+			                    '<span>' + escape(item.cpfcnpj) + '</span><br/>' +
 			                '</span>' +
 			            '</div>';
 			        }
