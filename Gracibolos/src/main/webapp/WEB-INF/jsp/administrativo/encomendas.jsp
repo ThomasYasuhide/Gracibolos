@@ -4,6 +4,9 @@
 <!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!-- Tag de importação JSTL, utilizado para fazer formatação dos valores das tags HTML -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="PT-BR">
 <head>
@@ -319,7 +322,7 @@
 													</button>
 												</div>
 						                    
-						                        <div class="input-margin col-xs-12 col-sm-12 col-md-12">
+						                        <div class="input-margin col-xs-12 col-sm-12 col-md-12 table-responsive">
 													<table id="produtos" class="input-margin table display table-settings">
 														<thead>
 															<!-- Titulos das tabelas  -->
@@ -341,7 +344,7 @@
 																	</td>
 																	
 																	<td>
-																		<select class="form-control" name="item[${loop.index}].produtoId">
+																		<select class="form-control produto" name="item[${loop.index}].produtoId">
 																			<option value="1" ${item.produtoId == '1' ? 'selected' : ''}>Produto 1</option>
 																			<option value="2" ${item.produtoId == '2' ? 'selected' : ''}>Produto 2</option>
 																			<option value="3" ${item.produtoId == '3' ? 'selected' : ''}>Produto 3</option>
@@ -357,14 +360,15 @@
 																	<td>
 																		<div class="input-group">
 																			<span class="input-group-addon">R$</span>
-																			<input type="text" name="item[${loop.index}].valor" value="${item.valor}" id="valor_${loop.index}" class="form-control valor">
+																			<fmt:setLocale value="pt_BR"/>
+																			<input type="text" name="item[${loop.index}].valor" value="<fmt:formatNumber value="${item.valor}" type="number" minFractionDigits="2"/>" id="valor_${loop.index}" class="form-control valor">
 																		</div>
 																	</td>
 																	
 																	<td>
 																		<div class="input-group">
 																			<span class="input-group-addon">R$</span>
-																			<input type="text" name="item[${loop.index}].total" value="${item.total}" id="total_${loop.index}" class="form-control total" readonly="readonly">
+																			<input type="text" name="item[${loop.index}].total" value="<fmt:formatNumber value="${item.total}" type="number" minFractionDigits="2"/>" id="total_${loop.index}" class="form-control total" readonly="readonly">
 																		</div>
 																	</td>
 																	
@@ -384,7 +388,7 @@
 													<label class="control-label" for="totalprodutos">Valor total dos produtos:</label>
 													<div class="input-group">
 														<span class="input-group-addon">R$</span>
-														<input id="totalprodutos" type="text" class="form-control totalprodutos" name="totalprodutos" max="999999999" value="${encomenda.totalprodutos}" placeholder="0,00" readonly>
+														<input id="totalprodutos" type="text" class="form-control totalprodutos" name="totalprodutos" max="999999999" value="<fmt:formatNumber value="${encomenda.totalprodutos}" type="number" minFractionDigits="2"/>" placeholder="0,00" readonly>
 													</div>
 												</div>
 						                    </div>
@@ -418,7 +422,6 @@
 												</div>
 						                    </div>
 						                </div>
-						
 						            </div>
 						        </div>
 							</div>
@@ -510,103 +513,162 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
+			/*
+			*
+			* Define as mascaras.
+			*
+			*/
+			
 			$(".valor").mask("000.000.000.000.000,00", {reverse: true});
 			$(".total").mask("000.000.000.000.000,00", {reverse: true});
 			$(".totalprodutos").mask("000.000.000.000.000,00", {reverse: true});
 			
+			/*
+			*
+			* Verifica a linha que está sendo alterada da tabela de produtos.
+			*
+			*/
+			
 			$("#produtos").on('change', '.valor, .quantidade', function() {
+				//Recupera o numero da linha do produto.
 			    var linha = this.id.replace("quantidade_", "").replace("valor_", "");
 
+				//Chama o método para calcular o total dos produtos passando como parametro o numero da linha.
 			    calcularTotal(linha);
 			});
-
-		  function calcularTotal(linha) {
-		    var quantidade = $('#quantidade_' + linha);
-		    var valor = $('#valor_' + linha);
-		    var total = $('#total_' + linha);
 			
-		    var valor_temp = valor.val();
-		    valor_temp = valor_temp.split(".").join("");
-		    valor_temp = valor_temp.split(",").join(".");
-		    
-		    total.val(parseFloat(parseInt(quantidade.val()) * valor_temp).toFixed(2)).trigger('input');
-		    
-		    calculaTotalProdutos(total.val());
-		  }
-
-		function calculaTotalProdutos() {
-		
-			var total = 0;
+			/*
+			*
+			* Calcular o total do produto multiplicando valor pela quantidade recebendo o numero da linha.
+			*
+			*/
 			
-			$('.total').each(function() {
+			function calcularTotal(linha) {
+				//Busca os campos pelo numero do ID.
+				var quantidade = $('#quantidade_' + linha);
+				var valor = $('#valor_' + linha);
+				var total = $('#total_' + linha);
 				
-				var valor_temp = $(this).val();
-			    valor_temp = valor_temp.split(".").join("");
-			    valor_temp = valor_temp.split(",").join(".");
+				//Variavel temporaria para retirar a mascara e possibilitar o calculo.
+				var valor_temp = valor.val();
+				valor_temp = valor_temp.split(".").join("");
+				valor_temp = valor_temp.split(",").join(".");
 				
-				total += Number(valor_temp);
-			})
+				//Insere o valor total da quantidade e valor dos produtos.
+				//Fixed(2) informa que só haverá 2 casas decimais após a virgula.
+				//Trigger aciona um evento para que o campo seja formatado com a mascara.
+				total.val(parseFloat(parseInt(quantidade.val()) * valor_temp).toFixed(2)).trigger('input');
+		    	
+				//Calcula o total de todos os produtos.
+		    	calculaTotalProdutos();
+			}
 			
-			total = parseFloat(total).toFixed(2);
+			/*
+			*
+			* Método para realizar o calculo total dos produtos.
+			*
+			*/
 			
-			$('#totalprodutos').val(total).trigger('input');
+			function calculaTotalProdutos() {
 			
-		}
+				//Reseta o valor total dos produtos para zero.
+				var total = 0;
+			
+				//Verifica todos os campos que tiver total e realiza a seguinte função.
+				$('.total').each(function() {
 
-		/*EXCLUR LINHA*/
-		$('#produtos').on('click', '#delete-produto', function() {
-		  $(this).parent().parent().remove();
-		
-		  calculaTotalProdutos();
-		});
+					//Variavel temporaria para retirar a mascara e possibilitar o calculo.
+					var valor_temp = $(this).val();
+				    valor_temp = valor_temp.split(".").join("");
+				    valor_temp = valor_temp.split(",").join(".");
+					
+				    //Incrementa o valor total de cada campo.
+					total += Number(valor_temp);
+				});
 
-		var produtos = $('#produtos');
-		var i = $('#produtos tr').size() - 1;
+				//Fixed(2) informa que só haverá 2 casas decimais após a virgula.
+				total = parseFloat(total).toFixed(2);
+	
+				//Insere o valor total dos produtos.
+				//Trigger aciona um evento para que o campo seja formatado com a mascara.
+				$('#totalprodutos').val(total).trigger('input');
+				
+			}
 
-		/* Inserir linha */
-		$('#inserir-linha').on('click', function() {
-		
-		  if($('#produtos tr').size() <= 100){
-		  	
-		    var item = '<tr id="item">';
-		    item +=			'<td class="hidden">';
-		    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
-		    item += 		'</td>';
-		    item +=			'<td>';
-		    item += 			'<select class="form-control" name="item['+i+'].produtoId">';
-		    item += 				'<option value="1" ${item.produtoId == "1" ? "selected" : ''}>Produto 1</option>';
-		    item += 				'<option value="2" ${item.produtoId == "2" ? "selected" : ''}>Produto 2</option>';
-		    item += 				'<option value="1" ${item.produtoId == "3" ? "selected" : ''}>Produto 3</option>';
-		    item += 			'</select>';
-		    item += 		'</td>';
-		    item +=			'<td>';
-		    item += 			'<input type="number" name="item['+i+'].quantidade" value="${item.quantidade}" id="quantidade_'+i+'" onchange="calculaTotal(this)" class="form-control quantidade"  min="0" max="9999999">';
-		    item += 		'</td>';
-		    item +=			'<td>';
-		    item += 			'<div class="input-group">';
-		    item += 				'<span class="input-group-addon">R$</span>';
-		    item += 				'<input type="text" name="item['+i+'].valor" value="${item.valor}" id="valor_'+i+'" onchange="calculaTotal(this)" class="form-control valor">';
-		    item += 			'</div>';
-		    item += 		'</td>';
-		    item +=			'<td>';
-		    item += 			'<div class="input-group">';
-		    item += 				'<span class="input-group-addon">R$</span>';
-		    item += 				'<input type="text" name="item['+i+'].total" value="${item.total}" id="total_'+i+'" class="form-control total" readonly="readonly">';
-		    item += 			'</div>';
-		    item += 		'</td>';
-		    item +=			'<td>';
-		    item += 			'<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>';
-		    item += 		'</td>';
-		    item += 	'</tr>';
-		    
-		    produtos.append(item);
-		    
-		    i++;
-		  }else {
-		  	alert('Você atingiu o limite máximo de produtos na encomenda');	
-		  }
-		
-		});
+			/*
+			*
+			* CRIA UMA NOVA LINHA DE PRODUTOS.
+			*
+			*/
+
+			var produtos = $('#produtos');
+			var i = $('#produtos tr').size() - 1;
+
+			$('#inserir-linha').on('click', function() {
+				
+				if($('#produtos tr').size() <= 100){
+			  	
+				    var item = '<tr id="item">';
+				    item +=			'<td class="hidden">';
+				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
+				    item += 		'</td>';
+				    item +=			'<td>';
+				    item += 			'<select class="form-control produto" name="item['+i+'].produtoId">';
+				    item += 				'<option value="1" ${item.produtoId == "1" ? "selected" : ''}>Produto 1</option>';
+				    item += 				'<option value="2" ${item.produtoId == "2" ? "selected" : ''}>Produto 2</option>';
+				    item += 				'<option value="1" ${item.produtoId == "3" ? "selected" : ''}>Produto 3</option>';
+				    item += 			'</select>';
+				    item += 		'</td>';
+				    item +=			'<td>';
+				    item += 			'<input type="number" name="item['+i+'].quantidade" value="${item.quantidade}" id="quantidade_'+i+'" onchange="calculaTotal(this)" class="form-control quantidade"  min="0" max="9999999">';
+				    item += 		'</td>';
+				    item +=			'<td>';
+				    item += 			'<div class="input-group">';
+				    item += 				'<span class="input-group-addon">R$</span>';
+				    item += 				'<input type="text" name="item['+i+'].valor" value="${item.valor}" id="valor_'+i+'" onchange="calculaTotal(this)" class="form-control valor">';
+				    item += 			'</div>';
+				    item += 		'</td>';
+				    item +=			'<td>';
+				    item += 			'<div class="input-group">';
+				    item += 				'<span class="input-group-addon">R$</span>';
+				    item += 				'<input type="text" name="item['+i+'].total" value="${item.total}" id="total_'+i+'" class="form-control total" readonly="readonly">';
+				    item += 			'</div>';
+				    item += 		'</td>';
+				    item +=			'<td>';
+				    item += 			'<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>';
+				    item += 		'</td>';
+				    item += 	'</tr>';
+			    
+				    produtos.append(item);
+				    
+				    i++;
+				}else {
+					alert('Você atingiu o limite máximo de produtos na encomenda');	
+				}
+				
+			});
+			
+			/*
+			*
+			* EXCLUSÃO DA LINHA
+			*
+			*/
+			
+			$('#produtos').on('click', '#delete-produto', function() {
+				
+				//Busca a linha e remove o TR.
+				$(this).parent().parent().remove();
+	
+				//Calcula o total de todos os produtos.
+				calculaTotalProdutos();
+			
+			});
+			
+			/*
+			*
+			* PESQUISA CLIENTE E POPULA O SELECT
+			*
+			*/
 			
 			$('#cliente').selectize({
 			    valueField: 'id',
