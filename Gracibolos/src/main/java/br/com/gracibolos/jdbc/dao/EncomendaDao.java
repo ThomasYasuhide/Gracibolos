@@ -34,7 +34,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			
 			//seta os atributos do objeto encomenda
 			ps = conn.prepareStatement(sql);
-			ps.setLong(1, encomenda.getCliente());
+			ps.setLong(1, encomenda.getClienteid());
 			ps.setLong(2, encomenda.getStatus());
 			ps.setString(3, encomenda.getResponsavel());
 			ps.setDate(4, Date.valueOf(encomenda.getDataentrega()));
@@ -80,7 +80,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			
 			//seta os atributos do objeto encomenda, fazendo a alteração.
 			ps = conn.prepareStatement(sql);
-			ps.setLong(1, encomenda.getCliente());
+			ps.setLong(1, encomenda.getClienteid());
 			ps.setLong(2, encomenda.getStatus());
 			ps.setString(3, encomenda.getResponsavel());
 			
@@ -181,7 +181,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 	public List<Encomenda> listar() throws Exception{
 		
 		//string query do banco
-		String sql = "SELECT id, cliemte, status, responsavel, dataencomenda, dataentrega, datafaturamento, dataproducao, datafinalizado, datacancelado, total, obs FROM encomenda";
+		String sql = "SELECT id, cliente, status, responsavel, dataencomenda, dataentrega, datafaturamento, dataproducao, datafinalizado, datacancelado, total, obs FROM encomenda";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Encomenda> encomendas= null;
@@ -197,7 +197,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				//da um get nos atributos do objeto encomenda
 				Encomenda encomenda = new Encomenda();
 				encomenda.setId(rs.getLong("id"));
-				encomenda.setCliente(rs.getInt("cliente"));	
+				encomenda.setClienteid(rs.getLong("cliente"));	
 				encomenda.setStatus(rs.getInt("status"));
 				encomenda.setResponsavel(rs.getString("responsavel"));
 				encomenda.setDataencomenda(rs.getDate("dataencomenda").toLocalDate());
@@ -258,7 +258,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				//da um get nos atributos do objeto encomenda
 				Encomenda encomenda = new Encomenda();
 				encomenda.setId(rs.getLong("id"));
-				encomenda.setCliente(rs.getInt("cliente"));	
+				encomenda.setClienteid(rs.getLong("cliente"));	
 				encomenda.setStatus(rs.getInt("status"));
 				encomenda.setResponsavel(rs.getString("responsavel"));
 				encomenda.setDataencomenda(rs.getDate("dataencomenda").toLocalDate());

@@ -145,7 +145,7 @@
 								<thead>
 									<!-- Titulos das tabelas  -->
 									<tr>
-										<th>Pedido</th>
+										<th>Encomenda</th>
 										<th>Status</th>
 										<th>Cliente</th>
 										<th>Responsável</th>
@@ -230,14 +230,14 @@
 						                <ul class="nav nav-tabs" role="tablist">
 						
 						                    <li role="presentation" class="active">
-						                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Informações do pedido">
+						                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Informações da encomenda">
 						                            <span class="round-tab">
 						                                <i class="glyphicon glyphicon-pencil"></i>
 						                            </span>
 						                        </a>
 						                    </li>
 						
-						                    <li role="presentation" class="disabled">
+						                    <li role="presentation">
 						                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
 						                            <span class="round-tab">
 						                                <i class="glyphicon glyphicon-list-alt"></i>
@@ -311,15 +311,23 @@
 													<textarea id="obs" name="obs" rows="5" class="form-control" placeholder="Insira uma observação sobre o cliente">${encomenda.obs}</textarea>
 												</div>
 						                    </div>
+						                    
+						                    
+						                    <div class="modal-footer modal-margin-top">
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+							                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
+							                    <button type="button" class="btn btn-default next-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Selecionar produtos</button>
+					                   		</div>
+						                    
 						                </div>
+						                
+						                
 						
 						                <div class="tab-pane" role="tabpanel" id="step2">
 						                    
 						                    <div class="row">
-						                    	<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
-													<button class="btn btn-default fullwidth" onclick="return false" id="inserir-linha">
-														<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Incluir novo produto
-													</button>
+						                    	<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						                    		<button type="button" id="inserir-linha"  onclick="return false" class="btn btn-default fullwidth"><i class="material-icons">add_shopping_cart</i>&nbsp;&nbsp;&nbsp;Incluir novo produto</button>
 												</div>
 						                    
 						                        <div class="input-margin col-xs-12 col-sm-12 col-md-12 table-responsive">
@@ -384,7 +392,7 @@
 													</table>
 												</div>
 																								
-												<div class="input-margin col-xs-12 col-sm-12 col-md-offset-8 col-md-4">
+												<div class="input-margin pull-right col-xs-12 col-sm-12 col-md-6 col-md-6">
 													<label class="control-label" for="totalprodutos">Valor total dos produtos:</label>
 													<div class="input-group">
 														<span class="input-group-addon">R$</span>
@@ -392,6 +400,14 @@
 													</div>
 												</div>
 						                    </div>
+						                    
+						                    <div class="modal-footer modal-margin-top">
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+							                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
+							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar para Informações</button>
+							                    <button type="button" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar encomenda</button>
+					                   		</div>
+						                    
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step3">
@@ -402,6 +418,13 @@
 													<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
 												</div>
 						                    </div>
+						                    
+						                    <div class="modal-footer modal-margin-top">
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+							                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
+							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Voltar para produtos</button>
+							                    <button type="button" class="btn btn-default next-step" id="finalizar-encomenda"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Produzir encomenda</button>
+					                   		</div>
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step4">
@@ -412,6 +435,13 @@
 													<input type="date" id="dataproducao" name="dataproducao" class="form-control" readonly />
 												</div>
 						                    </div>
+						                    
+						                    <div class="modal-footer modal-margin-top">
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+							                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
+							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Voltar para produção</button>
+							                    <button type="button" class="btn btn-default next-step" id="finalizar-encomenda"><i class="material-icons">done</i>&nbsp;&nbsp;&nbsp;Finalizar encomenda</button>
+					                   		</div>
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="complete">
@@ -421,19 +451,19 @@
 													<input type="date" id="datafinalizado" name="datafinalizado" class="form-control" readonly />
 												</div>
 						                    </div>
+						                    
+						                    <div class="modal-footer modal-margin-top">
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+							                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
+							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Voltar faturamento</button>
+							                    <button type="button" class="btn btn-default" id="finalizar-encomenda"><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar encomenda</button>
+					                   		</div>
 						                </div>
+						                
 						            </div>
 						        </div>
 							</div>
 						</div>
-					</div>
-					
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-	                    <button type="button" class="btn btn-default hidden" id="cancelar-encomenda" disabled><i class="material-icons">delete_forever</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
-						<button type="button" class="btn btn-default prev-step hidden" id="pagina-anterior"><i class="material-icons">arrow_back</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-	                    <button type="button" class="btn btn-default next-step" id="proxima-pagina"><i class="material-icons">arrow_forward</i>&nbsp;&nbsp;&nbsp;Selecionar produtos</button>
-	                    <button type="submit" class="btn btn-default hidden" id="finalizar-encomenda" disabled><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar encomenda</button>
 					</div>
 					
 					<!-- ################################# FIM DO CONTEUDO ################################# -->
@@ -620,12 +650,12 @@
 				    item += 			'</select>';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<input type="number" name="item['+i+'].quantidade" value="${item.quantidade}" id="quantidade_'+i+'" onchange="calculaTotal(this)" class="form-control quantidade"  min="0" max="9999999">';
+				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" class="form-control quantidade"  min="0" max="9999999">';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].valor" value="${item.valor}" id="valor_'+i+'" onchange="calculaTotal(this)" class="form-control valor">';
+				    item += 				'<input type="text" name="item['+i+'].valor" id="valor_'+i+'" class="form-control valor">';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
@@ -674,16 +704,17 @@
 			    valueField: 'id',
 			    labelField: 'nomerazao',
 			    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
+			    options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
 			    create: false,
 			    render: {
 			        option: function(item, escape) {
 			        	
-			            return '<div>' +
-			                '<span class="title">' +
-			                    '<span>' + escape(item.nomerazao) + '</span><br/>' +
-			                    '<span>' + escape(item.cpfcnpj) + '</span><br/>' +
-			                '</span>' +
-			            '</div>';
+			            return	'<div>' +
+									'<span class="title">' +
+										'<span>' + escape(item.nomerazao) + '</span><br/>' +
+										'<span>' + escape(item.cpfcnpj) + '</span><br/>' +
+									'</span>' +
+								'</div>';
 			        }
 			    },
 			    load: function(query, callback) {
@@ -702,6 +733,9 @@
 			    }
 			});
 			
+			var control = $('#cliente')[0].selectize;
+			
+			control.setValue(5);
 			
 			//Remove as mascaras quando apertar o submit
 			$("#encomenda-form").submit(function() {				

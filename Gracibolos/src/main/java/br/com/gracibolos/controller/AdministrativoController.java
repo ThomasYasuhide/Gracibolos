@@ -1230,7 +1230,9 @@ public class AdministrativoController {
 			//TESTES
 				Encomenda encomenda = new Encomenda();
 				encomenda.setId((long) 667);
-				encomenda.setCliente(3);
+				encomenda.setClienteid((long) 5);
+				encomenda.setClientenome("Teste");
+				encomenda.setClientecpfcnpj("123.123.123-12");
 				encomenda.setTotalprodutos(new BigDecimal("300.00"));
 				encomenda.setResponsavel("Teste");
 				encomenda.setDataencomenda(LocalDate.now());

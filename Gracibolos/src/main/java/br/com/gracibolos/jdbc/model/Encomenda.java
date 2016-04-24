@@ -12,7 +12,9 @@ public class Encomenda implements Serializable{
 	private static final long serialVersionUID = -2187641155037646683L;
 	
     private Long id;
-    private Integer cliente;
+    private Long clienteid;
+    private String clientenome;
+    private String clientecpfcnpj;
     private Integer status;
     private String responsavel;
     @DateTimeFormat(iso = ISO.DATE)
@@ -38,14 +40,30 @@ public class Encomenda implements Serializable{
 		this.id = id;
 	}
 	
-	public Integer getCliente() {
-		return cliente;
+	public Long getClienteid() {
+		return clienteid;
 	}
-	
-	public void setCliente(Integer cliente) {
-		this.cliente = cliente;
+
+	public void setClienteid(Long clienteid) {
+		this.clienteid = clienteid;
 	}
-	
+
+	public String getClientenome() {
+		return clientenome;
+	}
+
+	public void setClientenome(String clientenome) {
+		this.clientenome = clientenome;
+	}
+
+	public String getClientecpfcnpj() {
+		return clientecpfcnpj;
+	}
+
+	public void setClientecpfcnpj(String clientecpfcnpj) {
+		this.clientecpfcnpj = clientecpfcnpj;
+	}
+
 	public Integer getStatus() {
 		return status;
 	}
