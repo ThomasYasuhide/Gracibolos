@@ -136,8 +136,7 @@
 							<label class="control-label hidden-xs">Listar clientes</label>
 							<!-- Quando clicar no botão direciona a página para a url abaixo -->
 							<a href="administrativo-listar-clientes" class="btn btn-default fullwidth">Listar clientes</a>
-						</div>
-						
+						</div>						
 					</div>
 					
 					<!-- Essa div agrupa os títulos das tabelas, e os resultados das pesquisas -->

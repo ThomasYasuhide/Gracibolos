@@ -120,7 +120,7 @@
 						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
 							<label class="control-label">Pesquisar produto:</label>
 							<!-- Quando clicar no botão envia o form para a url abaixo -->
-							<form action="administrativo-pesquisar-produto" method="POST">
+							<form action="operacional-pesquisar-produto" method="POST">
 								<div class="input-group">
 									<input type="text" class="form-control" maxlength="100" placeholder="Informe o código ou o nome do produto para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
 									<span class="input-group-btn">
@@ -135,7 +135,7 @@
 						<!-- Esse botão lista todos os produtos -->
 						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">
 							<label class="control-label hidden-xs">Listar produtos</label>
-							<a href="administrativo-listar-produtos" class="btn btn-default fullwidth">Listar produtos</a>
+							<a href="operacional-listar-produtos" class="btn btn-default fullwidth">Listar produtos</a>
 						</div>
 					</div>
 					
@@ -186,7 +186,7 @@
 											<!-- Aqui nessa td, estão os botões de editar e excluir, que aparecem junto com a lista de produtos na tabela -->
 		                					<td>
 		                						<button id="edit-produto" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-		                						<button id="delete-produto" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+		                						<button id="delete-produto" class="btn btn-xs btn-default hidden"><i class="material-icons font-xs">clear</i></button>
 		                					</td>
 										</tr>
 									</c:forEach>
@@ -448,7 +448,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<!-- Envia o form para a url abaixo  -->
-				<form id="produto-delete-form" action="administrativo-remover-produto" method="POST">
+				<form id="produto-delete-form" action="operacional-remover-produto" method="POST">
 					
 					<!--Essa div tem o título do modal, e o "X" de fechar o modal   -->
 					<div class="modal-header">
@@ -695,7 +695,7 @@
 				$('#modal-subtitle').text("Incluir novo produto");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#produto-form").attr("action","administrativo-incluir-produto");
+				$("#produto-form").attr("action","operacional-incluir-produto");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir produto');
@@ -722,7 +722,7 @@
             	$('#modal-subtitle').text("Alterar produto");
 
             	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#produto-form").attr("action","administrativo-alterar-produto");
+				$("#produto-form").attr("action","operacional-alterar-produto");
 
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
