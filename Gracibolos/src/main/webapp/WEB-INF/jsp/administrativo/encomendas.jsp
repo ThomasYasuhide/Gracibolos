@@ -240,7 +240,7 @@
 						                    <li role="presentation">
 						                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
 						                            <span class="round-tab">
-						                                <i class="glyphicon glyphicon-list-alt"></i>
+						                                <i class="material-icons">shopping_cart</i>
 						                            </span>
 						                        </a>
 						                    </li>
@@ -439,7 +439,7 @@
 						                    <div class="modal-footer modal-margin-top">
 												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 							                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
-							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Voltar para produção</button>
+							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Voltar para faturamento</button>
 							                    <button type="button" class="btn btn-default next-step" id="finalizar-encomenda"><i class="material-icons">done</i>&nbsp;&nbsp;&nbsp;Finalizar encomenda</button>
 					                   		</div>
 						                </div>
@@ -455,8 +455,8 @@
 						                    <div class="modal-footer modal-margin-top">
 												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 							                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
-							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Voltar faturamento</button>
-							                    <button type="button" class="btn btn-default" id="finalizar-encomenda"><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar encomenda</button>
+							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Voltar para produção</button>
+							                    <button type="button" class="btn btn-default" id="finalizar-encomenda"><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
 					                   		</div>
 						                </div>
 						                
