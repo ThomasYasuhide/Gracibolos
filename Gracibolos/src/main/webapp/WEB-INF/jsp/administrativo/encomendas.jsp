@@ -417,6 +417,22 @@
 													<label class="control-label" for="datafaturamento">Data de faturamento:</label>
 													<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
 												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="valorcompra">Valor da compra:</label>
+													<input type="text" id="valorcompra" name="valorcompra" class="form-control" readonly />
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="valorpago">Valor pago:</label>
+													<input type="text" id="valorpago" name="valorpago" class="form-control" />
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="valortroco">Troco:</label>
+													<input type="text" id="valortroco" name="valortroco" class="form-control" readonly />
+												</div>
+												
 						                    </div>
 						                    
 						                    <div class="modal-footer modal-margin-top">
