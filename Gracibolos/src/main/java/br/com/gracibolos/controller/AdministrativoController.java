@@ -75,7 +75,6 @@ public class AdministrativoController {
 		//cria uma nova instância DAO do produto
 	    ProdutoDao produtoDao = new ProdutoDao();
 
-	    
 	    if(!file.isEmpty()) {
 		    produto.setFoto(file.getOriginalFilename().toString());
 		    
@@ -104,6 +103,12 @@ public class AdministrativoController {
 				e.printStackTrace();
 			}
 		    
+	    } else {
+	    	
+	    	if(produto.getFoto() == null || produto.getFoto().equals("")){
+		    	produto.setFoto("model.png");
+	    	}
+	    	
 	    }
 	    
 		try {

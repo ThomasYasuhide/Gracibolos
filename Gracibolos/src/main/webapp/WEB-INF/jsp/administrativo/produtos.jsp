@@ -311,9 +311,9 @@
 											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="unidade">Unidade:</label>
 												<select class="form-control" id="unidade" name="unidade">
-													<option value="" selected disabled>Selectione</option>
-													<option value="0">Kilos (kg)</option>
-													<option value="1">Litros (l)</option>
+													<option value="0" selected disabled>Selectione</option>
+													<option value="1">Kilos (kg)</option>
+													<option value="2">Litros (l)</option>
 												</select>
 											</div>
 											

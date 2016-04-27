@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import org.junit.Test;
 
 import br.com.gracibolos.jdbc.dao.ClienteDao;
@@ -43,7 +41,7 @@ Cliente c1 = new Cliente();
 		try {
 			assertEquals(b, dao.inserir(c1));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// Todo Auto-generated catch block
 			e.printStackTrace();
 		}
 		

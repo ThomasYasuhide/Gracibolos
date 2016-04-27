@@ -1,5 +1,6 @@
 package br.com.gracibolos.jdbc.dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -31,6 +32,22 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){	
+
+			/*
+			System.out.println(produto.getStatus());
+			System.out.println(produto.getFoto());
+			System.out.println(produto.getFabricacao());
+			System.out.println(produto.getVencimento());
+			System.out.println(produto.getCodigo());
+			System.out.println(produto.getNome());
+			System.out.println(produto.getTipo());
+			System.out.println(produto.getPeso());
+			System.out.println(produto.getUnidade());
+			System.out.println(produto.getEstoque());
+			System.out.println(produto.getCusto());
+			System.out.println(produto.getValor());
+			System.out.println(produto.getObs());
+			*/
 			
 			//seta os atributos do objeto produto
 			ps = conn.prepareStatement(sql);			
@@ -52,10 +69,27 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			ps.setString(5, produto.getCodigo());
 			ps.setString(6, produto.getNome());
 			ps.setLong(7, produto.getTipo());
-			ps.setBigDecimal(8, produto.getPeso());
-			ps.setLong(9, produto.getUnidade());
+			
+			if(produto.getPeso() != null){
+				ps.setBigDecimal(8, produto.getPeso());
+			}else{
+				ps.setBigDecimal(8, new BigDecimal("0.000"));
+			}
+			
+			if(produto.getUnidade() != null){
+				ps.setLong(9, produto.getUnidade());
+			}else{
+				ps.setNull(9, Types.INTEGER);
+			}
+			
 			ps.setLong(10, produto.getEstoque());
-			ps.setBigDecimal(11, produto.getCusto());
+			
+			if(produto.getCusto() != null){
+				ps.setBigDecimal(11, produto.getCusto());
+			}else{
+				ps.setBigDecimal(11, new BigDecimal("0.00"));
+			}
+			
 			ps.setBigDecimal(12, produto.getValor());
 			ps.setString(13, produto.getObs());
 			
@@ -86,7 +120,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 	 * */
 	
 	public boolean alterar(Produto produto) throws Exception{
-		
+		/*
 		System.out.println(produto.getId());
 		System.out.println(produto.getStatus());
 		System.out.println(produto.getFoto());
@@ -101,6 +135,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		System.out.println(produto.getCusto());
 		System.out.println(produto.getValor());
 		System.out.println(produto.getObs());
+		*/
 		
 		boolean status = false;
 		PreparedStatement  ps = null;
