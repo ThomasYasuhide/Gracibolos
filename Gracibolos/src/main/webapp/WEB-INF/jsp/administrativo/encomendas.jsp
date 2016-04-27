@@ -232,7 +232,7 @@
 						                    <li role="presentation" class="active">
 						                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Informações da encomenda">
 						                            <span class="round-tab">
-						                                <i class="glyphicon glyphicon-pencil"></i>
+						                                <i class="material-icons timeline">chrome_reader_mode</i>
 						                            </span>
 						                        </a>
 						                    </li>
@@ -240,14 +240,14 @@
 						                    <li role="presentation">
 						                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
 						                            <span class="round-tab">
-						                                <i class="material-icons">shopping_cart</i>
+						                                <i class="material-icons timeline">shopping_cart</i>
 						                            </span>
 						                        </a>
 						                    </li>
 						                    <li role="presentation" class="disabled">
 						                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Faturar encomenda">
 						                            <span class="round-tab">
-						                                <i class="glyphicon glyphicon-usd"></i>
+						                                <i class="material-icons timeline">account_balance</i>
 						                            </span>
 						                        </a>
 						                    </li>
@@ -255,7 +255,7 @@
 						                    <li role="presentation" class="disabled">
 						                        <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Produzir encomenda">
 						                            <span class="round-tab">
-						                                <i class="glyphicon glyphicon-time"></i>
+						                                <i class="material-icons timeline">query_builder</i>
 						                            </span>
 						                        </a>
 						                    </li>
@@ -263,7 +263,7 @@
 						                    <li role="presentation" class="disabled">
 						                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Finalizar encomenda">
 						                            <span class="round-tab">
-						                                <i class="glyphicon glyphicon-ok"></i>
+						                                <i class="material-icons timeline">done</i>
 						                            </span>
 						                        </a>
 						                    </li>
@@ -744,9 +744,6 @@
 				valor = total.split(",").join(".");
 				$("#total").val(total);
 			});
-			
-
-			
 			
 			/*
 			*
