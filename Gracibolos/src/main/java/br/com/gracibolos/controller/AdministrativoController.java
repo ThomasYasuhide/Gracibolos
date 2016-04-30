@@ -1235,13 +1235,13 @@ public class AdministrativoController {
 				Encomenda encomenda = new Encomenda();
 				encomenda.setId((long) 667);
 				encomenda.setClienteid((long) 5);
-				encomenda.setClientenome("Teste");
-				encomenda.setClientecpfcnpj("123.123.123-12");
+				encomenda.setClientenome("Breno Rufino");
+				encomenda.setClientecpfcnpj("212.542.288-21");
 				encomenda.setTotalprodutos(new BigDecimal("300.00"));
-				encomenda.setResponsavel("Teste");
+				encomenda.setResponsavel("Rogério Yudi");
 				encomenda.setDataencomenda(LocalDate.now());
 				encomenda.setDataentrega(LocalDate.now().plusDays(2));
-				encomenda.setObs("Teste de obs");
+				encomenda.setObs("Nenhuma observação");
 		
 				List<ItemEncomenda> itens = new ArrayList<ItemEncomenda>();
 		

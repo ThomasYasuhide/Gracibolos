@@ -2,7 +2,6 @@ package br.com.gracibolos.jdbc.dao;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +27,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		PreparedStatement ps = null;
         
 		//string query do banco
-		String sql = "INSERT INTO produto(foto, status, fabricacao, vencimento, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO produto(foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){	
@@ -36,8 +35,6 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			/*
 			System.out.println(produto.getStatus());
 			System.out.println(produto.getFoto());
-			System.out.println(produto.getFabricacao());
-			System.out.println(produto.getVencimento());
 			System.out.println(produto.getCodigo());
 			System.out.println(produto.getNome());
 			System.out.println(produto.getTipo());
@@ -53,45 +50,32 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			ps = conn.prepareStatement(sql);			
 			ps.setString(1, produto.getFoto());
 			ps.setInt(2, produto.getStatus());
-			
-			if(produto.getFabricacao() != null){
-				ps.setDate(3, Date.valueOf(produto.getFabricacao()));
-			}else{
-				ps.setNull(3, Types.DATE);
-			}
-			
-			if(produto.getVencimento() != null){
-				ps.setDate(4, Date.valueOf(produto.getVencimento()));
-			}else{
-				ps.setNull(4, Types.DATE);
-			}
-			
-			ps.setString(5, produto.getCodigo());
-			ps.setString(6, produto.getNome());
-			ps.setLong(7, produto.getTipo());
+			ps.setString(3, produto.getCodigo());
+			ps.setString(4, produto.getNome());
+			ps.setLong(5, produto.getTipo());
 			
 			if(produto.getPeso() != null){
-				ps.setBigDecimal(8, produto.getPeso());
+				ps.setBigDecimal(6, produto.getPeso());
 			}else{
-				ps.setBigDecimal(8, new BigDecimal("0.000"));
+				ps.setBigDecimal(6, new BigDecimal("0.000"));
 			}
 			
 			if(produto.getUnidade() != null){
-				ps.setLong(9, produto.getUnidade());
+				ps.setLong(7, produto.getUnidade());
 			}else{
-				ps.setNull(9, Types.INTEGER);
+				ps.setNull(7, Types.INTEGER);
 			}
 			
-			ps.setLong(10, produto.getEstoque());
+			ps.setLong(8, produto.getEstoque());
 			
 			if(produto.getCusto() != null){
-				ps.setBigDecimal(11, produto.getCusto());
+				ps.setBigDecimal(9, produto.getCusto());
 			}else{
-				ps.setBigDecimal(11, new BigDecimal("0.00"));
+				ps.setBigDecimal(9, new BigDecimal("0.00"));
 			}
 			
-			ps.setBigDecimal(12, produto.getValor());
-			ps.setString(13, produto.getObs());
+			ps.setBigDecimal(10, produto.getValor());
+			ps.setString(11, produto.getObs());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -141,7 +125,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		PreparedStatement  ps = null;
 		
 		//string query do banco
-		String sql = "UPDATE produto SET foto=?, status=?, fabricacao=?, vencimento=?, codigo=?, nome=?, tipo=?, peso=?, unidade=?, estoque=?, custo=?, valor=?, obs=? where id=?";
+		String sql = "UPDATE produto SET foto=?, status=?, codigo=?, nome=?, tipo=?, peso=?, unidade=?, estoque=?, custo=?, valor=?, obs=? where id=?";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())	{
@@ -150,29 +134,16 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			ps = conn.prepareStatement(sql);			
 			ps.setString(1, produto.getFoto());			
 			ps.setInt(2, produto.getStatus());
-			
-			if(produto.getFabricacao() != null){
-				ps.setDate(3, Date.valueOf(produto.getFabricacao()));
-			}else{
-				ps.setNull(3, Types.DATE);
-			}
-			
-			if(produto.getVencimento() != null){
-				ps.setDate(4, Date.valueOf(produto.getVencimento()));
-			}else{
-				ps.setNull(4, Types.DATE);
-			}
-			
-			ps.setString(5, produto.getCodigo());
-			ps.setString(6, produto.getNome());
-			ps.setLong(7, produto.getTipo());
-			ps.setBigDecimal(8, produto.getPeso());
-			ps.setLong(9, produto.getUnidade());
-			ps.setLong(10, produto.getEstoque());
-			ps.setBigDecimal(11, produto.getCusto());
-			ps.setBigDecimal(12, produto.getValor());
-			ps.setString(13, produto.getObs());
-			ps.setLong(14, produto.getId());
+			ps.setString(3, produto.getCodigo());
+			ps.setString(4, produto.getNome());
+			ps.setLong(5, produto.getTipo());
+			ps.setBigDecimal(6, produto.getPeso());
+			ps.setLong(7, produto.getUnidade());
+			ps.setLong(8, produto.getEstoque());
+			ps.setBigDecimal(9, produto.getCusto());
+			ps.setBigDecimal(10, produto.getValor());
+			ps.setString(11, produto.getObs());
+			ps.setLong(12, produto.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -246,7 +217,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		List<Produto> produtos = null;
 		
 		//string query do banco
-		String sql = "SELECT id, foto, status, fabricacao, vencimento, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs FROM produto";
+		String sql = "SELECT id, foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs FROM produto";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
@@ -262,8 +233,6 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setId(rs.getLong("id"));
 				produto.setFoto(rs.getString("foto"));
 				produto.setStatus(rs.getInt("status"));
-				produto.setFabricacao(rs.getDate("fabricacao").toLocalDate());
-				produto.setVencimento(rs.getDate("vencimento").toLocalDate());
 				produto.setCodigo(rs.getString("codigo"));
 				produto.setNome(rs.getString("nome"));
 				produto.setTipo(rs.getLong("tipo"));
@@ -299,8 +268,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		//string query do banco
-		String sql = "SELECT id, foto, status, fabricacao, vencimento, codigo, nome, tipo, "
-				+ "peso, unidade, estoque, custo, valor, obs FROM produto WHERE id="+id;
+		String sql = "SELECT id, foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs FROM produto WHERE id="+id;
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
@@ -314,8 +282,6 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			produto.setId(rs.getLong("id"));
 			produto.setFoto(rs.getString("foto"));
 			produto.setStatus(rs.getInt("status"));
-			produto.setFabricacao(rs.getDate("fabricacao").toLocalDate());
-			produto.setVencimento(rs.getDate("vencimento").toLocalDate());
 			produto.setCodigo(rs.getString("codigo"));
 			produto.setNome(rs.getString("nome"));
 			produto.setTipo(rs.getLong("tipo"));
@@ -356,7 +322,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		List<Produto> produtos = null;
 		
 		//string query do banco
-		String sql = "SELECT id, foto, status, fabricacao, vencimento, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs FROM produto WHERE codigo = ? OR nome LIKE ?";
+		String sql = "SELECT id, foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs FROM produto WHERE codigo = ? OR nome LIKE ?";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
@@ -377,8 +343,6 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setId(rs.getLong("id"));
 				produto.setFoto(rs.getString("foto"));
 				produto.setStatus(rs.getInt("status"));
-				produto.setFabricacao(rs.getDate("fabricacao").toLocalDate());
-				produto.setVencimento(rs.getDate("vencimento").toLocalDate());
 				produto.setCodigo(rs.getString("codigo"));
 				produto.setNome(rs.getString("nome"));
 				produto.setTipo(rs.getLong("tipo"));

@@ -8,10 +8,6 @@ package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class Produto implements Serializable{
     
@@ -20,10 +16,6 @@ public class Produto implements Serializable{
     private Long id;
     private String foto;
     private Integer status;
-	@DateTimeFormat(iso = ISO.DATE)
-    private LocalDate fabricacao;
-	@DateTimeFormat(iso = ISO.DATE)
-    private LocalDate vencimento;
     private String codigo;
     private String nome;
     private Long tipo;
@@ -56,22 +48,6 @@ public class Produto implements Serializable{
 	
 	public void setStatus(Integer status) {
 		this.status = status;
-	}
-	
-	public LocalDate getFabricacao() {
-		return fabricacao;
-	}
-	
-	public void setFabricacao(LocalDate fabricacao) {
-		this.fabricacao = fabricacao;
-	}
-	
-	public LocalDate getVencimento() {
-		return vencimento;
-	}
-	
-	public void setVencimento(LocalDate vencimento) {
-		this.vencimento = vencimento;
 	}
 	
 	public String getCodigo() {

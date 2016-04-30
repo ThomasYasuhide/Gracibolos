@@ -403,9 +403,10 @@
 						                    
 						                    <div class="modal-footer modal-margin-top">
 												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-							                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
-							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar para Informações</button>
-							                    <button type="button" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar encomenda</button>
+							                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+							                    <button type="button" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar e sair</button>
+							                    <button type="button" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 					                   		</div>
 						                    
 						                </div>
@@ -413,24 +414,48 @@
 						                <div class="tab-pane" role="tabpanel" id="step3">
 						                    
 						                    <div class="row">
-						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
+						                        <div class="input-margin col-xs-12 col-sm-6 col-md-4">
 													<label class="control-label" for="datafaturamento">Data de faturamento:</label>
 													<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
 												</div>
 												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="valorcompra">Valor da compra:</label>
-													<input type="text" id="valorcompra" name="valorcompra" class="form-control" readonly />
+												<div class="input-margin col-xs-12 col-sm-6 col-md-8">
+													<label class="control-label" for="valortroco">Forma de pagamento:</label>
+													<select class="form-control" name="formapagamento">
+														<option value="0" selected disabled>Selecione...</option>
+														<option value="1">Dinheiro</option>
+														<option value="2">Cartão de crédito</option>
+														<option value="3">Cheque</option>
+													</select>
 												</div>
 												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+												<div class="input-margin col-xs-12 col-sm-6 col-md-4">
+													<label class="control-label" for="valorcompra">Valor total da encomenda:</label>
+													<div class="input-group">
+														<span class="input-group-addon">R$</span>
+														<input type="text" id="totalencomenda" name="totalencomenda" class="form-control" readonly />
+													</div>
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 													<label class="control-label" for="valorpago">Valor pago:</label>
-													<input type="text" id="valorpago" name="valorpago" class="form-control" />
+													<div class="input-group">
+														<span class="input-group-addon">R$</span>
+														<input type="text" id="valorpago" name="valorpago" class="form-control" />
+													</div>
 												</div>
 												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+												<div class="input-margin col-xs-12 col-sm-12 col-md-4">
 													<label class="control-label" for="valortroco">Troco:</label>
-													<input type="text" id="valortroco" name="valortroco" class="form-control" readonly />
+													<div class="input-group">
+														<span class="input-group-addon">R$</span>
+														<input type="text" id="valortroco" name="valortroco" class="form-control" readonly />
+													</div>
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+													<label class="control-label" for="obs">Observações do pagamento:</label>
+													<textarea id="obspagamento" name="obspagamento" rows="3" class="form-control" placeholder="Insira uma observação sobre o pagamento"></textarea>
 												</div>
 												
 						                    </div>
@@ -561,13 +586,68 @@
 			
 			/*
 			*
-			* Define as mascaras.
+			* INDICADOR DE PAGINA DO MENU
+			*
+			*/
+			
+			$('#menu-mob-encomendas').addClass('active');
+			$('#menu-encomendas').addClass('active');
+			
+			/*
+			*
+			* Define os campos que receberam as mascaras.
 			*
 			*/
 			
 			$(".valor").mask("000.000.000.000.000,00", {reverse: true});
 			$(".total").mask("000.000.000.000.000,00", {reverse: true});
 			$(".totalprodutos").mask("000.000.000.000.000,00", {reverse: true});
+			$("#totalencomenda").mask("000.000.000.000.000,00", {reverse: true});
+			$("#valorpago").mask("000.000.000.000.000,00", {reverse: true});
+			$("#valortroco").mask("000.000.000.000.000,00", {reverse: true});
+			
+			/*
+			*
+			* PESQUISA CLIENTES E POPULA O SELECT
+			*
+			*/
+			
+			$('#cliente').selectize({
+			    valueField: 'id',
+			    labelField: 'nomerazao',
+			    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
+			    options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
+			    create: false,
+			    render: {
+			        option: function(item, escape) {
+			        	
+			            return	'<div>' +
+									'<span class="title">' +
+										'<span>' + escape(item.nomerazao) + '</span><br/>' +
+										'<span>' + escape(item.cpfcnpj) + '</span><br/>' +
+									'</span>' +
+								'</div>';
+			        }
+			    },
+			    load: function(query, callback) {
+			        if (!query.length) return callback();
+			        $.ajax({
+			            
+			            url: 'http://localhost:8080/Gracibolos/rest-clientes/' + encodeURIComponent(query),
+			            type: 'GET',
+			            error: function() {
+			                callback();
+			            },
+			            success: function(res) {
+			                callback(res);
+			            }
+			        });
+			    }
+			});
+			
+			var control = $('#cliente')[0].selectize;
+			
+			control.setValue(5);
 			
 			/*
 			*
@@ -710,48 +790,13 @@
 			
 			});
 			
-			/*
-			*
-			* PESQUISA CLIENTE E POPULA O SELECT
-			*
-			*/
 			
-			$('#cliente').selectize({
-			    valueField: 'id',
-			    labelField: 'nomerazao',
-			    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
-			    options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
-			    create: false,
-			    render: {
-			        option: function(item, escape) {
-			        	
-			            return	'<div>' +
-									'<span class="title">' +
-										'<span>' + escape(item.nomerazao) + '</span><br/>' +
-										'<span>' + escape(item.cpfcnpj) + '</span><br/>' +
-									'</span>' +
-								'</div>';
-			        }
-			    },
-			    load: function(query, callback) {
-			        if (!query.length) return callback();
-			        $.ajax({
-			            
-			            url: 'http://localhost:8080/Gracibolos/rest-clientes/' + encodeURIComponent(query),
-			            type: 'GET',
-			            error: function() {
-			                callback();
-			            },
-			            success: function(res) {
-			                callback(res);
-			            }
-			        });
-			    }
-			});
 			
-			var control = $('#cliente')[0].selectize;
 			
-			control.setValue(5);
+			
+			
+			
+			
 			
 			//Remove as mascaras quando apertar o submit
 			$("#encomenda-form").submit(function() {				
@@ -761,14 +806,7 @@
 				$("#total").val(total);
 			});
 			
-			/*
-			*
-			* INDICADOR DE PAGINA DO MENU
-			*
-			*/
 			
-			$('#menu-mob-encomendas').addClass('active');
-			$('#menu-encomendas').addClass('active');
 
 			/*
 			*
