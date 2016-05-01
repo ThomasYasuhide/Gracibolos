@@ -570,6 +570,7 @@
                         $("#cidade").val("Pesquisando...")
 
                         //Consulta o webservice viacep.com.br/
+                        //Ex: http://www.viacep.com.br/ws/04673070/json/?callback=?
                         $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
 
                             if (!("erro" in dados)) {
