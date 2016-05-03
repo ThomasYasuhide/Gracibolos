@@ -149,8 +149,6 @@
 										<th>#</th>
 										<th>Foto</th>
 										<th>Status</th>
-										<th>Data fabricação</th>
-										<th>Data vencimento</th>
 										<th>Codigo</th>
 										<th>Nome</th>
 										<th>Tipo</th>
@@ -171,8 +169,6 @@
 											<td>${produto.id}</td>
 											<td>${produto.foto}</td>
 											<td>${produto.status}</td>
-											<td>${produto.fabricacao}</td>
-											<td>${produto.vencimento}</td>
 											<td>${produto.codigo}</td>
 											<td>${produto.nome}</td>
 											<td>${produto.tipo}</td>
@@ -267,26 +263,14 @@
 												</select>
 											</div>
 
-											<!-- Campo data de fabricação-->
-											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-												<label class="control-label" for="fabricacao">Data de fabricação*:</label>
-												<input type="date" id="fabricacao" class="form-control" placeholder="Escolha a data de fabricação" name="fabricacao" required>
-											</div>
-											
-											<!-- Campo data de vencimento-->											
-											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-												<label class="control-label" for="vencimento">Data de vencimento*:</label>
-												<input type="date" id="vencimento" class="form-control" placeholder="Escolha a data de vencimento" name="vencimento" required>
-											</div>
-											
 											<!-- Campo código -->											
-											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+											<div class="input-margin col-xs-12 col-sm-6 col-md-6">
 												<label class="control-label" for="codigo">Código*:</label>
 												<input type="text" id="codigo" class="form-control" maxlength="20" placeholder="Digite o código do produto" name="codigo" required>
 											</div> 
 
 											<!-- Campo nome -->
-											<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+											<div class="input-margin col-xs-12 col-sm-12 col-md-9">
 												<label class="control-label" for="nome">Nome*:</label>
 												<input type="text" id="nome" class="form-control" maxlength="100" placeholder="Digite o nome do produto" name="nome" required>
 											</div>
@@ -295,7 +279,7 @@
 											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="tipo">Tipo*:</label>
 												<select class="form-control" id="tipo" name="tipo" required>
-													<option value="" selected="selected" disabled="disabled">Selecione</option>
+													<option value="" selected="selected" disabled="disabled">Selecione...</option>
 													<option value="1">Bolo</option>
 													<option value="0">Salgados</option>
 												</select>
@@ -311,16 +295,16 @@
 											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="unidade">Unidade:</label>
 												<select class="form-control" id="unidade" name="unidade">
-													<option value="" selected disabled>Selectione</option>
-													<option value="0">Kilos (kg)</option>
-													<option value="1">Litros (l)</option>
+													<option value="0" selected disabled>Selecione...</option>
+													<option value="1">Kilos (kg)</option>
+													<option value="2">Litros (l)</option>
 												</select>
 											</div>
 											
 											<!-- Campo estoque -->
 											<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 												<label class="control-label" for="estoque">Estoque:</label>
-												<input id="estoque" type="number" min=0 max=9999999 class="form-control" pattern="[0-9]+" maxlength="7"  name="estoque" value="0">
+												<input id="estoque" type="number" min=0 max=9999999 class="form-control" pattern="[0-9]+" maxlength="7"  name="estoque" value="0" disabled required/>
 											</div>
 											
 											<!-- Campo custo-->
@@ -344,7 +328,7 @@
 											<!-- Campo para escrever algum observação-->
 											<div class="input-margin col-xs-12 col-sm-12 col-md-12">
 												<label class="control-label" for="obs">Observação:</label>
-												<textarea class="form-control" name="obs" name="obs" id="obs" placeholder="Digite aqui as observações"></textarea>
+												<textarea class="form-control" name="obs" name="obs" id="obs" rows="3" placeholder="Digite aqui as observações"></textarea>
 											</div>
 										</div>
 										
@@ -675,7 +659,7 @@
             var table = $('#lista-produtos').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13 ],
+                        "targets": [ 0, 1, 2, 5, 6, 7, 8, 9, 10, 11 ],
                         "visible": false
                     }
                 ]
@@ -738,17 +722,15 @@
 				$('#foto-view').attr("src", "resources/img/produtos/"+data[1]);
 				$('#foto-inp').val(data[1]);
 				$('#status').val(data[2]);
-				$('#fabricacao').val(data[3]);
-				$('#vencimento').val(data[4]);
-				$('#codigo').val(data[5]);
-				$('#nome').val(data[6]);
-				$('#tipo').val(data[7]);
-				$('#peso').val(data[8]).trigger('input');
-				$('#unidade').val(data[9]);
-				$('#estoque').val(data[10]);
-				$('#custo').val(data[11]).trigger('input');
-				$('#valor').val(data[12]).trigger('input');
-				$('#obs').val(data[13]);
+				$('#codigo').val(data[3]);
+				$('#nome').val(data[4]);
+				$('#tipo').val(data[5]);
+				$('#peso').val(data[6]).trigger('input');
+				$('#unidade').val(data[7]);
+				$('#estoque').val(data[8]);
+				$('#custo').val(data[9]).trigger('input');
+				$('#valor').val(data[10]).trigger('input');
+				$('#obs').val(data[11]);
 
 			});
 

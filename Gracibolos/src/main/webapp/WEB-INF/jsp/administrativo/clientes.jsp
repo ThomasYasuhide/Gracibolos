@@ -142,7 +142,7 @@
 					<!-- Essa div agrupa os títulos das tabelas, e os resultados das pesquisas -->
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
-							<!-- tabela da lista clientes  -->
+							<!-- tabela da lista de clientes  -->
 							<table id="lista-clientes" class="table table-hover display table-settings">
 								<thead>
 									<!-- Titulos das tabelas  -->
@@ -288,19 +288,19 @@
 									<input type="date" id="datanascimento" name="datanascimento" placeholder="Data de nascimento" class="form-control" />
 								</div>
 								
-								<!-- Campo nome -->
+								<!-- Campo nome/nomerazao -->
 								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
 									<label class="control-label" for="nomerazao_lbl" id="nomerazao_lbl">Nome*:</label>
 									<input type="text" id="nomerazao_inp" name="nomerazao" placeholder="Digite seu nome aqui." class="form-control" maxlength="100" required/>
 								</div> 
 								
-								<!-- Campo cpf -->
+								<!-- Campo cpf/cnpj -->
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="cpfcnpj_inp" id="cpfcnpj_lbl">CPF*:</label>
 									<input type="text" id="cpfcnpj_inp" name="cpfcnpj" placeholder="000.000.000-00" class="form-control cpfcnpj_inp" maxlength="14" required/>
 								</div>
 								
-								<!-- Campo rg -->
+								<!-- Campo rg/ie -->
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="rgie_inp" id="rgie_lbl">RG:</label>
 									<input type="text" id="rgie_inp" name="rgie" placeholder="00.000.000-0" class="form-control" maxlength="9"/>
@@ -435,7 +435,7 @@
 	<div class="modal fade" id="excluir-cliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-			<!-- Envia o form para a url abaixo  -->
+				<!-- Envia o form para a url abaixo  -->
 				<form id="cliente-delete-form" action="administrativo-remover-cliente" method="POST">
 					
 					<!--Essa div tem o título do modal, e o "X" de fechar o modal   -->

@@ -120,7 +120,7 @@
 						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
 							<label class="control-label">Pesquisar fornecedores:</label>
 							<!-- Quando clicar no botão envia o form para a url abaixo -->
-							<form action="administrativo-pesquisar-fornecedor" method="POST">
+							<form action="operacional-pesquisar-fornecedor" method="POST">
 								<div class="input-group">
 									<input type="text" class="form-control" maxlength="100" placeholder="Informe o nome, CPF, CNPJ, RG ou IE para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
 									<span class="input-group-btn">
@@ -134,7 +134,7 @@
 						<!-- Esse botão lista todos os fornecedores -->
 						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">
 							<label class="control-label hidden-xs">Listar fornecedores</label>
-							<a href="administrativo-listar-fornecedores" class="btn btn-default fullwidth">Listar fornecedores</a>
+							<a href="operacional-listar-fornecedores" class="btn btn-default fullwidth">Listar fornecedores</a>
 						</div>
 					</div>
 					
@@ -198,7 +198,7 @@
 											<!-- Aqui nessa td, estão os botões de editar e excluir, que aparecem junto com a lista de fornecedores na tabela -->
 		                					<td>
 		                						<button id="edit-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-		                						<button id="delete-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+		                						<button id="delete-fornecedor" class="btn btn-xs btn-default hidden"><i class="material-icons font-xs">clear</i></button>
 		                					</td>
 										</tr>
 									</c:forEach>
@@ -428,7 +428,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<!-- Envia o form para a url abaixo  -->
-				<form id="fornecedor-delete-form" action="administrativo-remover-fornecedor" method="POST">
+				<form id="fornecedor-delete-form" action="operacional-remover-fornecedor" method="POST">
 
 					<!--Essa div tem o título do modal, e o "X" de fechar o modal   -->
 					<div class="modal-header">
@@ -657,7 +657,7 @@
 				$('#modal-subtitle').text("Incluir novo fornecedor");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#fornecedor-form").attr("action","administrativo-incluir-fornecedor");
+				$("#fornecedor-form").attr("action","operacional-incluir-fornecedor");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir fornecedor');
@@ -698,7 +698,7 @@
             	$('#modal-subtitle').text("Alterar fornecedor");
             	
             	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#fornecedor-form").attr("action","administrativo-alterar-fornecedor");
+				$("#fornecedor-form").attr("action","operacional-alterar-fornecedor");
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
@@ -781,7 +781,7 @@
 			function listar_cidades(id, callback){
 				
 				$.ajax({
-		            url : 'administrativo-pesquisar-cidade',
+		            url : 'operacional-pesquisar-cidade',
 		            method: "POST",
 		            data: {id:id},
 		            success : function(data) {
