@@ -330,7 +330,7 @@
 						                    		<button type="button" id="inserir-linha"  onclick="return false" class="btn btn-default fullwidth"><i class="material-icons">add_shopping_cart</i>&nbsp;&nbsp;&nbsp;Incluir novo produto</button>
 												</div>
 						                    
-						                        <div class="input-margin col-xs-12 col-sm-12 col-md-12 table-responsive">
+						                        <div class="input-margin col-xs-12 col-sm-12 col-md-12">
 													<table id="produtos" class="input-margin table display table-settings">
 														<thead>
 															<!-- Titulos das tabelas  -->
@@ -352,12 +352,15 @@
 																	</td>
 																	
 																	<td>
-																		<select class="form-control produto" name="item[${loop.index}].produtoId">
+																		<select class="form-control produto" id="produto_${loop.index}" name="item[${loop.index}].produtoId">
+																		
+																			<!-- 
 																			<option value="1" ${item.produtoId == '1' ? 'selected' : ''}>Produto 1</option>
 																			<option value="2" ${item.produtoId == '2' ? 'selected' : ''}>Produto 2</option>
 																			<option value="3" ${item.produtoId == '3' ? 'selected' : ''}>Produto 3</option>
 																			<option value="4" ${item.produtoId == '4' ? 'selected' : ''}>Produto 4</option>
 																			<option value="5" ${item.produtoId == '5' ? 'selected' : ''}>Produto 5</option>
+																			 -->
 																		</select>
 																	</td>
 																	
@@ -648,6 +651,79 @@
 			var control = $('#cliente')[0].selectize;
 			
 			control.setValue(5);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			/*
+			*
+			* PESQUISA PRODUTOS E POPULA O SELECT
+			*
+			*/
+			
+			$(".produto").each(function(){
+				$(this).selectize({
+				    valueField: 'id',
+				    labelField: 'nomerazao',
+				    dataAttr: 'data-id',
+				    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
+				    options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
+				    create: false,
+				    render: {
+				        option: function(item, escape) {
+				        	
+				            return	'<div>' +
+										'<span class="title">' +
+											'<span>' + escape(item.nomerazao) + '</span><br/>' +
+											'<span>' + escape(item.cpfcnpj) + '</span><br/>' +
+										'</span>' +
+									'</div>';
+				        }
+				    },
+				    load: function(query, callback) {
+				        if (!query.length) return callback();
+				        $.ajax({
+				            
+				            url: 'http://localhost:8080/Gracibolos/rest-clientes/' + encodeURIComponent(query),
+				            type: 'GET',
+				            error: function() {
+				                callback();
+				            },
+				            success: function(res) {
+				                callback(res);
+				            }
+				        });
+				    }
+				});
+			});
+			
+			$(".produto").on("change", function(){
+				var linha = this.id.replace("produto_", "");
+				
+				var valor = $('#valor_' + linha);
+				
+				valor.val("100,20");
+				
+				calcularTotal(linha);
+				
+			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			/*
 			*
