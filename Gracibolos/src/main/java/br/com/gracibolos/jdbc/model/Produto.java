@@ -25,6 +25,7 @@ public class Produto implements Serializable{
     private BigDecimal custo;
     private BigDecimal valor;
     private String obs;
+    private String receita;
 
 	public Long getId() {
 		return id;
@@ -121,5 +122,14 @@ public class Produto implements Serializable{
 	public void setObs(String obs) {
 		this.obs = obs;
 	}
+
+	public String getReceita() {
+		return receita;
+	}
+
+	public void setReceita(String receita) {
+		this.receita = receita;
+	}
+	
     
 }
