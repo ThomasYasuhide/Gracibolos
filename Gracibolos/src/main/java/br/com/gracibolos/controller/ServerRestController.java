@@ -22,7 +22,7 @@ public class ServerRestController {
 	private List<Cliente> clientesList;
 	
 	@RequestMapping(value = "/rest-produtos", method = RequestMethod.GET, headers="Accept=application/json")
-	public List<Produto> listAllProdutos() {    
+	public List<Produto> listAllProdutos() {
 		try {
 			produtoDao = new ProdutoDao();
 			produtosList = produtoDao.listar();
@@ -33,7 +33,8 @@ public class ServerRestController {
 		return produtosList;
     }
 	
-	@RequestMapping(value = "/rest-produtos/{id}", method = RequestMethod.GET, headers="Accept=application/json")  
+	
+	@RequestMapping(value = "/rest-pesquisar-produtos/{id}", method = RequestMethod.GET, headers="Accept=application/json")  
 	 public Produto findById(@PathVariable int id) {  
 		produtoDao = new ProdutoDao();
 		p = new Produto();
@@ -44,7 +45,21 @@ public class ServerRestController {
 			e.printStackTrace();
 		}    
 	  return p;  
-	 }  
+	 }
+	
+	@RequestMapping(value = "/rest-pesquisa-produtos/{pesquisa}", method = RequestMethod.GET, headers="Accept=application/json")  
+	public List<Produto> pesquisar_produto(@PathVariable String pesquisa) {
+		produtoDao = null;
+		produtoDao = new ProdutoDao();
+		try {
+			produtosList = produtoDao.pesquisar(pesquisa);
+		} catch (Exception e) {
+			System.out.println("ERRO - rest produtos, pesquisa produtos.");
+			e.printStackTrace();
+		}    
+		return produtosList;  
+	}
+
 	
 	@RequestMapping(value = "/rest-clientes/{nome}", method = RequestMethod.GET, headers="Accept=application/json")
 	public List<Cliente> ListClientes(@PathVariable String nome){

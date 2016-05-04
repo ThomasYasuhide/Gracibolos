@@ -353,7 +353,7 @@
 																	
 																	<td>
 																		<select class="form-control produto" id="produto_${loop.index}" name="item[${loop.index}].produtoId">
-																		
+																			
 																			<!-- 
 																			<option value="1" ${item.produtoId == '1' ? 'selected' : ''}>Produto 1</option>
 																			<option value="2" ${item.produtoId == '2' ? 'selected' : ''}>Produto 2</option>
@@ -361,6 +361,7 @@
 																			<option value="4" ${item.produtoId == '4' ? 'selected' : ''}>Produto 4</option>
 																			<option value="5" ${item.produtoId == '5' ? 'selected' : ''}>Produto 5</option>
 																			 -->
+																			 
 																		</select>
 																	</td>
 																	
@@ -669,20 +670,19 @@
 			*/
 			
 			$(".produto").each(function(){
+				
 				$(this).selectize({
 				    valueField: 'id',
-				    labelField: 'nomerazao',
-				    dataAttr: 'data-id',
-				    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
-				    options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
+				    labelField: 'nome',
+				    searchField: ['codigo', 'nome'],
+				    //options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
 				    create: false,
 				    render: {
 				        option: function(item, escape) {
-				        	
 				            return	'<div>' +
 										'<span class="title">' +
-											'<span>' + escape(item.nomerazao) + '</span><br/>' +
-											'<span>' + escape(item.cpfcnpj) + '</span><br/>' +
+											'<span>' + escape(item.nome) + '</span><br/>' +
+											'<span>' + escape(item.codigo) + '</span><br/>' +
 										'</span>' +
 									'</div>';
 				        }
@@ -691,7 +691,7 @@
 				        if (!query.length) return callback();
 				        $.ajax({
 				            
-				            url: 'http://localhost:8080/Gracibolos/rest-clientes/' + encodeURIComponent(query),
+				            url: 'http://localhost:8080/Gracibolos/rest-pesquisa-produtos/' + encodeURIComponent(query),
 				            type: 'GET',
 				            error: function() {
 				                callback();
@@ -707,14 +707,27 @@
 			$(".produto").on("change", function(){
 				var linha = this.id.replace("produto_", "");
 				
+				var produto = $('#produto_' + linha);
 				var valor = $('#valor_' + linha);
 				
-				valor.val("100,20");
-				
-				calcularTotal(linha);
+				if(produto.val() != "" || produto.val() != null){
+					$.ajax({
+			            url : 'administrativo-pesquisar-cidade',
+			            method: "POST",
+			            data: {id:produto.val()},
+			            success : function(data) {
+			            	
+			            	$.each(data, function(val, cidade){
+				            	valor.val(cidade.nome);
+							});
+							
+			            }
+			        });
+					
+					calcularTotal(linha);
+				}
 				
 			});
-			
 			
 			
 			
