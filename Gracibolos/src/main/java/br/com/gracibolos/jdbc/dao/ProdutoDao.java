@@ -145,7 +145,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			ps.setBigDecimal(10, produto.getValor());
 			ps.setString(11, produto.getObs());
 			//ps.setString(12, produto.getReceita());
-			ps.setLong(13, produto.getId());
+			ps.setLong(12, produto.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
