@@ -27,7 +27,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		PreparedStatement ps = null;
         
 		//string query do banco
-		String sql = "INSERT INTO produto(foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO produto(foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs, receita) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){	
@@ -76,6 +76,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			
 			ps.setBigDecimal(10, produto.getValor());
 			ps.setString(11, produto.getObs());
+			ps.setString(12, produto.getReceita());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -143,6 +144,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			ps.setBigDecimal(9, produto.getCusto());
 			ps.setBigDecimal(10, produto.getValor());
 			ps.setString(11, produto.getObs());
+			//ps.setString(12, produto.getReceita());
 			ps.setLong(12, produto.getId());
 			
 			if(ps.executeUpdate() != 0) {
@@ -217,7 +219,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		List<Produto> produtos = null;
 		
 		//string query do banco
-		String sql = "SELECT id, foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs FROM produto";
+		String sql = "SELECT id, foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs, receita FROM produto";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
@@ -242,6 +244,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setCusto(rs.getBigDecimal("custo"));
 				produto.setValor(rs.getBigDecimal("valor"));
 				produto.setObs(rs.getString("obs"));
+				produto.setReceita(rs.getString("receita"));
 				
 				//adiciona o objeto produto no arrayList
 				produtos.add(produto);
@@ -268,7 +271,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		//string query do banco
-		String sql = "SELECT id, foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs FROM produto WHERE id="+id;
+		String sql = "SELECT id, foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs, receita FROM produto WHERE id="+id;
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
@@ -291,6 +294,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			produto.setCusto(rs.getBigDecimal("custo"));
 			produto.setValor(rs.getBigDecimal("valor"));
 			produto.setObs(rs.getString("obs"));	
+			produto.setReceita(rs.getString("receita"));
 			
 			//fecha as conexões
 			ps.close();
@@ -322,7 +326,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		List<Produto> produtos = null;
 		
 		//string query do banco
-		String sql = "SELECT id, foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs FROM produto WHERE codigo = ? OR nome LIKE ?";
+		String sql = "SELECT id, foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs, receita FROM produto WHERE codigo = ? OR nome LIKE ?";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
@@ -352,6 +356,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setCusto(rs.getBigDecimal("custo"));
 				produto.setValor(rs.getBigDecimal("valor"));
 				produto.setObs(rs.getString("obs"));
+				produto.setReceita(rs.getString("receita"));
 				
 				//adiciona o objeto produto no arrayList
 				produtos.add(produto);
