@@ -209,7 +209,7 @@
 					
 					<!--Essa div tem o botão de abrir o modal "incluir novo fornecedor" -->
 					<div class="row">
-						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
+						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-4">
 							<a href="" id="incluir-fornecedor-modal" data-toggle="modal" data-target="#modal-fornecedor" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir novo fornecedor</a>
 						</div>
 					</div>
@@ -302,7 +302,13 @@
 									<label class="control-label" for="rgie_inp" id="rgie_lbl">RG:</label>
 									<input type="text" id="rgie_inp" name="rgie" placeholder="00.000.000-0" class="form-control" maxlength="9"/>
 								</div>
-
+								
+								<!-- Campo  cep-->
+								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
+									<label class="control-label" for="cep">CEP*:</label>
+									<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="9" required/>
+								</div>
+								
 								<!-- Campo  endereço -->
 								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
 									<label class="control-label" for="endereco">Endereço*:</label>
@@ -316,7 +322,7 @@
 								</div>
 
 								<!-- Campo complemento da casa -->
-								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="complemento">Complemento:</label>
 									<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120" disabled />
 								</div>
@@ -339,7 +345,7 @@
 								</div>
 
 								<!-- Campo  cidade-->
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-4 col-md-6">
 									<label class="control-label" for="cidade">Cidade*:</label>
 									<select class="form-control" id="cidade" name="cidade" required disabled >
 										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
@@ -349,12 +355,6 @@
 									</select>
 								</div>
 								
-								<!-- Campo  cep-->
-								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
-									<label class="control-label" for="cep">CEP*:</label>
-									<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="9" required/>
-								</div>
-
 								<!-- Campo telefone fixo-->
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="tel">Tel:</label>

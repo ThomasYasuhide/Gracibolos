@@ -184,7 +184,7 @@
 					
 					<!--Essa div tem o botão de abrir o modal "incluir nova matéria-prima" -->
 					<div class="row">
-						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-4">
+						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-5">
 							<a href="" id="incluir-materiaprima-modal" data-toggle="modal" data-target="#modal-materiaprima" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova matéria-prima</a>
 						</div>
 					</div>

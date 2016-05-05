@@ -193,7 +193,7 @@
 
 					<!--Essa div tem o botão de abrir o modal "incluir novo produto" -->
 					<div class="row">
-						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
+						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-4">
 							<a href="" id="incluir-produto-modal" data-toggle="modal" data-target="#modal-produto" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir novo produto</a>
 						</div>
 					</div>

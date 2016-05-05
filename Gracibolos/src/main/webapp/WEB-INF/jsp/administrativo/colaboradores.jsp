@@ -198,7 +198,7 @@
 					</div>
 
 					<div class="row">
-						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
+						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-4">
 							<a href="" id="incluir-colaborador-modal" data-toggle="modal" data-target="#modal-colaborador" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir novo colaborador</a>
 						</div>
 					</div>
@@ -280,7 +280,12 @@
 									<label class="control-label" for="rg" id="rg_lbl">RG:</label>
 									<input type="text" id="rg" name="rg" placeholder="00.000.000-0" class="form-control" maxlength="9"/>
 								</div>
-
+								
+								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
+									<label class="control-label" for="cep">CEP*:</label>
+									<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="9" required/>
+								</div>
+								
 								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
 									<label class="control-label" for="endereco">Endereço*:</label>
 									<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" disabled required/>
@@ -291,7 +296,7 @@
 									<input type="text" id="numero" name="numero" placeholder="0000" class="form-control" disabled required/>
 								</div>
 
-								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="complemento">Complemento:</label>
 									<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120"  disabled />
 								</div>
@@ -311,7 +316,7 @@
 									</select>
 								</div>
 
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-4 col-md-6">
 									<label class="control-label" for="cidade">Cidade*:</label>
 									<select class="form-control" id="cidade" name="cidade" disabled required >
 										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
@@ -319,11 +324,6 @@
 											<option value="${cidade.id}">${cidade.nome}</option>
 										</c:forEach>
 									</select>
-								</div>
-
-								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
-									<label class="control-label" for="cep">CEP*:</label>
-									<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="9" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">

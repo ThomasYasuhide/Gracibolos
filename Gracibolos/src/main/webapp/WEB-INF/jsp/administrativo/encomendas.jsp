@@ -190,7 +190,7 @@
 
 
 					<div class="row">
-						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
+						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-4">
 							<a href="" id="incluir-encomenda-modal" data-toggle="modal" data-target="#modal-encomenda" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova encomenda</a>
 						</div>
 					</div>
@@ -352,16 +352,10 @@
 																	</td>
 																	
 																	<td>
-																		<select class="form-control produto" id="produto_${loop.index}" name="item[${loop.index}].produtoId">
-																			
-																			<!-- 
-																			<option value="1" ${item.produtoId == '1' ? 'selected' : ''}>Produto 1</option>
-																			<option value="2" ${item.produtoId == '2' ? 'selected' : ''}>Produto 2</option>
-																			<option value="3" ${item.produtoId == '3' ? 'selected' : ''}>Produto 3</option>
-																			<option value="4" ${item.produtoId == '4' ? 'selected' : ''}>Produto 4</option>
-																			<option value="5" ${item.produtoId == '5' ? 'selected' : ''}>Produto 5</option>
-																			 -->
-																			 
+																		<select class="form-control produto" id="produto_${loop.index}" placeholder="Digite o código ou nome do produto." name="item[${loop.index}].produtoId">
+																			<c:forEach var="cliente" items="${clientes}">
+																				<option value="${item.produtoId}" selected>${item.nome}</option>
+																			</c:forEach>
 																		</select>
 																	</td>
 																	
@@ -652,17 +646,7 @@
 			var control = $('#cliente')[0].selectize;
 			
 			control.setValue(5);
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+						
 			/*
 			*
 			* PESQUISA PRODUTOS E POPULA O SELECT
@@ -675,7 +659,7 @@
 				    valueField: 'id',
 				    labelField: 'nome',
 				    searchField: ['codigo', 'nome'],
-				    //options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
+					options: [{id: '${item.produtoId}', codigo: '${item.codigo}', nome: '${item.nome}'}],
 				    create: false,
 				    render: {
 				        option: function(item, escape) {
@@ -712,32 +696,20 @@
 				
 				if(produto.val() != "" || produto.val() != null){
 					$.ajax({
-			            url : 'administrativo-pesquisar-cidade',
+			            url : 'administrativo-pesquisar-valor',
 			            method: "POST",
 			            data: {id:produto.val()},
 			            success : function(data) {
 			            	
-			            	$.each(data, function(val, cidade){
-				            	valor.val(cidade.nome);
-							});
-							
+			            	valor.val(parseFloat(data.valor).toFixed(2)).trigger('input');
+			            	
+			            	calcularTotal(linha);
 			            }
 			        });
-					
-					calcularTotal(linha);
 				}
 				
 			});
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+						
 			/*
 			*
 			* Verifica a linha que está sendo alterada da tabela de produtos.
@@ -828,11 +800,7 @@
 				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<select class="form-control produto" name="item['+i+'].produtoId">';
-				    item += 				'<option value="1" ${item.produtoId == "1" ? "selected" : ''}>Produto 1</option>';
-				    item += 				'<option value="2" ${item.produtoId == "2" ? "selected" : ''}>Produto 2</option>';
-				    item += 				'<option value="1" ${item.produtoId == "3" ? "selected" : ''}>Produto 3</option>';
-				    item += 			'</select>';
+				    item += 			'<select class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" class="form-control quantidade"  min="0" max="9999999">';
@@ -879,14 +847,6 @@
 			
 			});
 			
-			
-			
-			
-			
-			
-			
-			
-			
 			//Remove as mascaras quando apertar o submit
 			$("#encomenda-form").submit(function() {				
 				var total = $("#total").val();
@@ -895,8 +855,6 @@
 				$("#total").val(total);
 			});
 			
-			
-
 			/*
 			*
 			* CONFIGURAÇÃO DA TABELA

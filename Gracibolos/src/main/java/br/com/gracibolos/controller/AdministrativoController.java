@@ -915,6 +915,29 @@ public class AdministrativoController {
 	
 	/*
 	 * 
+	 * ###################### PESQUISA VALORES ######################
+	 * 
+	 * */
+	
+	@RequestMapping(value="/administrativo-pesquisar-valor", method=RequestMethod.POST)
+	public @ResponseBody Produto pesquisar_valor(int id){
+				
+		Produto produto = new Produto();
+
+		//cria uma nova instância DAO
+		ProdutoDao dao = new ProdutoDao();
+		try {
+			produto = dao.pesquisarPorId(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
+	    return produto;
+		
+	}
+	
+	/*
+	 * 
 	 * ###################### MATÉRIA PRIMA ######################
 	 * 
 	 * */
@@ -1280,7 +1303,7 @@ public class AdministrativoController {
 	//INCLUIR NOVA ENCOMENDA
 	@RequestMapping("/administrativo-incluir-encomenda")
 	public ModelAndView incluir_encomenda(Encomenda encomenda){
-		System.out.println("Entrou na servlet de inclusão de uma nova materiaPrima");
+		System.out.println("Entrou na servlet de inclusão de uma nova encomenda");
 		
 		
 		/*
@@ -1340,7 +1363,7 @@ public class AdministrativoController {
 	//AlTERAR ENCOMENDA
 	@RequestMapping("/administrativo-alterar-encomenda")
 	public ModelAndView alterar_encomenda(Encomenda encomenda){
-		System.out.println("Entrou na pagina de alteração de materiaPrima");
+		System.out.println("Entrou na pagina de alteração de encomenda");
 		
 		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
@@ -1374,7 +1397,7 @@ public class AdministrativoController {
 	//EXCLUIR ENCOMENDA
 	@RequestMapping("/administrativo-excluir-encomenda")
 	public ModelAndView excluir_encomenda(Encomenda encomenda){
-		System.out.println("Entrou na pagina de exclusão de materiaprima");
+		System.out.println("Entrou na pagina de exclusão de encomenda");
 		
 		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;	
