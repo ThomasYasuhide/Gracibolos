@@ -1243,6 +1243,32 @@ public class AdministrativoController {
 	    return mv;
 	}
 	
+	//LISTAR CAIXA
+		@RequestMapping("/administrativo-listar-caixa")
+		public ModelAndView listar_caixa(){
+			System.out.println("Realizou a listagem do caixa");
+			
+			//cria uma nova instância dao da materia-prima
+			CaixaDao dao = new CaixaDao();
+			List<Caixa> caixas = null;
+			
+			try {
+				//Guarda a lista de materia-prima num List
+				caixas = dao.listar();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			//instância uma nova modelView
+			ModelAndView mv = new ModelAndView();
+		    //seta o caminho e o nome da jsp
+			mv.setViewName("administrativo/caixa");
+			//passa a lita de materia-prima para a Expression Language chamada materiasprimas
+			mv.addObject("caixas", caixas);
+		    //retorna mv		    
+		    return mv;
+		}
+	
 	/*
 	 * 
 	 * ###################### ENCOMENDA ######################

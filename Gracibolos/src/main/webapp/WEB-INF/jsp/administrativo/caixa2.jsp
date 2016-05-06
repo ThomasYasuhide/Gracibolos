@@ -1,4 +1,4 @@
-﻿<!-- Define que este documento é uma pagina JSP -->
+<!-- Define que este documento é uma pagina JSP -->
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->
@@ -51,13 +51,12 @@
 
 
 					<!-- ################################# ALERTAS ################################# -->
-					<!-- Aqui as Expressions Languages recebem true caso a operação seja efetuado corretamente, caso de algum erro recebem false-->
 					<c:if test="${incluir == 'true'}">
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Matéria-prima armazenada com sucesso.
+								  <strong>Sucesso!</strong> pagamento armazenado com sucesso.
 								</div>
 							</div>
 						</div>
@@ -67,7 +66,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar incluir uma nova matéria-prima, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar incluir o novo pagamento, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -87,7 +86,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								 <strong>Erro!</strong> Houve algum erro ao tentar alterar a matéria-prima, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar alterar o pagamento, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -97,7 +96,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Matéria-prima foi excluida com sucesso!
+								  <strong>Sucesso!</strong> Pagamento foi excluido com sucesso!
 								</div>
 							</div>
 						</div>
@@ -107,22 +106,19 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								 <strong>Erro!</strong> Houve algum erro ao tentar excluir a matéria-prima, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar excluir o pagamento, favor tente novamente.
 								</div>
 							</div>
 						</div>
 					</c:if>
 					<!-- ################################# FIM DOS ALERTAS ################################# -->
 					
-					<!-- Essa div agrupa os campos de pesquisa e de listar as matérias-primas -->
 					<div class="row">
-						<!-- Campo de pesquisar as matérias-primas -->
-						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
+						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-md-lg-9">
 							<label class="control-label">Pesquisar pagamento:</label>
-							<!-- Quando clicar no botão, envia o form para a url abaixo -->
 							<form action="administrativo-pesquisar-caixa" method="POST">
 								<div class="input-group">
-									<input type="text" class="form-control" maxlength="100" placeholder="Informe o código ou o nome da matéria-prima para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
+									<input type="text" class="form-control" maxlength="100" placeholder="Informe o nome, CPF, CNPJ, RG ou IE para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
 									<span class="input-group-btn">
 										<button class="btn btn-default" type="submit">
 											<span class="glyphicon glyphicon-search disabled"></span>
@@ -131,14 +127,15 @@
 								</div>
 							</form>
 						</div>
-						<!-- Esse botão lista todas as matérias-primas -->
+						
 						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">
 							<label class="control-label hidden-xs">Listar caixa</label>
+							<!-- Quando clicar no botão direciona a página para a url abaixo -->
 							<a href="administrativo-listar-caixa" class="btn btn-default fullwidth">Listar caixa</a>
 						</div>
+						
 					</div>
 					
-					<!-- Essa div agrupa os títulos das tabelas, e os resultados das pesquisas -->
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
 							<table id="lista-caixa" class="table table-hover display table-settings">
@@ -146,14 +143,14 @@
 									<!-- Titulos das tabelas  -->
 									<tr>
 										<th>#</th>
-										<th>Recebido / Gasto</th>
 										<th>Encomenda ID</th>
 										<th>Fornecedor ID</th>
-										<th>Valor</th>									
+										<th>Valor</th>										
+										<th>Recebido / Gasto</th>
 										<th>Forma</th>
 										<th>Parcela</th>
+										<th>Descrição</th>
 										<th>Data</th>
-										<th>Descrição</th>										
 										<th>Ações</th>
 									</tr>
 								</thead>
@@ -163,16 +160,14 @@
 									<c:forEach var="caixa" items="${caixas}">
 										<tr>
 											<td>${caixa.id}</td>
-											<td>${caixa.gastoRecebimento}</td>
 											<td>${caixa.encomendaId}</td>
 											<td>${caixa.fornecedorId}</td>
-											<td>${caixa.valor}</td>											
+											<td>${caixa.valor}</td>
+											<td>${caixa.gastoRecebimento}</td>
 											<td>${caixa.forma}</td>
 											<td>${caixa.parcela}</td>
+											<td>${caixa.descricao}</td>
 											<td>${caixa.data}</td>
-											<td>${caixa.descricao}</td>											
-											
-											<!-- Aqui nessa td, estão os botões de editar e excluir, que aparecem junto com a lista de matérias-primas na tabela -->
 		                					<td>
 		                						<button id="edit-caixa" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
 		                						<button id="delete-caixa" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
@@ -183,10 +178,9 @@
 							</table>
 						</div>
 					</div>
-					
-					<!--Essa div tem o botão de abrir o modal "incluir nova matéria-prima" -->
+
 					<div class="row">
-						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-5">
+						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
 							<a href="" id="incluir-caixa-modal" data-toggle="modal" data-target="#modal-caixa" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova saída</a>
 						</div>
 					</div>
@@ -196,27 +190,24 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!--
 
-	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR ############################################################
+	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DO CAIXA ############################################################
 
 	-->
 	<div class="modal fade" id="modal-caixa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-	    		
-	    		<!-- formulário de preencher os dados da matéria-prima -->
+	    	
 	    		<form id="caixa-form" method="POST">
-	    			
-	    			<!--Essa div tem o título e subtítulo do modal, e o "X" de fechar o modal   -->
+	    
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<h3 id="modal-title">CAIXA</h3>
 						<h4 id="modal-subtitle"></h4>
 					</div>
-					
-					<!--  Corpo do modal -->
+
 					<div class="modal-body">
 						<!-- ################################# CONTEUDO ################################# -->
 						<div class="row">
@@ -225,31 +216,30 @@
 								<div class="hidden">
 									<label class="control-label" for="id">Nº caixa:</label>
 									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
-								</div>																	
+								</div>
 								
-	
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="gastoRecebimento">Gasto/Recebimento*:</label>
 									<select id="gastoRecebimento" name="gastoRecebimento" onchange="desabilitarCampos(this)" class="form-control" required>
 										<option selected value="0">Gasto</option>
 										<option value="1">Recebimento</option>
 									</select>
 								</div>
-																
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+
+								<div class="input-margin col-xs-12 col-sm-12 col-md-4">
 									<label class="control-label" for="nome_tipo" id="nome_tipo">Fornecedor*:</label>
 									<input type="text" name="nome" id="nome_des" placeholder="Digite seu nome aqui." class="form-control" maxlength="100" required/>
-								</div>
-								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								</div>																
+															
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="valor">Valor*:</label>
 									<div class="input-group">
 										<span class="input-group-addon">R$</span>
 										<input type="text" id="valor" name="valor" placeholder="0,00" class="form-control" maxlength="14" required/>
 									</div>
-								</div>
-								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								</div>								
+																
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="formaPagamento">Forma de pagamento*:</label>
 									<select class="form-control" id="formaPagamento" name="formaPagamento">										
 										<option value="0" selected disabled>Selecione...</option>
@@ -260,14 +250,14 @@
 									</select>
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="parcela">Número de Parcelas:</label>
 									<input id="parcela" type="number" min=1 class="form-control" pattern="[0-9]+" maxlength="1"  name="parcela" value="1">
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="data_transacao">Data da transação:</label>
-									<input type="date" id="data_transacao" name="data_transacao" class="form-control" required />
+								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
+									<label class="control-label" for="clientedesde">Data da transação:</label>
+									<input type="date" id="clientedesde" name="clientedesde" class="form-control"  />
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -280,15 +270,13 @@
 					</div>
 
 					<!-- ################################# FIM DO CONTEUDO ################################# -->
-					
-					<!-- Esse div contem o 2 botões -->
+
 					<div class="modal-footer">
-						<!-- botão de fechar o modal  -->
 						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-						<!-- botão de incluir ou alterar a matéria-prima, assim finalizando o formulário  -->
 						<button type="submit" class="btn btn-default" id="modal-action"></button>
 					</div>
-					
+
+
 				</form>
 			</div>
 		</div>
@@ -296,7 +284,7 @@
 
 	<!--
 
-	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR #########################################################
+	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE CLIENTE #########################################################
 
 	-->
 
@@ -307,47 +295,41 @@
 
 	<!--
 
-	############################################################        MODAL DE EXCLUSÃO DE COLABORADOR      ############################################################
+	############################################################        MODAL DE EXCLUSÃO DE CLIENTE      ############################################################
 
 	-->
 
 
 
-	<!-- Modal de confirmação de exclusão de matéria-prima -->
+	<!-- Modal de confirmação de exclusão de cliente -->
 	<div class="modal fade" id="excluir-caixa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<!-- Envia o form para a url abaixo  -->
 				<form id="caixa-delete-form" action="administrativo-excluir-caixa" method="POST">
-					
-					<!--Essa div tem o título do modal, e o "X" de fechar o modal   -->
+
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Excluir caixa</h4>
+						<h4 class="modal-title" id="myModalLabel">Excluir pagamento</h4>
 					</div>
 					
-					<!--  Corpo do modal -->
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								
-								<!-- Essa div contem o id da matéria-prima q vai ser excluida, porem ele fica escondido na tela, por causa da class hidden-->
+
 								<div class="hidden">
-									<label class="control-label" for="id">Nº matéria-prima:</label>
+									<label class="control-label" for="id">Nº caixa:</label>
 									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
 								</div>
-								<!-- mensagem no corpo do modal -->	
-								<p>Deseja realmente excluir a matéria-prima selecionada?</p>
+
+								<p>Deseja realmente excluir o caixa selecionado?</p>
 							</div>
 						</div>
 
 						
 					</div>
-					<!-- Essa div contem 2 botões -->
+
 					<div class="modal-footer">
-						<!-- botão de cancelar a exclusão da matéria-prima-->
 						<button type="button" class="btn btn-default" data-dismiss="modal">Não, quero manter</button>
-						<!-- botão de confirmar a exclusão da matéria-prima -->
 						<button type="submit" class="btn btn-default">Sim, quero excluir</button>
 					</div>
 
@@ -359,22 +341,29 @@
 
 	<!--
 
-	############################################################ FIM DO  MODAL DE EXCLUSÃO DE COLABORADOR ############################################################
+	############################################################ FIM DO  MODAL DE EXCLUSÃO DE CLIENTE ############################################################
 
 	-->
 
 
 	<!-- Importação dos arquivos java script -->
 	<script src="resources/js/jquery-2.1.4.js"></script>
-	<script src="resources/js/datatables.js"></script>	
-	<script src="resources/js/mask.js"></script>
+	<script src="resources/js/datatables.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
-    
-
+	<script src="resources/js/mask.js"></script>
+	<script src="resources/js/moment.js"></script>
+	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
-			
+// 			//Remove as mascaras quando apertar o submit
+// 			$("#caixa-form").submit(function() {
+// 				$("#cep").unmask();
+// 				$("#recebidoGasto_inp").unmask();
+// 				$("#tel").unmask();
+// 				$("#cel").unmask();
+// 			});
+
 
 			/*
 			*
@@ -392,6 +381,50 @@
 			*/
 			
 			$("#valor").mask("000.000.000.000.000,00", {reverse: true});
+			
+			/*
+			*
+			* PESQUISA CLIENTES E POPULA O SELECT
+			*
+			*/
+			
+			$('#fornecedor').selectize({
+			    valueField: 'id',
+			    labelField: 'nomerazao',
+			    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
+			    options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
+			    create: false,
+			    render: {
+			        option: function(item, escape) {
+			        	
+			            return	'<div>' +
+									'<span class="title">' +
+										'<span>' + escape(item.nomerazao) + '</span><br/>' +
+										'<span>' + escape(item.cpfcnpj) + '</span><br/>' +
+									'</span>' +
+								'</div>';
+			        }
+			    },
+			    load: function(query, callback) {
+			        if (!query.length) return callback();
+			        $.ajax({
+			            
+			            url: 'http://localhost:8080/Gracibolos/rest-clientes/' + encodeURIComponent(query),
+			            type: 'GET',
+			            error: function() {
+			                callback();
+			            },
+			            success: function(res) {
+			                callback(res);
+			            }
+			        });
+			    }
+			});
+			
+			var control = $('#fornecedor')[0].selectize;
+			
+			control.setValue(5);
+			
 
 			/*
 			*
@@ -400,10 +433,10 @@
 			*/
 			
 			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
-            var table = $('#lista-materiaprima').DataTable({
+            var table = $('#lista-caixa').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 2],
+                        "targets": [ 0, 1 ],
                         "visible": false
                     }
                 ]
@@ -411,13 +444,19 @@
 
             /*
 			*
-			* INCLUSÃO DE MATÉRIA-PRIMA
+			* INCLUSÃO DE CLIENTE
 			*
 			*/
-			
-			//quando o usuário clica no botão de incluir nova matéria-prima, ele abre o modal e chama essa função
+
             $('#incluir-caixa-modal').click(function() {
             	
+//             	$("#endereco").prop( "disabled", true );
+//             	$("#numero").prop( "disabled", true );
+//             	$("#complemento").prop( "disabled", true); 
+//             	$("#bairro").prop( "disabled", true );
+//                 $("#cidade").prop( "disabled", true );
+//                 $("#estado").prop( "disabled", true );
+            	                
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova saída");
 				
@@ -425,7 +464,7 @@
 				$("#caixa-form").attr("action","administrativo-incluir-caixa");
 				
 				//Altera o nome do botão do modal.
-				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir saída');
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir cliente');
 				
 				//Reset autmaticamente todos os campos do formulário.
 				$('#caixa-form').each(function(){
@@ -433,23 +472,23 @@
 				});
 				
 				var now = moment().format('YYYY-MM-DD');
-                $('#data_transacao').val(now);               
-
+                $('#clientedesde').val(now);
+				
 				//Este método se encontra no arquivo scripts.js
 				//Desabilita e habilita os campos NOME RAZÃO CPF CNPJ RG IE SEXO DATANASCIMENTO
                 desabilitarCampos(document.getElementById("#gastoRecebimento"));
-				
+									
 			});
 
             /*
 			*
-			* ALTERAÇÃO DE MATÉRIA-PRIMA
+			* ALTERAÇÃO DE CLIENTE
 			*
 			*/
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
-            $('#lista-caixa tbody').on( 'click', '#edit-caixa', function () {            	
-            	
+            $('#lista-caixa tbody').on( 'click', '#edit-caixa', function () {
+                        	
             	 //Altera dinamicamente o titulo do modal.
             	$('#modal-subtitle').text("Alterar pagamento");
             	
@@ -460,27 +499,29 @@
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
 				
 				//Pega os dados de determinada linha da tabela.
-                var data = table.row( $(this).parents('tr') ).data();
+                var data = table.row( $(this).parents('tr') ).data();                
+             	
+              		//Apresenta o modal de exclusão na tela.
+              		$('#modal-caixa').modal('show');
 
-              	//Apresenta o modal de exclusão na tela.
-              	$('#modal-caixa').modal('show');
-					
-				//Preenche os determinados campos com os conteudos.
-              	$('#id').val(data[0]);
-              	$('#gastoRecebimento').val(data[1]);
-              	$('#encomendaId').val(data[2]);
-              	$('#fornecedorId').val(data[3]);
-				$('#valor').val(data[4]);
-				$('#forma').val(data[5]);
-				$('#parcela').val(data[6]);
-				$('#data_transacao').val(data[7]);
-				$('#descricao').val(data[8]);
-            });
+					//Preenche os determinados campos com os conteudos.
+                    $('#id').val(data[0]);
+                    $('#encomendaId').val(data[1]);
+                    $('#fornecedorId').val(data[2]);
+    				
+    				$('#recebidoGasto_inp').val(data[3]).trigger('input');
+    				
+                    $('#forma').val(data[4]);
+                    $('#parcela').val(data[5]);
+                    $('#descricao').val(data[6]);
+					    				
+                    desabilitarCampos(document.getElementById("gastoRecebimento").value);                
 
+			});
 
 			/*
 			*
-			* EXCLUSÃO DA MATÉRIA-PRIMA
+			* EXCLUSÃO DE CLIENTE
 			*
 			*/
 	
@@ -497,7 +538,7 @@
 				$('#excluir-caixa').modal('show');
 
             });
-	
+			
         });
 
 	</script>

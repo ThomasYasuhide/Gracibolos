@@ -4,14 +4,14 @@ import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.model.Cliente;
 
 //funcionando
-public class ClienteListar {
+public class ClientePesquisar {
 
 	public static void main(String[] args) {
 		
 		ClienteDao dao = new ClienteDao();
 		
 		try {
-			for(Cliente p : dao.listar()){
+			for(Cliente p : dao.pesquisar("thomas")){
 			    System.out.println(	  			   "Id : "+p.getId()
 			    						   + "\tStatus : "+p.getStatus()
 			    						+"\tTipoPessoa : "+p.getTipopessoa()
@@ -32,8 +32,7 @@ public class ClienteListar {
 			                           		 +"\tEmail : "+p.getEmail()
 			                           		  +"\tSite : "+p.getSite()
 			                          +"\tClienteDesde : "+p.getClientedesde()
-			                          		   +"\tObs : "+p.getObs()			    
-			    +"lista"+dao.listar().get(22));
+			                          		   +"\tObs : "+p.getObs());			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
