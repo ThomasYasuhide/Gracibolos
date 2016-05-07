@@ -1,9 +1,11 @@
 package br.com.gracibolos.jdbc.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,8 @@ import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Caixa;
 
 public class CaixaDao implements GenericoDao<Caixa>{
+	
+	private Date sqlDate;
 
 	/*
 	 * INCLUIR CAIXA
@@ -23,22 +27,34 @@ public class CaixaDao implements GenericoDao<Caixa>{
 		boolean status = false;
 		
 		//string query do banco
-		String sql = " INSERT INTO caixa(tipoId, numeroId, recebidoGasto, forma,"
-				   + " parcela, descricao)"
-				   + " VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = " INSERT INTO gracibolos.caixa(encomendaId, fornecedorId, valor, gastoRecebimento, forma,"
+				   + " parcela, descricao, data)"
+				   + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
+		sqlDate = new Date(caixa.getData().getTime());
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{
 			//seta os atributos do objeto caixa
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, caixa.getTipoId());
-			ps.setInt(2, caixa.getNumeroId());
-			ps.setBigDecimal(3, caixa.getRecebidoGasto());
-			ps.setString(4, caixa.getForma());
-			ps.setInt(5, caixa.getParcela());
-			ps.setString(6, caixa.getDescricao());
+			
+			if(caixa.getEncomendaId()!=null){
+				ps.setInt(1, caixa.getEncomendaId());
+			}else{
+				ps.setNull(1, Types.INTEGER);
+			}
+			if(caixa.getFornecedorId()!=null){
+				ps.setInt(2, caixa.getFornecedorId());
+			}else{
+				ps.setNull(2, Types.INTEGER);
+			}
+			ps.setBigDecimal(3, caixa.getValor());
+			ps.setInt(4, caixa.getGastoRecebimento());
+			ps.setString(5, caixa.getForma());
+			ps.setInt(6, caixa.getParcela());
+			ps.setString(7, caixa.getDescricao());
+			ps.setDate(8, sqlDate);
 						
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -68,22 +84,34 @@ public class CaixaDao implements GenericoDao<Caixa>{
 		boolean status = false;
 		
 		//string query do banco
-		String sql = " UPDATE caixa SET tipoId=?, numeroId=?, recebidoGasto=?, forma=?,"
-				   + " parcela=?, descricao=? where id=?";
+		String sql = " UPDATE caixa SET encomendaId=?, fornecedorId=?, valor=?, gastoRecebimento=?, forma=?,"
+				   + " parcela=?, descricao=?, data=? where id=?";
 		PreparedStatement  ps = null;
+		sqlDate = new Date(caixa.getData().getTime());
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{	
 			//seta os atributos do objeto caixa, fazendo a alteração.
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, caixa.getTipoId());
-			ps.setInt(2, caixa.getNumeroId());
-			ps.setBigDecimal(3, caixa.getRecebidoGasto());
-			ps.setString(4, caixa.getForma());
-			ps.setInt(5, caixa.getParcela());
-			ps.setString(6, caixa.getDescricao());
-			ps.setLong(7, caixa.getId());
+			
+			if(caixa.getEncomendaId()!=null){
+				ps.setInt(1, caixa.getEncomendaId());
+			}else{
+				ps.setNull(1, Types.INTEGER);
+			}
+			if(caixa.getFornecedorId()!=null){
+				ps.setInt(2, caixa.getFornecedorId());
+			}else{
+				ps.setNull(2, Types.INTEGER);
+			}
+			ps.setBigDecimal(3, caixa.getValor());
+			ps.setInt(4, caixa.getGastoRecebimento());
+			ps.setString(5, caixa.getForma());
+			ps.setInt(6, caixa.getParcela());
+			ps.setString(7, caixa.getDescricao());
+			ps.setDate(8, sqlDate);
+			ps.setLong(9, caixa.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -164,13 +192,9 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			{
 				//da um get nos atributos do objeto caixa
 				Caixa caixa = new Caixa();
-				caixa.setId(rs.getLong("id"));
-				caixa.setTipoId(rs.getInt("tipoId"));
-				caixa.setNumeroId(rs.getInt("numeroId"));
-				caixa.setRecebidoGasto(rs.getBigDecimal("recebidoGasto"));
-				caixa.setForma(rs.getString("forma"));
-				caixa.setParcela(rs.getInt("parcela"));
-				caixa.setDescricao(rs.getString("descricao"));
+				
+				
+				
 				
 				//adiciona o objeto caixa no arrayList
 				listaDeCaixa.add(caixa);
@@ -202,36 +226,42 @@ public class CaixaDao implements GenericoDao<Caixa>{
 	 * */
 	
 	@Override
-	public List<Caixa> pesquisar(String pesquisa) throws Exception{
+	public List<Caixa> pesquisar(String pesquisa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public List<Caixa> pesquisarEntre(String inicio, String fim) throws Exception{
+		
 		List<Caixa> caixas = new ArrayList<>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
 		//string query do banco
-		String sql = "SELECT id, tipoId, numeroId, recebidoGasto, forma, parcela, descricao FROM caixa WHERE tipoId = ? OR recebidoGasto LIKE ?";
+		String sql = "SELECT * FROM gracibolos.caixa WHERE data between '"+inicio+"' AND '"+fim+"'";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 			
 			//seta a string para fazer a busca
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, pesquisa);
-			ps.setString(2, "%"+pesquisa+"%");
-			
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
 				
 				//da um get nos atributos do objeto caixa
-				Caixa caixa = new Caixa();				
+				Caixa caixa = new Caixa();	
+					
 				caixa.setId(rs.getLong("id"));
-				caixa.setTipoId(rs.getInt("tipoId"));
-				caixa.setNumeroId(rs.getInt("numeroId"));
-				caixa.setRecebidoGasto(rs.getBigDecimal("recebidoGasto"));
+				caixa.setEncomendaId(rs.getInt("encomendaId"));
+				caixa.setFornecedorId(rs.getInt("fornecedorId"));
+				caixa.setValor(rs.getBigDecimal("valor"));
+				caixa.setGastoRecebimento(rs.getInt("gastoRecebimento"));
 				caixa.setForma(rs.getString("forma"));
 				caixa.setParcela(rs.getInt("parcela"));
 				caixa.setDescricao(rs.getString("descricao"));
-				
+				caixa.setData(rs.getDate("data"));			
+			
 				//adiciona o objeto caixa no arrayList
 				caixas.add(caixa);
 			}
@@ -241,7 +271,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			conn.close();
 		//trata, caso de uma exceção			
 		} catch (Exception e) {
-			System.out.println("Houve um erro ao pesquisar o matéria prima");
+			System.out.println("Houve um erro ao pesquisar o caixa\n"+e);
 		}
 		//retorna o array
 		return caixas;

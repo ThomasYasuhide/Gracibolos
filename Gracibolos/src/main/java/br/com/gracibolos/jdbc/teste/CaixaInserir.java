@@ -1,6 +1,9 @@
 package br.com.gracibolos.jdbc.teste;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import br.com.gracibolos.jdbc.dao.CaixaDao;
 import br.com.gracibolos.jdbc.model.Caixa;
@@ -11,14 +14,24 @@ public class CaixaInserir {
 	public static void main(String[] args) {
 		
 		Caixa c = new Caixa();
-		BigDecimal valor = new BigDecimal(33);
+		BigDecimal valor = new BigDecimal(330.00);
+		 
+		Date data = new Date();
+		try {
+			data = new SimpleDateFormat("dd/MM/yyyy").parse("03/05/2016");
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
-		c.setTipoId(2);
-		c.setNumeroId(1);
-		c.setRecebidoGasto(valor);
+		c.setEncomendaId(3);
+		c.setFornecedorId(null);
+		c.setValor(valor);
+		c.setGastoRecebimento(1);
 		c.setForma("debito");
 		c.setParcela(1);
-		c.setDescricao("testee");
+		c.setDescricao(null);
+		c.setData(data);
 		
 		CaixaDao dao = new CaixaDao();
 		
