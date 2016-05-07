@@ -4,6 +4,7 @@
 <!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <!DOCTYPE html>
 <html lang="PT-BR">
 <head>
@@ -118,7 +119,7 @@
 					<div class="row">
 						<!-- Campo de pesquisar as matérias-primas -->
 						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
-							<label class="control-label">Pesquisar pagamento:</label>
+							<label class="control-label">Pesquisar os pagamentos:</label>
 							<!-- Quando clicar no botão, envia o form para a url abaixo -->
 							<form action="administrativo-pesquisar-caixa" method="POST">
 								<div class="input-group">
