@@ -15,17 +15,18 @@ public class ProdutoProntoInserir {
 		
 		//seto os IDs do (produto e encomenda)
 		//e converto de Long para int na hora de usar o get
-		Produto p = new Produto();
-		p.setId(1L);
 		
-		Encomenda e = new Encomenda();
-		e.setId(1L);
+		//Produto p = new Produto();
+		//p.setId(1L);
 		
-		pPronto.setProdutoId(p.getId().intValue());
-		pPronto.setEncomendaId(e.getId().intValue());
+		//Encomenda e = new Encomenda();
+		//e.setId(1L);
+		
+		pPronto.setProdutoId(13);
+		pPronto.setEncomendaId(null);
 		pPronto.setFinalizado(LocalDate.now());
-		pPronto.setDataValidade(LocalDate.now());
-		pPronto.setCodigo("22");		
+		pPronto.setDataValidade(null);
+		pPronto.setCodigo("22B56NN");		
 		
 		ProdutoProntoDao dao = new ProdutoProntoDao();
 		

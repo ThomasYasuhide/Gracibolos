@@ -23,9 +23,17 @@ public class ProdutoProntoDao implements GenericoDao<ProdutoPronto>{
 		{		
 			ps = conn.prepareStatement(sql);			
 			ps.setInt(1, pPronto.getProdutoId());
-			ps.setInt(2, pPronto.getEncomendaId());			
+			
+			if(pPronto.getEncomendaId()!=null){
+				ps.setInt(2, pPronto.getEncomendaId());	
+			}
+					
 			ps.setDate(3, Date.valueOf(pPronto.getFinalizado()));
-			ps.setDate(4, Date.valueOf(pPronto.getDataValidade()));	
+			
+			if(pPronto.getDataValidade()!=null){
+				ps.setDate(4, Date.valueOf(pPronto.getDataValidade()));	
+			}
+			
 			ps.setString(5, pPronto.getCodigo());
 			
 			if(ps.executeUpdate() != 0) {
