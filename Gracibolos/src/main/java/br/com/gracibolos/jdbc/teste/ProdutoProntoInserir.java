@@ -3,8 +3,6 @@ package br.com.gracibolos.jdbc.teste;
 //funcionando
 import java.time.LocalDate;
 import br.com.gracibolos.jdbc.dao.ProdutoProntoDao;
-import br.com.gracibolos.jdbc.model.Encomenda;
-import br.com.gracibolos.jdbc.model.Produto;
 import br.com.gracibolos.jdbc.model.ProdutoPronto;
 
 public class ProdutoProntoInserir {

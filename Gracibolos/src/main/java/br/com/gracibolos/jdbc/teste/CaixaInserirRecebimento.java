@@ -1,21 +1,16 @@
 package br.com.gracibolos.jdbc.teste;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import br.com.gracibolos.jdbc.dao.CaixaDao;
 import br.com.gracibolos.jdbc.model.Caixa;
 
 //funcionando
 public class CaixaInserirRecebimento {
 
-	@SuppressWarnings("static-access")
 	public static void main(String[] args) 
 	{
 		CaixaDao dao = new CaixaDao();
-		GeradorCaixa gc = gc = new GeradorCaixa();
+		GeradorCaixa gc = new GeradorCaixa();
 		Caixa c = null;
 		Long[] idsEnc = gc.IdsEnc();
 		//int[] idsForn = gc.IdsForn();

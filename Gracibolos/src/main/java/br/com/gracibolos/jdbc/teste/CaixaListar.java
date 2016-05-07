@@ -1,9 +1,5 @@
 package br.com.gracibolos.jdbc.teste;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import br.com.gracibolos.jdbc.dao.CaixaDao;
 import br.com.gracibolos.jdbc.model.Caixa;
 

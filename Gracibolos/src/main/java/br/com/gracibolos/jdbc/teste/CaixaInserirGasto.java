@@ -7,12 +7,11 @@ import br.com.gracibolos.jdbc.model.Caixa;
 
 public class CaixaInserirGasto {
 
-	@SuppressWarnings("static-access")
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
 		CaixaDao dao = new CaixaDao();
-		GeradorCaixa gc = gc = new GeradorCaixa();
+		GeradorCaixa gc = new GeradorCaixa();
 		Caixa c = null;
 		//Long[] idsEnc = gc.IdsEnc();
 		int[] idsForn = gc.IdsForn();

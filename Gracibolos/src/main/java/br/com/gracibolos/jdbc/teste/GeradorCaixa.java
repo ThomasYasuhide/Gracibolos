@@ -1,13 +1,9 @@
 package br.com.gracibolos.jdbc.teste;
 
-import java.time.Instant;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Month;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Random;
 
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
@@ -16,8 +12,7 @@ import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Fornecedor;
 
 public class GeradorCaixa {
-	
-	private static GregorianCalendar gc;
+
 	private static Random ran;
 	private static FornecedorDao daoForn;
 	private static Fornecedor f;
@@ -48,14 +43,14 @@ public class GeradorCaixa {
 	*/
 	
 	//Gerador de id
-	public static int ranIdInt(int[] ids){
+	public int ranIdInt(int[] ids){
 		int id=0;
 		id = ids[ran.nextInt(ids.length)];
 		return id;
 	}
 	
 	//ids do fornecedor
-	public static int[] IdsForn(){	
+	public int[] IdsForn(){	
 		ran = new Random();
 		int i=0;
 		int[] ids = null;
@@ -81,14 +76,14 @@ public class GeradorCaixa {
 	}
 	
 	//Gerador de id
-	public static Long ranIdLong(Long[] ids){
+	public Long ranIdLong(Long[] ids){
 		Long id=0L;
 		id = ids[ran.nextInt(ids.length)];
 		return id;
 	}
 	
 	//ids do encomenda
-	public static Long[] IdsEnc(){	
+	public Long[] IdsEnc(){	
 		ran = new Random();
 		int i=0;
 		Long[] ids = null;
@@ -114,7 +109,7 @@ public class GeradorCaixa {
 	}
 	
 	//Gerador de forma de pagamento
-	public static String ranForma(){
+	public String ranForma(){
 		String[] forma = {"dinheiro", "cheque", "débto", "crédito", "boleto"};
 		ran = new Random();
 		String eForma = forma[ran.nextInt(forma.length)];	
@@ -122,8 +117,7 @@ public class GeradorCaixa {
 	}
 	
 	// Gerador de datas
-	@SuppressWarnings("static-access")
-	public static LocalDate generateDate(){
+	public LocalDate generateDate(){
 		
 		LocalDate start = LocalDate.of(2015, Month.JANUARY, 1);
 	    long days = ChronoUnit.DAYS.between(start, LocalDate.now());
@@ -134,7 +128,7 @@ public class GeradorCaixa {
 	}
 	
 	//gerador de nureos incial e final 
-	public static int randBetween(int start, int end) {
+	public int randBetween(int start, int end) {
         return start + (int)Math.round(Math.random() * (end - start));
     }
 	
