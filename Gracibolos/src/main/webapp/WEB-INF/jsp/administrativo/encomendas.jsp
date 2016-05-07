@@ -296,6 +296,7 @@
 													<input type="date" id="datacancelado" name="datacancelado" class="form-control" value="${encomenda.datacancelamento}" readonly />
 												</div>
 												
+												<!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
 													<label class="control-label" for="cliente">Cliente*:</label>
 													<select id="cliente" name="cliente" class="form-control" placeholder="Insira o nome, RG, CPF, CNPJ ou IE." required></select>

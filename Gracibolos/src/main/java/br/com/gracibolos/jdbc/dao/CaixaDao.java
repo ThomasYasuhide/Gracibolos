@@ -52,7 +52,11 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			ps.setBigDecimal(3, caixa.getValor());
 			ps.setInt(4, caixa.getGastoRecebimento());
 			ps.setString(5, caixa.getForma());
-			ps.setInt(6, caixa.getParcela());
+			if(caixa.getParcela()!=null){
+				ps.setInt(6, caixa.getParcela());
+			}else{
+				ps.setNull(6, Types.INTEGER);
+			}
 			ps.setString(7, caixa.getDescricao());
 			ps.setDate(8, sqlDate);
 						

@@ -18,7 +18,7 @@ public class CaixaInserirRecebimento {
 		GeradorCaixa gc = gc = new GeradorCaixa();
 		Caixa c = null;
 		Long[] idsEnc = gc.IdsEnc();
-		int[] idsForn = gc.IdsForn();
+		//int[] idsForn = gc.IdsForn();
 		int i;
 		int qtd = 100;
 		//
