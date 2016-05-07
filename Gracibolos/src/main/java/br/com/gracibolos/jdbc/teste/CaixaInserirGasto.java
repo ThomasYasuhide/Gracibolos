@@ -8,7 +8,8 @@ import br.com.gracibolos.jdbc.model.Caixa;
 public class CaixaInserirGasto {
 
 	@SuppressWarnings("static-access")
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		// TODO Auto-generated method stub
 		CaixaDao dao = new CaixaDao();
 		GeradorCaixa gc = gc = new GeradorCaixa();
