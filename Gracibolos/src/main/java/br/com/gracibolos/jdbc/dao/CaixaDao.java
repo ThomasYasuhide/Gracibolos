@@ -13,8 +13,6 @@ import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Caixa;
 
 public class CaixaDao implements GenericoDao<Caixa>{
-	
-	private Date sqlDate;
 
 	/*
 	 * INCLUIR CAIXA
@@ -31,7 +29,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 				   + " parcela, descricao, data)"
 				   + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
-		sqlDate = new Date(caixa.getData().getTime());
+		
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
@@ -58,7 +56,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 				ps.setNull(6, Types.INTEGER);
 			}
 			ps.setString(7, caixa.getDescricao());
-			ps.setDate(8, sqlDate);
+			ps.setDate(8, Date.valueOf(caixa.getData()));
 						
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -91,7 +89,6 @@ public class CaixaDao implements GenericoDao<Caixa>{
 		String sql = " UPDATE caixa SET encomendaId=?, fornecedorId=?, valor=?, gastoRecebimento=?, forma=?,"
 				   + " parcela=?, descricao=?, data=? where id=?";
 		PreparedStatement  ps = null;
-		sqlDate = new Date(caixa.getData().getTime());
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
@@ -114,7 +111,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			ps.setString(5, caixa.getForma());
 			ps.setInt(6, caixa.getParcela());
 			ps.setString(7, caixa.getDescricao());
-			ps.setDate(8, sqlDate);
+			ps.setDate(8, Date.valueOf(caixa.getData()));
 			ps.setLong(9, caixa.getId());
 			
 			if(ps.executeUpdate() != 0) {
@@ -264,7 +261,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 				caixa.setForma(rs.getString("forma"));
 				caixa.setParcela(rs.getInt("parcela"));
 				caixa.setDescricao(rs.getString("descricao"));
-				caixa.setData(rs.getDate("data"));			
+				caixa.setData(rs.getDate("data").toLocalDate());			
 			
 				//adiciona o objeto caixa no arrayList
 				caixas.add(caixa);

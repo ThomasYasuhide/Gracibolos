@@ -7,7 +7,11 @@ package br.com.gracibolos.jdbc.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  *
@@ -32,7 +36,8 @@ public class Caixa implements Serializable{
     private String forma; // de pagamento
     private Integer parcela;
     private String descricao;
-    private Date data;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate data;
 
 	public Long getId() {
 		return id;
@@ -82,10 +87,10 @@ public class Caixa implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 

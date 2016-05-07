@@ -3,6 +3,7 @@ package br.com.gracibolos.jdbc.teste;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import br.com.gracibolos.jdbc.dao.CaixaDao;
@@ -13,23 +14,17 @@ public class CaixaAlterar {
 
 	public static void main(String[] args) {
 	
-		Caixa c = new Caixa();
-		BigDecimal valor = new BigDecimal(336.00);
+		Caixa c = new Caixa();	
 		
-		Date data = new Date();
-		try {
-			data = new SimpleDateFormat("dd/MM/yyyy").parse("06/05/2016");
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}	
 		c.setEncomendaId(null);
 		c.setFornecedorId(1);
+		BigDecimal valor = new BigDecimal(336.00);
 		c.setValor(valor);
 		c.setGastoRecebimento(1);
 		c.setForma("debito");
 		c.setParcela(1);
 		c.setDescricao(null);
+		LocalDate data = LocalDate.of(2016, 05, 06);
 		c.setData(data);
 		c.setId(10L);
 		

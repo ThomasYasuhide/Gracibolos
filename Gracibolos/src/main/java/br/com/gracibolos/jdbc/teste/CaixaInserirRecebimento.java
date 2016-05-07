@@ -42,22 +42,10 @@ public class CaixaInserirRecebimento {
 			c.setParcela(1);
 			//descricao
 			c.setDescricao(null);
-			
-			/* //Conversão para Date
-			Date data = new Date();
-			try {
-				data = new SimpleDateFormat("dd/MM/yyyy").parse("03/05/2016");
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} */
-			
 			//data
 			c.setData(gc.generateDate());
 			try {
 				if(dao.inserir(c) == true){
-					
-					//System.out.println("inserido com sucesso : "+ i+1 +": registro");
 				}
 				else{
 					System.out.println("falha");

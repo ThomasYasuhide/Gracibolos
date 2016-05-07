@@ -1,5 +1,12 @@
 package br.com.gracibolos.jdbc.teste;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
@@ -7,8 +14,6 @@ import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Fornecedor;
-
-import java.util.Date;
 
 public class GeradorCaixa {
 	
@@ -118,17 +123,14 @@ public class GeradorCaixa {
 	
 	// Gerador de datas
 	@SuppressWarnings("static-access")
-	public static Date generateDate(){
+	public static LocalDate generateDate(){
 		
-		gc = new GregorianCalendar();
-        //int year = randBetween(2015, 2016);
-		int year = 2016;
-        gc.set(gc.YEAR, year);
-        int dayOfYear = randBetween(1, gc.getActualMaximum(gc.DAY_OF_YEAR));
-        gc.set(gc.DAY_OF_YEAR, dayOfYear);
-        //System.out.println(gc.get(gc.YEAR) + "-" + (gc.get(gc.MONTH) + 1) + "-" + gc.get(gc.DAY_OF_MONTH));  
-        Date data = gc.getTime();
-        return data;
+		LocalDate start = LocalDate.of(2015, Month.JANUARY, 1);
+	    long days = ChronoUnit.DAYS.between(start, LocalDate.now());
+	    LocalDate randomDate = start.plusDays(new Random().nextInt((int) days + 1));
+	    //System.out.println(randomDate);
+	    
+        return randomDate;
 	}
 	
 	//gerador de nureos incial e final 
