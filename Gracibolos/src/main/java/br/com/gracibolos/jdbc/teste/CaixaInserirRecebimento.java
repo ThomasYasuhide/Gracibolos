@@ -10,12 +10,12 @@ public class CaixaInserirRecebimento {
 	public static void main(String[] args) 
 	{
 		CaixaDao dao = new CaixaDao();
-		GeradorCaixa gc = new GeradorCaixa();
+		Gerador gc = new Gerador();
 		Caixa c = null;
 		Long[] idsEnc = gc.IdsEnc();
 		//int[] idsForn = gc.IdsForn();
 		int i;
-		int qtd = 1;
+		int qtd = 400;
 		//
 		for(i=0; i<qtd;i++)
 		{	

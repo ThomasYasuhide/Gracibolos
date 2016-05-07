@@ -1219,16 +1219,16 @@ public class AdministrativoController {
 		return mv;
 	}
 			
-	//PESQUISAR CAIXA
-	@RequestMapping("/administrativo-pesquisar-caixa")
-	public ModelAndView pesquisar_caixa (String pesquisa){
-		System.out.println("Realizou a pesquisa do caixa");
+	//PESQUISAR ENTRE CAIXA
+	@RequestMapping("/administrativo-pesquisar-entre")
+	public ModelAndView pesquisar_entre (String inicio, String fim){
+		System.out.println("Realizou a pesquisa entre datas do caixa");
 		
 		//cria uma nova instância DAO do caixa
 		CaixaDao dao = new CaixaDao();		
 		List<Caixa> caixas = null;
 		try {
-			caixas = dao.pesquisar(pesquisa);
+			caixas = dao.pesquisarEntre(inicio, fim);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1238,7 +1238,7 @@ public class AdministrativoController {
 	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/caixa");
 	    //passa a lista do caixa para a Expression Language chamada caixas
-		mv.addObject("caixas", caixas);
+		mv.addObject("listCaixa", caixas);
 	    //retorna mv
 	    return mv;
 	}
@@ -1283,7 +1283,7 @@ public class AdministrativoController {
 			//TESTES
 				Encomenda encomenda = new Encomenda();
 				encomenda.setId((long) 667);
-				encomenda.setClienteid((long) 5);
+				encomenda.setClienteid(5);
 				encomenda.setClientenome("Breno Rufino");
 				encomenda.setClientecpfcnpj("212.542.288-21");
 				encomenda.setTotalprodutos(new BigDecimal("300.00"));

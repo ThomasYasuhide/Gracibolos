@@ -3,7 +3,7 @@ package br.com.gracibolos.jdbc.teste;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class enderecoIp {
+public class EnderecoIp {
 	
 	
 	

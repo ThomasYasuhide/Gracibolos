@@ -25,8 +25,9 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		boolean status = false;
 		
 		//string query do banco
-		String sql = " INSERT INTO encomenda(cliente, status, responsavel, dataentrega, dataencomenda, total, obs)"
-				   + " VALUES (?, ?, ?, ?, ?, ? ,?)";
+		String sql = " INSERT INTO encomenda(status, dataencomenda, dataentrega, cliente, responsavel,"
+				+ "datafaturamento , dataproducao, datafinalizado, datacancelado, total, obs)"
+				   + " VALUES (?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
@@ -34,11 +35,40 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			
 			//seta os atributos do objeto encomenda
 			ps = conn.prepareStatement(sql);
-			ps.setLong(1, encomenda.getClienteid());
-			ps.setLong(2, encomenda.getStatus());
-			ps.setString(3, encomenda.getResponsavel());
-			ps.setDate(4, Date.valueOf(encomenda.getDataentrega()));
-			ps.setDate(5, Date.valueOf(encomenda.getDataencomenda()));
+			ps.setInt(1, encomenda.getStatus());
+			if(encomenda.getDataencomenda()!=null){
+				ps.setDate(2, Date.valueOf(encomenda.getDataencomenda()));
+			}else{
+				ps.setNull(2, Types.DATE);
+			}
+			if(encomenda.getDataentrega()!=null){
+				ps.setDate(3, Date.valueOf(encomenda.getDataentrega()));
+			}else{
+				ps.setNull(3, Types.DATE);
+			}
+			
+			ps.setInt(4, encomenda.getClienteid());
+			ps.setString(5, encomenda.getResponsavel());
+			if(encomenda.getDatafaturamento()!=null){
+				ps.setDate(6, Date.valueOf(encomenda.getDatafaturamento()));
+			}else{
+				ps.setNull(6, Types.DATE);
+			}
+			if(encomenda.getDataproducao()!=null){
+				ps.setDate(7, Date.valueOf(encomenda.getDataproducao()));
+			}else{
+				ps.setNull(7, Types.DATE);
+			}
+			if(encomenda.getDatafinalizado()!=null){
+				ps.setDate(8, Date.valueOf(encomenda.getDatafinalizado()));
+			}else{
+				ps.setNull(8, Types.DATE);
+			}
+			if(encomenda.getDatacancelamento()!=null){
+				ps.setDate(9, Date.valueOf(encomenda.getDatacancelamento()));
+			}else{
+				ps.setNull(9, Types.DATE);
+			}
 			ps.setBigDecimal(10, encomenda.getTotalprodutos());
 			ps.setString(11, encomenda.getObs());
 			
@@ -197,7 +227,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				//da um get nos atributos do objeto encomenda
 				Encomenda encomenda = new Encomenda();
 				encomenda.setId(rs.getLong("id"));
-				encomenda.setClienteid(rs.getLong("cliente"));	
+				encomenda.setClienteid(rs.getInt("cliente"));	
 				encomenda.setStatus(rs.getInt("status"));
 				encomenda.setResponsavel(rs.getString("responsavel"));
 				if(rs.getDate("dataencomenda")!=null)
@@ -264,7 +294,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				//da um get nos atributos do objeto encomenda
 				Encomenda encomenda = new Encomenda();
 				encomenda.setId(rs.getLong("id"));
-				encomenda.setClienteid(rs.getLong("cliente"));	
+				encomenda.setClienteid(rs.getInt("cliente"));	
 				encomenda.setStatus(rs.getInt("status"));
 				encomenda.setResponsavel(rs.getString("responsavel"));
 				encomenda.setDataencomenda(rs.getDate("dataencomenda").toLocalDate());

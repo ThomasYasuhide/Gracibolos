@@ -283,7 +283,7 @@ public class ClienteDao implements GenericoDao<Cliente>{
 		}
 		//trata, caso de uma exceção
 		catch (Exception e) {
-			System.out.println("Houve um erro ao listar os clientes");
+			System.out.println("Houve um erro ao listar os clientes\n"+e);
 			throw new Exception("Houve um erro ao listar os clientes");
 		}
 		//retorna o array

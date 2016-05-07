@@ -6,20 +6,24 @@ import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
+import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
+import br.com.gracibolos.jdbc.model.Cliente;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Fornecedor;
 
-public class GeradorCaixa {
+public class Gerador {
 
 	private static Random ran;
 	private static FornecedorDao daoForn;
 	private static Fornecedor f;
 	private static EncomendaDao daoEnc;
 	private static Encomenda e;
+	private static ClienteDao daoCli;
+	private static Cliente c;
 	
-	public GeradorCaixa() {
+	public Gerador() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -49,6 +53,30 @@ public class GeradorCaixa {
 		return id;
 	}
 	
+	//ids do clientes
+		public int[] IdsCli(){	
+			ran = new Random();
+			int i=0;
+			int[] ids = null;
+			try {
+				daoCli = new ClienteDao();
+				i = daoCli.listar().size();
+				ids = new int[i];
+					
+				for(int j=0;j<i;j++){
+					c = new Cliente();
+					c = daoCli.listar().get(j);
+					ids[j] = c.getId();
+					//System.out.println(ids[j]);
+				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+			return ids;
+		}
+	
 	//ids do fornecedor
 	public int[] IdsForn(){	
 		ran = new Random();
@@ -70,8 +98,6 @@ public class GeradorCaixa {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//id = ids[8];
-		
 		return ids;
 	}
 	
@@ -103,8 +129,6 @@ public class GeradorCaixa {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//id = ids[8];
-		
 		return ids;
 	}
 	
@@ -120,7 +144,9 @@ public class GeradorCaixa {
 	public LocalDate generateDate(){
 		
 		LocalDate start = LocalDate.of(2015, Month.JANUARY, 1);
-	    long days = ChronoUnit.DAYS.between(start, LocalDate.now());
+		LocalDate end = LocalDate.of(2016, Month.DECEMBER, 31);
+		
+	    long days = ChronoUnit.DAYS.between(start, end);
 	    LocalDate randomDate = start.plusDays(new Random().nextInt((int) days + 1));
 	    //System.out.println(randomDate);
 	    
