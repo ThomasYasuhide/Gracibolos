@@ -40,7 +40,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			ps = conn.prepareStatement(sql);
 			
 			if(caixa.getEncomendaId()!=null){
-				ps.setInt(1, caixa.getEncomendaId());
+				ps.setLong(1, caixa.getEncomendaId());
 			}else{
 				ps.setNull(1, Types.INTEGER);
 			}
@@ -96,7 +96,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			ps = conn.prepareStatement(sql);
 			
 			if(caixa.getEncomendaId()!=null){
-				ps.setInt(1, caixa.getEncomendaId());
+				ps.setLong(1, caixa.getEncomendaId());
 			}else{
 				ps.setNull(1, Types.INTEGER);
 			}
@@ -253,7 +253,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 				Caixa caixa = new Caixa();	
 					
 				caixa.setId(rs.getLong("id"));
-				caixa.setEncomendaId(rs.getInt("encomendaId"));
+				caixa.setEncomendaId(rs.getLong("encomendaId"));
 				caixa.setFornecedorId(rs.getInt("fornecedorId"));
 				caixa.setValor(rs.getBigDecimal("valor"));
 				caixa.setGastoRecebimento(rs.getInt("gastoRecebimento"));

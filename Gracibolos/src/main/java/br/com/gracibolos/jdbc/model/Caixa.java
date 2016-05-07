@@ -25,7 +25,7 @@ public class Caixa implements Serializable{
     }
        
     private Long id; 
-    private Integer encomendaId; //encomenda Id ou materia Prima Id
+    private Long encomendaId; //encomenda Id ou materia Prima Id
     private Integer fornecedorId;
     private BigDecimal valor; // valor recebido da encomenda, ou valor gasto na compra de materia prima
     private int gastoRecebimento;
@@ -40,10 +40,10 @@ public class Caixa implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Integer getEncomendaId() {
+	public Long getEncomendaId() {
 		return encomendaId;
 	}
-	public void setEncomendaId(Integer encomendaId) {
+	public void setEncomendaId(Long encomendaId) {
 		this.encomendaId = encomendaId;
 	}
 	public Integer getFornecedorId() {

@@ -200,12 +200,18 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				encomenda.setClienteid(rs.getLong("cliente"));	
 				encomenda.setStatus(rs.getInt("status"));
 				encomenda.setResponsavel(rs.getString("responsavel"));
-				encomenda.setDataencomenda(rs.getDate("dataencomenda").toLocalDate());
-				encomenda.setDataentrega(rs.getDate("dataentrega").toLocalDate());
-				encomenda.setDatafaturamento(rs.getDate("datafaturamento").toLocalDate());
-				encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
-				encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
-				encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
+				if(rs.getDate("dataencomenda")!=null)
+					encomenda.setDataencomenda(rs.getDate("dataencomenda").toLocalDate());
+				if(rs.getDate("dataentrega")!=null)
+					encomenda.setDataentrega(rs.getDate("dataentrega").toLocalDate());
+				if(rs.getDate("datafaturamento")!=null)
+					encomenda.setDatafaturamento(rs.getDate("datafaturamento").toLocalDate());
+				if(rs.getDate("dataproducao")!=null)
+					encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
+				if(rs.getDate("datafinalizado")!=null)
+					encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
+				if(rs.getDate("datacancelado")!=null)
+					encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
 				encomenda.setTotalprodutos(rs.getBigDecimal("total"));
 				encomenda.setObs(rs.getString("obs"));
 				
