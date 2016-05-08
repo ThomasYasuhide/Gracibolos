@@ -1,6 +1,6 @@
 package br.com.gracibolos.jdbc.teste;
 
-import java.math.BigDecimal;
+//import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
@@ -14,7 +14,7 @@ public class EncomendaInserir {
 		Encomenda encomenda;
 		Gerador g = new Gerador();
 		int[] ids = g.IdsCli();
-		BigDecimal total;
+		//BigDecimal total;
 		int idCli;
 		
 		encomenda = new Encomenda();
@@ -29,8 +29,8 @@ public class EncomendaInserir {
 		encomenda.setDatafinalizado(LocalDate.now());
 		encomenda.setDatacancelamento(LocalDate.now());
 		
-		total = new BigDecimal(g.randBetween(8, 250));
-		encomenda.setTotalprodutos(total);
+		//total = new BigDecimal(g.randBetween(8, 250));
+		encomenda.setTotalprodutos(null);
 		encomenda.setObs("teste");
 		
 		

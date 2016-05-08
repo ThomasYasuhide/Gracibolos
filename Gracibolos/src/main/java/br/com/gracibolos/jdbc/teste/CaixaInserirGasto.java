@@ -16,7 +16,7 @@ public class CaixaInserirGasto {
 		//Long[] idsEnc = gc.IdsEnc();
 		int[] idsForn = gc.IdsForn();
 		int i;
-		int qtd = 250;
+		int qtd = 150;
 		//
 		for(i=0; i<qtd;i++)
 		{	
