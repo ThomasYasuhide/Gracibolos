@@ -1,5 +1,8 @@
 package br.com.gracibolos.jdbc.teste;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.model.Encomenda;
 
@@ -9,21 +12,23 @@ public class EncomendaAlterar {
 	public static void main(String[] args) {
 		
 		Encomenda encomenda = new Encomenda();
-//		BigDecimal big = new BigDecimal(45.90);
+		BigDecimal big = new BigDecimal(45.90);
+		Gerador g = new Gerador();
+		int[] ids = g.IdsCli();
+		int id = g.ranIdInt(ids);
 		
 		encomenda.setId(1L);
-		//encomenda.setClienteId("1L");	
-		//encomenda.setStatusNome("1L");
-//		encomenda.setResponsavel("responsavel");
-//		encomenda.setDataInicio(LocalDate.now());
-//		encomenda.setDataFaltaProd(LocalDate.now());
-//		encomenda.setDataProducao(LocalDate.now());
-//		encomenda.setDataFinalizado(LocalDate.now());
-//		encomenda.setDataEntrega(LocalDate.now());
-//		encomenda.setEntregaRetirada(true);
-//		encomenda.setTotal(big);
-//		encomenda.setDescricao("completo");
-//		encomenda.setNumero(87);
+		encomenda.setClienteid(id);	
+		encomenda.setStatus(2);
+		encomenda.setResponsavel("responsavel");
+		encomenda.setDataencomenda(LocalDate.now());
+		encomenda.setDatacancelamento(LocalDate.now());
+		encomenda.setDataproducao(LocalDate.now());
+		encomenda.setDatafinalizado(LocalDate.now());
+		encomenda.setDataentrega(LocalDate.now());
+		encomenda.setDatafaturamento(LocalDate.now());
+		encomenda.setTotalprodutos(big);
+		encomenda.setObs("completo");
 		
 		EncomendaDao dao = new EncomendaDao();
 		

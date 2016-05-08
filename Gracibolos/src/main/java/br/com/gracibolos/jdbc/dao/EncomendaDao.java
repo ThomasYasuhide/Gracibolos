@@ -101,7 +101,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		
 		//string query do banco
 		String sql = " UPDATE encomenda SET cliente=?, status=?, responsavel=?, dataencomenda=?, dataentrega=?,"
-				   + " datafaturamento=?, dataproducao=?, datafinalizado=?, datacancelamento=?, total=?, obs=? WHERE id=?";
+				   + " datafaturamento=?, dataproducao=?, datafinalizado=?, datacancelado=?, total=?, obs=? WHERE id=?";
 		
 		PreparedStatement  ps = null;
 		

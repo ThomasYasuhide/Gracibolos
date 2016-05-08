@@ -15,11 +15,14 @@ public class EncomendaInserir {
 		Gerador g = new Gerador();
 		int[] ids = g.IdsCli();
 		BigDecimal total;
+		int idCli;
 		
 		encomenda = new Encomenda();
-		int idCli = g.ranIdInt(ids);
+		idCli = g.ranIdInt(ids);
+		encomenda.setStatus(g.randBetween(1, 5));//vai de 1 - 4
+		encomenda.setDataencomenda(LocalDate.now());
+		encomenda.setDataentrega(LocalDate.now());
 		encomenda.setClienteid(idCli);	
-		encomenda.setStatus(g.randBetween(1, 4));//vai de 1 - 4
 		encomenda.setResponsavel(null);
 		encomenda.setDatafaturamento(LocalDate.now());
 		encomenda.setDataproducao(LocalDate.now());
