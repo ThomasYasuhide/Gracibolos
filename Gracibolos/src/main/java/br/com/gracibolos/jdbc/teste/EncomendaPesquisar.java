@@ -3,15 +3,18 @@ package br.com.gracibolos.jdbc.teste;
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.model.Encomenda;
 
-//funcionando, porem está listando (br.com.gracibolos.jdbc.model.Encomenda@1c6c3b2..) não sei pq
-public class EncomendaListar {
+public class EncomendaPesquisar {
 
 	public static void main(String[] args) {
-		
+		// TODO Auto-generated method stub
 		EncomendaDao dao = new EncomendaDao();
+		Encomenda e = null;
+		Gerador g = new Gerador();
+		Long[] ids = g.IdsEnc();
+		Long id = g.ranIdLong(ids);
 		
 		try {
-			for(Encomenda e : dao.listar()){
+				e = dao.pesquisarId(id);
 				System.out.println(	  
 								 		 "Id : "+e.getId()
 							   +"\tClienteId : "+e.getClienteid()
@@ -27,9 +30,9 @@ public class EncomendaListar {
 			             	   +"\tDescricao : "+e.getObs()
 			             	   	 
 			             	  );					
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 
 	}

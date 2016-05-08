@@ -11,7 +11,7 @@ public class EncomendaExcluir {
 		EncomendaDao dao = new EncomendaDao();
 		
 		Encomenda encomenda = new Encomenda();
-		encomenda.setId(2L);
+		encomenda.setId(6L);
 		
 		try {
 			if(dao.excluir(encomenda) == true){

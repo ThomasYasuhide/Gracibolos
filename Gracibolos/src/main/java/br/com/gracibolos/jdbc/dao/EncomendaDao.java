@@ -270,46 +270,48 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 	 * Este método tem como principal objetivo realizar uma consulta ao banco e retornar os dados das encomendas pesquisados.
 	 * 
 	 * */
-
+	
 	@Override
-	public List<Encomenda> pesquisar(String pesquisa) throws Exception{
+	public List<Encomenda> pesquisar(String pesquisa) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public Encomenda pesquisarId(Long pesquisa) throws Exception{
 		
 		//string query do banco
 		String sql = "SELECT id, cliente, status, responsavel, dataencomenda, dataentrega, datafaturamento, dataproducao, datafinalizado, datacancelado, total, obs FROM encomenda WHERE id=?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<Encomenda> encomendas = null;
-		
+		Encomenda encomenda=null;
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
-		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
-			
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) 
+		{	
 			//seta a string para fazer a busca
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, pesquisa);
-			
+			ps.setLong(1, pesquisa);
 			rs = ps.executeQuery();
-			encomendas = new ArrayList<Encomenda>();
-			
-			while(rs.next()) {
-				//da um get nos atributos do objeto encomenda
-				Encomenda encomenda = new Encomenda();
-				encomenda.setId(rs.getLong("id"));
-				encomenda.setClienteid(rs.getInt("cliente"));	
-				encomenda.setStatus(rs.getInt("status"));
-				encomenda.setResponsavel(rs.getString("responsavel"));
+			rs.next();
+			//da um get nos atributos do objeto encomenda
+			encomenda = new Encomenda();
+			encomenda.setId(rs.getLong("id"));
+			encomenda.setClienteid(rs.getInt("cliente"));	
+			encomenda.setStatus(rs.getInt("status"));
+			encomenda.setResponsavel(rs.getString("responsavel"));
+			if(rs.getDate("dataencomenda")!=null)
 				encomenda.setDataencomenda(rs.getDate("dataencomenda").toLocalDate());
+			if(rs.getDate("dataentrega")!=null)
 				encomenda.setDataentrega(rs.getDate("dataentrega").toLocalDate());
+			if(rs.getDate("datafaturamento")!=null)
 				encomenda.setDatafaturamento(rs.getDate("datafaturamento").toLocalDate());
+			if(rs.getDate("dataproducao")!=null)
 				encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
+			if(rs.getDate("datafinalizado")!=null)
 				encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
+			if(rs.getDate("datacancelado")!=null)
 				encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
-				encomenda.setTotalprodutos(rs.getBigDecimal("total"));
-				encomenda.setObs(rs.getString("obs"));
-				
-				//adiciona o objeto encomenda no arrayList
-				encomendas.add(encomenda);
-				 
-			}
+			encomenda.setTotalprodutos(rs.getBigDecimal("total"));
+			encomenda.setObs(rs.getString("obs"));
 			
 			ps.close();
 			conn.close();			
@@ -318,9 +320,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		catch (SQLException e) {
 			System.out.println("Erro ao listar as encomendas\n"+e);
 		}
-		
 		//retorna o array
-		return encomendas;
+		return encomenda;
 	}
-
 }

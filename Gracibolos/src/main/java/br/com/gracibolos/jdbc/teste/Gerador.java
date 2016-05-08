@@ -108,7 +108,7 @@ public class Gerador {
 		return id;
 	}
 	
-	//ids do encomenda
+	//ids da encomenda
 	public Long[] IdsEnc(){	
 		ran = new Random();
 		int i=0;
