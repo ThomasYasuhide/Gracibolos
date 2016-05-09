@@ -16,34 +16,8 @@ public class DashboardDao {
 	
 	private static Gasto gasto;
 	private static Recebimento rec;
-	
-	public static void main(String[] args) 
-	{
-		String ano = "2016";
-		Gasto g = new Gasto();
-		Recebimento r = new Recebimento();
 		
-		g = getGR(ano).getGasto();
-		r = getGR(ano).getRec();
-		
-		System.out.println("Janeiro : "+g.getJaneiro()+" - "+r.getJaneiro()+
-						  "\nFevereiro : "+g.getFevereiro()+" - "+r.getFevereiro()+
-						 "\nMarço : "+g.getMarco()+" - "+r.getMarco()+
-						 "\nAbril : "+g.getAbril()+" - "+r.getAbril()+
-						 "\nMaio : "+g.getMaio()+" - "+r.getMaio()+
-						 "\nJunho : "+g.getJunho()+" - "+r.getJunho()+
-						 "\nJulho : "+g.getJulho()+" - "+r.getJulho()+
-						 "\nAgosto : "+g.getAgosto()+" - "+r.getAgosto()+
-						 "\nSetembro : "+g.getSetembro()+" - "+r.getSetembro()+
-						 "\nOutubro : "+g.getOutubro()+" - "+r.getOutubro()+
-						 "\nNovembro : "+g.getNovembro()+" - "+r.getNovembro()+
-						 "\nDezembro : "+g.getDezembro()+" - "+r.getDezembro()
-				);
-	}
-	
-	
-	
-	public static GastoRecebimento getGR(String ano)
+	public GastoRecebimento getGR(String ano)
 	{
 		gasto = buscarGasto(ano);
 		rec = buscarRecebimento(ano);
@@ -51,83 +25,81 @@ public class DashboardDao {
 		return gr;
 	}
 	
-	
-	
 	private static Recebimento buscarRecebimento(String ano)
-	{
+	{	
+		// um igual a recebimento
 		List<Ano> gL = buscar("1",ano);
 		Recebimento r = new Recebimento();
 		if(buscar("1",ano).size()==0){
 			return r;
 		}else{
 			if(gL.get(0).getTotal()!=0)
-				r.setJaneiro(gL.get(0).getTotal()); 
+				r.setJaneiro(gL.get(0).getTotal());// Janeiro 
 			if(gL.get(1).getTotal()!=0)
-				r.setFevereiro(gL.get(1).getTotal());
+				r.setFevereiro(gL.get(1).getTotal());// Fevereiro
 			if(gL.get(2).getTotal()!=0)
-				r.setMarco(gL.get(2).getTotal()); 
+				r.setMarco(gL.get(2).getTotal());// Março 
 			if(gL.get(3).getTotal()!=0)
-				r.setAbril(gL.get(3).getTotal()); 
+				r.setAbril(gL.get(3).getTotal());// Abril 
 			if(gL.get(4).getTotal()!=0)
-				r.setMaio(gL.get(4).getTotal()); 
+				r.setMaio(gL.get(4).getTotal()); // Maio
 			if(gL.get(5).getTotal()!=0)
-				r.setJunho(gL.get(5).getTotal());
+				r.setJunho(gL.get(5).getTotal());// Junho
 			if(gL.get(6).getTotal()!=0)
-				r.setJulho(gL.get(6).getTotal());
+				r.setJulho(gL.get(6).getTotal());// Julho
 			if(gL.get(7).getTotal()!=0)
-				r.setAgosto(gL.get(7).getTotal());
+				r.setAgosto(gL.get(7).getTotal());// Agosto
 			if(gL.get(8).getTotal()!=0)
-				r.setSetembro(gL.get(8).getTotal());
+				r.setSetembro(gL.get(8).getTotal());// Setembro
 			if(gL.get(9).getTotal()!=0)
-				r.setOutubro(gL.get(9).getTotal());
+				r.setOutubro(gL.get(9).getTotal());// Outubro
 			if(gL.get(10).getTotal()!=0)	
-				r.setNovembro(gL.get(10).getTotal());
+				r.setNovembro(gL.get(10).getTotal());// Novembro
 			if(gL.get(11).getTotal()!=0)	
-				r.setDezembro(gL.get(11).getTotal());
+				r.setDezembro(gL.get(11).getTotal());// Dezembro
 		}
 		return r;
 	}
 	
 	private static Gasto buscarGasto(String ano)
 	{
+		// zero igual a gasto
 		List<Ano> gL = buscar("0",ano);
 		Gasto g = new Gasto();
-		//System.out.println(buscar("0",ano).size());
 		if(buscar("0",ano).size() == 0)
 		{
 			return g;
 		}else{
 			if(gL.get(0).getTotal()!=0)
-				g.setJaneiro(gL.get(0).getTotal());
+				g.setJaneiro(gL.get(0).getTotal());// Janeiro
 			if(gL.get(1).getTotal()!=0)
-				g.setFevereiro(gL.get(1).getTotal());
+				g.setFevereiro(gL.get(1).getTotal());// Fevereiro
 			if(gL.get(2).getTotal()!=0)
-				g.setMarco(gL.get(2).getTotal()); 
+				g.setMarco(gL.get(2).getTotal()); // Março
 			if(gL.get(3).getTotal()!=0)
-				g.setAbril(gL.get(3).getTotal()); 
+				g.setAbril(gL.get(3).getTotal()); // Abril
 			if(gL.get(4).getTotal()!=0)
-				g.setMaio(gL.get(4).getTotal()); 
+				g.setMaio(gL.get(4).getTotal()); // Maio
 			if(gL.get(5).getTotal()!=0)
-				g.setJunho(gL.get(5).getTotal());
+				g.setJunho(gL.get(5).getTotal());// Junho
 			if(gL.get(6).getTotal()!=0)
-				g.setJulho(gL.get(6).getTotal());
+				g.setJulho(gL.get(6).getTotal());// Julho
 			if(gL.get(7).getTotal()!=0)
-				g.setAgosto(gL.get(7).getTotal());
+				g.setAgosto(gL.get(7).getTotal());// Agosto
 			if(gL.get(8).getTotal()!=0)
-				g.setSetembro(gL.get(8).getTotal());
+				g.setSetembro(gL.get(8).getTotal());// Setembro
 			if(gL.get(9).getTotal()!=0)
-				g.setOutubro(gL.get(9).getTotal());
+				g.setOutubro(gL.get(9).getTotal());// Outubro
 			if(gL.get(10).getTotal()!=0)	
-				g.setNovembro(gL.get(10).getTotal());
+				g.setNovembro(gL.get(10).getTotal());// Novembro
 			if(gL.get(11).getTotal()!=0)	
-				g.setDezembro(gL.get(11).getTotal());
+				g.setDezembro(gL.get(11).getTotal());// Dezembro
 		}
 		return g;
 	}
 	
 	private static List<Ano> buscar(String gr, String ano)
 	{
-		//Gasto g = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Ano a = null;
@@ -149,10 +121,9 @@ public class DashboardDao {
 				meses.add(a);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
-		
 		return meses;
 	}
 }

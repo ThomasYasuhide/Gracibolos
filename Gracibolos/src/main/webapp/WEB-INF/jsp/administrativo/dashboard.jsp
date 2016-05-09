@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="PT-BR">
@@ -36,7 +36,7 @@
 
 					<!-- Titulo e subtitulo da pagina -->
 					<header>
-						<h2 class="">DASHBOARD</h2>
+						<h2 class="">DASHBOARD ${r.getJaneiro }</h2>
 						<h4 class="">Tabelas estatistícas</h4>
 					</header>
 
@@ -45,6 +45,7 @@
 					<!-- ########## CONTEUDO ########## -->
 										
 					<div>
+						
 						<h3>Grafico de valores de venda por mês</h3>
 						<canvas id="valores" height="100px"></canvas>
 						<p>Valores espressos em R$</p>
@@ -87,7 +88,7 @@
 					pointStrokeColor : "#fff",
 					pointHighlightFill : "#fff",
 					pointHighlightStroke : "rgba(151,187,205,1)",
-					data : [20,200,100,300,100,400,100,900,300,600,400]
+					data : [150,20,200,100,300,100,400,100,900,300,600,400]
 				}
 			]
 
