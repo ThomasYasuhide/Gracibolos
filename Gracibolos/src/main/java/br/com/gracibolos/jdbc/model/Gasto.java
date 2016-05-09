@@ -17,7 +17,6 @@ public class Gasto {
 
 	public Gasto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public double getJaneiro() {

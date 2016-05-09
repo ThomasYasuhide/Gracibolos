@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,7 +24,6 @@ import br.com.gracibolos.jdbc.dao.CaixaDao;
 import br.com.gracibolos.jdbc.dao.CidadeDao;
 import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.ColaboradorDao;
-import br.com.gracibolos.jdbc.dao.DashboardDao;
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.dao.EstadoDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
@@ -42,28 +39,14 @@ import br.com.gracibolos.jdbc.model.Fornecedor;
 import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Produto;
-import br.com.gracibolos.jdbc.model.Recebimento;
 
 @Controller
 public class AdministrativoController {
-	
 	//DASHBOARD
 	@RequestMapping("/administrativo-dashboard")
-	public ModelAndView dashboard()
-	{
+	public ModelAndView dashboard(){
 		System.out.println("Entrou na pagina dashboard");
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("administrativo/dashboard");
-		DashboardDao dao = new DashboardDao();
-		LocalDate data = LocalDate.now();
-		Recebimento r = new Recebimento();
-		r = dao.getGR(String.valueOf(data.getYear())).getRec();
-		Map<String, Object> modelMap = new LinkedHashMap<String, Object>();
-		modelMap.put("rJan", r.getJaneiro());
-		mv.addAllObjects(modelMap);
-		
-		return mv;
+		return new ModelAndView("administrativo/dashboard");
 	}
 	
 	/*

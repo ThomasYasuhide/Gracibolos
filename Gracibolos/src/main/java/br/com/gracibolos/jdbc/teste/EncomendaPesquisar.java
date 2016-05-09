@@ -6,7 +6,6 @@ import br.com.gracibolos.jdbc.model.Encomenda;
 public class EncomendaPesquisar {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		EncomendaDao dao = new EncomendaDao();
 		Encomenda e = null;
 		Gerador g = new Gerador();
