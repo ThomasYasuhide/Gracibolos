@@ -1238,7 +1238,7 @@ public class AdministrativoController {
 	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/caixa");
 	    //passa a lista do caixa para a Expression Language chamada caixas
-		mv.addObject("listCaixa", caixas);
+		mv.addObject("caixas", caixas);
 	    //retorna mv
 	    return mv;
 	}

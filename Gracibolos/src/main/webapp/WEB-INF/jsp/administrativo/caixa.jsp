@@ -117,26 +117,28 @@
 					
 					<!-- Essa div agrupa os campos de pesquisa e de listar as matérias-primas -->
 					<div class="row">
-						<!-- Campo de pesquisar as matérias-primas -->
-						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
-							<label class="control-label">Pesquisar os pagamentos:</label>
-							<!-- Quando clicar no botão, envia o form para a url abaixo -->
-							<form action="administrativo-pesquisar-caixa" method="POST">
-								<div class="input-group">
-									<input type="text" class="form-control" maxlength="100" placeholder="Informe o código ou o nome da matéria-prima para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="submit">
-											<span class="glyphicon glyphicon-search disabled"></span>
-										</button>
-									</span>
-								</div>
-							</form>
+					
+						<div class="input-margin col-xs-12 col-sm-1 col-md-1 col-lg-1">
+							<label class="control-label" for="fabricacao">De*:</label>
 						</div>
-						<!-- Esse botão lista todas as matérias-primas -->
-						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">
-							<label class="control-label hidden-xs">Listar caixa</label>
-							<a href="administrativo-listar-caixa" class="btn btn-default fullwidth">Listar caixa</a>
+						
+						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">							
+							<input type="date" id="fabricacao" class="form-control" placeholder="Escolha a data de fabricação" name="fabricacao" required>
 						</div>
+						
+						<div class="input-margin col-xs-12 col-sm-1 col-md-1 col-lg-1">
+							<label class="control-label" for="fabricacao">até*:</label>
+						</div>						
+						
+						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">							
+							<input type="date" id="fabricacao" class="form-control" placeholder="Escolha a data de fabricação" name="fabricacao" required>
+						</div>
+						
+						<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
+							<a href="administrativo-pesquisar-caixa" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 btn btn-default fullwidth">
+								<span class="glyphicon glyphicon-search disabled"></span>
+							</a>
+						</div>					
 					</div>
 					
 					<!-- Essa div agrupa os títulos das tabelas, e os resultados das pesquisas -->
@@ -187,7 +189,7 @@
 					
 					<!--Essa div tem o botão de abrir o modal "incluir nova matéria-prima" -->
 					<div class="row">
-						<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-5">
+						<div class="input-margin pull-right col-xs-12 col-sm-4 col-md-4">
 							<a href="" id="incluir-caixa-modal" data-toggle="modal" data-target="#modal-caixa" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova saída</a>
 						</div>
 					</div>
@@ -332,13 +334,13 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 								
-								<!-- Essa div contem o id da matéria-prima q vai ser excluida, porem ele fica escondido na tela, por causa da class hidden-->
+								<!-- Essa div contem o id do caixa q vai ser excluido, porem ele fica escondido na tela, por causa da class hidden-->
 								<div class="hidden">
-									<label class="control-label" for="id">Nº matéria-prima:</label>
+									<label class="control-label" for="id">Nº caixa:</label>
 									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
 								</div>
 								<!-- mensagem no corpo do modal -->	
-								<p>Deseja realmente excluir a matéria-prima selecionada?</p>
+								<p>Deseja realmente excluir o caixa selecionada?</p>
 							</div>
 						</div>
 
@@ -401,10 +403,10 @@
 			*/
 			
 			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
-            var table = $('#lista-materiaprima').DataTable({
+            var table = $('#lista-caixa').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 2],
+                        "targets": [ 0, 2, 3, 5, 6, 8 ],
                         "visible": false
                     }
                 ]
