@@ -273,7 +273,6 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 	
 	@Override
 	public List<Encomenda> pesquisar(String pesquisa) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

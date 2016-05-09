@@ -43,19 +43,30 @@
 					<hr/>
 
 					<!-- ########## CONTEUDO ########## -->
-										
-					<div>
-						<h3>Grafico de valores de venda por mês</h3>
-						<canvas id="valores" height="100px"></canvas>
-						<p>Valores espressos em R$</p>
+					
+					<!-- Container com layout fluido, preenchendo maior parte da tela -->
+					<div class="container-fluid fullheight">
+						<div class="row">
+							<div class=" col-xs-12 col-sm-12 col-md-6 col-lg-3">
+								
+							</div>
+							
+							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+								
+							</div>
+							
+							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+								
+							</div>
+							
+							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+								
+							</div>
+						</div>
 					</div>
-
-					<hr/>
-
+					
 					<div>
-						<h3>Grafico de quantidade de vendas por mês</h3>
-						<canvas id="vendas" height="100px"></canvas>
-						<p>Valores espressos em quantidade</p>
+						<canvas id="graficos" height="100px"></canvas>
 					</div>
 
 					<!-- ########## FIM DO CONTEUDO ########## -->
@@ -75,53 +86,42 @@
 	<script>
 		$('#menu-mob-dashboard').addClass('active');
 		$('#menu-dashboard').addClass('active');
-	
-		var lineChartData = {
-			labels : ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
-			datasets : [
-				{
-					label: "Tabela de vendas",
-					fillColor : "rgba(151,187,205,0.2)",
-					strokeColor : "rgba(151,187,205,1)",
-					pointColor : "rgba(151,187,205,1)",
-					pointStrokeColor : "#fff",
-					pointHighlightFill : "#fff",
-					pointHighlightStroke : "rgba(151,187,205,1)",
-					data : [20,200,100,300,100,400,100,900,300,600,400]
-				}
-			]
 
-		}
-
-		var vendasData = {
-			labels : ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
-			datasets : [
-				
-				{
-					label: "Tabela de vendas",
-					fillColor : "rgba(151,187,205,0.2)",
-					strokeColor : "rgba(151,187,205,1)",
-					pointColor : "rgba(151,187,205,1)",
-					pointStrokeColor : "#fff",
-					pointHighlightFill : "#fff",
-					pointHighlightStroke : "rgba(151,187,205,1)",
-					data : [10,30,20,30,20,40,10,100,30,50,30]
-				}
-			]
-
-		}
-
-		window.onload = function(){
-			var ctx = document.getElementById("valores").getContext("2d");
-			window.myLine = new Chart(ctx).Line(lineChartData, {
-				responsive: true
-			});
-
-			var ctx = document.getElementById("vendas").getContext("2d");
-			window.myBar = new Chart(ctx).Bar(vendasData, {
-				responsive : true
-			});
-		}
+        var config = {
+            type: 'line',
+            data: {
+                labels: ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
+                datasets: [{
+                    label: "Total das vendas em R$",
+                    backgroundColor : "rgba(107,83,68,0.18)",
+                    borderColor : "rgba(107,83,68,1)",
+					pointColor : "rgba(107,83,68,1)",
+					data : [237.00,264.00,347.00,393.00,410.00,510.00,0,0,0,0,0,0]
+                }, {
+                    label: "Total das gastos em R$",
+                    backgroundColor : "rgba(241,187,186,0.5)",
+                    borderColor : "rgba(241,187,186,1)",
+					pointColor : "rgba(241,187,186,1)",
+					data : [423.00,370.00,380.00,290.00,270.00,290.00,0,0,0,0,0,0]
+                }]
+            },
+            options: {
+                responsive: true,
+                title:{
+                    display:true,
+                    text:'Dashboard Gracibolos'
+                },
+                tooltips: {
+                    mode: 'label'
+                }
+            }
+        };
+		
+		window.onload = function() {
+            var ctx = document.getElementById("graficos").getContext("2d");
+            window.myLine = new Chart(ctx, config);
+        };
+		
 	</script>
 
 

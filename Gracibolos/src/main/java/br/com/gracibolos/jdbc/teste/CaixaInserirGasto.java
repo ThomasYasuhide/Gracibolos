@@ -9,7 +9,6 @@ public class CaixaInserirGasto {
 
 	public static void main(String[] args) 
 	{
-		// TODO Auto-generated method stub
 		CaixaDao dao = new CaixaDao();
 		Gerador gc = new Gerador();
 		Caixa c = null;

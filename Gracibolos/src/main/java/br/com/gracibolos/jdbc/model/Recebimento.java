@@ -17,7 +17,6 @@ public class Recebimento {
 	
 	public Recebimento() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public double getJaneiro() {

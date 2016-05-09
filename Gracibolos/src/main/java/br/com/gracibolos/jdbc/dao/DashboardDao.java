@@ -149,7 +149,6 @@ public class DashboardDao {
 				meses.add(a);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

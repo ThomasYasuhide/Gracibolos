@@ -24,12 +24,11 @@ public class Gerador {
 	private static Cliente c;
 	
 	public Gerador() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	/*
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		int[] idsForn = IdsForn();// Carregar os ids dos fornecedores
 		Long[] idsEnc = IdsEnc();
@@ -71,7 +70,6 @@ public class Gerador {
 				}
 				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
 			return ids;
@@ -95,7 +93,6 @@ public class Gerador {
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ids;
@@ -126,7 +123,6 @@ public class Gerador {
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return ids;
