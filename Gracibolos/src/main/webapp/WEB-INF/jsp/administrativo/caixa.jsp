@@ -117,28 +117,22 @@
 					
 					<!-- Essa div agrupa os campos de pesquisa e de listar as matérias-primas -->
 					<div class="row">
-					
-						<div class="input-margin col-xs-12 col-sm-1 col-md-1 col-lg-1">
-							<label class="control-label" for="fabricacao">De*:</label>
-						</div>
-						
-						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">							
-							<input type="date" id="fabricacao" class="form-control" placeholder="Escolha a data de fabricação" name="fabricacao" required>
-						</div>
-						
-						<div class="input-margin col-xs-12 col-sm-1 col-md-1 col-lg-1">
-							<label class="control-label" for="fabricacao">até*:</label>
-						</div>						
-						
-						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">							
-							<input type="date" id="fabricacao" class="form-control" placeholder="Escolha a data de fabricação" name="fabricacao" required>
-						</div>
-						
-						<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
-							<a href="administrativo-pesquisar-caixa" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 btn btn-default fullwidth">
-								<span class="glyphicon glyphicon-search disabled"></span>
-							</a>
-						</div>					
+						<form action="administrativo-pesquisar-caixa" method="POST">
+							<div class="input-margin col-xs-12 col-sm-1 col-md-1 col-lg-4">
+								<label class="control-label" for="datainicial">Data inicial*:</label>
+								<input type="date" id="datainicial" class="form-control" placeholder="Informe a data inicial" name="datainicial" required>
+							</div>
+													
+							<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-4">
+								<label class="control-label" for="datafinal">Data final*:</label>						
+								<input type="date" id="datafinal" class="form-control" placeholder="Informe a data final" name="datafinal" required>
+							</div>
+							
+							<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
+								<label class="control-label" for="fabricacao">Pesquisar por data:</label>
+								<button type="submit" class="btn btn-default fullwidth"><i class="material-icons">search</i>Pesquisar por período</button>
+							</div>
+						</form>
 					</div>
 					
 					<!-- Essa div agrupa os títulos das tabelas, e os resultados das pesquisas -->
