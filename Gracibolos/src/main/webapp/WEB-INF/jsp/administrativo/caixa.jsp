@@ -58,7 +58,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Matéria-prima armazenada com sucesso.
+								  <strong>Sucesso!</strong> Transação armazenado com sucesso.
 								</div>
 							</div>
 						</div>
@@ -68,7 +68,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar incluir uma nova matéria-prima, favor tente novamente.
+								  <strong>Erro!</strong> Houve algum erro ao tentar incluir uma nova transação, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -88,7 +88,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								 <strong>Erro!</strong> Houve algum erro ao tentar alterar a matéria-prima, favor tente novamente.
+								 <strong>Erro!</strong> Houve algum erro ao tentar alterar a transação, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -98,7 +98,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Matéria-prima foi excluida com sucesso!
+								  <strong>Sucesso!</strong> transação foi excluida com sucesso!
 								</div>
 							</div>
 						</div>
@@ -108,7 +108,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								 <strong>Erro!</strong> Houve algum erro ao tentar excluir a matéria-prima, favor tente novamente.
+								 <strong>Erro!</strong> Houve algum erro ao tentar excluir a transação, favor tente novamente.
 								</div>
 							</div>
 						</div>
@@ -117,7 +117,7 @@
 					
 					<!-- Essa div agrupa os campos de pesquisa e de listar as matérias-primas -->
 					<div class="row">
-						<form action="administrativo-pesquisar-caixa" method="POST">
+						<form action="administrativo-pesquisar-entre" method="POST">
 							<div class="input-margin col-xs-12 col-sm-1 col-md-1 col-lg-4">
 								<label class="control-label" for="datainicial">Data inicial*:</label>
 								<input type="date" id="datainicial" class="form-control" placeholder="Informe a data inicial" name="datainicial" required>

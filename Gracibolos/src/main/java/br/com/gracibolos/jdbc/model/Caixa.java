@@ -27,22 +27,28 @@ public class Caixa implements Serializable{
         
     }
        
-    private Long id; 
+    private Long id;
+    private int gastoRecebimento;
     private Long encomendaId; //encomenda Id ou materia Prima Id
     private Integer fornecedorId;
-    private BigDecimal valor; // valor recebido da encomenda, ou valor gasto na compra de materia prima
-    private int gastoRecebimento;
+    private BigDecimal valor; // valor recebido da encomenda, ou valor gasto na compra de materia prima    
     private String forma; // de pagamento
     private Integer parcela;
-    private String descricao;
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate data;
+    private String descricao;
 
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public int getGastoRecebimento() {
+		return gastoRecebimento;
+	}
+	public void setGastoRecebimento(int gastoRecebimento) {
+		this.gastoRecebimento = gastoRecebimento;
 	}
 	public Long getEncomendaId() {
 		return encomendaId;
@@ -62,12 +68,6 @@ public class Caixa implements Serializable{
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
-	public int getGastoRecebimento() {
-		return gastoRecebimento;
-	}
-	public void setGastoRecebimento(int gastoRecebimento) {
-		this.gastoRecebimento = gastoRecebimento;
-	}
 	public String getForma() {
 		return forma;
 	}
@@ -80,17 +80,19 @@ public class Caixa implements Serializable{
 	public void setParcela(Integer parcela) {
 		this.parcela = parcela;
 	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
 	public LocalDate getData() {
 		return data;
 	}
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
-
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

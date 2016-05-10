@@ -25,8 +25,8 @@ public class CaixaDao implements GenericoDao<Caixa>{
 		boolean status = false;
 		
 		//string query do banco
-		String sql = " INSERT INTO gracibolos.caixa(encomendaId, fornecedorId, valor, gastoRecebimento, forma,"
-				   + " parcela, descricao, data)"
+		String sql = " INSERT INTO caixa(gastoRecebimento, encomendaId, fornecedorId, valor, forma,"
+				   + " parcela, data, descricao)"
 				   + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		
@@ -37,26 +37,29 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			//seta os atributos do objeto caixa
 			ps = conn.prepareStatement(sql);
 			
+			ps.setInt(1, caixa.getGastoRecebimento());
+			
 			if(caixa.getEncomendaId()!=null){
-				ps.setLong(1, caixa.getEncomendaId());
-			}else{
-				ps.setNull(1, Types.INTEGER);
-			}
-			if(caixa.getFornecedorId()!=null){
-				ps.setInt(2, caixa.getFornecedorId());
+				ps.setLong(2, caixa.getEncomendaId());
 			}else{
 				ps.setNull(2, Types.INTEGER);
 			}
-			ps.setBigDecimal(3, caixa.getValor());
-			ps.setInt(4, caixa.getGastoRecebimento());
+			if(caixa.getFornecedorId()!=null){
+				ps.setInt(3, caixa.getFornecedorId());
+			}else{
+				ps.setNull(3, Types.INTEGER);
+			}
+			ps.setBigDecimal(4, caixa.getValor());
+			
 			ps.setString(5, caixa.getForma());
 			if(caixa.getParcela()!=null){
 				ps.setInt(6, caixa.getParcela());
 			}else{
 				ps.setNull(6, Types.INTEGER);
 			}
-			ps.setString(7, caixa.getDescricao());
-			ps.setDate(8, Date.valueOf(caixa.getData()));
+			
+			ps.setDate(7, Date.valueOf(caixa.getData()));
+			ps.setString(8, caixa.getDescricao());			
 						
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -253,14 +256,14 @@ public class CaixaDao implements GenericoDao<Caixa>{
 				Caixa caixa = new Caixa();	
 					
 				caixa.setId(rs.getLong("id"));
+				caixa.setGastoRecebimento(rs.getInt("gastoRecebimento"));
 				caixa.setEncomendaId(rs.getLong("encomendaId"));
 				caixa.setFornecedorId(rs.getInt("fornecedorId"));
-				caixa.setValor(rs.getBigDecimal("valor"));
-				caixa.setGastoRecebimento(rs.getInt("gastoRecebimento"));
+				caixa.setValor(rs.getBigDecimal("valor"));				
 				caixa.setForma(rs.getString("forma"));
 				caixa.setParcela(rs.getInt("parcela"));
-				caixa.setDescricao(rs.getString("descricao"));
-				caixa.setData(rs.getDate("data").toLocalDate());			
+				caixa.setData(rs.getDate("data").toLocalDate());	
+				caixa.setDescricao(rs.getString("descricao"));						
 			
 				//adiciona o objeto caixa no arrayList
 				caixas.add(caixa);
