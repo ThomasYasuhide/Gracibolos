@@ -1221,14 +1221,14 @@ public class AdministrativoController {
 			
 	//PESQUISAR ENTRE CAIXA
 	@RequestMapping("/administrativo-pesquisar-entre")
-	public ModelAndView pesquisar_entre (String inicio, String fim){
+	public ModelAndView pesquisar_entre (String datainicial, String datafinal){
 		System.out.println("Realizou a pesquisa entre datas do caixa");
 		
 		//cria uma nova instância DAO do caixa
 		CaixaDao dao = new CaixaDao();		
 		List<Caixa> caixas = null;
 		try {
-			caixas = dao.pesquisarEntre(inicio, fim);
+			caixas = dao.pesquisarEntre(datainicial, datafinal);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
