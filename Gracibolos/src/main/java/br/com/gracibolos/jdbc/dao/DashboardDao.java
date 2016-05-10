@@ -17,41 +17,13 @@ public class DashboardDao {
 	private static Gasto gasto;
 	private static Recebimento rec;
 	
-	public static void main(String[] args) 
-	{
-		String ano = "2016";
-		Gasto g = new Gasto();
-		Recebimento r = new Recebimento();
-		
-		g = getGR(ano).getGasto();
-		r = getGR(ano).getRec();
-		
-		System.out.println("Janeiro : "+g.getJaneiro()+" - "+r.getJaneiro()+
-						  "\nFevereiro : "+g.getFevereiro()+" - "+r.getFevereiro()+
-						 "\nMarço : "+g.getMarco()+" - "+r.getMarco()+
-						 "\nAbril : "+g.getAbril()+" - "+r.getAbril()+
-						 "\nMaio : "+g.getMaio()+" - "+r.getMaio()+
-						 "\nJunho : "+g.getJunho()+" - "+r.getJunho()+
-						 "\nJulho : "+g.getJulho()+" - "+r.getJulho()+
-						 "\nAgosto : "+g.getAgosto()+" - "+r.getAgosto()+
-						 "\nSetembro : "+g.getSetembro()+" - "+r.getSetembro()+
-						 "\nOutubro : "+g.getOutubro()+" - "+r.getOutubro()+
-						 "\nNovembro : "+g.getNovembro()+" - "+r.getNovembro()+
-						 "\nDezembro : "+g.getDezembro()+" - "+r.getDezembro()
-				);
-	}
-	
-	
-	
-	public static GastoRecebimento getGR(String ano)
+	public GastoRecebimento getGR(String ano)
 	{
 		gasto = buscarGasto(ano);
 		rec = buscarRecebimento(ano);
 		GastoRecebimento gr = new GastoRecebimento(gasto, rec);
 		return gr;
 	}
-	
-	
 	
 	private static Recebimento buscarRecebimento(String ano)
 	{
