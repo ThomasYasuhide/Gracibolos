@@ -2,9 +2,14 @@ package br.com.gracibolos.jdbc.model;
 
 public class GastoRecebimento {
 	
-	private final Gasto gasto;
-	private final Recebimento rec;
+	private Gasto gasto;
+	private Recebimento rec;
 	
+	public GastoRecebimento() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public GastoRecebimento(Gasto gasto, Recebimento rec) {
 		super();
 		this.gasto = gasto;

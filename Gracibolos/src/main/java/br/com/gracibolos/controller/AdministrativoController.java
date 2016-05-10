@@ -24,6 +24,7 @@ import br.com.gracibolos.jdbc.dao.CaixaDao;
 import br.com.gracibolos.jdbc.dao.CidadeDao;
 import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.ColaboradorDao;
+import br.com.gracibolos.jdbc.dao.DashboardDao;
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.dao.EstadoDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
@@ -36,9 +37,12 @@ import br.com.gracibolos.jdbc.model.Colaborador;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Estado;
 import br.com.gracibolos.jdbc.model.Fornecedor;
+import br.com.gracibolos.jdbc.model.Gasto;
+import br.com.gracibolos.jdbc.model.GastoRecebimento;
 import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Produto;
+import br.com.gracibolos.jdbc.model.Recebimento;
 
 @Controller
 public class AdministrativoController {
@@ -46,7 +50,18 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-dashboard")
 	public ModelAndView dashboard(){
 		System.out.println("Entrou na pagina dashboard");
-		return new ModelAndView("administrativo/dashboard");
+		DashboardDao dao = new DashboardDao();
+		Gasto g = new Gasto();
+		Recebimento r = new Recebimento();
+		g = dao.getGR("2016").getGasto();
+		r = dao.getGR("2016").getRec();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/dashboard");
+		mv.addObject("gasto", g);
+		mv.addObject("recebimento", r);
+		
+		return mv;
 	}
 	
 	/*
