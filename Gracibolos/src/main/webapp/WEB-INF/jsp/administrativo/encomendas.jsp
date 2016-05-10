@@ -210,7 +210,6 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				
-	    		<form id="encomenda-form" method="POST">
 	    
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -272,7 +271,10 @@
 						            </div>
 						
 						            <div class="tab-content">
-						            
+						            	
+						            	
+	    								<form id="encomenda-form" method="POST">
+						            	
 						                <div class="tab-pane active" role="tabpanel" id="step1">
 						                    
 						                    <div class="row">
@@ -354,9 +356,7 @@
 																	
 																	<td>
 																		<select class="form-control produto" id="produto_${loop.index}" placeholder="Digite o código ou nome do produto." name="item[${loop.index}].produtoId">
-																			<c:forEach var="cliente" items="${clientes}">
-																				<option value="${item.produtoId}" selected>${item.nome}</option>
-																			</c:forEach>
+																				<option value="teste" selected>Teste</option>
 																		</select>
 																	</td>
 																	
@@ -409,6 +409,8 @@
 					                   		</div>
 						                    
 						                </div>
+						                
+						                </form>
 						
 						                <div class="tab-pane" role="tabpanel" id="step3">
 						                    
@@ -508,7 +510,6 @@
 					
 					<!-- ################################# FIM DO CONTEUDO ################################# -->
 
-				</form>
 			</div>
 		</div>
 	</div>
@@ -695,7 +696,8 @@
 				var produto = $('#produto_' + linha);
 				var valor = $('#valor_' + linha);
 				
-				if(produto.val() != "" || produto.val() != null){
+
+				if(produto.val() != undefined){
 					$.ajax({
 			            url : 'administrativo-pesquisar-valor',
 			            method: "POST",
@@ -804,7 +806,7 @@
 				    item += 			'<select class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" class="form-control quantidade"  min="0" max="9999999">';
+				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" value="0" class="form-control quantidade"  min="0" max="9999999">';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';

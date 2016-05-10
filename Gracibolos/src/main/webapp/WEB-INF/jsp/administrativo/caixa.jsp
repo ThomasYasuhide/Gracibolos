@@ -118,19 +118,19 @@
 					<!-- Essa div agrupa os campos de pesquisa e de listar as matérias-primas -->
 					<div class="row">
 						<form action="administrativo-pesquisar-caixa" method="POST">
-							<div class="input-margin col-xs-12 col-sm-1 col-md-1 col-lg-4">
+							<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
 								<label class="control-label" for="datainicial">Data inicial*:</label>
 								<input type="date" id="datainicial" class="form-control" placeholder="Informe a data inicial" name="datainicial" required>
 							</div>
 													
-							<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-4">
+							<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
 								<label class="control-label" for="datafinal">Data final*:</label>						
 								<input type="date" id="datafinal" class="form-control" placeholder="Informe a data final" name="datafinal" required>
 							</div>
 							
 							<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
 								<label class="control-label" for="fabricacao">Pesquisar por data:</label>
-								<button type="submit" class="btn btn-default fullwidth"><i class="material-icons">search</i>Pesquisar por período</button>
+								<button type="submit" class="btn btn-default fullwidth"><i class="material-icons">search</i>&nbsp;&nbsp;&nbsp;Pesquisar por período</button>
 							</div>
 						</form>
 					</div>
