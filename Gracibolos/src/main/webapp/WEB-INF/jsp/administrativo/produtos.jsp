@@ -281,7 +281,8 @@
 												<select class="form-control" id="tipo" name="tipo" required>
 													<option value="" selected="selected" disabled="disabled">Selecione...</option>
 													<option value="1">Bolo</option>
-													<option value="0">Salgados</option>
+													<option value="2">Salgados</option>
+													<option value="3">Doces</option>
 												</select>
 											</div>
 
