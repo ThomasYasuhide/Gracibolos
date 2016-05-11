@@ -325,6 +325,7 @@
 										</c:forEach>
 									</select>
 								</div>
+								
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="tel">Tel:</label>
@@ -589,6 +590,7 @@
 				$('#modal-subtitle').text("Incluir novo colaborador");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
+				//CHAMADA PARA A CONTROLLER INCLUIR COLABORADOR
 				$("#colaborador-form").attr("action","administrativo-incluir-colaborador");
 				
 				//Altera o nome do botão do modal.

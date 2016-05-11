@@ -113,10 +113,13 @@
 							</div>
 						</div>
 					</c:if>
-					<!-- ################################# FIM DOS ALERTAS ################################# -->
+<!-- ################################# FIM DOS ALERTAS ################################# -->
 					
 					<!-- Essa div agrupa os campos de pesquisa e de listar as matérias-primas -->
-					<div class="row">
+					<div class="row">]
+					
+<!-- ################################# PESQUISA ENTRE DATAS CAHMADA PARA A CONTROLLER administrativo-pesquisar-entre ################################# -->
+					
 						<form action="administrativo-pesquisar-entre" method="POST">
 							<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
 								<label class="control-label" for="datainicial">Data inicial*:</label>
@@ -135,6 +138,10 @@
 						</form>
 					</div>
 					
+<!-- ################################# FIM PESQUISA ENTRE DATAS CAHMADA PARA A CONTROLLER administrativo-pesquisar-entre ################################# -->
+					
+<!-- ############################################################ INICIO DA TABELA ############################################################ -->
+
 					<!-- Essa div agrupa os títulos das tabelas, e os resultados das pesquisas -->
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
@@ -190,7 +197,7 @@
 						</div>
 					</div>
 
-					<!-- ############################################################ FIM DO CONTEUDO ############################################################ -->
+<!-- ############################################################ FIM DA TABELA ############################################################ -->
 				</div>
 			</div>
 		</div>
@@ -295,7 +302,7 @@
 
 	<!--
 
-	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR #########################################################
+	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DO CAIXA #########################################################
 
 	-->
 

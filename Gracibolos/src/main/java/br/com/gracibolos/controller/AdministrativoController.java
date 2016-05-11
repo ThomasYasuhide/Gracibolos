@@ -38,7 +38,6 @@ import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Estado;
 import br.com.gracibolos.jdbc.model.Fornecedor;
 import br.com.gracibolos.jdbc.model.Gasto;
-import br.com.gracibolos.jdbc.model.GastoRecebimento;
 import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Produto;
@@ -854,6 +853,7 @@ public class AdministrativoController {
 	
 	//PESQUISAR COLABORADOR
 	@RequestMapping("/administrativo-procurar-colaborador")
+	//id="pesquisa" do input
 	public ModelAndView pesquisar_colaborador(String pesquisa){
 		System.out.println("Realizou a pesquisa de colaboradores");
 		
@@ -1236,6 +1236,7 @@ public class AdministrativoController {
 			
 	//PESQUISAR ENTRE CAIXA
 	@RequestMapping("/administrativo-pesquisar-entre")
+	// NO SUBMIT, O FORM OS DOIS PARAMETROS id="datainicial" E id="datafinal"	
 	public ModelAndView pesquisar_entre (String datainicial, String datafinal){
 		System.out.println("Realizou a pesquisa entre datas do caixa");
 		
