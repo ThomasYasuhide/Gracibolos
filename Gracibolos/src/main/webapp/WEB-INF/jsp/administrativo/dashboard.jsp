@@ -76,15 +76,7 @@
 				</div>
 			</div>
 		</div>
-		
-		<script>
-			entradas = ["${recebimento.janeiro}","${recebimento.fevereiro}","${recebimento.marco}","${recebimento.abril}","${recebimento.maio}","${recebimento.junho}","${recebimento.julho}","${recebimento.agosto}","${recebimento.setembro}","${recebimento.outubro}","${recebimento.novembro}","${recebimento.dezembro}"];
-			saidas = ["${gasto.janeiro}","${gasto.fevereiro}","${gasto.marco}","${gasto.abril}","${gasto.maio}","${gasto.junho}","${gasto.julho}","${gasto.agosto}","${gasto.setembro}","${gasto.outubro}","${gasto.novembro}","${gasto.dezembro}"];
-		</script>
 	</div>
-
-	
-
 
 	<!-- Importação dos arquivos java script -->
 	<script src="resources/js/jquery-2.1.4.js"></script>
@@ -95,6 +87,9 @@
 		$('#menu-mob-dashboard').addClass('active');
 		$('#menu-dashboard').addClass('active');
 
+		var entradas = ["${recebimento.janeiro}","${recebimento.fevereiro}","${recebimento.marco}","${recebimento.abril}","${recebimento.maio}","${recebimento.junho}","${recebimento.julho}","${recebimento.agosto}","${recebimento.setembro}","${recebimento.outubro}","${recebimento.novembro}","${recebimento.dezembro}"];
+		var saidas = ["${gasto.janeiro}","${gasto.fevereiro}","${gasto.marco}","${gasto.abril}","${gasto.maio}","${gasto.junho}","${gasto.julho}","${gasto.agosto}","${gasto.setembro}","${gasto.outubro}","${gasto.novembro}","${gasto.dezembro}"];
+	
         var config = {
             type: 'line',
             data: {

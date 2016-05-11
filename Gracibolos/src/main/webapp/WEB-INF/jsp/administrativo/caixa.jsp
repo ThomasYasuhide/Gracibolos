@@ -146,28 +146,30 @@
 										<th>Recebido / Gasto</th>
 										<th>Encomenda ID</th>
 										<th>Fornecedor ID</th>
-										<th>Valor</th>									
+										<th>Data</th>									
 										<th>Forma</th>
 										<th>Parcela</th>
-										<th>Data</th>
+										<th>Valor</th>
 										<th>Descrição</th>										
 										<th>Ações</th>
 									</tr>
 								</thead>
 								<tbody>
 
-									<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
+									<!-- 
+										Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  
+									-->
 									<c:forEach var="caixa" items="${caixas}">
 										<tr>
-											<td>${caixa.id}</td>
-											<td>${caixa.gastoRecebimento}</td>
-											<td>${caixa.encomendaId}</td>
-											<td>${caixa.fornecedorId}</td>
-											<td>${caixa.valor}</td>											
-											<td>${caixa.forma}</td>
-											<td>${caixa.parcela}</td>
-											<td>${caixa.data}</td>
-											<td>${caixa.descricao}</td>											
+											<!-- 0 --><td>${caixa.id}</td>
+											<!-- 1 --><td>${caixa.gastoRecebimento}</td>
+											<!-- 2 --><td>${caixa.encomendaId}</td>
+											<!-- 3 --><td>${caixa.fornecedorId}</td>
+											<!-- 4 --><td>${caixa.data}</td>											
+											<!-- 5 --><td>${caixa.forma}</td>
+											<!-- 6 --><td>${caixa.parcela}</td>
+											<!-- 7 --><td>${caixa.valor}</td>
+											<!-- 8 --><td>${caixa.descricao}</td>											
 											
 											<!-- Aqui nessa td, estão os botões de editar e excluir, que aparecem junto com a lista de matérias-primas na tabela -->
 		                					<td>
@@ -196,7 +198,7 @@
 	
 	<!--
 
-	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR ############################################################
+	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DO CAIXA ############################################################
 
 	-->
 	<div class="modal fade" id="modal-caixa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -304,7 +306,7 @@
 
 	<!--
 
-	############################################################        MODAL DE EXCLUSÃO DE COLABORADOR      ############################################################
+	############################################################        MODAL DE EXCLUSÃO DO CAIXA      ############################################################
 
 	-->
 
@@ -356,7 +358,7 @@
 
 	<!--
 
-	############################################################ FIM DO  MODAL DE EXCLUSÃO DE COLABORADOR ############################################################
+	############################################################ FIM DO  MODAL DE EXCLUSÃO DO CAIXA ############################################################
 
 	-->
 
@@ -400,7 +402,7 @@
             var table = $('#lista-caixa').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 2, 3, 5, 6, 8 ],
+                        "targets": [ 0, 1, 2, 3, 5, 6, 8 ],
                         "visible": false
                     }
                 ]
