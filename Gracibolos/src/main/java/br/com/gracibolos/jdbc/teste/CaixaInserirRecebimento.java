@@ -15,8 +15,11 @@ public class CaixaInserirRecebimento {
 		Long[] idsEnc = gc.IdsEnc();
 		//int[] idsForn = gc.IdsForn();
 		int i;
-		int qtd = 400;
-		//
+		
+////////////////////////////////////////////		
+		int qtd = 200;
+////////////////////////////////////////////
+		
 		for(i=0; i<qtd;i++)
 		{	
 			c = new Caixa();

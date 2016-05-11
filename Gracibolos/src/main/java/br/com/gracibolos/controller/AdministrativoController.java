@@ -37,11 +37,10 @@ import br.com.gracibolos.jdbc.model.Colaborador;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Estado;
 import br.com.gracibolos.jdbc.model.Fornecedor;
-import br.com.gracibolos.jdbc.model.Gasto;
+import br.com.gracibolos.jdbc.model.Meses;
 import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Produto;
-import br.com.gracibolos.jdbc.model.Recebimento;
 
 @Controller
 public class AdministrativoController {
@@ -49,16 +48,22 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-dashboard")
 	public ModelAndView dashboard(){
 		System.out.println("Entrou na pagina dashboard");
+		
+		LocalDate ld = LocalDate.now();
+		String ano = String.valueOf(ld.getYear());
+		
+		Meses gasto = new Meses();
+		Meses rec = new Meses();
+		
 		DashboardDao dao = new DashboardDao();
-		Gasto g = new Gasto();
-		Recebimento r = new Recebimento();
-		g = dao.getGR("2016").getGasto();
-		r = dao.getGR("2016").getRec();
+		
+		gasto = dao.buscarGastoRecebimento("0", ano);//Aqui eu busquei os gastos "0" deste ano
+		rec = dao.buscarGastoRecebimento("1", ano);//Aqui eu busquei os recebimentos "0" deste ano
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("administrativo/dashboard");
-		mv.addObject("gasto", g);
-		mv.addObject("recebimento", r);
+		mv.addObject("gasto", gasto);
+		mv.addObject("recebimento", rec);
 		
 		return mv;
 	}

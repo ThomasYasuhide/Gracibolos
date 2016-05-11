@@ -116,7 +116,7 @@
 <!-- ################################# FIM DOS ALERTAS ################################# -->
 					
 					<!-- Essa div agrupa os campos de pesquisa e de listar as matérias-primas -->
-					<div class="row">]
+					<div class="row">
 					
 <!-- ################################# PESQUISA ENTRE DATAS CAHMADA PARA A CONTROLLER administrativo-pesquisar-entre ################################# -->
 					
