@@ -236,7 +236,7 @@
 						                        </a>
 						                    </li>
 						
-						                    <li role="presentation">
+						                    <li role="presentation" class="disabled">
 						                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">shopping_cart</i>
@@ -271,235 +271,258 @@
 						            </div>
 						
 						            <div class="tab-content">
-						            	
-						            	
-	    								<form id="encomenda-form" method="POST">
-						            	
+						            				            	
 						                <div class="tab-pane active" role="tabpanel" id="step1">
 						                    
-						                    <div class="row">
-						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="id">Nº da encomenda:</label>
-													<input type="text" id="id" name="id" value="${encomenda.id}" class="form-control" readonly />
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="dataencomenda">Data da encomenda:</label>
-													<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" value="${encomenda.dataencomenda}" readonly />
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="dataentrega">Data de entrega*:</label>
-													<input type="date" id="dataentrega" name="dataentrega" class="form-control" value="${encomenda.dataentrega}" required />
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="datacancelado">Data do cancelamento:</label>
-													<input type="date" id="datacancelado" name="datacancelado" class="form-control" value="${encomenda.datacancelamento}" readonly />
-												</div>
-												
-												<!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
-												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-													<label class="control-label" for="cliente">Cliente*:</label>
-													<select id="cliente" name="cliente" class="form-control" placeholder="Insira o nome, RG, CPF, CNPJ ou IE." required></select>
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-													<label class="control-label" for="responsavel" id="responsavel">Responsável pela retirada:</label>
-													<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada." value="${encomenda.responsavel}" class="form-control" maxlength="100"/>
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-12 col-md-12">
-													<label class="control-label" for="obs">Observações:</label>
-													<textarea id="obs" name="obs" rows="5" class="form-control" placeholder="Insira uma observação sobre o cliente">${encomenda.obs}</textarea>
-												</div>
-						                    </div>
-						                    
-						                    
-						                    <div class="modal-footer modal-margin-top">
-												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-							                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
-							                    <button type="button" class="btn btn-default next-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Selecionar produtos</button>
-					                   		</div>
-						                    
+						                    <form id="dados-encomenda" method="POST">
+						                    				                    
+							                    <div class="row">
+							                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
+														<label class="control-label" for="id">Nº da encomenda:</label>
+														<input type="text" id="id" name="id" value="${encomenda.id}" class="form-control" readonly />
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+														<label class="control-label" for="dataencomenda">Data da encomenda:</label>
+														<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" value="${encomenda.dataencomenda}" readonly />
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+														<label class="control-label" for="dataentrega">Data de entrega*:</label>
+														<input type="date" id="dataentrega" name="dataentrega" class="form-control" value="${encomenda.dataentrega}" required />
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+														<label class="control-label" for="datacancelado">Data do cancelamento:</label>
+														<input type="date" id="datacancelado" name="datacancelado" class="form-control" value="${encomenda.datacancelamento}" readonly />
+													</div>
+													
+													<!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
+													<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+														<label class="control-label" for="cliente">Cliente*:</label>
+														<select id="cliente" name="cliente" class="form-control" placeholder="Insira o nome, RG, CPF, CNPJ ou IE." required></select>
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+														<label class="control-label" for="responsavel">Responsável pela retirada:</label>
+														<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada." value="${encomenda.responsavel}" class="form-control" maxlength="100"/>
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+														<label class="control-label" for="obs">Observações:</label>
+														<textarea id="obs" name="obs" rows="5" class="form-control" placeholder="Insira uma observação sobre o cliente">${encomenda.obs}</textarea>
+													</div>
+							                    </div>
+								                    
+							                    
+							                    <div class="modal-footer modal-margin-top">
+													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+								                    <button type="button" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
+						                   		</div>
+					                   		
+					                   		</form>
+					                   		
 						                </div>
+							                
 						                
 						                
-						
+										
 						                <div class="tab-pane" role="tabpanel" id="step2">
 						                    
-						                    <div class="row">
-						                    	<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						                    		<button type="button" id="inserir-linha"  onclick="return false" class="btn btn-default fullwidth"><i class="material-icons">add_shopping_cart</i>&nbsp;&nbsp;&nbsp;Incluir novo produto</button>
-												</div>
+						                    <form id="produtos-encomenda" method="POST">
 						                    
-						                        <div class="input-margin col-xs-12 col-sm-12 col-md-12">
-													<table id="produtos" class="input-margin table display table-settings">
-														<thead>
-															<!-- Titulos das tabelas  -->
-															<tr>
-																<th width="35%">Produto</th>
-																<th width="10%">Quantidade</th>
-																<th width="25%">Valor unitário</th>
-																<th width="25%">Valor total</th>
-																<th width="5%">Ações</th>
-															</tr>
-														</thead>
-														<tbody id="lista-produtos" >
-					
-															<c:forEach var="item" items="${itens}" varStatus="loop">
-																<tr id="item">
-																	
-																	<td class="hidden">
-																		<input type="text" id="id_${loop.index}" name="item[${loop.index}].id" value="${item.id}" class="readonly">
-																	</td>
-																	
-																	<td>
-																		<select class="form-control produto" id="produto_${loop.index}" placeholder="Digite o código ou nome do produto." name="item[${loop.index}].produtoId">
-																				<option value="teste" selected>Teste</option>
-																		</select>
-																	</td>
-																	
-																	<td>
-																		<input type="number" name="item[${loop.index}].quantidade" value="${item.quantidade}" id="quantidade_${loop.index}" class="form-control quantidade"  min="0" max="9999999">
-																	</td>
-																	
-																	<td>
-																		<div class="input-group">
-																			<span class="input-group-addon">R$</span>
-																			<fmt:setLocale value="pt_BR"/>
-																			<input type="text" name="item[${loop.index}].valor" value="<fmt:formatNumber value="${item.valor}" type="number" minFractionDigits="2"/>" id="valor_${loop.index}" class="form-control valor">
-																		</div>
-																	</td>
-																	
-																	<td>
-																		<div class="input-group">
-																			<span class="input-group-addon">R$</span>
-																			<input type="text" name="item[${loop.index}].total" value="<fmt:formatNumber value="${item.total}" type="number" minFractionDigits="2"/>" id="total_${loop.index}" class="form-control total" readonly="readonly">
-																		</div>
-																	</td>
-																	
-																	<td>
-																		<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>
-																	</td>
-																	
-																	
-																</tr>
-															</c:forEach>
-															
-														</tbody>
-													</table>
-												</div>
-																								
-												<div class="input-margin pull-right col-xs-12 col-sm-12 col-md-6 col-md-6">
-													<label class="control-label" for="totalprodutos">Valor total dos produtos:</label>
-													<div class="input-group">
-														<span class="input-group-addon">R$</span>
-														<input id="totalprodutos" type="text" class="form-control totalprodutos" name="totalprodutos" max="999999999" value="<fmt:formatNumber value="${encomenda.totalprodutos}" type="number" minFractionDigits="2"/>" placeholder="0,00" readonly>
+							                    <div class="row">
+							                    	<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							                    		<button type="button" id="inserir-linha"  onclick="return false" class="btn btn-default fullwidth"><i class="material-icons">add_shopping_cart</i>&nbsp;&nbsp;&nbsp;Incluir novo produto</button>
 													</div>
-												</div>
-						                    </div>
+							                    
+							                        <div class="input-margin col-xs-12 col-sm-12 col-md-12">
+														<table id="produtos" class="input-margin table display table-settings">
+															<thead>
+																<!-- Titulos das tabelas  -->
+																<tr>
+																	<th width="35%">Produto</th>
+																	<th width="10%">Quantidade</th>
+																	<th width="25%">Valor unitário</th>
+																	<th width="25%">Valor total</th>
+																	<th width="5%">Ações</th>
+																</tr>
+															</thead>
+															<tbody id="lista-produtos" >
+						
+																<c:forEach var="item" items="${itens}" varStatus="loop">
+																	<tr id="item">
+																		
+																		<td class="hidden">
+																			<input type="text" id="id_${loop.index}" name="item[${loop.index}].id" value="${item.id}" class="readonly">
+																		</td>
+																		
+																		<td>
+																			<select class="form-control produto" id="produto_${loop.index}" placeholder="Digite o código ou nome do produto." name="item[${loop.index}].produtoId">
+																					<option value="teste" selected>Teste</option>
+																			</select>
+																		</td>
+																		
+																		<td>
+																			<input type="number" name="item[${loop.index}].quantidade" value="${item.quantidade}" id="quantidade_${loop.index}" class="form-control quantidade"  min="0" max="9999999">
+																		</td>
+																		
+																		<td>
+																			<div class="input-group">
+																				<span class="input-group-addon">R$</span>
+																				<fmt:setLocale value="pt_BR"/>
+																				<input type="text" name="item[${loop.index}].valor" value="<fmt:formatNumber value="${item.valor}" type="number" minFractionDigits="2"/>" id="valor_${loop.index}" class="form-control valor">
+																			</div>
+																		</td>
+																		
+																		<td>
+																			<div class="input-group">
+																				<span class="input-group-addon">R$</span>
+																				<input type="text" name="item[${loop.index}].total" value="<fmt:formatNumber value="${item.total}" type="number" minFractionDigits="2"/>" id="total_${loop.index}" class="form-control total" readonly="readonly">
+																			</div>
+																		</td>
+																		
+																		<td>
+																			<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>
+																		</td>
+																		
+																		
+																	</tr>
+																</c:forEach>
+																
+															</tbody>
+														</table>
+													</div>
+																									
+													<div class="input-margin pull-right col-xs-12 col-sm-12 col-md-6 col-md-6">
+														<label class="control-label" for="totalprodutos">Valor total dos produtos:</label>
+														<div class="input-group">
+															<span class="input-group-addon">R$</span>
+															<input id="totalprodutos" type="text" class="form-control totalprodutos" name="totalprodutos" max="999999999" value="<fmt:formatNumber value="${encomenda.totalprodutos}" type="number" minFractionDigits="2"/>" placeholder="0,00" readonly>
+														</div>
+													</div>
+							                    </div>
+							                    
+							                    <div class="modal-footer modal-margin-top">
+													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+								                    <button type="button" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+						                   		</div>
 						                    
-						                    <div class="modal-footer modal-margin-top">
-												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-							                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
-							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-							                    <button type="button" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar e sair</button>
-							                    <button type="button" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
-					                   		</div>
+						                    </form>
 						                    
 						                </div>
-						                
-						                </form>
 						
 						                <div class="tab-pane" role="tabpanel" id="step3">
 						                    
-						                    <div class="row">
-						                        <div class="input-margin col-xs-12 col-sm-6 col-md-4">
-													<label class="control-label" for="datafaturamento">Data de faturamento:</label>
-													<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-8">
-													<label class="control-label" for="valortroco">Forma de pagamento:</label>
-													<select class="form-control" name="formapagamento">
-														<option value="0" selected disabled>Selecione...</option>
-														<option value="1">Dinheiro</option>
-														<option value="2">Cartão de crédito</option>
-														<option value="3">Cheque</option>
-													</select>
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-4">
-													<label class="control-label" for="valorcompra">Valor total da encomenda:</label>
-													<div class="input-group">
-														<span class="input-group-addon">R$</span>
-														<input type="text" id="totalencomenda" name="totalencomenda" class="form-control" readonly />
-													</div>
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-6 col-md-4">
-													<label class="control-label" for="valorpago">Valor pago:</label>
-													<div class="input-group">
-														<span class="input-group-addon">R$</span>
-														<input type="text" id="valorpago" name="valorpago" class="form-control" />
-													</div>
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-12 col-md-4">
-													<label class="control-label" for="valortroco">Troco:</label>
-													<div class="input-group">
-														<span class="input-group-addon">R$</span>
-														<input type="text" id="valortroco" name="valortroco" class="form-control" readonly />
-													</div>
-												</div>
-												
-												<div class="input-margin col-xs-12 col-sm-12 col-md-12">
-													<label class="control-label" for="obs">Observações do pagamento:</label>
-													<textarea id="obspagamento" name="obspagamento" rows="3" class="form-control" placeholder="Insira uma observação sobre o pagamento"></textarea>
-												</div>
-												
-						                    </div>
+						                    <form id="faturar-encomenda" method="POST">
 						                    
-						                    <div class="modal-footer modal-margin-top">
-												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-							                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
-							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Voltar para produtos</button>
-							                    <button type="button" class="btn btn-default next-step" id="finalizar-encomenda"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Produzir encomenda</button>
-					                   		</div>
+							                    <div class="row">
+							                        <div class="input-margin col-xs-12 col-sm-6 col-md-4">
+														<label class="control-label" for="datafaturamento">Data de faturamento:</label>
+														<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-6 col-md-8">
+														<label class="control-label" for="valortroco">Forma de pagamento:</label>
+														<select class="form-control" name="formapagamento">
+															<option value="0" selected disabled>Selecione...</option>
+															<option value="1">Dinheiro</option>
+															<option value="2">Cartão de crédito</option>
+															<option value="3">Cheque</option>
+														</select>
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-6 col-md-4">
+														<label class="control-label" for="valorcompra">Valor total da encomenda:</label>
+														<div class="input-group">
+															<span class="input-group-addon">R$</span>
+															<input type="text" id="totalencomenda" name="totalencomenda" class="form-control" readonly />
+														</div>
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-6 col-md-4">
+														<label class="control-label" for="valorpago">Valor pago:</label>
+														<div class="input-group">
+															<span class="input-group-addon">R$</span>
+															<input type="text" id="valorpago" name="valorpago" class="form-control" />
+														</div>
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-12 col-md-4">
+														<label class="control-label" for="valortroco">Troco:</label>
+														<div class="input-group">
+															<span class="input-group-addon">R$</span>
+															<input type="text" id="valortroco" name="valortroco" class="form-control" readonly />
+														</div>
+													</div>
+													
+													<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+														<label class="control-label" for="obs">Observações do pagamento:</label>
+														<textarea id="obspagamento" name="obspagamento" rows="3" class="form-control" placeholder="Insira uma observação sobre o pagamento"></textarea>
+													</div>
+													
+							                    </div>
+							                    
+							                    <div class="modal-footer modal-margin-top">
+													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+								                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+								                    <button type="button" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Produzir</button>
+						                   		</div>
+						                   		
+						                   	</form>
+						                   	
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step4">
 						                    
-						                    <div class="row">
-						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="dataproducao">Data da produção:</label>
-													<input type="date" id="dataproducao" name="dataproducao" class="form-control" readonly />
-												</div>
-						                    </div>
+						                    <form id="produzir-encomenda" method="POST">
 						                    
-						                    <div class="modal-footer modal-margin-top">
-												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-							                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
-							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Voltar para faturamento</button>
-							                    <button type="button" class="btn btn-default next-step" id="finalizar-encomenda"><i class="material-icons">done</i>&nbsp;&nbsp;&nbsp;Finalizar encomenda</button>
-					                   		</div>
+							                    <div class="row">
+							                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
+														<label class="control-label" for="dataproducao">Data da produção:</label>
+														<input type="date" id="dataproducao" name="dataproducao" class="form-control" readonly />
+													</div>
+							                    </div>
+							                    
+							                    <div class="modal-footer modal-margin-top">
+													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+								                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+								                    <button type="button" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">done</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
+						                   		</div>
+						                   		
+						                   	</form>
+						                   	
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="complete">
-						                    <div class="row">
-						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
-													<label class="control-label" for="datafinalizado">Data da finalização:</label>
-													<input type="date" id="datafinalizado" name="datafinalizado" class="form-control" readonly />
-												</div>
-						                    </div>
-						                    
-						                    <div class="modal-footer modal-margin-top">
-												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-							                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar encomenda</button>
-							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Voltar para produção</button>
-							                    <button type="button" class="btn btn-default" id="finalizar-encomenda"><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
-					                   		</div>
+						                	
+						                    <form id="finalizar-encomenda" method="POST">
+						                
+							                    <div class="row">
+							                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
+														<label class="control-label" for="datafinalizado">Data da finalização:</label>
+														<input type="date" id="datafinalizado" name="datafinalizado" class="form-control" readonly />
+													</div>
+							                    </div>
+							                    
+							                    <div class="modal-footer modal-margin-top">
+													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+								                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+								                    <button type="button" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" class="btn btn-default" id="finalizar-encomenda"><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
+						                   		</div>
+						                   		
+						                   	</form>
 						                </div>
 						                
 						            </div>
@@ -851,11 +874,58 @@
 			});
 			
 			//Remove as mascaras quando apertar o submit
-			$("#encomenda-form").submit(function() {				
-				var total = $("#total").val();
-				valor = total.split(".").join("");
-				valor = total.split(",").join(".");
-				$("#total").val(total);
+			$("#dados-encomenda").submit(function(e) {
+				e.preventDefault();
+				alert('dados da encomenda');
+				
+				/*
+				alert($('#id').val());
+				alert($('#dataencomenda').val());
+				alert($('#dataentrega').val());
+				alert($('#datacancelado').val());
+				alert($('#cliente').val());
+				alert($('#responsavel').val());
+				alert($('#obs').val());
+				*/
+				
+				return false;
+				
+			});
+			
+			//Remove as mascaras quando apertar o submit
+			$("#produtos-encomenda").submit(function(e) {
+				e.preventDefault();
+				
+				alert('produtos da encomenda');
+				
+				return false;
+			});
+			
+			//Remove as mascaras quando apertar o submit
+			$("#faturar-encomenda").submit(function(e) {
+				e.preventDefault();
+				
+				alert('faturar da encomenda');
+				
+				return false;
+			});
+			
+			//Remove as mascaras quando apertar o submit
+			$("#produzir-encomenda").submit(function(e) {
+				e.preventDefault();
+				
+				alert('produzir da encomenda');
+				
+				return false;
+			});
+			
+			//Remove as mascaras quando apertar o submit
+			$("#finalizar-encomenda").submit(function(e) {
+				e.preventDefault();
+				
+				alert('finalizar da encomenda');
+				
+				return false;
 			});
 			
 			/*
