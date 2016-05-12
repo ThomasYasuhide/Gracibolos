@@ -127,7 +127,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		PreparedStatement  ps = null;
 		
 		//string query do banco
-		String sql = "UPDATE produto SET foto=?, status=?, codigo=?, nome=?, tipo=?, peso=?, unidade=?, estoque=?, custo=?, valor=?, obs=? where id=?";
+		String sql = "UPDATE produto SET foto=?, status=?, codigo=?, nome=?, tipo=?, peso=?, unidade=?, estoque=?, custo=?, valor=?, obs=?, receita=? where id=?";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())	{
@@ -155,8 +155,9 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			ps.setBigDecimal(9, produto.getCusto());
 			ps.setBigDecimal(10, produto.getValor());
 			ps.setString(11, produto.getObs());
+			ps.setString(12,produto.getRec());
 			
-			ps.setLong(12, produto.getId());
+			ps.setLong(13, produto.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -305,7 +306,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			produto.setCusto(rs.getBigDecimal("custo"));
 			produto.setValor(rs.getBigDecimal("valor"));
 			produto.setObs(rs.getString("obs"));	
-			//produto.setReceita(rs.getString("receita"));
+			produto.setRec(rs.getString("receita"));
 			
 			//fecha as conexões
 			ps.close();

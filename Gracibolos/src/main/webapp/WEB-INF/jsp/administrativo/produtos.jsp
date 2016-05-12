@@ -227,18 +227,20 @@
 					
 					<!--  Corpo do modal -->
 					<div class="modal-body">
-						<!-- ################################# CONTEUDO ################################# -->
+						<!-- ################################# Corpo do modal ################################# -->
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-								<!-- ABAS -->
 								<ul class="nav nav-tabs">
 									<li class="active"><a data-toggle="tab" href="#info">Informações do produto</a></li>
 									<li><a data-toggle="tab" href="#receita">Receita do produto</a></li>
 								</ul>
 
 									<div class="tab-content">
-
+									
+										<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+											INICIO DA ABA INFORMAÇÕES DO PRODUTO
+										+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 										<div id="info" class="tab-pane fade in active">
 											
 											<div class="hidden">
@@ -334,20 +336,22 @@
 												<textarea class="form-control" name="obs" name="obs" id="obs" rows="3" placeholder="Digite aqui as observações"></textarea>
 											</div>
 										</div>
+										<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+											FIM DA ABBA INFORMAÇÕES DO PRODUTO 
+										+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 										
-										<!-- 
-											Aqui fica o conteúdo da aba receita 
-										-->
+										<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+											INICIO DA ABA RECEITA 
+										+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 										<div id="receita" class="tab-pane fade">
 										
-											<!-- 
-												Campo para escrever a receita
-											-->
+											<!-- Campo receita	-->
 											<div class="input-margin col-xs-12 col-sm-12 col-md-12">
 												<label class="control-label" for="rec">Receita</label>
-												<textarea class="form-control" name="rec" name="rec" id="rec" rows="25" placeholder="Digite aqui a receita"></textarea>
+												<textarea class="form-control" name="rec" name="rec" id="rec" rows="20" placeholder="Digite aqui a receita"></textarea>
 											</div>
-										
+											
+											<!-- TABELA PARA INSERÇÃO DE MATÉRIA PRIMA	-->
 											<table class="input-margin table display table-settings">
 												<thead>
 													<!-- Titulos das tabelas  -->
@@ -383,7 +387,7 @@
 												</tbody>
 											</table>
 											
-											<!-- Essa div contem um botão -->
+											<!-- BOTÃO INSERIR LINHA -->
 											<div class="row">
 												<div class="input-margin pull-right col-xs-12 col-sm-5 col-md-3">
 													
@@ -396,7 +400,9 @@
 											</div>
 
 										</div>
-
+										<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+											FIM DA ABA RECEITA 
+										+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 									</div>
 
 
@@ -672,7 +678,7 @@
 			*
 			*/
 			
-			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário (invisível)
+			//INVISÍVEL - Define que as colunas determinadas no "targes" não sejam visiveis para o usuáriO
             var table = $('#lista-produtos').DataTable({
                 "columnDefs": [
                     {
