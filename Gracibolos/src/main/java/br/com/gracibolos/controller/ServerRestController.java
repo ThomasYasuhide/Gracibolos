@@ -53,7 +53,7 @@ public class ServerRestController {
 					,produces = {MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE
 				})
-	public @ResponseBody List<MateriaPrima> pesquisar_materiprima(@PathVariable String pesquisa) {
+	public @ResponseBody List<MateriaPrima> pesquisar_materiprima(@PathVariable String pesquisa, HttpServletResponse response) {
 		mpList = null;
 		mpDao = new MateriaPrimaDao();
 		try {
@@ -62,6 +62,12 @@ public class ServerRestController {
 			System.out.println("ERRO - rest materiaprima, pesquisa materiaprima.");
 			e.printStackTrace();
 		}    
+		
+		response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+        
 		return mpList;  
 	}
 	
