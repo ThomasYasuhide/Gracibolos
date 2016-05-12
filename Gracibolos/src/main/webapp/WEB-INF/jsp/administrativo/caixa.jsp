@@ -149,11 +149,11 @@
 								<thead>
 									<!-- Titulos das tabelas  -->
 									<tr>
-										<th>#</th>
+										<th>Data</th>
 										<th>Recebido / Gasto</th>
 										<th>Encomenda ID</th>
 										<th>Fornecedor ID</th>
-										<th>Data</th>									
+										<th>#</th>									
 										<th>Forma</th>
 										<th>Parcela</th>
 										<th>Valor</th>
@@ -168,11 +168,11 @@
 									-->
 									<c:forEach var="caixa" items="${caixas}">
 										<tr>
-											<!-- 0 --><td>${caixa.id}</td>
+											<!-- 0 --><td>${caixa.data}</td>
 											<!-- 1 --><td>${caixa.gastoRecebimento}</td>
 											<!-- 2 --><td>${caixa.encomendaId}</td>
 											<!-- 3 --><td>${caixa.fornecedorId}</td>
-											<!-- 4 --><td>${caixa.data}</td>											
+											<!-- 4 --><td>${caixa.id}</td>											
 											<!-- 5 --><td>${caixa.forma}</td>
 											<!-- 6 --><td>${caixa.parcela}</td>
 											<!-- 7 --><td>${caixa.valor}</td>
@@ -205,7 +205,7 @@
 	
 	<!--
 
-	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DO CAIXA ############################################################
+############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DO CAIXA ####################################################
 
 	-->
 	<div class="modal fade" id="modal-caixa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -224,7 +224,7 @@
 					
 					<!--  Corpo do modal -->
 					<div class="modal-body">
-						<!-- ################################# CONTEUDO ################################# -->
+						<!-- ################################# Corpo do modal CONTEUDO ################################# -->
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
@@ -405,11 +405,18 @@
 			*
 			*/
 			
-			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
+			//INVISIVEIS - Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
             var table = $('#lista-caixa').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 2, 3, 5, 6, 8 ],
+                     /* //1 - gastoRecebimento
+                        //2 - encomendaId
+                        //3 - fornecedorId
+                        //4 - id
+                        //5 - forma
+                        //6 - parcela
+                        //8 - descricao */
+                        "targets": [ 1, 2, 3, 5, 4, 6, 8 ],
                         "visible": false
                     }
                 ]
@@ -417,21 +424,21 @@
 
             /*
 			*
-			* INCLUSÃO DE MATÉRIA-PRIMA
+			* INCLUSÃO DE NOVO GASTO
 			*
 			*/
 			
-			//quando o usuário clica no botão de incluir nova matéria-prima, ele abre o modal e chama essa função
+			//quando o usuário clica no botão de incluir novo gasto, ele abre o modal e chama essa função
             $('#incluir-caixa-modal').click(function() {
             	
             	//Altera dinamicamente o titulo do modal.
-				$('#modal-subtitle').text("Incluir nova saída");
+				$('#modal-subtitle').text("Incluir novo gasto");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
 				$("#caixa-form").attr("action","administrativo-incluir-caixa");
 				
 				//Altera o nome do botão do modal.
-				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir saída');
+				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir gasto');
 				
 				//Reset autmaticamente todos os campos do formulário.
 				$('#caixa-form').each(function(){
@@ -442,7 +449,7 @@
                 $('#data_transacao').val(now);               
 
 				//Este método se encontra no arquivo scripts.js
-				//Desabilita e habilita os campos NOME RAZÃO CPF CNPJ RG IE SEXO DATANASCIMENTO
+                // DESABILITA O CAMPO
                 desabilitarCampos(document.getElementById("#gastoRecebimento"));
 				
 			});

@@ -12,14 +12,14 @@ public class CaixaListarEntre {
 		
 		try {
 			for(Caixa c : dao.pesquisarEntre("2016/01/01", "2016/01/30")){
-			    System.out.println(	     		 "Id : "+c.getId()
-			    					 + "\tEncomendaId: "+c.getEncomendaId()
+			    System.out.println(	     		 //"Id : "+c.getId()
+			    					   "\tEncomendaId: "+c.getEncomendaId()
 			    				    + "\tFornecedorId: "+c.getFornecedorId()
 			                        		+"\tValor: "+c.getValor()
 			                        		+"\tGasto: "+c.getGastoRecebimento()
-			                        	   +"\tForma : "+c.getForma()
-			                        	 +"\tParcela : "+c.getParcela()			                              
-			                            +"\tDescrição :"+c.getDescricao()
+			                        	   //+"\tForma : "+c.getForma()
+			                        	 //+"\tParcela : "+c.getParcela()			                              
+			                            //+"\tDescrição :"+c.getDescricao()
 			    							 +"\tData :"+c.getData());		
 			}
 		} catch (Exception e) {

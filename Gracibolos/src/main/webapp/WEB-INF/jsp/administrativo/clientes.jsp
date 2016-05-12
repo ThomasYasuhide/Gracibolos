@@ -594,7 +594,7 @@
                                 limpa_formulário_cep();
                                 alert("CEP não encontrado.");
                             }
-                        });
+                        });// FIM getJason
                     } //end if.
                     else {
                         //cep é inválido.

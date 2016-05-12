@@ -241,7 +241,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 		ResultSet rs = null;
 		
 		//string query do banco
-		String sql = "SELECT * FROM gracibolos.caixa WHERE data between '"+inicio+"' AND '"+fim+"'";
+		String sql = "SELECT * FROM gracibolos.caixa WHERE caixa.data between '"+inicio+"' AND '"+fim+"' ORDER BY caixa.data";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {

@@ -2,9 +2,13 @@ package br.com.gracibolos.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.gracibolos.jdbc.dao.ClienteDao;
@@ -45,8 +49,11 @@ public class ServerRestController {
 	}
 	
 	@RequestMapping(value = "/rest-pesquisa-materiaprima/{pesquisa}", 
-			method = RequestMethod.GET, headers="Accept=application/json")  
-	public List<MateriaPrima> pesquisar_materiprima(@PathVariable String pesquisa) {
+			method = RequestMethod.GET
+					,produces = {MediaType.APPLICATION_JSON_VALUE,
+					MediaType.APPLICATION_XML_VALUE
+				})
+	public @ResponseBody List<MateriaPrima> pesquisar_materiprima(@PathVariable String pesquisa) {
 		mpList = null;
 		mpDao = new MateriaPrimaDao();
 		try {
@@ -73,8 +80,11 @@ public class ServerRestController {
 	
 	
 	@RequestMapping(value = "/rest-pesquisar-produtos/{id}", 
-			method = RequestMethod.GET, headers="Accept=application/json")  
-	 public Produto findById(@PathVariable int id) {  
+			method = RequestMethod.GET
+			,produces = {MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE
+		})
+	 public @ResponseBody Produto findById(@PathVariable int id, HttpServletResponse response) {  
 		produtoDao = new ProdutoDao();
 		p = new Produto();
 		try {
@@ -83,7 +93,12 @@ public class ServerRestController {
 			System.out.println("ERRO - rest produtos, busca produtos por id.");
 			e.printStackTrace();
 		}    
-	  return p;  
+		response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+        
+        return p;  
 	 }
 	
 	@RequestMapping(value = "/rest-pesquisa-produtos/{pesquisa}", 
