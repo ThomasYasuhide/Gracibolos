@@ -1,5 +1,8 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!-- Define que este documento é uma pagina JSP -->
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 
+<!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="PT-BR">
@@ -75,9 +78,6 @@
 		</div>
 	</div>
 
-	
-
-
 	<!-- Importação dos arquivos java script -->
 	<script src="resources/js/jquery-2.1.4.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
@@ -87,6 +87,9 @@
 		$('#menu-mob-dashboard').addClass('active');
 		$('#menu-dashboard').addClass('active');
 
+		var entradas = ["${recebimento.janeiro}","${recebimento.fevereiro}","${recebimento.marco}","${recebimento.abril}","${recebimento.maio}","${recebimento.junho}","${recebimento.julho}","${recebimento.agosto}","${recebimento.setembro}","${recebimento.outubro}","${recebimento.novembro}","${recebimento.dezembro}"];
+		var saidas = ["${gasto.janeiro}","${gasto.fevereiro}","${gasto.marco}","${gasto.abril}","${gasto.maio}","${gasto.junho}","${gasto.julho}","${gasto.agosto}","${gasto.setembro}","${gasto.outubro}","${gasto.novembro}","${gasto.dezembro}"];
+	
         var config = {
             type: 'line',
             data: {
@@ -96,13 +99,13 @@
                     backgroundColor : "rgba(107,83,68,0.18)",
                     borderColor : "rgba(107,83,68,1)",
 					pointColor : "rgba(107,83,68,1)",
-					data : [237.00,264.00,347.00,393.00,410.00,510.00,0,0,0,0,0,0]
+					data : entradas
                 }, {
                     label: "Total das gastos em R$",
                     backgroundColor : "rgba(241,187,186,0.5)",
                     borderColor : "rgba(241,187,186,1)",
 					pointColor : "rgba(241,187,186,1)",
-					data : [423.00,370.00,380.00,290.00,270.00,290.00,0,0,0,0,0,0]
+					data : saidas
                 }]
             },
             options: {

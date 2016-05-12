@@ -16,6 +16,7 @@ public class FornecedorListar {
 				System.out.println(	  
 								 "Id : "+f.getId()
 						   + "\tTipoPessoa : "+f.getTipopessoa()
+						   + "\nDataNasc : "+f.getDatanascimento()
 			            +"\tNomeRazao : "+f.getNomerazao()
 			               +"\tCPF/CNPJ : "+f.getCpfcnpj()
 			                 +"\tRG/IE : "+f.getRgie()

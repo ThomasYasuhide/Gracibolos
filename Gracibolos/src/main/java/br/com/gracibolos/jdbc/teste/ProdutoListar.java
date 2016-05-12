@@ -25,7 +25,7 @@ public class ProdutoListar {
 						 				+"\tUnidade : "+p.getUnidade()
 						 				+"\tUnidade : "+p.getUnidade()
 						 				   +"\tPeso : "+p.getPeso()
-						 				//+"\tReceita : "+p.getReceita()
+						 				+"\tReceita : "+p.getRec()
 						 				  + "\tFoto : "+p.getFoto());
 			}
 		} catch (Exception e) {

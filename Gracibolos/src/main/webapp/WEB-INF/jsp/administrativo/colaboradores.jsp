@@ -237,7 +237,7 @@
 
 								<div class="hidden">
 									<label class="control-label" for="id">Nº colaborador:</label>
-									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
+			<!-- id="id" -->  		<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
@@ -258,59 +258,59 @@
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="telefone">Usuario*:</label>
-									<input type="text" id="usuario" name="usuario" placeholder="Digite o seu usuário" class="form-control" maxlength="20" required/>
+		<!-- id="usuario" --> 		<input type="text" id="usuario" name="usuario" placeholder="Digite o seu usuário" class="form-control" maxlength="20" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="celular">Senha*:</label>
-									<input type="password" id="senha" name="senha" placeholder="Senha" class="form-control" maxlength="20" required/>
+		<!-- id="senha" -->		<input type="password" id="senha" name="senha" placeholder="Senha" class="form-control" maxlength="20" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
 									<label class="control-label" for="nome" id="nome_lbl">Nome*:</label>
-									<input type="text" id="nome" name="nome" placeholder="Digite seu nome aqui" class="form-control" maxlength="100" required/>
+		<!-- id="nome" -->			<input type="text" id="nome" name="nome" placeholder="Digite seu nome aqui" class="form-control" maxlength="100" required/>
 								</div> 
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="cpf" id="cpf_lbl">CPF*:</label>
-									<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" class="form-control" maxlength="14" required/>
+		<!-- id="cpf" -->			<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" class="form-control" maxlength="14" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="rg" id="rg_lbl">RG:</label>
-									<input type="text" id="rg" name="rg" placeholder="00.000.000-0" class="form-control" maxlength="9"/>
+		<!-- id="rg" -->			<input type="text" id="rg" name="rg" placeholder="00.000.000-0" class="form-control" maxlength="9"/>
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
 									<label class="control-label" for="cep">CEP*:</label>
-									<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="9" required/>
+		<!-- id="cep" -->			<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="9" required/>
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
 									<label class="control-label" for="endereco">Endereço*:</label>
-									<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" disabled required/>
+	<!-- id="endereco" -->			<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" disabled required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-3 col-md-2">
 									<label class="control-label" for="numero">Numero*:</label>
-									<input type="text" id="numero" name="numero" placeholder="0000" class="form-control" disabled required/>
+		<!-- id="numero" -->		<input type="text" id="numero" name="numero" placeholder="0000" class="form-control" disabled required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="complemento">Complemento:</label>
-									<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120"  disabled />
+	<!-- id="complemento" -->		<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120"  disabled />
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="bairro">Bairro*:</label>
-									<input type="text" id="bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" disabled required/>
+		<!-- id="bairro" -->		<input type="text" id="bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" disabled required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-2 col-md-3">
 									<label class="control-label" for="estado">Estado*:</label>
 									<select class="form-control" id="estado" name="estado" disabled required >
 										<option selected="selected" disabled="disabled" value="0">Selecione o estado</option>
-										<c:forEach var="estado" items="${estados}">
+			<!-- id="estado" -->			<c:forEach var="estado" items="${estados}">
 											<option value="${estado.id}">${estado.sigla}</option>
 										</c:forEach>
 									</select>
@@ -320,30 +320,31 @@
 									<label class="control-label" for="cidade">Cidade*:</label>
 									<select class="form-control" id="cidade" name="cidade" disabled required >
 										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
-										<c:forEach var="cidade" items="${cidades}">
+			<!-- id="cidade" -->			<c:forEach var="cidade" items="${cidades}">
 											<option value="${cidade.id}">${cidade.nome}</option>
 										</c:forEach>
 									</select>
 								</div>
+								
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="tel">Tel:</label>
-									<input type="text" id="tel" name="tel" placeholder="(00) 0000-0000" class="form-control" maxlength="14"/>
+			<!-- id="tel" -->		<input type="text" id="tel" name="tel" placeholder="(00) 0000-0000" class="form-control" maxlength="14"/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="cel">Cel:</label>
-									<input type="text" id="cel" name="cel" placeholder="(00) 00000-0000" class="form-control" maxlength="15" />
+			<!-- id="cel" -->		<input type="text" id="cel" name="cel" placeholder="(00) 00000-0000" class="form-control" maxlength="15" />
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-12 col-md-6">
 									<label class="control-label" for="email">E-mail:</label>
-									<input type="email" id="email" name="email" class="form-control" placeholder="email@provedor.com.br" maxlength="120"/>
+		<!-- id="email" -->			<input type="email" id="email" name="email" class="form-control" placeholder="email@provedor.com.br" maxlength="120"/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
 									<label class="control-label" for="obs">Observações:</label>
-									<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o colaborador"></textarea>
+		<!-- id="obs" -->			<textarea id="obs" name="obs" class="form-control" placeholder="Insira uma observação sobre o colaborador"></textarea>
 								</div>
 							</div>
 						</div>
@@ -354,6 +355,9 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 						<button type="submit" class="btn btn-default" id="modal-action"></button>
+						<!-- JQuery
+							$("#colaborador-form").attr("action","administrativo-incluir-colaborador"); 
+						-->
 					</div>
 
 
@@ -589,6 +593,7 @@
 				$('#modal-subtitle').text("Incluir novo colaborador");
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
+				//CHAMADA PARA A CONTROLLER INCLUIR COLABORADOR
 				$("#colaborador-form").attr("action","administrativo-incluir-colaborador");
 				
 				//Altera o nome do botão do modal.
@@ -625,7 +630,7 @@
             	 //Altera dinamicamente o titulo do modal.
             	$('#modal-subtitle').text("Alterar colaborador");
             	
-            	//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
+            	//CHAMADA PARA A CONTROLLER.
 				$("#colaborador-form").attr("action","administrativo-alterar-colaborador");
 				
 				//Altera o nome do botão do modal.

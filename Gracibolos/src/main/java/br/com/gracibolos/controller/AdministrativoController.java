@@ -24,6 +24,7 @@ import br.com.gracibolos.jdbc.dao.CaixaDao;
 import br.com.gracibolos.jdbc.dao.CidadeDao;
 import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.ColaboradorDao;
+import br.com.gracibolos.jdbc.dao.DashboardDao;
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.dao.EstadoDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
@@ -36,6 +37,7 @@ import br.com.gracibolos.jdbc.model.Colaborador;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Estado;
 import br.com.gracibolos.jdbc.model.Fornecedor;
+import br.com.gracibolos.jdbc.model.Meses;
 import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Produto;
@@ -46,7 +48,24 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-dashboard")
 	public ModelAndView dashboard(){
 		System.out.println("Entrou na pagina dashboard");
-		return new ModelAndView("administrativo/dashboard");
+		
+		LocalDate ld = LocalDate.now();
+		String ano = String.valueOf(ld.getYear());
+		
+		Meses gasto = new Meses();
+		Meses rec = new Meses();
+		
+		DashboardDao dao = new DashboardDao();
+		
+		gasto = dao.buscarGastoRecebimento("0", ano);//Aqui eu busquei os gastos "0" deste ano
+		rec = dao.buscarGastoRecebimento("1", ano);//Aqui eu busquei os recebimentos "0" deste ano
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/dashboard");
+		mv.addObject("gasto", gasto);
+		mv.addObject("recebimento", rec);
+		
+		return mv;
 	}
 	
 	/*
@@ -839,6 +858,7 @@ public class AdministrativoController {
 	
 	//PESQUISAR COLABORADOR
 	@RequestMapping("/administrativo-procurar-colaborador")
+	//id="pesquisa" do input
 	public ModelAndView pesquisar_colaborador(String pesquisa){
 		System.out.println("Realizou a pesquisa de colaboradores");
 		
@@ -1221,14 +1241,15 @@ public class AdministrativoController {
 			
 	//PESQUISAR ENTRE CAIXA
 	@RequestMapping("/administrativo-pesquisar-entre")
-	public ModelAndView pesquisar_entre (String inicio, String fim){
+	// NO SUBMIT, O FORM OS DOIS PARAMETROS id="datainicial" E id="datafinal"	
+	public ModelAndView pesquisar_entre (String datainicial, String datafinal){
 		System.out.println("Realizou a pesquisa entre datas do caixa");
 		
 		//cria uma nova instância DAO do caixa
 		CaixaDao dao = new CaixaDao();		
 		List<Caixa> caixas = null;
 		try {
-			caixas = dao.pesquisarEntre(inicio, fim);
+			caixas = dao.pesquisarEntre(datainicial, datafinal);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

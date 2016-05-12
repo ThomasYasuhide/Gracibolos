@@ -119,7 +119,7 @@ public class Gerador {
 				e = new Encomenda();
 				e = daoEnc.listar().get(j);
 				ids[j] = e.getId();
-				//System.out.println(ids[j]);
+				//System.out.println("N° Encom. : "+ids[j]);
 			}
 			
 		} catch (Exception e) {
@@ -138,9 +138,9 @@ public class Gerador {
 	
 	// Gerador de datas
 	public LocalDate generateDate(){
-		
+		//Data inicial e final
 		LocalDate start = LocalDate.of(2014, Month.JANUARY, 1);
-		LocalDate end = LocalDate.of(2016, Month.DECEMBER, 31);
+		LocalDate end = LocalDate.of(2016, Month.JUNE, 21);
 		
 	    long days = ChronoUnit.DAYS.between(start, end);
 	    LocalDate randomDate = start.plusDays(new Random().nextInt((int) days + 1));

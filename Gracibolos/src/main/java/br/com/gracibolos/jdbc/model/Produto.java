@@ -18,14 +18,14 @@ public class Produto implements Serializable{
     private Integer status;
     private String codigo;
     private String nome;
-    private Long tipo;
+    private int tipo;
     private BigDecimal peso;
     private Long unidade;
     private int estoque;
     private BigDecimal custo;
     private BigDecimal valor;
     private String obs;
-    private String receita;
+    private String rec;
 
 	public Long getId() {
 		return id;
@@ -67,11 +67,11 @@ public class Produto implements Serializable{
 		this.nome = nome;
 	}
 	
-	public Long getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
 	
-	public void setTipo(Long tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
 
@@ -123,12 +123,12 @@ public class Produto implements Serializable{
 		this.obs = obs;
 	}
 
-	public String getReceita() {
-		return receita;
+	public String getRec() {
+		return rec;
 	}
 
-	public void setReceita(String receita) {
-		this.receita = receita;
+	public void setRec(String rec) {
+		this.rec = rec;
 	}
 	
     

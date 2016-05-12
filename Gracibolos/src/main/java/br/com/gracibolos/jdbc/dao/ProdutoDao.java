@@ -11,6 +11,7 @@ import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Produto;
+import javafx.animation.KeyValue.Type;
 
 public class ProdutoDao implements GenericoDao<Produto>{
 
@@ -27,7 +28,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		PreparedStatement ps = null;
         
 		//string query do banco
-		String sql = "INSERT INTO produto(foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs, receita) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO produto(foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){	
@@ -52,7 +53,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			ps.setInt(2, produto.getStatus());
 			ps.setString(3, produto.getCodigo());
 			ps.setString(4, produto.getNome());
-			ps.setLong(5, produto.getTipo());
+			ps.setInt(5, produto.getTipo());
 			
 			if(produto.getPeso() != null){
 				ps.setBigDecimal(6, produto.getPeso());
@@ -76,7 +77,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			
 			ps.setBigDecimal(10, produto.getValor());
 			ps.setString(11, produto.getObs());
-			ps.setString(12, produto.getReceita());
+			//ps.setString(12, produto.getReceita());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -126,7 +127,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		PreparedStatement  ps = null;
 		
 		//string query do banco
-		String sql = "UPDATE produto SET foto=?, status=?, codigo=?, nome=?, tipo=?, peso=?, unidade=?, estoque=?, custo=?, valor=?, obs=? where id=?";
+		String sql = "UPDATE produto SET foto=?, status=?, codigo=?, nome=?, tipo=?, peso=?, unidade=?, estoque=?, custo=?, valor=?, obs=?, receita=? where id=?";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())	{
@@ -137,15 +138,26 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			ps.setInt(2, produto.getStatus());
 			ps.setString(3, produto.getCodigo());
 			ps.setString(4, produto.getNome());
-			ps.setLong(5, produto.getTipo());
+			
+			ps.setInt(5, produto.getTipo());
+		
 			ps.setBigDecimal(6, produto.getPeso());
-			ps.setLong(7, produto.getUnidade());
-			ps.setLong(8, produto.getEstoque());
+			if(produto.getUnidade()!=null){
+				ps.setLong(7, produto.getUnidade());
+			}else{
+				ps.setNull(7, Types.INTEGER);
+			}
+			if(produto.getEstoque()!=0){
+				ps.setInt(8, produto.getEstoque());
+			}else{
+				ps.setInt(8, 0);
+			}
 			ps.setBigDecimal(9, produto.getCusto());
 			ps.setBigDecimal(10, produto.getValor());
 			ps.setString(11, produto.getObs());
-			//ps.setString(12, produto.getReceita());
-			ps.setLong(12, produto.getId());
+			ps.setString(12,produto.getRec());
+			
+			ps.setLong(13, produto.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -158,7 +170,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		}
 		//trata, caso de uma exceção
 		catch (SQLException e){
-			System.out.println("Houve um erro ao alterar o produto");
+			System.out.println("Houve um erro ao alterar o produto\n"+e);
 			throw new Exception("Houve um erro ao alterar o produto");
 		}
 		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
@@ -237,14 +249,14 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setStatus(rs.getInt("status"));
 				produto.setCodigo(rs.getString("codigo"));
 				produto.setNome(rs.getString("nome"));
-				produto.setTipo(rs.getLong("tipo"));
+				produto.setTipo(rs.getInt("tipo"));
 				produto.setPeso(rs.getBigDecimal("peso"));
 				produto.setUnidade(rs.getLong("unidade"));
 				produto.setEstoque(rs.getInt("estoque"));
 				produto.setCusto(rs.getBigDecimal("custo"));
 				produto.setValor(rs.getBigDecimal("valor"));
 				produto.setObs(rs.getString("obs"));
-				produto.setReceita(rs.getString("receita"));
+				produto.setRec(rs.getString("receita"));
 				
 				//adiciona o objeto produto no arrayList
 				produtos.add(produto);
@@ -287,14 +299,14 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			produto.setStatus(rs.getInt("status"));
 			produto.setCodigo(rs.getString("codigo"));
 			produto.setNome(rs.getString("nome"));
-			produto.setTipo(rs.getLong("tipo"));
+			produto.setTipo(rs.getInt("tipo"));
 			produto.setPeso(rs.getBigDecimal("peso"));
 			produto.setUnidade(rs.getLong("unidade"));
 			produto.setEstoque(rs.getInt("estoque"));
 			produto.setCusto(rs.getBigDecimal("custo"));
 			produto.setValor(rs.getBigDecimal("valor"));
 			produto.setObs(rs.getString("obs"));	
-			produto.setReceita(rs.getString("receita"));
+			produto.setRec(rs.getString("receita"));
 			
 			//fecha as conexões
 			ps.close();
@@ -349,14 +361,14 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setStatus(rs.getInt("status"));
 				produto.setCodigo(rs.getString("codigo"));
 				produto.setNome(rs.getString("nome"));
-				produto.setTipo(rs.getLong("tipo"));
+				produto.setTipo(rs.getInt("tipo"));
 				produto.setPeso(rs.getBigDecimal("peso"));
 				produto.setUnidade(rs.getLong("unidade"));
 				produto.setEstoque(rs.getInt("estoque"));
 				produto.setCusto(rs.getBigDecimal("custo"));
 				produto.setValor(rs.getBigDecimal("valor"));
 				produto.setObs(rs.getString("obs"));
-				produto.setReceita(rs.getString("receita"));
+				//produto.setReceita(rs.getString("receita"));
 				
 				//adiciona o objeto produto no arrayList
 				produtos.add(produto);

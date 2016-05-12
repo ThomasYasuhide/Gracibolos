@@ -1,31 +1,39 @@
 package br.com.gracibolos.jdbc.teste;
 
+import java.time.LocalDate;
+
 import br.com.gracibolos.jdbc.dao.DashboardDao;
-import br.com.gracibolos.jdbc.model.Gasto;
-import br.com.gracibolos.jdbc.model.Recebimento;
+import br.com.gracibolos.jdbc.model.Meses;
 
 public class Dashboard {
-	public static void main(String[] args) 
-	{
-		String ano = "2016";
-		Gasto g = new Gasto();
-		Recebimento r = new Recebimento();
-		DashboardDao dao = new DashboardDao();
-		g = dao.getGR(ano).getGasto();
-		r = dao.getGR(ano).getRec();
+	public static void main(String[] args) {
 		
-		System.out.println("Janeiro : "+g.getJaneiro()+" - "+r.getJaneiro()+
-						  "\nFevereiro : "+g.getFevereiro()+" - "+r.getFevereiro()+
-						 "\nMarço : "+g.getMarco()+" - "+r.getMarco()+
-						 "\nAbril : "+g.getAbril()+" - "+r.getAbril()+
-						 "\nMaio : "+g.getMaio()+" - "+r.getMaio()+
-						 "\nJunho : "+g.getJunho()+" - "+r.getJunho()+
-						 "\nJulho : "+g.getJulho()+" - "+r.getJulho()+
-						 "\nAgosto : "+g.getAgosto()+" - "+r.getAgosto()+
-						 "\nSetembro : "+g.getSetembro()+" - "+r.getSetembro()+
-						 "\nOutubro : "+g.getOutubro()+" - "+r.getOutubro()+
-						 "\nNovembro : "+g.getNovembro()+" - "+r.getNovembro()+
-						 "\nDezembro : "+g.getDezembro()+" - "+r.getDezembro()
+		LocalDate ld = LocalDate.now();
+		//System.out.println(ld.getYear());
+		//String ano = String.valueOf(ld.getYear());
+		String ano = "2014";
+		
+		Meses gasto = new Meses();
+		Meses rec = new Meses();
+		
+		DashboardDao dao = new DashboardDao();
+		
+		gasto = dao.buscarGastoRecebimento("0", ano);//Aqui eu busquei os gastos "0" deste ano
+		rec = dao.buscarGastoRecebimento("1", ano);//Aqui eu busquei os recebimentos "0" deste ano
+		
+		System.out.println("Janeiro : "+gasto.getJaneiro()+" - "+rec.getJaneiro()+
+						  "\nFevereiro : "+gasto.getFevereiro()+" - "+rec.getFevereiro()+
+						 "\nMarço : "+gasto.getMarco()+" - "+rec.getMarco()+
+						 "\nAbril : "+gasto.getAbril()+" - "+rec.getAbril()+
+						 "\nMaio : "+gasto.getMaio()+" - "+rec.getMaio()+
+						 "\nJunho : "+gasto.getJunho()+" - "+rec.getJunho()+
+						 "\nJulho : "+gasto.getJulho()+" - "+rec.getJulho()+
+						 "\nAgosto : "+gasto.getAgosto()+" - "+rec.getAgosto()+
+						 "\nSetembro : "+gasto.getSetembro()+" - "+rec.getSetembro()+
+						 "\nOutubro : "+gasto.getOutubro()+" - "+rec.getOutubro()+
+						 "\nNovembro : "+gasto.getNovembro()+" - "+rec.getNovembro()+
+						 "\nDezembro : "+gasto.getDezembro()+" - "+rec.getDezembro()
 				);
 	}
+	
 }

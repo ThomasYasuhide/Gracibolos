@@ -1,6 +1,6 @@
 package br.com.gracibolos.jdbc.model;
 
-public class Gasto {
+public class Meses {
 	
 	private double janeiro;
 	private double fevereiro;
@@ -15,7 +15,7 @@ public class Gasto {
 	private double novembro;
 	private double dezembro;
 
-	public Gasto() {
+	public Meses() {
 		super();
 	}
 

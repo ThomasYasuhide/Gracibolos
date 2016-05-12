@@ -108,33 +108,40 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								 <strong>Erro!</strong> Houve algum erro ao tentar excluir a transação, favor tente novamente.
+								 <strong>Erro!</strong> Houve algum erro ao tentar excluir a matéria-prima, favor tente novamente.
 								</div>
 							</div>
 						</div>
 					</c:if>
-					<!-- ################################# FIM DOS ALERTAS ################################# -->
+<!-- ################################# FIM DOS ALERTAS ################################# -->
 					
 					<!-- Essa div agrupa os campos de pesquisa e de listar as matérias-primas -->
 					<div class="row">
+					
+<!-- ################################# PESQUISA ENTRE DATAS CAHMADA PARA A CONTROLLER administrativo-pesquisar-entre ################################# -->
+					
 						<form action="administrativo-pesquisar-entre" method="POST">
-							<div class="input-margin col-xs-12 col-sm-1 col-md-1 col-lg-4">
+							<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
 								<label class="control-label" for="datainicial">Data inicial*:</label>
 								<input type="date" id="datainicial" class="form-control" placeholder="Informe a data inicial" name="datainicial" required>
 							</div>
 													
-							<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-4">
+							<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
 								<label class="control-label" for="datafinal">Data final*:</label>						
 								<input type="date" id="datafinal" class="form-control" placeholder="Informe a data final" name="datafinal" required>
 							</div>
 							
 							<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
 								<label class="control-label" for="fabricacao">Pesquisar por data:</label>
-								<button type="submit" class="btn btn-default fullwidth"><i class="material-icons">search</i>Pesquisar por período</button>
+								<button type="submit" class="btn btn-default fullwidth"><i class="material-icons">search</i>&nbsp;&nbsp;&nbsp;Pesquisar por período</button>
 							</div>
 						</form>
 					</div>
 					
+<!-- ################################# FIM PESQUISA ENTRE DATAS CAHMADA PARA A CONTROLLER administrativo-pesquisar-entre ################################# -->
+					
+<!-- ############################################################ INICIO DA TABELA ############################################################ -->
+
 					<!-- Essa div agrupa os títulos das tabelas, e os resultados das pesquisas -->
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-md-lg-6">
@@ -146,28 +153,30 @@
 										<th>Recebido / Gasto</th>
 										<th>Encomenda ID</th>
 										<th>Fornecedor ID</th>
-										<th>Valor</th>									
+										<th>Data</th>									
 										<th>Forma</th>
 										<th>Parcela</th>
-										<th>Data</th>
+										<th>Valor</th>
 										<th>Descrição</th>										
 										<th>Ações</th>
 									</tr>
 								</thead>
 								<tbody>
 
-									<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
+									<!-- 
+										Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  
+									-->
 									<c:forEach var="caixa" items="${caixas}">
 										<tr>
-											<td>${caixa.id}</td>
-											<td>${caixa.gastoRecebimento}</td>
-											<td>${caixa.encomendaId}</td>
-											<td>${caixa.fornecedorId}</td>
-											<td>${caixa.valor}</td>											
-											<td>${caixa.forma}</td>
-											<td>${caixa.parcela}</td>
-											<td>${caixa.data}</td>
-											<td>${caixa.descricao}</td>											
+											<!-- 0 --><td>${caixa.id}</td>
+											<!-- 1 --><td>${caixa.gastoRecebimento}</td>
+											<!-- 2 --><td>${caixa.encomendaId}</td>
+											<!-- 3 --><td>${caixa.fornecedorId}</td>
+											<!-- 4 --><td>${caixa.data}</td>											
+											<!-- 5 --><td>${caixa.forma}</td>
+											<!-- 6 --><td>${caixa.parcela}</td>
+											<!-- 7 --><td>${caixa.valor}</td>
+											<!-- 8 --><td>${caixa.descricao}</td>											
 											
 											<!-- Aqui nessa td, estão os botões de editar e excluir, que aparecem junto com a lista de matérias-primas na tabela -->
 		                					<td>
@@ -188,7 +197,7 @@
 						</div>
 					</div>
 
-					<!-- ############################################################ FIM DO CONTEUDO ############################################################ -->
+<!-- ############################################################ FIM DA TABELA ############################################################ -->
 				</div>
 			</div>
 		</div>
@@ -196,7 +205,7 @@
 	
 	<!--
 
-	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR ############################################################
+	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DO CAIXA ############################################################
 
 	-->
 	<div class="modal fade" id="modal-caixa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -293,7 +302,7 @@
 
 	<!--
 
-	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE COLABORADOR #########################################################
+	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DO CAIXA #########################################################
 
 	-->
 
@@ -304,7 +313,7 @@
 
 	<!--
 
-	############################################################        MODAL DE EXCLUSÃO DE COLABORADOR      ############################################################
+	############################################################        MODAL DE EXCLUSÃO DO CAIXA      ############################################################
 
 	-->
 
@@ -356,7 +365,7 @@
 
 	<!--
 
-	############################################################ FIM DO  MODAL DE EXCLUSÃO DE COLABORADOR ############################################################
+	############################################################ FIM DO  MODAL DE EXCLUSÃO DO CAIXA ############################################################
 
 	-->
 
@@ -400,7 +409,7 @@
             var table = $('#lista-caixa').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 2, 3, 5, 6, 8 ],
+                        "targets": [ 0, 1, 2, 3, 5, 6, 8 ],
                         "visible": false
                     }
                 ]
