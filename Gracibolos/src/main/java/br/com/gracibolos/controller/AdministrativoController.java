@@ -1141,38 +1141,38 @@ public class AdministrativoController {
 	}
 	
 	//INCLUIR NOVO CAIXA
-	@RequestMapping("/administrativo-incluir-caixa")
-	public ModelAndView incluir_caixa(Caixa caixa){
-		System.out.println("Entrou na servlet de inclusão de um novo caixa");
-		
-		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
-		boolean status = false;
-		 
-		//cria uma nova instância DAO do caixa
-		CaixaDao dao = new CaixaDao();			
+		@RequestMapping("/administrativo-incluir-caixa")
+		public ModelAndView incluir_caixa(Caixa caixa){
+			System.out.println("Entrou na servlet de inclusão de inclusão de um novo caixa");
 			
-		try {
-			//se o método inserir passando um caixa, for executado corretamente, status recebe verdadeiro
-			if(dao.inserir(caixa)) {
-				status = true;
-			} 
-			//caso contrário, status recebe falso
-			else {
-				status = false;
+			//declara um status como falso, pra depois verificar se a condição foi atendida ou não.
+			boolean status = false;
+			
+			//cria uma nova instância dao do caixa
+			CaixaDao dao = new CaixaDao();					
+			
+			try {
+				//se o método inserir passando um caixa, for executado corretamente, status recebe verdadeiro
+				if(dao.inserir(caixa)) {
+					status = true;			
+				}
+				//caso contrário, status recebe falso
+				else {
+					status = false;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			//instância uma nova modelView
+			ModelAndView mv = new ModelAndView();
+			//seta o caminho e o nome da jsp
+			mv.setViewName("administrativo/caixa");
+			//passa o retorno do status para a Expression Language chamada incluir
+			mv.addObject("incluir", status);
+			//retorna o mv
+			return mv;
 		}
-		
-		//instância uma nova modelView
-		ModelAndView mv = new ModelAndView();
-	    //seta o caminho e o nome da jsp
-		mv.setViewName("administrativo/caixa");
-		//passa o retorno do status para a Expression Language chamada incluir
-		mv.addObject("incluir", status);
-	    //retorna mv
-		return mv;
-	}
+
 	
 	//AlTERAR CAIXA
 	@RequestMapping("/administrativo-alterar-caixa")
