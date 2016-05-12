@@ -16,7 +16,7 @@ public class CaixaInserir {
 		BigDecimal big = new BigDecimal(30.00);
 		c.setGastoRecebimento(0);
 		c.setEncomendaId(null);
-		c.setFornecedorId(2);
+		c.setFornecedorId(146);
 		c.setValor(big);
 		c.setForma("dinheiro");
 		c.setParcela(1);

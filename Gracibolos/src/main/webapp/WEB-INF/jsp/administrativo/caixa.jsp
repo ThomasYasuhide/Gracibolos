@@ -38,7 +38,7 @@
 			<%@ include file="menu.jsp" %>
 			
 			<div class="content fullpage col-xs-12 col-sm-12 col-md-9 col-lg-9">
-				<div class="margin-top">
+				<div class="margin-top">	
 
 					<!-- ############################################################ CABEÇALHO ############################################################ -->
 					<header>
@@ -153,10 +153,10 @@
 										<th>Recebido / Gasto</th>
 										<th>Encomenda ID</th>
 										<th>Fornecedor ID</th>
-										<th>Data</th>									
+										<th>Valor</th>																		
 										<th>Forma</th>
-										<th>Parcela</th>
-										<th>Valor</th>
+										<th>Parcela</th>										
+										<th>Data</th>
 										<th>Descrição</th>										
 										<th>Ações</th>
 									</tr>
@@ -172,10 +172,10 @@
 											<!-- 1 --><td>${caixa.gastoRecebimento}</td>
 											<!-- 2 --><td>${caixa.encomendaId}</td>
 											<!-- 3 --><td>${caixa.fornecedorId}</td>
-											<!-- 4 --><td>${caixa.data}</td>											
+											<!-- 4 --><td>${caixa.valor}</td>																					
 											<!-- 5 --><td>${caixa.forma}</td>
-											<!-- 6 --><td>${caixa.parcela}</td>
-											<!-- 7 --><td>${caixa.valor}</td>
+											<!-- 6 --><td>${caixa.parcela}</td>											
+											<!-- 7 --><td>${caixa.data}</td>
 											<!-- 8 --><td>${caixa.descricao}</td>											
 											
 											<!-- Aqui nessa td, estão os botões de editar e excluir, que aparecem junto com a lista de matérias-primas na tabela -->
@@ -234,30 +234,35 @@
 								</div>																	
 								
 	
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-3 col-md-3">
 									<label class="control-label" for="gastoRecebimento">Gasto/Recebimento*:</label>
 									<select id="gastoRecebimento" name="gastoRecebimento" onchange="desabilitarCampos(this)" class="form-control" required>
 										<option selected value="0">Gasto</option>
 										<option value="1">Recebimento</option>
 									</select>
 								</div>
-																
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="nome_tipo" id="nome_tipo">Fornecedor*:</label>
-									<input type="text" name="nome" id="nome_des" placeholder="Digite seu nome aqui." class="form-control" maxlength="100" required/>
-								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-3 col-md-3">
+									<label class="control-label" for="encomendaId" id="encomendaId">Encomenda*:</label>
+									<input type="text" name="encomendaId" id="encomendaId" placeholder="Digite seu nome aqui." class="form-control" maxlength="100" required/>
+								</div>
+																
+								<div class="input-margin col-xs-12 col-sm-3 col-md-3">
+									<label class="control-label" for="fornecedorId" id="fornecedorId">Fornecedor*:</label>
+									<input type="text" name="fornecedorId" id="fornecedorId" placeholder="Digite seu nome aqui." class="form-control" maxlength="100" required/>
+								</div>
+																
+								<div class="input-margin col-xs-12 col-sm-3 col-md-3">
 									<label class="control-label" for="valor">Valor*:</label>
 									<div class="input-group">
 										<span class="input-group-addon">R$</span>
 										<input type="text" id="valor" name="valor" placeholder="0,00" class="form-control" maxlength="14" required/>
 									</div>
 								</div>
-								
+								 
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="formaPagamento">Forma de pagamento*:</label>
-									<select class="form-control" id="formaPagamento" name="formaPagamento">										
+									<label class="control-label" for="forma">Forma de pagamento*:</label>
+									<select class="form-control" id="forma" name="forma">										
 										<option value="0" selected disabled>Selecione...</option>
 										<option value="1">Dinheiro</option>
 										<option value="2">Cartão de crédito</option>
@@ -272,8 +277,8 @@
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="data_transacao">Data da transação:</label>
-									<input type="date" id="data_transacao" name="data_transacao" class="form-control" required />
+									<label class="control-label" for="data">Data da transação:</label>
+									<input type="date" id="data" name="data" class="form-control" required />
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -479,7 +484,7 @@
 				$('#valor').val(data[4]);
 				$('#forma').val(data[5]);
 				$('#parcela').val(data[6]);
-				$('#data_transacao').val(data[7]);
+				$('#data').val(data[7]);
 				$('#descricao').val(data[8]);
             });
 
