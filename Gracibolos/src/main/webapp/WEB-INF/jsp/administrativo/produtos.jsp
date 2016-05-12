@@ -158,6 +158,7 @@
 										<th>Custo</th>
 										<th>Valor</th>
 										<th>Obs</th>
+										<th>Receita</th>
 										<th>Ações</th>
 									</tr>
 								</thead>
@@ -178,6 +179,7 @@
 											<td>${produto.custo}</td>
 											<td>${produto.valor}</td>
 											<td>${produto.obs}</td>
+											<td>${produto.rec}</td>
 											
 											<!-- Aqui nessa td, estão os botões de editar e excluir, que aparecem junto com a lista de produtos na tabela -->
 		                					<td>
@@ -333,9 +335,19 @@
 											</div>
 										</div>
 										
-										<!-- Aqui fica o conteúdo da aba receita -->
+										<!-- 
+											Aqui fica o conteúdo da aba receita 
+										-->
 										<div id="receita" class="tab-pane fade">
-											
+										
+											<!-- 
+												Campo para escrever a receita
+											-->
+											<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+												<label class="control-label" for="rec">Receita</label>
+												<textarea class="form-control" name="rec" name="rec" id="rec" rows="25" placeholder="Digite aqui a receita"></textarea>
+											</div>
+										
 											<table class="input-margin table display table-settings">
 												<thead>
 													<!-- Titulos das tabelas  -->
@@ -534,7 +546,9 @@
 			}
 			
 			var lista_materiaprima = $('#lista-materiaprima');
-			
+			//
+			// INSERIR UMA LINHA NA TABELA
+			//
             $('#inserir-linha').click(function() {
             	var tabela;
             	var linha;
@@ -613,7 +627,8 @@
             		excluir_btn.innerHTML = "<i class='material-icons'>clear</i>";
             		excluir_btn.onclick = excluir;
 
-            	id_column.appendChild(id);
+				
+               	id_column.appendChild(id);
             	materiaprima_column.appendChild(materiaprima);
                 medida_column.appendChild(medida);
                 unidade_column.appendChild(unidade);	
@@ -625,7 +640,8 @@
                 linha.appendChild(medida_column);
                 linha.appendChild(unidade_column);
                 linha.appendChild(acoes_column);
-
+                
+				// ADICIONA OS VALORES NA TABELA
             	tabela.appendChild(linha);
 
                 function salvar(){
@@ -656,11 +672,22 @@
 			*
 			*/
 			
-			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
+			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário (invisível)
             var table = $('#lista-produtos').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 0, 1, 2, 5, 6, 7, 8, 9, 10, 11 ],
+                        //0 - id
+                        //1 - foto
+                        //2 - status
+                        //5 - tipo
+                        //6 - peso
+                        //7 - unidade
+                        //8 - estoque
+                        //9 - custo
+                        //10 - valor
+                        //11 - obs
+                        //12 - receita
+                        "targets": [ 0, 1, 2, 5, 6, 7, 8, 9, 10, 11, 12],
                         "visible": false
                     }
                 ]
@@ -732,6 +759,7 @@
 				$('#custo').val(data[9]).trigger('input');
 				$('#valor').val(data[10]).trigger('input');
 				$('#obs').val(data[11]);
+				$('#rec').val(data[12]);
 
 			});
 

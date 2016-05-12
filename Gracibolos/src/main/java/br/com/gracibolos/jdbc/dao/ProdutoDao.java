@@ -255,7 +255,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 				produto.setCusto(rs.getBigDecimal("custo"));
 				produto.setValor(rs.getBigDecimal("valor"));
 				produto.setObs(rs.getString("obs"));
-				//produto.setReceita(rs.getString("receita"));
+				produto.setRec(rs.getString("receita"));
 				
 				//adiciona o objeto produto no arrayList
 				produtos.add(produto);
