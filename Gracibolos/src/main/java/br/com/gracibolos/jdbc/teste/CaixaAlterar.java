@@ -13,16 +13,16 @@ public class CaixaAlterar {
 	
 		Caixa c = new Caixa();	
 		
+		c.setGastoRecebimento(0);
 		c.setEncomendaId(null);
 		c.setFornecedorId(1);
 		BigDecimal valor = new BigDecimal(336.00);
-		c.setValor(valor);
-		c.setGastoRecebimento(1);
+		c.setValor(valor);		
 		c.setForma("debito");
 		c.setParcela(1);
-		c.setDescricao(null);
 		LocalDate data = LocalDate.of(2016, 05, 06);
 		c.setData(data);
+		c.setDescricao(null);		
 		c.setId(10L);
 		
 		CaixaDao dao = new CaixaDao();
