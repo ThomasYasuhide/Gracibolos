@@ -33,10 +33,11 @@ public class ServerRestController {
 	private FornecedorDao fornDao;
 	private List<Fornecedor> fornList;
 	
-	
-	@RequestMapping(value = "/rest-pesquisa-fornecedor/{pesquisa}", 
+	// OK
+	@RequestMapping(value = "/rest-pesquisar-fornecedor/{pesquisa}", 
 			method = RequestMethod.GET, headers="Accept=application/json")  
-	public List<Fornecedor> pesquisar_fornecedor(@PathVariable String pesquisa) {
+	public @ResponseBody List<Fornecedor> pesquisar_fornecedor(@PathVariable String pesquisa
+			, HttpServletResponse response) {
 		fornList = null;
 		fornDao = new FornecedorDao();
 		try {
@@ -45,15 +46,20 @@ public class ServerRestController {
 			System.out.println("ERRO - rest fornecedor, pesquisa fornecedor.");
 			e.printStackTrace();
 		}    
+		colocarAcesso(response);
 		return fornList;  
 	}
 	
-	@RequestMapping(value = "/rest-pesquisa-materiaprima/{pesquisa}", 
-			method = RequestMethod.GET
+	// OK
+	@RequestMapping(value = "/rest-pesquisa-materiaprima/{pesquisa}"
+					,method = RequestMethod.GET
 					,produces = {MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE
 				})
-	public @ResponseBody List<MateriaPrima> pesquisar_materiprima(@PathVariable String pesquisa, HttpServletResponse response) {
+	
+	public @ResponseBody List<MateriaPrima> pesquisar_materiprima(@PathVariable String pesquisa
+			, HttpServletResponse response) 
+	{
 		mpList = null;
 		mpDao = new MateriaPrimaDao();
 		try {
@@ -61,19 +67,27 @@ public class ServerRestController {
 		} catch (Exception e) {
 			System.out.println("ERRO - rest materiaprima, pesquisa materiaprima.");
 			e.printStackTrace();
-		}    
-		
+		} 
+		// AJAX
+		colocarAcesso(response);
+	   
+		return mpList;  
+	}
+	// AJAX
+	private void colocarAcesso(HttpServletResponse response){
 		response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-        
-		return mpList;  
 	}
 	
+	// OK
 	@RequestMapping(value = "/rest-produtos", 
-			method = RequestMethod.GET, headers="Accept=application/json")
-	public List<Produto> listAllProdutos() {
+			method = RequestMethod.GET
+			,produces = {MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE
+		})
+	public @ResponseBody List<Produto> listAllProdutos(HttpServletResponse response) {
 		try {
 			produtoDao = new ProdutoDao();
 			produtosList = produtoDao.listar();
@@ -81,11 +95,13 @@ public class ServerRestController {
 			System.out.println("ERRO - rest produtos, lista de produtos.");
 			e.printStackTrace();
 		}
+		colocarAcesso(response);
+		
 		return produtosList;
     }
 	
-	
-	@RequestMapping(value = "/rest-pesquisar-produtos/{id}", 
+	// OK
+	@RequestMapping(value = "/rest-pesquisar-produto-id/{id}", 
 			method = RequestMethod.GET
 			,produces = {MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE
@@ -99,17 +115,18 @@ public class ServerRestController {
 			System.out.println("ERRO - rest produtos, busca produtos por id.");
 			e.printStackTrace();
 		}    
-		response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+		colocarAcesso(response);
         
         return p;  
 	 }
 	
-	@RequestMapping(value = "/rest-pesquisa-produtos/{pesquisa}", 
-			method = RequestMethod.GET, headers="Accept=application/json")  
-	public List<Produto> pesquisar_produto(@PathVariable String pesquisa) {
+	// OK
+	@RequestMapping(value = "/rest-pesquisar-produto-nome/{pesquisa}", 
+			method = RequestMethod.GET
+			,produces = {MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE
+		}) 
+	public @ResponseBody List<Produto> pesquisar_produto(@PathVariable String pesquisa, HttpServletResponse response) {
 		produtoDao = null;
 		produtoDao = new ProdutoDao();
 		try {
@@ -117,14 +134,19 @@ public class ServerRestController {
 		} catch (Exception e) {
 			System.out.println("ERRO - rest produtos, pesquisa produtos.");
 			e.printStackTrace();
-		}    
+		}   
+		colocarAcesso(response);
+		
 		return produtosList;  
 	}
 
-	
+	// OK
 	@RequestMapping(value = "/rest-clientes/{nome}", 
-			method = RequestMethod.GET, headers="Accept=application/json")
-	public List<Cliente> ListClientes(@PathVariable String nome){
+			method = RequestMethod.GET
+			,produces = {MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE
+		}) 
+	public @ResponseBody List<Cliente> ListClientes(@PathVariable String nome, HttpServletResponse response){
 		clienteDao = new ClienteDao();
 		try {
 			clientesList = clienteDao.pesquisar(nome);
@@ -132,6 +154,8 @@ public class ServerRestController {
 			System.out.println("ERRO - rest clientes, lista de clientes.");
 			e.printStackTrace();
 		}
+		colocarAcesso(response);
+		
 		return clientesList;
 	}
 	
