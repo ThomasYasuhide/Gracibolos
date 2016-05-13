@@ -898,6 +898,13 @@
 				
 				alert('produtos da encomenda');
 				
+				var now = moment().format('YYYY-MM-DD');
+				var totalencomenda = $('#totalprodutos').val();
+               
+				$('#datafaturamento').val(now);
+				$('#totalencomenda').val(totalencomenda);
+				
+				
 				return false;
 			});
 			
@@ -926,6 +933,27 @@
 				alert('finalizar da encomenda');
 				
 				return false;
+			});
+			
+			$('#valorpago').on('change', function(){
+				
+				//Variavel temporaria para retirar a mascara e possibilitar o calculo.
+				var totalencomenda = $('#totalencomenda').val();
+				totalencomenda = totalencomenda.split(".").join("");
+				totalencomenda = totalencomenda.split(",").join(".");
+				
+				//Variavel temporaria para retirar a mascara e possibilitar o calculo.
+				var valorpago = $('#valorpago').val();
+				valorpago = valorpago.split(".").join("");
+				valorpago = valorpago.split(",").join(".");
+								
+				if(parseFloat(valorpago) >= parseFloat(totalencomenda)){
+					$("#valortroco").val((valorpago - totalencomenda).toFixed(2)).trigger('input');
+				}else{
+					alert('O valor pago é inferior ao valor total da encomenda.');
+				}
+				
+				
 			});
 			
 			/*
