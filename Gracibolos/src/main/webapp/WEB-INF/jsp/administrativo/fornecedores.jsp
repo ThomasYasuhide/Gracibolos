@@ -273,7 +273,6 @@
 									<label class="control-label" for="sexo">Sexo:</label>
 									<select id="sexo" name="sexo" class="form-control" required>
 										<option selected="selected" disabled="disabled" value="0">Selecione um sexo</option>
-										
 										<option value="1">Masculino</option>
 										<option value="2">Feminino</option>
 									</select>
