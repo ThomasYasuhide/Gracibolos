@@ -55,6 +55,18 @@ input[type="checkbox"]:checked ~ .unchecked {
     padding-left: 0 !important;
 }
 
+.dashboard-box {
+    border: 1.5px solid #6B5344;
+    border-radius: 5px;
+    margin: 0px -10px 30px -10px;
+    padding: 10px 15px 10px 15px;
+}
+
+.dashboard-icon {
+    font-size: 40px;
+    opacity: 0.4;
+    color: #6B5344;
+}
 
 /* Muda a cor dos place holders*/
 
