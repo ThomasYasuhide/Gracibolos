@@ -233,26 +233,29 @@
 
 								<div class="hidden">
 									<label class="control-label" for="id">Nº caixa:</label>
-									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
+									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control"  />
 								</div>																	
 								
-	
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<!-- 
+									gasto = 0
+									recebimento = 1
+								 -->
+								<div class="hidden">
 									<label class="control-label" for="gastoRecebimento">Gasto/Recebimento*:</label>
-									<select id="gastoRecebimento" name="gastoRecebimento" class="form-control" required>
+									<select id="gastoRecebimento" name="gastoRecebimento" class="form-control" >
 										<option selected value="0">Gasto</option>
 										<option value="1">Recebimento</option>
 									</select>
 								</div>
 																
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="nomeRazao" id="lbl_nomeRazao">Fornecedor*:</label>
-									<input type="text" name="nomeRazao" id="nomeRazao"  class="form-control" maxlength="100" required/>
+									<label class="control-label" for="nomeRazao" >Fornecedor*:</label>
+									<input type="text" name="nomeRazao" id="nomeRazao"  class="form-control" maxlength="100" />
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-3 col-md-3">
- 									<label class="control-label" for="encomendaId" id="lbl_encomendaId">Encomenda*:</label>
- 								<input type="text" name="encomendaId" id="encomendaId"  class="form-control" maxlength="100" required/>
+								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+ 									<label class="control-label" for="encomendaId" >Encomenda*:</label>
+ 								<input type="text" name="encomendaId" id="encomendaId"  class="form-control" maxlength="100" />
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
@@ -277,12 +280,17 @@
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="parcela">Número de Parcelas:</label>
-									<input id="parcela" name="parcela" type="number" min=1 class="form-control" pattern="[0-9]+" maxlength="1" >
+									<input id="parcela" name="parcela" type="number" class="form-control" pattern="[0-9]+" maxlength="1" >
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="data">Data da transação:</label>
-									<input type="date" id="data" name="data" class="form-control" required />
+									<input type="date" id="data" name="data" class="form-control"  />
+								</div>
+								
+								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+									<label class="control-label" for="fornecedorId" id="lbl_fornecedorId">Fornecedor id:</label>
+									<input type="text" name="fornecedorId" id="fornecedorId"  class="form-control" maxlength="100" placeholder=""/>
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -411,7 +419,7 @@
 			*
 			*/
 			
-			$("#valor").mask("000.000.000.000.000,00", {reverse: true});
+			//$("#valor").mask("000.000.000.000.000,00", {reverse: true});
 
 			/*
 			*
@@ -498,17 +506,48 @@
               	$('#modal-caixa').modal('show');
 					
 				//Preenche os determinados campos com os conteudos.
+              	
 								
-				$('#data').val(data[0]);              	
-              	$('#gastoRecebimento').val(data[1]);
-              	$('#encomendaId').val(data[2]);
-              	$('#fornecedorId').val(data[3]);
+				$('#data').val(data[0]);
+
+				//Atribuo os objetos para utilizar no bloqueio
+				var mfornecedorId = document.getElementById("fornecedorId");
+				var mencomendaId = document.getElementById("encomendaId");
+				var mnomeRazao = document.getElementById("nomeRazao");
+				
+				//Se for recebimento
+              	if(data[1] == 1){
+                 	//console.log(data[1]);
+                 	//Bloqueio o fornecedorId e o nomeRazao	e ativo encomenda				
+             		mencomendaId.disabled = false;
+  					mfornecedorId.disabled = true;
+  		   			mnomeRazao.disabled = true;
+              		//Coloca os valores na encomendaId
+        			$('#encomendaId').val(data[2]);
+        		}
+        		//Se for gasto
+        		if(data[1] == 0){
+        			//console.log(data[1]);
+        			//Boloqueio encomendaId e ativo fornecedor e nomeRzao       			              		
+            		mfornecedorId.disabled = false;	           		
+               		mnomeRazao.disabled = false;
+                 	mencomendaId.disabled = true;
+                                 
+                	console.log("fornecedor "+mfornecedorId.disabled);
+           			console.log("encomenda "+mencomendaId.disabled);
+           			console.log("nomeRazao "+mnomeRazao.disabled);
+           			
+              		//Coloca os valores
+              		$('#fornecedorId').val(data[3]);
+              		$('#nomeRazao').val(data[9]);
+                }
+              
               	$('#id').val(data[4]);
 				$('#valor').val(data[5]);
 				$('#forma').val(data[6]);
 				$('#parcela').val(data[7]);				
 				$('#descricao').val(data[8]);
-				$('#nomeRazao').val(data[9]);
+				
             });
 
 

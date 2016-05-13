@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1133,8 +1134,20 @@ public class AdministrativoController {
 	//CAIXA
 	@RequestMapping("/administrativo-caixa")
 	public ModelAndView caixa(){
+
 		System.out.println("Entrou na servlet de listagem do caixa");
 						
+
+		System.out.println("Entrou na servlet de listagem de matéria prima");
+		
+		//VERIFICA A DATA ATUAL, E PEGA O PRIMEIRO E ULTIMO DIA DO MÊS
+		LocalDate data = LocalDate.now();
+		@SuppressWarnings("unused")
+		LocalDate primeiro = data.with(TemporalAdjusters.firstDayOfMonth());
+		@SuppressWarnings("unused")
+		LocalDate ultimo = data.with(TemporalAdjusters.lastDayOfMonth());
+		
+
 		return new ModelAndView("administrativo/caixa");
 	}
 	

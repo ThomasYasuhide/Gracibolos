@@ -49,14 +49,6 @@ function desabilitarCampos (id){
 		
 	}else {
 		
-//		if(nome_tipo.innerHTML == 'Fornecedor*:'){
-//		    nome_tipo.innerHTML = 'Encomenda*:';
-//		}
-//		
-//		if(nome_des.placeholder == 'Digite o nome do fornecedor.'){
-//			nome_des.placeholder = 'Número da encomenda.';
-//		}
-		
 		if(sexo.disabled == false){
 			sexo.disabled = true;
 			sexo.value = 0;
