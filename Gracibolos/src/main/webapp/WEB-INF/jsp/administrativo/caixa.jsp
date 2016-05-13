@@ -307,7 +307,7 @@
 					<!-- Esse div contem o 2 botões -->
 					<div class="modal-footer">
 						<!-- botão de fechar o modal  -->
-						<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+						<button type="button" id="fecharModal" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 						<!-- botão de incluir ou alterar a matéria-prima, assim finalizando o formulário  -->
 						<button type="submit" class="btn btn-default" id="modal-action"></button>
 					</div>
@@ -462,6 +462,13 @@
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
 				$("#caixa-form").attr("action","administrativo-incluir-caixa");
+
+				//Limpo os campos ao fechar - relacionado a visibilidade dos campos
+				$("#caixa-form").click(function(){
+	            	mfornecedorId.value="";           		
+	           		mnomeRazao.value="";
+	             	mencomendaId.value="";    
+				});
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir gasto');
@@ -486,7 +493,7 @@
 			*
 			*/
 
-            //Define uma ação na linha da tabela ao apertar o botão editar.
+ //Define uma ação na linha da tabela ao apertar o botão editar.----------------------------------------------------------------
             
             $('#lista-caixa tbody').on( 'click', '#edit-caixa', function () {            	
             	
@@ -505,11 +512,18 @@
               	//Apresenta o modal de exclusão na tela.
               	$('#modal-caixa').modal('show');
 					
-				//Preenche os determinados campos com os conteudos.
-              	
-								
+				//Pega os valores que estão na tabela e passa para o modal.			
 				$('#data').val(data[0]);
-
+				$('#id').val(data[4]);
+				$('#valor').val(data[5]);
+				$('#forma').val(data[6]);
+				$('#parcela').val(data[7]);				
+				$('#descricao').val(data[8]);
+          		$('#fornecedorId').val(data[3]);
+          		$('#nomeRazao').val(data[9]);
+          		$('#encomendaId').val(data[2]);
+				
+//---------------visibilidade-----------------------------------------------------------------
 				//Atribuo os objetos para utilizar no bloqueio
 				var mfornecedorId = document.getElementById("fornecedorId");
 				var mencomendaId = document.getElementById("encomendaId");
@@ -518,38 +532,37 @@
 				//Se for recebimento
               	if(data[1] == 1){
                  	//console.log(data[1]);
-                 	//Bloqueio o fornecedorId e o nomeRazao	e ativo encomenda				
+                 	//Bloqueio o fornecedorId e o nomeRazao	e ativo encomenda	
+                 	//mencomendaId.style.visibility="visible";			
              		mencomendaId.disabled = false;
+             		//mfornecedorId.style.visibility="hidden";
   					mfornecedorId.disabled = true;
+  					//mnomeRazao.style.visibility="hidden";
   		   			mnomeRazao.disabled = true;
               		//Coloca os valores na encomendaId
-        			$('#encomendaId').val(data[2]);
+        			
         		}
         		//Se for gasto
         		if(data[1] == 0){
         			//console.log(data[1]);
-        			//Boloqueio encomendaId e ativo fornecedor e nomeRzao       			              		
-            		mfornecedorId.disabled = false;	           		
+        			//Boloqueio encomendaId e ativo fornecedor e nomeRzao  
+        			//mfornecedorId.style.visibility="visible";     			              		
+            		mfornecedorId.disabled = false;
+            		//mnomeRazao.style.visibility="visible";	           		
                		mnomeRazao.disabled = false;
+               		//mencomendaId.style.visibility="hidden";
                  	mencomendaId.disabled = true;
                                  
-                	console.log("fornecedor "+mfornecedorId.disabled);
-           			console.log("encomenda "+mencomendaId.disabled);
-           			console.log("nomeRazao "+mnomeRazao.disabled);
-           			
-              		//Coloca os valores
-              		$('#fornecedorId').val(data[3]);
-              		$('#nomeRazao').val(data[9]);
+                	//console.log("fornecedor "+mfornecedorId.disabled);
+           			//onsole.log("encomenda "+mencomendaId.disabled);
+           			//console.log("nomeRazao "+mnomeRazao.disabled);
+           	              		
                 }
-              
-              	$('#id').val(data[4]);
-				$('#valor').val(data[5]);
-				$('#forma').val(data[6]);
-				$('#parcela').val(data[7]);				
-				$('#descricao').val(data[8]);
-				
+//---------------FIM - visibilidade-----------------------------------------------------------------             
+              	
+          		
             });
-
+//FIM - Define uma ação na linha da tabela ao apertar o botão editar.----------------------------------------------------------------
 
 			/*
 			*
@@ -571,6 +584,8 @@
 				$('#excluir-caixa').modal('show');
 
             });
+
+            
 	
         });
 
