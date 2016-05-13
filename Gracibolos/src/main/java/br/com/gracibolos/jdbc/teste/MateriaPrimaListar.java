@@ -11,7 +11,7 @@ public class MateriaPrimaListar {
 		MateriaPrimaDao dao = new MateriaPrimaDao();
 		
 		try {
-			for(MateriaPrima mp : dao.listar()){
+			for(MateriaPrima mp : dao.pesquisar("leite")){
 			    System.out.println(	    	  		 "Id : "+mp.getId()
 			    				       		   + "\tNome : "+mp.getNome()
 			    						 	 +"\tEstoque : "+mp.getEstoque()

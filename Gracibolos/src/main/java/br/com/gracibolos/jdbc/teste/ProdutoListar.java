@@ -12,7 +12,7 @@ public class ProdutoListar {
 		
 		
 		try {
-			for( Produto p : dao.listar()){
+			for( Produto p : dao.pesquisar("bolo")){
 				System.out.println(	  
 					
 												"Id : "+p.getId()
