@@ -1,14 +1,6 @@
-alert('carregado');
-
-
 //FUNÇÂO PARA ALTERAR O VALOR DOS CAMPOS
 function desabilitarCampos (id){
-	
-	alert('teste');
-	
-//	var nome_tipo = document.getElementById("nome_tipo");
-//	var nome_des = document.getElementById("nome_des");
-	
+
 	var sexo = document.getElementById("sexo");
 	var datanascimento = document.getElementById("datanascimento");
 
@@ -20,15 +12,7 @@ function desabilitarCampos (id){
 	var rgie_inp = document.getElementById("rgie_inp");
 
 	if(id.value == 0){
-		
-//		if(nome_tipo.innerHTML == 'Encomenda*:'){
-//		    nome_tipo.innerHTML = 'Fornecedor*:';
-//		}
-		
-//		if(nome_des.placeholder == 'Número da encomenda.'){
-//			nome_des.placeholder = 'Digite o nome do fornecedor.';
-//		}
-		
+
 		if(sexo.disabled == true){
 			sexo.disabled = false;
 		}

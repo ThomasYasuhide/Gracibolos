@@ -1,6 +1,6 @@
 package br.com.gracibolos.jdbc.teste;
 
-import java.time.LocalDate;
+//import java.time.LocalDate;
 
 import br.com.gracibolos.jdbc.dao.DashboardDao;
 import br.com.gracibolos.jdbc.model.Meses;
@@ -8,7 +8,7 @@ import br.com.gracibolos.jdbc.model.Meses;
 public class Dashboard {
 	public static void main(String[] args) {
 		
-		LocalDate ld = LocalDate.now();
+		//LocalDate ld = LocalDate.now();
 		//System.out.println(ld.getYear());
 		//String ano = String.valueOf(ld.getYear());
 		String ano = "2014";

@@ -6144,7 +6144,7 @@ module.exports = function(Chart) {
 					minSize.height += totalHeight;
 
 				} else {
-					// TODO vertical
+					// vertical
 				}
 			}
 
@@ -6656,7 +6656,7 @@ module.exports = function(Chart) {
 					// A horizontal axis is more constrained by the height.
 					this.longestLabelWidth = largestTextWidth;
 
-					// TODO - improve this calculation
+					// improve this calculation
 					var labelHeight = (Math.sin(helpers.toRadians(this.labelRotation)) * this.longestLabelWidth) + 1.5 * tickFontSize;
 
 					minSize.height = Math.min(this.maxHeight, minSize.height + labelHeight);

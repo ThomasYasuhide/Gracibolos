@@ -11,7 +11,6 @@ import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Produto;
-import javafx.animation.KeyValue.Type;
 
 public class ProdutoDao implements GenericoDao<Produto>{
 

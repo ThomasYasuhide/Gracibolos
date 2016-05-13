@@ -10,7 +10,7 @@ public class ProdutoAlterar {
 	public static void main(String[] args) {
 		
 		Produto p1 = new Produto();
-		BigDecimal custo = new BigDecimal(0);
+		//BigDecimal custo = new BigDecimal(0);
 		BigDecimal valor = new BigDecimal(32.00);
 		//BigDecimal peso = new BigDecimal(4.00);	
 		

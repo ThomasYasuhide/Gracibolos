@@ -248,9 +248,9 @@
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-3 col-md-3">
- +									<label class="control-label" for="encomendaId" id="encomendaId">Encomenda*:</label>
- +									<input type="text" name="encomendaId" id="encomendaId" placeholder="Digite seu nome aqui." class="form-control" maxlength="100" required/>
- +								</div>
+									<label class="control-label" for="encomendaId" id="encomendaId">Encomenda*:</label>
+									<input type="text" name="encomendaId" id="encomendaId" placeholder="Digite seu nome aqui." class="form-control" maxlength="100" required/>
+								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="valor">Valor*:</label>
