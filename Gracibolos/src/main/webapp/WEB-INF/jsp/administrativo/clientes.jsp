@@ -540,7 +540,8 @@
 				//Adiciona opção onde solicita que o usuário selecione uma cidade.
 				combo_cidade.append($('<option></option>').val(0).html("Selecione a cidade").attr('disabled','disabled').attr('selected','selected'));
             }
-            
+
+//-------Busca de cep---------------------------------------------------------------------------------------------------------------------------------------
             //Quando o campo cep perde o foco.
             $("#cep").blur(function() {
 				
@@ -607,7 +608,7 @@
                     limpa_formulário_cep();
                 }
             });
-			
+//----------fim da busca de cep------------------------------------------------------------------------------------------------------------------------------------			
 			
 			
 			
@@ -727,7 +728,7 @@
               		//Apresenta o modal de exclusão na tela.
               		$('#modal-cliente').modal('show');
 
-					//Preenche os determinados campos com os conteudos.
+//------------------Coloca os valores nos campos ao abrir a modal----------------------------------------------------------------------------------------------------------------------------
                     $('#id').val(data[0]);
                     $('#status').val(data[1]);
                     $('#tipopessoa').val(data[2]);
@@ -742,9 +743,9 @@
     				} else {
     					$("#cpfcnpj_inp").mask("00.000.000/0000-00");
     				}
+
     				
-    				$('#cpfcnpj_inp').val(data[6]).trigger('input');
-    				
+    				$('#cpfcnpj_inp').val(data[6]).trigger('input');   				
                     $('#rgie_inp').val(data[7]);
                     $('#endereco').val(data[8]);
                     $('#numero').val(data[9]);
@@ -759,8 +760,9 @@
                     $('#site').val(data[18]);
                     $('#clientedesde').val(data[19]);
     				$('#obs').val(data[20]);
-					    				
+//----------------------------------------------------------------------------------------------------------------------------------------------					    				
                     desabilitarCampos(document.getElementById("tipopessoa"));
+
                 });
 
 			});

@@ -14,7 +14,7 @@ public class CaixaListarEntre {
 			for(Caixa c : dao.pesquisarEntre("2016/01/01", "2016/01/30")){
 			    System.out.println(	     		 //"Id : "+c.getId()
 			    					   "\tEncomendaId: "+c.getEncomendaId()
-			    				    + "\tFornecedorId: "+c.getFornecedorId()
+			    				      + "\tNomeRazao : "+c.getNomeRazao()
 			                        		+"\tValor: "+c.getValor()
 			                        		+"\tGasto: "+c.getGastoRecebimento()
 			                        	   //+"\tForma : "+c.getForma()

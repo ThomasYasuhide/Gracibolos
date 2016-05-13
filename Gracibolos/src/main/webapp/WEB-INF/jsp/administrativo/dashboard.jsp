@@ -84,12 +84,14 @@
 	<script src="resources/js/chart.js"></script>
 
 	<script>
+	
 		$('#menu-mob-dashboard').addClass('active');
 		$('#menu-dashboard').addClass('active');
-
+		
+//------Armazeno nas variáveis os valore vindos do ModeAndView---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
 		var entradas = ["${recebimento.janeiro}","${recebimento.fevereiro}","${recebimento.marco}","${recebimento.abril}","${recebimento.maio}","${recebimento.junho}","${recebimento.julho}","${recebimento.agosto}","${recebimento.setembro}","${recebimento.outubro}","${recebimento.novembro}","${recebimento.dezembro}"];
 		var saidas = ["${gasto.janeiro}","${gasto.fevereiro}","${gasto.marco}","${gasto.abril}","${gasto.maio}","${gasto.junho}","${gasto.julho}","${gasto.agosto}","${gasto.setembro}","${gasto.outubro}","${gasto.novembro}","${gasto.dezembro}"];
-	
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
         var config = {
             type: 'line',
             data: {
@@ -99,12 +101,14 @@
                     backgroundColor : "rgba(107,83,68,0.18)",
                     borderColor : "rgba(107,83,68,1)",
 					pointColor : "rgba(107,83,68,1)",
+					//Seto aqui
 					data : entradas
                 }, {
                     label: "Total das gastos em R$",
                     backgroundColor : "rgba(241,187,186,0.5)",
                     borderColor : "rgba(241,187,186,1)",
 					pointColor : "rgba(241,187,186,1)",
+					//seto aqui
 					data : saidas
                 }]
             },

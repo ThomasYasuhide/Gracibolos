@@ -1135,7 +1135,7 @@ public class AdministrativoController {
 	//CAIXA
 	@RequestMapping("/administrativo-caixa")
 	public ModelAndView caixa(){
-		System.out.println("Entrou na servlet de listagem de matéria prima");
+		System.out.println("Entrou na servlet de listagem do caixa");
 						
 		return new ModelAndView("administrativo/caixa");
 	}

@@ -183,8 +183,9 @@ public class CaixaDao implements GenericoDao<Caixa>{
 	 * LISTAR CAIXA
 	 * Este método tem como principal objetivo realizar uma consulta ao banco e retornar todos os caixas.
 	 * 
+	 * NÃO ESTÁ IMPLEMENTADO 
 	 */
-
+	
 	public List<Caixa> listar() throws Exception{
 		
 		//string query do banco
@@ -248,7 +249,10 @@ public class CaixaDao implements GenericoDao<Caixa>{
 		ResultSet rs = null;
 		
 		//string query do banco
-		String sql = "SELECT * FROM gracibolos.caixa WHERE caixa.data between '"+inicio+"' AND '"+fim+"' ORDER BY caixa.data";
+		String sql = "SELECT caixa.id, caixa.fornecedorId, caixa.encomendaId, caixa.valor, caixa.gastoRecebimento, caixa.forma, caixa.data, fornecedor.nomerazao, caixa.parcela, caixa.descricao "
+				+ "FROM gracibolos.caixa left join gracibolos.fornecedor on caixa.fornecedorId = fornecedor.id "
+				+ "where caixa.data between '"+inicio+"' AND '"+fim+"'" 
+				+ "order by caixa.data";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
@@ -271,7 +275,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 				caixa.setParcela(rs.getInt("parcela"));
 				caixa.setData(rs.getDate("data").toLocalDate());	
 				caixa.setDescricao(rs.getString("descricao"));						
-			
+				caixa.setNomeRazao(rs.getString("nomerazao"));
 				//adiciona o objeto caixa no arrayList
 				caixas.add(caixa);
 			}

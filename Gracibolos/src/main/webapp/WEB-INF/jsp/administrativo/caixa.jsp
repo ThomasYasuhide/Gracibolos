@@ -157,7 +157,8 @@
 										<th>Valor</th>									
 										<th>Forma</th>
 										<th>Parcela</th>										
-										<th>Descrição</th>										
+										<th>Descrição</th>	
+										<th>Nome Razão</th>									
 										<th>Ações</th>
 									</tr>
 								</thead>
@@ -176,7 +177,9 @@
 											<!-- 5 --><td>${caixa.valor}</td>										
 											<!-- 6 --><td>${caixa.forma}</td>
 											<!-- 7 --><td>${caixa.parcela}</td>											
-											<!-- 8 --><td>${caixa.descricao}</td>											
+											<!-- 8 --><td>${caixa.descricao}</td>	
+											<!-- 9 --><td>${caixa.nomeRazao}</td>	
+																				
 											
 											<!-- Aqui nessa td, estão os botões de editar e excluir, que aparecem junto com a lista de matérias-primas na tabela -->
 		                					<td>
@@ -236,21 +239,21 @@
 	
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="gastoRecebimento">Gasto/Recebimento*:</label>
-									<select id="gastoRecebimento" name="gastoRecebimento" onchange="desabilitarCampos(this)" class="form-control" required>
+									<select id="gastoRecebimento" name="gastoRecebimento" class="form-control" required>
 										<option selected value="0">Gasto</option>
 										<option value="1">Recebimento</option>
 									</select>
 								</div>
 																
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="fornecedorId" id="fornecedorId">Fornecedor*:</label>
-									<input type="text" name="fornecedorId" id="fornecedorId" placeholder="Digite seu nome aqui." class="form-control" maxlength="100" required/>
+									<label class="control-label" for="nomeRazao" id="lbl_nomeRazao">Fornecedor*:</label>
+									<input type="text" name="nomeRazao" id="nomeRazao"  class="form-control" maxlength="100" required/>
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-3 col-md-3">
- +									<label class="control-label" for="encomendaId" id="encomendaId">Encomenda*:</label>
- +									<input type="text" name="encomendaId" id="encomendaId" placeholder="Digite seu nome aqui." class="form-control" maxlength="100" required/>
- +								</div>
+ 									<label class="control-label" for="encomendaId" id="lbl_encomendaId">Encomenda*:</label>
+ 								<input type="text" name="encomendaId" id="encomendaId"  class="form-control" maxlength="100" required/>
+								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="valor">Valor*:</label>
@@ -264,16 +267,17 @@
 									<label class="control-label" for="forma">Forma de pagamento*:</label>
 									<select class="form-control" id="forma" name="forma">										
 										<option value="0" selected disabled>Selecione...</option>
-										<option value="1">Dinheiro</option>
-										<option value="2">Cartão de crédito</option>
-										<option value="3">Cartão de débito</option>
-										<option value="4">Cheque</option>
+										<option value="dinheiro">Dinheiro</option>
+										<option value="crédito">Cartão de crédito</option>
+										<option value="débto">Cartão de débito</option>
+										<option value="cheque">Cheque</option>
+										<option value="boleto">Boleto</option>
 									</select>
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="parcela">Número de Parcelas:</label>
-									<input id="parcela" type="number" min=1 class="form-control" pattern="[0-9]+" maxlength="1"  name="parcela" value="1">
+									<input id="parcela" name="parcela" type="number" min=1 class="form-control" pattern="[0-9]+" maxlength="1" >
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
@@ -283,7 +287,7 @@
 								
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
 									<label class="control-label" for="descricao">Descrição:</label>
-									<textarea class="form-control" rows="3" name="descricao" id="descricao" placeholder="Digite aqui a descrição"></textarea>
+									<textarea class="form-control" rows="3" name="descricao" id="descricao" ></textarea>
 								</div>
 								
 							</div>
@@ -383,9 +387,17 @@
     
 
 	<script type="text/javascript">
+
+	
+		alert("${caixas[0].nomeRazao}");
+
 		$(document).ready(function() {
 			
-			
+			//Remove as mascaras quando apertar o submit
+			$("#caixa-form").submit(function() {
+				$("#valor").unmask();
+				
+			});
 
 			/*
 			*
@@ -407,7 +419,7 @@
 			/*
 			*
 			* CONFIGURAÇÃO DA TABELA
-			*
+			*	id da tabela lista-caixa
 			*/
 			
 			//INVISIVEIS - Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
@@ -423,8 +435,9 @@
                         //5 - valor
                         //6 - forma
                         //7 - parcela                        
-                        //8 - descricao */ 
-                        "targets": [ 1, 2, 3, 4, 6, 7, 8 ],
+                        //8 - descricao 
+                        //9 - nomeRazao  */ 
+                        "targets": [ 1, 2, 3, 4, 6, 7, 8, 9 ],
                         "visible": false
                     }
                 ]
@@ -468,7 +481,8 @@
 			*
 			*/
 
-            //Define uma ação ao apertar o botão editar de algum item da tabela.
+            //Define uma ação na linha da tabela ao apertar o botão editar.
+            
             $('#lista-caixa tbody').on( 'click', '#edit-caixa', function () {            	
             	
             	 //Altera dinamicamente o titulo do modal.
@@ -497,6 +511,7 @@
 				$('#forma').val(data[6]);
 				$('#parcela').val(data[7]);				
 				$('#descricao').val(data[8]);
+				$('#nomeRazao').val(data[9]);
             });
 
 
@@ -506,7 +521,8 @@
 			*
 			*/
 	
-			//Define uma ação ao apertar o botão excluir de algum item da tabela.
+			//Define uma ação na linha da tabela ao apertar o botão delete.
+			
             $('#lista-caixa tbody').on( 'click', '#delete-caixa', function () {
 				
 				//Pega os dados de determinada linha da tabela.

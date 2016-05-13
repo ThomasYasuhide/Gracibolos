@@ -37,7 +37,14 @@ public class Caixa implements Serializable{
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate data;
     private String descricao;
-
+    private String nomeRazao;
+    
+	public String getNomeRazao() {
+		return nomeRazao;
+	}
+	public void setNomeRazao(String nomeRazao) {
+		this.nomeRazao = nomeRazao;
+	}
 	public Long getId() {
 		return id;
 	}
