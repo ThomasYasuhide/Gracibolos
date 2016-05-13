@@ -12,9 +12,9 @@ public class ProdutoInserir {
 	public static void main(String[] args) {
 
 		Produto p1 = new Produto();
-		BigDecimal custo = new BigDecimal(15.69);
+		//BigDecimal custo = new BigDecimal(15.69);
 		BigDecimal valor = new BigDecimal(25.00);
-		BigDecimal peso = new BigDecimal(4.00);		
+		//BigDecimal peso = new BigDecimal(4.00);
 		//byte [] foto = new  byte [ 100 ]; 
 	
 		p1.setStatus(1);

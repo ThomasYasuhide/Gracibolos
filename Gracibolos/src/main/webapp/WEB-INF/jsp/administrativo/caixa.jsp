@@ -388,9 +388,6 @@
 
 	<script type="text/javascript">
 
-	
-		alert("${caixas[0].nomeRazao}");
-
 		$(document).ready(function() {
 			
 			//Remove as mascaras quando apertar o submit
