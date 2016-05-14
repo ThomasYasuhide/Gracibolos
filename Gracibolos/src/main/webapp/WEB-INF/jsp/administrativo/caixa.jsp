@@ -201,7 +201,7 @@
 						</div>							
 						
 						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-								<div class="row dashboard-box">
+								<div class="row caixasaldo">
 									<div class="col-xs-9">
 										<h4>Saldo : ${saldo}</h4>
 									</div>
@@ -209,17 +209,8 @@
 										<i class="material-icons pull-right dashboard-icon">done</i>
 									</div>
 								</div>
-							</div>
-						
-				       
-						
+							</div>						
 					</div>
-					
-<!-- 					 <div class="container"> -->
-<!--   							<div class="panel panel-default col-sm-3 col-md-3"> -->
-<%--     							<div class=""> Saldo : ${saldo} &nbsp;&nbsp; <i class="material-icons">done</i></div> --%>
-<!--   							</div> -->
-<!-- 						</div> -->
 <!-- ############################################################ FIM DA TABELA ############################################################ -->
 				</div>
 			</div>
