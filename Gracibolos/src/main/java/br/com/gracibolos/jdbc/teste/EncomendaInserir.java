@@ -14,11 +14,8 @@ public class EncomendaInserir {
 		
 		for(int i=0;i<50;i++){
 					encomenda = new Encomenda();
-			//------cliente---------------------------------------		
-					int[] ids = g.IdsCli();
-					int idCli;
-					idCli = g.ranIdInt(ids);
-					encomenda.setClienteid(idCli);
+			//------cliente---------------------------------------							
+					encomenda.setClienteid(g.ranIdInt(g.IdsCli()));
 			//------status----------------------------------------
 					encomenda.setStatus(g.randBetween(1, 5));//vai de 1 - 5
 			//------data encomenda--------------------------------	

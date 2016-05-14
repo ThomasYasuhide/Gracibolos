@@ -9,28 +9,36 @@ import java.util.Random;
 import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
+import br.com.gracibolos.jdbc.dao.ProdutoDao;
 import br.com.gracibolos.jdbc.model.Cliente;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Fornecedor;
+import br.com.gracibolos.jdbc.model.Produto;
 
 public class Gerador {
 	
-	private static Random ran;
-	private static FornecedorDao daoForn;
-	private static Fornecedor f;
-	private static EncomendaDao daoEnc;
-	private static Encomenda e;
-	private static ClienteDao daoCli;
-	private static Cliente c;
-
-	//Gerador de id int
+	private static Random ran = null;
+	private static FornecedorDao daoForn = null;
+	private static Fornecedor f = null;
+	private static EncomendaDao daoEnc = null;
+	private static Encomenda e = null;
+	private static ClienteDao daoCli = null;
+	private static Cliente c = null;
+	private static ProdutoDao daoPro = null;
+	private static Produto p = null;
+	
+	//EXEMPLO PARA GERAR UM ID DA LSTA DE PRODUTOS
+	//System.out.println(ranIdLong(idsProduto()));
+	
+	
+	//Gerador de id int---------------------------------------------------------
 	public int ranIdInt(int[] ids){
 		int id=0;
 		id = ids[ran.nextInt(ids.length)];
 		return id;
 	}
 	
-	//ids do clientes
+	//ids do clientes-----------------------------------------------------------
 	public int[] IdsCli(){	
 		ran = new Random();
 		int i=0;
@@ -53,7 +61,7 @@ public class Gerador {
 		return ids;
 	}
 	
-	//ids do fornecedor
+	//ids do fornecedor----------------------------------------------------------
 	public int[] IdsForn(){	
 		ran = new Random();
 		int i=0;
@@ -76,14 +84,36 @@ public class Gerador {
 		return ids;
 	}
 	
-	//Gerador de id Long
+	//Gerador de id Long-------------------------------------------------------------
 	public Long ranIdLong(Long[] ids){
 		Long id=0L;
 		id = ids[ran.nextInt(ids.length)];
 		return id;
 	}
 	
-	//ids da encomenda
+	//produto-------------------------------------------------------------------------
+	public Long[] idsProduto(){
+		ran = new Random();
+		int i=0;
+		Long[] ids = null;
+		try {
+			daoPro = new ProdutoDao();
+			i = daoPro.listar().size();
+			ids = new Long[i];
+				
+			for(int j=0;j<i;j++){
+				p = new Produto();
+				p = daoPro.listar().get(j);
+				ids[j] = p.getId();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ids;
+	}
+	
+	//ids da encomenda---------------------------------------------------------------------
 	public Long[] IdsEnc(){	
 		ran = new Random();
 		int i=0;
@@ -106,7 +136,7 @@ public class Gerador {
 		return ids;
 	}
 	
-	//Gerador de nomes aleátorios a partir do cliente
+	//Gerador de nomes aleátorios a partir do cliente----------------------------------------
 	public String responsavel()
 	{
 		daoCli = new ClienteDao();
@@ -130,7 +160,7 @@ public class Gerador {
 		return nomeAle;
 	}
 	
-	//Gerador de forma de pagamento
+	//Gerador de forma de pagamento--------------------------------------------------------
 	public String ranForma(){
 		String[] forma = {"dinheiro", "cheque", "débto", "crédito", "boleto"};
 		ran = new Random();
@@ -138,7 +168,7 @@ public class Gerador {
 		return eForma;
 	}
 	
-	// Gerador de datas
+	// Gerador de datas---------------------------------------------------------------------
 	public LocalDate generateDate(){
 		//Data inicial e final
 		LocalDate start = LocalDate.of(2014, Month.JANUARY, 1);
@@ -151,7 +181,7 @@ public class Gerador {
         return randomDate;
 	}
 	
-	//gerador de nureos incial e final 
+	//gerador de nureos incial e final ------------------------------------------------------
 	public int randBetween(int start, int end) {
         return start + (int)Math.round(Math.random() * (end - start));
     }

@@ -1376,7 +1376,7 @@ public class AdministrativoController {
 				ItemEncomenda item = new ItemEncomenda();
 				item.setId((long) 1);
 				item.setNumero(1);
-				item.setProdutoId(3);
+				item.setProdutoId(3l);
 				item.setQuantidade(20);
 				item.setValor(new BigDecimal("10.00"));
 				item.setTotal(new BigDecimal("200.00"));
@@ -1384,7 +1384,7 @@ public class AdministrativoController {
 				ItemEncomenda item2 = new ItemEncomenda();
 				item2.setId((long) 2);
 				item2.setNumero(2);
-				item2.setProdutoId(2);
+				item2.setProdutoId(2l);
 				item2.setQuantidade(20);
 				item2.setValor(new BigDecimal("5.00"));
 				item2.setTotal(new BigDecimal("100.00"));
