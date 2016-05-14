@@ -195,6 +195,9 @@
 					
 					<!--Essa div tem o botão de abrir o modal "incluir nova matéria-prima" -->
 					<div class="row">
+						<b>
+							<p class="text-center">Saldo : ${saldo }</p>
+						</b>
 						<div class="input-margin pull-right col-xs-12 col-sm-4 col-md-4">
 							<a href="" id="incluir-caixa-modal" data-toggle="modal" data-target="#modal-caixa" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova saída</a>
 						</div>

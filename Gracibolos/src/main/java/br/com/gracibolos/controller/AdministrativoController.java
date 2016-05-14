@@ -1137,32 +1137,48 @@ public class AdministrativoController {
 
 		System.out.println("Entrou na servlet de listagem do caixa");
 		
+		ModelAndView mv = new ModelAndView();
 		CaixaDao dao = new CaixaDao();
 		List<Caixa> listCaixa = new ArrayList<Caixa>();
 	
 		//VERIFICA A DATA ATUAL, E PEGA O PRIMEIRO E ULTIMO DIA DO MÊS
 		LocalDate data = LocalDate.now();
-		@SuppressWarnings("unused")//recebo o primeiro dia do mes
+		//recebo o primeiro dia do mes
 		String dataInicial = data.with(TemporalAdjusters.firstDayOfMonth()).toString();
 		//System.out.println(dataInicial);
-		@SuppressWarnings("unused")//ultimo dia do mes
+		//ultimo dia do mes
 		String dataFinal = data.with(TemporalAdjusters.lastDayOfMonth()).toString();
 		//System.out.println(dataFinal);
 		
+		BigDecimal gasto = new BigDecimal(0);
+		BigDecimal rec = new BigDecimal(0);
+		
 		try {
+			
 			listCaixa = dao.pesquisarEntre(dataInicial, dataFinal);
 			for(Caixa c : listCaixa){
-				
+				//somo os gastos
+				if(c.getGastoRecebimento()==0){
+					gasto = gasto.add(c.getValor());
+				//somo os recebimentos
+				}else if(c.getGastoRecebimento()==1){
+					rec = rec.add(c.getValor());
+				}
 			}
+						
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//List mesAtual
-		//total
-		ModelAndView mv = new ModelAndView();
+		
+		//TESTES
+		//System.out.println("gasto : "+gasto);
+		//System.out.println("rec : "+rec);
+		//System.out.println("saldo : "+rec.subtract(gasto));	
+		
 		mv.setViewName("administrativo/caixa");
 		mv.addObject("listCaixa",listCaixa);
+		mv.addObject("saldo",rec.subtract(gasto));
 		return mv;
 	}
 	
@@ -1299,11 +1315,11 @@ public class AdministrativoController {
 			
 			//cria uma nova instância dao da materia-prima
 			CaixaDao dao = new CaixaDao();
-			List<Caixa> caixas = null;
+			List<Caixa> listCaixa = null;
 			
 			try {
 				//Guarda a lista de materia-prima num List
-				caixas = dao.listar();
+				listCaixa = dao.listar();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -1313,7 +1329,7 @@ public class AdministrativoController {
 		    //seta o caminho e o nome da jsp
 			mv.setViewName("administrativo/caixa");
 			//passa a lita de materia-prima para a Expression Language chamada materiasprimas
-			mv.addObject("caixas", caixas);
+			mv.addObject("listCaixa", listCaixa);
 		    //retorna mv		    
 		    return mv;
 		}
