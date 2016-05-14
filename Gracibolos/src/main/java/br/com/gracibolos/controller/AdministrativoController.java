@@ -45,7 +45,13 @@ import br.com.gracibolos.jdbc.model.Produto;
 
 @Controller
 public class AdministrativoController {
-	//DASHBOARD
+	
+	
+	/*
+	 * 
+	 * ###################### DASHBOARD ######################
+	 * 
+	 * */
 	@RequestMapping("/administrativo-dashboard")
 	public ModelAndView dashboard(){
 		System.out.println("Entrou na pagina dashboard");
@@ -81,7 +87,15 @@ public class AdministrativoController {
 	public ModelAndView produtos(){
 		System.out.println("Entrou na pagina de listagem de produtos");
 		//retorna a página produtos
-		return new ModelAndView("administrativo/produtos");
+		ProdutoDao dao = new ProdutoDao();
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/produtos");
+		try {
+			mv.addObject("produtos", dao.listar());
+		} catch (Exception e) {
+			System.out.println("Controller - erro ao carregar a lista de produtos\n"+e);
+		}
+		return mv;
 	}
 	
 	//INCLUIR NOVO PRODUTO
