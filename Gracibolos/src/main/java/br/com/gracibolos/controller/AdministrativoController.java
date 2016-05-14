@@ -45,7 +45,13 @@ import br.com.gracibolos.jdbc.model.Produto;
 
 @Controller
 public class AdministrativoController {
-	//DASHBOARD
+	
+	
+	/*
+	 * 
+	 * ###################### DASHBOARD ######################
+	 * 
+	 * */
 	@RequestMapping("/administrativo-dashboard")
 	public ModelAndView dashboard(){
 		System.out.println("Entrou na pagina dashboard");
@@ -81,7 +87,15 @@ public class AdministrativoController {
 	public ModelAndView produtos(){
 		System.out.println("Entrou na pagina de listagem de produtos");
 		//retorna a página produtos
-		return new ModelAndView("administrativo/produtos");
+		ProdutoDao dao = new ProdutoDao();
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/produtos");
+		try {
+			mv.addObject("produtos", dao.listar());
+		} catch (Exception e) {
+			System.out.println("Controller - erro ao carregar a lista de produtos\n"+e);
+		}
+		return mv;
 	}
 	
 	//INCLUIR NOVO PRODUTO
@@ -1376,7 +1390,7 @@ public class AdministrativoController {
 				ItemEncomenda item = new ItemEncomenda();
 				item.setId((long) 1);
 				item.setNumero(1);
-				item.setProdutoId(3);
+				item.setProdutoId(3l);
 				item.setQuantidade(20);
 				item.setValor(new BigDecimal("10.00"));
 				item.setTotal(new BigDecimal("200.00"));
@@ -1384,7 +1398,7 @@ public class AdministrativoController {
 				ItemEncomenda item2 = new ItemEncomenda();
 				item2.setId((long) 2);
 				item2.setNumero(2);
-				item2.setProdutoId(2);
+				item2.setProdutoId(2l);
 				item2.setQuantidade(20);
 				item2.setValor(new BigDecimal("5.00"));
 				item2.setTotal(new BigDecimal("100.00"));

@@ -22,8 +22,8 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{			
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemEncomenda.getProdutoId());
-			ps.setInt(2, itemEncomenda.getEncomendaId());
+			ps.setLong(1, itemEncomenda.getProdutoId());
+			ps.setLong(2, itemEncomenda.getEncomendaId());
 			ps.setInt(3, itemEncomenda.getQuantidade());			
 			
 			if(ps.executeUpdate() != 0) {
@@ -47,8 +47,8 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{						
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemEncomenda.getProdutoId());
-			ps.setInt(2, itemEncomenda.getEncomendaId());
+			ps.setLong(1, itemEncomenda.getProdutoId());
+			ps.setLong(2, itemEncomenda.getEncomendaId());
 			ps.setInt(3, itemEncomenda.getQuantidade());			
 			ps.setLong(4, itemEncomenda.getId());
 			
@@ -105,8 +105,8 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 			{
 				ItemEncomenda itemEncomenda = new ItemEncomenda();
 				itemEncomenda.setId(rs.getLong("id"));
-				itemEncomenda.setProdutoId(rs.getInt("produtoId"));
-				itemEncomenda.setEncomendaId(rs.getInt("encomendaId"));
+				itemEncomenda.setProdutoId(rs.getLong("produtoId"));
+				itemEncomenda.setEncomendaId(rs.getLong("encomendaId"));
 				itemEncomenda.setQuantidade(rs.getInt("qtd"));				
 				
 				listaDeItemEncomenda.add(itemEncomenda);

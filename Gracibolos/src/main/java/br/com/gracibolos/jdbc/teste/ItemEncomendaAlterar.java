@@ -11,8 +11,8 @@ public class ItemEncomendaAlterar {
 		ItemEncomenda itemEncomenda = new ItemEncomenda();
 		
 		itemEncomenda.setId(1L);
-		itemEncomenda.setProdutoId(3);
-		itemEncomenda.setEncomendaId(1);
+		itemEncomenda.setProdutoId(3l);
+		itemEncomenda.setEncomendaId(1l);
 		itemEncomenda.setQuantidade(53);		
 		
 		ItemEncomendaDao dao = new ItemEncomendaDao();

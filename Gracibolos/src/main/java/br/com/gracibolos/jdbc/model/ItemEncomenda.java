@@ -14,8 +14,8 @@ public class ItemEncomenda implements Serializable{
 
     private Long id;
     private int numero;
-    private Integer produtoId;
-    private Integer encomendaId;
+    private Long produtoId;
+    private Long encomendaId;
     private Integer quantidade;
     private BigDecimal valor;
     private BigDecimal total;
@@ -36,19 +36,19 @@ public class ItemEncomenda implements Serializable{
 		this.numero = numero;
 	}
 
-	public Integer getProdutoId() {
+	public Long getProdutoId() {
 		return produtoId;
 	}
 
-	public void setProdutoId(Integer produtoId) {
+	public void setProdutoId(Long produtoId) {
 		this.produtoId = produtoId;
 	}
 
-	public Integer getEncomendaId() {
+	public Long getEncomendaId() {
 		return encomendaId;
 	}
 
-	public void setEncomendaId(Integer encomendaId) {
+	public void setEncomendaId(Long encomendaId) {
 		this.encomendaId = encomendaId;
 	}
 
