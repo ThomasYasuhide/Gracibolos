@@ -165,9 +165,9 @@
 								<tbody>
 
 									<!-- 
-										Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  
+										AQUI EU RECUPERO O OBJETO ENVIADO PELA CONTROLLER 
 									-->
-									<c:forEach var="caixa" items="${caixas}">
+									<c:forEach var="caixa" items="${listCaixa}">
 										<tr>
 											<!-- 0 --><td>${caixa.data}</td>
 											<!-- 1 --><td>${caixa.gastoRecebimento}</td>
@@ -462,13 +462,6 @@
 				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
 				$("#caixa-form").attr("action","administrativo-incluir-caixa");
-
-				//Limpo os campos ao fechar - relacionado a visibilidade dos campos
-				$("#caixa-form").click(function(){
-	            	mfornecedorId.value="";           		
-	           		mnomeRazao.value="";
-	             	mencomendaId.value="";    
-				});
 				
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir gasto');
@@ -484,12 +477,20 @@
 				//Este método se encontra no arquivo scripts.js
                 // DESABILITA O CAMPO
                 desabilitarCampos(document.getElementById("#gastoRecebimento"));
+
+              //Limpo os campos ao fechar - relacionado a visibilidade dos campos
+				$("#caixa-form").click(function(){
+					//objeto javascript
+	            	mfornecedorId.value="";           		
+	           		mnomeRazao.value="";
+	             	mencomendaId.value="";    
+				});
 				
 			});
 
             /*
 			*
-			* ALTERAÇÃO DE MATÉRIA-PRIMA
+			* ALTERAÇÃO DO CAIXA
 			*
 			*/
 
@@ -566,7 +567,7 @@
 
 			/*
 			*
-			* EXCLUSÃO DA MATÉRIA-PRIMA
+			* EXCLUSÃO DO CAIXA
 			*
 			*/
 	

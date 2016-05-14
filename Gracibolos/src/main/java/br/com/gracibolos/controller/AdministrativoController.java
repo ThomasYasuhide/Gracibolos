@@ -1136,19 +1136,34 @@ public class AdministrativoController {
 	public ModelAndView caixa(){
 
 		System.out.println("Entrou na servlet de listagem do caixa");
-						
-
-		System.out.println("Entrou na servlet de listagem de matéria prima");
 		
+		CaixaDao dao = new CaixaDao();
+		List<Caixa> listCaixa = new ArrayList<Caixa>();
+	
 		//VERIFICA A DATA ATUAL, E PEGA O PRIMEIRO E ULTIMO DIA DO MÊS
 		LocalDate data = LocalDate.now();
-		@SuppressWarnings("unused")
-		LocalDate primeiro = data.with(TemporalAdjusters.firstDayOfMonth());
-		@SuppressWarnings("unused")
-		LocalDate ultimo = data.with(TemporalAdjusters.lastDayOfMonth());
+		@SuppressWarnings("unused")//recebo o primeiro dia do mes
+		String dataInicial = data.with(TemporalAdjusters.firstDayOfMonth()).toString();
+		//System.out.println(dataInicial);
+		@SuppressWarnings("unused")//ultimo dia do mes
+		String dataFinal = data.with(TemporalAdjusters.lastDayOfMonth()).toString();
+		//System.out.println(dataFinal);
 		
-
-		return new ModelAndView("administrativo/caixa");
+		try {
+			listCaixa = dao.pesquisarEntre(dataInicial, dataFinal);
+			for(Caixa c : listCaixa){
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//List mesAtual
+		//total
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/caixa");
+		mv.addObject("listCaixa",listCaixa);
+		return mv;
 	}
 	
 	//INCLUIR NOVO CAIXA
