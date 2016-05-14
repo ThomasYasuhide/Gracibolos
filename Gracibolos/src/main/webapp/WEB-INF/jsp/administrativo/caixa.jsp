@@ -200,14 +200,11 @@
 							<a href="" id="incluir-caixa-modal" data-toggle="modal" data-target="#modal-caixa" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova saída</a>
 						</div>							
 						
-						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 								<div class="row caixasaldo">
 									<div class="col-xs-9">
 										<h4>Saldo : ${saldo}</h4>
-									</div>
-									<div class="col-xs-3">
-										<i class="material-icons pull-right dashboard-icon">done</i>
-									</div>
+									</div>									
 								</div>
 							</div>						
 					</div>
@@ -296,7 +293,7 @@
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="data">Data da transação:</label>
-									<input type="date" id="data" name="data" class="form-control"  />
+									<input type="date" id="data" name="data" class="form-control" readonly />
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
@@ -483,11 +480,11 @@
 				});
 				
 				var now = moment().format('YYYY-MM-DD');
-                $('#data_transacao').val(now);               
+                $('#data').val(now);     
 
 				//Este método se encontra no arquivo scripts.js
                 // DESABILITA O CAMPO
-                desabilitarCampos(document.getElementById("#gastoRecebimento"));
+                desabilitarCamposCaixa(document.getElementById("#gastoRecebimento"));
 
               //Limpo os campos ao fechar - relacionado a visibilidade dos campos
 				$("#caixa-form").click(function(){
