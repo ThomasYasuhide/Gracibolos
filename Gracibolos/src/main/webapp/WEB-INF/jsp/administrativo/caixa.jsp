@@ -194,15 +194,32 @@
 					</div>
 					
 					<!--Essa div tem o botão de abrir o modal "incluir nova matéria-prima" -->
-					<div class="row">
-						<b>
-							<p class="text-center">Saldo : ${saldo }</p>
-						</b>
+					<div class="row">					
+						
 						<div class="input-margin pull-right col-xs-12 col-sm-4 col-md-4">
 							<a href="" id="incluir-caixa-modal" data-toggle="modal" data-target="#modal-caixa" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova saída</a>
-						</div>
+						</div>							
+						
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+								<div class="row dashboard-box">
+									<div class="col-xs-9">
+										<h4>Saldo : ${saldo}</h4>
+									</div>
+									<div class="col-xs-3">
+										<i class="material-icons pull-right dashboard-icon">done</i>
+									</div>
+								</div>
+							</div>
+						
+				       
+						
 					</div>
-
+					
+<!-- 					 <div class="container"> -->
+<!--   							<div class="panel panel-default col-sm-3 col-md-3"> -->
+<%--     							<div class=""> Saldo : ${saldo} &nbsp;&nbsp; <i class="material-icons">done</i></div> --%>
+<!--   							</div> -->
+<!-- 						</div> -->
 <!-- ############################################################ FIM DA TABELA ############################################################ -->
 				</div>
 			</div>
@@ -248,7 +265,7 @@
 									<select id="gastoRecebimento" name="gastoRecebimento" class="form-control" >
 										<option selected value="0">Gasto</option>
 										<option value="1">Recebimento</option>
-									</select>
+									</select> 
 								</div>
 																
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
