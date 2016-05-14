@@ -1174,7 +1174,7 @@ public class AdministrativoController {
 		//TESTES
 		//System.out.println("gasto : "+gasto);
 		//System.out.println("rec : "+rec);
-		//System.out.println("saldo : "+rec.subtract(gasto));	
+		//System.out.println("saldo : "+rec.subtract(gasto));
 		
 		mv.setViewName("administrativo/caixa");
 		mv.addObject("listCaixa",listCaixa);
@@ -1290,10 +1290,23 @@ public class AdministrativoController {
 		System.out.println("Realizou a pesquisa entre datas do caixa");
 		
 		//cria uma nova instância DAO do caixa
-		CaixaDao dao = new CaixaDao();		
+		CaixaDao dao = new CaixaDao();	
+		
+		BigDecimal gasto = new BigDecimal(0);
+		BigDecimal rec = new BigDecimal(0);
+		
 		List<Caixa> caixas = null;
 		try {
 			caixas = dao.pesquisarEntre(datainicial, datafinal);
+			for(Caixa c : caixas){
+				//somo os gastos
+				if(c.getGastoRecebimento()==0){
+					gasto = gasto.add(c.getValor());
+				//somo os recebimentos
+				}else if(c.getGastoRecebimento()==1){
+					rec = rec.add(c.getValor());
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1303,36 +1316,37 @@ public class AdministrativoController {
 	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/caixa");
 	    //passa a lista do caixa para a Expression Language chamada caixas
-		mv.addObject("caixas", caixas);
+		mv.addObject("listCaixa", caixas);
+		mv.addObject("saldo",rec.subtract(gasto));
 	    //retorna mv
 	    return mv;
 	}
 	
 	//LISTAR CAIXA
-		@RequestMapping("/administrativo-listar-caixa")
-		public ModelAndView listar_caixa(){
-			System.out.println("Realizou a listagem do caixa");
-			
-			//cria uma nova instância dao da materia-prima
-			CaixaDao dao = new CaixaDao();
-			List<Caixa> listCaixa = null;
-			
-			try {
-				//Guarda a lista de materia-prima num List
-				listCaixa = dao.listar();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			//instância uma nova modelView
-			ModelAndView mv = new ModelAndView();
-		    //seta o caminho e o nome da jsp
-			mv.setViewName("administrativo/caixa");
-			//passa a lita de materia-prima para a Expression Language chamada materiasprimas
-			mv.addObject("listCaixa", listCaixa);
-		    //retorna mv		    
-		    return mv;
+	@RequestMapping("/administrativo-listar-caixa")
+	public ModelAndView listar_caixa(){
+		System.out.println("Realizou a listagem do caixa");
+		
+		//cria uma nova instância dao da materia-prima
+		CaixaDao dao = new CaixaDao();
+		List<Caixa> listCaixa = null;
+		
+		try {
+			//Guarda a lista de materia-prima num List
+			listCaixa = dao.listar();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		//instância uma nova modelView
+		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
+		mv.setViewName("administrativo/caixa");
+		//passa a lita de materia-prima para a Expression Language chamada materiasprimas
+		mv.addObject("listCaixa", listCaixa);
+	    //retorna mv		    
+	    return mv;
+	}
 	
 	/*
 	 * 

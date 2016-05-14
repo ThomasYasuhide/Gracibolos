@@ -230,10 +230,12 @@
 						<!-- ################################# Corpo do modal ################################# -->
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
+								
+								<!-- ################################# TÍTULO DAS ABAS ################################# -->
 								<ul class="nav nav-tabs">
 									<li class="active"><a data-toggle="tab" href="#info">Informações do produto</a></li>
 									<li><a data-toggle="tab" href="#receita">Receita do produto</a></li>
+									<li><a data-toggle="tab" href="#materias-primas">Matérias primas</a></li>
 								</ul>
 
 									<div class="tab-content">
@@ -241,6 +243,7 @@
 										<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 											INICIO DA ABA INFORMAÇÕES DO PRODUTO
 										+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+										
 										<div id="info" class="tab-pane fade in active">
 											
 											<div class="hidden">
@@ -343,6 +346,7 @@
 										<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 											INICIO DA ABA RECEITA 
 										+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+										
 										<div id="receita" class="tab-pane fade">
 										
 											<!-- Campo receita	-->
@@ -350,7 +354,18 @@
 												<label class="control-label" for="rec">Receita</label>
 												<textarea class="form-control" name="rec" name="rec" id="rec" rows="20" placeholder="Digite aqui a receita"></textarea>
 											</div>
-											
+										
+										</div>
+										
+										<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+											FIM DA ABA MATERIAS PRIMAS
+										+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+										
+										<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+											INICIO DA ABA MATERIAS PRIMAS
+										+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->	
+										
+										<div id="materias-primas" class="tab-pane fade">	
 											<!-- TABELA PARA INSERÇÃO DE MATÉRIA PRIMA	-->
 											<table class="input-margin table display table-settings">
 												<thead>
@@ -364,26 +379,7 @@
 												</thead>
 												<tbody id="lista-materiaprima" >
 
-													<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
-												
-													<!-- 	FALTA IMPLEMENTAR 
-
-													<c:forEach var="fornecedor" items="${fornecedores}">
-														<tr>
-															<td>${fornecedor.id}</td>
-															<td>${fornecedor.tipopessoa}</td>
-															<td>${fornecedor.nomerazao}</td>
-															<td>${fornecedor.cpfcnpj}</td>
-															<td>${fornecedor.rgie}</td>
-															<td>${fornecedor.endereco}</td>
-						                					<td>
-						                						<button id="edit-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-						                						<button id="delete-fornecedor" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
-						                					</td>
-														</tr>
-													</c:forEach>
-
-													-->
+													
 												</tbody>
 											</table>
 											
@@ -401,7 +397,7 @@
 
 										</div>
 										<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-											FIM DA ABA RECEITA 
+											FIM DA ABA MATERIAS PRIMAS
 										+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 									</div>
 

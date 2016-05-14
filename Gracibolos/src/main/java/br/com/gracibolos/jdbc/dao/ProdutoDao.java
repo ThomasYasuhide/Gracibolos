@@ -27,7 +27,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		PreparedStatement ps = null;
         
 		//string query do banco
-		String sql = "INSERT INTO produto(foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO produto(foto, status, codigo, nome, tipo, peso, unidade, estoque, custo, valor, obs, receita) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){	
@@ -76,7 +76,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 			
 			ps.setBigDecimal(10, produto.getValor());
 			ps.setString(11, produto.getObs());
-			//ps.setString(12, produto.getReceita());
+			ps.setString(12, produto.getRec());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
