@@ -19,7 +19,10 @@ public class ItemEncomenda implements Serializable{
     private Integer quantidade;
     private BigDecimal valor;
     private BigDecimal total;
-
+    private String nomeProduto;
+    private Long produtoIdProduto;
+    
+    
 	public Long getId() {
 		return id;
 	}
@@ -75,5 +78,22 @@ public class ItemEncomenda implements Serializable{
 	public void setTotal(BigDecimal total) {
 		this.total = total;
 	}
-   
+
+	public String getNomeProduto() {
+		return nomeProduto;
+	}
+
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
+
+	public Long getProdutoIdProduto() {
+		return produtoIdProduto;
+	}
+
+	public void setProdutoIdProduto(Long produtoIdProduto) {
+		this.produtoIdProduto = produtoIdProduto;
+	}
+	
+	
 }

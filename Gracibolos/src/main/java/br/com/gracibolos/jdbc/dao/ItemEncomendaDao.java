@@ -91,7 +91,21 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 	}
 
 	public List<ItemEncomenda> listar() throws Exception{
-		String sql = "SELECT * FROM itemEncomenda";
+	
+		
+		return null;
+	}
+
+	
+	@Override
+	public List<ItemEncomenda> pesquisar(String encomenda) throws Exception{
+		
+		String sql = "SELECT itemencomenda.id, itemencomenda.produtoId, itemencomenda.encomendaId, itemencomenda.qtd, produto.nome as nomeProduto," 
+				+" produto.codigo, produto.valor, produto.id as produtoIdproduto"
+				+" FROM gracibolos.itemencomenda"
+				+" inner join gracibolos.produto on itemencomenda.produtoId = produto.id"
+				+" where itemencomenda.encomendaId = "+encomenda;
+		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<ItemEncomenda> listaDeItemEncomenda= null;
@@ -104,16 +118,17 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 			while(rs.next())
 			{
 				ItemEncomenda itemEncomenda = new ItemEncomenda();
+				
 				itemEncomenda.setId(rs.getLong("id"));
 				itemEncomenda.setProdutoId(rs.getLong("produtoId"));
 				itemEncomenda.setEncomendaId(rs.getLong("encomendaId"));
-				itemEncomenda.setQuantidade(rs.getInt("qtd"));				
+				itemEncomenda.setQuantidade(rs.getInt("qtd"));
+				itemEncomenda.setNomeProduto(rs.getString("nomeProduto"));
+				itemEncomenda.setValor(rs.getBigDecimal("valor"));
+				itemEncomenda.setProdutoIdProduto(rs.getLong("produtoIdproduto"));
 				
 				listaDeItemEncomenda.add(itemEncomenda);
 				
-				for(int i = 0;i<listaDeItemEncomenda.size();i++){  //enquanto i for menor, não maior  
-				     System.out.println(listaDeItemEncomenda.get(i));    
-				}  
 			}
 			ps.close();
 			conn.close();
@@ -123,12 +138,6 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 			System.out.println("Erro ao listar Item da Encomenda\n"+e);
 		}
 		return listaDeItemEncomenda;
-	}
-
-	
-	@Override
-	public List<ItemEncomenda> pesquisar(String pesquisa) throws Exception{
-		return null;
 	}
 
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Encomenda;
+import br.com.gracibolos.jdbc.model.ItemEncomenda;
 
 public class EncomendaDao implements GenericoDao<Encomenda>{
 
@@ -21,6 +22,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 	 * 
 	 * */
 	
+	@SuppressWarnings("static-access")
 	public boolean inserir(Encomenda encomenda) throws Exception{
 		boolean status = false;
 		
@@ -29,12 +31,14 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				+ "datafaturamento , dataproducao, datafinalizado, datacancelado, total, obs)"
 				   + " VALUES (?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
+		ResultSet rs = null;
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
 			
 			//seta os atributos do objeto encomenda
-			ps = conn.prepareStatement(sql);
+			//PASSA O PARA ps QUE EU QUERO O RETORNO DA CHAVE
+			ps = conn.prepareStatement(sql, ps.RETURN_GENERATED_KEYS);
 			ps.setInt(1, encomenda.getStatus());
 			if(encomenda.getDataencomenda()!=null){
 				ps.setDate(2, Date.valueOf(encomenda.getDataencomenda()));
@@ -72,9 +76,38 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			ps.setBigDecimal(10, encomenda.getTotalprodutos());
 			ps.setString(11, encomenda.getObs());
 			
+			
+			//Insiro a encomenda
 			if(ps.executeUpdate() != 0) {
 				status = true;
 			}
+			
+			//Aqui eu pego o retorno da chave inserida
+			rs = ps.getGeneratedKeys();
+			rs.next();
+			Long lastid = rs.getLong(1);
+			
+			System.out.println("inserido id : "+lastid);
+			
+			//---INSIRO OS ITENS DA ENCOMENDA----------------------------------------------------
+			String sqlIe = " INSERT INTO itemEncomenda(produtoId, encomendaId, qtd)"
+					   + " VALUES (?, ?, ?)";
+			
+			//Inserir todos os itens da encomenda
+			for(ItemEncomenda ie : encomenda.getListItemEncomenda())
+			{			
+				ps = conn.prepareStatement(sqlIe);
+				ps.setLong(1, ie.getProdutoId());
+				ps.setLong(2, lastid);//encomendaId
+				ps.setInt(3, ie.getQuantidade());	
+				
+				//Insiro os itens da encomenda
+				if(ps.executeUpdate() != 0) {
+					status = true;
+				}
+			}
+			
+			
 			
 			ps.close();	
 			conn.close();			
@@ -83,7 +116,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		//trata, caso de uma exceção
 		catch (SQLException e) 
 		{
-			System.out.println("Erro ao inserir usuário\n"+e);
+			System.out.println("Erro ao inserir encomenda\n"+e);
 		}
 		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;

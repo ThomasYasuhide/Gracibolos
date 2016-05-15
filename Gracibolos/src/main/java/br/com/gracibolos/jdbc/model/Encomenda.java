@@ -3,6 +3,7 @@ package br.com.gracibolos.jdbc.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -36,6 +37,7 @@ public class Encomenda implements Serializable{
     private String nomerazao;
     private Long clienteId;
     private String cpfcnpj;
+    private List<ItemEncomenda> listItemEncomenda;
     
 	public Long getId() {
 		return id;
@@ -171,6 +173,14 @@ public class Encomenda implements Serializable{
 
 	public void setCpfcnpj(String cpfcnpj) {
 		this.cpfcnpj = cpfcnpj;
+	}
+
+	public List<ItemEncomenda> getListItemEncomenda() {
+		return listItemEncomenda;
+	}
+
+	public void setListItemEncomenda(List<ItemEncomenda> listItemEncomenda) {
+		this.listItemEncomenda = listItemEncomenda;
 	}
 	
 	
