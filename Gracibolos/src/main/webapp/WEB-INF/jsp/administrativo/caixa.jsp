@@ -293,7 +293,7 @@
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="data">Data da transação:</label>
-									<input type="date" id="data" name="data" class="form-control" readonly />
+									<input type="date" id="data" name="data" class="form-control" />
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
@@ -421,8 +421,17 @@
 			*
 			*/
 			
-			//$("#valor").mask("000.000.000.000.000,00", {reverse: true});
-
+			$("#valor").mask("000.000.000.000.000,00", {reverse: true});
+			
+			//Remove as mascaras quando apertar o submit
+			$("#caixa-form").submit(function() {
+						
+				var valor = $("#valor").val();
+				valor = valor.split(".").join("");
+				valor = valor.split(",").join(".");
+				$("#valor").val(valor);
+			});
+			
 			/*
 			*
 			* CONFIGURAÇÃO DA TABELA
@@ -486,14 +495,7 @@
 	            	mfornecedorId.value="";           		
 	           		mnomeRazao.value="";
 	             	mencomendaId.value="";    
-				});
-
-				//Remove as mascaras quando apertar o submit
-				$("#caixa-form").submit(function() {
-					$("#valor").unmask();
-					
-				});
-				
+				});				
 			});
 
             /*
@@ -523,8 +525,9 @@
 					
 				//Pega os valores que estão na tabela e passa para o modal.			
 				$('#data').val(data[0]);
+				$('#gastoRecebimento').val(data[1]);
 				$('#id').val(data[4]);
-				$('#valor').val(data[5]);
+				$('#valor').val(data[5]).trigger('input');
 				$('#forma').val(data[6]);
 				$('#parcela').val(data[7]);				
 				$('#descricao').val(data[8]);
@@ -587,7 +590,7 @@
                 var data = table.row( $(this).parents('tr') ).data();
 
                 //Preenche o modal com o numero do ID a ser deletado.
-                $('#id_delete').val(data[0]);
+                $('#id_delete').val(data[4]);
 
                 //Apresenta o modal de exclusão na tela.
 				$('#excluir-caixa').modal('show');
