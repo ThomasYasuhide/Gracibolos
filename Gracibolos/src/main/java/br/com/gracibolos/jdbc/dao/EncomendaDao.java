@@ -276,19 +276,25 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		return null;
 	}
 	
-	public Encomenda pesquisarId(Long pesquisa) throws Exception{
+	public Encomenda pesquisarId(String pesquisa) throws Exception{
 		
 		//string query do banco
-		String sql = "SELECT id, cliente, status, responsavel, dataencomenda, dataentrega, datafaturamento, dataproducao, datafinalizado, datacancelado, total, obs FROM encomenda WHERE id=?";
+		String sql = "SELECT encomenda.id, encomenda.cliente, encomenda.status, encomenda.responsavel, encomenda.dataencomenda, encomenda.dataentrega"
+				+ ", encomenda.datafaturamento, encomenda.dataproducao, encomenda.datafinalizado, encomenda.datacancelado, encomenda.total"
+				+ ", encomenda.obs, cliente.nomerazao, cliente.id as clienteId, cliente.cpfcnpj "
+				+ "FROM encomenda "
+				+ "INNER JOIN cliente ON encomenda.cliente = cliente.id "
+				+ "WHERE encomenda.id = "+pesquisa;
+		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Encomenda encomenda=null;
+		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) 
 		{	
 			//seta a string para fazer a busca
 			ps = conn.prepareStatement(sql);
-			ps.setLong(1, pesquisa);
 			rs = ps.executeQuery();
 			rs.next();
 			//da um get nos atributos do objeto encomenda
@@ -311,6 +317,9 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
 			encomenda.setTotalprodutos(rs.getBigDecimal("total"));
 			encomenda.setObs(rs.getString("obs"));
+			encomenda.setNomerazao(rs.getString("nomerazao"));
+			encomenda.setClienteId(rs.getLong("clienteId"));
+			encomenda.setCpfcnpj(rs.getString("cpfcnpj"));
 			
 			ps.close();
 			conn.close();			
@@ -321,5 +330,67 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		}
 		//retorna o array
 		return encomenda;
+	}
+	
+	public List<Encomenda> emAberto(String status) throws Exception{
+		
+		//string query do banco
+		String sql = "SELECT encomenda.id, encomenda.cliente, encomenda.status, encomenda.responsavel, encomenda.dataencomenda, encomenda.dataentrega"
+				+ ", encomenda.datafaturamento, encomenda.dataproducao, encomenda.datafinalizado, encomenda.datacancelado, encomenda.total"
+				+ ", encomenda.obs, cliente.nomerazao, cliente.id as clienteId, cliente.cpfcnpj "
+				+ "FROM encomenda "
+				+ "INNER JOIN cliente ON encomenda.cliente = cliente.id "
+				+ "WHERE encomenda.status >= "+status;
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Encomenda encomenda=null;
+		ArrayList<Encomenda> listEnc = new ArrayList<>();
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) 
+		{	
+			
+			//seta a string para fazer a busca
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()){
+				//da um get nos atributos do objeto encomenda
+				encomenda = new Encomenda();
+			
+				encomenda.setId(rs.getLong("id"));
+				encomenda.setClienteid(rs.getInt("cliente"));	
+				encomenda.setStatus(rs.getInt("status"));
+				encomenda.setResponsavel(rs.getString("responsavel"));
+				if(rs.getDate("dataencomenda")!=null)
+					encomenda.setDataencomenda(rs.getDate("dataencomenda").toLocalDate());
+				if(rs.getDate("dataentrega")!=null)
+					encomenda.setDataentrega(rs.getDate("dataentrega").toLocalDate());
+				if(rs.getDate("datafaturamento")!=null)
+					encomenda.setDatafaturamento(rs.getDate("datafaturamento").toLocalDate());
+				if(rs.getDate("dataproducao")!=null)
+					encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
+				if(rs.getDate("datafinalizado")!=null)
+					encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
+				if(rs.getDate("datacancelado")!=null)
+					encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
+				encomenda.setTotalprodutos(rs.getBigDecimal("total"));
+				encomenda.setObs(rs.getString("obs"));
+				encomenda.setNomerazao(rs.getString("nomerazao"));
+				encomenda.setClienteId(rs.getLong("clienteId"));
+				encomenda.setCpfcnpj(rs.getString("cpfcnpj"));
+				
+				listEnc.add(encomenda);
+			}
+			conn.close();
+			ps.close();
+						
+		} 
+		//trata, caso de uma exceção
+		catch (SQLException e) {
+			System.out.println("Erro ao listar as encomendas\n"+e);
+		}
+		//retorna o array
+		return listEnc;
 	}
 }

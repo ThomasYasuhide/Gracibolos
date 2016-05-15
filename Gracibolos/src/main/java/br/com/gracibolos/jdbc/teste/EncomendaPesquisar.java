@@ -13,7 +13,7 @@ public class EncomendaPesquisar {
 		Long id = g.ranIdLong(ids);
 		
 		try {
-				e = dao.pesquisarId(id);
+				e = dao.pesquisarId(id.toString());
 				System.out.println(	  
 								 		 "Id : "+e.getId()
 							   +"\tClienteId : "+e.getClienteid()

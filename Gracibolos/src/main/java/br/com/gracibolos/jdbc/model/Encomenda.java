@@ -33,6 +33,9 @@ public class Encomenda implements Serializable{
     private LocalDate datacancelamento;
     private BigDecimal totalprodutos;
     private String obs;
+    private String nomerazao;
+    private Long clienteId;
+    private String cpfcnpj;
     
 	public Long getId() {
 		return id;
@@ -145,5 +148,30 @@ public class Encomenda implements Serializable{
 	public void setObs(String obs) {
 		this.obs = obs;
 	}
+
+	public String getNomerazao() {
+		return nomerazao;
+	}
+
+	public void setNomerazao(String nomerazao) {
+		this.nomerazao = nomerazao;
+	}
+
+	public Long getClienteId() {
+		return clienteId;
+	}
+
+	public void setClienteId(Long clienteId) {
+		this.clienteId = clienteId;
+	}
+
+	public String getCpfcnpj() {
+		return cpfcnpj;
+	}
+
+	public void setCpfcnpj(String cpfcnpj) {
+		this.cpfcnpj = cpfcnpj;
+	}
+	
 	
 }
