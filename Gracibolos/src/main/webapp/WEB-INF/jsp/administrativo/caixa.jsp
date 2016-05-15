@@ -531,9 +531,8 @@
 				$('#forma').val(data[6]);
 				$('#parcela').val(data[7]);				
 				$('#descricao').val(data[8]);
-          		$('#fornecedorId').val(data[3]);
-          		$('#nomeRazao').val(data[9]);
-          		$('#encomendaId').val(data[2]);
+          		
+          		
 				
 //---------------visibilidade-----------------------------------------------------------------
 				//Atribuo os objetos para utilizar no bloqueio
@@ -551,8 +550,12 @@
   					mfornecedorId.disabled = true;
   					//mnomeRazao.style.visibility="hidden";
   		   			mnomeRazao.disabled = true;
-              		//Coloca os valores na encomendaId
-        			
+  		   			
+  		   			//Pega os valores que estão na tabela e passa para o modal.	
+              		$('#encomendaId').val(data[2]);    
+              		$('#fornecedorId').val('');
+	          		$('#nomeRazao').val('');  
+	          		
         		}
         		//Se for gasto
         		if(data[1] == 0){
@@ -564,7 +567,11 @@
                		mnomeRazao.disabled = false;
                		//mencomendaId.style.visibility="hidden";
                  	mencomendaId.disabled = true;
-                                 
+
+                 	//Pega os valores que estão na tabela e passa para o modal.	
+                 	$('#fornecedorId').val(data[3]);
+	          		$('#nomeRazao').val(data[9]);  
+	          		$('#encomendaId').val('');       
                 	//console.log("fornecedor "+mfornecedorId.disabled);
            			//onsole.log("encomenda "+mencomendaId.disabled);
            			//console.log("nomeRazao "+mnomeRazao.disabled);
