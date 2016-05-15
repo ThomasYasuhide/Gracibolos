@@ -53,7 +53,7 @@
 							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 								<div class="row dashboard-box">
 									<div class="col-xs-9">
-										<h4>3.942</h4>
+										<h4>${clientes }</h4>
 										<h5>Clientes</h5>
 									</div>
 									<div class="col-xs-3">
@@ -65,7 +65,7 @@
 							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 								<div class="row dashboard-box">
 									<div class="col-xs-9">
-										<h4>67</h4>
+										<h4>${encomendas }</h4>
 										<h5>Encomendas</h5>
 									</div>
 									<div class="col-xs-3">
@@ -77,7 +77,7 @@
 							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 								<div class="row dashboard-box">
 									<div class="col-xs-9">
-										<h4>R$ 3,652.00</h4>
+										<h4>R$ ${saldoMes }</h4>
 										<h5>Caixa</h5>
 									</div>
 									<div class="col-xs-3">
@@ -89,7 +89,7 @@
 							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 								<div class="row dashboard-box">
 									<div class="col-xs-9">
-										<h4>127</h4>
+										<h4>${produtos }</h4>
 										<h5>Produtos</h5>
 									</div>
 									<div class="col-xs-3">
@@ -100,6 +100,7 @@
 						</div>
 					</div>
 					
+					<!-- Grafico -->
 					<div>
 						<canvas id="graficos" height="100px"></canvas>
 					</div>

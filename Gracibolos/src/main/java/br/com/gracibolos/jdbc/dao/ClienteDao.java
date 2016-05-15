@@ -13,7 +13,7 @@ import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Cliente;
 
 public class ClienteDao implements GenericoDao<Cliente>{
-
+	
 	/*
 	 * INCLUIR CLIENTE
 	 * 
@@ -212,6 +212,24 @@ public class ClienteDao implements GenericoDao<Cliente>{
 		}
 		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
+	}
+	
+	public int contagem() 
+	{
+		String sql = "SELECT id FROM cliente";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int tam = 0;
+		  
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+		  ps = conn.prepareStatement(sql);
+		  rs = ps.executeQuery();
+		  rs.last();
+		  tam = rs.getRow();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return tam;
 	}
 	
 	/*

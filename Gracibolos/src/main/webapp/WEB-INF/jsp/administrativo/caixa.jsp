@@ -405,12 +405,6 @@
 	<script type="text/javascript">
 
 		$(document).ready(function() {
-			
-			//Remove as mascaras quando apertar o submit
-			$("#caixa-form").submit(function() {
-				$("#valor").unmask();
-				
-			});
 
 			/*
 			*
@@ -492,6 +486,12 @@
 	            	mfornecedorId.value="";           		
 	           		mnomeRazao.value="";
 	             	mencomendaId.value="";    
+				});
+
+				//Remove as mascaras quando apertar o submit
+				$("#caixa-form").submit(function() {
+					$("#valor").unmask();
+					
 				});
 				
 			});

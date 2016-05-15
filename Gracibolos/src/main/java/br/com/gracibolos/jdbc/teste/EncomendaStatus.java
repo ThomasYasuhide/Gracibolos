@@ -4,22 +4,17 @@ import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.ItemEncomenda;
 
-public class EncomendaPesquisar {
+public class EncomendaStatus {
 
 	public static void main(String[] args) {
 		EncomendaDao dao = new EncomendaDao();
-		Encomenda e = null;
-		Gerador g = new Gerador();
-		Long[] ids = g.IdsEnc();
-		Long id = g.ranIdLong(ids);
+		
 		
 		try {
-				e = dao.pesquisarId("88");
+			
+			for(Encomenda e : dao.emAberto()){
 				System.out.println(	  
-								"encomendaId : "+e.getId()
-							   +"\nClienteId : "+e.getClienteid()
-							   +"\nNomerazao : "+e.getNomerazao()
-							     +"\nCpfcnpj : "+e.getCpfcnpj()
+								 		 "Id : "+e.getId()
 						          +"\nStatus : "+e.getStatus()
 						    + "\nResponsavel : "+e.getResponsavel()
 						   	  +"\nDataInicio : "+e.getDataencomenda()
@@ -29,27 +24,31 @@ public class EncomendaPesquisar {
 			              	+ "\nDataEntrega : "+e.getDataentrega()
 			             +"\nEntregaRetirada : "+e.getDatafinalizado()
 			             		   +"\nTotal : "+e.getTotalprodutos()
-			             	   +"\tDescricao : "+e.getObs()
-			             	   	 
-			             	  );					
+			             	   +"\nDescricao : "+e.getObs()
+			             	   +"\nNomerazao : "+e.getNomerazao()
+			             	   	 +"\ncpfcnpj : "+e.getCpfcnpj()
+			                   +"\nClienteId : "+e.getClienteId()
+			             	   			             	   	 
+					);
 					for(ItemEncomenda ie : e.getListItemEncomenda()){
 						
-												System.out.println(
-															
-														"\n\tId : "+ie.getId()
-												+"\n\tprodutoId : "+ie.getProdutoId()
-											  +"\n\tencomendaId : "+ie.getEncomendaId()
-										 +"\n\tProdutoIdProduto : "+ie.getProdutoIdProduto()
-									 			  	 +"\n\tNome : "+ie.getNomeProduto()
-									 			  	 +"\n\tQtd : "+ie.getQuantidade()
-									 			  	 +"\n\tValor : "+ie.getValor()
-														);
-						
-					}
+						System.out.println(
+									
+								"\n\tId : "+ie.getId()
+						+"\n\tprodutoId : "+ie.getProdutoId()
+					  +"\n\tencomendaId : "+ie.getEncomendaId()
+				 +"\n\tProdutoIdProduto : "+ie.getProdutoIdProduto()
+			 			  	 +"\n\tNome : "+ie.getNomeProduto()
+			 			  	  +"\n\tQtd : "+ie.getQuantidade()
+			 			  	+"\n\tValor : "+ie.getValor()
+								);
+	
+					}//Fim do for dos itens
+			}//fim do for encomenda
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
 	}
 
 }

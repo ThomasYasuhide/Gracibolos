@@ -322,6 +322,25 @@ public class ProdutoDao implements GenericoDao<Produto>{
 	
 	}
 	
+	public int contagem() 
+	{
+		String sql = "SELECT id FROM produto";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int tam = 0;
+		  
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+		  ps = conn.prepareStatement(sql);
+		  rs = ps.executeQuery();
+		  rs.last();
+		  tam = rs.getRow();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return tam;
+	}
+	
+	
 	/*
 	 * PESQUISAR PRODUTOS
 	 * 
