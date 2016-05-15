@@ -17,7 +17,7 @@ public class CaixaInserirGasto {
 		int i;
 		
 ////////////////////////////////////////////		
-		int qtd = 90;
+		int qtd = 120;
 ////////////////////////////////////////////
 		
 		for(i=0; i<qtd;i++)
@@ -30,7 +30,7 @@ public class CaixaInserirGasto {
 			int idForn = gc.ranIdInt(idsForn);
 			c.setFornecedorId(idForn);
 			//valor
-			BigDecimal valor = new BigDecimal(gc.randBetween(1, 1000));
+			BigDecimal valor = new BigDecimal(gc.randBetween(1, 450));
 			c.setValor(valor);
 			//gastoRecebimento
 			//gasto = 0, recebimento = 1
@@ -44,7 +44,9 @@ public class CaixaInserirGasto {
 			//data
 			c.setData(gc.generateDate());
 			try {
-				if(dao.inserir(c) == true){
+				if(dao.inserir(c) == true)
+				{
+					System.out.println("inserido com sucesso : "+ i +": registros");
 				}
 				else{
 					System.out.println("falha");
@@ -54,7 +56,7 @@ public class CaixaInserirGasto {
 			}
 		//fim for	
 		}		
-		System.out.println("inserido com sucesso : "+ i +": registros");	
+			
 	}
 }
 

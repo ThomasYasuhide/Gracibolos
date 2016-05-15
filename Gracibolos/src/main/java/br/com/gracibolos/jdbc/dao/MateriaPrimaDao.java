@@ -194,8 +194,10 @@ public class MateriaPrimaDao implements GenericoDao<MateriaPrima>{
 				materiaPrima.setNome(rs.getString("nome"));
 				materiaPrima.setEstoque(rs.getDouble("estoque"));
 				materiaPrima.setUnidade(rs.getLong("unidade"));
-				materiaPrima.setFabricacao(rs.getDate("fabricacao").toLocalDate());
-				materiaPrima.setVencimento(rs.getDate("vencimento").toLocalDate());
+				if(rs.getDate("fabricacao")!=null)
+					materiaPrima.setFabricacao(rs.getDate("fabricacao").toLocalDate());
+				if(rs.getDate("vencimento")!=null)
+					materiaPrima.setVencimento(rs.getDate("vencimento").toLocalDate());
 				materiaPrima.setDescricao(rs.getString("descricao"));
 				
 				//adiciona o objeto materiaPrima no arrayList

@@ -163,20 +163,20 @@
 								<tbody>
 
 									<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
-									<c:forEach var="cliente" items="${clientes}">
+									<c:forEach var="encomendas" items="${encomendas}">
 										<tr>
-											<td>${cliente.id}</td>
-											<td>${cliente.status}</td>
-											<td>${cliente.cliente}</td>
-											<td>${cliente.responsavel}</td>
-											<td>${cliente.dataencomenda}</td>
-											<td>${cliente.dataentrega}</td>
-											<td>${cliente.datafaturamento}</td>
-											<td>${cliente.dataproducao}</td>
-											<td>${cliente.datafinalizado}</td>
-											<td>${cliente.datacancelamento}</td>
-											<td>${cliente.total}</td>
-											<td>${cliente.obs}</td>
+											<td>${encomendas.id}</td>
+											<td>${encomendas.status}</td>
+											<td>${encomendas.nomerazao}</td>
+											<td>${encomendas.responsavel}</td>
+											<td>${encomendas.dataencomenda}</td>
+											<td>${encomendas.dataentrega}</td>
+											<td>${encomendas.datafaturamento}</td>
+											<td>${encomendas.dataproducao}</td>
+											<td>${encomendas.datafinalizado}</td>
+											<td>${encomendas.datacancelamento}</td>
+											<td>${encomendas.totalprodutos}</td>
+											<td>${encomendas.obs}</td>
 		                					<td>
 		                						<button id="edit-encomenda" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
 		                						<button id="delete-encomenda" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
