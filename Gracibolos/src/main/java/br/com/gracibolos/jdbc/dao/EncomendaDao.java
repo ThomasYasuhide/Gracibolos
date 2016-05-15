@@ -106,9 +106,8 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 					status = true;
 				}
 			}
-			
-			
-			
+					
+			rs.close();
 			ps.close();	
 			conn.close();			
 					
@@ -319,9 +318,16 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				+ "INNER JOIN cliente ON encomenda.cliente = cliente.id "
 				+ "WHERE encomenda.id = "+pesquisa;
 		
+		String sqlItem = "SELECT itemencomenda.id, itemencomenda.produtoId, itemencomenda.encomendaId, itemencomenda.qtd, produto.nome as nomeProduto," 
+				+" produto.codigo, produto.valor, produto.id as produtoIdproduto"
+				+" FROM gracibolos.itemencomenda"
+				+" inner join gracibolos.produto on itemencomenda.produtoId = produto.id"
+				+" where itemencomenda.encomendaId = "+pesquisa;
+		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Encomenda encomenda=null;
+		List<ItemEncomenda> listaDeItemEncomenda= null;
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) 
@@ -354,6 +360,29 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			encomenda.setClienteId(rs.getLong("clienteId"));
 			encomenda.setCpfcnpj(rs.getString("cpfcnpj"));
 			
+			
+			//------Itens da encomenda---------------------------------------------------------
+			ps = conn.prepareStatement(sqlItem);
+			rs = ps.executeQuery();
+			listaDeItemEncomenda = new ArrayList<ItemEncomenda>();
+			while(rs.next())
+			{
+				ItemEncomenda itemEncomenda = new ItemEncomenda();
+				
+				itemEncomenda.setId(rs.getLong("id"));//itemEncomenda
+				itemEncomenda.setProdutoId(rs.getLong("produtoId"));//itemEncomenda
+				itemEncomenda.setProdutoIdProduto(rs.getLong("produtoIdproduto"));//Produto
+				itemEncomenda.setEncomendaId(rs.getLong("encomendaId"));//itemEncomenda
+				itemEncomenda.setQuantidade(rs.getInt("qtd"));//itemEncomenda
+				itemEncomenda.setNomeProduto(rs.getString("nomeProduto"));//Produto
+				itemEncomenda.setValor(rs.getBigDecimal("valor"));//Produto
+				
+				listaDeItemEncomenda.add(itemEncomenda);
+				
+			}
+			
+			encomenda.setListItemEncomenda(listaDeItemEncomenda);
+			
 			ps.close();
 			conn.close();			
 		} 
@@ -375,10 +404,17 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				+ "INNER JOIN cliente ON encomenda.cliente = cliente.id "
 				+ "WHERE encomenda.status >= "+status;
 		
+		ArrayList<Encomenda> listEnc = new ArrayList<>();
+		//Encomenda
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Encomenda encomenda=null;
-		ArrayList<Encomenda> listEnc = new ArrayList<>();
+		
+		//Itens
+		PreparedStatement psItens = null;
+		ResultSet rsItens = null;
+		List<ItemEncomenda> listaDeItemEncomenda= null;
+		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) 
 		{	
@@ -387,7 +423,8 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
-			while(rs.next()){
+			while(rs.next())
+			{
 				//da um get nos atributos do objeto encomenda
 				encomenda = new Encomenda();
 			
@@ -412,9 +449,44 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				encomenda.setNomerazao(rs.getString("nomerazao"));
 				encomenda.setClienteId(rs.getLong("clienteId"));
 				encomenda.setCpfcnpj(rs.getString("cpfcnpj"));
+			
+				//------Itens da encomenda---------------------------------------------------------
+				 		
+				String sqlItem = "SELECT itemencomenda.id, itemencomenda.produtoId, itemencomenda.encomendaId, itemencomenda.qtd, produto.nome as nomeProduto," 
+						+" produto.codigo, produto.valor, produto.id as produtoIdproduto"
+						+" FROM gracibolos.itemencomenda"
+						+" inner join gracibolos.produto on itemencomenda.produtoId = produto.id"
+						+" where itemencomenda.encomendaId = "+encomenda.getId().toString();
+				
+				psItens = conn.prepareStatement(sqlItem);
+				rsItens = psItens.executeQuery();
+				listaDeItemEncomenda = new ArrayList<ItemEncomenda>();
+				
+				while(rsItens.next())
+				{
+					ItemEncomenda itemEncomenda = new ItemEncomenda();
+					
+					itemEncomenda.setId(rsItens.getLong("id"));//itemEncomenda
+					itemEncomenda.setProdutoId(rsItens.getLong("produtoId"));//itemEncomenda
+					itemEncomenda.setProdutoIdProduto(rsItens.getLong("produtoIdproduto"));//Produto
+					itemEncomenda.setEncomendaId(rsItens.getLong("encomendaId"));//itemEncomenda
+					itemEncomenda.setQuantidade(rsItens.getInt("qtd"));//itemEncomenda
+					itemEncomenda.setNomeProduto(rsItens.getString("nomeProduto"));//Produto
+					itemEncomenda.setValor(rsItens.getBigDecimal("valor"));//Produto
+					
+					listaDeItemEncomenda.add(itemEncomenda);
+					
+				}//while itens
+				
+				rsItens = null;
+				psItens = null;
+				
+				encomenda.setListItemEncomenda(listaDeItemEncomenda);
 				
 				listEnc.add(encomenda);
-			}
+				
+			}//while encomenda
+			
 			conn.close();
 			ps.close();
 						

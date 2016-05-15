@@ -44,7 +44,8 @@ public class EncomendaInserir {
 					encomenda.setObs("It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.");
 					
 					
-					for(int j=0;j<4;j++){
+					for(int j=0;j<4;j++)
+					{
 						itemEncomenda = new ItemEncomenda();
 						itemEncomenda.setProdutoId(g.ranIdLong(g.idsProduto()));
 						//Sem o id da encomenda - no ResultSet eu pego o retorno da chave  gerada
@@ -63,7 +64,7 @@ public class EncomendaInserir {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-		}//Fim do for
+		}//Fim do for qtd de encomenda
 		
 
 	}
