@@ -1438,7 +1438,7 @@ public class AdministrativoController {
 		mv.setViewName("administrativo/encomendas");
 		//passa os dados da encomenda para a Expression Language chamada encomenda
 		try {//Passando as encomendas em aberto - status >= 3
-			mv.addObject("encomenda", encomenda);
+			mv.addObject("encomendas", dao.emAberto());
 			mv.addObject("itens", itens);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
