@@ -394,7 +394,25 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		return encomenda;
 	}
 	
-	public List<Encomenda> emAberto(String status) throws Exception{
+	public int contagemEmAberto() 
+	{
+		String sql = "SELECT id FROM encomenda where status between 3 AND 4";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int tam = 0;
+		  
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+		  ps = conn.prepareStatement(sql);
+		  rs = ps.executeQuery();
+		  rs.last();
+		  tam = rs.getRow();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return tam;
+	}
+	
+	public List<Encomenda> emAberto() throws Exception{
 		
 		//string query do banco
 		String sql = "SELECT encomenda.id, encomenda.cliente, encomenda.status, encomenda.responsavel, encomenda.dataencomenda, encomenda.dataentrega"
@@ -402,8 +420,8 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				+ ", encomenda.obs, cliente.nomerazao, cliente.id as clienteId, cliente.cpfcnpj "
 				+ "FROM encomenda "
 				+ "INNER JOIN cliente ON encomenda.cliente = cliente.id "
-				+ "WHERE encomenda.status >= "+status;
-		
+				+ "WHERE encomenda.status between 3 AND 4 ";
+										//3 - FATURADA , 4 - PRODUZINDO
 		ArrayList<Encomenda> listEnc = new ArrayList<>();
 		//Encomenda
 		PreparedStatement ps = null;

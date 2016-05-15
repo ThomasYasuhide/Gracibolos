@@ -63,12 +63,19 @@ public class AdministrativoController {
 		Meses rec = new Meses();
 		
 		DashboardDao dao = new DashboardDao();
+		ClienteDao daoCli = new ClienteDao();
+		EncomendaDao daoEnc = new EncomendaDao();
+		ProdutoDao daoPro = new ProdutoDao();
 		
 		gasto = dao.buscarGastoRecebimento("0", ano);//Aqui eu busquei os gastos "0" deste ano
 		rec = dao.buscarGastoRecebimento("1", ano);//Aqui eu busquei os recebimentos "0" deste ano
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("administrativo/dashboard");
+		mv.addObject("clientes", daoCli.contagem());
+		mv.addObject("encomendas", daoEnc.contagemEmAberto());
+		mv.addObject("saldoMes",saldoMes());
+		mv.addObject("produtos", daoPro.contagem());
 		mv.addObject("gasto", gasto);
 		mv.addObject("recebimento", rec);
 		
@@ -545,6 +552,7 @@ public class AdministrativoController {
 		
 		//cria uma nova instância DAO do estado
 		EstadoDao estadoDao = new EstadoDao();
+		ClienteDao daoCli = new ClienteDao();
 		//Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 		
@@ -554,6 +562,12 @@ public class AdministrativoController {
 	    mv.setViewName("administrativo/clientes");
 	    //passa a lista de estados para a Expression Language chamada estados	
 	    mv.addObject("estados", estados);
+	    try {
+			mv.addObject("clientes", daoCli.listar());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    //retorna o mv	
 		return mv;
 	}
@@ -1152,9 +1166,19 @@ public class AdministrativoController {
 		System.out.println("Entrou na servlet de listagem do caixa");
 		
 		ModelAndView mv = new ModelAndView();
-		CaixaDao dao = new CaixaDao();
-		List<Caixa> listCaixa = new ArrayList<Caixa>();
+		mv.setViewName("administrativo/caixa");
+		mv.addObject("listCaixa",listaCaixaMes());
+		mv.addObject("saldo",saldoMes());
+		return mv;
+	}
 	
+	static CaixaDao daoCaixa;
+	static List<Caixa> listCaixa;
+	
+	public static List<Caixa> listaCaixaMes()
+	{
+		daoCaixa = new CaixaDao();
+		listCaixa = new ArrayList<Caixa>();
 		//VERIFICA A DATA ATUAL, E PEGA O PRIMEIRO E ULTIMO DIA DO MÊS
 		LocalDate data = LocalDate.now();
 		//recebo o primeiro dia do mes
@@ -1163,37 +1187,36 @@ public class AdministrativoController {
 		//ultimo dia do mes
 		String dataFinal = data.with(TemporalAdjusters.lastDayOfMonth()).toString();
 		//System.out.println(dataFinal);
-		
-		BigDecimal gasto = new BigDecimal(0);
-		BigDecimal rec = new BigDecimal(0);
-		
 		try {
-			
-			listCaixa = dao.pesquisarEntre(dataInicial, dataFinal);
-			for(Caixa c : listCaixa){
-				//somo os gastos
-				if(c.getGastoRecebimento()==0){
-					gasto = gasto.add(c.getValor());
-				//somo os recebimentos
-				}else if(c.getGastoRecebimento()==1){
-					rec = rec.add(c.getValor());
-				}
-			}
-						
+			listCaixa = daoCaixa.pesquisarEntre(dataInicial, dataFinal);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return listCaixa;
+	}
+	
+	public static BigDecimal saldoMes(){
 		
+		BigDecimal gasto = new BigDecimal(0);
+		BigDecimal rec = new BigDecimal(0);
+			
+		for(Caixa c : listaCaixaMes()){
+			//somo os gastos
+			if(c.getGastoRecebimento()==0){
+				gasto = gasto.add(c.getValor());
+			//somo os recebimentos
+			}else if(c.getGastoRecebimento()==1){
+				rec = rec.add(c.getValor());
+			}
+		}
+				
 		//TESTES
 		//System.out.println("gasto : "+gasto);
 		//System.out.println("rec : "+rec);
 		//System.out.println("saldo : "+rec.subtract(gasto));
 		
-		mv.setViewName("administrativo/caixa");
-		mv.addObject("listCaixa",listCaixa);
-		mv.addObject("saldo",rec.subtract(gasto));
-		return mv;
+		return rec.subtract(gasto);
 	}
 	
 	//INCLUIR NOVO CAIXA
@@ -1406,15 +1429,23 @@ public class AdministrativoController {
 				itens.add(item);
 				itens.add(item2);
 			//FIM DOS TESTES
-
+				
+		EncomendaDao dao = new EncomendaDao();
+				
 		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
 		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/encomendas");
 		//passa os dados da encomenda para a Expression Language chamada encomenda
-		mv.addObject("encomenda", encomenda);
+		try {//Passando as encomendas em aberto - status >= 3
+			mv.addObject("encomenda", encomenda);
+			mv.addObject("itens", itens);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//passa a lista de item para a Expression Language chamada itens
-		mv.addObject("itens", itens);
+		//mv.addObject("itens", itens);
 		//retorna mv
 		return mv;
 	}

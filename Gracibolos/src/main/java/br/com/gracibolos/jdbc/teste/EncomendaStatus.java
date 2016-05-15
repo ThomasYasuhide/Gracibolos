@@ -12,7 +12,7 @@ public class EncomendaStatus {
 		
 		try {
 			
-			for(Encomenda e : dao.emAberto("3")){
+			for(Encomenda e : dao.emAberto()){
 				System.out.println(	  
 								 		 "Id : "+e.getId()
 						          +"\nStatus : "+e.getStatus()
