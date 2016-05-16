@@ -455,7 +455,7 @@
 														<label class="control-label" for="valorpago">Valor pago:</label>
 														<div class="input-group">
 															<span class="input-group-addon">R$</span>
-															<input type="text" id="valorpago" name="valorpago" class="form-control" />
+															<input type="text" id="valorpago" placeholder="0,00" name="valorpago" class="form-control" />
 														</div>
 													</div>
 													
@@ -463,7 +463,7 @@
 														<label class="control-label" for="valortroco">Troco:</label>
 														<div class="input-group">
 															<span class="input-group-addon">R$</span>
-															<input type="text" id="valortroco" name="valortroco" class="form-control" readonly />
+															<input type="text" id="valortroco" name="valortroco" placeholder="0,00" class="form-control" readonly />
 														</div>
 													</div>
 													
@@ -706,7 +706,7 @@
 				        if (!query.length) return callback();
 				        $.ajax({
 				            
-				            url: 'http://localhost:8080/Gracibolos/rest-pesquisa-produtos/' + encodeURIComponent(query),
+				            url: 'http://localhost:8080/Gracibolos/rest-pesquisar-produto-nome/' + encodeURIComponent(query),
 				            type: 'GET',
 				            error: function() {
 				                callback();
@@ -835,12 +835,12 @@
 				    item += 			'<select class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" value="0" class="form-control quantidade"  min="0" max="9999999">';
+				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" class="form-control quantidade"  min="0" max="9999999">';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].valor" id="valor_'+i+'" class="form-control valor">';
+				    item += 				'<input type="text" name="item['+i+'].valor" placeholder="0,00" id="valor_'+i+'" class="form-control valor">';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
@@ -957,6 +957,9 @@
 					$("#valortroco").val((valorpago - totalencomenda).toFixed(2)).trigger('input');
 				}else{
 					alert('O valor pago é inferior ao valor total da encomenda.');
+					
+					$('#valorpago').val("");
+					$("#valortroco").val("");
 				}
 				
 				
