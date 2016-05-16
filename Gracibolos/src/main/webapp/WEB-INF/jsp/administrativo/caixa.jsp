@@ -301,7 +301,7 @@
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="fornecedorId" id="lbl_fornecedorId">Fornecedor id:</label>
-									<input type="text" name="fornecedorId" id="fornecedorId"  class="form-control" maxlength="100" placeholder=""/>
+									<select name="fornecedorId" id="fornecedorId"  class="form-control" > </select>
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -403,8 +403,10 @@
 	<script src="resources/js/datatables.js"></script>	
 	<script src="resources/js/mask.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
-    
-
+    <script src="resources/js/selectize.js"></script>
+	<script src="resources/js/moment.js"></script>
+	<script src="resources/js/wizard.js"></script>
+	
 	<script type="text/javascript">
 
 		$(document).ready(function() {
@@ -424,8 +426,8 @@
 			*
 			*/
 			
-			//$("#valor").mask("000.000.000.000.000,00", {reverse: true});
-
+			$("#valor").mask("000.000.000.000.000,00", {reverse: true});
+			
 			/*
 			*
 			* CONFIGURAÇÃO DA TABELA

@@ -134,8 +134,11 @@
 						</div>
 						
 						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">
-							<label class="control-label hidden-xs">Listar encomendas</label>
-							<a href="administrativo-listar-encomendas" class="btn btn-default fullwidth">Listar encomendas</a>
+							<label class="control-label hidden-xs">Listar finalizadas</label>
+							<!-- 
+								Chamada para a controller @RequestMapping 
+							-->
+							<a href="administrativo-listar-encomendas-finalizadas" class="btn btn-default fullwidth">Listar finalizadas</a>
 						</div>
 					</div>
 					

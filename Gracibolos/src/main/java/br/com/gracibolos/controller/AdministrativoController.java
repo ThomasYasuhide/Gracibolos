@@ -1387,9 +1387,23 @@ public class AdministrativoController {
 	
 	/*
 	 * 
-	 * ###################### ENCOMENDA ######################
+	 * ###################### ENCOMENDA #####################
 	 * 
 	 * */
+	
+	@RequestMapping("/administrativo-listar-encomendas-finalizadas")
+	public ModelAndView listarEncomendasFinalizadas(){
+		EncomendaDao daoEnc = new EncomendaDao();
+		ModelAndView mv = new ModelAndView();
+		try {
+			mv.addObject("encomendas", daoEnc.finalizadas());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mv.setViewName("administrativo/encomendas");
+		return mv;
+	}
 	
 	//ENCOMENDA
 	@RequestMapping("/administrativo-encomendas")
@@ -1449,7 +1463,9 @@ public class AdministrativoController {
 		//retorna mv
 		return mv;
 	}
-		
+	
+	
+	
 	//INCLUIR NOVA ENCOMENDA
 	@RequestMapping("/administrativo-incluir-encomenda")
 	public ModelAndView incluir_encomenda(Encomenda encomenda){
@@ -1601,5 +1617,4 @@ public class AdministrativoController {
 	    //retorna mv		    
 	    return mv;
 	}
-	
 }

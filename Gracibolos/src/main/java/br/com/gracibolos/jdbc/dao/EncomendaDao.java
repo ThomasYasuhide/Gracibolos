@@ -394,6 +394,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		return encomenda;
 	}
 	
+	//Contagem de encomendas em aberto
 	public int contagemEmAberto() 
 	{
 		String sql = "SELECT id FROM encomenda where status between 3 AND 4";
@@ -412,16 +413,34 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		return tam;
 	}
 	
+	public List<Encomenda> finalizadas() throws Exception{
+		
+		//ENCOMENDAS FINALIZADAS
+				String sql = "SELECT encomenda.id, encomenda.cliente, encomenda.status, encomenda.responsavel, encomenda.dataencomenda, encomenda.dataentrega"
+						+ ", encomenda.datafaturamento, encomenda.dataproducao, encomenda.datafinalizado, encomenda.datacancelado, encomenda.total"
+						+ ", encomenda.obs, cliente.nomerazao, cliente.id as clienteId, cliente.cpfcnpj "
+						+ "FROM encomenda "
+						+ "INNER JOIN cliente ON encomenda.cliente = cliente.id "
+						+ "WHERE encomenda.status = 5 ";
+											//5 - finalizadas
+				return getListEncomenda(sql);
+	}
+	
 	public List<Encomenda> emAberto() throws Exception{
 		
-		//string query do banco
+		//ENCOMENDAS EM ABERTO
 		String sql = "SELECT encomenda.id, encomenda.cliente, encomenda.status, encomenda.responsavel, encomenda.dataencomenda, encomenda.dataentrega"
 				+ ", encomenda.datafaturamento, encomenda.dataproducao, encomenda.datafinalizado, encomenda.datacancelado, encomenda.total"
 				+ ", encomenda.obs, cliente.nomerazao, cliente.id as clienteId, cliente.cpfcnpj "
 				+ "FROM encomenda "
 				+ "INNER JOIN cliente ON encomenda.cliente = cliente.id "
 				+ "WHERE encomenda.status between 3 AND 4 ";
-										//3 - FATURADA , 4 - PRODUZINDO
+									//3 - FATURADA , 4 - PRODUZINDO
+		return getListEncomenda(sql);
+	}
+	
+	public static List<Encomenda> getListEncomenda(String sql) throws Exception{
+		
 		ArrayList<Encomenda> listEnc = new ArrayList<>();
 		//Encomenda
 		PreparedStatement ps = null;
