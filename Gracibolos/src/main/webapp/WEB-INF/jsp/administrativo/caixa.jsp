@@ -488,9 +488,13 @@
                 $('#data').val(now);     
 
                 // DESABILITA O CAMPO
-                var nencomendaId = document.getElementById("encomendaId");
-                nencomendaId.disabled = true;
-
+                var campoEncomendaId = document.getElementById("encomendaId");
+                campoEncomendaId.disabled = true;
+                //HABILITA OS CAMPOS
+                var campoFornecedorId = document.getElementById("fornecedorId");
+				var campoNomeRazao = document.getElementById("nomeRazao");
+				campoFornecedorId.disabled = false;
+				campoNomeRazao.disabled = false;
               
 			});
 
