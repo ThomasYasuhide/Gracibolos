@@ -1596,16 +1596,17 @@ public class AdministrativoController {
 	//PESQUISAR ENCOMENDA
 	@RequestMapping("/administrativo-pesquisar-encomenda")
 	public ModelAndView pesquisar_encomenda(String pesquisa){
-		System.out.println("Realizou a pesquisa de matéria prima");
+		System.out.println("Realizou a pesquisa do número da encomenda");
 		
 		//cria uma nova instância DAO da encomenda
 		EncomendaDao dao = new EncomendaDao();
-		
-		List<Encomenda> encomendas = null;
+		Encomenda e = new Encomenda();
+		List<Encomenda> encomendas = new ArrayList<Encomenda>();
 		try {
-			encomendas = dao.pesquisar(pesquisa);
-		} catch (Exception e) {
-			e.printStackTrace();
+			e = dao.pesquisarId(pesquisa);
+			encomendas.add(e);
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		
 		//instância uma nova modelView

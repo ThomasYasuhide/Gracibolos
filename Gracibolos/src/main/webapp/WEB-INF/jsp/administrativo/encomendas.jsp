@@ -123,7 +123,10 @@
 							<label class="control-label">Pesquisar encomenda:</label>
 							<form action="administrativo-pesquisar-encomenda" method="POST">
 								<div class="input-group">
-									<input type="text" class="form-control" maxlength="100" placeholder="Informe o numero de encomenda para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
+									<!-- 
+										id="pesquisa" envio para a controller o número da encomenda
+									 -->
+									<input id="pesquisa" type="text" class="form-control" maxlength="100" placeholder="Informe o numero de encomenda para realizar a pesquisa." name="pesquisa"  required />
 									<span class="input-group-btn">
 										<button class="btn btn-default" type="submit">
 											<span class="glyphicon glyphicon-search disabled"></span>
