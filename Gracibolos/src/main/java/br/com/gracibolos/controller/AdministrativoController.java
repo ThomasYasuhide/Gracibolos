@@ -1387,9 +1387,23 @@ public class AdministrativoController {
 	
 	/*
 	 * 
-	 * ###################### ENCOMENDA ######################
+	 * ###################### ENCOMENDA #####################
 	 * 
 	 * */
+	
+	@RequestMapping("/administrativo-listar-encomendas-finalizadas")
+	public ModelAndView listarEncomendasFinalizadas(){
+		EncomendaDao daoEnc = new EncomendaDao();
+		ModelAndView mv = new ModelAndView();
+		try {
+			mv.addObject("encomendas", daoEnc.finalizadas());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mv.setViewName("administrativo/encomendas");
+		return mv;
+	}
 	
 	//ENCOMENDA
 	@RequestMapping("/administrativo-encomendas")
@@ -1449,7 +1463,9 @@ public class AdministrativoController {
 		//retorna mv
 		return mv;
 	}
-		
+	
+	
+	
 	//INCLUIR NOVA ENCOMENDA
 	@RequestMapping("/administrativo-incluir-encomenda")
 	public ModelAndView incluir_encomenda(Encomenda encomenda){
@@ -1580,16 +1596,17 @@ public class AdministrativoController {
 	//PESQUISAR ENCOMENDA
 	@RequestMapping("/administrativo-pesquisar-encomenda")
 	public ModelAndView pesquisar_encomenda(String pesquisa){
-		System.out.println("Realizou a pesquisa de matéria prima");
+		System.out.println("Realizou a pesquisa do número da encomenda");
 		
 		//cria uma nova instância DAO da encomenda
 		EncomendaDao dao = new EncomendaDao();
-		
-		List<Encomenda> encomendas = null;
+		Encomenda e = new Encomenda();
+		List<Encomenda> encomendas = new ArrayList<Encomenda>();
 		try {
-			encomendas = dao.pesquisar(pesquisa);
-		} catch (Exception e) {
-			e.printStackTrace();
+			e = dao.pesquisarId(pesquisa);
+			encomendas.add(e);
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		
 		//instância uma nova modelView
@@ -1601,5 +1618,4 @@ public class AdministrativoController {
 	    //retorna mv		    
 	    return mv;
 	}
-	
 }

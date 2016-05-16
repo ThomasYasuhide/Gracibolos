@@ -204,7 +204,10 @@
 								<div class="row caixasaldo">
 									<div class="col-xs-9">
 										<h4>Saldo : ${saldo}</h4>
-									</div>									
+									</div>
+									<div class="col-xs-3">
+										<i class="material-icons pull-right dashboard-icon">done</i>
+									</div>
 								</div>
 							</div>						
 					</div>
@@ -298,7 +301,7 @@
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="fornecedorId" id="lbl_fornecedorId">Fornecedor id:</label>
-									<input type="text" name="fornecedorId" id="fornecedorId"  class="form-control" maxlength="100" placeholder=""/>
+									<select name="fornecedorId" id="fornecedorId"  class="form-control" > </select>
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -400,8 +403,10 @@
 	<script src="resources/js/datatables.js"></script>	
 	<script src="resources/js/mask.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
-    
-
+    <script src="resources/js/selectize.js"></script>
+	<script src="resources/js/moment.js"></script>
+	<script src="resources/js/wizard.js"></script>
+	
 	<script type="text/javascript">
 
 		$(document).ready(function() {
@@ -531,9 +536,8 @@
 				$('#forma').val(data[6]);
 				$('#parcela').val(data[7]);				
 				$('#descricao').val(data[8]);
-          		$('#fornecedorId').val(data[3]);
-          		$('#nomeRazao').val(data[9]);
-          		$('#encomendaId').val(data[2]);
+          		
+          		
 				
 //---------------visibilidade-----------------------------------------------------------------
 				//Atribuo os objetos para utilizar no bloqueio
@@ -551,8 +555,12 @@
   					mfornecedorId.disabled = true;
   					//mnomeRazao.style.visibility="hidden";
   		   			mnomeRazao.disabled = true;
-              		//Coloca os valores na encomendaId
-        			
+  		   			
+  		   			//Pega os valores que estão na tabela e passa para o modal.	
+              		$('#encomendaId').val(data[2]);    
+              		$('#fornecedorId').val('');
+	          		$('#nomeRazao').val('');  
+	          		
         		}
         		//Se for gasto
         		if(data[1] == 0){
@@ -564,7 +572,11 @@
                		mnomeRazao.disabled = false;
                		//mencomendaId.style.visibility="hidden";
                  	mencomendaId.disabled = true;
-                                 
+
+                 	//Pega os valores que estão na tabela e passa para o modal.	
+                 	$('#fornecedorId').val(data[3]);
+	          		$('#nomeRazao').val(data[9]);  
+	          		$('#encomendaId').val('');       
                 	//console.log("fornecedor "+mfornecedorId.disabled);
            			//onsole.log("encomenda "+mencomendaId.disabled);
            			//console.log("nomeRazao "+mnomeRazao.disabled);
