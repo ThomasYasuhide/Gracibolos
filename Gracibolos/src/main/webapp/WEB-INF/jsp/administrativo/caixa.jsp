@@ -200,16 +200,13 @@
 							<a href="" id="incluir-caixa-modal" data-toggle="modal" data-target="#modal-caixa" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova saída</a>
 						</div>							
 						
-						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-								<div class="row caixasaldo">
-									<div class="col-xs-9">
-										<h4>Saldo : ${saldo}</h4>
-									</div>
-									<div class="col-xs-3">
-										<i class="material-icons pull-right dashboard-icon">done</i>
-									</div>
-								</div>
-							</div>						
+						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+							<div class="row caixasaldo">
+								<div class="col-xs-9">
+									<h4>Saldo : ${saldo}</h4>
+								</div>									
+							</div>
+						</div>						
 					</div>
 <!-- ############################################################ FIM DA TABELA ############################################################ -->
 				</div>
@@ -291,17 +288,17 @@
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="parcela">Número de Parcelas:</label>
-									<input id="parcela" name="parcela" type="number" class="form-control" pattern="[0-9]+" maxlength="1" >
+									<input id="parcela" name="parcela" type="number" class="form-control" min=1 max=6 pattern="[0-9]+" maxlength="1" value="1">
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="data">Data da transação:</label>
-									<input type="date" id="data" name="data" class="form-control"  />
+									<input type="date" id="data" name="data" class="form-control" />
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="fornecedorId" id="lbl_fornecedorId">Fornecedor id:</label>
-									<select name="fornecedorId" id="fornecedorId"  class="form-control" > </select>
+									<input type="text" name="fornecedorId" id="fornecedorId"  class="form-control" maxlength="100" />
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -428,6 +425,15 @@
 			
 			$("#valor").mask("000.000.000.000.000,00", {reverse: true});
 			
+			//Remove as mascaras quando apertar o submit
+			$("#caixa-form").submit(function() {
+						
+				var valor = $("#valor").val();
+				valor = valor.split(".").join("");
+				valor = valor.split(",").join(".");
+				$("#valor").val(valor);
+			});
+			
 			/*
 			*
 			* CONFIGURAÇÃO DA TABELA
@@ -479,26 +485,17 @@
 				});
 				
 				var now = moment().format('YYYY-MM-DD');
-                $('#data_transacao').val(now);               
+                $('#data').val(now);     
 
-				//Este método se encontra no arquivo scripts.js
                 // DESABILITA O CAMPO
-                desabilitarCampos(document.getElementById("#gastoRecebimento"));
-
-              //Limpo os campos ao fechar - relacionado a visibilidade dos campos
-				$("#caixa-form").click(function(){
-					//objeto javascript
-	            	mfornecedorId.value="";           		
-	           		mnomeRazao.value="";
-	             	mencomendaId.value="";    
-				});
-
-				//Remove as mascaras quando apertar o submit
-				$("#caixa-form").submit(function() {
-					$("#valor").unmask();
-					
-				});
-				
+                var campoEncomendaId = document.getElementById("encomendaId");
+                campoEncomendaId.disabled = true;
+                //HABILITA OS CAMPOS
+                var campoFornecedorId = document.getElementById("fornecedorId");
+				var campoNomeRazao = document.getElementById("nomeRazao");
+				campoFornecedorId.disabled = false;
+				campoNomeRazao.disabled = false;
+              
 			});
 
             /*
@@ -528,8 +525,9 @@
 					
 				//Pega os valores que estão na tabela e passa para o modal.			
 				$('#data').val(data[0]);
+				$('#gastoRecebimento').val(data[1]);
 				$('#id').val(data[4]);
-				$('#valor').val(data[5]);
+				$('#valor').val(data[5]).trigger('input');
 				$('#forma').val(data[6]);
 				$('#parcela').val(data[7]);				
 				$('#descricao').val(data[8]);
@@ -599,7 +597,7 @@
                 var data = table.row( $(this).parents('tr') ).data();
 
                 //Preenche o modal com o numero do ID a ser deletado.
-                $('#id_delete').val(data[0]);
+                $('#id_delete').val(data[4]);
 
                 //Apresenta o modal de exclusão na tela.
 				$('#excluir-caixa').modal('show');
