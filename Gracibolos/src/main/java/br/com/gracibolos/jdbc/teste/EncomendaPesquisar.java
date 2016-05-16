@@ -9,9 +9,9 @@ public class EncomendaPesquisar {
 	public static void main(String[] args) {
 		EncomendaDao dao = new EncomendaDao();
 		Encomenda e = null;
-		Gerador g = new Gerador();
-		Long[] ids = g.IdsEnc();
-		Long id = g.ranIdLong(ids);
+		//Gerador g = new Gerador();
+		//Long[] ids = g.IdsEnc();
+		//Long id = g.ranIdLong(ids);
 		
 		try {
 				e = dao.pesquisarId("9");

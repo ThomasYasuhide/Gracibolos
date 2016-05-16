@@ -408,7 +408,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		  rs.last();
 		  tam = rs.getRow();
 		}catch (Exception e) {
-			// TODO: handle exception
+			//handle exception
 		}
 		return tam;
 	}

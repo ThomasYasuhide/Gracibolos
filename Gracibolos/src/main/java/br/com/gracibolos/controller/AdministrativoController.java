@@ -565,7 +565,7 @@ public class AdministrativoController {
 	    try {
 			mv.addObject("clientes", daoCli.listar());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 	    //retorna o mv	
@@ -1190,7 +1190,7 @@ public class AdministrativoController {
 		try {
 			listCaixa = daoCaixa.pesquisarEntre(dataInicial, dataFinal);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		return listCaixa;
@@ -1398,7 +1398,7 @@ public class AdministrativoController {
 		try {
 			mv.addObject("encomendas", daoEnc.finalizadas());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		mv.setViewName("administrativo/encomendas");
@@ -1455,7 +1455,7 @@ public class AdministrativoController {
 			mv.addObject("encomendas", dao.emAberto());
 			mv.addObject("itens", itens);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		//passa a lista de item para a Expression Language chamada itens

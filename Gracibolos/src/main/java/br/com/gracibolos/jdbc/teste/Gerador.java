@@ -153,7 +153,7 @@ public class Gerador {
 				j++;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		nomeAle = nomes[ran.nextInt(nomes.length)];

@@ -335,7 +335,7 @@ public class ProdutoDao implements GenericoDao<Produto>{
 		  rs.last();
 		  tam = rs.getRow();
 		}catch (Exception e) {
-			// TODO: handle exception
+			// handle exception
 		}
 		return tam;
 	}
