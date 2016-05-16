@@ -471,38 +471,6 @@
                     }
                 ]
             });// FIM - CONFIGURAÇÃO DA TABELA
-
-        	$('#fornecedorId').selectize({
-        	    valueField: 'id',
-        	    labelField: 'nomerazao',
-        	    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
-        	    options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
-        	    create: false,
-        	    render: {
-        	        option: function(item, escape) {
-        	        	 return	'<div>' +
-        					'<span class="title">' +
-        						'<span>' + escape(item.nomerazao) + '</span><br/>' +
-        						'<span>' + escape(item.cpfcnpj) + '</span><br/>' +
-        					'</span>' +
-        				'</div>';
-        	        }
-        	    },
-
-        	    load: function(query, callback) {
-        	        if (!query.length) return callback();
-        	        $.ajax({
-        	            url: 'rest-pesquisar-fornecedor/' + encodeURIComponent(query),
-        	            type: 'GET',
-        	            error: function() {
-        	                callback();
-        	            },
-        	            success: function(res) {
-        	                callback(res);
-        	            }
-        	        });
-        	    }
-        	});
             
 
             /*
@@ -532,13 +500,46 @@
                 $('#data').val(now);     
 
                 // DESABILITA O CAMPO
-                var campoEncomendaId = document.getElementById("encomendaId");
-                campoEncomendaId.disabled = true;
+                //var campoEncomendaId = document.getElementById("encomendaId");
+                document.getElementById("encomendaId").disabled = true;
                 //HABILITA OS CAMPOS
-                var campoFornecedorId = document.getElementById("fornecedorId");
-				var campoNomeRazao = document.getElementById("nomeRazao");
-				campoFornecedorId.disabled = false;
-				campoNomeRazao.disabled = false;
+                //var campoFornecedorId = document.getElementById("fornecedorId");
+				//var campoNomeRazao = document.getElementById("nomeRazao");
+				document.getElementById("fornecedorId").disabled = false;
+				document.getElementById("nomeRazao").disabled = false;
+
+				//-----------Autocomplete----------------------------------------------------------------------
+	        	$('#fornecedorId').selectize({
+	        	    valueField: 'id',//Valor do campo
+	        	    labelField: 'nomerazao',
+	        	    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
+	        	    options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
+	        	    create: false,
+	        	    render: {
+	        	        option: function(item, escape) {
+	        	        	 return	'<div>' +
+	        					'<span class="title">' +
+	        						'<span>' + escape(item.nomerazao) + '</span><br/>' +
+	        						'<span>' + escape(item.cpfcnpj) + '</span><br/>' +
+	        					'</span>' +
+	        				'</div>';
+	        	        }
+	        	    },
+
+	        	    load: function(query, callback) {
+	        	        if (!query.length) return callback();
+	        	        $.ajax({
+	        	            url: 'rest-pesquisar-fornecedor/' + encodeURIComponent(query),
+	        	            type: 'GET',
+	        	            error: function() {
+	        	                callback();
+	        	            },
+	        	            success: function(res) {
+	        	                callback(res);
+	        	            }
+	        	        });
+	        	    }
+	        	});
               
 			});
 
@@ -580,20 +581,20 @@
 				
 				//---------------visibilidade-----------------------------------------------------------------
 				//Atribuo os objetos para utilizar no bloqueio
-				var mfornecedorId = document.getElementById("fornecedorId");
-				var mencomendaId = document.getElementById("encomendaId");
-				var mnomeRazao = document.getElementById("nomeRazao");
+				//var mfornecedorId = document.getElementById("fornecedorId");
+				//var mencomendaId = document.getElementById("encomendaId");
+				//var mnomeRazao = document.getElementById("nomeRazao");
 				
 				//Se for recebimento
               	if(data[1] == 1){
                  	//console.log(data[1]);
                  	//Bloqueio o fornecedorId e o nomeRazao	e ativo encomenda	
                  	//mencomendaId.style.visibility="visible";			
-             		mencomendaId.disabled = false;
+             		document.getElementById("encomendaId").disabled = false;
              		//mfornecedorId.style.visibility="hidden";
-  					mfornecedorId.disabled = true;
+  					document.getElementById("fornecedorId").disabled = true;
   					//mnomeRazao.style.visibility="hidden";
-  		   			mnomeRazao.disabled = true;
+  		   			document.getElementById("nomeRazao").disabled = true;
   		   			
   		   			//Pega os valores que estão na tabela e passa para o modal.	
               		$('#encomendaId').val(data[2]);    
@@ -606,11 +607,11 @@
         			//console.log(data[1]);
         			//Boloqueio encomendaId e ativo fornecedor e nomeRzao  
         			//mfornecedorId.style.visibility="visible";     			              		
-            		mfornecedorId.disabled = false;
+            		document.getElementById("fornecedorId").disabled = false;
             		//mnomeRazao.style.visibility="visible";	           		
-               		mnomeRazao.disabled = false;
+               		document.getElementById("nomeRazao").disabled = false;
                		//mencomendaId.style.visibility="hidden";
-                 	mencomendaId.disabled = true;
+                 	document.getElementById("encomendaId").disabled = true;
 
                  	//Pega os valores que estão na tabela e passa para o modal.	
                  	$('#fornecedorId').val(data[3]);
