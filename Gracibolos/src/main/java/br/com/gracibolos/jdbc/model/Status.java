@@ -20,14 +20,38 @@ public class Status implements Serializable{
 	public Status(){
         
     }
-    
-    public Status(String nome) {
-        this.nome = nome;
-    }
-    
+        
     private Long id;
     private String nome;
+    private boolean status1;
+    private boolean status2;
+    private Long numeroEncomenda;
     
+    
+	public boolean getStatus2() {
+		return status2;
+	}
+
+	public void setStatus2(boolean status2) {
+		this.status2 = status2;
+	}
+
+	public boolean getStatus1() {
+		return status1;
+	}
+
+	public void setStatus1(boolean status) {
+		this.status1 = status;
+	}
+
+	public Long getNumeroEncomenda() {
+		return numeroEncomenda;
+	}
+
+	public void setNumeroEncomenda(Long numeroEncomenda) {
+		this.numeroEncomenda = numeroEncomenda;
+	}
+
 	public Long getId() {
 		return id;
 	}

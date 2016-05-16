@@ -12,8 +12,9 @@ import java.util.List;
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.ItemEncomenda;
+import br.com.gracibolos.jdbc.model.Status;
 
-public class EncomendaDao implements GenericoDao<Encomenda>{
+public class EncomendaDao{
 
 	/*
 	 * INCLUIR ENCOMENDA
@@ -23,8 +24,8 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 	 * */
 	
 	@SuppressWarnings("static-access")
-	public boolean inserir(Encomenda encomenda) throws Exception{
-		boolean status = false;
+	public Status inserir(Encomenda encomenda) throws Exception{
+		//boolean status = false;
 		
 		//string query do banco
 		String sql = " INSERT INTO encomenda(status, dataencomenda, dataentrega, cliente, responsavel,"
@@ -32,6 +33,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				   + " VALUES (?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		Status status = new Status();
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
@@ -79,14 +81,16 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			
 			//Insiro a encomenda
 			if(ps.executeUpdate() != 0) {
-				status = true;
+				status.setStatus1(true);
+			}else{
+				status.setStatus1(false);
 			}
 			
 			//Aqui eu pego o retorno da chave inserida
 			rs = ps.getGeneratedKeys();
 			rs.next();
 			Long lastid = rs.getLong(1);
-			
+			status.setNumeroEncomenda(lastid);//Aqui eu pego o numero da encomenda
 			System.out.println("inserido id : "+lastid);
 			
 			//---INSIRO OS ITENS DA ENCOMENDA----------------------------------------------------
@@ -103,7 +107,9 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				
 				//Insiro os itens da encomenda
 				if(ps.executeUpdate() != 0) {
-					status = true;
+					status.setStatus2(true);
+				}else{
+					status.setStatus2(false);
 				}
 			}
 					
@@ -303,7 +309,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 	 * 
 	 * */
 	
-	@Override
+	
 	public List<Encomenda> pesquisar(String pesquisa) throws Exception {
 		return null;
 	}

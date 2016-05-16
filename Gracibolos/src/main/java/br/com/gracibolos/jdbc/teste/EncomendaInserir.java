@@ -6,19 +6,21 @@ import java.util.List;
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.ItemEncomenda;
+import br.com.gracibolos.jdbc.model.Status;
 
 //funcionando
 public class EncomendaInserir {
 
 	public static void main(String[] args) {
 		
-		Encomenda encomenda;
+		Encomenda encomenda = null;
 		Gerador g = new Gerador();
-		EncomendaDao dao;
-		List<ItemEncomenda> listIe;
-		ItemEncomenda itemEncomenda;
+		EncomendaDao dao = null;
+		List<ItemEncomenda> listIe = null;
+		ItemEncomenda itemEncomenda = null;
+		Status status = new Status();
 		
-		for(int i=0;i<10;i++){
+		for(int i=0;i<1;i++){
 					encomenda = new Encomenda();
 			//------cliente---------------------------------------							
 					encomenda.setClienteid(g.ranIdInt(g.IdsCli()));
@@ -66,8 +68,9 @@ public class EncomendaInserir {
 					
 					dao = new EncomendaDao();
 					try {
-						if( dao.inserir(encomenda) == true){
-							System.out.println("inserido com sucesso");
+						status = dao.inserir(encomenda);
+						if((status.getStatus1() && status.getStatus2()) == true){
+							System.out.println("inserido com sucesso"+ status.getNumeroEncomenda());
 						}else{
 							System.out.println("falha");
 						}

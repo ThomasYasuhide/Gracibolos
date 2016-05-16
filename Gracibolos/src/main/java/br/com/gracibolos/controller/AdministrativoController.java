@@ -42,6 +42,7 @@ import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Meses;
 import br.com.gracibolos.jdbc.model.Produto;
+import br.com.gracibolos.jdbc.model.Status;
 
 @Controller
 public class AdministrativoController {
@@ -1499,19 +1500,14 @@ public class AdministrativoController {
 		
 		
 		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
-		boolean status = false;
+		//boolean status = false;
 		//cria uma nova instância DAO da encomenda
 		EncomendaDao dao = new EncomendaDao();			
-			
+		Status status = new Status();	
 		try {
 			//se o método inserir passando uma encomenda, for executado corretamente, status recebe verdadeiro
-			if(dao.inserir(encomenda)) {
-				status = true;
-			} 
-			//caso contrário, status recebe falso
-			else {
-				status = false;
-			}
+			status = dao.inserir(encomenda);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1521,7 +1517,9 @@ public class AdministrativoController {
 	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/encomendas");
 		//passa o retorno do status para a Expression Language chamada incluir
-		mv.addObject("incluir", status);
+		mv.addObject("incluir", status.getStatus1());
+		mv.addObject("incluirItens", status.getStatus2());
+		mv.addObject("numeroEncomenda", status.getNumeroEncomenda());
 	    //retorna mv
 		return mv;
 	}
