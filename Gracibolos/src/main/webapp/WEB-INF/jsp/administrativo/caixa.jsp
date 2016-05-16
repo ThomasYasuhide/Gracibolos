@@ -20,7 +20,8 @@
 	<link href="resources/css/reset.css" rel="stylesheet">
 	<link href="resources/css/style.css" rel="stylesheet">
     <link href="resources/css/datatables.css" rel="stylesheet">
-
+	<link href="resources/css/selectize.css" rel="stylesheet">
+	
 	<!-- Titulo da página -->
 	<title>Graci Bolos | Caixa</title>
 
@@ -469,7 +470,40 @@
                         "visible": false
                     }
                 ]
-            });
+            });// FIM - CONFIGURAÇÃO DA TABELA
+
+        	$('#fornecedorId').selectize({
+        	    valueField: 'id',
+        	    labelField: 'nomerazao',
+        	    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
+        	    options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
+        	    create: false,
+        	    render: {
+        	        option: function(item, escape) {
+        	        	 return	'<div>' +
+        					'<span class="title">' +
+        						'<span>' + escape(item.nomerazao) + '</span><br/>' +
+        						'<span>' + escape(item.cpfcnpj) + '</span><br/>' +
+        					'</span>' +
+        				'</div>';
+        	        }
+        	    },
+
+        	    load: function(query, callback) {
+        	        if (!query.length) return callback();
+        	        $.ajax({
+        	            url: 'rest-pesquisar-fornecedor/' + encodeURIComponent(query),
+        	            type: 'GET',
+        	            error: function() {
+        	                callback();
+        	            },
+        	            success: function(res) {
+        	                callback(res);
+        	            }
+        	        });
+        	    }
+        	});
+            
 
             /*
 			*
@@ -514,7 +548,7 @@
 			*
 			*/
 
- //Define uma ação na linha da tabela ao apertar o botão editar.----------------------------------------------------------------
+ 			//Define uma ação na linha da tabela ao apertar o botão editar.----------------------------------------------------------------
             
             $('#lista-caixa tbody').on( 'click', '#edit-caixa', function () {            	
             	
@@ -544,7 +578,7 @@
           		
           		
 				
-//---------------visibilidade-----------------------------------------------------------------
+				//---------------visibilidade-----------------------------------------------------------------
 				//Atribuo os objetos para utilizar no bloqueio
 				var mfornecedorId = document.getElementById("fornecedorId");
 				var mencomendaId = document.getElementById("encomendaId");
@@ -587,11 +621,11 @@
            			//console.log("nomeRazao "+mnomeRazao.disabled);
            	              		
                 }
-//---------------FIM - visibilidade-----------------------------------------------------------------             
+				//---------------FIM - visibilidade-----------------------------------------------------------------             
               	
           		
             });
-//FIM - Define uma ação na linha da tabela ao apertar o botão editar.----------------------------------------------------------------
+			//FIM - Define uma ação na linha da tabela ao apertar o botão editar.----------------------------------------------------------------
 
 			/*
 			*
