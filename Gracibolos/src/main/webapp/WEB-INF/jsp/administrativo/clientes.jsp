@@ -593,6 +593,7 @@
                             else {
                                 //CEP pesquisado não foi encontrado.
                                 limpa_formulário_cep();
+                                //*********************************
                                 alert("CEP não encontrado.");
                             }
                         });// FIM getJason
@@ -600,6 +601,7 @@
                     else {
                         //cep é inválido.
                         limpa_formulário_cep();
+                        //**************************************
                         alert("Formato de CEP inválido.");
                     }
                 } //end if.
@@ -644,7 +646,9 @@
                         "targets": [ 0, 1, 2, 3, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
                         "visible": false
                     }
-                ]
+                ],
+                //Em ordem alfabética
+                "order": [[ 5, "asc" ]]
             });
 
             /*
