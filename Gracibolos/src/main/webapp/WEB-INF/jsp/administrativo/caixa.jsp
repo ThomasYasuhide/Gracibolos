@@ -199,15 +199,24 @@
 						
 						<div class="input-margin pull-right col-xs-12 col-sm-4 col-md-4">
 							<a href="" id="incluir-caixa-modal" data-toggle="modal" data-target="#modal-caixa" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova saída</a>
-						</div>							
-						
-						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-							<div class="row caixasaldo">
-								<div class="col-xs-9">
-									<h4>Saldo : ${saldo}</h4>
-								</div>									
-							</div>
 						</div>						
+						
+						<form action="" method="POST">
+													
+							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+								<div class="row caixasaldo">
+									<div class="col-xs-9">
+										<h4>Saldo : ${saldo}</h4>
+									</div>									
+								</div>
+							</div>
+							
+							<div class="input-margin pull-right col-xs-12 col-sm-4 col-md-4">
+								<button id="incluir-saldo-anterior"  class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir saldo anterior</button>
+							</div>
+							
+						</form>
+												
 					</div>
 <!-- ############################################################ FIM DA TABELA ############################################################ -->
 				</div>
