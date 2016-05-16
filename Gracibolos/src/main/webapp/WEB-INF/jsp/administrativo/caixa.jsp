@@ -445,10 +445,10 @@
                 
             	"createdRow": function( row, data, dataIndex ) {
                     if ( data[1] == 0 ) {
-                        console.log(data[0], data[5]);
-                      //alert("gasto");
-                      //$(row).addClass( "important" );
-                      $('td', row).eq(5).addClass("highlightRow");
+                        //console.log(data[0], data[5]);               
+                      	$(row).css('color', 'Red');      
+                    }else if(data[1] == 1){
+                    	$(row).css('color', 'blue'); 
                     }
                   },
                   
