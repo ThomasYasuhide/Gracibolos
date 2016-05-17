@@ -201,20 +201,22 @@
 							<a href="" id="incluir-caixa-modal" data-toggle="modal" data-target="#modal-caixa" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova saída</a>
 						</div>						
 						
-						<form action="" method="POST">
+						<!-- INCLUIR SALDO ANTERIOR -->
+						<form action="administrativo-incluir-saldo-anterior" method="POST">	
 													
 							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-								<div class="row caixasaldo">
+								<div class="row">
 									<div class="col-xs-9">
-										<h4>Saldo : ${saldo}</h4>
+								
+										<h4 >Saldo : <input  name="saldomes" value="${saldo}" type="text" size="10" style="border:0;"/></h4>		
+										
 									</div>									
 								</div>
 							</div>
-							
+					
 							<div class="input-margin pull-right col-xs-12 col-sm-4 col-md-4">
-								<button id="incluir-saldo-anterior"  class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir saldo anterior</button>
+								<button type="submit" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir saldo anterior</button>
 							</div>
-							
 						</form>
 												
 					</div>

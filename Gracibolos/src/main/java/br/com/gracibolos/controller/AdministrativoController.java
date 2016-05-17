@@ -1160,6 +1160,17 @@ public class AdministrativoController {
 	 * 
 	 * */
 	
+	@RequestMapping("/administrativo-incluir-saldo-anterior")
+	public ModelAndView inclirSaldoAnterior(String saldomes){
+		System.out.println("Entrou na servlet de incluir saldo anterior");
+		System.out.println(saldomes);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/caixa");
+		mv.addObject("listCaixa",listaCaixaMes());
+		mv.addObject("saldo",saldoMes());
+		return mv;
+	}
+	
 	//CAIXA
 	@RequestMapping("/administrativo-caixa")
 	public ModelAndView caixa(){
