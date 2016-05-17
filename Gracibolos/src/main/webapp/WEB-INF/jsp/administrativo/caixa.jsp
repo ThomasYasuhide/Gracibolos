@@ -152,14 +152,14 @@
 									<tr>
 										<th>Data</th>
 										<th>Recebido / Gasto</th>
-										<th>Encomenda ID</th>
+										<th>N° Encomenda</th>
 										<th>Fornecedor ID</th>
 										<th>#</th>
 										<th>Valor</th>									
 										<th>Forma</th>
 										<th>Parcela</th>										
 										<th>Descrição</th>	
-										<th>Nome Razão</th>									
+										<th>Fornecedor</th>									
 										<th>Ações</th>
 									</tr>
 								</thead>
@@ -543,9 +543,11 @@
             	"createdRow": function( row, data, dataIndex ) {
                     if ( data[1] == 0 ) {
                         //console.log(data[0], data[5]);               
-                      	$(row).css('color', 'Red');      
+                      	//$(row).css('color', 'Red');//linha toda
+                    	$('td', row).eq(2).css('color', 'Red');//só a coluna    
                     }else if(data[1] == 1){
-                    	$(row).css('color', 'blue'); 
+                    	//$(row).css('color', 'blue');
+                    	$('td', row).eq(2).css('color', 'blue');    
                     }
                   },
                   
@@ -562,7 +564,7 @@
                         //7 - parcela                        
                         //8 - descricao 
                         //9 - nomeRazao  */ 
-                        "targets": [ 1, 2, 3, 4, 6, 7, 8, 9 ],
+                        "targets": [ 1, 3, 4, 6, 7, 8 ],
                         "visible": false
                     }
                 ]
