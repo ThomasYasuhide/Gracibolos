@@ -153,7 +153,9 @@
 									<tr>
 										<th>Encomenda</th>
 										<th>Status</th>
+										<th>Cliente ID</th>
 										<th>Cliente</th>
+										<th>Cliente CPF/CNPJ</th>
 										<th>Responsável</th>
 										<th>Data da encomenda</th>
 										<th>Data da entrega</th>
@@ -173,7 +175,9 @@
 										<tr>
 											<td>${encomendas.id}</td>
 											<td>${encomendas.status}</td>
-											<td>${encomendas.nomerazao}</td>
+											<td>${encomendas.clienteid}</td>
+											<td>${encomendas.clientenome}</td>
+											<td>${encomendas.clientecpfcnpj}</td>
 											<td>${encomendas.responsavel}</td>
 											<td>${encomendas.dataencomenda}</td>
 											<td>${encomendas.dataentrega}</td>
@@ -302,8 +306,7 @@
 														<label class="control-label" for="datacancelado">Data do cancelamento:</label>
 														<input type="date" id="datacancelado" name="datacancelado" class="form-control" value="${encomenda.datacancelamento}" readonly />
 													</div>
-													
-													<!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
 													<div class="input-margin col-xs-12 col-sm-12 col-md-6">
 														<label class="control-label" for="cliente">Cliente*:</label>
 														<select id="cliente" name="cliente" class="form-control" placeholder="Insira o nome, RG, CPF, CNPJ ou IE." required></select>
@@ -319,8 +322,7 @@
 														<textarea id="obs" name="obs" rows="5" class="form-control" placeholder="Insira uma observação sobre o cliente">${encomenda.obs}</textarea>
 													</div>
 							                    </div>
-								                    
-							                    
+
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
@@ -645,7 +647,6 @@
 			    valueField: 'id',
 			    labelField: 'nomerazao',
 			    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
-			    options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
 			    create: false,
 			    render: {
 			        option: function(item, escape) {
@@ -975,7 +976,7 @@
             var table = $('#lista-encomendas').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 3, 4, 8, 9, 10, 11, 12 ],
+                        "targets": [ 3, 4, 8, 9, 10, 11],
                         "visible": false
                     }
                 ]
@@ -1037,16 +1038,19 @@
 				//Preenche os determinados campos com os conteudos.
                 $('#id').val(data[0]);
                 $('#status').val(data[1]);
-                $('#cliente').val(data[2]);
-                $('#responsavel').val(data[3]);
-                $('#dataencomenda').val(data[4]);
-   				$('#dataentrega').val(data[5]);
-                //$('#datafaturamento').val(data[6]);
-                //$('#dataproducao').val(data[7]);
-                //$('#datafinalizado').val(data[8]);
-   				//$('#datacancelado').val(data[9]);
-   				$('#total').val(data[10]);
-   				$('#obs').val(data[11]);
+                
+                var selectize = $('#cliente')[0].selectize;
+                selectize.addOption({id:"5", nomerazao:"Teste", cpfcnpj:"10371059000140"});
+                
+                $('#responsavel').val(data[5]);
+                $('#dataencomenda').val(data[6]);
+   				$('#dataentrega').val(data[7]);
+                //$('#datafaturamento').val(data[8]);
+                //$('#dataproducao').val(data[9]);
+                //$('#datafinalizado').val(data[10]);
+   				//$('#datacancelado').val(data[11]);
+   				$('#total').val(data[12]);
+   				$('#obs').val(data[13]);
 				
 
 			});
