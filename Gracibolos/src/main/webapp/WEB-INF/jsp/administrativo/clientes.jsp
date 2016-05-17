@@ -52,6 +52,7 @@
 
 					<!-- ################################# ALERTAS ################################# -->
 					<!-- Aqui as Expressions Languages recebem true caso a operação seja efetuado corretamente, caso de algum erro recebem false-->
+									
 					<c:if test="${incluir == 'true'}">
 						<div class="row">
 							<div class="col-xs-12">
@@ -240,6 +241,24 @@
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<h3 id="modal-title">CLIENTES</h3>
 						<h4 id="modal-subtitle"></h4>
+					</div>
+					
+					<div class="row" style="display: none;" id="cepinvalido">
+						<div class="col-xs-12">
+							<div class="alert alert-danger alert-dismissible" role="alert">
+							  <button id="btn_cepinvalido" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							  <strong>Erro!</strong> cep inválido.
+							</div>
+						</div>
+					</div>
+					
+					<div class="row" style="display: none;" id="cepnaoencontrado">
+						<div class="col-xs-12">
+							<div class="alert alert-danger alert-dismissible" role="alert">
+							  <button id="cepnaoencontrado" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							  <strong>Erro!</strong> cep não encontrado.
+							</div>
+						</div>
 					</div>
 					
 					<!--  Corpo do modal -->
@@ -594,7 +613,8 @@
                                 //CEP pesquisado não foi encontrado.
                                 limpa_formulário_cep();
                                 //*********************************
-                                alert("CEP não encontrado.");
+                                //alert("CEP não encontrado.");
+                                document.getElementById("cepnaoencontrado").style.display = "block";
                             }
                         });// FIM getJason
                     } //end if.
@@ -602,7 +622,8 @@
                         //cep é inválido.
                         limpa_formulário_cep();
                         //**************************************
-                        alert("Formato de CEP inválido.");
+                        //alert("Formato de CEP inválido.");
+                        document.getElementById("cepinvalido").style.display = "block";
                     }
                 } //end if.
                 else {
