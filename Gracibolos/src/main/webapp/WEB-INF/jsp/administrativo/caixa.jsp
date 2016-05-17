@@ -194,7 +194,9 @@
 						</div>
 					</div>
 					
-					<!--Essa div tem o botão de abrir o modal "incluir nova matéria-prima" -->
+					<!--
+					Essa div tem o botão de abrir o modal "incluir novo gasto" 
+					-->
 					<div class="row">					
 						
 						<div class="input-margin pull-right col-xs-12 col-sm-4 col-md-4">
@@ -202,22 +204,22 @@
 						</div>						
 						
 						<!-- INCLUIR SALDO ANTERIOR -->
-						<form action="administrativo-incluir-saldo-anterior" method="POST">	
+						
 													
 							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 								<div class="row">
 									<div class="col-xs-9">
 								
-										<h4 >Saldo : <input  name="saldomes" value="${saldo}" type="text" size="10" style="border:0;"/></h4>		
+										<h4 >Saldo : <input id="saldomes" name="saldomes" value="${saldo}" type="text" size="10" style="border:0;"/></h4>		
 										
 									</div>									
 								</div>
 							</div>
 					
 							<div class="input-margin pull-right col-xs-12 col-sm-4 col-md-4">
-								<button type="submit" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir saldo anterior</button>
+								<button id="btn-saldo-anterior" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir saldo anterior</button>
 							</div>
-						</form>
+						
 												
 					</div>
 <!-- ############################################################ FIM DA TABELA ############################################################ -->
@@ -235,7 +237,9 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 	    		
-	    		<!-- formulário de preencher os dados da matéria-prima -->
+	    		<!-- 
+	    		formulário de preencher os dados da matéria-prima 
+	    		-->
 	    		<form id="caixa-form" method="POST">
 	    			
 	    			<!--Essa div tem o título e subtítulo do modal, e o "X" de fechar o modal   -->
@@ -405,7 +409,88 @@
 	############################################################ FIM DO  MODAL DE EXCLUSÃO DO CAIXA ############################################################
 
 	-->
+	
+	<!--
 
+	############################################################ MODAL DE INCLUSÃO DO SALDO ANTERIOR ####################################################
+	
+	-->
+		<div class="modal fade" id="modal-saldo-anterior" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+	    		
+	    		<!-- 
+	    		formulário de preencher os dados da matéria-prima 
+	    		-->
+	    		<form id="saldo-anterior-form" method="POST">
+	    			
+	    			<!--Essa div tem o título e subtítulo do modal, e o "X" de fechar o modal   -->
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h3 id="modal-title-saldo-anterior">SALDO ANTERIOR</h3>
+						<h4 id="modal-subtitle-saldo-anterior"></h4>
+					</div>
+					
+					<!--  Corpo do modal -->
+					<div class="modal-body">
+						<!-- ################################# Corpo do modal CONTEUDO ################################# -->
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								
+								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+									<label class="control-label" for="valorSaldoAnterior">Valor*:</label>
+									<div class="input-group">
+										<span class="input-group-addon">R$</span>
+										<input type="text" id="valorSaldoAnterior" name="valorSaldoAnterior" placeholder="0,00" class="form-control" maxlength="14" required/>
+									</div>
+								</div>
+								
+								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+									<label class="control-label" for="dataSaldoAnterior">Data da transação:</label>
+									<input type="date" id="dataSaldoAnterior" name="dataSaldoAnterior" class="form-control" />
+								</div>
+								
+								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+									<label class="control-label" for="parcelaSaldoAnterior">Número de Parcelas:</label>
+									<input id="parcelaSaldoAnterior" name="parcelaSaldoAnterior" type="number" class="form-control" min=1 max=6 pattern="[0-9]+" maxlength="1" value="1">
+								</div>		
+								
+								<!-- 
+									gasto = 0
+									recebimento = 1
+								 -->
+								<div class="hidden" class="input-margin col-xs-12 col-sm-4 col-md-4">
+									<input id="gastoRecebimentoSaldoAnterior" name="gastoRecebimentoSaldoAnterior" value="1" class="form-control" />
+								</div>
+								
+								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+									<label class="control-label" for="descricaoSaldoAnterior">Descrição:</label>
+									<textarea class="form-control" rows="1" name="descricaoSaldoAnterior" id="descricaoSaldoAnterior" ></textarea>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+
+					<!-- ################################# FIM DO CONTEUDO ################################# -->
+					
+					<!-- Esse div contem o 2 botões -->
+					<div class="modal-footer">
+						<!-- botão de fechar o modal  -->
+						<button type="button" id="fecharModal-saldo-anterior" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+						<!-- botão de incluir ou alterar a matéria-prima, assim finalizando o formulário  -->
+						<button type="submit" class="btn btn-default" id="modal-action-saldo-anterior"></button>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--
+	
+	######################################################### FIM DO MODAL DO SALDO ANTERIOR ########################################################################
+	
+	-->
 
 	<!-- Importação dos arquivos java script -->
 	<script src="resources/js/jquery-2.1.4.js"></script>
@@ -513,18 +598,19 @@
                 // DESABILITA O CAMPO
                 //var campoEncomendaId = document.getElementById("encomendaId");
                 document.getElementById("encomendaId").disabled = true;
+                document.getElementById("nomeRazao").disabled = true;
                 //HABILITA OS CAMPOS
                 //var campoFornecedorId = document.getElementById("fornecedorId");
 				//var campoNomeRazao = document.getElementById("nomeRazao");
 				document.getElementById("fornecedorId").disabled = false;
-				document.getElementById("nomeRazao").disabled = false;
+				
 
 				//-----------Autocomplete----------------------------------------------------------------------
-	        	$('#fornecedorId').selectize({
+	        	$('#fornecedorId').selectize({	
 	        	    valueField: 'id',//Valor do campo
 	        	    labelField: 'nomerazao',
 	        	    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
-	        	    options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
+	        	    options: [{id: '${fornecedor.fornid}', nomerazao: '${fornecedor.fornnome}', cpfcnpj: '${fornecedor.forncpfcnpj}'}],
 	        	    create: false,
 	        	    render: {
 	        	        option: function(item, escape) {
@@ -550,7 +636,7 @@
 	        	            }
 	        	        });
 	        	    }
-	        	});
+       			});
               
 			});
 
@@ -576,7 +662,7 @@
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
 
-              	//Apresenta o modal de exclusão na tela.
+              	//Apresenta o modal de alteração na tela.-----------------------
               	$('#modal-caixa').modal('show');
 					
 				//Pega os valores que estão na tabela e passa para o modal.			
@@ -656,11 +742,34 @@
                 $('#id_delete').val(data[4]);
 
                 //Apresenta o modal de exclusão na tela.
-				$('#excluir-caixa').modal('show');
+				$('#excluir-caixa').modal('show');//---------------------------------
 
             });
 
-            
+            /*
+			*
+			* SALDO ANTERIOR
+			*
+			*/
+			
+            $('#btn-saldo-anterior').click(function() {
+                
+            	//Apresenta o modal de exclusão na tela.
+				$('#modal-saldo-anterior').modal('show');//---------------------------------
+				//Altera o nome do botão do modal.
+				$("#modal-action-saldo-anterior").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir saldo anterior');
+				 //Altera dinamicamente o titulo do modal.
+            	$('#modal-subtitle-saldo-anterior').text("Incluir saldo anterior");
+            	//Ação da controller
+				$("#saldo-anterior-form").attr("action","administrativo-incluir-saldo-anterior");
+				//insere a data atual
+				var now = moment().format('YYYY-MM-DD');
+                $('#dataSaldoAnterior').val(now);  
+				//Pega o valor so saldo e passa para a modal
+                var data = $('#saldomes').val();
+                $('#valorSaldoAnterior').val(data).trigger('input');
+                
+            });
 	
         });
 

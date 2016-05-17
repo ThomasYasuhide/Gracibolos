@@ -11,6 +11,7 @@ import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Caixa;
+import br.com.gracibolos.jdbc.model.SaldoAnterior;
 
 public class CaixaDao implements GenericoDao<Caixa>{
 
@@ -20,6 +21,40 @@ public class CaixaDao implements GenericoDao<Caixa>{
 	 * Este método tem como principal objetivo receber os dados de um novo pagamento e persistir no banco de dados.
 	 * 
 	 * */
+	public boolean inserirSaldoAnterior(SaldoAnterior sa) throws Exception{
+		boolean status = false;
+		
+		//string query do banco
+		String sql = " INSERT INTO caixa (valor, data, parcela, forma, gastoRecebimento, descricao)"
+				   + " VALUES (?, ?, ?, ?, ?, ?)";
+		PreparedStatement ps = null;
+		
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
+		try(Connection conn = ConnectionProvider.getInstance().getConnection())
+		{
+			//seta os atributos do objeto caixa
+			ps = conn.prepareStatement(sql);
+			ps.setBigDecimal(1, sa.getValorSaldoAnterior());
+			ps.setDate(2, Date.valueOf(sa.getDataSaldoAnterior()));
+			ps.setInt(3, sa.getParcelaSaldoAnterior());
+			ps.setString(4, sa.getFormaSaldoAnterir());
+			ps.setInt(5, sa.getGastoRecebimentoSaldoAnterior());	
+			ps.setString(6, sa.getDescricaoSaldoAnterior());									
+			if(ps.executeUpdate() != 0) {
+				status = true;
+			}	
+			//fecha as conexões
+			ps.close();	
+			conn.close();								
+		}
+		//trata, caso de uma exceção
+		catch (SQLException e) 
+		{
+			System.out.println("Erro ao inserir saldo anterior\n"+e);
+		}
+		return status;
+	}
 	
 	public boolean inserir(Caixa caixa) throws Exception{
 		boolean status = false;

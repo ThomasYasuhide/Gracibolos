@@ -42,6 +42,7 @@ import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Meses;
 import br.com.gracibolos.jdbc.model.Produto;
+import br.com.gracibolos.jdbc.model.SaldoAnterior;
 import br.com.gracibolos.jdbc.model.Status;
 
 @Controller
@@ -1160,17 +1161,6 @@ public class AdministrativoController {
 	 * 
 	 * */
 	
-	@RequestMapping("/administrativo-incluir-saldo-anterior")
-	public ModelAndView inclirSaldoAnterior(String saldomes){
-		System.out.println("Entrou na servlet de incluir saldo anterior");
-		System.out.println(saldomes);
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("administrativo/caixa");
-		mv.addObject("listCaixa",listaCaixaMes());
-		mv.addObject("saldo",saldoMes());
-		return mv;
-	}
-	
 	//CAIXA
 	@RequestMapping("/administrativo-caixa")
 	public ModelAndView caixa(){
@@ -1231,40 +1221,76 @@ public class AdministrativoController {
 		return rec.subtract(gasto);
 	}
 	
-	//INCLUIR NOVO CAIXA
-		@RequestMapping("/administrativo-incluir-caixa")
-		public ModelAndView incluir_caixa(Caixa caixa){
-			System.out.println("Entrou na servlet de inclusão de inclusão de um novo caixa");
-			
-			//declara um status como falso, pra depois verificar se a condição foi atendida ou não.
-			boolean status = false;
-			
-			//cria uma nova instância dao do caixa
-			CaixaDao dao = new CaixaDao();					
-			
-			try {
-				//se o método inserir passando um caixa, for executado corretamente, status recebe verdadeiro
-				if(dao.inserir(caixa)) {
-					status = true;			
-				}
-				//caso contrário, status recebe falso
-				else {
-					status = false;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+	//INCLUIR SALDO ANTERIOR
+	@RequestMapping("/administrativo-incluir-saldo-anterior")
+	public ModelAndView incluir_saldo_anterior(SaldoAnterior sa){
+		//declara um status como falso, pra depois verificar se a condição foi atendida ou não.
+		boolean status = false;
+		
+		//cria uma nova instância dao do caixa
+		CaixaDao dao = new CaixaDao();		
+		
+		
+		System.out.println(sa.getValorSaldoAnterior()
+				+"\n"+sa.getDataSaldoAnterior()
+				+"\n"+sa.getGastoRecebimentoSaldoAnterior());
+		
+		try {
+			//se o método inserir passando um caixa, for executado corretamente, status recebe verdadeiro
+			if(dao.inserirSaldoAnterior(sa)) {
+				status = true;			
 			}
-			//instância uma nova modelView
-			ModelAndView mv = new ModelAndView();
-			//seta o caminho e o nome da jsp
-			mv.setViewName("administrativo/caixa");
-			//passa o retorno do status para a Expression Language chamada incluir
-			mv.addObject("incluir", status);
-			//retorna o mv
-			return mv;
+			//caso contrário, status recebe falso
+			else {
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/caixa");
+		mv.addObject("incluir", status);
+		mv.addObject("listCaixa",listaCaixaMes());
+		mv.addObject("saldo",saldoMes());
+		return mv;
+	}
 	
+	//INCLUIR NOVO CAIXA
+	@RequestMapping("/administrativo-incluir-caixa")
+	public ModelAndView incluir_caixa(Caixa caixa){
+		System.out.println("Entrou na servlet de inclusão de inclusão de um novo caixa");
+		
+		//declara um status como falso, pra depois verificar se a condição foi atendida ou não.
+		boolean status = false;
+		
+		//cria uma nova instância dao do caixa
+		CaixaDao dao = new CaixaDao();					
+		
+		try {
+			//se o método inserir passando um caixa, for executado corretamente, status recebe verdadeiro
+			if(dao.inserir(caixa)) {
+				status = true;			
+			}
+			//caso contrário, status recebe falso
+			else {
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//instância uma nova modelView
+		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
+		mv.setViewName("administrativo/caixa");
+		//passa o retorno do status para a Expression Language chamada incluir
+		mv.addObject("incluir", status);
+		mv.addObject("listCaixa",listaCaixaMes());
+		mv.addObject("saldo",saldoMes());
+		//retorna o mv
+		return mv;
+	}
+
 	//AlTERAR CAIXA
 	@RequestMapping("/administrativo-alterar-caixa")
 	public ModelAndView alterar_caixa (Caixa caixa){
@@ -1295,6 +1321,8 @@ public class AdministrativoController {
 		mv.setViewName("administrativo/caixa");
 		//passa o retorno do status para a Expression Language chamada alterar
 		mv.addObject("alterar", status);
+		mv.addObject("listCaixa",listaCaixaMes());
+		mv.addObject("saldo",saldoMes());
 	    //retorna mv
 		return mv;
 	}
@@ -1326,6 +1354,8 @@ public class AdministrativoController {
 		ModelAndView mv = new ModelAndView();
 	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/caixa");
+		mv.addObject("listCaixa",listaCaixaMes());
+		mv.addObject("saldo",saldoMes());
 		//passa o retorno do status para a Expression Language chamada excluir
 		mv.addObject("excluir", status);			
 	    //retorna mv
@@ -1393,6 +1423,7 @@ public class AdministrativoController {
 		mv.setViewName("administrativo/caixa");
 		//passa a lita de materia-prima para a Expression Language chamada materiasprimas
 		mv.addObject("listCaixa", listCaixa);
+		mv.addObject("saldo",saldoMes());
 	    //retorna mv		    
 	    return mv;
 	}
@@ -1402,6 +1433,7 @@ public class AdministrativoController {
 	 * ###################### ENCOMENDA #####################
 	 * 
 	 * */
+	
 	
 	@RequestMapping("/administrativo-listar-encomendas-finalizadas")
 	public ModelAndView listarEncomendasFinalizadas(){
