@@ -176,8 +176,8 @@
 											<td>${encomendas.id}</td>
 											<td>${encomendas.status}</td>
 											<td>${encomendas.clienteid}</td>
-											<td>${encomendas.clientenome}</td>
-											<td>${encomendas.clientecpfcnpj}</td>
+											<td>${encomendas.nomerazao}</td>
+											<td>${encomendas.cpfcnpj}</td>
 											<td>${encomendas.responsavel}</td>
 											<td>${encomendas.dataencomenda}</td>
 											<td>${encomendas.dataentrega}</td>
@@ -1040,7 +1040,8 @@
                 $('#status').val(data[1]);
                 
                 var selectize = $('#cliente')[0].selectize;
-                selectize.addOption({id:"5", nomerazao:"Teste", cpfcnpj:"10371059000140"});
+                selectize.addOption({id:data[2], nomerazao:data[3], cpfcnpj:data[4]});
+                selectize.setValue(data[2]);
                 
                 $('#responsavel').val(data[5]);
                 $('#dataencomenda').val(data[6]);
