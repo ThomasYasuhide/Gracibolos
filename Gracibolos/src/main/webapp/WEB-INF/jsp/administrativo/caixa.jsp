@@ -444,7 +444,7 @@
 			});
 			
 			//-----------Autocomplete----------------------------------------------------------------------
-        	$('#fornecedorId').selectize({	
+        	var selectize = $('#fornecedorId').selectize({	
         	    valueField: 'id',//Valor do campo
         	    labelField: 'nomerazao',
         	    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],

@@ -42,7 +42,7 @@ import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Meses;
 import br.com.gracibolos.jdbc.model.Produto;
-import br.com.gracibolos.jdbc.model.SaldoAnterior;
+import br.com.gracibolos.jdbc.model.Saldo;
 import br.com.gracibolos.jdbc.model.Status;
 
 @Controller
@@ -76,7 +76,7 @@ public class AdministrativoController {
 		mv.setViewName("administrativo/dashboard");
 		mv.addObject("clientes", daoCli.contagem());
 		mv.addObject("encomendas", daoEnc.contagemEmAberto());
-		mv.addObject("saldoMes",saldoMes());
+		mv.addObject("saldoMes",saldo());
 		mv.addObject("produtos", daoPro.contagem());
 		mv.addObject("gasto", gasto);
 		mv.addObject("recebimento", rec);
@@ -1170,13 +1170,13 @@ public class AdministrativoController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("administrativo/caixa");
 		mv.addObject("listCaixa",listaCaixaMes());
-		mv.addObject("saldo",saldoMes());
+		mv.addObject("saldo",saldo());
 		return mv;
 	}
 	
 	static CaixaDao daoCaixa;
 	static List<Caixa> listCaixa;
-	
+	static Saldo saldo;
 	public static List<Caixa> listaCaixaMes()
 	{
 		daoCaixa = new CaixaDao();
@@ -1198,63 +1198,18 @@ public class AdministrativoController {
 		return listCaixa;
 	}
 	
-	public static BigDecimal saldoMes(){
-		
-		BigDecimal gasto = new BigDecimal(0);
-		BigDecimal rec = new BigDecimal(0);
-			
-		for(Caixa c : listaCaixaMes()){
-			//somo os gastos
-			if(c.getGastoRecebimento()==0){
-				gasto = gasto.add(c.getValor());
-			//somo os recebimentos
-			}else if(c.getGastoRecebimento()==1){
-				rec = rec.add(c.getValor());
-			}
-		}
-				
-		//TESTES
-		//System.out.println("gasto : "+gasto);
-		//System.out.println("rec : "+rec);
-		//System.out.println("saldo : "+rec.subtract(gasto));
-		
-		return rec.subtract(gasto);
-	}
-	
-	//INCLUIR SALDO ANTERIOR
-	@RequestMapping("/administrativo-incluir-saldo-anterior")
-	public ModelAndView incluir_saldo_anterior(SaldoAnterior sa){
-		//declara um status como falso, pra depois verificar se a condição foi atendida ou não.
-		boolean status = false;
-		
-		//cria uma nova instância dao do caixa
-		CaixaDao dao = new CaixaDao();		
-		
-		
-		System.out.println(sa.getValorSaldoAnterior()
-				+"\n"+sa.getDataSaldoAnterior()
-				+"\n"+sa.getGastoRecebimentoSaldoAnterior());
-		
+	public static BigDecimal saldo(){
+		saldo = new Saldo();
+		daoCaixa = new CaixaDao();
 		try {
-			//se o método inserir passando um caixa, for executado corretamente, status recebe verdadeiro
-			if(dao.inserirSaldoAnterior(sa)) {
-				status = true;			
-			}
-			//caso contrário, status recebe falso
-			else {
-				status = false;
-			}
+			saldo = daoCaixa.getSaldo();
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("administrativo/caixa");
-		mv.addObject("incluir", status);
-		mv.addObject("listCaixa",listaCaixaMes());
-		mv.addObject("saldo",saldoMes());
-		return mv;
+		return saldo.getSaldo();
 	}
+
 	
 	//INCLUIR NOVO CAIXA
 	@RequestMapping("/administrativo-incluir-caixa")
@@ -1286,7 +1241,7 @@ public class AdministrativoController {
 		//passa o retorno do status para a Expression Language chamada incluir
 		mv.addObject("incluir", status);
 		mv.addObject("listCaixa",listaCaixaMes());
-		mv.addObject("saldo",saldoMes());
+		mv.addObject("saldo",saldo());
 		//retorna o mv
 		return mv;
 	}
@@ -1322,7 +1277,7 @@ public class AdministrativoController {
 		//passa o retorno do status para a Expression Language chamada alterar
 		mv.addObject("alterar", status);
 		mv.addObject("listCaixa",listaCaixaMes());
-		mv.addObject("saldo",saldoMes());
+		mv.addObject("saldo",saldo());
 	    //retorna mv
 		return mv;
 	}
@@ -1355,7 +1310,7 @@ public class AdministrativoController {
 	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/caixa");
 		mv.addObject("listCaixa",listaCaixaMes());
-		mv.addObject("saldo",saldoMes());
+		mv.addObject("saldo",saldo());
 		//passa o retorno do status para a Expression Language chamada excluir
 		mv.addObject("excluir", status);			
 	    //retorna mv
@@ -1423,7 +1378,7 @@ public class AdministrativoController {
 		mv.setViewName("administrativo/caixa");
 		//passa a lita de materia-prima para a Expression Language chamada materiasprimas
 		mv.addObject("listCaixa", listCaixa);
-		mv.addObject("saldo",saldoMes());
+		mv.addObject("saldo",saldo());
 	    //retorna mv		    
 	    return mv;
 	}

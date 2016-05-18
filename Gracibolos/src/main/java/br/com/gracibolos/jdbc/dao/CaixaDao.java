@@ -1,5 +1,6 @@
 package br.com.gracibolos.jdbc.dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Caixa;
-import br.com.gracibolos.jdbc.model.SaldoAnterior;
+import br.com.gracibolos.jdbc.model.Saldo;
 
 public class CaixaDao implements GenericoDao<Caixa>{
 
@@ -21,40 +22,6 @@ public class CaixaDao implements GenericoDao<Caixa>{
 	 * Este método tem como principal objetivo receber os dados de um novo pagamento e persistir no banco de dados.
 	 * 
 	 * */
-	public boolean inserirSaldoAnterior(SaldoAnterior sa) throws Exception{
-		boolean status = false;
-		
-		//string query do banco
-		String sql = " INSERT INTO caixa (valor, dataTransacao, parcela, forma, gastoRecebimento, descricao)"
-				   + " VALUES (?, ?, ?, ?, ?, ?)";
-		PreparedStatement ps = null;
-		
-		
-		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
-		try(Connection conn = ConnectionProvider.getInstance().getConnection())
-		{
-			//seta os atributos do objeto caixa
-			ps = conn.prepareStatement(sql);
-			ps.setBigDecimal(1, sa.getValorSaldoAnterior());
-			ps.setDate(2, Date.valueOf(sa.getDataSaldoAnterior()));
-			ps.setInt(3, sa.getParcelaSaldoAnterior());
-			ps.setString(4, sa.getFormaSaldoAnterir());
-			ps.setInt(5, sa.getGastoRecebimentoSaldoAnterior());	
-			ps.setString(6, sa.getDescricaoSaldoAnterior());									
-			if(ps.executeUpdate() != 0) {
-				status = true;
-			}	
-			//fecha as conexões
-			ps.close();	
-			conn.close();								
-		}
-		//trata, caso de uma exceção
-		catch (SQLException e) 
-		{
-			System.out.println("Erro ao inserir saldo anterior\n"+e);
-		}
-		return status;
-	}
 	
 	public boolean inserir(Caixa caixa) throws Exception{
 		boolean status = false;
@@ -273,6 +240,45 @@ ps.setInt(1, caixa.getGastoRecebimento());
 		return null;
 	}
 	
+	public boolean updateSaldo(Saldo saldo) throws Exception{
+		
+		boolean status = false;
+		String sql = "update caixa set saldo = ? where caixa.id=1";
+		PreparedStatement ps = null;
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+			ps = conn.prepareStatement(sql);
+			ps.setBigDecimal(1, saldo.getSaldo());
+			if(ps.executeUpdate()!=0){
+				status = true; 
+			}
+		} catch (Exception e) {
+			System.out.println("Houve um erro ao atualizar o saldo \n"+e);
+		}
+		return status;
+	}
+	
+	public Saldo getSaldo() throws Exception {
+		
+		String sql = "SELECT caixa.id, caixa.saldo FROM gracibolos.caixa where caixa.id=1";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Saldo s = new Saldo();
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+			ps = conn.prepareStatement(sql);//
+			rs = ps.executeQuery();//Armazena o resultado da pesquisa
+			if(rs.first()){//pega o primeiro registro 
+				s.setId(rs.getLong("id"));
+				s.setSaldo(rs.getBigDecimal("saldo"));
+			}else{
+				System.out.println("Saldo não encontrado");
+			}	
+			
+		} catch (Exception e) {
+			System.out.println("Houve um erro ao pesquisar o saldo \n"+e);
+		}
+		return s;
+	}
+	
 	public List<Caixa> pesquisarEntre(String inicio, String fim) throws Exception{
 		
 		List<Caixa> caixas = new ArrayList<>();
@@ -303,7 +309,7 @@ ps.setInt(1, caixa.getGastoRecebimento());
 				caixa.setFornecedorId(rs.getInt("fornecedorId"));
 				caixa.setEncomendaId(rs.getLong("encomendaId"));
 				caixa.setValor(rs.getBigDecimal("valor"));
-				caixa.setSaldo(rs.getBigDecimal("saldo"));					
+				//caixa.setSaldo(rs.getBigDecimal("saldo"));					
 				caixa.setForma(rs.getString("forma"));
 				caixa.setParcela(rs.getInt("parcela"));
 				if(rs.getDate("dataTransacao")!=null)
