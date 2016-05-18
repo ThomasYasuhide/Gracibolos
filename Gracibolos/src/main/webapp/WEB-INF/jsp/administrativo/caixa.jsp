@@ -202,7 +202,7 @@
 					<div class="row">					
 						
 						<div class="input-margin pull-right col-xs-12 col-sm-4 col-md-4">
-							<a href="" id="incluir-caixa-modal" data-toggle="modal" data-target="#modal-caixa" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova saída</a>
+							<a href="" id="incluir-caixa-modal" data-toggle="modal" data-target="#modal-caixa" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir novo gasto</a>
 						</div>
 												
 						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -251,28 +251,29 @@
 								<div class="hidden">
 									<label class="control-label" for="id">Nº caixa:</label>
 									<input type="text" id="id" name="id" placeholder="Digite o numero de ID" class="form-control"  />
-								</div>																	
+								</div>
 								
-								<!-- 
-									gasto = 0
-									recebimento = 1
+								<!--
+									0 Para gasto.
+									1 Para recebimento.
 								 -->
+								 
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="gastoRecebimento">Gasto/Recebimento*:</label>
-									<select id="gastoRecebimento" name="gastoRecebimento" class="form-control" >
+									<label class="control-label" for="gastoRecebimento">Identificação:</label>
+									<select id="gastoRecebimento" name="gastoRecebimento" class="form-control">
 										<option selected value="0">Gasto</option>
-										<option value="1">Recebimento</option>
+										<option value="1" disabled>Recebimento</option>
 									</select> 
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4" id="divFornecedorId">
-									<label class="control-label" for="fornecedorId" id="lbl_fornecedorId">Fornecedor id:</label>
-									<input type="text" name="fornecedorId" id="fornecedorId"  class="form-control" maxlength="100" />
+								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+									<label class="control-label" for="dataOperacao">Data da Operação:</label>
+									<input type="date" id="dataOperacao" name="dataOperacao" class="form-control" readonly/>
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4" id="divEncomendaId">
- 									<label class="control-label" for="encomendaId" >Encomenda*:</label>
- 								<input type="text" name="encomendaId" id="encomendaId"  class="form-control" maxlength="100" />
+								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+									<label class="control-label" for="dataTransacao">Data da transação*:</label>
+									<input type="date" id="dataTransacao" name="dataTransacao" class="form-control" required/>
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
@@ -300,19 +301,14 @@
 									</div>
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="dataOperacao">Data da Operação:</label>
-									<input type="date" id="dataOperacao" name="dataOperacao" class="form-control" readonly/>
+								<div class="input-margin col-xs-12 col-sm-6 col-md-12" id="fornecedorDiv">
+									<label class="control-label" for="fornecedorId" id="lbl_fornecedorId">Fornecedor:</label>									
+ 									<select name="fornecedorId" id="fornecedorId" class="form-control" placeholder="Digite o nome do fornecedor."></select>
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="dataTransacao">Data da transação:</label>
-									<input type="date" id="dataTransacao" name="dataTransacao" class="form-control" />
-								</div>
-								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="saldo">Saldo:</label>
-									<input type="text" id="saldo" name="saldo" class="form-control" />
+								<div class="input-margin col-xs-12 col-sm-6 col-md-12" id="encomendaDiv">
+ 									<label class="control-label" for="encomendaId" >Numero da encomenda:</label>
+ 									<input type="text" name="encomendaId" id="encomendaId"  class="form-control" readonly/>
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -447,6 +443,39 @@
 				$("#valor").val(valor);
 			});
 			
+			//-----------Autocomplete----------------------------------------------------------------------
+        	$('#fornecedorId').selectize({	
+        	    valueField: 'id',//Valor do campo
+        	    labelField: 'nomerazao',
+        	    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
+        	    options: [{id: '${fornecedor.fornid}', nomerazao: '${fornecedor.fornnome}', cpfcnpj: '${fornecedor.forncpfcnpj}'}],
+        	    create: false,
+        	    render: {
+        	        option: function(item, escape) {
+        	        	 return	'<div>' +
+        					'<span class="title">' +
+        						'<span>' + escape(item.nomerazao) + '</span><br/>' +
+        						'<span>' + escape(item.cpfcnpj) + '</span><br/>' +
+        					'</span>' +
+        				'</div>';
+        	        }
+        	    },
+
+        	    load: function(query, callback) {
+        	        if (!query.length) return callback();
+        	        $.ajax({
+        	            url: 'rest-pesquisar-fornecedor/' + encodeURIComponent(query),
+        	            type: 'GET',
+        	            error: function() {
+        	                callback();
+        	            },
+        	            success: function(res) {
+        	                callback(res);
+        	            }
+        	        });
+        	    }
+   			});
+			
 			/*
 			*
 			* CONFIGURAÇÃO DA TABELA
@@ -467,24 +496,26 @@
                     }
                   },
                   
+				/* 
+					0 - dataTransacao
+					1 - id
+					2 - gastoRecebimento
+					3 - fornecedorId
+					4 - encomendaId                        
+					5 - valor
+					6 - saldo
+					7 - forma
+					8 - parcela   
+					9 - dataOperacao                      
+					10 - descricao
+				*/ 
+                             
                 "columnDefs": [
-                    {                   	
-                        
-                     /* //0 - dataTransacao
-                     	//1 - id
-                     	//2 - gastoRecebimento
-                        //3 - fornecedorId
-                        //4 - encomendaId                        
-                        //5 - valor
-                        //6 - saldo
-                        //7 - forma
-                        //8 - parcela   
-                        //9 - dataOperacao                      
-                        //10 - descricao  */ 
-                        "targets": [ 1, 3, 4, 6, 7, 8, 9, 10],
-                        "visible": false
-                    }
-                ]
+								{
+			                        "targets": [ 1, 3, 4, 6, 7, 8, 9, 10],
+			                        "visible": false
+								}
+							  ]
             });// FIM - CONFIGURAÇÃO DA TABELA
             
 
@@ -514,57 +545,20 @@
 				var now = moment().format('YYYY-MM-DD');
                 $('#dataOperacao').val(now);
                 
-                var now = moment().format('YYYY-MM-DD');
-                $('#dataTransacao').val(now);
 
-//                 // DESABILITA O CAMPO
-					var campoFornecedorId = document.getElementById("divFornecedorId");
-					var campoEncomendaId = document.getElementById("divEncomendaId");
-					
-					campoFornecedorId.style.visibility="visible";
-               		campoEncomendaId.style.visibility="hidden";
-//                 //var campoEncomendaId = document.getElementById("encomendaId");
-//                 document.getElementById("encomendaId").disabled = true;
-//                 document.getElementById("nomeRazao").disabled = true;
-//                 //HABILITA OS CAMPOS
-//                 //var campoFornecedorId = document.getElementById("fornecedorId");
-// 				//var campoNomeRazao = document.getElementById("nomeRazao");
-// 				document.getElementById("fornecedorId").disabled = false;
+				// DESABILITA O CAMPO
+				var gastoRecebimento = $("#gastoRecebimento");
+				var fornecedorDiv = $("#fornecedorDiv");
+				var encomendaDiv = $("#encomendaDiv");
 				
-
-				//-----------Autocomplete----------------------------------------------------------------------
-// 	        	$('#fornecedorId').selectize({	
-// 	        	    valueField: 'id',//Valor do campo
-// 	        	    labelField: 'nomerazao',
-// 	        	    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
-// 	        	    options: [{id: '${fornecedor.fornid}', nomerazao: '${fornecedor.fornnome}', cpfcnpj: '${fornecedor.forncpfcnpj}'}],
-// 	        	    create: false,
-// 	        	    render: {
-// 	        	        option: function(item, escape) {
-// 	        	        	 return	'<div>' +
-// 	        					'<span class="title">' +
-// 	        						'<span>' + escape(item.nomerazao) + '</span><br/>' +
-// 	        						'<span>' + escape(item.cpfcnpj) + '</span><br/>' +
-// 	        					'</span>' +
-// 	        				'</div>';
-// 	        	        }
-// 	        	    },
-
-// 	        	    load: function(query, callback) {
-// 	        	        if (!query.length) return callback();
-// 	        	        $.ajax({
-// 	        	            url: 'rest-pesquisar-fornecedor/' + encodeURIComponent(query),
-// 	        	            type: 'GET',
-// 	        	            error: function() {
-// 	        	                callback();
-// 	        	            },
-// 	        	            success: function(res) {
-// 	        	                callback(res);
-// 	        	            }
-// 	        	        });
-// 	        	    }
-//        			});
-              
+				if(gastoRecebimento.val() == 0){
+					encomendaDiv.hide();
+					fornecedorDiv.show();
+				}else{
+					encomendaDiv.show();
+					fornecedorDiv.hide();
+				}
+				              
 			});
 
             /*
@@ -604,52 +598,18 @@
 				$('#descricao').val(data[10]);
           		
           		
+				// DESABILITA O CAMPO
+				var gastoRecebimento = $("#gastoRecebimento");
+				var fornecedorDiv = $("#fornecedorDiv");
+				var encomendaDiv = $("#encomendaDiv");
 				
-				//---------------visibilidade-----------------------------------------------------------------
-				//Atribuo os objetos para utilizar no bloqueio
-				var campoFornecedorId = document.getElementById("divFornecedorId");
-				var campoEncomendaId = document.getElementById("divEncomendaId");
-				//var mnomeRazao = document.getElementById("nomeRazao");
-				
-				//Se for recebimento
-              	if(data[2] == 1){
-                 	//console.log(data[1]);
-                 	//Bloqueio o fornecedorId e o nomeRazao	e ativo encomenda	
-                 	campoEncomendaId.style.visibility="visible";			
-             		//document.getElementById("encomendaId").disabled = false;
-             		campoFornecedorId.style.visibility="hidden";
-  					//document.getElementById("fornecedorId").disabled = true;
-  					//mnomeRazao.style.visibility="hidden";
-  		   			//document.getElementById("nomeRazao").disabled = true;
-  		   			
-  		   			//Pega os valores que estão na tabela e passa para o modal.	
-              		$('#encomendaId').val(data[4]);    
-              		$('#fornecedorId').val('');
-	          		$('#nomeRazao').val('');  
-	          		
-        		}
-        		//Se for gasto
-        		if(data[2] == 0){
-        			//console.log(data[1]);
-        			//Boloqueio encomendaId e ativo fornecedor e nomeRzao  
-        			campoFornecedorId.style.visibility="visible";     			              		
-            		//document.getElementById("fornecedorId").disabled = false;
-            		//mnomeRazao.style.visibility="visible";	           		
-               		//document.getElementById("nomeRazao").disabled = false;
-               		campoEncomendaId.style.visibility="hidden";
-                 	//document.getElementById("encomendaId").disabled = true;
-
-                 	//Pega os valores que estão na tabela e passa para o modal.	
-                 	$('#fornecedorId').val(data[3]);
-	          		$('#nomeRazao').val(data[null]);  
-	          		$('#encomendaId').val('');       
-                	//console.log("fornecedor "+mfornecedorId.disabled);
-           			//onsole.log("encomenda "+mencomendaId.disabled);
-           			//console.log("nomeRazao "+mnomeRazao.disabled);
-           	              		
-                }
-				//---------------FIM - visibilidade-----------------------------------------------------------------             
-              	
+				if(gastoRecebimento.val() == 0){
+					encomendaDiv.hide();
+					fornecedorDiv.show();
+				}else{
+					encomendaDiv.show();
+					fornecedorDiv.hide();
+				}
           		
             });
 			//FIM - Define uma ação na linha da tabela ao apertar o botão editar.----------------------------------------------------------------
@@ -665,7 +625,7 @@
             $('#lista-caixa tbody').on( 'click', '#delete-caixa', function () {
 				
 				//Pega os dados de determinada linha da tabela.
-                var data = table.row( $(this).parents('tr') ).data();
+                var data = table.row( $(this).parents('tr')).data();
 
                 //Preenche o modal com o numero do ID a ser deletado.
                 $('#id_delete').val(data[4]);
