@@ -207,10 +207,10 @@
 												
 						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 							<div class="row">
-								<div class="col-xs-9">
-							
-									<h4 >Saldo : <input id="saldomes" name="saldomes" value="${saldo}" type="text" size="10" style="border:0;"/></h4>		
-									
+								<div class="row caixasaldo">
+									<div class="col-xs-9">							
+										<h4 >Saldo : R$<input id="saldomes" name="saldomes" value="${saldo}" type="text" size="10" style="border:0;" readonly/></h4>		
+									</div>
 								</div>									
 							</div>
 						</div>											
@@ -261,7 +261,7 @@
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="gastoRecebimento">Identificação:</label>
 									<select id="gastoRecebimento" name="gastoRecebimento" class="form-control">
-										<option selected value="0">Gasto</option>
+										<option selected value="0" >Gasto</option>
 										<option value="1" disabled>Recebimento</option>
 									</select> 
 								</div>
@@ -302,7 +302,7 @@
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-6 col-md-12" id="fornecedorDiv">
-									<label class="control-label" for="fornecedorId" id="lbl_fornecedorId">Fornecedor:</label>									
+									<label class="control-label" for="fornecedorId" id="lbl_fornecedorId">Fornecedor:</label>			 						
  									<select name="fornecedorId" id="fornecedorId" class="form-control" placeholder="Digite o nome do fornecedor."></select>
 								</div>
 								
@@ -492,7 +492,7 @@
                     	$('td', row).eq(2).css('color', 'Red');//só a coluna    
                     }else if(data[2] == 1){
                     	//$(row).css('color', 'blue');
-                    	$('td', row).eq(2).css('color', 'blue');    
+                    	$('td', row).eq(2).css('color', 'Blue');    
                     }
                   },
                   
@@ -544,7 +544,8 @@
 				
 				var now = moment().format('YYYY-MM-DD');
                 $('#dataOperacao').val(now);
-                
+                var now = moment().format('YYYY-MM-DD');
+                $('#dataTransacao').val(now);                
 
 				// DESABILITA O CAMPO
 				var gastoRecebimento = $("#gastoRecebimento");
@@ -606,9 +607,11 @@
 				if(gastoRecebimento.val() == 0){
 					encomendaDiv.hide();
 					fornecedorDiv.show();
+					$('#fornecedorId').val(data[3]);
 				}else{
 					encomendaDiv.show();
 					fornecedorDiv.hide();
+					$('#encomendaId').val(data[4]);
 				}
           		
             });
