@@ -306,8 +306,10 @@ ps.setInt(1, caixa.getGastoRecebimento());
 				caixa.setSaldo(rs.getBigDecimal("saldo"));					
 				caixa.setForma(rs.getString("forma"));
 				caixa.setParcela(rs.getInt("parcela"));
-				caixa.setDataTransacao(rs.getDate("dataTransacao").toLocalDate());
-				caixa.setDataOperacao(rs.getDate("dataOperacao").toLocalDate());	
+				if(rs.getDate("dataTransacao")!=null)
+					caixa.setDataTransacao(rs.getDate("dataTransacao").toLocalDate());
+				if(rs.getDate("dataOperacao")!=null)
+					caixa.setDataOperacao(rs.getDate("dataOperacao").toLocalDate());	
 				caixa.setDescricao(rs.getString("descricao"));	
 				//adiciona o objeto caixa no arrayList
 				caixas.add(caixa);
@@ -318,7 +320,7 @@ ps.setInt(1, caixa.getGastoRecebimento());
 			conn.close();
 		//trata, caso de uma exceção			
 		} catch (Exception e) {
-			System.out.println("Houve um erro ao pesquisar o caixa\n"+e);
+			System.out.println("Houve um erro ao pesquisar o caixa entre datas \n"+e);
 		}
 		//retorna o array
 		return caixas;
