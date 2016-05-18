@@ -29,22 +29,18 @@ public class Caixa implements Serializable{
        
     private Long id;
     private int gastoRecebimento;
-    private Long encomendaId; //encomenda Id ou materia Prima Id
     private Integer fornecedorId;
+    private Long encomendaId; //encomenda Id ou materia Prima Id
     private BigDecimal valor; // valor recebido da encomenda, ou valor gasto na compra de materia prima    
+    private BigDecimal saldo;
     private String forma; // de pagamento
     private Integer parcela;
     @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate data;
+    private LocalDate dataTransacao;
+    @DateTimeFormat(iso = ISO.DATE)
+    private LocalDate dataOperacao;
     private String descricao;
-    private String nomeRazao;
-    
-	public String getNomeRazao() {
-		return nomeRazao;
-	}
-	public void setNomeRazao(String nomeRazao) {
-		this.nomeRazao = nomeRazao;
-	}
+
 	public Long getId() {
 		return id;
 	}
@@ -57,23 +53,29 @@ public class Caixa implements Serializable{
 	public void setGastoRecebimento(int gastoRecebimento) {
 		this.gastoRecebimento = gastoRecebimento;
 	}
-	public Long getEncomendaId() {
-		return encomendaId;
-	}
-	public void setEncomendaId(Long encomendaId) {
-		this.encomendaId = encomendaId;
-	}
 	public Integer getFornecedorId() {
 		return fornecedorId;
 	}
 	public void setFornecedorId(Integer fornecedorId) {
 		this.fornecedorId = fornecedorId;
 	}
+	public Long getEncomendaId() {
+		return encomendaId;
+	}
+	public void setEncomendaId(Long encomendaId) {
+		this.encomendaId = encomendaId;
+	}
 	public BigDecimal getValor() {
 		return valor;
 	}
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+	public BigDecimal getSaldo() {
+		return saldo;
+	}
+	public void setSaldo(BigDecimal saldo) {
+		this.saldo = saldo;
 	}
 	public String getForma() {
 		return forma;
@@ -87,11 +89,17 @@ public class Caixa implements Serializable{
 	public void setParcela(Integer parcela) {
 		this.parcela = parcela;
 	}
-	public LocalDate getData() {
-		return data;
+	public LocalDate getDataTransacao() {
+		return dataTransacao;
 	}
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setDataTransacao(LocalDate dataTransacao) {
+		this.dataTransacao = dataTransacao;
+	}
+	public LocalDate getDataOperacao() {
+		return dataOperacao;
+	}
+	public void setDataOperacao(LocalDate dataOperacao) {
+		this.dataOperacao = dataOperacao;
 	}
 	public String getDescricao() {
 		return descricao;
@@ -101,5 +109,5 @@ public class Caixa implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
+	}   
 }

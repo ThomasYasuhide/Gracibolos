@@ -288,27 +288,27 @@
 								
 								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
 									<label class="control-label" for="endereco">Endereço*:</label>
-	<!-- id="endereco" -->			<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" disabled required/>
+	<!-- id="endereco" -->			<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-3 col-md-2">
 									<label class="control-label" for="numero">Numero*:</label>
-		<!-- id="numero" -->		<input type="text" id="numero" name="numero" placeholder="0000" class="form-control" disabled required/>
+		<!-- id="numero" -->		<input type="text" id="numero" name="numero" placeholder="0000" class="form-control" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="complemento">Complemento:</label>
-	<!-- id="complemento" -->		<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120"  disabled />
+	<!-- id="complemento" -->		<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120" />
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="bairro">Bairro*:</label>
-		<!-- id="bairro" -->		<input type="text" id="bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" disabled required/>
+		<!-- id="bairro" -->		<input type="text" id="bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" required/>
 								</div>
 
 								<div class="input-margin col-xs-12 col-sm-2 col-md-3">
 									<label class="control-label" for="estado">Estado*:</label>
-									<select class="form-control" id="estado" name="estado" disabled required >
+									<select class="form-control" id="estado" name="estado" required >
 										<option selected="selected" disabled="disabled" value="0">Selecione o estado</option>
 			<!-- id="estado" -->			<c:forEach var="estado" items="${estados}">
 											<option value="${estado.id}">${estado.sigla}</option>
@@ -318,7 +318,7 @@
 
 								<div class="input-margin col-xs-12 col-sm-4 col-md-6">
 									<label class="control-label" for="cidade">Cidade*:</label>
-									<select class="form-control" id="cidade" name="cidade" disabled required >
+									<select class="form-control" id="cidade" name="cidade" required >
 										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
 			<!-- id="cidade" -->			<c:forEach var="cidade" items="${cidades}">
 											<option value="${cidade.id}">${cidade.nome}</option>
@@ -479,13 +479,6 @@
             //Quando o campo cep perde o foco.
             $("#cep").blur(function() {
 				
-            	$("#endereco").prop( "disabled", false );
-            	$("#numero").prop( "disabled", false );
-            	$("#complemento").prop( "disabled", false ); 
-            	$("#bairro").prop( "disabled", false );
-                $("#cidade").prop( "disabled", false );
-                $("#estado").prop( "disabled", false );
-            	
                 //Nova variável "cep" somente com dígitos.
                 var cep = $(this).val().replace(/\D/g, '');
 
@@ -582,13 +575,6 @@
 
             $('#incluir-colaborador-modal').click(function() {
             	
-            	$("#endereco").prop( "disabled", true );
-            	$("#numero").prop( "disabled", true );
-            	$("#complemento").prop( "disabled", true); 
-            	$("#bairro").prop( "disabled", true );
-                $("#cidade").prop( "disabled", true );
-                $("#estado").prop( "disabled", true );
-            	
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir novo colaborador");
 				
@@ -619,13 +605,6 @@
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
             $('#lista-colaboradores tbody').on( 'click', '#edit-colaborador', function () {
-            	
-            	$("#endereco").prop( "disabled", false );
-            	$("#numero").prop( "disabled", false );
-            	$("#complemento").prop( "disabled", false ); 
-            	$("#bairro").prop( "disabled", false );
-                $("#cidade").prop( "disabled", false );
-                $("#estado").prop( "disabled", false );
             	
             	 //Altera dinamicamente o titulo do modal.
             	$('#modal-subtitle').text("Alterar colaborador");

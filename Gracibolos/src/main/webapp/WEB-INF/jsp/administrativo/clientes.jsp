@@ -334,31 +334,31 @@
 								<!-- Campo  endereço -->
 								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
 									<label class="control-label" for="endereco">Endereço*:</label>
-									<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" disabled required/>
+									<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" required/>
 								</div>
 								
 								<!-- Campo número da casa -->
 								<div class="input-margin col-xs-12 col-sm-3 col-md-2">
 									<label class="control-label" for="numero">Numero*:</label>
-									<input type="text" id="numero" name="numero" placeholder="0" class="form-control" disabled required/>
+									<input type="text" id="numero" name="numero" placeholder="0" class="form-control" required/>
 								</div>
 								
 								<!-- Campo complemento da casa -->
 								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="complemento">Complemento:</label>
-									<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120" disabled />
+									<input type="text" id="complemento" name="complemento" placeholder="Digite o complemento se houver" class="form-control" maxlength="120"  />
 								</div>
 								
 								<!-- Campo bairro -->
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="bairro">Bairro*:</label>
-									<input type="text" id="bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" disabled required/>
+									<input type="text" id="bairro" name="bairro" placeholder="Digite seu bairro" class="form-control" maxlength="60" required/>
 								</div>
 
 								<!-- Campo estado-->
 								<div class="input-margin col-xs-12 col-sm-6 col-md-3">
 									<label class="control-label" for="estado">Estado*:</label>
-									<select class="form-control" id="estado" name="estado" disabled required >
+									<select class="form-control" id="estado" name="estado" required >
 										<option selected="selected" disabled="disabled" value="0">Selecione o estado</option>
 										<c:forEach var="estado" items="${estados}">
 											<option value="${estado.id}">${estado.sigla}</option>
@@ -369,7 +369,7 @@
 								<!-- Campo  cidade-->
 								<div class="input-margin col-xs-12 col-sm-6 col-md-6">
 									<label class="control-label" for="cidade">Cidade*:</label>
-									<select class="form-control" id="cidade" name="cidade" disabled required >
+									<select class="form-control" id="cidade" name="cidade" required >
 										<option selected="selected" disabled="disabled" value="0">Selecione a cidade</option>
 										<c:forEach var="cidade" items="${cidades}">
 											<option value="${cidade.id}">${cidade.nome}</option>
@@ -563,14 +563,7 @@
 //-------Busca de cep---------------------------------------------------------------------------------------------------------------------------------------
             //Quando o campo cep perde o foco.
             $("#cep").blur(function() {
-				
-            	$("#endereco").prop( "disabled", false );
-            	$("#numero").prop( "disabled", false );
-            	$("#complemento").prop( "disabled", false ); 
-            	$("#bairro").prop( "disabled", false );
-                $("#cidade").prop( "disabled", false );
-                $("#estado").prop( "disabled", false );
-            	
+				            	
                 //Nova variável "cep" somente com dígitos.
                 var cep = $(this).val().replace(/\D/g, '');
 
@@ -682,15 +675,7 @@
             $('#incluir-cliente-modal').click(function() {
             	
     			$("#cpfcnpj_inp").mask("000.000.000-00");
-            	
-            	$("#endereco").prop( "disabled", true );
-            	$("#numero").prop( "disabled", true );
-            	$("#complemento").prop( "disabled", true); 
-            	$("#bairro").prop( "disabled", true );
-                $("#cidade").prop( "disabled", true );
-                $("#estado").prop( "disabled", true );
-                
-            	                
+            	          
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir novo cliente");
 				
@@ -727,14 +712,7 @@
 
             //Define uma ação ao apertar o botão editar de algum item da tabela.
             $('#lista-clientes tbody').on( 'click', '#edit-cliente', function () {
-            	
-            	$("#endereco").prop( "disabled", false );
-            	$("#numero").prop( "disabled", false );
-            	$("#complemento").prop( "disabled", false ); 
-            	$("#bairro").prop( "disabled", false );
-                $("#cidade").prop( "disabled", false );
-                $("#estado").prop( "disabled", false );
-            	
+            	           	
             	 //Altera dinamicamente o titulo do modal.
             	$('#modal-subtitle').text("Alterar cliente");
             	
