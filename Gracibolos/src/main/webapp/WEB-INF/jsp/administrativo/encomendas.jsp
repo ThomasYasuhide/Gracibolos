@@ -1039,7 +1039,7 @@
                 $('#id').val(data[0]);
                 $('#status').val(data[1]);
 
-                //Settando no selectize os valores vindo da controller
+                //Settando no selectize os valores vindo da tabela
                 var selectize = $('#cliente')[0].selectize;
                 selectize.addOption({id:data[2], nomerazao:data[3], cpfcnpj:data[4]});
                 selectize.setValue(data[2]);
@@ -1053,7 +1053,19 @@
    				//$('#datacancelado').val(data[11]);
    				$('#total').val(data[12]);
    				$('#obs').val(data[13]);
-				
+
+				//------------------------------------------------------------------------------
+				var url = '/Gracibolos/rest-itensencomenda/'+data[0];
+				$.getJSON(url).done(function(data){
+					var itens = [];
+					//recebe por parâmetro a lista de objetos. i = iteração e field = objeto
+					$.each(data, function(i, field){
+			            //$("div").append(field.nome + " ");
+			            console.log('getJSON : '+ data[i].nomeProduto, data[i].valor);
+			            itens[i] = data[i].nomeProduto;//Aqui seto so o nome - json muito grande
+						console.log('itens : '+itens[i]);
+			        });
+				});
 
 			});
 

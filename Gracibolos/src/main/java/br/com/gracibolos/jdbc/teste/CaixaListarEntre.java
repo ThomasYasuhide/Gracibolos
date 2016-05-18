@@ -16,10 +16,14 @@ public class CaixaListarEntre {
 			    					   "\tEncomendaId: "+c.getEncomendaId()
 			                        		+"\tValor: "+c.getValor()
 			                        		+"\tGasto: "+c.getGastoRecebimento()
-			                        	   //+"\tForma : "+c.getForma()
-			                        	 //+"\tParcela : "+c.getParcela()			                              
-			                            //+"\tDescrição :"+c.getDescricao()
-			    							 +"\tData :"+c.getDataTransacao());		
+		                        	     //+"\tForma : "+c.getForma()
+		                        	   //+"\tParcela : "+c.getParcela()			                              
+		                             //+"\tDescrição :"+c.getDescricao()
+    							   +"\tDataTransação :"+c.getDataTransacao()
+									+"\tfornecedorId :"+c.getFornecedorId()
+	    							 +"\tIdFornecedor :"+c.getFornecedorIdFornecedor()
+							 	    	+"\tNomerazao :"+c.getNomerazao()
+			    		);		
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

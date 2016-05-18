@@ -40,6 +40,8 @@ public class Caixa implements Serializable{
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate dataOperacao;
     private String descricao;
+    private Long fornecedorIdFornecedor;
+    private String nomerazao;
 
 	public Long getId() {
 		return id;
@@ -109,5 +111,18 @@ public class Caixa implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}   
+	}
+	public Long getFornecedorIdFornecedor() {
+		return fornecedorIdFornecedor;
+	}
+	public void setFornecedorIdFornecedor(Long fornecedorIdFornecedor) {
+		this.fornecedorIdFornecedor = fornecedorIdFornecedor;
+	}
+	public String getNomerazao() {
+		return nomerazao;
+	}
+	public void setNomerazao(String nomerazao) {
+		this.nomerazao = nomerazao;
+	}
+	
 }

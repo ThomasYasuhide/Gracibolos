@@ -287,7 +287,8 @@ ps.setInt(1, caixa.getGastoRecebimento());
 		
 		//string query do banco
 		String sql = " SELECT caixa.id, caixa.gastoRecebimento, caixa.fornecedorId, caixa.encomendaId, caixa.valor, caixa.saldo,"
-				   + " caixa.forma, caixa.parcela, caixa.dataTransacao, caixa.dataOperacao, caixa.descricao"
+				   + " caixa.forma, caixa.parcela, caixa.dataTransacao, caixa.dataOperacao, caixa.descricao,"
+				   + " fornecedor.id as fornecedorIdFornecedor, fornecedor.nomerazao"
 			 	   + " FROM gracibolos.caixa left join gracibolos.fornecedor on caixa.fornecedorId = fornecedor.id"
 				   + " where caixa.dataTransacao between '"+inicio+"' AND '"+fim+"'" 
 				   + " order by caixa.dataTransacao";
@@ -317,6 +318,8 @@ ps.setInt(1, caixa.getGastoRecebimento());
 				if(rs.getDate("dataOperacao")!=null)
 					caixa.setDataOperacao(rs.getDate("dataOperacao").toLocalDate());	
 				caixa.setDescricao(rs.getString("descricao"));	
+				caixa.setFornecedorIdFornecedor(rs.getLong("fornecedorIdFornecedor"));
+				caixa.setNomerazao(rs.getString("nomerazao"));
 				//adiciona o objeto caixa no arrayList
 				caixas.add(caixa);
 			}

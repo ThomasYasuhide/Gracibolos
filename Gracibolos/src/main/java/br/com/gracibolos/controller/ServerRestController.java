@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
+import br.com.gracibolos.jdbc.dao.ItemEncomendaDao;
 import br.com.gracibolos.jdbc.dao.MateriaPrimaDao;
 import br.com.gracibolos.jdbc.dao.ProdutoDao;
 import br.com.gracibolos.jdbc.model.Cliente;
 import br.com.gracibolos.jdbc.model.Fornecedor;
+import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Produto;
 
@@ -32,6 +34,8 @@ public class ServerRestController {
 	private List<MateriaPrima> mpList;
 	private FornecedorDao fornDao;
 	private List<Fornecedor> fornList;
+	private ItemEncomendaDao ItemEncDao;
+	private List<ItemEncomenda> listItemEnc;
 	
 	// OK
 	@RequestMapping(value = "/rest-pesquisar-fornecedor/{pesquisa}", 
@@ -157,6 +161,25 @@ public class ServerRestController {
 		colocarAcesso(response);
 		
 		return clientesList;
+	}
+	
+	@RequestMapping(value = "/rest-itensencomenda/{encomenda}", 
+			method = RequestMethod.GET
+			,produces = {MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE
+		}) 
+	public @ResponseBody List<ItemEncomenda> ListItensEncomenda(@PathVariable String encomenda
+			, HttpServletResponse response){
+		ItemEncDao = new ItemEncomendaDao();
+		try {
+			listItemEnc = ItemEncDao.pesquisar(encomenda);
+		} catch (Exception e) {
+			System.out.println("ERRO - rest itensencomenda, lista de itensencomenda.");
+			e.printStackTrace();
+		}
+		colocarAcesso(response);
+		
+		return listItemEnc;
 	}
 	
 }

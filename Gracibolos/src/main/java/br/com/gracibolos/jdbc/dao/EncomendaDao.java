@@ -453,11 +453,6 @@ public class EncomendaDao{
 		ResultSet rs = null;
 		Encomenda encomenda=null;
 		
-		//Itens
-		PreparedStatement psItens = null;
-		ResultSet rsItens = null;
-		List<ItemEncomenda> listaDeItemEncomenda= null;
-		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) 
 		{	
@@ -495,36 +490,7 @@ public class EncomendaDao{
 			
 				//------Itens da encomenda---------------------------------------------------------
 				 		
-				String sqlItem = "SELECT itemencomenda.id, itemencomenda.produtoId, itemencomenda.encomendaId, itemencomenda.qtd, produto.nome as nomeProduto," 
-						+" produto.codigo, produto.valor, produto.id as produtoIdproduto"
-						+" FROM gracibolos.itemencomenda"
-						+" inner join gracibolos.produto on itemencomenda.produtoId = produto.id"
-						+" where itemencomenda.encomendaId = "+encomenda.getId().toString();
 				
-				psItens = conn.prepareStatement(sqlItem);
-				rsItens = psItens.executeQuery();
-				listaDeItemEncomenda = new ArrayList<ItemEncomenda>();
-				
-				while(rsItens.next())
-				{
-					ItemEncomenda itemEncomenda = new ItemEncomenda();
-					
-					itemEncomenda.setId(rsItens.getLong("id"));//itemEncomenda
-					itemEncomenda.setProdutoId(rsItens.getLong("produtoId"));//itemEncomenda
-					itemEncomenda.setProdutoIdProduto(rsItens.getLong("produtoIdproduto"));//Produto
-					itemEncomenda.setEncomendaId(rsItens.getLong("encomendaId"));//itemEncomenda
-					itemEncomenda.setQuantidade(rsItens.getInt("qtd"));//itemEncomenda
-					itemEncomenda.setNomeProduto(rsItens.getString("nomeProduto"));//Produto
-					itemEncomenda.setValor(rsItens.getBigDecimal("valor"));//Produto
-					
-					listaDeItemEncomenda.add(itemEncomenda);
-					
-				}//while itens
-				
-				rsItens = null;
-				psItens = null;
-				
-				encomenda.setListItemEncomenda(listaDeItemEncomenda);
 				
 				listEnc.add(encomenda);
 				

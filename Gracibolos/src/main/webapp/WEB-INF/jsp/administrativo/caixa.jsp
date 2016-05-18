@@ -160,7 +160,8 @@
 										<th>Forma</th>
 										<th>Parcela</th>		
 										<th>Data Opera</th>									
-										<th>Descrição</th>									
+										<th>Descrição</th>	
+										<th>Nome</th>									
 										<th>Ações</th>
 									</tr>
 								</thead>
@@ -182,7 +183,7 @@
 											<!-- 8 --><td>${caixa.parcela}</td>	
 											<!-- 9 --><td>${caixa.dataOperacao}</td>											
 											<!-- 10 --><td>${caixa.descricao}</td>	
-																				
+											<!-- 11 --><td>${caixa.nomerazao}</td>										
 											
 											<!-- Aqui nessa td, estão os botões de editar e excluir, que aparecem junto com a lista de matérias-primas na tabela -->
 		                					<td>
@@ -444,7 +445,7 @@
 			});
 			
 			//-----------Autocomplete----------------------------------------------------------------------
-        	var selectize = $('#fornecedorId').selectize({	
+        	$('#fornecedorId').selectize({	
         	    valueField: 'id',//Valor do campo
         	    labelField: 'nomerazao',
         	    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
@@ -508,11 +509,12 @@
 					8 - parcela   
 					9 - dataOperacao                      
 					10 - descricao
+					11 - nomerazao
 				*/ 
                              
                 "columnDefs": [
 								{
-			                        "targets": [ 1, 3, 4, 6, 7, 8, 9, 10],
+			                        "targets": [ 1, 3, 4, 6, 7, 8, 9, 10, 11],
 			                        "visible": false
 								}
 							  ]
@@ -586,7 +588,23 @@
 
               	//Apresenta o modal de alteração na tela.-----------------------
               	$('#modal-caixa').modal('show');
-					
+
+              //Settando no selectize os valores vindo da tabela
+              /* 
+					0 - dataTransacao
+					1 - id
+					2 - gastoRecebimento
+					3 - fornecedorId
+					4 - encomendaId                        
+					5 - valor
+					6 - saldo
+					7 - forma
+					8 - parcela   
+					9 - dataOperacao                      
+					10 - descricao
+					11 - nomerazao
+				*/ 
+				
 				//Pega os valores que estão na tabela e passa para o modal.			
 				$('#dataTransacao').val(data[0]);
 				$('#id').val(data[1]);
@@ -607,7 +625,15 @@
 				if(gastoRecebimento.val() == 0){
 					encomendaDiv.hide();
 					fornecedorDiv.show();
-					$('#fornecedorId').val(data[3]);
+					
+					//$('#fornecedorId').val(data[3]);
+					console.log('gasto');
+					console.log(data[11]);
+					
+	                var selec = $('#fornecedorId')[0].selectize;
+	                //selec.addOption({id:'1', nome:'Magna'});
+	                selec.setValue('magna');
+					
 				}else{
 					encomendaDiv.show();
 					fornecedorDiv.hide();
