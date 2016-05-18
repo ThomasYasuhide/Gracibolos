@@ -3,6 +3,7 @@ package br.com.gracibolos.jdbc.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -33,6 +34,10 @@ public class Encomenda implements Serializable{
     private LocalDate datacancelamento;
     private BigDecimal totalprodutos;
     private String obs;
+    private String nomerazao;
+    private Long clienteId;
+    private String cpfcnpj;
+    private List<ItemEncomenda> listItemEncomenda;
     
 	public Long getId() {
 		return id;
@@ -145,5 +150,38 @@ public class Encomenda implements Serializable{
 	public void setObs(String obs) {
 		this.obs = obs;
 	}
+
+	public String getNomerazao() {
+		return nomerazao;
+	}
+
+	public void setNomerazao(String nomerazao) {
+		this.nomerazao = nomerazao;
+	}
+
+	public Long getClienteId() {
+		return clienteId;
+	}
+
+	public void setClienteId(Long clienteId) {
+		this.clienteId = clienteId;
+	}
+
+	public String getCpfcnpj() {
+		return cpfcnpj;
+	}
+
+	public void setCpfcnpj(String cpfcnpj) {
+		this.cpfcnpj = cpfcnpj;
+	}
+
+	public List<ItemEncomenda> getListItemEncomenda() {
+		return listItemEncomenda;
+	}
+
+	public void setListItemEncomenda(List<ItemEncomenda> listItemEncomenda) {
+		this.listItemEncomenda = listItemEncomenda;
+	}
+	
 	
 }

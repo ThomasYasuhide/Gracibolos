@@ -38,6 +38,7 @@ import br.com.gracibolos.jdbc.model.Fornecedor;
 import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Produto;
+import br.com.gracibolos.jdbc.model.Status;
 
 @Controller
 public class OperacionalController {	
@@ -1225,7 +1226,7 @@ public class OperacionalController {
 				ItemEncomenda item = new ItemEncomenda();
 				item.setId((long) 1);
 				item.setNumero(1);
-				item.setProdutoId(3);
+				item.setProdutoId(3l);
 				item.setQuantidade(20);
 				item.setValor(new BigDecimal("10.00"));
 				item.setTotal(new BigDecimal("200.00"));
@@ -1233,7 +1234,7 @@ public class OperacionalController {
 				ItemEncomenda item2 = new ItemEncomenda();
 				item2.setId((long) 2);
 				item2.setNumero(2);
-				item2.setProdutoId(2);
+				item2.setProdutoId(2l);
 				item2.setQuantidade(20);
 				item2.setValor(new BigDecimal("5.00"));
 				item2.setTotal(new BigDecimal("100.00"));
@@ -1285,19 +1286,15 @@ public class OperacionalController {
 		
 		
 		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
-		boolean status = false;
+		//boolean status = false;
 		//cria uma nova instância DAO da encomenda
 		EncomendaDao dao = new EncomendaDao();			
-			
+		Status status = new Status();
+		
 		try {
 			//se o método inserir passando uma encomenda, for executado corretamente, status recebe verdadeiro
-			if(dao.inserir(encomenda)) {
-				status = true;
-			} 
-			//caso contrário, status recebe falso
-			else {
-				status = false;
-			}
+			status = dao.inserir(encomenda);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1307,7 +1304,9 @@ public class OperacionalController {
 	    //seta o caminho e o nome da jsp
 		mv.setViewName("operacional/encomendas");
 		//passa o retorno do status para a Expression Language chamada incluir
-		mv.addObject("incluir", status);
+		mv.addObject("incluir", status.getStatus1());
+		mv.addObject("incluirItens", status.getStatus2());
+		mv.addObject("numeroEncomenda", status.getNumeroEncomenda());
 	    //retorna mv
 		return mv;
 	}

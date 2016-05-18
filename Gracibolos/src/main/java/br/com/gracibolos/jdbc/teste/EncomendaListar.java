@@ -9,27 +9,33 @@ public class EncomendaListar {
 	public static void main(String[] args) {
 		
 		EncomendaDao dao = new EncomendaDao();
+		Encomenda e = new Encomenda();
+		
 		
 		try {
-			for(Encomenda e : dao.listar()){
+			e = dao.pesquisarId("23");
+			//for(Encomenda e : dao.pesquisarId("23")){
 				System.out.println(	  
 								 		 "Id : "+e.getId()
-							   +"\tClienteId : "+e.getClienteid()
-						          +"\tStatus : "+e.getStatus()
-						    + "\tResponsavel : "+e.getResponsavel()
-						   	  +"\tDataInicio : "+e.getDataencomenda()
-			            +"\tDataCancelamento : "+e.getDatacancelamento()
-			                +"\tDataProducao : "+e.getDataproducao()
-			             +"\tDataFaturamento : "+e.getDatafaturamento()
-			              	+ "\tDataEntrega : "+e.getDataentrega()
-			             +"\tEntregaRetirada : "+e.getDatafinalizado()
-			             		   +"\tTotal : "+e.getTotalprodutos()
-			             	   +"\tDescricao : "+e.getObs()
+						          +"\nStatus : "+e.getStatus()
+						    + "\nResponsavel : "+e.getResponsavel()
+						   	  +"\nDataInicio : "+e.getDataencomenda()
+			            +"\nDataCancelamento : "+e.getDatacancelamento()
+			                +"\nDataProducao : "+e.getDataproducao()
+			             +"\nDataFaturamento : "+e.getDatafaturamento()
+			              	+ "\nDataEntrega : "+e.getDataentrega()
+			             +"\nEntregaRetirada : "+e.getDatafinalizado()
+			             		   +"\nTotal : "+e.getTotalprodutos()
+			             	   +"\nDescricao : "+e.getObs()
+			             	   +"\nNomerazao : "+e.getNomerazao()
+			             	   	 +"\ncpfcnpj : "+e.getCpfcnpj()
+			                   +"\nClienteId : "+e.getClienteId()
+			             	   
 			             	   	 
 			             	  );					
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			//}
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 
 	}

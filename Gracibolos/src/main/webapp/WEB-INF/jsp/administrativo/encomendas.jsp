@@ -123,7 +123,10 @@
 							<label class="control-label">Pesquisar encomenda:</label>
 							<form action="administrativo-pesquisar-encomenda" method="POST">
 								<div class="input-group">
-									<input type="text" class="form-control" maxlength="100" placeholder="Informe o numero de encomenda para realizar a pesquisa." name="pesquisa" id="pesquisa" required />
+									<!-- 
+										id="pesquisa" envio para a controller o número da encomenda
+									 -->
+									<input id="pesquisa" type="text" class="form-control" maxlength="100" placeholder="Informe o numero de encomenda para realizar a pesquisa." name="pesquisa"  required />
 									<span class="input-group-btn">
 										<button class="btn btn-default" type="submit">
 											<span class="glyphicon glyphicon-search disabled"></span>
@@ -134,8 +137,11 @@
 						</div>
 						
 						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">
-							<label class="control-label hidden-xs">Listar encomendas</label>
-							<a href="administrativo-listar-encomendas" class="btn btn-default fullwidth">Listar encomendas</a>
+							<label class="control-label hidden-xs">Listar finalizadas</label>
+							<!-- 
+								Chamada para a controller @RequestMapping 
+							-->
+							<a href="administrativo-listar-encomendas-finalizadas" class="btn btn-default fullwidth">Listar finalizadas</a>
 						</div>
 					</div>
 					
@@ -147,7 +153,9 @@
 									<tr>
 										<th>Encomenda</th>
 										<th>Status</th>
+										<th>Cliente ID</th>
 										<th>Cliente</th>
+										<th>Cliente CPF/CNPJ</th>
 										<th>Responsável</th>
 										<th>Data da encomenda</th>
 										<th>Data da entrega</th>
@@ -163,20 +171,22 @@
 								<tbody>
 
 									<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
-									<c:forEach var="cliente" items="${clientes}">
+									<c:forEach var="encomendas" items="${encomendas}">
 										<tr>
-											<td>${cliente.id}</td>
-											<td>${cliente.status}</td>
-											<td>${cliente.cliente}</td>
-											<td>${cliente.responsavel}</td>
-											<td>${cliente.dataencomenda}</td>
-											<td>${cliente.dataentrega}</td>
-											<td>${cliente.datafaturamento}</td>
-											<td>${cliente.dataproducao}</td>
-											<td>${cliente.datafinalizado}</td>
-											<td>${cliente.datacancelamento}</td>
-											<td>${cliente.total}</td>
-											<td>${cliente.obs}</td>
+											<td>${encomendas.id}</td>
+											<td>${encomendas.status}</td>
+											<td>${encomendas.clienteid}</td>
+											<td>${encomendas.clientenome}</td>
+											<td>${encomendas.clientecpfcnpj}</td>
+											<td>${encomendas.responsavel}</td>
+											<td>${encomendas.dataencomenda}</td>
+											<td>${encomendas.dataentrega}</td>
+											<td>${encomendas.datafaturamento}</td>
+											<td>${encomendas.dataproducao}</td>
+											<td>${encomendas.datafinalizado}</td>
+											<td>${encomendas.datacancelamento}</td>
+											<td>${encomendas.totalprodutos}</td>
+											<td>${encomendas.obs}</td>
 		                					<td>
 		                						<button id="edit-encomenda" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
 		                						<button id="delete-encomenda" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
@@ -237,7 +247,7 @@
 						                    </li>
 						
 						                    <li role="presentation" class="disabled">
-						                        <a href="#step2" onClick="document.getElementById('produtos-encomenda').submit;" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
+						                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">shopping_cart</i>
 						                            </span>
@@ -296,8 +306,7 @@
 														<label class="control-label" for="datacancelado">Data do cancelamento:</label>
 														<input type="date" id="datacancelado" name="datacancelado" class="form-control" value="${encomenda.datacancelamento}" readonly />
 													</div>
-													
-													<!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
 													<div class="input-margin col-xs-12 col-sm-12 col-md-6">
 														<label class="control-label" for="cliente">Cliente*:</label>
 														<select id="cliente" name="cliente" class="form-control" placeholder="Insira o nome, RG, CPF, CNPJ ou IE." required></select>
@@ -313,8 +322,7 @@
 														<textarea id="obs" name="obs" rows="5" class="form-control" placeholder="Insira uma observação sobre o cliente">${encomenda.obs}</textarea>
 													</div>
 							                    </div>
-								                    
-							                    
+
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
@@ -325,6 +333,7 @@
 					                   		</form>
 					                   		
 						                </div>
+							                
 						                
 						                
 										
@@ -427,13 +436,12 @@
 													</div>
 													
 													<div class="input-margin col-xs-12 col-sm-6 col-md-8">
-														<label class="control-label" for="formapagamento">Forma de pagamento:</label>
+														<label class="control-label" for="valortroco">Forma de pagamento:</label>
 														<select class="form-control" name="formapagamento">
 															<option value="0" selected disabled>Selecione...</option>
 															<option value="1">Dinheiro</option>
 															<option value="2">Cartão de crédito</option>
 															<option value="3">Cheque</option>
-															<option value="4">Dinheiro e Cartão</option>
 														</select>
 													</div>
 													
@@ -449,7 +457,7 @@
 														<label class="control-label" for="valorpago">Valor pago:</label>
 														<div class="input-group">
 															<span class="input-group-addon">R$</span>
-															<input type="text" id="valorpago" name="valorpago" placeholder="0,00" class="form-control" />
+															<input type="text" id="valorpago" placeholder="0,00" name="valorpago" class="form-control" />
 														</div>
 													</div>
 													
@@ -639,7 +647,6 @@
 			    valueField: 'id',
 			    labelField: 'nomerazao',
 			    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
-			    options: [{id: '${encomenda.clienteid}', nomerazao: '${encomenda.clientenome}', cpfcnpj: '${encomenda.clientecpfcnpj}'}],
 			    create: false,
 			    render: {
 			        option: function(item, escape) {
@@ -678,12 +685,14 @@
 			*
 			*/
 			
-			function selectize(id){
-				$("#produto_"+id).selectize({
+			$(".produto").each(function(){
+				
+				$(this).selectize({
 				    valueField: 'id',
 				    labelField: 'nome',
 				    searchField: ['codigo', 'nome'],
-					create: false,
+					options: [{id: '${item.produtoId}', codigo: '${item.codigo}', nome: '${item.nome}'}],
+				    create: false,
 				    render: {
 				        option: function(item, escape) {
 				            return	'<div>' +
@@ -709,17 +718,13 @@
 				        });
 				    }
 				});
-			}
+			});
 			
-			$("#item").on("change", ".produto", function(){
+			$(".produto").on("change", function(){
 				var linha = this.id.replace("produto_", "");
 				
 				var produto = $('#produto_' + linha);
 				var valor = $('#valor_' + linha);
-				
-				alert(linha);
-				alert(produto);
-				alert(valor);
 				
 
 				if(produto.val() != undefined){
@@ -828,7 +833,7 @@
 				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<select class="form-control produto" id="produto_'+i+'" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
+				    item += 			'<select class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" class="form-control quantidade"  min="0" max="9999999">';
@@ -836,7 +841,7 @@
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].valor" id="valor_'+i+'" placeholder="0,00" class="form-control valor">';
+				    item += 				'<input type="text" name="item['+i+'].valor" placeholder="0,00" id="valor_'+i+'" class="form-control valor">';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
@@ -849,10 +854,8 @@
 				    item += 			'<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>';
 				    item += 		'</td>';
 				    item += 	'</tr>';
-			    					    
+			    
 				    produtos.append(item);
-				    
-				    selectize(i);
 				    
 				    i++;
 				}else {
@@ -955,9 +958,11 @@
 					$("#valortroco").val((valorpago - totalencomenda).toFixed(2)).trigger('input');
 				}else{
 					alert('O valor pago é inferior ao valor total da encomenda.');
+					
 					$('#valorpago').val("");
 					$("#valortroco").val("");
 				}
+				
 				
 			});
 			
@@ -971,7 +976,7 @@
             var table = $('#lista-encomendas').DataTable({
                 "columnDefs": [
                     {
-                        "targets": [ 3, 4, 8, 9, 10, 11, 12 ],
+                        "targets": [ 3, 4, 8, 9, 10, 11],
                         "visible": false
                     }
                 ]
@@ -1033,16 +1038,19 @@
 				//Preenche os determinados campos com os conteudos.
                 $('#id').val(data[0]);
                 $('#status').val(data[1]);
-                $('#cliente').val(data[2]);
-                $('#responsavel').val(data[3]);
-                $('#dataencomenda').val(data[4]);
-   				$('#dataentrega').val(data[5]);
-                //$('#datafaturamento').val(data[6]);
-                //$('#dataproducao').val(data[7]);
-                //$('#datafinalizado').val(data[8]);
-   				//$('#datacancelado').val(data[9]);
-   				$('#total').val(data[10]);
-   				$('#obs').val(data[11]);
+                
+                var selectize = $('#cliente')[0].selectize;
+                selectize.addOption({id:"5", nomerazao:"Teste", cpfcnpj:"10371059000140"});
+                
+                $('#responsavel').val(data[5]);
+                $('#dataencomenda').val(data[6]);
+   				$('#dataentrega').val(data[7]);
+                //$('#datafaturamento').val(data[8]);
+                //$('#dataproducao').val(data[9]);
+                //$('#datafinalizado').val(data[10]);
+   				//$('#datacancelado').val(data[11]);
+   				$('#total').val(data[12]);
+   				$('#obs').val(data[13]);
 				
 
 			});

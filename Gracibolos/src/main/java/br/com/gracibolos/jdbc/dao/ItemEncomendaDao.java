@@ -2,9 +2,7 @@ package br.com.gracibolos.jdbc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
@@ -14,29 +12,8 @@ import br.com.gracibolos.jdbc.model.ItemEncomenda;
 public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 
 	public boolean inserir(ItemEncomenda itemEncomenda) throws Exception{
-		boolean status = false;
-		String sql = " INSERT INTO itemEncomenda(produtoId, encomendaId, qtd)"
-				   + " VALUES (?, ?, ?)";
-		PreparedStatement ps = null;
 		
-		try(Connection conn = ConnectionProvider.getInstance().getConnection())
-		{			
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemEncomenda.getProdutoId());
-			ps.setInt(2, itemEncomenda.getEncomendaId());
-			ps.setInt(3, itemEncomenda.getQuantidade());			
-			
-			if(ps.executeUpdate() != 0) {
-				status = true;
-			}
-			ps.close();	
-			conn.close();								
-		} 
-		catch (SQLException e) 
-		{
-			System.out.println("Erro ao inserir Item da Encomenda\n"+e);
-		}
-		return status;
+		return true;
 	}
 
 	public boolean alterar(ItemEncomenda itemEncomenda) throws Exception{
@@ -47,8 +24,8 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
 		{						
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemEncomenda.getProdutoId());
-			ps.setInt(2, itemEncomenda.getEncomendaId());
+			ps.setLong(1, itemEncomenda.getProdutoId());
+			ps.setLong(2, itemEncomenda.getEncomendaId());
 			ps.setInt(3, itemEncomenda.getQuantidade());			
 			ps.setLong(4, itemEncomenda.getId());
 			
@@ -91,43 +68,15 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 	}
 
 	public List<ItemEncomenda> listar() throws Exception{
-		String sql = "SELECT * FROM itemEncomenda";
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		List<ItemEncomenda> listaDeItemEncomenda= null;
+	
 		
-		try(Connection conn = ConnectionProvider.getInstance().getConnection())
-		{			
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			listaDeItemEncomenda = new ArrayList<ItemEncomenda>();
-			while(rs.next())
-			{
-				ItemEncomenda itemEncomenda = new ItemEncomenda();
-				itemEncomenda.setId(rs.getLong("id"));
-				itemEncomenda.setProdutoId(rs.getInt("produtoId"));
-				itemEncomenda.setEncomendaId(rs.getInt("encomendaId"));
-				itemEncomenda.setQuantidade(rs.getInt("qtd"));				
-				
-				listaDeItemEncomenda.add(itemEncomenda);
-				
-				for(int i = 0;i<listaDeItemEncomenda.size();i++){  //enquanto i for menor, não maior  
-				     System.out.println(listaDeItemEncomenda.get(i));    
-				}  
-			}
-			ps.close();
-			conn.close();
-		}
-		catch (SQLException e) 
-		{
-			System.out.println("Erro ao listar Item da Encomenda\n"+e);
-		}
-		return listaDeItemEncomenda;
+		return null;
 	}
 
 	
 	@Override
-	public List<ItemEncomenda> pesquisar(String pesquisa) throws Exception{
+	public List<ItemEncomenda> pesquisar(String encomenda) throws Exception{
+			
 		return null;
 	}
 

@@ -20,7 +20,8 @@
 	<link href="resources/css/reset.css" rel="stylesheet">
 	<link href="resources/css/style.css" rel="stylesheet">
     <link href="resources/css/datatables.css" rel="stylesheet">
-
+	<link href="resources/css/selectize.css" rel="stylesheet">
+	
 	<!-- Titulo da página -->
 	<title>Graci Bolos | Caixa</title>
 
@@ -151,14 +152,14 @@
 									<tr>
 										<th>Data</th>
 										<th>Recebido / Gasto</th>
-										<th>Encomenda ID</th>
+										<th>N° Encomenda</th>
 										<th>Fornecedor ID</th>
 										<th>#</th>
 										<th>Valor</th>									
 										<th>Forma</th>
 										<th>Parcela</th>										
 										<th>Descrição</th>	
-										<th>Nome Razão</th>									
+										<th>Fornecedor</th>									
 										<th>Ações</th>
 									</tr>
 								</thead>
@@ -193,13 +194,34 @@
 						</div>
 					</div>
 					
-					<!--Essa div tem o botão de abrir o modal "incluir nova matéria-prima" -->
-					<div class="row">
+					<!--
+					Essa div tem o botão de abrir o modal "incluir novo gasto" 
+					-->
+					<div class="row">					
+						
 						<div class="input-margin pull-right col-xs-12 col-sm-4 col-md-4">
 							<a href="" id="incluir-caixa-modal" data-toggle="modal" data-target="#modal-caixa" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir nova saída</a>
-						</div>
+						</div>						
+						
+						<!-- INCLUIR SALDO ANTERIOR -->
+						
+													
+							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+								<div class="row">
+									<div class="col-xs-9">
+								
+										<h4 >Saldo : <input id="saldomes" name="saldomes" value="${saldo}" type="text" size="10" style="border:0;"/></h4>		
+										
+									</div>									
+								</div>
+							</div>
+					
+							<div class="input-margin pull-right col-xs-12 col-sm-4 col-md-4">
+								<button id="btn-saldo-anterior" class="btn btn-default fullwidth"><i class="material-icons">add</i>&nbsp;&nbsp;&nbsp;Incluir saldo anterior</button>
+							</div>
+						
+												
 					</div>
-
 <!-- ############################################################ FIM DA TABELA ############################################################ -->
 				</div>
 			</div>
@@ -215,7 +237,9 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 	    		
-	    		<!-- formulário de preencher os dados da matéria-prima -->
+	    		<!-- 
+	    		formulário de preencher os dados da matéria-prima 
+	    		-->
 	    		<form id="caixa-form" method="POST">
 	    			
 	    			<!--Essa div tem o título e subtítulo do modal, e o "X" de fechar o modal   -->
@@ -245,7 +269,7 @@
 									<select id="gastoRecebimento" name="gastoRecebimento" class="form-control" >
 										<option selected value="0">Gasto</option>
 										<option value="1">Recebimento</option>
-									</select>
+									</select> 
 								</div>
 																
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
@@ -280,17 +304,17 @@
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="parcela">Número de Parcelas:</label>
-									<input id="parcela" name="parcela" type="number" class="form-control" pattern="[0-9]+" maxlength="1" >
+									<input id="parcela" name="parcela" type="number" class="form-control" min=1 max=6 pattern="[0-9]+" maxlength="1" value="1">
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="data">Data da transação:</label>
-									<input type="date" id="data" name="data" class="form-control"  />
+									<input type="date" id="data" name="data" class="form-control" />
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="fornecedorId" id="lbl_fornecedorId">Fornecedor id:</label>
-									<input type="text" name="fornecedorId" id="fornecedorId"  class="form-control" maxlength="100" placeholder=""/>
+									<input type="text" name="fornecedorId" id="fornecedorId"  class="form-control" maxlength="100" />
 								</div>
 								
 								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
@@ -385,24 +409,101 @@
 	############################################################ FIM DO  MODAL DE EXCLUSÃO DO CAIXA ############################################################
 
 	-->
+	
+	<!--
 
+	############################################################ MODAL DE INCLUSÃO DO SALDO ANTERIOR ####################################################
+	
+	-->
+		<div class="modal fade" id="modal-saldo-anterior" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+	    		
+	    		<!-- 
+	    		formulário de preencher os dados da matéria-prima 
+	    		-->
+	    		<form id="saldo-anterior-form" method="POST">
+	    			
+	    			<!--Essa div tem o título e subtítulo do modal, e o "X" de fechar o modal   -->
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h3 id="modal-title-saldo-anterior">SALDO ANTERIOR</h3>
+						<h4 id="modal-subtitle-saldo-anterior"></h4>
+					</div>
+					
+					<!--  Corpo do modal -->
+					<div class="modal-body">
+						<!-- ################################# Corpo do modal CONTEUDO ################################# -->
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								
+								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+									<label class="control-label" for="valorSaldoAnterior">Valor*:</label>
+									<div class="input-group">
+										<span class="input-group-addon">R$</span>
+										<input type="text" id="valorSaldoAnterior" name="valorSaldoAnterior" placeholder="0,00" class="form-control" maxlength="14" required/>
+									</div>
+								</div>
+								
+								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+									<label class="control-label" for="dataSaldoAnterior">Data da transação:</label>
+									<input type="date" id="dataSaldoAnterior" name="dataSaldoAnterior" class="form-control" />
+								</div>
+								
+								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+									<label class="control-label" for="parcelaSaldoAnterior">Número de Parcelas:</label>
+									<input id="parcelaSaldoAnterior" name="parcelaSaldoAnterior" type="number" class="form-control" min=1 max=6 pattern="[0-9]+" maxlength="1" value="1">
+								</div>		
+								
+								<!-- 
+									gasto = 0
+									recebimento = 1
+								 -->
+								<div class="hidden" class="input-margin col-xs-12 col-sm-4 col-md-4">
+									<input id="gastoRecebimentoSaldoAnterior" name="gastoRecebimentoSaldoAnterior" value="1" class="form-control" />
+								</div>
+								
+								<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+									<label class="control-label" for="descricaoSaldoAnterior">Descrição:</label>
+									<textarea class="form-control" rows="1" name="descricaoSaldoAnterior" id="descricaoSaldoAnterior" ></textarea>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+
+					<!-- ################################# FIM DO CONTEUDO ################################# -->
+					
+					<!-- Esse div contem o 2 botões -->
+					<div class="modal-footer">
+						<!-- botão de fechar o modal  -->
+						<button type="button" id="fecharModal-saldo-anterior" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+						<!-- botão de incluir ou alterar a matéria-prima, assim finalizando o formulário  -->
+						<button type="submit" class="btn btn-default" id="modal-action-saldo-anterior"></button>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--
+	
+	######################################################### FIM DO MODAL DO SALDO ANTERIOR ########################################################################
+	
+	-->
 
 	<!-- Importação dos arquivos java script -->
 	<script src="resources/js/jquery-2.1.4.js"></script>
 	<script src="resources/js/datatables.js"></script>	
 	<script src="resources/js/mask.js"></script>
 	<script src="resources/js/bootstrap.js"></script>
-    
-
+    <script src="resources/js/selectize.js"></script>
+	<script src="resources/js/moment.js"></script>
+	<script src="resources/js/wizard.js"></script>
+	
 	<script type="text/javascript">
 
 		$(document).ready(function() {
-			
-			//Remove as mascaras quando apertar o submit
-			$("#caixa-form").submit(function() {
-				$("#valor").unmask();
-				
-			});
 
 			/*
 			*
@@ -419,8 +520,17 @@
 			*
 			*/
 			
-			//$("#valor").mask("000.000.000.000.000,00", {reverse: true});
-
+			$("#valor").mask("000.000.000.000.000,00", {reverse: true});
+			
+			//Remove as mascaras quando apertar o submit
+			$("#caixa-form").submit(function() {
+						
+				var valor = $("#valor").val();
+				valor = valor.split(".").join("");
+				valor = valor.split(",").join(".");
+				$("#valor").val(valor);
+			});
+			
 			/*
 			*
 			* CONFIGURAÇÃO DA TABELA
@@ -429,6 +539,18 @@
 			
 			//INVISIVEIS - Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
             var table = $('#lista-caixa').DataTable({
+                
+            	"createdRow": function( row, data, dataIndex ) {
+                    if ( data[1] == 0 ) {
+                        //console.log(data[0], data[5]);               
+                      	//$(row).css('color', 'Red');//linha toda
+                    	$('td', row).eq(2).css('color', 'Red');//só a coluna    
+                    }else if(data[1] == 1){
+                    	//$(row).css('color', 'blue');
+                    	$('td', row).eq(2).css('color', 'blue');    
+                    }
+                  },
+                  
                 "columnDefs": [
                     {                   	
                         
@@ -442,11 +564,12 @@
                         //7 - parcela                        
                         //8 - descricao 
                         //9 - nomeRazao  */ 
-                        "targets": [ 1, 2, 3, 4, 6, 7, 8, 9 ],
+                        "targets": [ 1, 3, 4, 6, 7, 8 ],
                         "visible": false
                     }
                 ]
-            });
+            });// FIM - CONFIGURAÇÃO DA TABELA
+            
 
             /*
 			*
@@ -472,20 +595,51 @@
 				});
 				
 				var now = moment().format('YYYY-MM-DD');
-                $('#data_transacao').val(now);               
+                $('#data').val(now);     
 
-				//Este método se encontra no arquivo scripts.js
                 // DESABILITA O CAMPO
-                desabilitarCampos(document.getElementById("#gastoRecebimento"));
-
-              //Limpo os campos ao fechar - relacionado a visibilidade dos campos
-				$("#caixa-form").click(function(){
-					//objeto javascript
-	            	mfornecedorId.value="";           		
-	           		mnomeRazao.value="";
-	             	mencomendaId.value="";    
-				});
+                //var campoEncomendaId = document.getElementById("encomendaId");
+                document.getElementById("encomendaId").disabled = true;
+                document.getElementById("nomeRazao").disabled = true;
+                //HABILITA OS CAMPOS
+                //var campoFornecedorId = document.getElementById("fornecedorId");
+				//var campoNomeRazao = document.getElementById("nomeRazao");
+				document.getElementById("fornecedorId").disabled = false;
 				
+
+				//-----------Autocomplete----------------------------------------------------------------------
+	        	$('#fornecedorId').selectize({	
+	        	    valueField: 'id',//Valor do campo
+	        	    labelField: 'nomerazao',
+	        	    searchField: ['nomerazao', 'cpfcnpj', 'rgie'],
+	        	    options: [{id: '${fornecedor.fornid}', nomerazao: '${fornecedor.fornnome}', cpfcnpj: '${fornecedor.forncpfcnpj}'}],
+	        	    create: false,
+	        	    render: {
+	        	        option: function(item, escape) {
+	        	        	 return	'<div>' +
+	        					'<span class="title">' +
+	        						'<span>' + escape(item.nomerazao) + '</span><br/>' +
+	        						'<span>' + escape(item.cpfcnpj) + '</span><br/>' +
+	        					'</span>' +
+	        				'</div>';
+	        	        }
+	        	    },
+
+	        	    load: function(query, callback) {
+	        	        if (!query.length) return callback();
+	        	        $.ajax({
+	        	            url: 'rest-pesquisar-fornecedor/' + encodeURIComponent(query),
+	        	            type: 'GET',
+	        	            error: function() {
+	        	                callback();
+	        	            },
+	        	            success: function(res) {
+	        	                callback(res);
+	        	            }
+	        	        });
+	        	    }
+       			});
+              
 			});
 
             /*
@@ -494,7 +648,7 @@
 			*
 			*/
 
- //Define uma ação na linha da tabela ao apertar o botão editar.----------------------------------------------------------------
+ 			//Define uma ação na linha da tabela ao apertar o botão editar.----------------------------------------------------------------
             
             $('#lista-caixa tbody').on( 'click', '#edit-caixa', function () {            	
             	
@@ -510,60 +664,68 @@
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
 
-              	//Apresenta o modal de exclusão na tela.
+              	//Apresenta o modal de alteração na tela.-----------------------
               	$('#modal-caixa').modal('show');
 					
 				//Pega os valores que estão na tabela e passa para o modal.			
 				$('#data').val(data[0]);
+				$('#gastoRecebimento').val(data[1]);
 				$('#id').val(data[4]);
-				$('#valor').val(data[5]);
+				$('#valor').val(data[5]).trigger('input');
 				$('#forma').val(data[6]);
 				$('#parcela').val(data[7]);				
 				$('#descricao').val(data[8]);
-          		$('#fornecedorId').val(data[3]);
-          		$('#nomeRazao').val(data[9]);
-          		$('#encomendaId').val(data[2]);
+          		
+          		
 				
-//---------------visibilidade-----------------------------------------------------------------
+				//---------------visibilidade-----------------------------------------------------------------
 				//Atribuo os objetos para utilizar no bloqueio
-				var mfornecedorId = document.getElementById("fornecedorId");
-				var mencomendaId = document.getElementById("encomendaId");
-				var mnomeRazao = document.getElementById("nomeRazao");
+				//var mfornecedorId = document.getElementById("fornecedorId");
+				//var mencomendaId = document.getElementById("encomendaId");
+				//var mnomeRazao = document.getElementById("nomeRazao");
 				
 				//Se for recebimento
               	if(data[1] == 1){
                  	//console.log(data[1]);
                  	//Bloqueio o fornecedorId e o nomeRazao	e ativo encomenda	
                  	//mencomendaId.style.visibility="visible";			
-             		mencomendaId.disabled = false;
+             		document.getElementById("encomendaId").disabled = false;
              		//mfornecedorId.style.visibility="hidden";
-  					mfornecedorId.disabled = true;
+  					document.getElementById("fornecedorId").disabled = true;
   					//mnomeRazao.style.visibility="hidden";
-  		   			mnomeRazao.disabled = true;
-              		//Coloca os valores na encomendaId
-        			
+  		   			document.getElementById("nomeRazao").disabled = true;
+  		   			
+  		   			//Pega os valores que estão na tabela e passa para o modal.	
+              		$('#encomendaId').val(data[2]);    
+              		$('#fornecedorId').val('');
+	          		$('#nomeRazao').val('');  
+	          		
         		}
         		//Se for gasto
         		if(data[1] == 0){
         			//console.log(data[1]);
         			//Boloqueio encomendaId e ativo fornecedor e nomeRzao  
         			//mfornecedorId.style.visibility="visible";     			              		
-            		mfornecedorId.disabled = false;
+            		document.getElementById("fornecedorId").disabled = false;
             		//mnomeRazao.style.visibility="visible";	           		
-               		mnomeRazao.disabled = false;
+               		document.getElementById("nomeRazao").disabled = false;
                		//mencomendaId.style.visibility="hidden";
-                 	mencomendaId.disabled = true;
-                                 
+                 	document.getElementById("encomendaId").disabled = true;
+
+                 	//Pega os valores que estão na tabela e passa para o modal.	
+                 	$('#fornecedorId').val(data[3]);
+	          		$('#nomeRazao').val(data[9]);  
+	          		$('#encomendaId').val('');       
                 	//console.log("fornecedor "+mfornecedorId.disabled);
            			//onsole.log("encomenda "+mencomendaId.disabled);
            			//console.log("nomeRazao "+mnomeRazao.disabled);
            	              		
                 }
-//---------------FIM - visibilidade-----------------------------------------------------------------             
+				//---------------FIM - visibilidade-----------------------------------------------------------------             
               	
           		
             });
-//FIM - Define uma ação na linha da tabela ao apertar o botão editar.----------------------------------------------------------------
+			//FIM - Define uma ação na linha da tabela ao apertar o botão editar.----------------------------------------------------------------
 
 			/*
 			*
@@ -579,14 +741,37 @@
                 var data = table.row( $(this).parents('tr') ).data();
 
                 //Preenche o modal com o numero do ID a ser deletado.
-                $('#id_delete').val(data[0]);
+                $('#id_delete').val(data[4]);
 
                 //Apresenta o modal de exclusão na tela.
-				$('#excluir-caixa').modal('show');
+				$('#excluir-caixa').modal('show');//---------------------------------
 
             });
 
-            
+            /*
+			*
+			* SALDO ANTERIOR
+			*
+			*/
+			
+            $('#btn-saldo-anterior').click(function() {
+                
+            	//Apresenta o modal de exclusão na tela.
+				$('#modal-saldo-anterior').modal('show');//---------------------------------
+				//Altera o nome do botão do modal.
+				$("#modal-action-saldo-anterior").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir saldo anterior');
+				 //Altera dinamicamente o titulo do modal.
+            	$('#modal-subtitle-saldo-anterior').text("Incluir saldo anterior");
+            	//Ação da controller
+				$("#saldo-anterior-form").attr("action","administrativo-incluir-saldo-anterior");
+				//insere a data atual
+				var now = moment().format('YYYY-MM-DD');
+                $('#dataSaldoAnterior').val(now);  
+				//Pega o valor so saldo e passa para a modal
+                var data = $('#saldomes').val();
+                $('#valorSaldoAnterior').val(data).trigger('input');
+                
+            });
 	
         });
 

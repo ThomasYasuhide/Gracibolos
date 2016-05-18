@@ -1,51 +1,84 @@
 package br.com.gracibolos.jdbc.teste;
 
-//import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.model.Encomenda;
+import br.com.gracibolos.jdbc.model.ItemEncomenda;
+import br.com.gracibolos.jdbc.model.Status;
 
 //funcionando
 public class EncomendaInserir {
 
 	public static void main(String[] args) {
 		
-		Encomenda encomenda;
+		Encomenda encomenda = null;
 		Gerador g = new Gerador();
-		int[] ids = g.IdsCli();
-		//BigDecimal total;
-		int idCli;
+		EncomendaDao dao = null;
+		List<ItemEncomenda> listIe = null;
+		ItemEncomenda itemEncomenda = null;
+		Status status = new Status();
 		
-		encomenda = new Encomenda();
-		idCli = g.ranIdInt(ids);
-		encomenda.setStatus(g.randBetween(1, 5));//vai de 1 - 4
-		encomenda.setDataencomenda(LocalDate.now());
-		encomenda.setDataentrega(LocalDate.now());
-		encomenda.setClienteid(idCli);	
-		encomenda.setResponsavel(null);
-		encomenda.setDatafaturamento(LocalDate.now());
-		encomenda.setDataproducao(LocalDate.now());
-		encomenda.setDatafinalizado(LocalDate.now());
-		encomenda.setDatacancelamento(LocalDate.now());
+		for(int i=0;i<1;i++){
+					encomenda = new Encomenda();
+			//------cliente---------------------------------------							
+					encomenda.setClienteid(g.ranIdInt(g.IdsCli()));
+			//------status----------------------------------------
+					//encomenda.setStatus(g.randBetween(1, 5));//vai de 1 - 5
+					//encomenda.setStatus(g.randBetween(3, 4));//Em aberto
+					//encomenda.setStatus(2);//cancelado
+					encomenda.setStatus(5);//finalizado
+			//------data encomenda--------------------------------	
+					encomenda.setDataencomenda(g.generateDate());
+			//------data entrega----------------------------------
+					encomenda.setDataentrega(g.generateDate());
+					//encomenda.setDataentrega(null);
+			//------responsável-----------------------------------
+					encomenda.setResponsavel(g.responsavel());
+			//------data faturamento------------------------------
+					encomenda.setDatafaturamento(g.generateDate());
+					//encomenda.setDatafaturamento(null);
+			//------data produção---------------------------------
+					encomenda.setDataproducao(g.generateDate());
+					//encomenda.setDataproducao(null);
+			//------data produção---------------------------------
+					encomenda.setDatafinalizado(g.generateDate());
+					//encomenda.setDatafinalizado(null);
+			//------data finalizado-------------------------------
+					encomenda.setDatacancelamento(g.generateDate());
+					//encomenda.setDatacancelamento(null);
+			//------data cancelado--------------------------------
+					//total = new BigDecimal(g.randBetween(8, 250));
+					encomenda.setTotalprodutos(null);
+					encomenda.setObs("It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.");
+					
+					listIe = new ArrayList<ItemEncomenda>();
+					//DE 1 À 4 ITENS 
+					for(int j=0;j<g.randBetween(1, 4);j++)
+					{
+						itemEncomenda = new ItemEncomenda();
+						itemEncomenda.setProdutoId(g.ranIdLong(g.idsProduto()));
+						//Sem o id da encomenda - no ResultSet eu pego o retorno da chave  gerada
+						//itemEncomenda.setEncomendaId(g.ranIdLong(g.IdsEnc()));
+						itemEncomenda.setQuantidade(g.randBetween(1, 10));		
+						listIe.add(itemEncomenda);
+					}
+					encomenda.setListItemEncomenda(listIe);
+					
+					dao = new EncomendaDao();
+					try {
+						status = dao.inserir(encomenda);
+						if((status.getStatus1() && status.getStatus2()) == true){
+							System.out.println("inserido com sucesso"+ status.getNumeroEncomenda());
+						}else{
+							System.out.println("falha");
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+		}//Fim do for qtd de encomenda
 		
-		//total = new BigDecimal(g.randBetween(8, 250));
-		encomenda.setTotalprodutos(null);
-		encomenda.setObs("teste");
-		
-		
-		
-		EncomendaDao dao = new EncomendaDao();
-		
-		try {
-			if(dao.inserir(encomenda) == true){
-				System.out.println("inserido com sucesso");
-			}else{
-				System.out.println("falha");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
 
 	}
 

@@ -42,10 +42,18 @@ import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Meses;
 import br.com.gracibolos.jdbc.model.Produto;
+import br.com.gracibolos.jdbc.model.SaldoAnterior;
+import br.com.gracibolos.jdbc.model.Status;
 
 @Controller
 public class AdministrativoController {
-	//DASHBOARD
+	
+	
+	/*
+	 * 
+	 * ###################### DASHBOARD ######################
+	 * 
+	 * */
 	@RequestMapping("/administrativo-dashboard")
 	public ModelAndView dashboard(){
 		System.out.println("Entrou na pagina dashboard");
@@ -57,12 +65,19 @@ public class AdministrativoController {
 		Meses rec = new Meses();
 		
 		DashboardDao dao = new DashboardDao();
+		ClienteDao daoCli = new ClienteDao();
+		EncomendaDao daoEnc = new EncomendaDao();
+		ProdutoDao daoPro = new ProdutoDao();
 		
 		gasto = dao.buscarGastoRecebimento("0", ano);//Aqui eu busquei os gastos "0" deste ano
 		rec = dao.buscarGastoRecebimento("1", ano);//Aqui eu busquei os recebimentos "0" deste ano
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("administrativo/dashboard");
+		mv.addObject("clientes", daoCli.contagem());
+		mv.addObject("encomendas", daoEnc.contagemEmAberto());
+		mv.addObject("saldoMes",saldoMes());
+		mv.addObject("produtos", daoPro.contagem());
 		mv.addObject("gasto", gasto);
 		mv.addObject("recebimento", rec);
 		
@@ -81,7 +96,15 @@ public class AdministrativoController {
 	public ModelAndView produtos(){
 		System.out.println("Entrou na pagina de listagem de produtos");
 		//retorna a página produtos
-		return new ModelAndView("administrativo/produtos");
+		ProdutoDao dao = new ProdutoDao();
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/produtos");
+		try {
+			mv.addObject("produtos", dao.listar());
+		} catch (Exception e) {
+			System.out.println("Controller - erro ao carregar a lista de produtos\n"+e);
+		}
+		return mv;
 	}
 	
 	//INCLUIR NOVO PRODUTO
@@ -531,6 +554,7 @@ public class AdministrativoController {
 		
 		//cria uma nova instância DAO do estado
 		EstadoDao estadoDao = new EstadoDao();
+		ClienteDao daoCli = new ClienteDao();
 		//Guarda a lista de estados num List
 	    List<Estado> estados = estadoDao.listar_estados();
 		
@@ -540,6 +564,12 @@ public class AdministrativoController {
 	    mv.setViewName("administrativo/clientes");
 	    //passa a lista de estados para a Expression Language chamada estados	
 	    mv.addObject("estados", estados);
+	    try {
+			mv.addObject("clientes", daoCli.listar());
+		} catch (Exception e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
 	    //retorna o mv	
 		return mv;
 	}
@@ -1137,69 +1167,130 @@ public class AdministrativoController {
 
 		System.out.println("Entrou na servlet de listagem do caixa");
 		
-		CaixaDao dao = new CaixaDao();
-		List<Caixa> listCaixa = new ArrayList<Caixa>();
-	
-		//VERIFICA A DATA ATUAL, E PEGA O PRIMEIRO E ULTIMO DIA DO MÊS
-		LocalDate data = LocalDate.now();
-		@SuppressWarnings("unused")//recebo o primeiro dia do mes
-		String dataInicial = data.with(TemporalAdjusters.firstDayOfMonth()).toString();
-		//System.out.println(dataInicial);
-		@SuppressWarnings("unused")//ultimo dia do mes
-		String dataFinal = data.with(TemporalAdjusters.lastDayOfMonth()).toString();
-		//System.out.println(dataFinal);
-		
-		try {
-			listCaixa = dao.pesquisarEntre(dataInicial, dataFinal);
-			for(Caixa c : listCaixa){
-				
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//List mesAtual
-		//total
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("administrativo/caixa");
-		mv.addObject("listCaixa",listCaixa);
+		mv.addObject("listCaixa",listaCaixaMes());
+		mv.addObject("saldo",saldoMes());
+		return mv;
+	}
+	
+	static CaixaDao daoCaixa;
+	static List<Caixa> listCaixa;
+	
+	public static List<Caixa> listaCaixaMes()
+	{
+		daoCaixa = new CaixaDao();
+		listCaixa = new ArrayList<Caixa>();
+		//VERIFICA A DATA ATUAL, E PEGA O PRIMEIRO E ULTIMO DIA DO MÊS
+		LocalDate data = LocalDate.now();
+		//recebo o primeiro dia do mes
+		String dataInicial = data.with(TemporalAdjusters.firstDayOfMonth()).toString();
+		//System.out.println(dataInicial);
+		//ultimo dia do mes
+		String dataFinal = data.with(TemporalAdjusters.lastDayOfMonth()).toString();
+		//System.out.println(dataFinal);
+		try {
+			listCaixa = daoCaixa.pesquisarEntre(dataInicial, dataFinal);
+		} catch (Exception e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listCaixa;
+	}
+	
+	public static BigDecimal saldoMes(){
+		
+		BigDecimal gasto = new BigDecimal(0);
+		BigDecimal rec = new BigDecimal(0);
+			
+		for(Caixa c : listaCaixaMes()){
+			//somo os gastos
+			if(c.getGastoRecebimento()==0){
+				gasto = gasto.add(c.getValor());
+			//somo os recebimentos
+			}else if(c.getGastoRecebimento()==1){
+				rec = rec.add(c.getValor());
+			}
+		}
+				
+		//TESTES
+		//System.out.println("gasto : "+gasto);
+		//System.out.println("rec : "+rec);
+		//System.out.println("saldo : "+rec.subtract(gasto));
+		
+		return rec.subtract(gasto);
+	}
+	
+	//INCLUIR SALDO ANTERIOR
+	@RequestMapping("/administrativo-incluir-saldo-anterior")
+	public ModelAndView incluir_saldo_anterior(SaldoAnterior sa){
+		//declara um status como falso, pra depois verificar se a condição foi atendida ou não.
+		boolean status = false;
+		
+		//cria uma nova instância dao do caixa
+		CaixaDao dao = new CaixaDao();		
+		
+		
+		System.out.println(sa.getValorSaldoAnterior()
+				+"\n"+sa.getDataSaldoAnterior()
+				+"\n"+sa.getGastoRecebimentoSaldoAnterior());
+		
+		try {
+			//se o método inserir passando um caixa, for executado corretamente, status recebe verdadeiro
+			if(dao.inserirSaldoAnterior(sa)) {
+				status = true;			
+			}
+			//caso contrário, status recebe falso
+			else {
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrativo/caixa");
+		mv.addObject("incluir", status);
+		mv.addObject("listCaixa",listaCaixaMes());
+		mv.addObject("saldo",saldoMes());
 		return mv;
 	}
 	
 	//INCLUIR NOVO CAIXA
-		@RequestMapping("/administrativo-incluir-caixa")
-		public ModelAndView incluir_caixa(Caixa caixa){
-			System.out.println("Entrou na servlet de inclusão de inclusão de um novo caixa");
-			
-			//declara um status como falso, pra depois verificar se a condição foi atendida ou não.
-			boolean status = false;
-			
-			//cria uma nova instância dao do caixa
-			CaixaDao dao = new CaixaDao();					
-			
-			try {
-				//se o método inserir passando um caixa, for executado corretamente, status recebe verdadeiro
-				if(dao.inserir(caixa)) {
-					status = true;			
-				}
-				//caso contrário, status recebe falso
-				else {
-					status = false;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+	@RequestMapping("/administrativo-incluir-caixa")
+	public ModelAndView incluir_caixa(Caixa caixa){
+		System.out.println("Entrou na servlet de inclusão de inclusão de um novo caixa");
+		
+		//declara um status como falso, pra depois verificar se a condição foi atendida ou não.
+		boolean status = false;
+		
+		//cria uma nova instância dao do caixa
+		CaixaDao dao = new CaixaDao();					
+		
+		try {
+			//se o método inserir passando um caixa, for executado corretamente, status recebe verdadeiro
+			if(dao.inserir(caixa)) {
+				status = true;			
 			}
-			//instância uma nova modelView
-			ModelAndView mv = new ModelAndView();
-			//seta o caminho e o nome da jsp
-			mv.setViewName("administrativo/caixa");
-			//passa o retorno do status para a Expression Language chamada incluir
-			mv.addObject("incluir", status);
-			//retorna o mv
-			return mv;
+			//caso contrário, status recebe falso
+			else {
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		//instância uma nova modelView
+		ModelAndView mv = new ModelAndView();
+		//seta o caminho e o nome da jsp
+		mv.setViewName("administrativo/caixa");
+		//passa o retorno do status para a Expression Language chamada incluir
+		mv.addObject("incluir", status);
+		mv.addObject("listCaixa",listaCaixaMes());
+		mv.addObject("saldo",saldoMes());
+		//retorna o mv
+		return mv;
+	}
 
-	
 	//AlTERAR CAIXA
 	@RequestMapping("/administrativo-alterar-caixa")
 	public ModelAndView alterar_caixa (Caixa caixa){
@@ -1230,6 +1321,8 @@ public class AdministrativoController {
 		mv.setViewName("administrativo/caixa");
 		//passa o retorno do status para a Expression Language chamada alterar
 		mv.addObject("alterar", status);
+		mv.addObject("listCaixa",listaCaixaMes());
+		mv.addObject("saldo",saldoMes());
 	    //retorna mv
 		return mv;
 	}
@@ -1261,6 +1354,8 @@ public class AdministrativoController {
 		ModelAndView mv = new ModelAndView();
 	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/caixa");
+		mv.addObject("listCaixa",listaCaixaMes());
+		mv.addObject("saldo",saldoMes());
 		//passa o retorno do status para a Expression Language chamada excluir
 		mv.addObject("excluir", status);			
 	    //retorna mv
@@ -1274,10 +1369,23 @@ public class AdministrativoController {
 		System.out.println("Realizou a pesquisa entre datas do caixa");
 		
 		//cria uma nova instância DAO do caixa
-		CaixaDao dao = new CaixaDao();		
+		CaixaDao dao = new CaixaDao();	
+		
+		BigDecimal gasto = new BigDecimal(0);
+		BigDecimal rec = new BigDecimal(0);
+		
 		List<Caixa> caixas = null;
 		try {
 			caixas = dao.pesquisarEntre(datainicial, datafinal);
+			for(Caixa c : caixas){
+				//somo os gastos
+				if(c.getGastoRecebimento()==0){
+					gasto = gasto.add(c.getValor());
+				//somo os recebimentos
+				}else if(c.getGastoRecebimento()==1){
+					rec = rec.add(c.getValor());
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1287,42 +1395,59 @@ public class AdministrativoController {
 	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/caixa");
 	    //passa a lista do caixa para a Expression Language chamada caixas
-		mv.addObject("caixas", caixas);
+		mv.addObject("listCaixa", caixas);
+		mv.addObject("saldo",rec.subtract(gasto));
 	    //retorna mv
 	    return mv;
 	}
 	
 	//LISTAR CAIXA
-		@RequestMapping("/administrativo-listar-caixa")
-		public ModelAndView listar_caixa(){
-			System.out.println("Realizou a listagem do caixa");
-			
-			//cria uma nova instância dao da materia-prima
-			CaixaDao dao = new CaixaDao();
-			List<Caixa> caixas = null;
-			
-			try {
-				//Guarda a lista de materia-prima num List
-				caixas = dao.listar();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			//instância uma nova modelView
-			ModelAndView mv = new ModelAndView();
-		    //seta o caminho e o nome da jsp
-			mv.setViewName("administrativo/caixa");
-			//passa a lita de materia-prima para a Expression Language chamada materiasprimas
-			mv.addObject("caixas", caixas);
-		    //retorna mv		    
-		    return mv;
+	@RequestMapping("/administrativo-listar-caixa")
+	public ModelAndView listar_caixa(){
+		System.out.println("Realizou a listagem do caixa");
+		
+		//cria uma nova instância dao da materia-prima
+		CaixaDao dao = new CaixaDao();
+		List<Caixa> listCaixa = null;
+		
+		try {
+			//Guarda a lista de materia-prima num List
+			listCaixa = dao.listar();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		//instância uma nova modelView
+		ModelAndView mv = new ModelAndView();
+	    //seta o caminho e o nome da jsp
+		mv.setViewName("administrativo/caixa");
+		//passa a lita de materia-prima para a Expression Language chamada materiasprimas
+		mv.addObject("listCaixa", listCaixa);
+		mv.addObject("saldo",saldoMes());
+	    //retorna mv		    
+	    return mv;
+	}
 	
 	/*
 	 * 
-	 * ###################### ENCOMENDA ######################
+	 * ###################### ENCOMENDA #####################
 	 * 
 	 * */
+	
+	
+	@RequestMapping("/administrativo-listar-encomendas-finalizadas")
+	public ModelAndView listarEncomendasFinalizadas(){
+		EncomendaDao daoEnc = new EncomendaDao();
+		ModelAndView mv = new ModelAndView();
+		try {
+			mv.addObject("encomendas", daoEnc.finalizadas());
+		} catch (Exception e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		mv.setViewName("administrativo/encomendas");
+		return mv;
+	}
 	
 	//ENCOMENDA
 	@RequestMapping("/administrativo-encomendas")
@@ -1346,7 +1471,7 @@ public class AdministrativoController {
 				ItemEncomenda item = new ItemEncomenda();
 				item.setId((long) 1);
 				item.setNumero(1);
-				item.setProdutoId(3);
+				item.setProdutoId(3l);
 				item.setQuantidade(20);
 				item.setValor(new BigDecimal("10.00"));
 				item.setTotal(new BigDecimal("200.00"));
@@ -1354,7 +1479,7 @@ public class AdministrativoController {
 				ItemEncomenda item2 = new ItemEncomenda();
 				item2.setId((long) 2);
 				item2.setNumero(2);
-				item2.setProdutoId(2);
+				item2.setProdutoId(2l);
 				item2.setQuantidade(20);
 				item2.setValor(new BigDecimal("5.00"));
 				item2.setTotal(new BigDecimal("100.00"));
@@ -1362,19 +1487,29 @@ public class AdministrativoController {
 				itens.add(item);
 				itens.add(item2);
 			//FIM DOS TESTES
-
+				
+		EncomendaDao dao = new EncomendaDao();
+				
 		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
 		//seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/encomendas");
 		//passa os dados da encomenda para a Expression Language chamada encomenda
-		mv.addObject("encomenda", encomenda);
+		try {//Passando as encomendas em aberto - status >= 3
+			mv.addObject("encomendas", dao.emAberto());
+			mv.addObject("itens", itens);
+		} catch (Exception e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
 		//passa a lista de item para a Expression Language chamada itens
-		mv.addObject("itens", itens);
+		//mv.addObject("itens", itens);
 		//retorna mv
 		return mv;
 	}
-		
+	
+	
+	
 	//INCLUIR NOVA ENCOMENDA
 	@RequestMapping("/administrativo-incluir-encomenda")
 	public ModelAndView incluir_encomenda(Encomenda encomenda){
@@ -1408,19 +1543,14 @@ public class AdministrativoController {
 		
 		
 		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
-		boolean status = false;
+		//boolean status = false;
 		//cria uma nova instância DAO da encomenda
 		EncomendaDao dao = new EncomendaDao();			
-			
+		Status status = new Status();	
 		try {
 			//se o método inserir passando uma encomenda, for executado corretamente, status recebe verdadeiro
-			if(dao.inserir(encomenda)) {
-				status = true;
-			} 
-			//caso contrário, status recebe falso
-			else {
-				status = false;
-			}
+			status = dao.inserir(encomenda);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1430,7 +1560,9 @@ public class AdministrativoController {
 	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/encomendas");
 		//passa o retorno do status para a Expression Language chamada incluir
-		mv.addObject("incluir", status);
+		mv.addObject("incluir", status.getStatus1());
+		mv.addObject("incluirItens", status.getStatus2());
+		mv.addObject("numeroEncomenda", status.getNumeroEncomenda());
 	    //retorna mv
 		return mv;
 	}
@@ -1505,16 +1637,17 @@ public class AdministrativoController {
 	//PESQUISAR ENCOMENDA
 	@RequestMapping("/administrativo-pesquisar-encomenda")
 	public ModelAndView pesquisar_encomenda(String pesquisa){
-		System.out.println("Realizou a pesquisa de matéria prima");
+		System.out.println("Realizou a pesquisa do número da encomenda");
 		
 		//cria uma nova instância DAO da encomenda
 		EncomendaDao dao = new EncomendaDao();
-		
-		List<Encomenda> encomendas = null;
+		Encomenda e = new Encomenda();
+		List<Encomenda> encomendas = new ArrayList<Encomenda>();
 		try {
-			encomendas = dao.pesquisar(pesquisa);
-		} catch (Exception e) {
-			e.printStackTrace();
+			e = dao.pesquisarId(pesquisa);
+			encomendas.add(e);
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 		
 		//instância uma nova modelView
@@ -1526,5 +1659,4 @@ public class AdministrativoController {
 	    //retorna mv		    
 	    return mv;
 	}
-	
 }

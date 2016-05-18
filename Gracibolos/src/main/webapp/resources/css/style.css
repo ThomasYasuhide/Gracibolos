@@ -62,6 +62,14 @@ input[type="checkbox"]:checked ~ .unchecked {
     padding: 10px 15px 10px 15px;
 }
 
+.caixasaldo {
+	border: 1.5px solid #6B5344;
+    border-radius: 5px;
+    margin: 0px 5px 30px -5px;
+    height: 36px;
+
+}
+
 .dashboard-icon {
     font-size: 40px;
     opacity: 0.4;

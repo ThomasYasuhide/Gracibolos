@@ -11,8 +11,10 @@ import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Encomenda;
+import br.com.gracibolos.jdbc.model.ItemEncomenda;
+import br.com.gracibolos.jdbc.model.Status;
 
-public class EncomendaDao implements GenericoDao<Encomenda>{
+public class EncomendaDao{
 
 	/*
 	 * INCLUIR ENCOMENDA
@@ -21,20 +23,24 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 	 * 
 	 * */
 	
-	public boolean inserir(Encomenda encomenda) throws Exception{
-		boolean status = false;
+	@SuppressWarnings("static-access")
+	public Status inserir(Encomenda encomenda) throws Exception{
+		//boolean status = false;
 		
 		//string query do banco
 		String sql = " INSERT INTO encomenda(status, dataencomenda, dataentrega, cliente, responsavel,"
 				+ "datafaturamento , dataproducao, datafinalizado, datacancelado, total, obs)"
 				   + " VALUES (?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)";
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Status status = new Status();
 		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {			
 			
 			//seta os atributos do objeto encomenda
-			ps = conn.prepareStatement(sql);
+			//PASSA O PARA ps QUE EU QUERO O RETORNO DA CHAVE
+			ps = conn.prepareStatement(sql, ps.RETURN_GENERATED_KEYS);
 			ps.setInt(1, encomenda.getStatus());
 			if(encomenda.getDataencomenda()!=null){
 				ps.setDate(2, Date.valueOf(encomenda.getDataencomenda()));
@@ -72,10 +78,42 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 			ps.setBigDecimal(10, encomenda.getTotalprodutos());
 			ps.setString(11, encomenda.getObs());
 			
+			
+			//Insiro a encomenda
 			if(ps.executeUpdate() != 0) {
-				status = true;
+				status.setStatus1(true);
+			}else{
+				status.setStatus1(false);
 			}
 			
+			//Aqui eu pego o retorno da chave inserida
+			rs = ps.getGeneratedKeys();
+			rs.next();
+			Long lastid = rs.getLong(1);
+			status.setNumeroEncomenda(lastid);//Aqui eu pego o numero da encomenda
+			System.out.println("inserido id : "+lastid);
+			
+			//---INSIRO OS ITENS DA ENCOMENDA----------------------------------------------------
+			String sqlIe = " INSERT INTO itemEncomenda(produtoId, encomendaId, qtd)"
+					   + " VALUES (?, ?, ?)";
+			
+			//Inserir todos os itens da encomenda
+			for(ItemEncomenda ie : encomenda.getListItemEncomenda())
+			{			
+				ps = conn.prepareStatement(sqlIe);
+				ps.setLong(1, ie.getProdutoId());
+				ps.setLong(2, lastid);//encomendaId
+				ps.setInt(3, ie.getQuantidade());	
+				
+				//Insiro os itens da encomenda
+				if(ps.executeUpdate() != 0) {
+					status.setStatus2(true);
+				}else{
+					status.setStatus2(false);
+				}
+			}
+					
+			rs.close();
 			ps.close();	
 			conn.close();			
 					
@@ -83,7 +121,7 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		//trata, caso de uma exceção
 		catch (SQLException e) 
 		{
-			System.out.println("Erro ao inserir usuário\n"+e);
+			System.out.println("Erro ao inserir encomenda\n"+e);
 		}
 		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;
@@ -271,24 +309,37 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 	 * 
 	 * */
 	
-	@Override
+	
 	public List<Encomenda> pesquisar(String pesquisa) throws Exception {
 		return null;
 	}
 	
-	public Encomenda pesquisarId(Long pesquisa) throws Exception{
+	public Encomenda pesquisarId(String pesquisa) throws Exception{
 		
 		//string query do banco
-		String sql = "SELECT id, cliente, status, responsavel, dataencomenda, dataentrega, datafaturamento, dataproducao, datafinalizado, datacancelado, total, obs FROM encomenda WHERE id=?";
+		String sql = "SELECT encomenda.id, encomenda.cliente, encomenda.status, encomenda.responsavel, encomenda.dataencomenda, encomenda.dataentrega"
+				+ ", encomenda.datafaturamento, encomenda.dataproducao, encomenda.datafinalizado, encomenda.datacancelado, encomenda.total"
+				+ ", encomenda.obs, cliente.nomerazao, cliente.id as clienteId, cliente.cpfcnpj "
+				+ "FROM encomenda "
+				+ "INNER JOIN cliente ON encomenda.cliente = cliente.id "
+				+ "WHERE encomenda.id = "+pesquisa;
+		
+		String sqlItem = "SELECT itemencomenda.id, itemencomenda.produtoId, itemencomenda.encomendaId, itemencomenda.qtd, produto.nome as nomeProduto," 
+				+" produto.codigo, produto.valor, produto.id as produtoIdproduto"
+				+" FROM gracibolos.itemencomenda"
+				+" inner join gracibolos.produto on itemencomenda.produtoId = produto.id"
+				+" where itemencomenda.encomendaId = "+pesquisa;
+		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Encomenda encomenda=null;
+		List<ItemEncomenda> listaDeItemEncomenda= null;
+		
 		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) 
 		{	
 			//seta a string para fazer a busca
 			ps = conn.prepareStatement(sql);
-			ps.setLong(1, pesquisa);
 			rs = ps.executeQuery();
 			rs.next();
 			//da um get nos atributos do objeto encomenda
@@ -311,6 +362,32 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 				encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
 			encomenda.setTotalprodutos(rs.getBigDecimal("total"));
 			encomenda.setObs(rs.getString("obs"));
+			encomenda.setNomerazao(rs.getString("nomerazao"));
+			encomenda.setClienteId(rs.getLong("clienteId"));
+			encomenda.setCpfcnpj(rs.getString("cpfcnpj"));
+			
+			
+			//------Itens da encomenda---------------------------------------------------------
+			ps = conn.prepareStatement(sqlItem);
+			rs = ps.executeQuery();
+			listaDeItemEncomenda = new ArrayList<ItemEncomenda>();
+			while(rs.next())
+			{
+				ItemEncomenda itemEncomenda = new ItemEncomenda();
+				
+				itemEncomenda.setId(rs.getLong("id"));//itemEncomenda
+				itemEncomenda.setProdutoId(rs.getLong("produtoId"));//itemEncomenda
+				itemEncomenda.setProdutoIdProduto(rs.getLong("produtoIdproduto"));//Produto
+				itemEncomenda.setEncomendaId(rs.getLong("encomendaId"));//itemEncomenda
+				itemEncomenda.setQuantidade(rs.getInt("qtd"));//itemEncomenda
+				itemEncomenda.setNomeProduto(rs.getString("nomeProduto"));//Produto
+				itemEncomenda.setValor(rs.getBigDecimal("valor"));//Produto
+				
+				listaDeItemEncomenda.add(itemEncomenda);
+				
+			}
+			
+			encomenda.setListItemEncomenda(listaDeItemEncomenda);
 			
 			ps.close();
 			conn.close();			
@@ -321,5 +398,147 @@ public class EncomendaDao implements GenericoDao<Encomenda>{
 		}
 		//retorna o array
 		return encomenda;
+	}
+	
+	//Contagem de encomendas em aberto
+	public int contagemEmAberto() 
+	{
+		String sql = "SELECT id FROM encomenda where status between 3 AND 4";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int tam = 0;
+		  
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+		  ps = conn.prepareStatement(sql);
+		  rs = ps.executeQuery();
+		  rs.last();
+		  tam = rs.getRow();
+		}catch (Exception e) {
+			//handle exception
+		}
+		return tam;
+	}
+	
+	public List<Encomenda> finalizadas() throws Exception{
+		
+		//ENCOMENDAS FINALIZADAS
+				String sql = "SELECT encomenda.id, encomenda.cliente, encomenda.status, encomenda.responsavel, encomenda.dataencomenda, encomenda.dataentrega"
+						+ ", encomenda.datafaturamento, encomenda.dataproducao, encomenda.datafinalizado, encomenda.datacancelado, encomenda.total"
+						+ ", encomenda.obs, cliente.nomerazao, cliente.id as clienteId, cliente.cpfcnpj "
+						+ "FROM encomenda "
+						+ "INNER JOIN cliente ON encomenda.cliente = cliente.id "
+						+ "WHERE encomenda.status = 5 ";
+											//5 - finalizadas
+				return getListEncomenda(sql);
+	}
+	
+	public List<Encomenda> emAberto() throws Exception{
+		
+		//ENCOMENDAS EM ABERTO
+		String sql = "SELECT encomenda.id, encomenda.cliente, encomenda.status, encomenda.responsavel, encomenda.dataencomenda, encomenda.dataentrega"
+				+ ", encomenda.datafaturamento, encomenda.dataproducao, encomenda.datafinalizado, encomenda.datacancelado, encomenda.total"
+				+ ", encomenda.obs, cliente.nomerazao, cliente.id as clienteId, cliente.cpfcnpj "
+				+ "FROM encomenda "
+				+ "INNER JOIN cliente ON encomenda.cliente = cliente.id "
+				+ "WHERE encomenda.status between 3 AND 4 ";
+									//3 - FATURADA , 4 - PRODUZINDO
+		return getListEncomenda(sql);
+	}
+	
+	public static List<Encomenda> getListEncomenda(String sql) throws Exception{
+		
+		ArrayList<Encomenda> listEnc = new ArrayList<>();
+		//Encomenda
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Encomenda encomenda=null;
+		
+		//Itens
+		PreparedStatement psItens = null;
+		ResultSet rsItens = null;
+		List<ItemEncomenda> listaDeItemEncomenda= null;
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) 
+		{	
+			
+			//seta a string para fazer a busca
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next())
+			{
+				//da um get nos atributos do objeto encomenda
+				encomenda = new Encomenda();
+			
+				encomenda.setId(rs.getLong("id"));
+				encomenda.setClienteid(rs.getInt("cliente"));	
+				encomenda.setStatus(rs.getInt("status"));
+				encomenda.setResponsavel(rs.getString("responsavel"));
+				if(rs.getDate("dataencomenda")!=null)
+					encomenda.setDataencomenda(rs.getDate("dataencomenda").toLocalDate());
+				if(rs.getDate("dataentrega")!=null)
+					encomenda.setDataentrega(rs.getDate("dataentrega").toLocalDate());
+				if(rs.getDate("datafaturamento")!=null)
+					encomenda.setDatafaturamento(rs.getDate("datafaturamento").toLocalDate());
+				if(rs.getDate("dataproducao")!=null)
+					encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
+				if(rs.getDate("datafinalizado")!=null)
+					encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
+				if(rs.getDate("datacancelado")!=null)
+					encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
+				encomenda.setTotalprodutos(rs.getBigDecimal("total"));
+				encomenda.setObs(rs.getString("obs"));
+				encomenda.setNomerazao(rs.getString("nomerazao"));
+				encomenda.setClienteId(rs.getLong("clienteId"));
+				encomenda.setCpfcnpj(rs.getString("cpfcnpj"));
+			
+				//------Itens da encomenda---------------------------------------------------------
+				 		
+				String sqlItem = "SELECT itemencomenda.id, itemencomenda.produtoId, itemencomenda.encomendaId, itemencomenda.qtd, produto.nome as nomeProduto," 
+						+" produto.codigo, produto.valor, produto.id as produtoIdproduto"
+						+" FROM gracibolos.itemencomenda"
+						+" inner join gracibolos.produto on itemencomenda.produtoId = produto.id"
+						+" where itemencomenda.encomendaId = "+encomenda.getId().toString();
+				
+				psItens = conn.prepareStatement(sqlItem);
+				rsItens = psItens.executeQuery();
+				listaDeItemEncomenda = new ArrayList<ItemEncomenda>();
+				
+				while(rsItens.next())
+				{
+					ItemEncomenda itemEncomenda = new ItemEncomenda();
+					
+					itemEncomenda.setId(rsItens.getLong("id"));//itemEncomenda
+					itemEncomenda.setProdutoId(rsItens.getLong("produtoId"));//itemEncomenda
+					itemEncomenda.setProdutoIdProduto(rsItens.getLong("produtoIdproduto"));//Produto
+					itemEncomenda.setEncomendaId(rsItens.getLong("encomendaId"));//itemEncomenda
+					itemEncomenda.setQuantidade(rsItens.getInt("qtd"));//itemEncomenda
+					itemEncomenda.setNomeProduto(rsItens.getString("nomeProduto"));//Produto
+					itemEncomenda.setValor(rsItens.getBigDecimal("valor"));//Produto
+					
+					listaDeItemEncomenda.add(itemEncomenda);
+					
+				}//while itens
+				
+				rsItens = null;
+				psItens = null;
+				
+				encomenda.setListItemEncomenda(listaDeItemEncomenda);
+				
+				listEnc.add(encomenda);
+				
+			}//while encomenda
+			
+			conn.close();
+			ps.close();
+						
+		} 
+		//trata, caso de uma exceção
+		catch (SQLException e) {
+			System.out.println("Erro ao listar as encomendas\n"+e);
+		}
+		//retorna o array
+		return listEnc;
 	}
 }
