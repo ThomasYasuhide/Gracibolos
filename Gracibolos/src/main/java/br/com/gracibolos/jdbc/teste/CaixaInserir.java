@@ -20,7 +20,7 @@ public class CaixaInserir {
 		c.setValor(big);
 		c.setForma("dinheiro");
 		c.setParcela(1);
-		c.setData(LocalDate.now());
+		//c.setData(LocalDate.now());
 		c.setDescricao("teste");
 		
 		try {

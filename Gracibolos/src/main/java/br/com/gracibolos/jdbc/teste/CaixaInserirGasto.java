@@ -42,7 +42,7 @@ public class CaixaInserirGasto {
 			//descricao
 			c.setDescricao(null);
 			//data
-			c.setData(gc.generateDate());
+			//c.setData(gc.generateDate());
 			try {
 				if(dao.inserir(c) == true)
 				{

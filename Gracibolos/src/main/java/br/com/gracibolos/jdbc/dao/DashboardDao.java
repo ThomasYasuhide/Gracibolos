@@ -19,10 +19,10 @@ public class DashboardDao {
 		
 		List<Ano> meses = new ArrayList<Ano>();
 		//string query do banco
-		String sql = "SELECT MONTH (caixa.data) AS num, "
-				+ "MONTHNAME (caixa.data) as nome, "
+		String sql = "SELECT MONTH (caixa.dataTransacao) AS num, "
+				+ "MONTHNAME (caixa.dataTransacao) as nome, "
 				+ "sum(caixa.valor) as total  from caixa "
-				+ "WHERE caixa.gastoRecebimento="+gr+" AND YEAR (caixa.data) = "+ano+" "
+				+ "WHERE caixa.gastoRecebimento="+gr+" AND YEAR (caixa.dataTransacao) = "+ano+" "
 				+ "GROUP BY num,nome";
 		try (Connection conn = ConnectionProvider.getInstance().getConnection()) 
 		{

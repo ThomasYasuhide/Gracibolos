@@ -21,7 +21,7 @@ public class CaixaAlterar {
 		c.setForma("debito");
 		c.setParcela(1);
 		LocalDate data = LocalDate.of(2016, 05, 06);
-		c.setData(data);
+		//c.setData(data);
 		c.setDescricao(null);		
 		c.setId(10L);
 		
