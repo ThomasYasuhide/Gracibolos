@@ -237,7 +237,7 @@
 						                    </li>
 						
 						                    <li role="presentation" class="disabled">
-						                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
+						                        <a href="#step2" onClick="document.getElementById('produtos-encomenda').submit;" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">shopping_cart</i>
 						                            </span>
@@ -325,7 +325,6 @@
 					                   		</form>
 					                   		
 						                </div>
-							                
 						                
 						                
 										
@@ -428,12 +427,13 @@
 													</div>
 													
 													<div class="input-margin col-xs-12 col-sm-6 col-md-8">
-														<label class="control-label" for="valortroco">Forma de pagamento:</label>
+														<label class="control-label" for="formapagamento">Forma de pagamento:</label>
 														<select class="form-control" name="formapagamento">
 															<option value="0" selected disabled>Selecione...</option>
 															<option value="1">Dinheiro</option>
 															<option value="2">Cartão de crédito</option>
 															<option value="3">Cheque</option>
+															<option value="4">Dinheiro e Cartão</option>
 														</select>
 													</div>
 													
@@ -449,7 +449,7 @@
 														<label class="control-label" for="valorpago">Valor pago:</label>
 														<div class="input-group">
 															<span class="input-group-addon">R$</span>
-															<input type="text" id="valorpago" name="valorpago" class="form-control" />
+															<input type="text" id="valorpago" name="valorpago" placeholder="0,00" class="form-control" />
 														</div>
 													</div>
 													
@@ -457,7 +457,7 @@
 														<label class="control-label" for="valortroco">Troco:</label>
 														<div class="input-group">
 															<span class="input-group-addon">R$</span>
-															<input type="text" id="valortroco" name="valortroco" class="form-control" readonly />
+															<input type="text" id="valortroco" name="valortroco" placeholder="0,00" class="form-control" readonly />
 														</div>
 													</div>
 													
@@ -678,14 +678,12 @@
 			*
 			*/
 			
-			$(".produto").each(function(){
-				
-				$(this).selectize({
+			function selectize(id){
+				$("#produto_"+id).selectize({
 				    valueField: 'id',
 				    labelField: 'nome',
 				    searchField: ['codigo', 'nome'],
-					options: [{id: '${item.produtoId}', codigo: '${item.codigo}', nome: '${item.nome}'}],
-				    create: false,
+					create: false,
 				    render: {
 				        option: function(item, escape) {
 				            return	'<div>' +
@@ -700,7 +698,7 @@
 				        if (!query.length) return callback();
 				        $.ajax({
 				            
-				            url: 'http://localhost:8080/Gracibolos/rest-pesquisa-produtos/' + encodeURIComponent(query),
+				            url: 'http://localhost:8080/Gracibolos/rest-pesquisar-produto-nome/' + encodeURIComponent(query),
 				            type: 'GET',
 				            error: function() {
 				                callback();
@@ -711,13 +709,17 @@
 				        });
 				    }
 				});
-			});
+			}
 			
-			$(".produto").on("change", function(){
+			$("#item").on("change", ".produto", function(){
 				var linha = this.id.replace("produto_", "");
 				
 				var produto = $('#produto_' + linha);
 				var valor = $('#valor_' + linha);
+				
+				alert(linha);
+				alert(produto);
+				alert(valor);
 				
 
 				if(produto.val() != undefined){
@@ -826,15 +828,15 @@
 				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<select class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
+				    item += 			'<select class="form-control produto" id="produto_'+i+'" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" value="0" class="form-control quantidade"  min="0" max="9999999">';
+				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" class="form-control quantidade"  min="0" max="9999999">';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].valor" id="valor_'+i+'" class="form-control valor">';
+				    item += 				'<input type="text" name="item['+i+'].valor" id="valor_'+i+'" placeholder="0,00" class="form-control valor">';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
@@ -847,8 +849,10 @@
 				    item += 			'<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>';
 				    item += 		'</td>';
 				    item += 	'</tr>';
-			    
+			    					    
 				    produtos.append(item);
+				    
+				    selectize(i);
 				    
 				    i++;
 				}else {
@@ -951,8 +955,9 @@
 					$("#valortroco").val((valorpago - totalencomenda).toFixed(2)).trigger('input');
 				}else{
 					alert('O valor pago é inferior ao valor total da encomenda.');
+					$('#valorpago').val("");
+					$("#valortroco").val("");
 				}
-				
 				
 			});
 			
