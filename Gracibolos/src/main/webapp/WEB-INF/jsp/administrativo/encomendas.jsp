@@ -1038,7 +1038,8 @@
 				//Preenche os determinados campos com os conteudos.
                 $('#id').val(data[0]);
                 $('#status').val(data[1]);
-                
+
+                //Settando no selectize os valores vindo da controller
                 var selectize = $('#cliente')[0].selectize;
                 selectize.addOption({id:data[2], nomerazao:data[3], cpfcnpj:data[4]});
                 selectize.setValue(data[2]);
