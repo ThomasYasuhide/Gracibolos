@@ -124,12 +124,12 @@
 						<form action="administrativo-pesquisar-entre" method="POST">
 							<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
 								<label class="control-label" for="datainicial">Data inicial*:</label>
-								<input type="date" id="datainicial" class="form-control" placeholder="Informe a data inicial" name="datainicial" required>
+								<input value="${datainicial }" type="date" id="datainicial" class="form-control" placeholder="Informe a data inicial" name="datainicial" required>
 							</div>
 													
 							<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
 								<label class="control-label" for="datafinal">Data final*:</label>						
-								<input type="date" id="datafinal" class="form-control" placeholder="Informe a data final" name="datafinal" required>
+								<input value="${datafinal }" type="date" id="datafinal" class="form-control" placeholder="Informe a data final" name="datafinal" required>
 							</div>
 							
 							<div class="input-margin col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -210,7 +210,7 @@
 							<div class="row">
 								<div class="row caixasaldo">
 									<div class="col-xs-9">							
-										<h4 >Saldo : R$<input id="saldomes" name="saldomes" value="${saldo}" type="text" size="10" style="border:0;" readonly/></h4>		
+										<h4 >Saldo : R$ <input id="saldomes" name="saldomes" value="${saldo}" type="text" size="10" style="border:0;" readonly/></h4>		
 									</div>
 								</div>									
 							</div>

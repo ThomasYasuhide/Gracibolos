@@ -38,9 +38,8 @@ public class ServerRestController {
 	private List<ItemEncomenda> listItemEnc;
 	
 	// OK
-	@RequestMapping(value = "/rest-pesquisar-fornecedor/{pesquisa}", 
-			method = RequestMethod.GET, headers="Accept=application/json")  
-	public @ResponseBody List<Fornecedor> pesquisar_fornecedor(@PathVariable String pesquisa
+	@RequestMapping(value = "/rest-pesquisar-fornecedor/{pesquisa}")  
+	public List<Fornecedor> pesquisar_fornecedor(@PathVariable String pesquisa
 			, HttpServletResponse response) {
 		fornList = null;
 		fornDao = new FornecedorDao();
@@ -55,13 +54,8 @@ public class ServerRestController {
 	}
 	
 	// OK
-	@RequestMapping(value = "/rest-pesquisa-materiaprima/{pesquisa}"
-					,method = RequestMethod.GET
-					,produces = {MediaType.APPLICATION_JSON_VALUE,
-					MediaType.APPLICATION_XML_VALUE
-				})
-	
-	public @ResponseBody List<MateriaPrima> pesquisar_materiprima(@PathVariable String pesquisa
+	@RequestMapping(value = "/rest-pesquisa-materiaprima/{pesquisa}")
+	public List<MateriaPrima> pesquisar_materiprima(@PathVariable String pesquisa
 			, HttpServletResponse response) 
 	{
 		mpList = null;
@@ -117,12 +111,8 @@ public class ServerRestController {
 	 }
 	
 	// OK
-	@RequestMapping(value = "/rest-pesquisar-produto-nome/{pesquisa}", 
-			method = RequestMethod.GET
-			,produces = {MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE
-		}) 
-	public @ResponseBody List<Produto> pesquisar_produto(@PathVariable String pesquisa, HttpServletResponse response) {
+	@RequestMapping(value = "/rest-pesquisar-produto-nome/{pesquisa}") 
+	public List<Produto> pesquisar_produto(@PathVariable String pesquisa, HttpServletResponse response) {
 		produtoDao = null;
 		produtoDao = new ProdutoDao();
 		try {
@@ -137,12 +127,8 @@ public class ServerRestController {
 	}
 
 	// OK
-	@RequestMapping(value = "/rest-clientes/{nome}", 
-			method = RequestMethod.GET
-			,produces = {MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE
-		}) 
-	public @ResponseBody List<Cliente> ListClientes(@PathVariable String nome, HttpServletResponse response){
+	@RequestMapping(value = "/rest-clientes/{nome}") 
+	public List<Cliente> ListClientes(@PathVariable String nome, HttpServletResponse response){
 		clienteDao = new ClienteDao();
 		try {
 			clientesList = clienteDao.pesquisar(nome);
@@ -155,12 +141,8 @@ public class ServerRestController {
 		return clientesList;
 	}
 	
-	@RequestMapping(value = "/rest-itensencomenda/{encomenda}", 
-			method = RequestMethod.GET
-			,produces = {MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE
-		}) 
-	public @ResponseBody List<ItemEncomenda> ListItensEncomenda(@PathVariable String encomenda
+	@RequestMapping(value = "/rest-itensencomenda/{encomenda}") 
+	public List<ItemEncomenda> ListItensEncomenda(@PathVariable String encomenda
 			, HttpServletResponse response){
 		ItemEncDao = new ItemEncomendaDao();
 		try {

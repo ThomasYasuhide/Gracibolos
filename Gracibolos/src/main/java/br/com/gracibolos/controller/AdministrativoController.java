@@ -1160,7 +1160,14 @@ public class AdministrativoController {
 	 * ###################### CAIXA ######################
 	 * 
 	 * */
-	
+	private static CaixaDao daoCaixa;
+	private static List<Caixa> listCaixa;
+	private static Saldo saldo;
+	private static LocalDate data = LocalDate.now();
+	private static String dataInicial = data.with(TemporalAdjusters.firstDayOfMonth()).toString();
+	private static String dataFinal = data.with(TemporalAdjusters.lastDayOfMonth()).toString();
+	//VERIFICA A DATA ATUAL, E PEGA O PRIMEIRO E ULTIMO DIA DO MÊS
+			
 	//CAIXA
 	@RequestMapping("/administrativo-caixa")
 	public ModelAndView caixa(){
@@ -1171,23 +1178,16 @@ public class AdministrativoController {
 		mv.setViewName("administrativo/caixa");
 		mv.addObject("listCaixa",listaCaixaMes());
 		mv.addObject("saldo",saldo());
+		mv.addObject("datainicial", dataInicial);
+		mv.addObject("datafinal", dataFinal);
 		return mv;
 	}
 	
-	static CaixaDao daoCaixa;
-	static List<Caixa> listCaixa;
-	static Saldo saldo;
 	public static List<Caixa> listaCaixaMes()
 	{
 		daoCaixa = new CaixaDao();
 		listCaixa = new ArrayList<Caixa>();
-		//VERIFICA A DATA ATUAL, E PEGA O PRIMEIRO E ULTIMO DIA DO MÊS
-		LocalDate data = LocalDate.now();
-		//recebo o primeiro dia do mes
-		String dataInicial = data.with(TemporalAdjusters.firstDayOfMonth()).toString();
-		//System.out.println(dataInicial);
-		//ultimo dia do mes
-		String dataFinal = data.with(TemporalAdjusters.lastDayOfMonth()).toString();
+
 		//System.out.println(dataFinal);
 		try {
 			listCaixa = daoCaixa.pesquisarEntre(dataInicial, dataFinal);
@@ -1210,7 +1210,6 @@ public class AdministrativoController {
 		return saldo.getSaldo();
 	}
 
-	
 	//INCLUIR NOVO CAIXA
 	@RequestMapping("/administrativo-incluir-caixa")
 	public ModelAndView incluir_caixa(Caixa caixa){
@@ -1220,11 +1219,11 @@ public class AdministrativoController {
 		boolean status = false;
 		
 		//cria uma nova instância dao do caixa
-		CaixaDao dao = new CaixaDao();					
+		daoCaixa = new CaixaDao();					
 		
 		try {
 			//se o método inserir passando um caixa, for executado corretamente, status recebe verdadeiro
-			if(dao.inserir(caixa)) {
+			if(daoCaixa.inserir(caixa)) {
 				status = true;			
 			}
 			//caso contrário, status recebe falso
@@ -1242,6 +1241,8 @@ public class AdministrativoController {
 		mv.addObject("incluir", status);
 		mv.addObject("listCaixa",listaCaixaMes());
 		mv.addObject("saldo",saldo());
+		mv.addObject("datainicial", dataInicial);
+		mv.addObject("datafinal", dataFinal);
 		//retorna o mv
 		return mv;
 	}
@@ -1254,12 +1255,12 @@ public class AdministrativoController {
 		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;
 		//cria uma nova instância DAO do caixa
-		CaixaDao dao = new CaixaDao();			
+		daoCaixa = new CaixaDao();			
 			
 		try
 		{
 			//se o método alterar passando um caixa, for executado corretamente, status recebe verdadeiro
-			if(dao.alterar(caixa)) {
+			if(daoCaixa.alterar(caixa)) {
 				status = true;
 			}
 			//caso contrário, status recebe falso
@@ -1278,6 +1279,8 @@ public class AdministrativoController {
 		mv.addObject("alterar", status);
 		mv.addObject("listCaixa",listaCaixaMes());
 		mv.addObject("saldo",saldo());
+		mv.addObject("datainicial", dataInicial);
+		mv.addObject("datafinal", dataFinal);
 	    //retorna mv
 		return mv;
 	}
@@ -1290,11 +1293,11 @@ public class AdministrativoController {
 		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		boolean status = false;	
 		//cria uma nova instância DAO do caixa		
-		CaixaDao dao = new CaixaDao();			
+		daoCaixa = new CaixaDao();			
 				
 		try {
 			//se o método excluir passando um caixa, for executado corretamente, status recebe verdadeiro
-			if(dao.excluir(caixa)) {
+			if(daoCaixa.excluir(caixa)) {
 				status = true;
 			}
 			//caso contrário, status recebe falso
@@ -1312,7 +1315,9 @@ public class AdministrativoController {
 		mv.addObject("listCaixa",listaCaixaMes());
 		mv.addObject("saldo",saldo());
 		//passa o retorno do status para a Expression Language chamada excluir
-		mv.addObject("excluir", status);			
+		mv.addObject("excluir", status);
+		mv.addObject("datainicial", dataInicial);
+		mv.addObject("datafinal", dataFinal);
 	    //retorna mv
 		return mv;
 	}
@@ -1324,63 +1329,30 @@ public class AdministrativoController {
 		System.out.println("Realizou a pesquisa entre datas do caixa");
 		
 		//cria uma nova instância DAO do caixa
-		CaixaDao dao = new CaixaDao();	
-		
-		BigDecimal gasto = new BigDecimal(0);
-		BigDecimal rec = new BigDecimal(0);
+		daoCaixa = new CaixaDao();	
 		
 		List<Caixa> caixas = null;
 		try {
-			caixas = dao.pesquisarEntre(datainicial, datafinal);
-			for(Caixa c : caixas){
-				//somo os gastos
-				if(c.getGastoRecebimento()==0){
-					gasto = gasto.add(c.getValor());
-				//somo os recebimentos
-				}else if(c.getGastoRecebimento()==1){
-					rec = rec.add(c.getValor());
-				}
-			}
+			caixas = daoCaixa.pesquisarEntre(datainicial, datafinal);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		//instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
 	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/caixa");
 	    //passa a lista do caixa para a Expression Language chamada caixas
 		mv.addObject("listCaixa", caixas);
-		mv.addObject("saldo",rec.subtract(gasto));
+		mv.addObject("saldo",saldo());
 	    //retorna mv
 	    return mv;
 	}
 	
 	//LISTAR CAIXA
 	@RequestMapping("/administrativo-listar-caixa")
-	public ModelAndView listar_caixa(){
-		System.out.println("Realizou a listagem do caixa");
-		
-		//cria uma nova instância dao da materia-prima
-		CaixaDao dao = new CaixaDao();
-		List<Caixa> listCaixa = null;
-		
-		try {
-			//Guarda a lista de materia-prima num List
-			listCaixa = dao.listar();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		//instância uma nova modelView
-		ModelAndView mv = new ModelAndView();
-	    //seta o caminho e o nome da jsp
-		mv.setViewName("administrativo/caixa");
-		//passa a lita de materia-prima para a Expression Language chamada materiasprimas
-		mv.addObject("listCaixa", listCaixa);
-		mv.addObject("saldo",saldo());
-	    //retorna mv		    
-	    return mv;
+	public ModelAndView listar_caixa(){	    
+	    return new ModelAndView("administrativo/caixa");
 	}
 	
 	/*
