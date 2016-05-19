@@ -3,18 +3,21 @@ package br.com.gracibolos.jdbc.teste;
 import java.math.BigDecimal;
 
 import br.com.gracibolos.jdbc.dao.CaixaDao;
-import br.com.gracibolos.jdbc.model.Saldo;
 
 public class CaixaUpdateSaldo {
 
+	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Saldo s = new Saldo();
+		
 		CaixaDao dao = new CaixaDao();
 		BigDecimal saldo = new BigDecimal(0);
-		s.setSaldo(saldo);
+		BigDecimal valor = new BigDecimal(100);
+		
 		try {
-			if(dao.updateSaldo(s)){
+			saldo = dao.getSaldo();
+			//if(dao.updateSaldo(saldo.add(valor))){
+			if(dao.updateSaldo(saldo.subtract(valor))){
 				System.out.println("saldo atualizado");
 			}
 			

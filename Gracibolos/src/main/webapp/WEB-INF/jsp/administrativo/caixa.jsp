@@ -378,6 +378,12 @@
 									<label class="control-label" for="id">Nº caixa:</label>
 									<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
 								</div>
+								<!-- Essa div contem o id do caixa q vai ser excluido, porem ele fica escondido na tela, por causa da class hidden-->
+								<div class="hidden">
+								<!-- A identificação do spring é pelo name -->	
+									<label class="control-label" for="valor">Nº caixa:</label>
+									<input type="text" id="valor_delete" name="valor" placeholder="Digite o numero de ID" class="form-control" readonly />
+								</div>
 								<!-- mensagem no corpo do modal -->	
 								<p>Deseja realmente excluir o caixa selecionada?</p>
 							</div>
@@ -657,7 +663,8 @@
                 var data = table.row( $(this).parents('tr')).data();
 
                 //Preenche o modal com o numero do ID a ser deletado.
-                $('#id_delete').val(data[4]);
+                $('#id_delete').val(data[1]);
+                $('#valor_delete').val(data[5]);
 
                 //Apresenta o modal de exclusão na tela.
 				$('#excluir-caixa').modal('show');//---------------------------------

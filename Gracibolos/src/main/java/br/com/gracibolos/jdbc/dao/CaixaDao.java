@@ -12,7 +12,6 @@ import java.util.List;
 
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.Caixa;
-import br.com.gracibolos.jdbc.model.Saldo;
 
 public class CaixaDao implements GenericoDao<Caixa>{
 
@@ -24,6 +23,13 @@ public class CaixaDao implements GenericoDao<Caixa>{
 	 * */
 	
 	public boolean inserir(Caixa caixa) throws Exception{
+		
+		if(updateSaldo(getSaldo().add(caixa.getValor()))){
+			System.out.println("Valor incluso");
+		}else{
+			System.out.println("Erro ao incluir saldo");
+		}
+		
 		boolean status = false;
 		
 		//string query do banco
@@ -98,21 +104,17 @@ public class CaixaDao implements GenericoDao<Caixa>{
 		{	
 			//seta os atributos do objeto caixa, fazendo a alteração.
 			ps = conn.prepareStatement(sql);
-			
-ps.setInt(1, caixa.getGastoRecebimento());
-			
+			ps.setInt(1, caixa.getGastoRecebimento());	
 			if(caixa.getFornecedorId()!=null){
 				ps.setInt(2, caixa.getFornecedorId());
 			}else{
 				ps.setNull(2, Types.INTEGER);
 			}
-			
 			if(caixa.getEncomendaId()!=null){
 				ps.setLong(3, caixa.getEncomendaId());
 			}else{
 				ps.setNull(3, Types.INTEGER);
 			}
-			
 			ps.setBigDecimal(4, caixa.getValor());
 			ps.setBigDecimal(5, caixa.getSaldo());			
 			ps.setString(6, caixa.getForma());			
@@ -151,8 +153,15 @@ ps.setInt(1, caixa.getGastoRecebimento());
 	 * */
 
 	public boolean excluir(Caixa caixa) throws Exception{
-		boolean status = false;
+		//Atualização do saldo---------------------------
 		
+		if(updateSaldo(getSaldo().subtract(caixa.getValor()))){
+			System.out.println("Saldo atualizado");
+		}else{
+			System.out.println("Erro ao atualizado saldo");
+		}
+		
+		boolean status = false;
 		//string query do banco
 		String sql = "DELETE FROM caixa WHERE id = ?";
 		
@@ -244,14 +253,14 @@ ps.setInt(1, caixa.getGastoRecebimento());
 		return null;
 	}
 	
-	public boolean updateSaldo(Saldo saldo) throws Exception{
+	public static boolean updateSaldo(BigDecimal saldo) throws Exception{
 		
 		boolean status = false;
 		String sql = "update caixa set saldo = ? where caixa.id=1";
 		PreparedStatement ps = null;
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 			ps = conn.prepareStatement(sql);
-			ps.setBigDecimal(1, saldo.getSaldo());
+			ps.setBigDecimal(1, saldo);
 			if(ps.executeUpdate()!=0){
 				status = true; 
 			}
@@ -261,18 +270,18 @@ ps.setInt(1, caixa.getGastoRecebimento());
 		return status;
 	}
 	
-	public Saldo getSaldo() throws Exception {
+	public BigDecimal getSaldo() throws Exception {
 		
 		String sql = "SELECT caixa.id, caixa.saldo FROM gracibolos.caixa where caixa.id=1";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Saldo s = new Saldo();
+		BigDecimal saldo = new BigDecimal(0);
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
 			ps = conn.prepareStatement(sql);//
 			rs = ps.executeQuery();//Armazena o resultado da pesquisa
 			if(rs.first()){//pega o primeiro registro 
-				s.setId(rs.getLong("id"));
-				s.setSaldo(rs.getBigDecimal("saldo"));
+				//s.setId(rs.getLong("id"));
+				saldo = rs.getBigDecimal("saldo");
 			}else{
 				System.out.println("Saldo não encontrado");
 			}	
@@ -280,7 +289,7 @@ ps.setInt(1, caixa.getGastoRecebimento());
 		} catch (Exception e) {
 			System.out.println("Houve um erro ao pesquisar o saldo \n"+e);
 		}
-		return s;
+		return saldo;
 	}
 	
 	public List<Caixa> pesquisarEntre(String inicio, String fim) throws Exception{

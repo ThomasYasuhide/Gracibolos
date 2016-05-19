@@ -42,7 +42,6 @@ import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Meses;
 import br.com.gracibolos.jdbc.model.Produto;
-import br.com.gracibolos.jdbc.model.Saldo;
 import br.com.gracibolos.jdbc.model.Status;
 
 @Controller
@@ -1162,10 +1161,11 @@ public class AdministrativoController {
 	 * */
 	private static CaixaDao daoCaixa;
 	private static List<Caixa> listCaixa;
-	private static Saldo saldo;
+	//private static Saldo saldo;
 	private static LocalDate data = LocalDate.now();
 	private static String dataInicial = data.with(TemporalAdjusters.firstDayOfMonth()).toString();
 	private static String dataFinal = data.with(TemporalAdjusters.lastDayOfMonth()).toString();
+	private static BigDecimal saldo;
 	//VERIFICA A DATA ATUAL, E PEGA O PRIMEIRO E ULTIMO DIA DO MÊS
 			
 	//CAIXA
@@ -1199,7 +1199,6 @@ public class AdministrativoController {
 	}
 	
 	public static BigDecimal saldo(){
-		saldo = new Saldo();
 		daoCaixa = new CaixaDao();
 		try {
 			saldo = daoCaixa.getSaldo();
@@ -1207,7 +1206,7 @@ public class AdministrativoController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return saldo.getSaldo();
+		return saldo;
 	}
 
 	//INCLUIR NOVO CAIXA
