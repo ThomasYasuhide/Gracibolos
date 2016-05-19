@@ -243,24 +243,6 @@
 						<h4 id="modal-subtitle"></h4>
 					</div>
 					
-					<div class="row" style="display: none;" id="cepinvalido">
-						<div class="col-xs-12">
-							<div class="alert alert-danger alert-dismissible" role="alert">
-							  <button id="btn_cepinvalido" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							  <strong>Erro!</strong> cep inválido.
-							</div>
-						</div>
-					</div>
-					
-					<div class="row" style="display: none;" id="cepnaoencontrado">
-						<div class="col-xs-12">
-							<div class="alert alert-danger alert-dismissible" role="alert">
-							  <button id="cepnaoencontrado" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							  <strong>Erro!</strong> cep não encontrado.
-							</div>
-						</div>
-					</div>
-					
 					<!--  Corpo do modal -->
 					<div class="modal-body">
 						<!-- ################################# CONTEUDO ################################# -->
@@ -501,7 +483,45 @@
 	############################################################ FIM DO  MODAL DE EXCLUSÃO DE CLIENTE ############################################################
 
 	-->
+	
+<!--
 
+######################################################### modal de errro ########################################################################
+
+-->
+
+<!-- Modal de erro -->
+	<div class="modal fade" id="modal_erro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+								
+					<!--  Corpo do modal -->
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								
+								<!-- mensagem no corpo do modal -->	
+								<p id="erro_msg"></p>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Essa div contem 2 botões -->
+					<div class="modal-footer">
+						<!-- botão de cancelar-->
+						<button id="btn_erro" type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					</div>
+
+				
+			</div>
+		</div>
+	</div>
+
+
+	<!--
+
+	############################################################ fim do modal de erro ############################################################
+	-->
 
 	<!-- Importação dos arquivos java script -->
 	<script src="resources/js/jquery-2.1.4.js"></script>
@@ -521,8 +541,12 @@
                 validate: 'cpfcnpj',
                 event: 'blur',
                 handler: '#cpfcnpj_inp',
-                ifValid: function () { },
-                ifInvalid: function () { alert('ATENÇÃO! CPF ou CNPJ inválido, favor tente novamente.'); $('#cpfcnpj_inp').val(""); }
+                ifValid: function () { },//-----------------------------------------------------------------------------------------
+                ifInvalid: function () { 
+                	$('#modal_erro').modal('show');
+                    $('#erro_msg').text('ATENÇÃO! CPF ou CNPJ inválido, favor tente novamente.');
+                    $('#cpfcnpj_inp').val(""); 
+                }
             });
 			
 			//Remove as mascaras quando apertar o submit
@@ -603,25 +627,25 @@
                                 
                             } //end if.
                             else {
-                                //CEP pesquisado não foi encontrado.
-                                limpa_formulário_cep();
-                                //*********************************
-                                //alert("CEP não encontrado.");
-                                document.getElementById("cepnaoencontrado").style.display = "block";
+                                //CEP pesquisado não foi encontrado.                            
+                                $('#modal_erro').modal('show');
+                              	//Altera dinamicamente o titulo do modal.
+                				$('#erro_msg').text("ERRO! CEP não encontrado.");
+                				$('#cep').val('');
                             }
                         });// FIM getJason
                     } //end if.
                     else {
-                        //cep é inválido.
-                        limpa_formulário_cep();
-                        //**************************************
-                        //alert("Formato de CEP inválido.");
-                        document.getElementById("cepinvalido").style.display = "block";
+                        //cep é inválido.                       
+       					//modal de erro
+                        $('#modal_erro').modal('show');
+                        $('#erro_msg').text("ERRO! Formato de CEP inválido.");
+                        $('#cep').val('');
                     }
                 } //end if.
                 else {
                     //cep sem valor, limpa formulário.
-                    limpa_formulário_cep();
+                    $('#cep').val('');
                 }
             });
 //----------fim da busca de cep------------------------------------------------------------------------------------------------------------------------------------			

@@ -1060,16 +1060,11 @@
 					var itens = [];
 					//recebe por parâmetro a lista de objetos. i = iteração e field = objeto
 					$.each(data, function(i, field){
-			            //$("div").append(field.nome + " ");
-			            //console.log('itens : '+ data[i].nomeProduto, data[i].valor);
-						//console.log('itens : '+ data[i].id);
-			            console.log('itens : '+ data[i].nomeProduto);//Aqui seto so o nome - json muito grande
-			            console.log('itens : '+ data[i].numero);
-			            //console.log('itens : '+ data[i].produtoId);
-			            //console.log('itens : '+ data[i].produtoIdProduto);
-			            console.log('itens : '+ data[i].quantidade);
-			            //console.log('itens : '+ data[i].total);
-			            console.log('itens : '+ data[i].valor);
+			            //$("div").append(field.nome + " ");		        
+			            console.log('nomeProduto : '+ data[i].nomeProduto);//Aqui seto so o nome - json muito grande
+			            console.log('numero : '+ data[i].numero);			         
+			            console.log('quantidade : '+ data[i].quantidade);
+			            console.log('valor : '+ data[i].valor);
 						
 			        });
 				});

@@ -86,12 +86,8 @@ public class ServerRestController {
 	}
 	
 	// OK
-	@RequestMapping(value = "/rest-produtos", 
-			method = RequestMethod.GET
-			,produces = {MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE
-		})
-	public @ResponseBody List<Produto> listAllProdutos(HttpServletResponse response) {
+	@RequestMapping(value = "/rest-produtos")
+	public List<Produto> listAllProdutos(HttpServletResponse response) {
 		try {
 			produtoDao = new ProdutoDao();
 			produtosList = produtoDao.listar();
@@ -105,12 +101,8 @@ public class ServerRestController {
     }
 	
 	// OK
-	@RequestMapping(value = "/rest-pesquisar-produto-id/{id}", 
-			method = RequestMethod.GET
-			,produces = {MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE
-		})
-	 public @ResponseBody Produto findById(@PathVariable int id, HttpServletResponse response) {  
+	@RequestMapping(value = "/rest-pesquisar-produto-id/{id}")
+	 public Produto findById(@PathVariable int id, HttpServletResponse response) {  
 		produtoDao = new ProdutoDao();
 		p = new Produto();
 		try {

@@ -131,5 +131,24 @@ public class Produto implements Serializable{
 		this.rec = rec;
 	}
 	
-    
+//  @Override  
+//  public String toString(){
+//
+//      return "Produto: ["
+//      		+ "	id:" + this.id 
+//      		+ ", foto:" + this.foto 
+//      		+ ", status:" + this.status 
+//      		+ ", codigo:" + this.codigo 
+//      		+ ", nome:" + this.nome 
+//      		+ ", tipo:" + this.tipo 
+//      		+ ", peso:" + this.peso 
+//      		+ ", unidade:" + this.unidade 
+//      		+ ", estoque:" + this.estoque 
+//      		+ ", custo:" + this.custo 
+//      		+ ", valor:" + this.valor 
+//      		+ ", obs:" + this.obs 
+//      		+ ", rec:" + this.rec 
+//      		+ "]";
+//
+//  }
 }

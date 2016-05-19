@@ -26,4 +26,10 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	        <property name="maxUploadSize" value="100000000"></property>
 	</bean>
+	
+	 <!-- JSON Support  -->
+    <bean name="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+    <bean name="jsonTemplate" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">	</bean>
+    
+    
 </beans>
