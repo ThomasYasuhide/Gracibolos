@@ -3,6 +3,8 @@
 
 <!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 
 <!DOCTYPE html>
@@ -150,18 +152,22 @@
 								<thead>
 									<!-- Titulos das tabelas  -->
 									<tr>
-										<th>Data Tran</th>										
+										<th width="30%">Data Transação</th>
+										<th width="30%">Tipo</th>
+										<th width="30%">Valor</th>
+										
 										<th>#</th>
+										<th>Data Transação</th>
 										<th>Recebido / Gasto</th>
 										<th>Fornecedor ID</th>
 										<th>N° Encomenda</th>
 										<th>Valor</th>
-										<th>Saldo</th>									
+										<th>Saldo</th>
 										<th>Forma</th>
-										<th>Parcela</th>		
-										<th>Data Opera</th>									
-										<th>Descrição</th>	
-										<th>Nome</th>									
+										<th>Parcela</th>
+										<th>Data Operação</th>
+										<th>Descrição</th>
+										<th>Nome</th>
 										<th>Ações</th>
 									</tr>
 								</thead>
@@ -172,23 +178,36 @@
 									-->
 									<c:forEach var="caixa" items="${listCaixa}">
 										<tr>
-											<!-- 0 --><td>${caixa.dataTransacao}</td>
-											<!-- 1 --><td>${caixa.id}</td>
-											<!-- 2 --><td>${caixa.gastoRecebimento}</td>
-											<!-- 3 --><td>${caixa.fornecedorId}</td>
-											<!-- 4 --><td>${caixa.encomendaId}</td>
-											<!-- 5 --><td>${caixa.valor}</td>
-											<!-- 6 --><td>${caixa.saldo}</td>											
-											<!-- 7 --><td>${caixa.forma}</td>
-											<!-- 8 --><td>${caixa.parcela}</td>	
-											<!-- 9 --><td>${caixa.dataOperacao}</td>											
-											<!-- 10 --><td>${caixa.descricao}</td>	
-											<!-- 11 --><td>${caixa.nomerazao}</td>										
+											<fmt:parseDate value="${caixa.dataTransacao}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
+											
+											<!-- 00 --><td><fmt:formatDate pattern="dd/MM/yyyy" value="${parsedDate}" type="date"/></td>
+											<!-- 01 --><td>
+														<c:if test="${caixa.gastoRecebimento == 0}">Gasto</c:if>
+														<c:if test="${caixa.gastoRecebimento == 1}">Recebimento</c:if>
+													  </td>
+											<!-- 02 --><td>R$ ${caixa.valor}</td>
+											<!-- 03 --><td>${caixa.id}</td>
+											<!-- 04 --><td>${caixa.dataTransacao}</td>
+											<!-- 05 --><td>${caixa.gastoRecebimento}</td>
+											<!-- 06 --><td>${caixa.fornecedorId}</td>
+											<!-- 07 --><td>${caixa.encomendaId}</td>
+											<!-- 08 --><td>${caixa.valor}</td>
+											<!-- 09 --><td>${caixa.saldo}</td>											
+											<!-- 10 --><td>${caixa.forma}</td>
+											<!-- 11 --><td>${caixa.parcela}</td>	
+											<!-- 12 --><td>${caixa.dataOperacao}</td>											
+											<!-- 13 --><td>${caixa.descricao}</td>	
+											<!-- 14 --><td>${caixa.nomerazao}</td>
 											
 											<!-- Aqui nessa td, estão os botões de editar e excluir, que aparecem junto com a lista de matérias-primas na tabela -->
 		                					<td>
 		                						<button id="edit-caixa" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-		                						<button id="delete-caixa" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+		                						
+		                						<!-- Verifica se for gasto, se for coloca o botão de exclusão -->
+		                						<c:if test="${caixa.gastoRecebimento == 0}">
+		                							<button id="delete-caixa" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
+		                						</c:if>
+		                						
 		                					</td>
 										</tr>
 									</c:forEach>
@@ -260,9 +279,9 @@
 								 -->
 								 
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
-									<label class="control-label" for="gastoRecebimento">Identificação:</label>
+									<label class="control-label" for="gastoRecebimento">Tipo:</label>
 									<select id="gastoRecebimento" name="gastoRecebimento" class="form-control">
-										<option selected value="0" >Gasto</option>
+										<option value="0" disabled selected>Gasto</option>
 										<option value="1" disabled>Recebimento</option>
 									</select> 
 								</div>
@@ -385,7 +404,7 @@
 									<input type="text" id="valor_delete" name="valor" placeholder="Digite o numero de ID" class="form-control" readonly />
 								</div>
 								<!-- mensagem no corpo do modal -->	
-								<p>Deseja realmente excluir o caixa selecionada?</p>
+								<p>Deseja realmente excluir o gasto selecionado?</p>
 							</div>
 						</div>
 
@@ -443,7 +462,6 @@
 			
 			//Remove as mascaras quando apertar o submit
 			$("#caixa-form").submit(function() {
-						
 				var valor = $("#valor").val();
 				valor = valor.split(".").join("");
 				valor = valor.split(",").join(".");
@@ -493,34 +511,45 @@
             var table = $('#lista-caixa').DataTable({
                 
             	"createdRow": function( row, data, dataIndex ) {
-                    if ( data[2] == 0 ) {
+                    if ( data[5] == 0 ) {
                         //console.log(data[0], data[5]);               
                       	//$(row).css('color', 'Red');//linha toda
                     	$('td', row).eq(2).css('color', 'Red');//só a coluna    
-                    }else if(data[2] == 1){
+                    }
+                    
+                    /* Código desnecessário
+                    else if(data[2] == 1){
                     	//$(row).css('color', 'blue');
                     	$('td', row).eq(2).css('color', 'Blue');    
                     }
+                    */
+                    
                   },
                   
 				/* 
-					0 - dataTransacao
-					1 - id
-					2 - gastoRecebimento
-					3 - fornecedorId
-					4 - encomendaId                        
-					5 - valor
-					6 - saldo
-					7 - forma
-					8 - parcela   
-					9 - dataOperacao                      
-					10 - descricao
-					11 - nomerazao
+				
+					<!-- 00 -->View data transação
+					<!-- 01 -->View Tipo
+					<!-- 02 -->View valor
+					
+					<!-- 03 -->ID
+					<!-- 04 -->Data transação
+					<!-- 05 -->gastoRecebimento
+					<!-- 06 -->fornecedorId
+					<!-- 07 -->ID encomenda
+					<!-- 08 -->Valor
+					<!-- 09 -->Saldo
+					<!-- 10 -->Forma pagamento
+					<!-- 11 -->Caixa parcelas
+					<!-- 12 -->Data operação											
+					<!-- 13 -->Descrição
+					<!-- 14 -->Nome razão
+					
 				*/ 
                              
                 "columnDefs": [
 								{
-			                        "targets": [ 1, 3, 4, 6, 7, 8, 9, 10, 11],
+			                        "targets": [ 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
 			                        "visible": false
 								}
 							  ]
@@ -595,32 +624,32 @@
               	//Apresenta o modal de alteração na tela.-----------------------
               	$('#modal-caixa').modal('show');
 
-              //Settando no selectize os valores vindo da tabela
-              /* 
-					0 - dataTransacao
-					1 - id
-					2 - gastoRecebimento
-					3 - fornecedorId
-					4 - encomendaId                        
-					5 - valor
-					6 - saldo
-					7 - forma
-					8 - parcela   
-					9 - dataOperacao                      
-					10 - descricao
-					11 - nomerazao
+				//Settando no selectize os valores vindo da tabela
+				/* 
+					<!-- 03 -->ID
+					<!-- 04 -->Data transação
+					<!-- 05 -->gastoRecebimento
+					<!-- 06 -->fornecedorId
+					<!-- 07 -->ID encomenda
+					<!-- 08 -->Valor
+					<!-- 09 -->Saldo
+					<!-- 10 -->Forma pagamento
+					<!-- 11 -->Caixa parcelas
+					<!-- 12 -->Data operação											
+					<!-- 13 -->Descrição
+					<!-- 14 -->Nome razão
 				*/ 
 				
 				//Pega os valores que estão na tabela e passa para o modal.			
-				$('#dataTransacao').val(data[0]);
-				$('#id').val(data[1]);
-				$('#gastoRecebimento').val(data[2]);
-				$('#valor').val(data[5]).trigger('input');
-				$('#saldo').val(data[6]);
-				$('#forma').val(data[7]);
-				$('#parcela').val(data[8]);
-				$('#dataOperacao').val(data[9]);
-				$('#descricao').val(data[10]);
+				$('#id').val(data[3]);
+				$('#dataTransacao').val(data[4]);
+				$('#gastoRecebimento').val(data[5]);
+				$('#valor').val(data[8]).trigger('input');
+				$('#saldo').val(data[9]);
+				$('#forma').val(data[10]);
+				$('#parcela').val(data[11]);
+				$('#dataOperacao').val(data[12]);
+				$('#descricao').val(data[13]);
           		
           		
 				// DESABILITA O CAMPO
@@ -632,18 +661,15 @@
 					encomendaDiv.hide();
 					fornecedorDiv.show();
 					
-					//$('#fornecedorId').val(data[3]);
-					console.log('gasto');
-					console.log(data[11]);
-					
-	                var selec = $('#fornecedorId')[0].selectize;
-	                //selec.addOption({id:'1', nome:'Magna'});
-	                selec.setValue('magna');
+	                var selectize = $('#fornecedorId')[0].selectize;
+	                selectize.clearOptions();
+	                selectize.addOption({id:data[6], nomerazao:data[14], cpfcnpj:'123'});
+	                selectize.setValue(data[6]);
 					
 				}else{
 					encomendaDiv.show();
 					fornecedorDiv.hide();
-					$('#encomendaId').val(data[4]);
+					$('#encomendaId').val(data[7]);
 				}
           		
             });
@@ -663,8 +689,8 @@
                 var data = table.row( $(this).parents('tr')).data();
 
                 //Preenche o modal com o numero do ID a ser deletado.
-                $('#id_delete').val(data[1]);
-                $('#valor_delete').val(data[5]);
+                $('#id_delete').val(data[3]);
+                $('#valor_delete').val(data[8]);
 
                 //Apresenta o modal de exclusão na tela.
 				$('#excluir-caixa').modal('show');//---------------------------------
