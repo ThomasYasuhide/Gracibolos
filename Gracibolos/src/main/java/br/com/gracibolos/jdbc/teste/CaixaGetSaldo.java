@@ -5,13 +5,13 @@ import br.com.gracibolos.jdbc.dao.CaixaDao;
 public class CaixaGetSaldo {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 	
 		CaixaDao dao = new CaixaDao();
 		try {
 			System.out.println("Saldo R$ "+dao.getSaldo());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		

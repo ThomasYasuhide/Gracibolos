@@ -8,7 +8,7 @@ public class CaixaUpdateSaldo {
 
 	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		
 		CaixaDao dao = new CaixaDao();
 		BigDecimal saldo = new BigDecimal(0);
@@ -22,7 +22,7 @@ public class CaixaUpdateSaldo {
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
