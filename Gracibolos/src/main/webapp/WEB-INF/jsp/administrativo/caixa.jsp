@@ -281,7 +281,7 @@
 								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
 									<label class="control-label" for="gastoRecebimento">Tipo:</label>
 									<select id="gastoRecebimento" name="gastoRecebimento" class="form-control">
-										<option value="0" disabled selected>Gasto</option>
+										<option value="0" selected>Gasto</option>
 										<option value="1" disabled>Recebimento</option>
 									</select> 
 								</div>
@@ -651,6 +651,8 @@
 				$('#dataOperacao').val(data[12]);
 				$('#descricao').val(data[13]);
           		
+				$("#gastoRecebimento option[value=0]").removeAttr('disabled');
+				$("#gastoRecebimento option[value=1]").attr('disabled', 'disabled');
           		
 				// DESABILITA O CAMPO
 				var gastoRecebimento = $("#gastoRecebimento");
@@ -658,17 +660,31 @@
 				var encomendaDiv = $("#encomendaDiv");
 				
 				if(gastoRecebimento.val() == 0){
+					
 					encomendaDiv.hide();
 					fornecedorDiv.show();
 					
+					$('#valor').removeAttr('readonly');
+
 	                var selectize = $('#fornecedorId')[0].selectize;
 	                selectize.clearOptions();
-	                selectize.addOption({id:data[6], nomerazao:data[14], cpfcnpj:'123'});
-	                selectize.setValue(data[6]);
-					
+	                
+	                //Verifica se existe algum valor, se não existir não executa essa parte do código.
+	                if(data[6] != 0){
+	                	selectize.addOption({id:data[6], nomerazao:data[14], cpfcnpj:'123'});
+		                selectize.setValue(data[6]);
+	                }
+	                
 				}else{
+					$("#gastoRecebimento option[value=1]").removeAttr('disabled');
+					$("#gastoRecebimento option[value=0]").attr('disabled', 'disabled');
+					
+					$('#valor').attr('readonly', 'readonly');
+					
 					encomendaDiv.show();
 					fornecedorDiv.hide();
+
+					
 					$('#encomendaId').val(data[7]);
 				}
           		
