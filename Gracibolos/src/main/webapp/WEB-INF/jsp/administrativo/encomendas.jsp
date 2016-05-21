@@ -432,8 +432,8 @@
 								                    <button type="button" class="btn btn-default" id="cancelar-itens-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                   
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+								                    <button type="button" id="btn_salvar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="button" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 						                   		</div>
 						                    
 						                    </form>
@@ -695,7 +695,7 @@
 			* PESQUISA PRODUTOS E POPULA O SELECT
 			*
 			*/
-						
+			
 			$("#produtos").on("change", ".produto", function(){
 				var linha = this.id.replace("produto_", "");
 				
@@ -870,7 +870,18 @@
 				        });
 				    }
 				});//Fim selectize
+
+				//função de deletar
+				$('#lista-produtos button').on('click', '#delete-produto', function() {
+					e.preventDefault();
 					
+					//Busca a linha e remove o TR.
+					$(this).parent().parent().remove();
+		
+					//Calcula o total de todos os produtos.
+					calculaTotalProdutos();
+				
+				});
 			});
 			
 			/*
@@ -1218,6 +1229,36 @@
 				    }
 				});
 			}
+			/*
+			*
+			* SALVAR ENCOMENDA
+			*
+			*/
+			$('#btn_salvar').click(function(){
+				
+				console.log('Salvar');
+				var enc = new Object();
+				enc.dataencomenda = $('#dataencomenda').val();
+				enc.dataentrega = $('#dataentrega').val();
+				enc.datacancelado = $('#datacancelado').val();
+				enc.clienteid = $('#cliente').val();
+				enc.responsavel = $('#responsalvel').val();
+				enc.obs = $('#obs').val();
+				
+				js  = JSON.stringify(enc);
+				alert(js);
+				
+				$.ajax({
+		            url: "../Gracibolos/rest-encomenda/",
+		            type: 'POST',    
+		            data: js,
+		            contentType: "application/json; charset=utf-8",
+		            success: function(result) {
+		                alert("success?");
+		            }
+		        });
+		        
+			});
 			
 			/*
 			*
