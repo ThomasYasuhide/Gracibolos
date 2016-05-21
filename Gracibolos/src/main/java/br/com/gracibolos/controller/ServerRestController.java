@@ -174,8 +174,7 @@ public class ServerRestController {
 	Status status;
 	
 	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.POST) 
-	public ResponseEntity<String> createEncomenda(@RequestBody Encomenda encomenda
-			, HttpServletResponse response){
+	public ResponseEntity<String> createEncomenda(@RequestBody Encomenda encomenda){
 
 		daoEnc = new EncomendaDao();
 		System.out.println("nomerazao : "+encomenda.getNomerazao()
@@ -191,16 +190,34 @@ public class ServerRestController {
 		Status status = new Status();
 		try {
 			status = daoEnc.inserir(encomenda);
-			System.out.println("getNumeroEncomenda : "+status.getNumeroEncomenda());
+			System.out.println("Numero da encomenda : "+status.getNumeroEncomenda());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			System.out.println("ERRO - rest inserir encomenda.");
 			e.printStackTrace();
 		}
 
-		
 		System.out.println(encomenda.getNomerazao()+" "+encomenda.getStatus());
-		
-	
+			
 		return new ResponseEntity<String>(status.getNumeroEncomenda().toString(), HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.PUT) 
+	public ResponseEntity<String> updateEncomenda (@RequestBody Encomenda encomenda){
+		System.out.println("Datacancelamento : "+encomenda.getDatacancelamento()	
+					+"\nDatafinalizado : "+encomenda.getDatafinalizado()
+					
+				);
+		
+		return new ResponseEntity<String>( HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.DELETE) 
+	public ResponseEntity<String> deleteEncomenda (@RequestBody Encomenda encomenda){
+		System.out.println("Datacancelamento : "+encomenda.getDatacancelamento()	
+		+"\nDatafinalizado : "+encomenda.getDatafinalizado()
+		
+				);
+		
+		return new ResponseEntity<String>( HttpStatus.OK);
 	}
 }
