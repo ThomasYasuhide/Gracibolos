@@ -24,11 +24,12 @@ public class EncomendaInserir {
 					encomenda = new Encomenda();
 			//------cliente---------------------------------------							
 					encomenda.setClienteid(g.ranIdInt(g.IdsCli()));
+					encomenda.setClienteid(356);
 			//------status----------------------------------------
 					//encomenda.setStatus(g.randBetween(1, 5));//vai de 1 - 5
 					//encomenda.setStatus(g.randBetween(3, 4));//Em aberto
 					//encomenda.setStatus(2);//cancelado
-					encomenda.setStatus(5);//finalizado
+					encomenda.setStatus(1);//finalizado
 			//------data encomenda--------------------------------	
 					encomenda.setDataencomenda(g.generateDate());
 			//------data entrega----------------------------------
@@ -37,34 +38,34 @@ public class EncomendaInserir {
 			//------responsável-----------------------------------
 					encomenda.setResponsavel(g.responsavel());
 			//------data faturamento------------------------------
-					encomenda.setDatafaturamento(g.generateDate());
-					//encomenda.setDatafaturamento(null);
+					//encomenda.setDatafaturamento(g.generateDate());
+					encomenda.setDatafaturamento(null);
 			//------data produção---------------------------------
-					encomenda.setDataproducao(g.generateDate());
-					//encomenda.setDataproducao(null);
+					//encomenda.setDataproducao(g.generateDate());
+					encomenda.setDataproducao(null);
 			//------data produção---------------------------------
-					encomenda.setDatafinalizado(g.generateDate());
-					//encomenda.setDatafinalizado(null);
+					//encomenda.setDatafinalizado(g.generateDate());
+					encomenda.setDatafinalizado(null);
 			//------data finalizado-------------------------------
-					encomenda.setDatacancelamento(g.generateDate());
+					//encomenda.setDatacancelamento(g.generateDate());
 					//encomenda.setDatacancelamento(null);
 			//------data cancelado--------------------------------
 					//total = new BigDecimal(g.randBetween(8, 250));
-					encomenda.setTotalprodutos(null);
+					//encomenda.setTotalprodutos(null);
 					encomenda.setObs("It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.");
 					
-					listIe = new ArrayList<ItemEncomenda>();
-					//DE 1 À 4 ITENS 
-					for(int j=0;j<g.randBetween(1, 4);j++)
-					{
-						itemEncomenda = new ItemEncomenda();
-						itemEncomenda.setProdutoId(g.ranIdLong(g.idsProduto()));
-						//Sem o id da encomenda - no ResultSet eu pego o retorno da chave  gerada
-						//itemEncomenda.setEncomendaId(g.ranIdLong(g.IdsEnc()));
-						itemEncomenda.setQuantidade(g.randBetween(1, 10));		
-						listIe.add(itemEncomenda);
-					}
-					encomenda.setListItemEncomenda(listIe);
+//					listIe = new ArrayList<ItemEncomenda>();
+//					//DE 1 À 4 ITENS 
+//					for(int j=0;j<g.randBetween(1, 4);j++)
+//					{
+//						itemEncomenda = new ItemEncomenda();
+//						itemEncomenda.setProdutoId(g.ranIdLong(g.idsProduto()));
+//						//Sem o id da encomenda - no ResultSet eu pego o retorno da chave  gerada
+//						//itemEncomenda.setEncomendaId(g.ranIdLong(g.IdsEnc()));
+//						itemEncomenda.setQuantidade(g.randBetween(1, 10));		
+//						listIe.add(itemEncomenda);
+//					}
+//					encomenda.setListItemEncomenda(listIe);
 					
 					dao = new EncomendaDao();
 					try {

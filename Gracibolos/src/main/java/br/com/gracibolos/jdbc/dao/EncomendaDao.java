@@ -98,24 +98,30 @@ public class EncomendaDao{
 					   + " VALUES (?, ?, ?)";
 			
 			//Inserir todos os itens da encomenda
-			for(ItemEncomenda ie : encomenda.getListItemEncomenda())
-			{			
-				ps = conn.prepareStatement(sqlIe);
-				ps.setLong(1, ie.getProdutoId());
-				ps.setLong(2, lastid);//encomendaId
-				ps.setInt(3, ie.getQuantidade());	
-				
-				//Insiro os itens da encomenda
-				if(ps.executeUpdate() != 0) {
-					status.setStatus2(true);
-				}else{
-					status.setStatus2(false);
-				}
-			}
+			try {
+				for(ItemEncomenda ie : encomenda.getListItemEncomenda())
+				{			
+					ps = conn.prepareStatement(sqlIe);
+					ps.setLong(1, ie.getProdutoId());
+					ps.setLong(2, lastid);//encomendaId
+					ps.setInt(3, ie.getQuantidade());	
 					
-			rs.close();
-			ps.close();	
-			conn.close();			
+					//Insiro os itens da encomenda
+					if(ps.executeUpdate() != 0) {
+						status.setStatus2(true);
+					}else{
+						status.setStatus2(false);
+					}
+				}
+						
+				rs.close();
+				ps.close();	
+				conn.close();		
+			} catch (Exception e) {
+				System.out.println("sem itens\n"+e);
+			}
+			
+				
 					
 		}
 		//trata, caso de uma exceção

@@ -1232,13 +1232,14 @@
 			}
 			/*
 			*
-			* SALVAR ENCOMENDA
+			* SALVAR ENCOMENDA---------------------------------------
 			*
 			*/
 			$('#btn_salvar').click(function(){
 				
-				console.log('Salvar');
+				//console.log('Salvar');
 				var enc = new Object();
+				enc.status = 1;
 				enc.dataencomenda = $('#dataencomenda').val();
 				enc.dataentrega = $('#dataentrega').val();
 				enc.datacancelado = $('#datacancelado').val();
@@ -1255,7 +1256,9 @@
 		            data: js,
 		            contentType: "application/json; charset=utf-8",
 		            success: function(result) {
-		                alert("success?");
+		                alert("Encomenda de número : "+result
+				                );
+		                
 		            }
 		        });
 		        
