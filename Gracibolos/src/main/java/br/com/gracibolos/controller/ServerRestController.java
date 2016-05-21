@@ -177,7 +177,16 @@ public class ServerRestController {
 	public ResponseEntity<Void> createEncomenda(@RequestBody Encomenda encomenda
 			, HttpServletResponse response){
 		
-		System.out.println(encomenda.getNomerazao()+" "+encomenda.getStatus());
+		System.out.println("nomerazao : "+encomenda.getNomerazao()
+						+"\nsattus "+encomenda.getStatus()
+						+"\nDataencomenda "+encomenda.getDataencomenda()
+						+"\nDataentrega "+encomenda.getDataentrega()
+						+"\nDatacancelamento "+encomenda.getDatacancelamento()
+						+"\nClienteid "+encomenda.getClienteid()
+						+"\nResponsavel "+encomenda.getResponsavel()
+						+"\nObs "+encomenda.getObs()
+						
+				);
 		
 //		daoEnc = new EncomendaDao();
 //		status = new Status();
