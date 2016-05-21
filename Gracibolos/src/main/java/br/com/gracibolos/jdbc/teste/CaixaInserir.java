@@ -1,7 +1,6 @@
 package br.com.gracibolos.jdbc.teste;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import br.com.gracibolos.jdbc.dao.CaixaDao;
 import br.com.gracibolos.jdbc.model.Caixa;
 

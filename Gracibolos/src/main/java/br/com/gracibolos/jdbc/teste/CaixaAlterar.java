@@ -1,7 +1,6 @@
 package br.com.gracibolos.jdbc.teste;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 import br.com.gracibolos.jdbc.dao.CaixaDao;
 import br.com.gracibolos.jdbc.model.Caixa;
@@ -20,7 +19,7 @@ public class CaixaAlterar {
 		c.setValor(valor);		
 		c.setForma("debito");
 		c.setParcela(1);
-		LocalDate data = LocalDate.of(2016, 05, 06);
+		//LocalDate data = LocalDate.of(2016, 05, 06);
 		//c.setData(data);
 		c.setDescricao(null);		
 		c.setId(10L);

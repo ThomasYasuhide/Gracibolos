@@ -151,21 +151,22 @@
 								<thead>
 									<!-- Titulos das tabelas  -->
 									<tr>
-										<th>Encomenda</th>
-										<th>Status</th>
-										<th>Cliente ID</th>
-										<th>Cliente</th>
-										<th>Cliente CPF/CNPJ</th>
-										<th>Responsável</th>
-										<th>Data da encomenda</th>
-										<th>Data da entrega</th>
-										<th>Data do faturamento</th>
-										<th>Data da produção</th>
-										<th>Data da finalização</th>
-										<th>Data do cancelamento</th>
-										<th>Total</th>
-										<th>Obs</th>
-										<th>Ações</th>
+										<!-- 00 --><th>Encomenda</th>
+										<!-- 01 --><th>Status</th>
+										<!-- 02 --><th>Status</th>
+										<!-- 03 --><th>Cliente</th>
+										<!-- 04 --><th>Cliente ID</th>
+										<!-- 05 --><th>Cliente CPF/CNPJ</th>											
+										<!-- 06 --><th>Responsável</th>
+										<!-- 07 --><th>Data da encomenda</th>
+										<!-- 08 --><th>Data de entrega</th><!-- VIEW -->
+										<!-- 09 --><th>Data de entrega</th><!-- DADOS -->
+										<!-- 10 --><th>Data do faturamento</th>
+										<!-- 11 --><th>Data da finalização</th>
+										<!-- 12 --><th>Data do cancelamento</th>
+										<!-- 13 --><th>Total</th>
+										<!-- 14 --><th>Obs</th>
+										<!-- 15 --><th>Ações</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -173,20 +174,30 @@
 									<!-- Comando JSTL para repetição da tag TR, com leitura do objeto passado pelo JSP  -->
 									<c:forEach var="encomendas" items="${encomendas}">
 										<tr>
-											<td>${encomendas.id}</td>
-											<td>${encomendas.status}</td>
-											<td>${encomendas.clienteid}</td>
-											<td>${encomendas.nomerazao}</td>
-											<td>${encomendas.cpfcnpj}</td>
-											<td>${encomendas.responsavel}</td>
-											<td>${encomendas.dataencomenda}</td>
-											<td>${encomendas.dataentrega}</td>
-											<td>${encomendas.datafaturamento}</td>
-											<td>${encomendas.dataproducao}</td>
-											<td>${encomendas.datafinalizado}</td>
-											<td>${encomendas.datacancelamento}</td>
-											<td>${encomendas.totalprodutos}</td>
-											<td>${encomendas.obs}</td>
+											
+											<fmt:parseDate value="${encomendas.dataentrega}" pattern="yyyy-MM-dd" var="parsedDataentrega" type="date" />
+											
+											<!-- 00 --><td>${encomendas.id}</td>
+											<!-- 01 --><td>
+															<c:if test="${encomendas.status == 1}">Iniciado</c:if>
+															<c:if test="${encomendas.status == 2}">Cancelado</c:if>
+															<c:if test="${encomendas.status == 3}">Faturada</c:if>
+															<c:if test="${encomendas.status == 4}">Produzindo</c:if>
+															<c:if test="${encomendas.status == 5}">Finalizado</c:if>
+														</td>
+											<!-- 02 --><td>${encomendas.status}</td>
+											<!-- 03 --><td>${encomendas.nomerazao}</td>
+											<!-- 04 --><td>${encomendas.clienteid}</td>
+											<!-- 05 --><td>${encomendas.cpfcnpj}</td>
+											<!-- 06 --><td>${encomendas.responsavel}</td>
+											<!-- 07 --><td>${encomendas.dataencomenda}</td>
+											<!-- 08 --><td><fmt:formatDate pattern="dd/MM/yyyy" value="${parsedDataentrega}" type="date"/></td>
+											<!-- 09 --><td>${encomendas.dataentrega}</td>
+											<!-- 10 --><td>${encomendas.datafaturamento}</td>
+											<!-- 12 --><td>${encomendas.datafinalizado}</td>
+											<!-- 13 --><td>${encomendas.datacancelamento}</td>
+											<!-- 14 --><td>${encomendas.totalprodutos}</td>
+											<!-- 15 --><td>${encomendas.obs}</td>
 		                					<td>
 		                						<button id="edit-encomenda" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
 		                						<button id="delete-encomenda" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
@@ -326,7 +337,7 @@
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
-								                    <button type="button" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
 						                   		</div>
 					                   		
@@ -417,7 +428,7 @@
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="button" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 						                   		</div>
 						                    
@@ -480,7 +491,7 @@
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="button" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Produzir</button>
 						                   		</div>
 						                   		
@@ -503,7 +514,7 @@
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="button" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">done</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
 						                   		</div>
 						                   		
@@ -526,7 +537,7 @@
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="button" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default" id="finalizar-encomenda"><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
 						                   		</div>
 						                   		
@@ -674,10 +685,6 @@
 			        });
 			    }
 			});
-			
-			var control = $('#cliente')[0].selectize;
-			
-			control.setValue(5);
 						
 			/*
 			*
@@ -857,7 +864,7 @@
 			    
 				    produtos.append(item);
 				    
-				    i++;
+				    i++;    
 				}else {
 					alert('Você atingiu o limite máximo de produtos na encomenda');	
 				}
@@ -871,6 +878,7 @@
 			*/
 			
 			$('#produtos').on('click', '#delete-produto', function() {
+				e.preventDefault();
 				
 				//Busca a linha e remove o TR.
 				$(this).parent().parent().remove();
@@ -883,7 +891,6 @@
 			//Remove as mascaras quando apertar o submit
 			$("#dados-encomenda").submit(function(e) {
 				e.preventDefault();
-				alert('dados da encomenda');
 				
 				/*
 				alert($('#id').val());
@@ -895,15 +902,13 @@
 				alert($('#obs').val());
 				*/
 				
-				return false;
+				return true;
 				
 			});
 			
 			//Remove as mascaras quando apertar o submit
 			$("#produtos-encomenda").submit(function(e) {
 				e.preventDefault();
-				
-				alert('produtos da encomenda');
 				
 				var now = moment().format('YYYY-MM-DD');
 				var totalencomenda = $('#totalprodutos').val();
@@ -919,8 +924,6 @@
 			$("#faturar-encomenda").submit(function(e) {
 				e.preventDefault();
 				
-				alert('faturar da encomenda');
-				
 				return false;
 			});
 			
@@ -928,16 +931,12 @@
 			$("#produzir-encomenda").submit(function(e) {
 				e.preventDefault();
 				
-				alert('produzir da encomenda');
-				
 				return false;
 			});
 			
 			//Remove as mascaras quando apertar o submit
 			$("#finalizar-encomenda").submit(function(e) {
 				e.preventDefault();
-				
-				alert('finalizar da encomenda');
 				
 				return false;
 			});
@@ -974,9 +973,31 @@
 			
 			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
             var table = $('#lista-encomendas').DataTable({
+
+            	/*
+            	
+            		<!-- 00 --><th>Encomenda</th>
+					<!-- 01 --><th>Status</th> VIEW
+					<!-- 02 --><th>Status</th> DADOS
+					<!-- 03 --><th>Cliente</th>
+					<!-- 04 --><th>Cliente ID</th>
+					<!-- 05 --><th>Cliente CPF/CNPJ</th>											
+					<!-- 06 --><th>Responsável</th>
+					<!-- 07 --><th>Data da encomenda</th>
+					<!-- 08 --><th>Data de entrega</th> VIEW
+					<!-- 09 --><th>Data de entrega</th> DATA
+					<!-- 10 --><th>Data do faturamento</th>
+					<!-- 11 --><th>Data da finalização</th>
+					<!-- 12 --><th>Data do cancelamento</th>
+					<!-- 13 --><th>Total</th>
+					<!-- 14 --><th>Obs</th>
+					<!-- 15 --><th>Ações</th>
+            	
+            	*/
+                
                 "columnDefs": [
                     {
-                        "targets": [ 3, 4, 8, 9, 10, 11],
+                        "targets": [ 2, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14 ],
                         "visible": false
                     }
                 ]
@@ -1035,42 +1056,151 @@
            		//Apresenta o modal de exclusão na tela.
            		$('#modal-encomenda').modal('show');
 
+
+           		/*
+            	
+        		<!-- 00 --><th>Encomenda</th>
+				<!-- 01 --><th>Status</th> VIEW
+				<!-- 02 --><th>Status</th> DADOS
+				<!-- 03 --><th>Cliente</th>
+				<!-- 04 --><th>Cliente ID</th>
+				<!-- 05 --><th>Cliente CPF/CNPJ</th>											
+				<!-- 06 --><th>Responsável</th>
+				<!-- 07 --><th>Data da encomenda</th>
+				<!-- 08 --><th>Data de entrega</th> VIEW
+				<!-- 09 --><th>Data de entrega</th> DATA
+				<!-- 10 --><th>Data do faturamento</th>
+				<!-- 11 --><th>Data da finalização</th>
+				<!-- 12 --><th>Data do cancelamento</th>
+				<!-- 13 --><th>Total</th>
+				<!-- 14 --><th>Obs</th>
+				<!-- 15 --><th>Ações</th>
+        	
+        	*/
+           		
 				//Preenche os determinados campos com os conteudos.
                 $('#id').val(data[0]);
-                $('#status').val(data[1]);
+                $('#status').val(data[2]);
 
                 //Settando no selectize os valores vindo da tabela
                 var selectize = $('#cliente')[0].selectize;
-                selectize.addOption({id:data[2], nomerazao:data[3], cpfcnpj:data[4]});
-                selectize.setValue(data[2]);
+                selectize.clearOptions();
+                selectize.addOption({id:data[4], nomerazao:data[3], cpfcnpj:data[5]});
+                selectize.setValue(data[4]);
                 
-                $('#responsavel').val(data[5]);
-                $('#dataencomenda').val(data[6]);
-   				$('#dataentrega').val(data[7]);
-                //$('#datafaturamento').val(data[8]);
+                $('#responsavel').val(data[6]);
+                $('#dataencomenda').val(data[7]);
+   				$('#dataentrega').val(data[9]);
+                $('#datafaturamento').val(data[10]);
                 //$('#dataproducao').val(data[9]);
-                //$('#datafinalizado').val(data[10]);
-   				//$('#datacancelado').val(data[11]);
-   				$('#total').val(data[12]);
-   				$('#obs').val(data[13]);
+                $('#datafinalizado').val(data[11]);
+   				$('#datacancelado').val(data[12]);
+   				$('#total').val(data[13]);
+   				$('#obs').val(data[14]);
 
 				//------------------------------------------------------------------------------
 				var url = '/Gracibolos/rest-itensencomenda/'+data[0];
 				$.getJSON(url).done(function(data){
-					var itens = [];
 					//recebe por parâmetro a lista de objetos. i = iteração e field = objeto
+					$("#lista-produtos tr").each(function(){
+						$(this).remove();
+					});
+					
 					$.each(data, function(i, field){
-			            //$("div").append(field.nome + " ");		        
+
+						teste(data[i].valor, data[i].quantidade);
+			            //$("div").append(field.nome + " ");	        
 			            console.log('nomeProduto : '+ data[i].nomeProduto);//Aqui seto so o nome - json muito grande
 			            console.log('numero : '+ data[i].numero);			         
 			            console.log('quantidade : '+ data[i].quantidade);
 			            console.log('valor : '+ data[i].valor);
 						
 			        });
+
+					teste2();
 				});
 
 			});
 
+			function teste(valor, quantidade){
+
+				var i = $('#produtos tr').size() - 1;
+				
+				if($('#produtos tr').size() <= 100){
+				  	
+				    var item = '<tr id="item">';
+				    item +=			'<td class="hidden">';
+				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
+				    item += 		'</td>';
+				    item +=			'<td>';
+				    item += 			'<select class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
+				    item += 		'</td>';
+				    item +=			'<td>';
+				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" value="'+quantidade+'" class="form-control quantidade"  min="0" max="9999999">';
+				    item += 		'</td>';
+				    item +=			'<td>';
+				    item += 			'<div class="input-group">';
+				    item += 				'<span class="input-group-addon">R$</span>';
+				    item += 				'<input type="text" name="item['+i+'].valor" placeholder="0,00" id="valor_'+i+'" value="'+valor+'" class="form-control valor">';
+				    item += 			'</div>';
+				    item += 		'</td>';
+				    item +=			'<td>';
+				    item += 			'<div class="input-group">';
+				    item += 				'<span class="input-group-addon">R$</span>';
+				    item += 				'<input type="text" name="item['+i+'].total" value="${item.total}" id="total_'+i+'" class="form-control total" readonly="readonly">';
+				    item += 			'</div>';
+				    item += 		'</td>';
+				    item +=			'<td>';
+				    item += 			'<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>';
+				    item += 		'</td>';
+				    item += 	'</tr>';
+			    
+				    produtos.append(item);
+				    
+				    i++;    
+				}else {
+					alert('Você atingiu o limite máximo de produtos na encomenda');	
+				}
+			}
+
+			function teste2(){
+
+				$(".produto").each(function(){
+					
+					$(this).selectize({
+					    valueField: 'id',
+					    labelField: 'nome',
+					    searchField: ['codigo', 'nome'],
+						options: [{id: '${item.produtoId}', codigo: '${item.codigo}', nome: '${item.nome}'}],
+					    create: false,
+					    render: {
+					        option: function(item, escape) {
+					            return	'<div>' +
+											'<span class="title">' +
+												'<span>' + escape(item.nome) + '</span><br/>' +
+												'<span>' + escape(item.codigo) + '</span><br/>' +
+											'</span>' +
+										'</div>';
+					        }
+					    },
+					    load: function(query, callback) {
+					        if (!query.length) return callback();
+					        $.ajax({
+					            
+					            url: 'http://localhost:8080/Gracibolos/rest-pesquisar-produto-nome/' + encodeURIComponent(query),
+					            type: 'GET',
+					            error: function() {
+					                callback();
+					            },
+					            success: function(res) {
+					                callback(res);
+					            }
+					        });
+					    }
+					});
+				});
+			}
+			
 			/*
 			*
 			* EXCLUSÃO DE ENCOMENDA

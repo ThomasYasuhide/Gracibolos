@@ -94,15 +94,10 @@ public class AdministrativoController {
 	@RequestMapping("/administrativo-produtos")
 	public ModelAndView produtos(){
 		System.out.println("Entrou na pagina de listagem de produtos");
-		//retorna a página produtos
-		ProdutoDao dao = new ProdutoDao();
+		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("administrativo/produtos");
-		try {
-			mv.addObject("produtos", dao.listar());
-		} catch (Exception e) {
-			System.out.println("Controller - erro ao carregar a lista de produtos\n"+e);
-		}
+		
 		return mv;
 	}
 	
@@ -551,24 +546,10 @@ public class AdministrativoController {
 	public ModelAndView clientes(){
 		System.out.println("Entrou na servlet de listagem de clientes");
 		
-		//cria uma nova instância DAO do estado
-		EstadoDao estadoDao = new EstadoDao();
-		ClienteDao daoCli = new ClienteDao();
-		//Guarda a lista de estados num List
-	    List<Estado> estados = estadoDao.listar_estados();
-		
 	    //instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
 		//seta o caminho e o nome da jsp
 	    mv.setViewName("administrativo/clientes");
-	    //passa a lista de estados para a Expression Language chamada estados	
-	    mv.addObject("estados", estados);
-	    try {
-			mv.addObject("clientes", daoCli.listar());
-		} catch (Exception e) {
-			// Auto-generated catch block
-			e.printStackTrace();
-		}
 	    //retorna o mv	
 		return mv;
 	}
@@ -1486,7 +1467,7 @@ public class AdministrativoController {
 	    //seta o caminho e o nome da jsp
 		mv.setViewName("administrativo/encomendas");
 		//passa o retorno do status para a Expression Language chamada incluir
-		mv.addObject("incluir", status.getStatus1());
+		mv.addObject("incluir", true);
 		mv.addObject("incluirItens", status.getStatus2());
 		mv.addObject("numeroEncomenda", status.getNumeroEncomenda());
 	    //retorna mv

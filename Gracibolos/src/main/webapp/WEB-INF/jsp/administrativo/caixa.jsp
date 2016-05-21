@@ -227,11 +227,9 @@
 												
 						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
 							<div class="row">
-								<div class="row caixasaldo">
-									<div class="col-xs-9">							
-										<h4 >Saldo : R$ <input id="saldomes" name="saldomes" value="${saldo}" type="text" size="10" style="border:0;" readonly/></h4>		
-									</div>
-								</div>									
+								<div class="col-xs-9">							
+									<h4>Caixa: R$ <input id="saldomes" name="saldomes" value="${saldo}" type="text" size="10" style="border:0;" readonly/></h4>		
+								</div>								
 							</div>
 						</div>											
 					</div>

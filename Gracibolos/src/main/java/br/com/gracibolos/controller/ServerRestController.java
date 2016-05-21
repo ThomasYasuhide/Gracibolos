@@ -4,20 +4,27 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.gracibolos.jdbc.dao.ClienteDao;
+import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
 import br.com.gracibolos.jdbc.dao.ItemEncomendaDao;
 import br.com.gracibolos.jdbc.dao.MateriaPrimaDao;
 import br.com.gracibolos.jdbc.dao.ProdutoDao;
 import br.com.gracibolos.jdbc.model.Cliente;
+import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Fornecedor;
 import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Produto;
+import br.com.gracibolos.jdbc.model.Status;
 
 @RestController
 public class ServerRestController {
@@ -34,8 +41,17 @@ public class ServerRestController {
 	private ItemEncomendaDao ItemEncDao;
 	private List<ItemEncomenda> listItemEnc;
 	
-	// OK
-	@RequestMapping(value = "/rest-pesquisar-fornecedor/{pesquisa}")  
+	// AJAX
+	private void colocarAcesso(HttpServletResponse response){
+		response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+	}
+	
+	// ---------------------FORNECEDOR---------------------------------------------------------
+	
+	@RequestMapping(value = "/rest-pesquisar-fornecedor/{pesquisa}", method = RequestMethod.GET)  
 	public List<Fornecedor> pesquisar_fornecedor(@PathVariable String pesquisa
 			, HttpServletResponse response) {
 		fornList = null;
@@ -50,8 +66,9 @@ public class ServerRestController {
 		return fornList;  
 	}
 	
-	// OK
-	@RequestMapping(value = "/rest-pesquisa-materiaprima/{pesquisa}")
+	// ---------------------MATÉRIA PRIMA---------------------------------------------------------
+	
+	@RequestMapping(value = "/rest-pesquisa-materiaprima/{pesquisa}", method = RequestMethod.GET)
 	public List<MateriaPrima> pesquisar_materiprima(@PathVariable String pesquisa
 			, HttpServletResponse response) 
 	{
@@ -68,16 +85,11 @@ public class ServerRestController {
 	   
 		return mpList;  
 	}
-	// AJAX
-	private void colocarAcesso(HttpServletResponse response){
-		response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-	}
 	
-	// OK
-	@RequestMapping(value = "/rest-produtos")
+	
+	// ---------------------PRODUTO--------------------------------------------------------- 
+	
+	@RequestMapping(value = "/rest-produtos", method = RequestMethod.GET)
 	public List<Produto> listAllProdutos(HttpServletResponse response) {
 		try {
 			produtoDao = new ProdutoDao();
@@ -92,7 +104,7 @@ public class ServerRestController {
     }
 	
 	// OK
-	@RequestMapping(value = "/rest-pesquisar-produto-id/{id}")
+	@RequestMapping(value = "/rest-pesquisar-produto-id/{id}", method = RequestMethod.GET)
 	 public Produto findById(@PathVariable int id, HttpServletResponse response) {  
 		produtoDao = new ProdutoDao();
 		p = new Produto();
@@ -108,7 +120,7 @@ public class ServerRestController {
 	 }
 	
 	// OK
-	@RequestMapping(value = "/rest-pesquisar-produto-nome/{pesquisa}") 
+	@RequestMapping(value = "/rest-pesquisar-produto-nome/{pesquisa}", method = RequestMethod.GET) 
 	public List<Produto> pesquisar_produto(@PathVariable String pesquisa, HttpServletResponse response) {
 		produtoDao = null;
 		produtoDao = new ProdutoDao();
@@ -123,8 +135,9 @@ public class ServerRestController {
 		return produtosList;  
 	}
 
-	// OK
-	@RequestMapping(value = "/rest-clientes/{nome}") 
+	// ---------------------CLIENTE---------------------------------------------------------
+	
+	@RequestMapping(value = "/rest-clientes/{nome}", method = RequestMethod.GET) 
 	public List<Cliente> ListClientes(@PathVariable String nome, HttpServletResponse response){
 		clienteDao = new ClienteDao();
 		try {
@@ -138,7 +151,9 @@ public class ServerRestController {
 		return clientesList;
 	}
 	
-	@RequestMapping(value = "/rest-itensencomenda/{encomenda}") 
+	// ---------------------ITENS DA ENCOMENDA---------------------------------------------------------
+	
+	@RequestMapping(value = "/rest-itensencomenda/{encomenda}", method = RequestMethod.GET) 
 	public List<ItemEncomenda> ListItensEncomenda(@PathVariable String encomenda
 			, HttpServletResponse response){
 		ItemEncDao = new ItemEncomendaDao();
@@ -153,4 +168,25 @@ public class ServerRestController {
 		return listItemEnc;
 	}
 	
+	// ---------------------ENCOMEDA---------------------------------------------------------
+	
+	EncomendaDao daoEnc;
+	Status status;
+	
+	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.POST) 
+	public ResponseEntity<Void> createEncomenda(@RequestBody Encomenda encomenda
+			, HttpServletResponse response){
+		
+		System.out.println(encomenda.getNomerazao()+" "+encomenda.getStatus());
+		
+//		daoEnc = new EncomendaDao();
+//		status = new Status();
+//		try {
+//			status = daoEnc.inserir(encomenda);
+//		} catch (Exception e) {
+//			System.out.println("ERRO - rest inserir encomenda.");
+//			e.printStackTrace();
+//		}
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
 }

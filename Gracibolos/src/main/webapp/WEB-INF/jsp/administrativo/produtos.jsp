@@ -235,7 +235,7 @@
 								<ul class="nav nav-tabs">
 									<li class="active"><a data-toggle="tab" href="#info">Informações do produto</a></li>
 									<li><a data-toggle="tab" href="#receita">Receita do produto</a></li>
-									<li><a data-toggle="tab" href="#materias-primas">Matérias primas</a></li>
+									<!-- <li><a data-toggle="tab" href="#materias-primas">Matérias primas</a></li> -->
 								</ul>
 
 									<div class="tab-content">
@@ -352,7 +352,7 @@
 											<!-- Campo receita	-->
 											<div class="input-margin col-xs-12 col-sm-12 col-md-12">
 												<label class="control-label" for="rec">Receita</label>
-												<textarea class="form-control" name="rec" name="rec" id="rec" rows="20" placeholder="Digite aqui a receita"></textarea>
+												<textarea class="form-control" name="rec" name="rec" id="rec" rows="20" placeholder="Descreva a receita e o modo de preparo."></textarea>
 											</div>
 										
 										</div>
