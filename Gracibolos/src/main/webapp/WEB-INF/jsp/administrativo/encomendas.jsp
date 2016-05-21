@@ -336,8 +336,11 @@
 
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+								                    
+								                    <!--  
 								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+								                    -->
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
 						                   		</div>
 					                   		
@@ -370,7 +373,7 @@
 																</tr>
 															</thead>
 															<tbody id="lista-produtos" >
-						
+																<!--  
 																<c:forEach var="item" items="${itens}" varStatus="loop">
 																	<tr id="item">
 																		
@@ -410,7 +413,7 @@
 																		
 																	</tr>
 																</c:forEach>
-																
+																-->
 															</tbody>
 														</table>
 													</div>
@@ -426,7 +429,9 @@
 							                    
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+													<!--  
+								                    <button type="button" class="btn btn-default" id="cancelar-itens-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+								                    -->
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
@@ -448,7 +453,7 @@
 													
 													<div class="input-margin col-xs-12 col-sm-6 col-md-8">
 														<label class="control-label" for="valortroco">Forma de pagamento:</label>
-														<select class="form-control" name="formapagamento">
+														<select class="form-control" id="formapagamento" name="formapagamento">
 															<option value="0" selected disabled>Selecione...</option>
 															<option value="1">Dinheiro</option>
 															<option value="2">Cartão de crédito</option>
@@ -1006,11 +1011,21 @@
             /*
 			*
 			* INCLUSÃO DE ENCOMENDA
-			*
+			*	btn-incluir nova encomenda
 			*/
-
             $('#incluir-encomenda-modal').click(function() {
-            	
+
+            	//Reset autmaticamente todos os campos do formulário.
+				
+				$('#id').val('');
+				$('#dataencomenda').val('');
+				$('#dataentrega').val('');
+				$('#datacancelado').val('');
+				$('#cliente').val('');//nao funcionou
+				$('#responsavel').val('');
+				$('#obs').val('');
+				
+								
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
 				
@@ -1020,10 +1035,7 @@
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir encomenda');
 				
-				//Reset autmaticamente todos os campos do formulário.
-				$('#encomenda-form').each(function(){
-					this.reset();
-				});
+				
 				
 				var now = moment().format('YYYY-MM-DD');
                 $('#dataencomenda').val(now);
