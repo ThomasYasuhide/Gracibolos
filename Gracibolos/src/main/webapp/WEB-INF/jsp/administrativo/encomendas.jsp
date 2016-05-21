@@ -809,7 +809,7 @@
 				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<select id="produtoId_'+i+'" class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
+				    item += 			'<select id="produto_'+i+'" class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" class="form-control quantidade"  min="0" max="9999999">';
@@ -1044,8 +1044,6 @@
 				//Altera o nome do botão do modal.
 				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir encomenda');
 				
-				
-				
 				var now = moment().format('YYYY-MM-DD');
                 $('#dataencomenda').val(now);
 				
@@ -1130,7 +1128,7 @@
 					
 					$.each(data, function(i, field){
 						
-						teste(data[i].produtoId, data[i].nomeProduto, data[i].valor, data[i].quantidade);
+						teste(data[i].produtoId, data[i].nomeProduto, parseFloat(data[i].valor).toFixed(2), data[i].quantidade);
 						
 			            //$("div").append(field.nome + " ");	        
 			            console.log('nomeProduto : '+ data[i].nomeProduto);//Aqui seto so o nome - json muito grande
@@ -1146,7 +1144,8 @@
 			});
 
 			function teste(produtoid, produto, valor, quantidade){
-
+				
+				var produtos = $('#produtos');
 				var i = $('#produtos tr').size() - 1;
 				
 				if($('#produtos tr').size() <= 100){
@@ -1164,13 +1163,13 @@
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].valor" placeholder="0,00" id="valor_'+i+'" value="'+valor+'" class="form-control valor">';
+				    item += 				'<input type="text" name="item['+i+'].valor" placeholder="0,00" id="valor_'+i+'" class="form-control valor">';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].total" value="${item.total}" id="total_'+i+'" class="form-control total" readonly="readonly">';
+				    item += 				'<input type="text" name="item['+i+'].total" id="total_'+i+'" class="form-control total" readonly="readonly">';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
@@ -1181,14 +1180,10 @@
 				    produtos.append(item);
 				    teste2(i);
 				    
-				    $('#valor_'+i).trigger('input');
-				    
 	                var selectize = $('#produto_'+i)[0].selectize;
 	                selectize.clearOptions();
 	                selectize.addOption({id:produtoid, codigo:'213', nome:produto});
 	                selectize.setValue(produtoid);
-				    
-	                calcularTotal(i)
 	                
 				    i++;
 				}else {
