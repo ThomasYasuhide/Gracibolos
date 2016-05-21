@@ -336,11 +336,10 @@
 
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-								                    
-								                    <!--  
-								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
-								                    -->
+								                    
+								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+				                  
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
 						                   		</div>
 					                   		
@@ -429,9 +428,9 @@
 							                    
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-													<!--  
+													  
 								                    <button type="button" class="btn btn-default" id="cancelar-itens-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
-								                    -->
+								                   
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
@@ -1015,13 +1014,14 @@
 			*/
             $('#incluir-encomenda-modal').click(function() {
 
-            	//Reset autmaticamente todos os campos do formulário.
-				
+            	//Reset autmaticamente todos os campos do formulário.				
 				$('#id').val('');
 				$('#dataencomenda').val('');
 				$('#dataentrega').val('');
 				$('#datacancelado').val('');
-				$('#cliente').val('');//nao funcionou
+				var selectize = $('#cliente')[0].selectize;
+                selectize.clearOptions();
+				//$('#cliente').val('');//nao funcionou
 				$('#responsavel').val('');
 				$('#obs').val('');
 				
