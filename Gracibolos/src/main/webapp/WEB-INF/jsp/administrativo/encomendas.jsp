@@ -338,7 +338,7 @@
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                    
-								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" class="btn btn-default" disabled><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 				                  
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
 						                   		</div>
@@ -698,37 +698,7 @@
 			
 			$(".produto").each(function(){
 				
-				$(this).selectize({
-				    valueField: 'id',
-				    labelField: 'nome',
-				    searchField: ['codigo', 'nome'],
-					options: [{id: '${item.produtoId}', codigo: '${item.codigo}', nome: '${item.nome}'}],
-				    create: false,
-				    render: {
-				        option: function(item, escape) {
-				            return	'<div>' +
-										'<span class="title">' +
-											'<span>' + escape(item.nome) + '</span><br/>' +
-											'<span>' + escape(item.codigo) + '</span><br/>' +
-										'</span>' +
-									'</div>';
-				        }
-				    },
-				    load: function(query, callback) {
-				        if (!query.length) return callback();
-				        $.ajax({
-				            
-				            url: 'http://localhost:8080/Gracibolos/rest-pesquisar-produto-nome/' + encodeURIComponent(query),
-				            type: 'GET',
-				            error: function() {
-				                callback();
-				            },
-				            success: function(res) {
-				                callback(res);
-				            }
-				        });
-				    }
-				});
+				
 			});
 			
 			$(".produto").on("change", function(){
@@ -844,7 +814,7 @@
 				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<select class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
+				    item += 			'<select id="produtoId_'+i+'" class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" class="form-control quantidade"  min="0" max="9999999">';
@@ -865,14 +835,47 @@
 				    item += 			'<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>';
 				    item += 		'</td>';
 				    item += 	'</tr>';
-			    
+			    	
 				    produtos.append(item);
 				    
 				    i++;    
 				}else {
 					alert('Você atingiu o limite máximo de produtos na encomenda');	
 				}
-				
+				console.log('inserido');
+
+				$('#lista-produtos select').selectize({				
+				    valueField: 'id',
+				    labelField: 'nome',
+				    searchField: ['codigo', 'nome'],
+					options: [{id: '${item.produtoId}', codigo: '${item.codigo}', nome: '${item.nome}'}],
+				    create: false,
+				    render: {
+				        option: function(item, escape) {
+				            return	'<div>' +
+										'<span class="title">' +
+											'<span>' + escape(item.nome) + '</span><br/>' +
+											'<span>' + escape(item.codigo) + '</span><br/>' +
+										'</span>' +
+									'</div>';
+				        }
+				    },
+				    load: function(query, callback) {
+				        if (!query.length) return callback();
+				        $.ajax({
+				            
+				            url: 'http://localhost:8080/Gracibolos/rest-pesquisar-produto-nome/' + encodeURIComponent(query),
+				            type: 'GET',
+				            error: function() {
+				                callback();
+				            },
+				            success: function(res) {
+				                callback(res);
+				            }
+				        });
+				    }
+				});//Fim selectize
+					
 			});
 			
 			/*
@@ -1024,7 +1027,10 @@
 				//$('#cliente').val('');//nao funcionou
 				$('#responsavel').val('');
 				$('#obs').val('');
-				
+				$("#lista-produtos tr").each(function(){
+					$(this).remove();
+				});
+				//Reset autmaticamente todos os campos do formulário.	
 								
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
@@ -1040,7 +1046,7 @@
 				var now = moment().format('YYYY-MM-DD');
                 $('#dataencomenda').val(now);
 				
-                line_product();
+                //line_product();
                 
             });
 
@@ -1113,6 +1119,7 @@
 				//------------------------------------------------------------------------------
 				var url = '/Gracibolos/rest-itensencomenda/'+data[0];
 				$.getJSON(url).done(function(data){
+					
 					//recebe por parâmetro a lista de objetos. i = iteração e field = objeto
 					$("#lista-produtos tr").each(function(){
 						$(this).remove();
