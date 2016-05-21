@@ -47,7 +47,6 @@ import br.com.gracibolos.jdbc.model.Status;
 @Controller
 public class AdministrativoController {
 	
-	
 	/*
 	 * 
 	 * ###################### DASHBOARD ######################
