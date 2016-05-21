@@ -176,6 +176,7 @@ public class ServerRestController {
 	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.POST) 
 	public ResponseEntity<String> createEncomenda(@RequestBody Encomenda encomenda
 			, HttpServletResponse response){
+
 		daoEnc = new EncomendaDao();
 		System.out.println("nomerazao : "+encomenda.getNomerazao()
 						+"\nsattus "+encomenda.getStatus()
@@ -195,14 +196,11 @@ public class ServerRestController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		daoEnc = new EncomendaDao();
-//		status = new Status();
-//		try {
-//			status = daoEnc.inserir(encomenda);
-//		} catch (Exception e) {
-//			System.out.println("ERRO - rest inserir encomenda.");
-//			e.printStackTrace();
-//		}
+
+		
+		System.out.println(encomenda.getNomerazao()+" "+encomenda.getStatus());
+		
+	
 		return new ResponseEntity<String>(status.getNumeroEncomenda().toString(), HttpStatus.CREATED);
 	}
 }

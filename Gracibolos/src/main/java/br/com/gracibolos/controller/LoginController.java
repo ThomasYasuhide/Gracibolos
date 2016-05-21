@@ -90,7 +90,7 @@ public class LoginController {
 	                case 2:
 	                    System.out.println("Nível de acesso administrador");
 	                    status = true; //Altera o status de login válido
-	                    page = "redirect:administrativo-dashboard";  //Direciona para a pagina do administrador/dashboard
+	                    page = "redirect:administrativo-encomendas";  //Direciona para a pagina do administrador/dashboard
 	                    break;
 	            }
 	            

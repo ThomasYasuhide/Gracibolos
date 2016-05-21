@@ -696,18 +696,12 @@
 			*
 			*/
 			
-			$(".produto").each(function(){
-				
-				
-			});
-			
-			$("#lista-produtos select").on("change", function(){
+			$("#produtos").on("change", ".produto", function(){
 				var linha = this.id.replace("produto_", "");
 				
 				var produto = $('#produto_' + linha);
 				var valor = $('#valor_' + linha);
 				
-
 				if(produto.val() != undefined){
 					$.ajax({
 			            url : 'administrativo-pesquisar-valor',
@@ -802,14 +796,15 @@
 			*
 			*/
 
-			var produtos = $('#produtos');
-			var i = $('#produtos tr').size() - 1;
 
 			$('#inserir-linha').on('click', function() {
+
+				var produtos = $('#produtos');
+				var i = $('#produtos tr').size() - 1;
 				
 				if($('#produtos tr').size() <= 100){
 			  	
-				    var item = '<tr id="item">';
+					var item = '<tr id="item_'+i+'">';
 				    item +=			'<td class="hidden">';
 				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
 				    item += 		'</td>';
@@ -832,7 +827,7 @@
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>';
+				    item += 			'<button type="button" id="delete-produto" class="btn btn-default delete_produto"><i class="material-icons">remove_shopping_cart</i></button>';
 				    item += 		'</td>';
 				    item += 	'</tr>';
 			    	
@@ -895,15 +890,12 @@
 			*
 			*/
 			
-			$('#produtos').on('click', '#delete-produto', function() {
-				e.preventDefault();
+			$('#produtos').on('click', '.delete_produto', function() {
 				
 				//Busca a linha e remove o TR.
 				$(this).parent().parent().remove();
 	
-				//Calcula o total de todos os produtos.
 				calculaTotalProdutos();
-			
 			});
 			
 			//Remove as mascaras quando apertar o submit
@@ -1137,8 +1129,9 @@
 					});
 					
 					$.each(data, function(i, field){
-
-						teste(data[i].valor, data[i].quantidade);
+						
+						teste(data[i].produtoId, data[i].nomeProduto, data[i].valor, data[i].quantidade);
+						
 			            //$("div").append(field.nome + " ");	        
 			            console.log('nomeProduto : '+ data[i].nomeProduto);//Aqui seto so o nome - json muito grande
 			            console.log('numero : '+ data[i].numero);			         
@@ -1147,23 +1140,23 @@
 						
 			        });
 
-					teste2();
+					
 				});
 
 			});
 
-			function teste(valor, quantidade){
+			function teste(produtoid, produto, valor, quantidade){
 
 				var i = $('#produtos tr').size() - 1;
 				
 				if($('#produtos tr').size() <= 100){
 				  	
-				    var item = '<tr id="item">';
+				    var item = '<tr id="item_'+i+'">';
 				    item +=			'<td class="hidden">';
 				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<select class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
+				    item += 			'<select class="form-control produto" placeholder="Digite o código ou nome do produto." id="produto_'+i+'" name="item['+i+'].produtoId"></select>';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" value="'+quantidade+'" class="form-control quantidade"  min="0" max="9999999">';
@@ -1181,53 +1174,59 @@
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>';
+				    item += 			'<button type="button" id="delete-produto" class="btn btn-default delete_produto"><i class="material-icons">remove_shopping_cart</i></button>';
 				    item += 		'</td>';
 				    item += 	'</tr>';
 			    
 				    produtos.append(item);
+				    teste2(i);
 				    
-				    i++;    
+				    $('#valor_'+i).trigger('input');
+				    
+	                var selectize = $('#produto_'+i)[0].selectize;
+	                selectize.clearOptions();
+	                selectize.addOption({id:produtoid, codigo:'213', nome:produto});
+	                selectize.setValue(produtoid);
+				    
+	                calcularTotal(i)
+	                
+				    i++;
 				}else {
 					alert('Você atingiu o limite máximo de produtos na encomenda');	
 				}
 			}
 
-			function teste2(){
+			function teste2(i){
 
-				$(".produto").each(function(){
-					
-					$(this).selectize({
-					    valueField: 'id',
-					    labelField: 'nome',
-					    searchField: ['codigo', 'nome'],
-						options: [{id: '${item.produtoId}', codigo: '${item.codigo}', nome: '${item.nome}'}],
-					    create: false,
-					    render: {
-					        option: function(item, escape) {
-					            return	'<div>' +
-											'<span class="title">' +
-												'<span>' + escape(item.nome) + '</span><br/>' +
-												'<span>' + escape(item.codigo) + '</span><br/>' +
-											'</span>' +
-										'</div>';
-					        }
-					    },
-					    load: function(query, callback) {
-					        if (!query.length) return callback();
-					        $.ajax({
-					            
-					            url: 'http://localhost:8080/Gracibolos/rest-pesquisar-produto-nome/' + encodeURIComponent(query),
-					            type: 'GET',
-					            error: function() {
-					                callback();
-					            },
-					            success: function(res) {
-					                callback(res);
-					            }
-					        });
-					    }
-					});
+				$("#produto_"+i).selectize({
+				    valueField: 'id',
+				    labelField: 'nome',
+				    searchField: ['codigo', 'nome'],
+				    create: false,
+				    render: {
+				        option: function(item, escape) {
+				            return	'<div>' +
+										'<span class="title">' +
+											'<span>' + escape(item.nome) + '</span><br/>' +
+											'<span>' + escape(item.codigo) + '</span><br/>' +
+										'</span>' +
+									'</div>';
+				        }
+				    },
+				    load: function(query, callback) {
+				        if (!query.length) return callback();
+				        $.ajax({
+				            
+				            url: 'http://localhost:8080/Gracibolos/rest-pesquisar-produto-nome/' + encodeURIComponent(query),
+				            type: 'GET',
+				            error: function() {
+				                callback();
+				            },
+				            success: function(res) {
+				                callback(res);
+				            }
+				        });
+				    }
 				});
 			}
 			/*
