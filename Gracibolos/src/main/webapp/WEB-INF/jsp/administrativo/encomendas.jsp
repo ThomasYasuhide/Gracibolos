@@ -1,4 +1,4 @@
-﻿<!-- Define que este documento é uma pagina JSP -->
+﻿﻿<!-- Define que este documento é uma pagina JSP -->
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->
@@ -1245,9 +1245,18 @@
 				enc.clienteid = $('#cliente').val();
 				enc.responsavel = $('#responsalvel').val();
 				enc.obs = $('#obs').val();
-				
+
+// 				var listItemEncomenda = [];
+// 				$('#lista-produtos tr').each(function() {
+// 				    listItemEncomenda = $(this).find(".customerIDCell").html();    
+// 				 });
+
+				var tabela = $('#lista-produtos tr').html();
+				 
+				js1  = JSON.stringify(tabela);
+// 				alert(js1);
 				js  = JSON.stringify(enc);
-				alert(js);
+// 				alert(js);
 				
 				$.ajax({
 		            url: "../Gracibolos/rest-encomenda/",
