@@ -8,6 +8,11 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 public class Encomenda implements Serializable{
     
 	private static final long serialVersionUID = -2187641155037646683L;
@@ -20,16 +25,28 @@ public class Encomenda implements Serializable{
     private int clienteid;
     private Integer status;
     private String responsavel;
+    @JsonDeserialize(using = LocalDateDeserializer.class)  
+    @JsonSerialize(using = LocalDateSerializer.class)  
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate dataentrega;
+    @JsonDeserialize(using = LocalDateDeserializer.class)  
+    @JsonSerialize(using = LocalDateSerializer.class)  
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate dataencomenda;
+    @JsonDeserialize(using = LocalDateDeserializer.class)  
+    @JsonSerialize(using = LocalDateSerializer.class)  
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate datafaturamento;
+    @JsonDeserialize(using = LocalDateDeserializer.class)  
+    @JsonSerialize(using = LocalDateSerializer.class)  
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate dataproducao;
+    @JsonDeserialize(using = LocalDateDeserializer.class)  
+    @JsonSerialize(using = LocalDateSerializer.class)  
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate datafinalizado;
+    @JsonDeserialize(using = LocalDateDeserializer.class)  
+    @JsonSerialize(using = LocalDateSerializer.class)  
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate datacancelamento;
     private BigDecimal totalprodutos;
