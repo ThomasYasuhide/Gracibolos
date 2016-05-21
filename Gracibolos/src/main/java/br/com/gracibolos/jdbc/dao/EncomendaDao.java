@@ -446,7 +446,7 @@ public class EncomendaDao{
 				+ ", encomenda.obs, cliente.nomerazao, cliente.id as clienteId, cliente.cpfcnpj "
 				+ "FROM encomenda "
 				+ "INNER JOIN cliente ON encomenda.cliente = cliente.id "
-				+ "WHERE encomenda.status between 3 AND 4 ";
+				+ "WHERE encomenda.status = 1 or encomenda.status = 3 or encomenda.status = 4";
 									//3 - FATURADA , 4 - PRODUZINDO
 		return getListEncomenda(sql);
 	}
