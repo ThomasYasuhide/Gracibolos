@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.gracibolos.jdbc.dao.CaixaDao;
 import br.com.gracibolos.jdbc.dao.ClienteDao;
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.dao.FornecedorDao;
 import br.com.gracibolos.jdbc.dao.ItemEncomendaDao;
 import br.com.gracibolos.jdbc.dao.MateriaPrimaDao;
 import br.com.gracibolos.jdbc.dao.ProdutoDao;
+import br.com.gracibolos.jdbc.model.Caixa;
 import br.com.gracibolos.jdbc.model.Cliente;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Fornecedor;
@@ -40,7 +42,9 @@ public class ServerRestController {
 	private List<Fornecedor> fornList;
 	private ItemEncomendaDao ItemEncDao;
 	private List<ItemEncomenda> listItemEnc;
-	
+	private CaixaDao caixaDao;
+	private EncomendaDao daoEnc;
+	private Status status;
 	// AJAX
 	private void colocarAcesso(HttpServletResponse response){
 		response.setHeader("Access-Control-Allow-Origin", "*");
@@ -170,9 +174,6 @@ public class ServerRestController {
 	
 	// ---------------------ENCOMEDA---------------------------------------------------------
 	
-	EncomendaDao daoEnc;
-	Status status;
-	
 	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.POST) 
 	public ResponseEntity<String> createEncomenda(@RequestBody Encomenda encomenda){
 
@@ -206,7 +207,7 @@ public class ServerRestController {
 			e.printStackTrace();
 		}
 		
-		return new ResponseEntity<String>(status.getNumeroEncomenda().toString(), HttpStatus.CREATED);
+		return new ResponseEntity<String>(status.getNumeroEncomenda().toString(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.PUT) 
@@ -228,4 +229,21 @@ public class ServerRestController {
 		
 		return new ResponseEntity<String>( HttpStatus.OK);
 	}
+	
+	// ---------------------CAIXA---------------------------------------------------------
+	
+	@RequestMapping(value = "/rest-caixa/", method = RequestMethod.POST) 
+	public ResponseEntity<String> createCaixa(@RequestBody Caixa caixa){
+
+		caixaDao = new CaixaDao();
+		System.out.println("gastoRecebimento : "+caixa.getGastoRecebimento()
+						+"\nencomendaId "+caixa.getEncomendaId()
+						+"\nDataTransacao "+caixa.getDataTransacao()
+						+"\nValor "+caixa.getValor()
+						+"\nForma "+caixa.getForma()
+						
+				);
+	return new ResponseEntity<String>("registrado", HttpStatus.OK);
+	}
+	
 }

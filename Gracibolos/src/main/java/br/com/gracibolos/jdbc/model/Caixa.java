@@ -12,6 +12,11 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 /**
  *
  * @author d637942
@@ -35,8 +40,12 @@ public class Caixa implements Serializable{
     private BigDecimal saldo;
     private String forma; // de pagamento
     private Integer parcela;
+    @JsonDeserialize(using = LocalDateDeserializer.class)  
+    @JsonSerialize(using = LocalDateSerializer.class)  
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate dataTransacao;
+    @JsonDeserialize(using = LocalDateDeserializer.class)  
+    @JsonSerialize(using = LocalDateSerializer.class)  
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate dataOperacao;
     private String descricao;

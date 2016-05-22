@@ -346,9 +346,9 @@
 						                
 										
 						                <div class="tab-pane" role="tabpanel" id="step2">
-						                    
+						                    <!-- 
 						                    <form id="produtos-encomenda" method="POST">
-						                    
+						                     -->
 							                    <div class="row">
 							                    	<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							                    		<button type="button" id="inserir-linha"  onclick="return false" class="btn btn-default fullwidth"><i class="material-icons">add_shopping_cart</i>&nbsp;&nbsp;&nbsp;Incluir novo produto</button>
@@ -428,17 +428,17 @@
 								                   
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-								                    <button type="button" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+								                    <button type="button" id="btn_faturar" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 						                   		</div>
-						                    
+						                    <!-- 
 						                    </form>
-						                    
+						                     -->
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step3">
-						                    
+						                    <!-- 
 						                    <form id="faturar-encomenda" method="POST">
-						                    
+						                     -->
 							                    <div class="row">
 							                        <div class="input-margin col-xs-12 col-sm-6 col-md-4">
 														<label class="control-label" for="datafaturamento">Data de faturamento:</label>
@@ -459,7 +459,8 @@
 														<label class="control-label" for="valorcompra">Valor total da encomenda:</label>
 														<div class="input-group">
 															<span class="input-group-addon">R$</span>
-															<input type="text" id="totalencomenda" name="totalencomenda" class="form-control" readonly />
+															<!-- readonly -->
+															<input type="text" id="totalencomenda" name="totalencomenda" class="form-control"  />
 														</div>
 													</div>
 													
@@ -490,18 +491,18 @@
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" id="btn_submit_faturar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Produzir</button>
 						                   		</div>
-						                   		
+						                   	<!-- 	
 						                   	</form>
-						                   	
+						                   	 -->
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step4">
-						                    
+						                    <!-- 
 						                    <form id="produzir-encomenda" method="POST">
-						                    
+						                     -->
 							                    <div class="row">
 							                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
 														<label class="control-label" for="dataproducao">Data da produção:</label>
@@ -513,18 +514,18 @@
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" id="btn_submit_produzir" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">done</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
 						                   		</div>
-						                   		
+						                   	<!-- 	
 						                   	</form>
-						                   	
+						                   	 -->
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="complete">
-						                	
+						                	<!-- 
 						                    <form id="finalizar-encomenda" method="POST">
-						                
+						                	 -->
 							                    <div class="row">
 							                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
 														<label class="control-label" for="datafinalizado">Data da finalização:</label>
@@ -536,11 +537,12 @@
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="submit" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" id="btn_submit_finalizar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default" id="finalizar-encomenda"><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
 						                   		</div>
-						                   		
+						                   	<!-- 	
 						                   	</form>
+						                   	 -->
 						                </div>
 						                
 						            </div>
@@ -832,7 +834,6 @@
 				}else {
 					alert('Você atingiu o limite máximo de produtos na encomenda');	
 				}
-				console.log('inserido');
 
 				$('#lista-produtos select').selectize({				
 				    valueField: 'id',
@@ -900,22 +901,20 @@
 				
 			});
 
+			
+// 			//apertar o submit --------------------------------------------------  	
+// 			$("#produtos-encomenda").submit(function(e) {
+// 				e.preventDefault();//Aqui desativa o submit do form
+// 				return false;
+// 			});
+
 			/*
 			*
-			* SALVAR ENCOMENDA---------------------------------------
+			* INCLUIR ENCOMENDA---------------------------------------
 			*
 			*/
-			//apertar o submit --------------------------------------------------  
-			$("#produtos-encomenda").submit(function(e) {
 
-				//alert('submit');
-				//Remove as mascaras quando 
-				var now = moment().format('YYYY-MM-DD');
-				var totalencomenda = $('#totalprodutos').val();
-               
-				$('#datafaturamento').val(now);
-				$('#totalencomenda').val(totalencomenda);
-
+			function inserirEncomenda(){
 				//recupera os valores da encomenda
 				var enc = new Object();
 				enc.status = 1;
@@ -951,8 +950,11 @@
 	                 //alert('item '+JSON.stringify(itemencomenda));
 	                 //alert('list '+JSON.stringify(enc.listItemEncomenda));
 	                 
-				});				
+				});		
+	
+				//Parse para json		
 				var js = JSON.stringify(enc);
+				
 				//alert(enc);
 				$.ajax({
 		            url: "../Gracibolos/rest-encomenda/",
@@ -960,40 +962,82 @@
 		            data: js,
 		            contentType: "application/json; charset=utf-8",
 		            success: function(result) {
-		                alert("Encomenda de número : "+result
-				                );
-		                
+		                alert("Encomenda de número : "+result);
+		                $('#id').val(result);//Com o retorno do numero da encomenda, preencho o campo id                
 		            }
 		        });
+
+			};
+			
+			$("#btn_submit_produtos").click(function() {
+
+				inserirEncomenda();
 
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
 // 				$("#produtos-encomenda").attr("action","administrativo-encomendas");
 				
-				e.preventDefault();//Aqui desativa o submit do form
-				//return false;
-			});
-			
-			//Remove as mascaras quando apertar o submit
-			$("#faturar-encomenda").submit(function(e) {
-				e.preventDefault();
 				
-				return false;
-			});
-			
-			//Remove as mascaras quando apertar o submit
-			$("#produzir-encomenda").submit(function(e) {
-				e.preventDefault();
+			});//FIM - INCLUIR ENCOMENDA---------------------------------------
+
+
+			/*
+			*
+			* FATURAR ENCOMENDA---------------------------------------
+			*
+			*/
+			$("#btn_submit_faturar").click(function() {
+
+				inserirEncomenda();
+				//alert('faturar');
+				var caixa = new Object();
+
+				caixa.gastoRecebimento = 1;//gastoRecebimento
+				caixa.encomendaId = $('#id').val();//encomendaId
+				caixa.dataTransacao = $('#datafaturamento').val();//dataTransacao
 				
-				return false;
-			});
-			
-			//Remove as mascaras quando apertar o submit
-			$("#finalizar-encomenda").submit(function(e) {
-				e.preventDefault();
+				var valor_temp = $('#totalencomenda').val(); //Total encomenda
+				valor_temp = valor_temp.split(".").join("");//Retirar a máscara
+				caixa.valor = valor_temp.split(",").join(".");//Retirar a máscara
+				 
+				caixa.forma = $('#formapagamento').val();//forma
 				
-				return false;
+				var js = JSON.stringify(caixa);
+				alert(js);
+
+				$.ajax({
+		            url: "../Gracibolos/rest-caixa/",
+		            type: 'POST',    
+		            data: js,
+		            contentType: "application/json; charset=utf-8",
+		            success: function(result) {
+		                alert(result);                
+		            }
+		        });
+				
 			});
 			
+// 			//Remove as mascaras quando apertar o submit
+// 			$("#faturar-encomenda").submit(function(e) {
+// 				e.preventDefault();
+				
+// 				return false;
+// 			});
+			
+// 			//Remove as mascaras quando apertar o submit
+// 			$("#produzir-encomenda").submit(function(e) {
+// 				e.preventDefault();
+				
+// 				return false;
+// 			});
+			
+// 			//Remove as mascaras quando apertar o submit
+// 			$("#finalizar-encomenda").submit(function(e) {
+// 				e.preventDefault();
+				
+// 				return false;
+// 			});
+			
+			//CALCULO DO TROCO
 			$('#valorpago').on('change', function(){
 				
 				//Variavel temporaria para retirar a mascara e possibilitar o calculo.
@@ -1014,8 +1058,7 @@
 					$('#valorpago').val("");
 					$("#valortroco").val("");
 				}
-				
-				
+								
 			});
 			
 			/*
@@ -1055,6 +1098,7 @@
                     }
                 ]
             });
+            
 
             /*
 			*
@@ -1075,21 +1119,38 @@
 				$('#obs').val('');
 				$("#lista-produtos tr").each(function(){
 					$(this).remove();
-				});//fim - Reset autmaticamente todos os campos do formulário.
+				});
+				$('#totalencomenda').val('');
+				//fim - Reset autmaticamente todos os campos do formulário.
 												
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
 				
-				//Altera o nome do botão do modal.
+				//Nome do botão incluir encomenda
 				$("#btn_submit_produtos").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir encomenda');
-				
+				//Nome do botão do faturar.
+				$("#btn_submit_faturar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;faturar encomenda');
+				//Nome do botão do produzir.
+				$("#btn_submit_produzir").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;produzir encomenda');
+				//Nome do botão do finalizar.
+				$("#btn_submit_finalizar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;finalizar encomenda');
+
+				//------faturar---------------------------------
+				var now = moment().format('YYYY-MM-DD');        
+				$('#datafaturamento').val(now);//Colocar a data de hoje
+
 				var now = moment().format('YYYY-MM-DD');
                 $('#dataencomenda').val(now);
+                
+                $('#btn_faturar').click(function(){//calcular total da encomenda
+                	var totalprodutos = $('#totalprodutos').val();     
+    				$('#totalencomenda').val(totalprodutos);
+                });
 				
                 //line_product();
                
             });
-
+          
             /*
 			*
 			* ALTERAÇÃO DE ENCOMENDA
