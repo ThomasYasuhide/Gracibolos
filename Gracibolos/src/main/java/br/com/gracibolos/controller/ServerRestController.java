@@ -185,8 +185,18 @@ public class ServerRestController {
 						+"\nClienteid "+encomenda.getClienteid()
 						+"\nResponsavel "+encomenda.getResponsavel()
 						+"\nObs "+encomenda.getObs()
+						+"\nTotal "+encomenda.getTotalprodutos()
 						
 				);
+			for(ItemEncomenda ie : encomenda.getListItemEncomenda()){
+				System.out.println("\n\tprodutoId : "+ie.getProdutoId()
+								+"\n\tquantidade : "+ie.getQuantidade()
+								+"\n\tvalor : "+ie.getValor()
+								+"\n\tTotal : "+ie.getTotal()
+						
+					);
+		}
+		
 		Status status = new Status();
 		try {
 			status = daoEnc.inserir(encomenda);
@@ -195,9 +205,7 @@ public class ServerRestController {
 			System.out.println("ERRO - rest inserir encomenda.");
 			e.printStackTrace();
 		}
-
-		System.out.println(encomenda.getNomerazao()+" "+encomenda.getStatus());
-			
+		
 		return new ResponseEntity<String>(status.getNumeroEncomenda().toString(), HttpStatus.CREATED);
 	}
 	

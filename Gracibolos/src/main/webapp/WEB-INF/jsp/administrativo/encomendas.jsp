@@ -1,10 +1,5 @@
-﻿﻿<!-- Define que este documento é uma pagina JSP -->
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!-- Tag de importação JSTL, utilizado para fazer a repetição das tags HTML -->
+﻿<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<!-- Tag de importação JSTL, utilizado para fazer formatação dos valores das tags HTML -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
@@ -294,9 +289,9 @@
 						            <div class="tab-content">
 						            				            	
 						                <div class="tab-pane active" role="tabpanel" id="step1">
-						                    
+						                    <!--  
 						                    <form id="dados-encomenda" method="POST">
-						                    				                    
+						                    -->				                    
 							                    <div class="row">
 							                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
 														<label class="control-label" for="id">Nº da encomenda:</label>
@@ -342,8 +337,8 @@
 				                  
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
 						                   		</div>
+					                   		<!-- </form> -->
 					                   		
-					                   		</form>
 					                   		
 						                </div>
 							                
@@ -432,7 +427,7 @@
 								                    <button type="button" class="btn btn-default" id="cancelar-itens-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                   
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="button" id="btn_salvar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="submit" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="button" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 						                   		</div>
 						                    
@@ -806,24 +801,24 @@
 			  	
 					var item = '<tr id="item_'+i+'">';
 				    item +=			'<td class="hidden">';
-				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
+				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly" />';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<select id="produto_'+i+'" class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" class="form-control quantidade"  min="0" max="9999999">';
+				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" class="form-control quantidade"  min="0" max="9999999" />';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].valor" placeholder="0,00" id="valor_'+i+'" class="form-control valor">';
+				    item += 				'<input type="text" name="item['+i+'].valor" placeholder="0,00" id="valor_'+i+'" class="form-control valor" />';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].total" value="${item.total}" id="total_'+i+'" class="form-control total" readonly="readonly">';
+				    item += 				'<input type="text" name="item['+i+'].total" value="${item.total}" id="total_'+i+'" class="form-control total" readonly="readonly" />';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
@@ -871,18 +866,7 @@
 				    }
 				});//Fim selectize
 
-				//função de deletar
-				$('#lista-produtos button').on('click', '#delete-produto', function() {
-					e.preventDefault();
-					
-					//Busca a linha e remove o TR.
-					$(this).parent().parent().remove();
-		
-					//Calcula o total de todos os produtos.
-					calculaTotalProdutos();
-				
-				});
-			});
+			});//Fim inserir linha
 			
 			/*
 			*
@@ -915,19 +899,78 @@
 				return true;
 				
 			});
-			
-			//Remove as mascaras quando apertar o submit
+
+			/*
+			*
+			* SALVAR ENCOMENDA---------------------------------------
+			*
+			*/
+			//apertar o submit --------------------------------------------------  
 			$("#produtos-encomenda").submit(function(e) {
-				e.preventDefault();
-				
+
+				//alert('submit');
+				//Remove as mascaras quando 
 				var now = moment().format('YYYY-MM-DD');
 				var totalencomenda = $('#totalprodutos').val();
                
 				$('#datafaturamento').val(now);
 				$('#totalencomenda').val(totalencomenda);
+
+				//recupera os valores da encomenda
+				var enc = new Object();
+				enc.status = 1;
+				enc.dataencomenda = $('#dataencomenda').val();
+				enc.dataentrega = $('#dataentrega').val();
+				enc.datacancelado = $('#datacancelado').val();
+				enc.clienteid = $('#cliente').val();
+				enc.responsavel = $('#responsalvel').val();
+				enc.obs = $('#obs').val();
+
+	
+				enc.listItemEncomenda = [];
+				//var listItemEncomenda = [];
+				$('#lista-produtos tr').each(function (i,linha) {
+        				
+	                 // Criar objeto para armazenar os dados
+	                 var itemencomenda = new Object();
+	                 itemencomenda.produtoid = $(linha).find('select:eq(1)').val(); // valor da coluna Produto
+	                 itemencomenda.quantidade = $(linha).find('input:eq(2)').val(); // Valor da coluna Quantidade
+	                 				
+	                 var valor_temp = $(linha).find('input:eq(3)').val(); // Valor da coluna Quantidade
+	 				 valor_temp = valor_temp.split(".").join("");//Retirar a máscara
+	 				 itemencomenda.valor = valor_temp.split(",").join(".");//Retirar a máscara
+
+ 					 valor_temp = '';
+	 				 valor_temp = $(linha).find('input:eq(4)').val();//total
+	 				 valor_temp = valor_temp.split(".").join("");//Retirar a máscara	
+	                 itemencomenda.total = valor_temp.split(",").join(".");//Retirar a máscara
+	                 enc.listItemEncomenda[i] = itemencomenda;
+	                 
+	                 // Adicionar o objeto pedido no array
+	                 //enc.listItemEncomenda.push(JSON.stringify(pedido));
+	                 //alert('item '+JSON.stringify(itemencomenda));
+	                 //alert('list '+JSON.stringify(enc.listItemEncomenda));
+	                 
+				});				
+				var js = JSON.stringify(enc);
+				//alert(enc);
+				$.ajax({
+		            url: "../Gracibolos/rest-encomenda/",
+		            type: 'POST',    
+		            data: js,
+		            contentType: "application/json; charset=utf-8",
+		            success: function(result) {
+		                alert("Encomenda de número : "+result
+				                );
+		                
+		            }
+		        });
+
+				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
+// 				$("#produtos-encomenda").attr("action","administrativo-encomendas");
 				
-				
-				return false;
+				e.preventDefault();//Aqui desativa o submit do form
+				//return false;
 			});
 			
 			//Remove as mascaras quando apertar o submit
@@ -1032,23 +1075,19 @@
 				$('#obs').val('');
 				$("#lista-produtos tr").each(function(){
 					$(this).remove();
-				});
-				//Reset autmaticamente todos os campos do formulário.	
-								
+				});//fim - Reset autmaticamente todos os campos do formulário.
+												
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
 				
-				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-				$("#encomenda-form").attr("action","administrativo-incluir-encomenda");
-				
 				//Altera o nome do botão do modal.
-				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir encomenda');
+				$("#btn_submit_produtos").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir encomenda');
 				
 				var now = moment().format('YYYY-MM-DD');
                 $('#dataencomenda').val(now);
 				
                 //line_product();
-                
+               
             });
 
             /*
@@ -1067,7 +1106,7 @@
 				$("#encomenda-form").attr("action","administrativo-alterar-encomenda");
 				
 				//Altera o nome do botão do modal.
-				$("#modal-action").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
+				$("#btn_submit_produtos").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
 				
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
@@ -1152,24 +1191,24 @@
 				  	
 				    var item = '<tr id="item_'+i+'">';
 				    item +=			'<td class="hidden">';
-				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly">';
+				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly" />';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<select class="form-control produto" placeholder="Digite o código ou nome do produto." id="produto_'+i+'" name="item['+i+'].produtoId"></select>';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" value="'+quantidade+'" class="form-control quantidade"  min="0" max="9999999">';
+				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" value="'+quantidade+'" class="form-control quantidade"  min="0" max="9999999" />';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].valor" placeholder="0,00" id="valor_'+i+'" class="form-control valor">';
+				    item += 				'<input type="text" name="item['+i+'].valor" placeholder="0,00" id="valor_'+i+'" class="form-control valor" />';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].total" id="total_'+i+'" class="form-control total" readonly="readonly">';
+				    item += 				'<input type="text" name="item['+i+'].total" id="total_'+i+'" class="form-control total" readonly="readonly" />';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
@@ -1225,48 +1264,6 @@
 				});
 			}
 			
-			/*
-			*
-			* SALVAR ENCOMENDA---------------------------------------
-			*
-			*/
-			$('#btn_salvar').click(function(){
-				
-				//console.log('Salvar');
-				var enc = new Object();
-				enc.status = 1;
-				enc.dataencomenda = $('#dataencomenda').val();
-				enc.dataentrega = $('#dataentrega').val();
-				enc.datacancelado = $('#datacancelado').val();
-				enc.clienteid = $('#cliente').val();
-				enc.responsavel = $('#responsalvel').val();
-				enc.obs = $('#obs').val();
-
-// 				var listItemEncomenda = [];
-// 				$('#lista-produtos tr').each(function() {
-// 				    listItemEncomenda = $(this).find(".customerIDCell").html();    
-// 				 });
-
-				var tabela = $('#lista-produtos tr').html();
-				 
-				js1  = JSON.stringify(tabela);
-// 				alert(js1);
-				js  = JSON.stringify(enc);
-// 				alert(js);
-				
-				$.ajax({
-		            url: "../Gracibolos/rest-encomenda/",
-		            type: 'POST',    
-		            data: js,
-		            contentType: "application/json; charset=utf-8",
-		            success: function(result) {
-		                alert("Encomenda de número : "+result
-				                );
-		                
-		            }
-		        });
-		        
-			});
 			
 			/*
 			*

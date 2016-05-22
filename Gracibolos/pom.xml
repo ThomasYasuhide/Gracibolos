@@ -7,12 +7,6 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Gracibolos Maven Webapp</name>
   <dependencies>
-    <dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>3.8.1</version>
-		<scope>test</scope>
-    </dependency>
     
     <!-- Spring dependencies -->
     
@@ -34,17 +28,25 @@
 		<version>4.2.4.RELEASE</version>
 	</dependency>
 	
+	<!-- Jackson JSON Processor -->
 	<dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-core</artifactId>
-        <version>2.4.3</version>
+        <version>2.4.0</version>
     </dependency>
     
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
-        <version>2.4.3</version>
+        <version>2.4.0</version>
     </dependency>
+    
+	<dependency>
+	    <groupId>com.fasterxml.jackson.datatype</groupId>
+	    <artifactId>jackson-datatype-jsr310</artifactId>
+	    <version>2.4.0</version>
+	</dependency>
+	<!-- Jackson JSON Processor -->
 	
 	<dependency>
 		<groupId>jstl</groupId>
@@ -88,28 +90,6 @@
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
 		<version>5.1.38</version>
-	</dependency>
-	
-	<!-- REST dependencies 
-	
-	<dependency>
-        <groupId>org.codehaus.jackson</groupId>
-        <artifactId>jackson-mapper-asl</artifactId>
-        <version>1.9.13</version>
-    </dependency>
-	-->
-	
-	<!-- Jackson JSON Processor -->
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>2.4.1</version>
-    </dependency>
-    
-    <dependency>
-	    <groupId>com.fasterxml.jackson.datatype</groupId>
-	    <artifactId>jackson-datatype-jsr310</artifactId>
-	    <version>2.4.0</version>
 	</dependency>
 	
 	<!-- J unit -->

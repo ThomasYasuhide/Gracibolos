@@ -1358,7 +1358,7 @@ public class AdministrativoController {
 	//ENCOMENDA
 	@RequestMapping("/administrativo-encomendas")
 	public ModelAndView encomenda(){
-		System.out.println("Entrou na servlet de listagem de matéria prima");
+		System.out.println("Entrou na servlet de listagem das encomendas");
 			
 			//TESTES
 				Encomenda encomenda = new Encomenda();

@@ -1,5 +1,6 @@
 package br.com.gracibolos.jdbc.model;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,6 +9,11 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -49,6 +55,7 @@ public class Encomenda implements Serializable{
     @JsonSerialize(using = LocalDateSerializer.class)  
     @DateTimeFormat(iso = ISO.DATE)
     private LocalDate datacancelamento;
+    @JsonProperty("amountOfMoney")
     private BigDecimal totalprodutos;
     private String obs;
     private String nomerazao;
@@ -151,11 +158,11 @@ public class Encomenda implements Serializable{
 	public void setDatacancelamento(LocalDate datacancelamento) {
 		this.datacancelamento = datacancelamento;
 	}
-
+	@JsonSerialize(using = PriceJsonSerializer.class)
 	public BigDecimal getTotalprodutos() {
 		return totalprodutos;
 	}
-
+	@JsonSerialize(using = PriceJsonSerializer.class)
 	public void setTotalprodutos(BigDecimal totalprodutos) {
 		this.totalprodutos = totalprodutos;
 	}
@@ -200,5 +207,12 @@ public class Encomenda implements Serializable{
 		this.listItemEncomenda = listItemEncomenda;
 	}
 	
-	
+	public class PriceJsonSerializer extends JsonSerializer<BigDecimal> {
+
+		  @Override
+		  public void serialize(BigDecimal value, JsonGenerator jgen, SerializerProvider provider) 
+		    throws IOException, JsonProcessingException {
+		      jgen.writeString(value.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+		  }
+		}
 }
