@@ -831,8 +831,8 @@
 				$('#lista-produtos select').selectize({				
 				    valueField: 'id',
 				    labelField: 'nome',
-				    searchField: ['codigo', 'nome'],
-					options: [{id: '${item.produtoId}', codigo: '${item.codigo}', nome: '${item.nome}'}],
+				    searchField: ['codigo','nome'],
+					options: [{id: '${item.produtoId}', nome: '${item.nome}'}],
 				    create: false,
 				    render: {
 				        option: function(item, escape) {
@@ -945,31 +945,32 @@
 					var total = $('#total_' + linha);
 					
 					//Apresenta o ID de cada linha de produto
-					alert("Produto ID " + produto.val());
+					//alert("Produto ID " + produto.val());
 					
-					/*
+					
 	                 // Criar objeto para armazenar os dados
 	                 var itemencomenda = new Object();
 	                 
-	                 itemencomenda.produtoid = $(linha).find('select:eq(1)').val(); // valor da coluna Produto
-	                 itemencomenda.quantidade = $(linha).find('input:eq(2)').val(); // Valor da coluna Quantidade
+	                 itemencomenda.produtoId = produto.val(); // valor da coluna id do Produto
+	                 itemencomenda.quantidade = quantidade.val(); // Valor da coluna Quantidade
 	                 				
-	                 var valor_temp = $(linha).find('input:eq(3)').val(); // Valor da coluna Quantidade
+	                 var valor_temp = valor.val(); // Valor da coluna Quantidade
 	 				 valor_temp = valor_temp.split(".").join("");//Retirar a máscara
 	 				 itemencomenda.valor = valor_temp.split(",").join(".");//Retirar a máscara
 
  					 valor_temp = '';
-	 				 valor_temp = $(linha).find('input:eq(4)').val();//total
+	 				 valor_temp = total.val();//total
 	 				 valor_temp = valor_temp.split(".").join("");//Retirar a máscara	
 	                 itemencomenda.total = valor_temp.split(",").join(".");//Retirar a máscara
-	                 enc.listItemEncomenda[i] = itemencomenda;
+	                 
+	                 enc.listItemEncomenda[linha] = itemencomenda;
 	                 
 	                 // Adicionar o objeto pedido no array
 	                 //enc.listItemEncomenda.push(JSON.stringify(pedido));
-	                 //alert('item '+JSON.stringify(itemencomenda));
+	                 alert(itemencomenda.produtoId);
 	                 //alert('list '+JSON.stringify(enc.listItemEncomenda));
 	                 
-	                 */
+	                 
 	                 
 				});		
 	
