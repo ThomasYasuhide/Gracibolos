@@ -44,7 +44,7 @@ public class ServerRestController {
 	private List<ItemEncomenda> listItemEnc;
 	private CaixaDao caixaDao;
 	private EncomendaDao daoEnc;
-	private Status status;
+	//private Status status;
 	
 	// AJAX
 	private void colocarAcesso(HttpServletResponse response){
@@ -251,7 +251,7 @@ public class ServerRestController {
 				status = "Erro ao registrar";
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 	return new ResponseEntity<String>(status, HttpStatus.OK);
