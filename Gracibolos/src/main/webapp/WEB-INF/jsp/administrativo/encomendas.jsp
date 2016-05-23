@@ -360,47 +360,7 @@
 																</tr>
 															</thead>
 															<tbody id="lista-produtos" >
-																<!--  
-																<c:forEach var="item" items="${itens}" varStatus="loop">
-																	<tr id="item">
-																		
-																		<td class="hidden">
-																			<input type="text" id="id_${loop.index}" name="item[${loop.index}].id" value="${item.id}" class="readonly">
-																		</td>
-																		
-																		<td>
-																			<select class="form-control produto" id="produto_${loop.index}" placeholder="Digite o código ou nome do produto." name="item[${loop.index}].produtoId">
-																					<option value="teste" selected>Teste</option>
-																			</select>
-																		</td>
-																		
-																		<td>
-																			<input type="number" name="item[${loop.index}].quantidade" value="${item.quantidade}" id="quantidade_${loop.index}" class="form-control quantidade"  min="0" max="9999999">
-																		</td>
-																		
-																		<td>
-																			<div class="input-group">
-																				<span class="input-group-addon">R$</span>
-																				<fmt:setLocale value="pt_BR"/>
-																				<input type="text" name="item[${loop.index}].valor" value="<fmt:formatNumber value="${item.valor}" type="number" minFractionDigits="2"/>" id="valor_${loop.index}" class="form-control valor">
-																			</div>
-																		</td>
-																		
-																		<td>
-																			<div class="input-group">
-																				<span class="input-group-addon">R$</span>
-																				<input type="text" name="item[${loop.index}].total" value="<fmt:formatNumber value="${item.total}" type="number" minFractionDigits="2"/>" id="total_${loop.index}" class="form-control total" readonly="readonly">
-																			</div>
-																		</td>
-																		
-																		<td>
-																			<button type="button" id="delete-produto" class="btn btn-default"><i class="material-icons">remove_shopping_cart</i></button>
-																		</td>
-																		
-																		
-																	</tr>
-																</c:forEach>
-																-->
+																
 															</tbody>
 														</table>
 													</div>
@@ -679,13 +639,14 @@
 			        });
 			    }
 			});
-						
+
 			/*
 			*
-			* PESQUISA PRODUTOS E POPULA O SELECT
+			* PESQUISA PRODUTOS E POPULA O VALOR
 			*
 			*/
 			
+			//Quandor alterar o produto, captura o valor e preenche.
 			$("#produtos").on("change", ".produto", function(){
 				var linha = this.id.replace("produto_", "");
 				
@@ -710,7 +671,7 @@
 						
 			/*
 			*
-			* Verifica a linha que está sendo alterada da tabela de produtos.
+			* Verifica se a quantidade ou o valor é alterado, se for, realiza o calculo do produto.
 			*
 			*/
 			
@@ -779,7 +740,7 @@
 				$('#totalprodutos').val(total).trigger('input');
 				
 			}
-
+			
 			/*
 			*
 			* CRIA UMA NOVA LINHA DE PRODUTOS.
@@ -788,18 +749,40 @@
 
 
 			$('#inserir-linha').on('click', function() {
+				
+				//Chama o método para inserção
+				inserir_item();
+				
+			});//Fim inserir linha
+			
+			/*
+			*
+			* EXCLUSÃO DA LINHA
+			*
+			*/
+			
+			$('#produtos').on('click', '.delete_produto', function() {
+				
+				//Busca a linha e remove o TR.
+				$(this).parent().parent().remove();
+	
+				calculaTotalProdutos();
+			});
 
+
+			function inserir_item(callback){
+				
 				var produtos = $('#produtos');
 				var i = $('#produtos tr').size() - 1;
 				
 				if($('#produtos tr').size() <= 100){
-			  	
-					var item = '<tr id="item_'+i+'">';
+				  	
+				    var item = '<tr id="item_'+i+'">';
 				    item +=			'<td class="hidden">';
-				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly" />';
+				    item += 			'<input type="text" name="item['+i+'].id" id="id_'+i+'" class="readonly" />';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<select id="produto_'+i+'" class="form-control produto" placeholder="Digite o código ou nome do produto." name="item['+i+'].produtoId"></select>';
+				    item += 			'<select name="item['+i+'].produtoId" id="produto_'+i+'" class="form-control produto" placeholder="Digite o código ou nome do produto."></select>';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" class="form-control quantidade"  min="0" max="9999999" />';
@@ -807,32 +790,40 @@
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].valor" placeholder="0,00" id="valor_'+i+'" class="form-control valor" />';
+				    item += 				'<input type="text" name="item['+i+'].valor" id="valor_'+i+'" placeholder="0,00" class="form-control valor" />';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].total" value="${item.total}" id="total_'+i+'" class="form-control total" readonly="readonly" />';
+				    item += 				'<input type="text" name="item['+i+'].total" id="total_'+i+'" class="form-control total" readonly="readonly" />';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
 				    item += 			'<button type="button" id="delete-produto" class="btn btn-default delete_produto"><i class="material-icons">remove_shopping_cart</i></button>';
 				    item += 		'</td>';
 				    item += 	'</tr>';
-			    	
+			    
 				    produtos.append(item);
 				    
-				    i++;    
+				    addSelectize(i, function(){
+				    	callback(i);
+				    });
+				    
+				    i++;
+				    
+				    
 				}else {
 					alert('Você atingiu o limite máximo de produtos na encomenda');	
 				}
+			}
+			
+			function addSelectize(i, callback){
 
-				$('#lista-produtos select').selectize({				
+				$("#produto_"+i).selectize({
 				    valueField: 'id',
 				    labelField: 'nome',
-				    searchField: ['codigo','nome'],
-					options: [{id: '${item.produtoId}', nome: '${item.nome}'}],
+				    searchField: ['codigo', 'nome'],
 				    create: false,
 				    render: {
 				        option: function(item, escape) {
@@ -858,23 +849,10 @@
 				            }
 				        });
 				    }
-				});//Fim selectize
-
-			});//Fim inserir linha
-			
-			/*
-			*
-			* EXCLUSÃO DA LINHA
-			*
-			*/
-			
-			$('#produtos').on('click', '.delete_produto', function() {
+				});
 				
-				//Busca a linha e remove o TR.
-				$(this).parent().parent().remove();
-	
-				calculaTotalProdutos();
-			});
+				callback();
+			}
 			
 			//Remove as mascaras quando apertar o submit
 			$("#dados-encomenda").submit(function(e) {
@@ -969,8 +947,6 @@
 	                 //enc.listItemEncomenda.push(JSON.stringify(pedido));
 	                 alert(itemencomenda.produtoId);
 	                 //alert('list '+JSON.stringify(enc.listItemEncomenda));
-	                 
-	                 
 	                 
 				});		
 	
@@ -1262,104 +1238,26 @@
 					});
 					
 					$.each(data, function(i, field){
-						
-						teste(data[i].produtoId, data[i].nomeProduto, parseFloat(data[i].valor).toFixed(2), data[i].quantidade);
-						
-			            //$("div").append(field.nome + " ");	        
-			            console.log('nomeProduto : '+ data[i].nomeProduto);//Aqui seto so o nome - json muito grande
-			            console.log('numero : '+ data[i].numero);			         
-			            console.log('quantidade : '+ data[i].quantidade);
-			            console.log('valor : '+ data[i].valor);
+												
+						inserir_item(function(linha){
+							
+							selectize = $('#produto_'+linha)[0].selectize;
+			                selectize.clearOptions();
+			                selectize.addOption({id:data[i].produtoId, codigo:'código', nome:data[i].nomeProduto});
+			                selectize.setValue(data[i].produtoId);
+							
+							$('#quantidade_' + linha).val(data[i].quantidade).trigger('input');
+							$('#valor_' + linha).val(parseFloat(data[i].valor).toFixed(2)).trigger('input');
+							$('#total_' + linha).val(data[i].total).trigger('input');
+							
+						});
 						
 			        });
-
 					
 				});
 
 			});
 
-			function teste(produtoid, produto, valor, quantidade){
-				
-				var produtos = $('#produtos');
-				var i = $('#produtos tr').size() - 1;
-				
-				if($('#produtos tr').size() <= 100){
-				  	
-				    var item = '<tr id="item_'+i+'">';
-				    item +=			'<td class="hidden">';
-				    item += 			'<input type="text" id="id_'+i+'" name="item['+i+'].id" value="${item.id}" class="readonly" />';
-				    item += 		'</td>';
-				    item +=			'<td>';
-				    item += 			'<select class="form-control produto" placeholder="Digite o código ou nome do produto." id="produto_'+i+'" name="item['+i+'].produtoId"></select>';
-				    item += 		'</td>';
-				    item +=			'<td>';
-				    item += 			'<input type="number" name="item['+i+'].quantidade" id="quantidade_'+i+'" placeholder="0" value="'+quantidade+'" class="form-control quantidade"  min="0" max="9999999" />';
-				    item += 		'</td>';
-				    item +=			'<td>';
-				    item += 			'<div class="input-group">';
-				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].valor" placeholder="0,00" id="valor_'+i+'" class="form-control valor" />';
-				    item += 			'</div>';
-				    item += 		'</td>';
-				    item +=			'<td>';
-				    item += 			'<div class="input-group">';
-				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].total" id="total_'+i+'" class="form-control total" readonly="readonly" />';
-				    item += 			'</div>';
-				    item += 		'</td>';
-				    item +=			'<td>';
-				    item += 			'<button type="button" id="delete-produto" class="btn btn-default delete_produto"><i class="material-icons">remove_shopping_cart</i></button>';
-				    item += 		'</td>';
-				    item += 	'</tr>';
-			    
-				    produtos.append(item);
-				    teste2(i);
-				    
-	                var selectize = $('#produto_'+i)[0].selectize;
-	                selectize.clearOptions();
-	                selectize.addOption({id:produtoid, codigo:'213', nome:produto});
-	                selectize.setValue(produtoid);
-	                
-				    i++;
-				}else {
-					alert('Você atingiu o limite máximo de produtos na encomenda');	
-				}
-			}
-
-			function teste2(i){
-
-				$("#produto_"+i).selectize({
-				    valueField: 'id',
-				    labelField: 'nome',
-				    searchField: ['codigo', 'nome'],
-				    create: false,
-				    render: {
-				        option: function(item, escape) {
-				            return	'<div>' +
-										'<span class="title">' +
-											'<span>' + escape(item.nome) + '</span><br/>' +
-											'<span>' + escape(item.codigo) + '</span><br/>' +
-										'</span>' +
-									'</div>';
-				        }
-				    },
-				    load: function(query, callback) {
-				        if (!query.length) return callback();
-				        $.ajax({
-				            
-				            url: 'http://localhost:8080/Gracibolos/rest-pesquisar-produto-nome/' + encodeURIComponent(query),
-				            type: 'GET',
-				            error: function() {
-				                callback();
-				            },
-				            success: function(res) {
-				                callback(res);
-				            }
-				        });
-				    }
-				});
-			}
-			
 			
 			/*
 			*
