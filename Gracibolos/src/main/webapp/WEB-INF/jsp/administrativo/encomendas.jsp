@@ -925,9 +925,6 @@
 
 	
 				enc.listItemEncomenda = [];
-<<<<<<< HEAD
-=======
-				//var listItemEncomenda = [];
 				
 				//Verifica se existe algum item de produto
 				if($('#lista-produtos tr').length){
@@ -935,7 +932,6 @@
 				}else{
 					alert('não existe');
 				}
->>>>>>> branch 'master' of https://github.com/ThomasYasuhide/Gracibolos.git
 				
 				$('#lista-produtos tr').each(function () {
 					
