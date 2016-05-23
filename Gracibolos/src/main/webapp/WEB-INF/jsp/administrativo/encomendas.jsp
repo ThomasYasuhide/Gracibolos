@@ -56,7 +56,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda armazenado com sucesso.
+								  <strong>Sucesso!</strong> Encomenda armazenada com sucesso.
 								</div>
 							</div>
 						</div>
@@ -331,20 +331,13 @@
 
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
-								                    
-								                    <button type="submit" class="btn btn-default" disabled><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-				                  
+								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>               
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
 						                   		</div>
 					                   		<!-- </form> -->
 					                   		
-					                   		
 						                </div>
 							                
-						                
-						                
-										
 						                <div class="tab-pane" role="tabpanel" id="step2">
 						                    <!-- 
 						                    <form id="produtos-encomenda" method="POST">
@@ -932,6 +925,17 @@
 
 	
 				enc.listItemEncomenda = [];
+<<<<<<< HEAD
+=======
+				//var listItemEncomenda = [];
+				
+				//Verifica se existe algum item de produto
+				if($('#lista-produtos tr').length){
+					alert('existe');
+				}else{
+					alert('não existe');
+				}
+>>>>>>> branch 'master' of https://github.com/ThomasYasuhide/Gracibolos.git
 				
 				$('#lista-produtos tr').each(function () {
 					
@@ -1171,20 +1175,25 @@
 			*	btn-incluir nova encomenda
 			*/
             $('#incluir-encomenda-modal').click(function() {
-
+				
             	//Reset autmaticamente todos os campos do formulário.				
 				$('#id').val('');
 				$('#dataencomenda').val('');
 				$('#dataentrega').val('');
 				$('#datacancelado').val('');
+				
 				var selectize = $('#cliente')[0].selectize;
                 selectize.clearOptions();
-				//$('#cliente').val('');//nao funcionou
+                
 				$('#responsavel').val('');
 				$('#obs').val('');
+				
 				$("#lista-produtos tr").each(function(){
 					$(this).remove();
 				});
+				
+				$('#totalprodutos').val('');
+				
 				$('#totalencomenda').val('');
 				//fim - Reset autmaticamente todos os campos do formulário.
 												
