@@ -460,7 +460,7 @@
 														<div class="input-group">
 															<span class="input-group-addon">R$</span>
 															<!-- readonly -->
-															<input type="text" id="totalencomenda" name="totalencomenda" class="form-control"  />
+															<input type="text" id="totalencomenda" name="totalencomenda" class="form-control" readonly />
 														</div>
 													</div>
 													
@@ -837,16 +837,16 @@
 
 				$('#lista-produtos select').selectize({				
 				    valueField: 'id',
-				    labelField: 'nome',
-				    searchField: ['codigo', 'nome'],
-					options: [{id: '${item.produtoId}', codigo: '${item.codigo}', nome: '${item.nome}'}],
-				    create: false,
+				    labelField: 'id',
+				    searchField: 'nome',
+// 					options: [{id: '${item.produtoId}', nome: '${item.nome}'}],
+// 				    create: false,
 				    render: {
 				        option: function(item, escape) {
 				            return	'<div>' +
 										'<span class="title">' +
 											'<span>' + escape(item.nome) + '</span><br/>' +
-											'<span>' + escape(item.codigo) + '</span><br/>' +
+// 											'<span>' + escape(item.codigo) + '</span><br/>' +
 										'</span>' +
 									'</div>';
 				        }
@@ -916,7 +916,7 @@
 
 			function inserirEncomenda(status){
 				//recupera os valores da encomenda
-				alert(status);
+				//alert(status);
 				var enc = new Object();
 				if(status==3){
 					enc.status = 3;//status - faturada
@@ -938,7 +938,7 @@
 	                 // Criar objeto para armazenar os dados
 	                 var itemencomenda = new Object();
 	                 
-	                 itemencomenda.produtoid = $(linha).find('select:eq(1)').val(); // valor da coluna Produto
+	                 itemencomenda.produtoId = $(linha).find('div:eq(1)').text(); // valor da coluna id do Produto
 	                 itemencomenda.quantidade = $(linha).find('input:eq(2)').val(); // Valor da coluna Quantidade
 	                 				
 	                 var valor_temp = $(linha).find('input:eq(3)').val(); // Valor da coluna Quantidade
@@ -953,7 +953,7 @@
 	                 
 	                 // Adicionar o objeto pedido no array
 	                 //enc.listItemEncomenda.push(JSON.stringify(pedido));
-	                 //alert('item '+JSON.stringify(itemencomenda));
+	                 alert(itemencomenda.produtoId);
 	                 //alert('list '+JSON.stringify(enc.listItemEncomenda));
 	                 
 				});		

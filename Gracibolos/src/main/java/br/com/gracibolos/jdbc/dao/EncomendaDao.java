@@ -140,6 +140,78 @@ public class EncomendaDao{
 	 * 
 	 * */
 	
+	public boolean alterarProduzindo(Encomenda encomenda)throws Exception{
+		
+		boolean status = false;
+		
+		//string query do banco
+		String sql = " UPDATE encomenda SET status=4, dataproducao=? WHERE id=?";
+		
+		PreparedStatement  ps = null;
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+			
+			//seta os atributos do objeto encomenda, fazendo a alteração.
+			ps = conn.prepareStatement(sql);
+
+			if(encomenda.getDataproducao() != null){
+				ps.setDate(1, Date.valueOf(encomenda.getDataproducao()));
+			}else{
+				ps.setNull(1, Types.DATE);
+			}
+			ps.setLong(2, encomenda.getId());
+			if(ps.executeUpdate() != 0) {
+				status = true;
+			}
+			ps.close();	
+			conn.close();			
+		}
+		//trata, caso de uma exceção
+		catch (SQLException e) 
+		{
+			System.out.println("Erro ao alterar a produção encomenda\n"+e);
+		}
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
+		return status;
+	}
+	
+	public boolean alterarFinalizado(Encomenda encomenda)throws Exception{
+		
+		boolean status = false;
+		
+		//string query do banco
+		String sql = " UPDATE encomenda SET status=5, datafinalizado=? WHERE id=?";
+		
+		PreparedStatement  ps = null;
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+			
+			//seta os atributos do objeto encomenda, fazendo a alteração.
+			ps = conn.prepareStatement(sql);
+
+			if(encomenda.getDataproducao() != null){
+				ps.setDate(1, Date.valueOf(encomenda.getDatafinalizado()));
+			}else{
+				ps.setNull(1, Types.DATE);
+			}
+			ps.setLong(2, encomenda.getId());
+			if(ps.executeUpdate() != 0) {
+				status = true;
+			}
+			ps.close();	
+			conn.close();			
+		}
+		//trata, caso de uma exceção
+		catch (SQLException e) 
+		{
+			System.out.println("Erro ao alterar a produção encomenda\n"+e);
+		}
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
+		return status;
+	}
+
 	public boolean alterar(Encomenda encomenda) throws Exception{
 		boolean status = false;
 		
