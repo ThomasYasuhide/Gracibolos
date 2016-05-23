@@ -45,6 +45,7 @@ public class ServerRestController {
 	private CaixaDao caixaDao;
 	private EncomendaDao daoEnc;
 	private Status status;
+	
 	// AJAX
 	private void colocarAcesso(HttpServletResponse response){
 		response.setHeader("Access-Control-Allow-Origin", "*");

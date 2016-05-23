@@ -914,10 +914,15 @@
 			*
 			*/
 
-			function inserirEncomenda(){
+			function inserirEncomenda(status){
 				//recupera os valores da encomenda
+				alert(status);
 				var enc = new Object();
-				enc.status = 1;
+				if(status==3){
+					enc.status = 3;//status - faturada
+				}else{
+					enc.status = 1;//status - inicializada
+				}
 				enc.dataencomenda = $('#dataencomenda').val();
 				enc.dataentrega = $('#dataentrega').val();
 				enc.datacancelado = $('#datacancelado').val();
@@ -1018,11 +1023,12 @@
 			
 			$("#btn_submit_faturar").click(function() {
 				
-				inserirEncomenda();
-				
+				inserirEncomenda(3);// 3 = faturada
+				//Estou atrasando à chamada em 1 segundo, senão esta executa logo em seguida
+				//não dando tempo de gerar o numero da encomenda
 				setTimeout(function(){faturar();}, 1000	);
 				
-			});
+			});//FIM - FATURAR ENCOMENDA---------------------------------------
 			
 // 			//Remove as mascaras quando apertar o submit
 // 			$("#faturar-encomenda").submit(function(e) {
