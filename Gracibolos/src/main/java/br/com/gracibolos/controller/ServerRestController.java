@@ -211,24 +211,40 @@ public class ServerRestController {
 		return new ResponseEntity<String>(status.getNumeroEncomenda().toString(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.PUT) 
-	public ResponseEntity<String> updateEncomenda (@RequestBody Encomenda encomenda){
-		System.out.println("Datacancelamento : "+encomenda.getDatacancelamento()	
-					+"\nDatafinalizado : "+encomenda.getDatafinalizado()
-					
-				);
+	@RequestMapping(value = "/rest-encomenda/prod/", method = RequestMethod.PUT) 
+	public ResponseEntity<String> updateEncomendaProd (@RequestBody String id){
 		
-		return new ResponseEntity<String>( HttpStatus.OK);
+		System.out.println("Numero da encomenda : "+id);
+		daoEnc  = new EncomendaDao();
+		try {
+			daoEnc.alterarProduzindo(id);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		return new ResponseEntity<String>("Status alterado", HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.DELETE) 
-	public ResponseEntity<String> deleteEncomenda (@RequestBody Encomenda encomenda){
-		System.out.println("Datacancelamento : "+encomenda.getDatacancelamento()	
-		+"\nDatafinalizado : "+encomenda.getDatafinalizado()
+	@RequestMapping(value = "/rest-encomenda/fin/", method = RequestMethod.PUT) 
+	public ResponseEntity<String> updateEncomendaFin (@RequestBody String id){
 		
-				);
+		System.out.println("Numero da encomenda : "+id);
+		daoEnc  = new EncomendaDao();
+		try {
+			daoEnc.alterarFinalizado(id);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		return new ResponseEntity<String>("Status alterado", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/rest-encomenda/{id}", method = RequestMethod.DELETE) 
+	public ResponseEntity<String> deleteEncomenda (@PathVariable String id){
 		
-		return new ResponseEntity<String>( HttpStatus.OK);
+		System.out.println("Numero da encomenda : "+id);
+		
+		return new ResponseEntity<String>("", HttpStatus.OK);
 	}
 	
 	// ---------------------CAIXA---------------------------------------------------------
@@ -246,9 +262,9 @@ public class ServerRestController {
 				);
 		try {
 			if(caixaDao.inserir(caixa)){
-				status = "registrado";
+				status = "Faturado";
 			}else{
-				status = "Erro ao registrar";
+				status = "Erro ao faturar";
 			}
 		} catch (Exception e) {
 			// Auto-generated catch block
