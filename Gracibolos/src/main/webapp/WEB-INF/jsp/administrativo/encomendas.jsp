@@ -932,6 +932,7 @@
         				
 	                 // Criar objeto para armazenar os dados
 	                 var itemencomenda = new Object();
+	                 
 	                 itemencomenda.produtoid = $(linha).find('select:eq(1)').val(); // valor da coluna Produto
 	                 itemencomenda.quantidade = $(linha).find('input:eq(2)').val(); // Valor da coluna Quantidade
 	                 				
@@ -972,7 +973,7 @@
 			$("#btn_submit_produtos").click(function() {
 
 				inserirEncomenda();
-
+				
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
 // 				$("#produtos-encomenda").attr("action","administrativo-encomendas");
 				
@@ -985,12 +986,12 @@
 			* FATURAR ENCOMENDA---------------------------------------
 			*
 			*/
-			$("#btn_submit_faturar").click(function() {
 
-				inserirEncomenda();
+			function faturar(){
 				//alert('faturar');
 				var caixa = new Object();
 
+				caixa.parcela = 1;
 				caixa.gastoRecebimento = 1;//gastoRecebimento
 				caixa.encomendaId = $('#id').val();//encomendaId
 				caixa.dataTransacao = $('#datafaturamento').val();//dataTransacao
@@ -1002,9 +1003,9 @@
 				caixa.forma = $('#formapagamento').val();//forma
 				
 				var js = JSON.stringify(caixa);
-				alert(js);
-
-				$.ajax({
+				//alert(js);
+			
+				$.ajax({//Enviando o caixa
 		            url: "../Gracibolos/rest-caixa/",
 		            type: 'POST',    
 		            data: js,
@@ -1013,6 +1014,13 @@
 		                alert(result);                
 		            }
 		        });
+			};
+			
+			$("#btn_submit_faturar").click(function() {
+				
+				inserirEncomenda();
+				
+				setTimeout(function(){faturar();}, 1000	);
 				
 			});
 			

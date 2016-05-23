@@ -234,7 +234,7 @@ public class ServerRestController {
 	
 	@RequestMapping(value = "/rest-caixa/", method = RequestMethod.POST) 
 	public ResponseEntity<String> createCaixa(@RequestBody Caixa caixa){
-
+		String status = "";	
 		caixaDao = new CaixaDao();
 		System.out.println("gastoRecebimento : "+caixa.getGastoRecebimento()
 						+"\nencomendaId "+caixa.getEncomendaId()
@@ -243,7 +243,17 @@ public class ServerRestController {
 						+"\nForma "+caixa.getForma()
 						
 				);
-	return new ResponseEntity<String>("registrado", HttpStatus.OK);
+		try {
+			if(caixaDao.inserir(caixa)){
+				status = "registrado";
+			}else{
+				status = "Erro ao registrar";
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	return new ResponseEntity<String>(status, HttpStatus.OK);
 	}
 	
 }
