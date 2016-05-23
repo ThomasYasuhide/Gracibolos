@@ -916,7 +916,7 @@
 
 			function inserirEncomenda(status){
 				//recupera os valores da encomenda
-				alert(status);
+				//alert(status);
 				var enc = new Object();
 				if(status==3){
 					enc.status = 3;//status - faturada
@@ -933,8 +933,20 @@
 	
 				enc.listItemEncomenda = [];
 				//var listItemEncomenda = [];
-				$('#lista-produtos tr').each(function (i,linha) {
-        				
+				$('#lista-produtos tr').each(function () {
+					
+					//Captura os numeros de linhas
+					var linha = this.id.replace("item_", "");
+					
+					var produto = $('#produto_' + linha);
+					var quantidade = $('#quantidade_' + linha);
+					var valor = $('#valor_' + linha);
+					var total = $('#total_' + linha);
+					
+					//Apresenta o ID de cada linha de produto
+					alert("Produto ID " + produto.val());
+					
+					/*
 	                 // Criar objeto para armazenar os dados
 	                 var itemencomenda = new Object();
 	                 
@@ -955,6 +967,8 @@
 	                 //enc.listItemEncomenda.push(JSON.stringify(pedido));
 	                 //alert('item '+JSON.stringify(itemencomenda));
 	                 //alert('list '+JSON.stringify(enc.listItemEncomenda));
+	                 
+	                 */
 	                 
 				});		
 	

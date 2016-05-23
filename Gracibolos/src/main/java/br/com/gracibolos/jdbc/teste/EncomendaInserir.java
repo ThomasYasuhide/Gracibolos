@@ -1,11 +1,8 @@
 package br.com.gracibolos.jdbc.teste;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.model.Encomenda;
-import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.Status;
 
 //funcionando
@@ -16,8 +13,8 @@ public class EncomendaInserir {
 		Encomenda encomenda = null;
 		Gerador g = new Gerador();
 		EncomendaDao dao = null;
-		List<ItemEncomenda> listIe = null;
-		ItemEncomenda itemEncomenda = null;
+		//List<ItemEncomenda> listIe = null;
+		//ItemEncomenda itemEncomenda = null;
 		Status status = new Status();
 		
 		for(int i=0;i<1;i++){
