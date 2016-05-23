@@ -901,6 +901,18 @@
 // 				return false;
 // 			});
 
+			//Verifica se existe algum item de produto
+			function verificaProdutos(){
+				if($('#lista-produtos tr').length){
+					alert('existe');
+					return true;
+				}else{
+					alert('não existe');
+					return false;
+				}
+			}
+			
+
 			/*
 			*
 			* INCLUIR ENCOMENDA---------------------------------------
@@ -925,13 +937,7 @@
 
 	
 				enc.listItemEncomenda = [];
-				
-				//Verifica se existe algum item de produto
-				if($('#lista-produtos tr').length){
-					alert('existe');
-				}else{
-					alert('não existe');
-				}
+
 				
 				$('#lista-produtos tr').each(function () {
 					
@@ -980,10 +986,15 @@
 
 			};
 			
+			
 			$("#btn_submit_produtos").click(function() {
-
-				inserirEncomenda();
 				
+				if(verificaProdutos()){
+					inserirEncomenda();
+				}else{
+
+				}
+					
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
 // 				$("#produtos-encomenda").attr("action","administrativo-encomendas");
 				
@@ -1027,11 +1038,15 @@
 			};
 			
 			$("#btn_submit_faturar").click(function() {
+				if(verificaProdutos()){
+					inserirEncomenda(3);// 3 = faturada
+					//Estou atrasando à chamada em 1 segundo, senão esta executa logo em seguida
+					//não dando tempo de gerar o numero da encomenda
+					setTimeout(function(){faturar();}, 1000	);
+				}else{
+
+				}
 				
-				inserirEncomenda(3);// 3 = faturada
-				//Estou atrasando à chamada em 1 segundo, senão esta executa logo em seguida
-				//não dando tempo de gerar o numero da encomenda
-				setTimeout(function(){faturar();}, 1000	);
 				
 			});//FIM - FATURAR ENCOMENDA---------------------------------------
 
