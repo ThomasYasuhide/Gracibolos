@@ -1187,6 +1187,8 @@
 					$(this).remove();
 				});
 				
+				inserir_item();
+				
 				$('#totalprodutos').val('');
 				
 				$('#totalencomenda').val('');
@@ -1196,13 +1198,13 @@
 				$('#modal-subtitle').text("Incluir nova encomenda");
 				
 				//Nome do botão incluir encomenda
-				$("#btn_submit_produtos").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Incluir encomenda');
+				$("#btn_submit_produtos").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar');
 				//Nome do botão do faturar.
-				$("#btn_submit_faturar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;faturar encomenda');
+				$("#btn_submit_faturar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Faturar');
 				//Nome do botão do produzir.
-				$("#btn_submit_produzir").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;produzir encomenda');
+				$("#btn_submit_produzir").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Produzir');
 				//Nome do botão do finalizar.
-				$("#btn_submit_finalizar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;finalizar encomenda');
+				$("#btn_submit_finalizar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar');
 
 				//------faturar---------------------------------
 				var now = moment().format('YYYY-MM-DD');        
@@ -1296,18 +1298,22 @@
 					});
 					
 					$.each(data, function(i, field){
-												
+						//TESTE
+						$('#produtos').off('change', '.produto');
+						
 						inserir_item(function(linha){
 							
 							selectize = $('#produto_'+linha)[0].selectize;
 			                selectize.clearOptions();
 			                selectize.addOption({id:data[i].produtoId, codigo:'código', nome:data[i].nomeProduto});
 			                selectize.setValue(data[i].produtoId);
-							
+			                
 							$('#quantidade_' + linha).val(data[i].quantidade).trigger('input');
-							$('#valor_' + linha).val(parseFloat(data[i].valor).toFixed(2)).trigger('input');
+							$('#valor_' + linha).val(parseFloat(data[i].valor).toFixed(2).replace(".", ",")).trigger('input');
 							$('#total_' + linha).val(data[i].total).trigger('input');
-							
+
+							//TESTE
+							calcularTotal(linha);
 						});
 						
 			        });
