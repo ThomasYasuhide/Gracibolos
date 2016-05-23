@@ -932,7 +932,7 @@
 
 	
 				enc.listItemEncomenda = [];
-				//var listItemEncomenda = [];
+				
 				$('#lista-produtos tr').each(function () {
 					
 					//Captura os numeros de linhas
@@ -942,11 +942,7 @@
 					var quantidade = $('#quantidade_' + linha);
 					var valor = $('#valor_' + linha);
 					var total = $('#total_' + linha);
-					
-					//Apresenta o ID de cada linha de produto
-					//alert("Produto ID " + produto.val());
-					
-					
+				
 	                 // Criar objeto para armazenar os dados
 	                 var itemencomenda = new Object();
 	                 
@@ -961,16 +957,10 @@
 	 				 valor_temp = total.val();//total
 	 				 valor_temp = valor_temp.split(".").join("");//Retirar a máscara	
 	                 itemencomenda.total = valor_temp.split(",").join(".");//Retirar a máscara
-	                 
+
+	                 //Insere todos os itens no list
 	                 enc.listItemEncomenda[linha] = itemencomenda;
-	                 
-	                 // Adicionar o objeto pedido no array
-	                 //enc.listItemEncomenda.push(JSON.stringify(pedido));
-	                 alert(itemencomenda.produtoId);
-	                 //alert('list '+JSON.stringify(enc.listItemEncomenda));
-	                 
-	                 
-	                 
+	          
 				});		
 	
 				//Parse para json		
@@ -1044,6 +1034,52 @@
 				setTimeout(function(){faturar();}, 1000	);
 				
 			});//FIM - FATURAR ENCOMENDA---------------------------------------
+
+			/*
+			*
+			* PRODUZIR ENCOMENDA---------------------------------------
+			*
+			*/
+			$("#btn_submit_produzir").click(function() {
+
+				var id = $('#id').val();//encomendaId
+				var js = JSON.stringify(id);
+				
+				$.ajax({
+		            url: "../Gracibolos/rest-encomenda/prod/",
+		            type: 'PUT',    
+		            data: JSON.stringify(id),
+		            contentType: "application/json; charset=utf-8",
+		            success: function(result) {
+		                alert(result);
+		                                
+		            }
+		        });
+				
+			});//FIM - PRODUZIR ENCOMENDA---------------------------------------
+
+
+			/*
+			*
+			* FINALIZAR ENCOMENDA---------------------------------------
+			*
+			*/
+			$("#btn_submit_finalizar").click(function() {
+
+				var id = $('#id').val();//encomendaId
+				
+				$.ajax({
+		            url: "../Gracibolos/rest-encomenda/fin/",
+		            type: 'PUT',    
+		            data: JSON.stringify(id),
+		            contentType: "application/json; charset=utf-8",
+		            success: function(result) {
+		                alert(result);
+		                               
+		            }
+		        });
+				
+			});//FIM - FINALIZAR ENCOMENDA---------------------------------------
 			
 // 			//Remove as mascaras quando apertar o submit
 // 			$("#faturar-encomenda").submit(function(e) {
@@ -1167,9 +1203,9 @@
 				//------faturar---------------------------------
 				var now = moment().format('YYYY-MM-DD');        
 				$('#datafaturamento').val(now);//Colocar a data de hoje
-
-				var now = moment().format('YYYY-MM-DD');
                 $('#dataencomenda').val(now);
+                $('#dataproducao').val(now);
+                $('#datafinalizado').val(now);
                 
                 $('#btn_faturar').click(function(){//calcular total da encomenda
                 	var totalprodutos = $('#totalprodutos').val();     

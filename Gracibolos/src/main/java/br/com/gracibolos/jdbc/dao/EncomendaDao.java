@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,12 +141,14 @@ public class EncomendaDao{
 	 * 
 	 * */
 	
-	public boolean alterarProduzindo(Encomenda encomenda)throws Exception{
+	private static LocalDate hoje = LocalDate.now();
+	
+	public boolean alterarProduzindo(String id)throws Exception{
 		
 		boolean status = false;
 		
 		//string query do banco
-		String sql = " UPDATE encomenda SET status=4, dataproducao=? WHERE id=?";
+		String sql = " UPDATE encomenda SET status=4, dataproducao='"+hoje+"' WHERE id="+id;
 		
 		PreparedStatement  ps = null;
 		
@@ -154,13 +157,7 @@ public class EncomendaDao{
 			
 			//seta os atributos do objeto encomenda, fazendo a alteração.
 			ps = conn.prepareStatement(sql);
-
-			if(encomenda.getDataproducao() != null){
-				ps.setDate(1, Date.valueOf(encomenda.getDataproducao()));
-			}else{
-				ps.setNull(1, Types.DATE);
-			}
-			ps.setLong(2, encomenda.getId());
+			
 			if(ps.executeUpdate() != 0) {
 				status = true;
 			}
@@ -176,12 +173,12 @@ public class EncomendaDao{
 		return status;
 	}
 	
-	public boolean alterarFinalizado(Encomenda encomenda)throws Exception{
+	public boolean alterarFinalizado(String id)throws Exception{
 		
 		boolean status = false;
 		
 		//string query do banco
-		String sql = " UPDATE encomenda SET status=5, datafinalizado=? WHERE id=?";
+		String sql = " UPDATE encomenda SET status=5, datafinalizado='"+hoje+"' WHERE id="+id;
 		
 		PreparedStatement  ps = null;
 		
@@ -190,13 +187,7 @@ public class EncomendaDao{
 			
 			//seta os atributos do objeto encomenda, fazendo a alteração.
 			ps = conn.prepareStatement(sql);
-
-			if(encomenda.getDataproducao() != null){
-				ps.setDate(1, Date.valueOf(encomenda.getDatafinalizado()));
-			}else{
-				ps.setNull(1, Types.DATE);
-			}
-			ps.setLong(2, encomenda.getId());
+			
 			if(ps.executeUpdate() != 0) {
 				status = true;
 			}
@@ -206,7 +197,7 @@ public class EncomendaDao{
 		//trata, caso de uma exceção
 		catch (SQLException e) 
 		{
-			System.out.println("Erro ao alterar a produção encomenda\n"+e);
+			System.out.println("Erro ao alterar a finalização encomenda\n"+e);
 		}
 		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
 		return status;

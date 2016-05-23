@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -21,6 +23,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
  *
  * @author d637942
  */
+@JsonInclude(Include.NON_NULL)
 public class Caixa implements Serializable{
     
     /**
