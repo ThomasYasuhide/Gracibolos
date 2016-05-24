@@ -650,23 +650,7 @@
 			$("#produtos").on("change", ".produto", function(){
 				var linha = this.id.replace("produto_", "");
 				
-				var produto = $('#produto_' + linha);
-				var valor = $('#valor_' + linha);
-				
-				if(produto.val() != undefined){
-					$.ajax({
-			            url : 'administrativo-pesquisar-valor',
-			            method: "POST",
-			            data: {id:produto.val()},
-			            success : function(data) {
-			            	
-			            	valor.val(parseFloat(data.valor).toFixed(2)).trigger('input');
-			            	
-			            	calcularTotal(linha);
-			            }
-			        });
-				}
-				
+				pesquisarValor(linha);
 			});
 						
 			/*
@@ -722,7 +706,7 @@
 			
 				//Verifica todos os campos que tiver total e realiza a seguinte função.
 				$('.total').each(function() {
-
+					
 					//Variavel temporaria para retirar a mascara e possibilitar o calculo.
 					var valor_temp = $(this).val();
 				    valor_temp = valor_temp.split(".").join("");
@@ -742,6 +726,26 @@
 
 			};		
 
+			function pesquisarValor(linha){
+				
+				var produto = $('#produto_' + linha);
+				var valor = $('#valor_' + linha);
+				
+				if(produto.val() != undefined){
+					$.ajax({
+			            url : 'administrativo-pesquisar-valor',
+			            method: "POST",
+			            data: {id:produto.val()},
+			            success : function(data) {
+			            	
+			            	valor.val(parseFloat(data.valor).toFixed(2)).trigger('input');
+			            	
+			            	calcularTotal(linha);
+			            }
+			        });
+				}
+			}
+			
 			/*
 			*
 			* CRIA UMA NOVA LINHA DE PRODUTOS.
@@ -939,6 +943,79 @@
 					return true;
 				}
 			};
+			function verificaTotalP(){
+				if($('#totalprodutos').val() == ''){
+					alert('total não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function verificaCliente(){
+				if($('#cliente').val() == ''){
+					alert('nome não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function verificaValorPago(){
+				if($('#valorpago').val() == ''){
+					alert('valor pago não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function recarregar(){
+				window.location.href = "../Gracibolos/administrativo-encomendas";
+			};
+			
+			function verificaItemProdutoNome(){
+				var status;
+				$('#lista-produtos tr').each(function () {					
+					//Captura os numeros de linhas
+					var linha = this.id.replace('item_', '');
+					var produto = $('#produto_' + linha);
+					if(produto.val() == ''){
+						console.log('item nome do produto '+linha+' não existe');
+						return  status = false;
+						alert('item nome do produto '+linha+' não existe');
+					}else{
+						return status = true;
+					}							
+					//var quantidade = $('#quantidade_' + linha);
+					//var valor = $('#valor_' + linha);
+					//var total = $('#total_' + linha);				
+				});
+				
+			};
+
+			function verificaFormaPag(){
+				if(($('#formapagamento').val() == '')){
+					alert('forma pagamento não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function verificaDataEntr(){
+				if($('#dataentrega').val() == ''){
+					alert('data entrega não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
 
 			function verificaValorPago(){
 				if($('#valorpago').val() == ''){
@@ -1006,7 +1083,7 @@
 
 	                 //Insere todos os itens no list
 	                 enc.listItemEncomenda[linha] = itemencomenda;
-	          
+
 				});		
 	
 				//Parse para json		
@@ -1038,6 +1115,9 @@
 				}else{
 
 				}
+					
+				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
+// 				$("#produtos-encomenda").attr("action","administrativo-encomendas");
 				
 			});//INCLUIR ENCOMENDA SUBMIT---------------------------------------
 
@@ -1227,14 +1307,8 @@
                 ]
             });
             
-
-            $('#btn_faturar').click(function(){//calcular total da encomenda
-            	var totalprodutos = $('#totalprodutos').val();     
-				$('#totalencomenda').val(totalprodutos);
-            });
-
-			function resetCampos(){
-				//Reset autmaticamente todos os campos do formulário.				
+            function resetCampos(){
+            	//Reset autmaticamente todos os campos do formulário.				
 				$('#id').val('');
 				$('#dataencomenda').val('');
 				$('#dataentrega').val('');
@@ -1246,12 +1320,24 @@
 				$("#lista-produtos tr").each(function(){
 					$(this).remove();
 				});				
-				$('#totalprodutos').val('');				
+				$('#totalprodutos').val('');							
+				$('#totalprodutos').val('');			
 				$('#totalencomenda').val('');
 				$('#valorpago').val('');
-			};
-			
-            
+            };
+
+            $('#btn_faturar').click(function(){//calcular total da encomenda
+            	var totalprodutos = $('#totalprodutos').val();     
+				$('#totalencomenda').val(totalprodutos);
+            });
+
+          //------faturar---------------------------------
+			var now = moment().format('YYYY-MM-DD');        
+			$('#datafaturamento').val(now);//Colocar a data de hoje
+            $('#dataencomenda').val(now);
+            $('#dataproducao').val(now);
+            $('#datafinalizado').val(now);
+            	
             /*
 			*
 			* INCLUSÃO DE ENCOMENDA
@@ -1272,14 +1358,8 @@
 				$("#btn_submit_produzir").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Produzir');
 				//Nome do botão do finalizar.
 				$("#btn_submit_finalizar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar');
-
-				//------faturar---------------------------------
-				var now = moment().format('YYYY-MM-DD');        
-				$('#datafaturamento').val(now);//Colocar a data de hoje
-                $('#dataencomenda').val(now);
-                $('#dataproducao').val(now);
-                $('#datafinalizado').val(now);
-               
+             
+				        
             });
           
             /*
@@ -1373,10 +1453,15 @@
 			                
 							$('#quantidade_' + linha).val(data[i].quantidade).trigger('input');
 							$('#valor_' + linha).val(parseFloat(data[i].valor).toFixed(2).replace(".", ",")).trigger('input');
-							$('#total_' + linha).val(data[i].total).trigger('input');
-
-							//TESTE
-							calcularTotal(linha);
+							$('#total_' + linha).val("12,00").trigger('input');
+							
+							calculaTotalProdutos();
+						});
+						
+						$("#produtos").on("change", ".produto", function(){
+							var linha = this.id.replace("produto_", "");
+							
+							pesquisarValor(linha);
 						});
 						
 			        });
