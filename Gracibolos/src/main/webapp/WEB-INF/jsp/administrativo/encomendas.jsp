@@ -746,7 +746,7 @@
 		    	
 				//Calcula o total de todos os produtos.
 		    	calculaTotalProdutos();
-			}
+			};
 			
 			/*
 			*
@@ -778,7 +778,7 @@
 				//Trigger aciona um evento para que o campo seja formatado com a mascara.
 				$('#totalprodutos').val(total).trigger('input');
 				
-			}
+			};
 
 			/*
 			*
@@ -903,16 +903,86 @@
 
 			//Verifica se existe algum item de produto
 			function verificaProdutos(){
+				
 				if($('#lista-produtos tr').length){
-					alert('existe');
+					//alert('produtos existe');
 					return true;
 				}else{
-					alert('não existe');
+					alert('produtos não existe');
 					return false;
 				}
-			}
+			};
 			
+			function verificaTotalP(){
+				if($('#totalprodutos').val() == ''){
+					alert('total não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
 
+			function verificaCliente(){
+				if($('#cliente').val() == ''){
+					alert('nome não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function verificaItemProdutoNome(){
+				var status;
+				$('#lista-produtos tr').each(function () {					
+					//Captura os numeros de linhas
+					var linha = this.id.replace('item_', '');
+					var produto = $('#produto_' + linha);
+					if(produto.val() == ''){
+						console.log('item nome do produto '+linha+' não existe');
+						return  status = false;
+						alert('item nome do produto '+linha+' não existe');
+					}else{
+						return status = true;
+					}							
+					//var quantidade = $('#quantidade_' + linha);
+					//var valor = $('#valor_' + linha);
+					//var total = $('#total_' + linha);				
+				});
+				
+			};
+
+			function verificaFormaPag(){
+				if(($('#formapagamento').val() == '')){
+					alert('forma pagamento não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function verificaDataEntr(){
+				if($('#dataentrega').val() == ''){
+					alert('data entrega não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function verificaValorPago(){
+				if($('#valorpago').val() == ''){
+					alert('valor pago não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+			
 			/*
 			*
 			* INCLUIR ENCOMENDA---------------------------------------
@@ -984,12 +1054,13 @@
 		            }
 		        });
 
-			};
+			};// FIM INSERIR ENCOMENDA --------------------------------------------------------------
 			
 			
 			$("#btn_submit_produtos").click(function() {
 				
-				if(verificaProdutos()){
+				if(verificaCliente() && verificaDataEntr() && verificaProdutos() 
+						&& verificaTotalP()){
 					inserirEncomenda();
 				}else{
 
@@ -999,7 +1070,7 @@
 // 				$("#produtos-encomenda").attr("action","administrativo-encomendas");
 				
 				
-			});//FIM - INCLUIR ENCOMENDA---------------------------------------
+			});//INCLUIR ENCOMENDA SUBMIT---------------------------------------
 
 
 			/*
@@ -1038,7 +1109,8 @@
 			};
 			
 			$("#btn_submit_faturar").click(function() {
-				if(verificaProdutos()){
+				if(verificaCliente() && verificaProdutos() && verificaTotalP() 
+						&& verificaFormaPag() && verificaValorPago()){
 					inserirEncomenda(3);// 3 = faturada
 					//Estou atrasando à chamada em 1 segundo, senão esta executa logo em seguida
 					//não dando tempo de gerar o numero da encomenda
@@ -1187,26 +1259,6 @@
 			*/
             $('#incluir-encomenda-modal').click(function() {
 				
-            	//Reset autmaticamente todos os campos do formulário.				
-				$('#id').val('');
-				$('#dataencomenda').val('');
-				$('#dataentrega').val('');
-				$('#datacancelado').val('');
-				
-				var selectize = $('#cliente')[0].selectize;
-                selectize.clearOptions();
-                
-				$('#responsavel').val('');
-				$('#obs').val('');
-				
-				$("#lista-produtos tr").each(function(){
-					$(this).remove();
-				});
-				
-				$('#totalprodutos').val('');
-				
-				$('#totalencomenda').val('');
-				//fim - Reset autmaticamente todos os campos do formulário.
 												
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
