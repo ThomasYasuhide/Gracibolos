@@ -1319,38 +1319,6 @@
                 ]
             });
             
-
-            /*
-			*
-			* INCLUSÃO DE ENCOMENDA
-			*	btn-incluir nova encomenda
-			*/
-            $('#incluir-encomenda-modal').click(function() {
-				
-            	//Reset autmaticamente todos os campos do formulário.				
-				$('#id').val('');
-				$('#dataencomenda').val('');
-				$('#dataentrega').val('');
-				$('#datacancelado').val('');
-				
-				var selectize = $('#cliente')[0].selectize;
-                selectize.clearOptions();
-                
-				$('#responsavel').val('');
-				$('#obs').val('');
-				
-				$("#lista-produtos tr").each(function(){
-					$(this).remove();
-				});
-				
-				inserir_item();
-				
-				$('#totalprodutos').val('');
-				
-				$('#totalencomenda').val('');
-			};
-			
-            
             /*
 			*
 			* INCLUSÃO DE ENCOMENDA
