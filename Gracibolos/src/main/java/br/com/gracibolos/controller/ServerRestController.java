@@ -44,7 +44,8 @@ public class ServerRestController {
 	private List<ItemEncomenda> listItemEnc;
 	private CaixaDao caixaDao;
 	private EncomendaDao daoEnc;
-	//private Status status;
+	private Status status;
+	private String msg="";
 	
 	// AJAX
 	private void colocarAcesso(HttpServletResponse response){
@@ -199,9 +200,19 @@ public class ServerRestController {
 					);
 		}
 		
-		Status status = new Status();
+		status = new Status();
 		try {
 			status = daoEnc.inserir(encomenda);
+			if(status.getStatus1()){//Encomenda
+				
+			}else{
+				
+			}
+			if(status.getStatus2()){//ListItemEncomenda
+				
+			}else{
+				
+			}
 			System.out.println("Numero da encomenda : "+status.getNumeroEncomenda());
 		} catch (Exception e) {
 			System.out.println("ERRO - rest inserir encomenda.");
@@ -217,12 +228,16 @@ public class ServerRestController {
 		System.out.println("Numero da encomenda : "+id);
 		daoEnc  = new EncomendaDao();
 		try {
-			daoEnc.alterarProduzindo(id);
+			if(daoEnc.alterarProduzindo(id)){
+				msg="produzindo";
+			}else{
+				msg="erroproduzindo";
+			}
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
-		return new ResponseEntity<String>("Status alterado", HttpStatus.OK);
+		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/rest-encomenda/fin/", method = RequestMethod.PUT) 
@@ -231,12 +246,16 @@ public class ServerRestController {
 		System.out.println("Numero da encomenda : "+id);
 		daoEnc  = new EncomendaDao();
 		try {
-			daoEnc.alterarFinalizado(id);
+			if(daoEnc.alterarFinalizado(id)){
+				msg="finalizado";
+			}else{
+				msg="errofinalizado";
+			}
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
-		return new ResponseEntity<String>("Status alterado", HttpStatus.OK);
+		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/rest-encomenda/{id}", method = RequestMethod.DELETE) 
@@ -251,7 +270,7 @@ public class ServerRestController {
 	
 	@RequestMapping(value = "/rest-caixa/", method = RequestMethod.POST) 
 	public ResponseEntity<String> createCaixa(@RequestBody Caixa caixa){
-		String status = "";	
+		msg = "";	
 		caixaDao = new CaixaDao();
 		System.out.println("gastoRecebimento : "+caixa.getGastoRecebimento()
 						+"\nencomendaId "+caixa.getEncomendaId()
@@ -262,15 +281,15 @@ public class ServerRestController {
 				);
 		try {
 			if(caixaDao.inserir(caixa)){
-				status = "Faturado";
+				msg = "faturado";
 			}else{
-				status = "Erro ao faturar";
+				msg = "errofaturado";
 			}
 		} catch (Exception e) {
 			// Auto-generated catch block
 			e.printStackTrace();
 		}
-	return new ResponseEntity<String>(status, HttpStatus.OK);
+	return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 	
 }

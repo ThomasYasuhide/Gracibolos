@@ -691,7 +691,7 @@
 		    	
 				//Calcula o total de todos os produtos.
 		    	calculaTotalProdutos();
-			}
+			};
 			
 			/*
 			*
@@ -723,8 +723,9 @@
 				//Trigger aciona um evento para que o campo seja formatado com a mascara.
 				$('#totalprodutos').val(total).trigger('input');
 				
-			}
-			
+
+			};		
+
 			function pesquisarValor(linha){
 				
 				var produto = $('#produto_' + linha);
@@ -820,7 +821,7 @@
 				}else {
 					alert('Você atingiu o limite máximo de produtos na encomenda');	
 				}
-			}
+			};
 			
 			function addSelectize(i, callback){
 
@@ -856,7 +857,7 @@
 				});
 				
 				callback();
-			}
+			};
 			
 			//Remove as mascaras quando apertar o submit
 			$("#dados-encomenda").submit(function(e) {
@@ -885,16 +886,163 @@
 
 			//Verifica se existe algum item de produto
 			function verificaProdutos(){
+				
 				if($('#lista-produtos tr').length){
-					alert('existe');
+					//alert('produtos existe');
 					return true;
 				}else{
-					alert('não existe');
+					alert('produtos não existe');
 					return false;
 				}
-			}
+			};
 			
+			function verificaTotalP(){
+				if($('#totalprodutos').val() == ''){
+					alert('total não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
 
+			function verificaCliente(){
+				if($('#cliente').val() == ''){
+					alert('nome não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function verificaItemProdutoNome(){
+				var status;
+				$('#lista-produtos tr').each(function () {					
+					//Captura os numeros de linhas
+					var linha = this.id.replace('item_', '');
+					var produto = $('#produto_' + linha);
+					if(produto.val() == ''){
+						console.log('item nome do produto '+linha+' não existe');
+						return  status = false;
+						alert('item nome do produto '+linha+' não existe');
+					}else{
+						return status = true;
+					}							
+					//var quantidade = $('#quantidade_' + linha);
+					//var valor = $('#valor_' + linha);
+					//var total = $('#total_' + linha);				
+				});
+				
+			};
+
+			function verificaFormaPag(){
+				if(($('#formapagamento').val() == '')){
+					alert('forma pagamento não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function verificaDataEntr(){
+				if($('#dataentrega').val() == ''){
+					alert('data entrega não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+			function verificaTotalP(){
+				if($('#totalprodutos').val() == ''){
+					alert('total não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function verificaCliente(){
+				if($('#cliente').val() == ''){
+					alert('nome não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function verificaValorPago(){
+				if($('#valorpago').val() == ''){
+					alert('valor pago não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function recarregar(){
+				window.location.href = "../Gracibolos/administrativo-encomendas";
+			};
+			
+			function verificaItemProdutoNome(){
+				var status;
+				$('#lista-produtos tr').each(function () {					
+					//Captura os numeros de linhas
+					var linha = this.id.replace('item_', '');
+					var produto = $('#produto_' + linha);
+					if(produto.val() == ''){
+						console.log('item nome do produto '+linha+' não existe');
+						return  status = false;
+						alert('item nome do produto '+linha+' não existe');
+					}else{
+						return status = true;
+					}							
+					//var quantidade = $('#quantidade_' + linha);
+					//var valor = $('#valor_' + linha);
+					//var total = $('#total_' + linha);				
+				});
+				
+			};
+
+			function verificaFormaPag(){
+				if(($('#formapagamento').val() == '')){
+					alert('forma pagamento não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function verificaDataEntr(){
+				if($('#dataentrega').val() == ''){
+					alert('data entrega não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function verificaValorPago(){
+				if($('#valorpago').val() == ''){
+					alert('valor pago não existe');
+					return false;
+				}else{
+					//alert('nome existe');
+					return true;
+				}
+			};
+
+			function recarregar(){
+				window.location.href = "../Gracibolos/administrativo-encomendas";
+			};
+			
 			/*
 			*
 			* INCLUIR ENCOMENDA---------------------------------------
@@ -951,7 +1099,7 @@
 	                 
 	                 // Adicionar o objeto pedido no array
 	                 //enc.listItemEncomenda.push(JSON.stringify(pedido));
-	                 alert(itemencomenda.produtoId);
+	                 //alert(itemencomenda.produtoId);
 	                 //alert('list '+JSON.stringify(enc.listItemEncomenda));
 	                 
 				});		
@@ -971,13 +1119,17 @@
 		            }
 		        });
 
-			};
+			};// FIM INSERIR ENCOMENDA --------------------------------------------------------------
 			
 			
 			$("#btn_submit_produtos").click(function() {
 				
-				if(verificaProdutos()){
+				if(verificaCliente() && verificaDataEntr() && verificaProdutos() 
+						&& verificaTotalP()){
 					inserirEncomenda();
+					setTimeout(function(){recarregar();}, 1000	);
+					setTimeout(function(){resetCampos();}, 1500	);		
+					
 				}else{
 
 				}
@@ -985,8 +1137,7 @@
 				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
 // 				$("#produtos-encomenda").attr("action","administrativo-encomendas");
 				
-				
-			});//FIM - INCLUIR ENCOMENDA---------------------------------------
+			});//INCLUIR ENCOMENDA SUBMIT---------------------------------------
 
 
 			/*
@@ -1018,18 +1169,21 @@
 		            type: 'POST',    
 		            data: js,
 		            contentType: "application/json; charset=utf-8",
-		            success: function(result) {
-		                alert(result);                
+		            success: function(msg) {
+		                alert(msg);                
 		            }
 		        });
 			};
 			
 			$("#btn_submit_faturar").click(function() {
-				if(verificaProdutos()){
+				if(verificaCliente() && verificaProdutos() && verificaTotalP() && verificaValorPago()){
 					inserirEncomenda(3);// 3 = faturada
-					//Estou atrasando à chamada em 1 segundo, senão esta executa logo em seguida
+					//Estou atrasando à chamada em 1 segundo, senão o faturar executa logo em seguida
 					//não dando tempo de gerar o numero da encomenda
 					setTimeout(function(){faturar();}, 1000	);
+					setTimeout(function(){recarregar();}, 1500 );
+					setTimeout(function(){resetCampos();}, 2000 );				
+					
 				}else{
 
 				}
@@ -1076,8 +1230,7 @@
 		            data: JSON.stringify(id),
 		            contentType: "application/json; charset=utf-8",
 		            success: function(result) {
-		                alert(result);
-		                               
+		                alert(result);                 
 		            }
 		        });
 				
@@ -1195,8 +1348,18 @@
 				$('#totalprodutos').val('');
 				
 				$('#totalencomenda').val('');
-				//fim - Reset autmaticamente todos os campos do formulário.
-												
+			};
+			
+            
+            /*
+			*
+			* INCLUSÃO DE ENCOMENDA
+			*	btn-incluir nova encomenda
+			*/
+            $('#incluir-encomenda-modal').click(function() {
+
+            	inserir_item();								
+
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
 				
