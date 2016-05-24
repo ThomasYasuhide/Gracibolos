@@ -650,23 +650,7 @@
 			$("#produtos").on("change", ".produto", function(){
 				var linha = this.id.replace("produto_", "");
 				
-				var produto = $('#produto_' + linha);
-				var valor = $('#valor_' + linha);
-				
-				if(produto.val() != undefined){
-					$.ajax({
-			            url : 'administrativo-pesquisar-valor',
-			            method: "POST",
-			            data: {id:produto.val()},
-			            success : function(data) {
-			            	
-			            	valor.val(parseFloat(data.valor).toFixed(2)).trigger('input');
-			            	
-			            	calcularTotal(linha);
-			            }
-			        });
-				}
-				
+				pesquisarValor(linha);
 			});
 						
 			/*
@@ -722,7 +706,7 @@
 			
 				//Verifica todos os campos que tiver total e realiza a seguinte função.
 				$('.total').each(function() {
-
+					
 					//Variavel temporaria para retirar a mascara e possibilitar o calculo.
 					var valor_temp = $(this).val();
 				    valor_temp = valor_temp.split(".").join("");
@@ -739,6 +723,26 @@
 				//Trigger aciona um evento para que o campo seja formatado com a mascara.
 				$('#totalprodutos').val(total).trigger('input');
 				
+			}
+			
+			function pesquisarValor(linha){
+				
+				var produto = $('#produto_' + linha);
+				var valor = $('#valor_' + linha);
+				
+				if(produto.val() != undefined){
+					$.ajax({
+			            url : 'administrativo-pesquisar-valor',
+			            method: "POST",
+			            data: {id:produto.val()},
+			            success : function(data) {
+			            	
+			            	valor.val(parseFloat(data.valor).toFixed(2)).trigger('input');
+			            	
+			            	calcularTotal(linha);
+			            }
+			        });
+				}
 			}
 			
 			/*
@@ -950,7 +954,6 @@
 	                 alert(itemencomenda.produtoId);
 	                 //alert('list '+JSON.stringify(enc.listItemEncomenda));
 	                 
-	          
 				});		
 	
 				//Parse para json		
@@ -1310,10 +1313,15 @@
 			                
 							$('#quantidade_' + linha).val(data[i].quantidade).trigger('input');
 							$('#valor_' + linha).val(parseFloat(data[i].valor).toFixed(2).replace(".", ",")).trigger('input');
-							$('#total_' + linha).val(data[i].total).trigger('input');
-
-							//TESTE
-							calcularTotal(linha);
+							$('#total_' + linha).val("12,00").trigger('input');
+							
+							calculaTotalProdutos();
+						});
+						
+						$("#produtos").on("change", ".produto", function(){
+							var linha = this.id.replace("produto_", "");
+							
+							pesquisarValor(linha);
 						});
 						
 			        });
