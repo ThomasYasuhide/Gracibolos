@@ -381,7 +381,7 @@
 								                   
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-								                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#faturar-encomenda"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+								                    <button type="button" id="btn_faturar" class="btn btn-default" data-toggle="modal" data-target="#faturar-encomenda"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 						                   		</div>
 						                    <!-- 
 						                    </form>
@@ -1056,6 +1056,11 @@
 				}
 			};
 
+			$('#btn_faturar').click(function(){
+            	var totalprodutos = $('#totalprodutos').val();     
+				$('#totalencomenda').val(totalprodutos);
+            });
+
 			function recarregar(){
 				window.location.href = "../Gracibolos/administrativo-encomendas";
 			};
@@ -1336,22 +1341,7 @@
                 ]
             });
             
-            /*
-			*
-			* INCLUSÃO DE ENCOMENDA
-			*	btn-incluir nova encomenda
-			*/
-            $('#incluir-encomenda-modal').click(function() {
-            	
-            	/*
-            	
-            	FALTA IMPLANTAR
-            	
-            	voltar para a primeira tela
-            	bloquear todas as outras telas
-            	
-            	*/
-				
+            function resetCampos(){
             	//Reset autmaticamente todos os campos do formulário.				
 				$('#id').val('');
 				$('#dataencomenda').val('');
@@ -1368,6 +1358,35 @@
 					$(this).remove();
 				});
 				
+				$('#totalprodutos').val('');
+				$('#total').val('');
+            }
+
+          //------faturar---------------------------------
+			var now = moment().format('YYYY-MM-DD');        
+			$('#datafaturamento').val(now);//Colocar a data de hoje
+            $('#dataencomenda').val(now);
+            $('#dataproducao').val(now);
+            $('#datafinalizado').val(now);
+            
+            /*
+			*
+			* INCLUSÃO DE ENCOMENDA
+			*	btn-incluir nova encomenda
+			*/
+            $('#incluir-encomenda-modal').click(function() {
+            	
+            	/*
+            	
+            	FALTA IMPLANTAR
+            	
+            	voltar para a primeira tela
+            	bloquear todas as outras telas
+            	
+            	*/
+				
+            	resetCampos();
+				
 				inserir_item();					
 
 
@@ -1381,19 +1400,7 @@
 				//Nome do botão do produzir.
 				$("#btn_submit_produzir").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Produzir');
 				//Nome do botão do finalizar.
-				$("#btn_submit_finalizar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar');
-
-				//------faturar---------------------------------
-				var now = moment().format('YYYY-MM-DD');        
-				$('#datafaturamento').val(now);//Colocar a data de hoje
-                $('#dataencomenda').val(now);
-                $('#dataproducao').val(now);
-                $('#datafinalizado').val(now);
-                
-                $('#btn_faturar').click(function(){//calcular total da encomenda
-                	var totalprodutos = $('#totalprodutos').val();     
-    				$('#totalencomenda').val(totalprodutos);
-                });
+				$("#btn_submit_finalizar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar');   
 				               
 				$("#btn_submit_finalizar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar');
              

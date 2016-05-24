@@ -24,6 +24,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 	
 	public boolean inserir(Caixa caixa) throws Exception{
 		
+		//Atualização do saldo
 		if(updateSaldo(getSaldo().add(caixa.getValor()))){
 			System.out.println("Valor incluso");
 		}else{
