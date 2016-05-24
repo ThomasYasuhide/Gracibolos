@@ -332,7 +332,7 @@
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>               
-								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
+								                    <button type="button" class="btn btn-default next-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
 						                   		</div>
 					                   		<!-- </form> -->
 					                   		
@@ -381,7 +381,7 @@
 								                   
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-								                    <button type="button" id="btn_faturar" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+								                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#faturar-encomenda"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 						                   		</div>
 						                    <!-- 
 						                    </form>
@@ -409,7 +409,7 @@
 													</div>
 													
 													<div class="input-margin col-xs-12 col-sm-6 col-md-4">
-														<label class="control-label" for="valorcompra">Valor total da encomenda:</label>
+														<label class="control-label" for="totalencomenda">Valor total da encomenda:</label>
 														<div class="input-group">
 															<span class="input-group-addon">R$</span>
 															<!-- readonly -->
@@ -517,7 +517,37 @@
 	-->
 
 
+	
+	<div class="modal fade" id="faturar-encomenda" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="exampleModalLabel">Faturar encomenda</h4>
+					</div>
+					
+					<!--  Corpo do modal -->
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<p>Deseja realmente faturar a encomenda?</p>
+								<p>Após o fechamento não será possível algumas informações da encomenda.</p>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Essa div contem 2 botões -->
+					<div class="modal-footer">
+						<!-- botão de cancelar-->
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+						<button type="button" class="btn btn-default next-step" data-dismiss="modal">Faturar encomenda</button>
+					</div>
 
+				
+			</div>
+		</div>
+	</div>
+	
 
 
 
@@ -723,7 +753,6 @@
 				//Trigger aciona um evento para que o campo seja formatado com a mascara.
 				$('#totalprodutos').val(total).trigger('input');
 				
-
 			};		
 
 			function pesquisarValor(linha){
@@ -1325,8 +1354,33 @@
 			*	btn-incluir nova encomenda
 			*/
             $('#incluir-encomenda-modal').click(function() {
-
-            	inserir_item();								
+            	
+            	/*
+            	
+            	FALTA IMPLANTAR
+            	
+            	voltar para a primeira tela
+            	bloquear todas as outras telas
+            	
+            	*/
+				
+            	//Reset autmaticamente todos os campos do formulário.				
+				$('#id').val('');
+				$('#dataencomenda').val('');
+				$('#dataentrega').val('');
+				$('#datacancelado').val('');
+				
+				var selectize = $('#cliente')[0].selectize;
+                selectize.clearOptions();
+                
+				$('#responsavel').val('');
+				$('#obs').val('');
+				
+				$("#lista-produtos tr").each(function(){
+					$(this).remove();
+				});
+				
+				inserir_item();					
 
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
@@ -1351,9 +1405,7 @@
                 	var totalprodutos = $('#totalprodutos').val();     
     				$('#totalencomenda').val(totalprodutos);
                 });
-				
-                //line_product();
-               
+				               
             });
           
             /*
@@ -1444,7 +1496,7 @@
 			                
 							$('#quantidade_' + linha).val(data[i].quantidade).trigger('input');
 							$('#valor_' + linha).val(parseFloat(data[i].valor).toFixed(2).replace(".", ",")).trigger('input');
-							$('#total_' + linha).val("12,00").trigger('input');
+							$('#total_' + linha).val(parseFloat(data[i].total).toFixed(2).replace(".", ",")).trigger('input');
 							
 							calculaTotalProdutos();
 						});

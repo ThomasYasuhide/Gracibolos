@@ -545,11 +545,20 @@ public class AdministrativoController {
 	public ModelAndView clientes(){
 		System.out.println("Entrou na servlet de listagem de clientes");
 		
+
+		//cria uma nova instância DAO do estado
+	    EstadoDao estadoDao = new EstadoDao();
+	    //Guarda a lista de estados num List
+	    List<Estado> estados = estadoDao.listar_estados();
+		
 	    //instância uma nova modelView
 		ModelAndView mv = new ModelAndView();
 		//seta o caminho e o nome da jsp
 	    mv.setViewName("administrativo/clientes");
 	    //retorna o mv	
+		//passa a lista de estados para a Expression Language chamada estados	
+		mv.addObject("estados", estados);
+		
 		return mv;
 	}
 	

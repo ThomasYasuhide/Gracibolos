@@ -483,7 +483,12 @@
 	<div class="modal fade" id="modal_erro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-								
+					
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="exampleModalLabel">Atenção! ocorreu algum erro!</h4>
+					</div>
+					
 					<!--  Corpo do modal -->
 					<div class="modal-body">
 						<div class="row">
@@ -533,8 +538,9 @@
                 ifValid: function () { },
                 ifInvalid: function () { 
                 	$('#modal_erro').modal('show');
-                    $('#erro_msg').text('ATENÇÃO! CPF ou CNPJ inválido, favor tente novamente.'); 
-                    $('#cpfcnpj_inp').val(""); }
+                    $('#erro_msg').text('CPF ou CNPJ inválido, favor tente novamente.');
+                    $('#cpfcnpj_inp').val(""); 
+                }
             });
 
 			//Remove as mascaras quando apertar o submit
@@ -625,8 +631,12 @@
                     	//cep é inválido.                       
        					//modal de erro
                         $('#modal_erro').modal('show');
-                        $('#erro_msg').text("ERRO! Formato de CEP inválido.");
-                        $('#cep').val('');
+                        $('#erro_msg').text("O CEP digitado não foi encontrado, favor tente novamente.");
+        				$('#cep').val('');
+        				$('#endereco').val('');
+        				$('#bairro').val('');
+        				$('#cidade').val(0);
+        				$('#estado').val(0);
                     }
                 } //end if.
                 else {
