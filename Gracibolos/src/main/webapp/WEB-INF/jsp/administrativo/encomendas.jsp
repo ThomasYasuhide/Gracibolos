@@ -1307,6 +1307,7 @@
                 ]
             });
             
+
             function resetCampos(){
             	//Reset autmaticamente todos os campos do formulário.				
 				$('#id').val('');
@@ -1345,7 +1346,7 @@
 			*/
             $('#incluir-encomenda-modal').click(function() {
 
-            	inserir_item();								
+            	//inserir_item();								
 
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
