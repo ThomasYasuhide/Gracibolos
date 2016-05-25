@@ -50,68 +50,7 @@
 					<!-- ############################################################ CONTEUDO ############################################################ -->
 
 
-					<!-- ################################# ALERTAS ################################# -->
-					<c:if test="${incluir == 'true'}">
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda armazenada com sucesso.
-								</div>
-							</div>
-						</div>
-					</c:if>
-					<c:if test="${incluir == 'false'}">
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="alert alert-danger alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar incluir a nova encomenda, favor tente novamente.
-								</div>
-							</div>
-						</div>
-					</c:if>
-					<c:if test="${alterar == 'true'}">
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Alteração efetuada com sucesso.
-								</div>
-							</div>
-						</div>
-					</c:if>
-					<c:if test="${alterar == 'false'}">
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="alert alert-danger alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar alterar a encomenda, favor tente novamente.
-								</div>
-							</div>
-						</div>
-					</c:if>
-					<c:if test="${excluir == 'true'}">
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda foi excluida com sucesso!
-								</div>
-							</div>
-						</div>
-					</c:if>
-					<c:if test="${excluir == 'false'}">
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="alert alert-danger alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar excluir a encomenda, favor tente novamente.
-								</div>
-							</div>
-						</div>
-					</c:if>
-					<!-- ################################# FIM DOS ALERTAS ################################# -->
+
 					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
@@ -232,7 +171,65 @@
 						<h3 id="modal-title">ENCOMENDAS</h3>
 						<h4 id="modal-subtitle"></h4>
 					</div>
-
+					
+					<!-- ################################# ALERTAS ################################# -->
+					
+						<div class="row" id="">
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda armazenada com sucesso.
+								</div>
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar incluir a nova encomenda, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Alteração efetuada com sucesso.
+								</div>
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar alterar a encomenda, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda foi excluida com sucesso!
+								</div>
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar excluir a encomenda, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					
+					<!-- ################################# FIM DOS ALERTAS ################################# -->
+					
 					<div class="modal-body">
 						<!-- ################################# CONTEUDO ################################# -->
 												
@@ -381,7 +378,7 @@
 								                   
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-								                    <button type="button" id="btn_faturar" class="btn btn-default" data-toggle="modal" data-target="#faturar-encomenda"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+								                    <button type="button" id="btn_faturar" class="btn btn-default" data-toggle="modal" data-target=""><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 						                   		</div>
 						                    <!-- 
 						                    </form>
@@ -511,27 +508,30 @@
 	</div>
 
 	<!--
-
-	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE ENCOMENDA #########################################################
-
+	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE ENCOMENDA ####################
 	-->
 
-
+	<!--
+	######################################################### MODAL DE ERRO #########################################################
+	-->
 	
-	<div class="modal fade" id="faturar-encomenda" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="modal_erro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="exampleModalLabel">Faturar encomenda</h4>
+						<!-- Faturar encomenda -->
+						<h4 class="modal-title" id="title_modal_erro"></h4>
 					</div>
 					
 					<!--  Corpo do modal -->
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<p>Deseja realmente faturar a encomenda?</p>
-								<p>Após o fechamento não será possível algumas informações da encomenda.</p>
+								<!-- Deseja realmente faturar a encomenda? -->
+								<p id="msg1_modal_erro"></p>
+								<!-- Após o fechamento, não será possível alterar algumas informações da encomenda. -->
+								<p id="msg2_modal_erro"></p>
 							</div>
 						</div>
 					</div>
@@ -539,8 +539,8 @@
 					<!-- Essa div contem 2 botões -->
 					<div class="modal-footer">
 						<!-- botão de cancelar-->
-						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-						<button type="button" class="btn btn-default next-step" data-dismiss="modal">Faturar encomenda</button>
+						<button type="button" id="btn_fechar_modal_erro" class="btn btn-default" data-dismiss="modal">Fechar</button>
+						<button type="button" id="btn_modal_erro" class="btn btn-default next-step" data-dismiss="modal"></button>
 					</div>
 
 				
@@ -548,13 +548,13 @@
 		</div>
 	</div>
 	
-
+	<!--
+	############################################################ FIM DO MODAL DE ERRO ############################################################
+	-->
 
 
 	<!--
-
-	############################################################        MODAL DE EXCLUSÃO DE ENCOMENDA      ############################################################
-
+	############################################################ MODAL DE EXCLUSÃO DE ENCOMENDA ############################################################
 	-->
 
 

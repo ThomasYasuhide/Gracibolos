@@ -111,7 +111,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								 <strong>Erro!</strong> Houve algum erro ao tentar excluir a matéria-prima, favor tente novamente.
+								 <strong>Erro!</strong> Houve algum erro ao tentar excluir a transação, favor tente novamente.
 								</div>
 							</div>
 						</div>
