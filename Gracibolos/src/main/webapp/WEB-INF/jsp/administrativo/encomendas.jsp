@@ -241,7 +241,7 @@
 						                <div class="connecting-line"></div>
 						                <ul class="nav nav-tabs" role="tablist">
 						
-						                    <li role="presentation" class="active">
+						                    <li id="tab-info" role="presentation" class="active">
 						                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Informações da encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">chrome_reader_mode</i>
@@ -249,14 +249,14 @@
 						                        </a>
 						                    </li>
 						
-						                    <li role="presentation" class="disabled">
+						                    <li id="tab-produtos" role="presentation">
 						                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">shopping_cart</i>
 						                            </span>
 						                        </a>
 						                    </li>
-						                    <li role="presentation" class="disabled">
+						                    <li id="tab-faturar" role="presentation" class="disabled">
 						                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Faturar encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">account_balance</i>
@@ -264,7 +264,7 @@
 						                        </a>
 						                    </li>
 						
-						                    <li role="presentation" class="disabled">
+						                    <li id="tab-produzir" role="presentation" class="disabled">
 						                        <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Produzir encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">query_builder</i>
@@ -272,7 +272,7 @@
 						                        </a>
 						                    </li>
 						
-						                    <li role="presentation" class="disabled">
+						                    <li id="tab-finalizar" role="presentation" class="disabled">
 						                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Finalizar encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">done</i>
@@ -328,8 +328,8 @@
 
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-								                    <button type="button" class="btn btn-default" id="cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>               
-								                    <button type="button" class="btn btn-default next-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
+								                    <button type="button" class="btn btn-default cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>               
+								                    <button type="button" class="btn btn-default next-step" id="btn_produtos"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
 						                   		</div>
 					                   		<!-- </form> -->
 					                   		
@@ -374,11 +374,16 @@
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 													  
-								                    <button type="button" class="btn btn-default" id="cancelar-itens-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+								                    <button type="button" class="btn btn-default cancelar-encomenda" id="cancelar-itens-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                   
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+<<<<<<< HEAD
 								                    <button type="button" id="btn_faturar" class="btn btn-default" data-toggle="modal" data-target=""><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+=======
+								                    <button type="button" id="btn_faturar" class="btn btn-default" data-toggle="modal" data-target="#faturar-encomenda"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+								                    <button type="button" id="btn_faturar_bypass" class="btn btn-default next-step hidden" disabled="disabled"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+>>>>>>> branch 'master' of https://github.com/ThomasYasuhide/Gracibolos.git
 						                   		</div>
 						                    <!-- 
 						                    </form>
@@ -439,7 +444,7 @@
 							                    
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-								                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+								                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" id="btn_submit_faturar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Produzir</button>
@@ -462,7 +467,7 @@
 							                    
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-								                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+								                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" id="btn_submit_produzir" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">done</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
@@ -485,7 +490,7 @@
 							                    
 							                    <div class="modal-footer modal-margin-top">
 													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-								                    <button type="button" class="btn btn-default" id="cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+								                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" id="btn_submit_finalizar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="submit" class="btn btn-default" id="finalizar-encomenda" disabled><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
@@ -775,6 +780,73 @@
 				}
 			}
 			
+			
+			function verificaStatus(status) {
+				switch(status){
+					
+					case '1':
+						
+						$('#tab-faturar').addClass('disabled');
+						$('#tab-produzir').addClass('disabled');
+						$('#tab-finalizar').addClass('disabled');
+						
+						break;
+						
+					case '2':
+						
+						break;
+					
+					case '3':
+						
+						$('#tab-faturar').removeClass('disabled');
+						$('#tab-produzir').addClass('disabled');
+						$('#tab-finalizar').addClass('disabled');
+						
+						$('.cancelar-encomenda').removeAttr('disabled');
+						
+						$('#btn_faturar').addClass('hidden').attr('disabled','disabled');
+						$('#btn_faturar_bypass').removeClass('hidden').removeAttr('disabled');
+						
+						var selectize = $('#cliente')[0].selectize;
+						selectize.disable();
+						
+						$('#inserir-linha').addClass('disabled').attr('disabled','disabled');
+						
+						$('#lista-produtos tr').each(function () {					
+							//Captura os numeros de linhas
+							var linha = this.id.replace('item_', '');
+						
+							
+							var selectize = $('#produto_'+linha)[0].selectize;
+							selectize.disable();
+
+							$('#valor_'+linha).attr('disabled','disabled');
+							$('#quantidade_'+linha).attr('disabled','disabled');
+							$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
+						});
+						
+						break;
+					
+					case '4':
+						
+
+						$('#tab-faturar').removeClass('disabled');
+						$('#tab-produzir').removeClass('disabled');
+						$('#tab-finalizar').addClass('disabled');
+												
+						break;
+						
+					case '5':
+						
+						$('#tab-faturar').removeClass('disabled');
+						$('#tab-produzir').removeClass('disabled');
+						$('#tab-finalizar').removeClass('disabled');
+						
+						break;
+				}
+			}
+			
+			
 			/*
 			*
 			* CRIA UMA NOVA LINHA DE PRODUTOS.
@@ -834,7 +906,7 @@
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
-				    item += 			'<button type="button" id="delete-produto" class="btn btn-default delete_produto"><i class="material-icons">remove_shopping_cart</i></button>';
+				    item += 			'<button type="button" id="delete-produto_'+i+'" class="btn btn-default delete_produto"><i class="material-icons">remove_shopping_cart</i></button>';
 				    item += 		'</td>';
 				    item += 	'</tr>';
 			    
@@ -1389,12 +1461,14 @@
 				
 				inserir_item();					
 
-
+				var now = moment().format('YYYY-MM-DD');        
+                $('#dataencomenda').val(now);
+				
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
 				
 				//Nome do botão incluir encomenda
-				$("#btn_submit_produtos").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar');
+				$("#btn_submit_produtos").html('<i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar');
 				//Nome do botão do faturar.
 				$("#btn_submit_faturar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Faturar');
 				//Nome do botão do produzir.
@@ -1403,8 +1477,7 @@
 				$("#btn_submit_finalizar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar');   
 				               
 				$("#btn_submit_finalizar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar');
-             
-				        
+
             });
           
             /*
@@ -1412,7 +1485,7 @@
 			* ALTERAÇÃO DE ENCOMENDA
 			*
 			*/
-
+			
             //Define uma ação ao apertar o botão editar de algum item da tabela.
             $('#lista-encomendas tbody').on( 'click', '#edit-encomenda', function () {
             	            	
@@ -1423,7 +1496,7 @@
 				$("#encomenda-form").attr("action","administrativo-alterar-encomenda");
 				
 				//Altera o nome do botão do modal.
-				$("#btn_submit_produtos").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Salvar alterações'); 
+				$("#btn_submit_produtos").html('<i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar'); 
 				
 				//Pega os dados de determinada linha da tabela.
                 var data = table.row( $(this).parents('tr') ).data();
@@ -1459,7 +1532,7 @@
 				//Preenche os determinados campos com os conteudos.
                 $('#id').val(data[0]);
                 $('#status').val(data[2]);
-
+                
                 //Settando no selectize os valores vindo da tabela
                 var selectize = $('#cliente')[0].selectize;
                 selectize.clearOptions();
@@ -1513,6 +1586,7 @@
 					
 				});
 
+				setTimeout(function(){verificaStatus(data[2]);}, 500);
 			});
 
 			

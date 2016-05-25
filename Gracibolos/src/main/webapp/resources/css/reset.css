@@ -282,3 +282,9 @@ h1, h2, h3, h4, h5 {
 	font-size: inherit !important;
 }
 
+.selectize-control .selectize-input.disabled {
+    opacity: 1 !important;
+    background-color: #eee !important;
+    border: 1px solid #6B5344 !important;
+}
+

@@ -20,7 +20,7 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 
 	public boolean alterar(ItemEncomenda itemEncomenda) throws Exception{
 		boolean status = false;
-		String sql = "UPDATE itemEncomenda SET produtoId=?, encomendaId=?, qtd=? where id=?";
+		String sql = "UPDATE itemEncomenda SET produtoId=?, encomendaId=?, qtd=?, valor=?, total=? where id=?";
 		PreparedStatement  ps = null;
 		
 		try(Connection conn = ConnectionProvider.getInstance().getConnection())
@@ -28,8 +28,10 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 			ps = conn.prepareStatement(sql);
 			ps.setLong(1, itemEncomenda.getProdutoId());
 			ps.setLong(2, itemEncomenda.getEncomendaId());
-			ps.setInt(3, itemEncomenda.getQuantidade());			
-			ps.setLong(4, itemEncomenda.getId());
+			ps.setInt(3, itemEncomenda.getQuantidade());
+			ps.setBigDecimal(4, itemEncomenda.getValor());
+			ps.setBigDecimal(5, itemEncomenda.getTotal());
+			ps.setLong(6, itemEncomenda.getId());
 			
 			if(ps.executeUpdate() != 0) {
 				status = true;
@@ -79,8 +81,8 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 	@Override
 	public List<ItemEncomenda> pesquisar(String encomenda) throws Exception{
 		
-		String sqlItem = "SELECT itemencomenda.id, itemencomenda.produtoId, itemencomenda.encomendaId, itemencomenda.qtd, produto.nome as nomeProduto," 
-				+" produto.codigo, produto.valor, produto.id as produtoIdproduto"
+		String sqlItem = "SELECT itemencomenda.id, itemencomenda.produtoId, itemencomenda.encomendaId, itemencomenda.qtd, itemencomenda.valor, itemencomenda.total, produto.nome as nomeProduto," 
+				+" produto.codigo, produto.id as produtoIdproduto"
 				+" FROM gracibolos.itemencomenda"
 				+" inner join gracibolos.produto on itemencomenda.produtoId = produto.id"
 				+" where itemencomenda.encomendaId = "+encomenda;
@@ -105,6 +107,7 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 			itemEncomenda.setQuantidade(rsItens.getInt("qtd"));//itemEncomenda
 			itemEncomenda.setNomeProduto(rsItens.getString("nomeProduto"));//Produto
 			itemEncomenda.setValor(rsItens.getBigDecimal("valor"));//Produto
+			itemEncomenda.setTotal(rsItens.getBigDecimal("total"));
 			
 			listaDeItemEncomenda.add(itemEncomenda);
 			
