@@ -378,12 +378,10 @@
 								                   
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-<<<<<<< HEAD
-								                    <button type="button" id="btn_faturar" class="btn btn-default" data-toggle="modal" data-target=""><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
-=======
-								                    <button type="button" id="btn_faturar" class="btn btn-default" data-toggle="modal" data-target="#faturar-encomenda"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
-								                    <button type="button" id="btn_faturar_bypass" class="btn btn-default next-step hidden" disabled="disabled"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
->>>>>>> branch 'master' of https://github.com/ThomasYasuhide/Gracibolos.git
+								                    <button type="button" id="btn_faturar" class="btn btn-default next-step" class="btn btn-default" data-toggle="modal" data-target=""><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+								                    <!--  
+								                    <button type="button" id="btn_faturar_bypass" ><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+													-->	
 						                   		</div>
 						                    <!-- 
 						                    </form>
