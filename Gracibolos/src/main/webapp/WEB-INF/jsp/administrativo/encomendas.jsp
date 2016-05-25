@@ -848,7 +848,7 @@
 				    
 				    
 				}else {
-					alert('Você atingiu o limite máximo de produtos na encomenda');	
+					alert('Você atingiu o limite máximo de produtos na encomenda');
 				}
 			};
 			
@@ -1344,17 +1344,17 @@
             function resetCampos(){
             	//Reset autmaticamente todos os campos do formulário.				
 				$('#id').val('');
-				$('#dataencomenda').val('');
+				//$('#dataencomenda').val('');//Não limpar, dataproducao e datafinalizado				
 				$('#dataentrega').val('');
 				$('#datacancelado').val('');
 				
-				var selectize = $('#cliente')[0].selectize;
+				var selectize = $('#cliente')[0].selectize;//Autocomplete
                 selectize.clearOptions();
-                
+               
 				$('#responsavel').val('');
 				$('#obs').val('');
 				
-				$("#lista-produtos tr").each(function(){
+				$("#lista-produtos tr").each(function(){//itens produtos
 					$(this).remove();
 				});
 				
