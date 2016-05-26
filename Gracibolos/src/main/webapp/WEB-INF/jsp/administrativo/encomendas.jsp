@@ -172,9 +172,9 @@
 						<h4 id="modal-subtitle"></h4>
 					</div>
 					
-					<!-- ################################# ALERTAS ################################# 
+					<!-- ################################# ALERTAS ################################# -->
 					
-						<div class="row" id="" >
+						<div class="row" id="msg1" >
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -183,7 +183,7 @@
 							</div>
 						</div>
 					
-						<div class="row">
+						<div class="row" id="msg2">
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -192,7 +192,7 @@
 							</div>
 						</div>
 					
-						<div class="row">
+						<div class="row" id="msg3">
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -201,7 +201,7 @@
 							</div>
 						</div>
 					
-						<div class="row">
+						<div class="row" id="msg4">
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -210,7 +210,7 @@
 							</div>
 						</div>
 					
-						<div class="row">
+						<div class="row" id="msg5">
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -219,7 +219,7 @@
 							</div>
 						</div>
 					
-						<div class="row">
+						<div class="row" id="msg6">
 							<div class="col-xs-12">
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -612,9 +612,17 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
+			/*
+			* MENSAGENS DE ERRO
+			*/
+			$('#msg1').hide();
+			$('#msg2').hide();
+			$('#msg3').hide();
+			$('#msg4').hide();
+			$('#msg5').hide();
+			$('#msg6').hide();
 			
 			/*
-			*
 			* INDICADOR DE PAGINA DO MENU
 			*
 			*/
@@ -978,14 +986,16 @@
 					//alert('produtos existe');
 					return true;
 				}else{
-					alert('produtos não existe');
+					document.getElementById("step2").focus();
+					//alert('produtos não existe');
 					return false;
 				}
 			};
 			
 			function verificaTotalP(){
 				if($('#totalprodutos').val() == ''){
-					alert('total não existe');
+					document.getElementById("totalprodutos").focus();
+					//alert('total não existe');
 					return false;
 				}else{
 					//alert('nome existe');
@@ -995,7 +1005,8 @@
 
 			function verificaCliente(){
 				if($('#cliente').val() == ''){
-					alert('nome não existe');
+					document.getElementById("cliente").focus();
+					//alert('nome não existe');
 					return false;
 				}else{
 					//alert('nome existe');
@@ -1025,7 +1036,8 @@
 
 			function verificaFormaPag(){
 				if(($('#formapagamento').val() == '')){
-					alert('forma pagamento não existe');
+					document.getElementById("formapagamento").focus();
+					//alert('forma pagamento não existe');
 					return false;
 				}else{
 					//alert('nome existe');
@@ -1035,26 +1047,8 @@
 
 			function verificaDataEntr(){
 				if($('#dataentrega').val() == ''){
-					alert('data entrega não existe');
-					return false;
-				}else{
-					//alert('nome existe');
-					return true;
-				}
-			};
-			function verificaTotalP(){
-				if($('#totalprodutos').val() == ''){
-					alert('total não existe');
-					return false;
-				}else{
-					//alert('nome existe');
-					return true;
-				}
-			};
-
-			function verificaCliente(){
-				if($('#cliente').val() == ''){
-					alert('nome não existe');
+					document.getElementById("dataentrega").focus();
+					//alert('data entrega não existe');
 					return false;
 				}else{
 					//alert('nome existe');
@@ -1064,7 +1058,8 @@
 
 			function verificaValorPago(){
 				if($('#valorpago').val() == ''){
-					alert('valor pago não existe');
+					document.getElementById("valorpago").focus();
+					//alert('valor pago não existe');
 					return false;
 				}else{
 					//alert('nome existe');
@@ -1076,49 +1071,10 @@
 				window.location.href = "../Gracibolos/administrativo-encomendas";
 			};
 			
-			function verificaItemProdutoNome(){
-				var status;
-				$('#lista-produtos tr').each(function () {					
-					//Captura os numeros de linhas
-					var linha = this.id.replace('item_', '');
-					var produto = $('#produto_' + linha);
-					if(produto.val() == ''){
-						console.log('item nome do produto '+linha+' não existe');
-						return  status = false;
-						alert('item nome do produto '+linha+' não existe');
-					}else{
-						return status = true;
-					}							
-					//var quantidade = $('#quantidade_' + linha);
-					//var valor = $('#valor_' + linha);
-					//var total = $('#total_' + linha);				
-				});
-				
-			};
-
-			function verificaFormaPag(){
+			function verificaFormaPag(){//Não funciona
 				if(($('#formapagamento').val() == '')){
-					alert('forma pagamento não existe');
-					return false;
-				}else{
-					//alert('nome existe');
-					return true;
-				}
-			};
-
-			function verificaDataEntr(){
-				if($('#dataentrega').val() == ''){
-					alert('data entrega não existe');
-					return false;
-				}else{
-					//alert('nome existe');
-					return true;
-				}
-			};
-
-			function verificaValorPago(){
-				if($('#valorpago').val() == ''){
-					alert('valor pago não existe');
+					document.getElementById("formapagamento").focus();
+					//alert('forma pagamento não existe');
 					return false;
 				}else{
 					//alert('nome existe');
@@ -1200,7 +1156,15 @@
 		            data: js,
 		            contentType: "application/json; charset=utf-8",
 		            success: function(result) {
+		               
+		                
+		                //$('#title_modal_erro').Text('Número da encomenda : ');
+		                //$('#msg_modal_erro').Text(result);
+		                //$('#modal_erro').modal('show');
+		                //$('#btn_modal_erro').hide();
+
 		                alert("Encomenda de número : "+result);
+		                
 		                $('#id').val(result);//Com o retorno do numero da encomenda, preencho o campo id                
 		            }
 		        });
@@ -1210,11 +1174,10 @@
 			
 			$("#btn_submit_produtos").click(function() {
 				
-				if(verificaCliente() && verificaDataEntr() && verificaProdutos() 
-						&& verificaTotalP()){
+				if(verificaCliente() && verificaDataEntr()){
 					inserirEncomenda();
 					setTimeout(function(){recarregar();}, 1000	);
-					setTimeout(function(){resetCampos();}, 1500	);		
+					//setTimeout(function(){resetCampos();}, 1500	);		
 					
 				}else{
 
@@ -1268,7 +1231,7 @@
 					//não dando tempo de gerar o numero da encomenda
 					setTimeout(function(){faturar();}, 1000	);
 					setTimeout(function(){recarregar();}, 1500 );
-					setTimeout(function(){resetCampos();}, 2000 );				
+					//setTimeout(function(){resetCampos();}, 2000 );				
 					
 				}else{
 
