@@ -1465,22 +1465,10 @@
 			*/
             $('#incluir-encomenda-modal').click(function() {
             	
-            	/*
-            	
-            	FALTA IMPLANTAR
-            	
-            	voltar para a primeira tela
-            	bloquear todas as outras telas
-            	
-            	*/
-				
             	resetCampos();
 				
 				inserir_item();					
 
-				var now = moment().format('YYYY-MM-DD');        
-                $('#dataencomenda').val(now);
-				
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
 				
@@ -1557,7 +1545,7 @@
    				$('#dataentrega').val(data[9]);
                 $('#datafaturamento').val(data[10]);
                 //$('#dataproducao').val(data[9]);
-                $('#datafinalizado').val(data[11]);
+                //$('#datafinalizado').val(data[11]);
    				$('#datacancelado').val(data[12]);
    				$('#total').val(data[13]);
    				$('#obs').val(data[14]);
