@@ -172,90 +172,7 @@
 						<h4 id="modal-subtitle"></h4>
 					</div>
 					
-					<!-- ################################# ALERTAS ################################# -->
-					
-						<div class="row" id="msg1" >
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda iniciada com sucesso.
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg2">
-							<div class="col-xs-12">
-								<div class="alert alert-danger alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar incluir a nova encomenda, favor tente novamente.
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg3">
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Alteração efetuada com sucesso.
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg4">
-							<div class="col-xs-12">
-								<div class="alert alert-danger alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar alterar a encomenda, favor tente novamente.
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg5">
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda foi excluida com sucesso!
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg6">
-							<div class="col-xs-12">
-								<div class="alert alert-danger alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar excluir a encomenda, favor tente novamente.
-								</div>
-							</div>
-						</div>
-						
-						<div class="row" id="msg7" >
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda faturada com sucesso.
-								</div>
-							</div>
-						</div>
-						
-						<div class="row" id="msg8" >
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda produzindo com sucesso.
-								</div>
-							</div>
-						</div>
-						
-						<div class="row" id="msg9" >
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda finalizada com sucesso.
-								</div>
-							</div>
-						</div>
-					
-					<!-- ################################# FIM DOS ALERTAS ################################# -->
+
 					
 					<div class="modal-body">
 						<!-- ################################# CONTEUDO ################################# -->
@@ -553,7 +470,90 @@
 						<!-- Faturar encomenda -->
 						<h4 class="modal-title" id="title_modal_erro"></h4>
 					</div>
+						<!-- ################################# ALERTAS ################################# -->
 					
+						<div class="row" id="msg1" >
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda iniciada com sucesso.
+								</div>
+							</div>
+						</div>
+					
+						<div class="row" id="msg2">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar incluir a nova encomenda, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					
+						<div class="row" id="msg3">
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Alteração efetuada com sucesso.
+								</div>
+							</div>
+						</div>
+					
+						<div class="row" id="msg4">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar alterar a encomenda, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					
+						<div class="row" id="msg5">
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda foi excluida com sucesso!
+								</div>
+							</div>
+						</div>
+					
+						<div class="row" id="msg6">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar excluir a encomenda, favor tente novamente.
+								</div>
+							</div>
+						</div>
+						
+						<div class="row" id="msg7" >
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda faturada com sucesso.
+								</div>
+							</div>
+						</div>
+						
+						<div class="row" id="msg8" >
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda produzindo com sucesso.
+								</div>
+							</div>
+						</div>
+						
+						<div class="row" id="msg9" >
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda finalizada com sucesso.
+								</div>
+							</div>
+						</div>
+					
+					<!-- ################################# FIM DOS ALERTAS ################################# -->
 					<!--  Corpo do modal -->
 					<div class="modal-body">
 						<div class="row">
@@ -569,8 +569,8 @@
 					<!-- Essa div contem 2 botões -->
 					<div class="modal-footer">
 						<!-- botão de cancelar-->
-						<button type="button" id="btn_fechar_modal_erro" class="btn btn-default" data-dismiss="modal">Fechar</button>
-						<button type="button" id="btn_modal_erro" class="btn btn-default next-step" data-dismiss="modal"></button>
+						<button type="button" id="btn_ok_modal_erro" class="btn btn-default" data-dismiss="modal" >ok</button>
+						
 					</div>
 
 				
@@ -1127,7 +1127,7 @@
 			*
 			*/
 
-			function inserirEncomenda(status){
+			function inserirEncomenda(status, callback){
 				//recupera os valores da encomenda
 				var enc = new Object();
 				if(status==3){
@@ -1185,37 +1185,36 @@
 		            type: 'POST',    
 		            data: js,
 		            contentType: "application/json; charset=utf-8",
-		            success: function(result) {
-		               
-		                
-		                //$('#title_modal_erro').Text('Número da encomenda : ');
-		                //$('#msg_modal_erro').Text(result);
-		                //$('#modal_erro').modal('show');
-		                //$('#btn_modal_erro').hide();
-
-		                alert("Encomenda de número : "+result);
-		                $('#msg1').show();
-		                $('#id').val(result);//Com o retorno do numero da encomenda, preencho o campo id                
+		            success: function(result) {   
+		                $('#id').val(result);//Com o retorno do numero da encomenda, preencho o campo id
+		                callback(result);                
 		            }
 		        });
-
+				
 			};// FIM INSERIR ENCOMENDA --------------------------------------------------------------
 			
 			
 			$("#btn_submit_produtos").click(function() {
 				
 				if(verificaCliente() && verificaDataEntr()){
-					inserirEncomenda();
-					setTimeout(function(){recarregar();}, 1000	);
-					//setTimeout(function(){resetCampos();}, 1500	);		
 					
+					inserirEncomenda(1, resposta);//insiro a encomenda e espero a resposta (callback)
+					function resposta(result){//essa resposta é uma função
+
+						$('#msg1').show();//Encomenda inicializada
+						console.log('resposta '+result);
+						$('#title_modal_erro').text('Número da encomenda : ');
+		                $('#msg1_modal_erro').text(result);
+						$('#modal_erro').modal('show');
+						$('#btn_ok_modal_erro').click(function(){
+							setTimeout(function(){recarregar();}, 500	);	
+						});
+					}
+										
 				}else{
 
 				}
 					
-				//Altera o método de ação do form do modal (Altera para caso clicar no botão submit seja enviado a instrução de alteração).
-// 				$("#produtos-encomenda").attr("action","administrativo-encomendas");
-				
 			});//INCLUIR ENCOMENDA SUBMIT---------------------------------------
 
 
@@ -1225,14 +1224,14 @@
 			*
 			*/
 
-			function faturar(){
+			function faturar(callback){
 				//alert('faturar');
 				var caixa = new Object();
 
 				caixa.parcela = 1;
 				caixa.gastoRecebimento = 1;//gastoRecebimento
 				caixa.encomendaId = $('#id').val();//encomendaId
-				caixa.dataTransacao = $('#datafaturamento').val();//dataTransacao
+				caixa.dataTransacao = $('#datafaturamento').val();//dataTransacao(inserindo no dao)
 				
 				var valor_temp = $('#totalencomenda').val(); //Total encomenda
 				valor_temp = valor_temp.split(".").join("");//Retirar a máscara
@@ -1250,20 +1249,34 @@
 		            contentType: "application/json; charset=utf-8",
 		            success: function(msg) {
 		                //alert(msg);   
-		                $('#msg7').show();             
+		                console.log('ajax faturada'+msg)               
+		                callback(msg);            
 		            }
 		        });
 			};
 			
 			$("#btn_submit_faturar").click(function() {
 				if(verificaCliente() && verificaProdutos() && verificaTotalP() && verificaValorPago()){
-					inserirEncomenda(3);// 3 = faturada
-					//Estou atrasando à chamada em 1 segundo, senão o faturar executa logo em seguida
-					//não dando tempo de gerar o numero da encomenda
 					
-					setTimeout(function(){faturar();}, 1000	);
-					setTimeout(function(){recarregar();}, 1500 );
-					//setTimeout(function(){resetCampos();}, 2000 );				
+					inserirEncomenda(3, resposta);//insiro a encomenda e espero a resposta (callback)
+					function resposta(result){//essa resposta é uma função
+
+						//$('#msg1').show();//Encomenda inicializada
+						$('#msg7').show(); //Faturada
+						console.log('resposta iniciada'+result);
+						$('#title_modal_erro').text('Número da encomenda : ');
+		                $('#msg1_modal_erro').text(result);
+						$('#modal_erro').modal('show');
+						$('#btn_ok_modal_erro').click(function(){
+							
+							faturar(resposta);//função faturar com callback 
+							function resposta(result){
+								console.log('callback faturada'+result)							
+								setTimeout(function(){recarregar();}, 500 );	
+							}						
+							
+						});
+					}							
 					
 				}else{
 
@@ -1289,11 +1302,16 @@
 		            contentType: "application/json; charset=utf-8",
 		            success: function(result) {
 		                //alert(result);
-		            	$('#msg8').show();            
+		            	$('#msg8').show(); 
+		            	$('#msg1_modal_erro').text(result);
+		            	$('#modal_erro').modal('show'); 
+						$('#btn_ok_modal_erro').click(function(){		
+							setTimeout(function(){recarregar();}, 500 );
+						});          
 		            }
 		        });
 				     
-				setTimeout(function(){recarregar();}, 1000	);
+				
 				//setTimeout(function(){resetCampos();}, 1500	);		
 			});
 			//FIM - PRODUZIR ENCOMENDA---------------------------------------
@@ -1315,11 +1333,16 @@
 		            contentType: "application/json; charset=utf-8",
 		            success: function(result) {
 		                //alert(result);
-		            	$('#msg9').show();                   
+		            	$('#msg9').show();   
+		            	$('#msg1_modal_erro').text(result);
+		            	$('#modal_erro').modal('show');   
+		            	$('#btn_ok_modal_erro').click(function(){		
+		            		setTimeout(function(){recarregar();}, 500 );
+						});                 
 		            }
 		        });
 				
-				setTimeout(function(){recarregar();}, 1000	);
+				
 				//setTimeout(function(){resetCampos();}, 1500	);		
 			});
 			//FIM - FINALIZAR ENCOMENDA---------------------------------------
@@ -1428,7 +1451,7 @@
 				$('#total').val('');
             }
 
-          //------faturar---------------------------------
+          //------settando a data de hoje---------------------------------
 			var now = moment().format('YYYY-MM-DD');        
 			$('#datafaturamento').val(now);//Colocar a data de hoje
             $('#dataencomenda').val(now);
@@ -1497,10 +1520,6 @@
 
            		//Apresenta o modal de exclusão na tela.
            		$('#modal-encomenda').modal('show');
-
-           		var now = moment().format('YYYY-MM-DD');        
-                $('#dataproducao').val(now);
-                $('#datafinalizado').val(now);
 
            		/*
             	

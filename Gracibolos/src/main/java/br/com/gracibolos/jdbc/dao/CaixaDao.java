@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 	 * Este método tem como principal objetivo receber os dados de um novo pagamento e persistir no banco de dados.
 	 * 
 	 * */
+	private static LocalDate hoje = LocalDate.now();
 	
 	public boolean inserir(Caixa caixa) throws Exception{
 		
@@ -65,7 +67,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			ps.setString(6, caixa.getForma());			
 			ps.setInt(7, caixa.getParcela());
 			if(caixa.getDataTransacao()!=null){
-				ps.setDate(8, Date.valueOf(caixa.getDataTransacao()));
+				ps.setDate(8, Date.valueOf(hoje));//Data da transação sempre hoje
 			}else{
 				ps.setNull(8, Types.DATE);
 			}		
