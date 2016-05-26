@@ -178,7 +178,7 @@
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda armazenada com sucesso.
+								  <strong>Sucesso!</strong> Encomenda iniciada com sucesso.
 								</div>
 							</div>
 						</div>
@@ -224,6 +224,33 @@
 								<div class="alert alert-danger alert-dismissible" role="alert">
 								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 								  <strong>Erro!</strong> Houve algum erro ao tentar excluir a encomenda, favor tente novamente.
+								</div>
+							</div>
+						</div>
+						
+						<div class="row" id="msg7" >
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda faturada com sucesso.
+								</div>
+							</div>
+						</div>
+						
+						<div class="row" id="msg8" >
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda produzindo com sucesso.
+								</div>
+							</div>
+						</div>
+						
+						<div class="row" id="msg9" >
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda finalizada com sucesso.
 								</div>
 							</div>
 						</div>
@@ -621,6 +648,9 @@
 			$('#msg4').hide();
 			$('#msg5').hide();
 			$('#msg6').hide();
+			$('#msg7').hide();
+			$('#msg8').hide();
+			$('#msg9').hide();
 			
 			/*
 			* INDICADOR DE PAGINA DO MENU
@@ -1164,7 +1194,7 @@
 		                //$('#btn_modal_erro').hide();
 
 		                alert("Encomenda de número : "+result);
-		                
+		                $('#msg1').show();
 		                $('#id').val(result);//Com o retorno do numero da encomenda, preencho o campo id                
 		            }
 		        });
@@ -1219,7 +1249,8 @@
 		            data: js,
 		            contentType: "application/json; charset=utf-8",
 		            success: function(msg) {
-		                alert(msg);                
+		                //alert(msg);   
+		                $('#msg7').show();             
 		            }
 		        });
 			};
@@ -1229,6 +1260,7 @@
 					inserirEncomenda(3);// 3 = faturada
 					//Estou atrasando à chamada em 1 segundo, senão o faturar executa logo em seguida
 					//não dando tempo de gerar o numero da encomenda
+					
 					setTimeout(function(){faturar();}, 1000	);
 					setTimeout(function(){recarregar();}, 1500 );
 					//setTimeout(function(){resetCampos();}, 2000 );				
@@ -1256,13 +1288,13 @@
 		            data: JSON.stringify(id),
 		            contentType: "application/json; charset=utf-8",
 		            success: function(result) {
-		                alert(result);
-		                                
+		                //alert(result);
+		            	$('#msg8').show();            
 		            }
 		        });
-
+				     
 				setTimeout(function(){recarregar();}, 1000	);
-				setTimeout(function(){resetCampos();}, 1500	);		
+				//setTimeout(function(){resetCampos();}, 1500	);		
 			});
 			//FIM - PRODUZIR ENCOMENDA---------------------------------------
 
@@ -1282,12 +1314,13 @@
 		            data: JSON.stringify(id),
 		            contentType: "application/json; charset=utf-8",
 		            success: function(result) {
-		                alert(result);                 
+		                //alert(result);
+		            	$('#msg9').show();                   
 		            }
 		        });
-		        
+				
 				setTimeout(function(){recarregar();}, 1000	);
-				setTimeout(function(){resetCampos();}, 1500	);		
+				//setTimeout(function(){resetCampos();}, 1500	);		
 			});
 			//FIM - FINALIZAR ENCOMENDA---------------------------------------
 			
