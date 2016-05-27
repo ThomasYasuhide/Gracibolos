@@ -470,8 +470,20 @@
 						<!-- Faturar encomenda -->
 						<h4 class="modal-title" id="title_modal_erro"></h4>
 					</div>
-						<!-- ################################# ALERTAS ################################# -->
+						
+					<!--  Corpo do modal -->
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<!-- Deseja realmente faturar a encomenda? -->
+								<p id="msg1_modal_erro"></p>
+								<!-- Após o fechamento, não será possível alterar algumas informações da encomenda. -->
+								<p id="msg2_modal_erro"></p>
+							</div>
+						</div>
+					</div>
 					
+						<!-- ################################# ALERTAS ################################# -->				
 						<div class="row" id="msg1" >
 							<div class="col-xs-12">
 								<div class="alert alert-success alert-dismissible" role="alert">
@@ -554,18 +566,6 @@
 						</div>
 					
 					<!-- ################################# FIM DOS ALERTAS ################################# -->
-					<!--  Corpo do modal -->
-					<div class="modal-body">
-						<div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<!-- Deseja realmente faturar a encomenda? -->
-								<p id="msg1_modal_erro"></p>
-								<!-- Após o fechamento, não será possível alterar algumas informações da encomenda. -->
-								<p id="msg2_modal_erro"></p>
-							</div>
-						</div>
-					</div>
-					
 					<!-- Essa div contem 2 botões -->
 					<div class="modal-footer">
 						<!-- botão de cancelar-->
@@ -1401,8 +1401,7 @@
 			//Define que as colunas determinadas no "targes" não sejam visiveis para o usuário
             var table = $('#lista-encomendas').DataTable({
 
-            	/*
-            	
+            	/*          	
             		<!-- 00 --><th>Encomenda</th>
 					<!-- 01 --><th>Status</th> VIEW
 					<!-- 02 --><th>Status</th> DADOS
@@ -1418,8 +1417,7 @@
 					<!-- 12 --><th>Data do cancelamento</th>
 					<!-- 13 --><th>Total</th>
 					<!-- 14 --><th>Obs</th>
-					<!-- 15 --><th>Ações</th>
-            	
+					<!-- 15 --><th>Ações</th>            	
             	*/
                 
                 "columnDefs": [
@@ -1451,7 +1449,7 @@
 				$('#total').val('');
             }
 
-          //------settando a data de hoje---------------------------------
+          	//------settando a data de hoje---------------------------------
 			var now = moment().format('YYYY-MM-DD');        
 			$('#datafaturamento').val(now);//Colocar a data de hoje
             $('#dataencomenda').val(now);
