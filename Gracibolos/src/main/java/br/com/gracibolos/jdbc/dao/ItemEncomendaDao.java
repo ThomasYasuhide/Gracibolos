@@ -81,7 +81,7 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 	@Override
 	public List<ItemEncomenda> pesquisar(String encomenda) throws Exception{
 		
-		String sqlItem = "SELECT itemencomenda.id, itemencomenda.produtoId, itemencomenda.encomendaId, itemencomenda.qtd, produto.valor, produto.nome as nomeProduto," 
+		String sqlItem = "SELECT itemencomenda.id, itemencomenda.produtoId, itemencomenda.encomendaId, itemencomenda.qtd, itemencomenda.valor, itemencomenda.total, produto.nome as nomeProduto," 
 				+" produto.codigo, produto.id as produtoIdproduto"
 				+" FROM gracibolos.itemencomenda"
 				+" inner join gracibolos.produto on itemencomenda.produtoId = produto.id"
@@ -107,6 +107,7 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 			itemEncomenda.setQuantidade(rsItens.getInt("qtd"));//itemEncomenda
 			itemEncomenda.setNomeProduto(rsItens.getString("nomeProduto"));//Produto
 			itemEncomenda.setValor(rsItens.getBigDecimal("valor"));//Produto
+			itemEncomenda.setTotal(rsItens.getBigDecimal("total"));//Produto
 			
 			listaDeItemEncomenda.add(itemEncomenda);
 			

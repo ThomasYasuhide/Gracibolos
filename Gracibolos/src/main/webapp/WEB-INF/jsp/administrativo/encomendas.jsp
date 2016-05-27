@@ -322,10 +322,8 @@
 								                   
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-								                    <button type="button" id="btn_faturar" class="btn btn-default next-step" class="btn btn-default" data-toggle="modal" data-target=""><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
-								                    <!--  
-								                    <button type="button" id="btn_faturar_bypass" ><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
-													-->	
+								                    <button type="button" id="btn_faturar" class="btn btn-default" data-toggle="modal" data-target=""><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+								                    <button type="button" id="btn_faturar_bypass" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 						                   		</div>
 						                    <!-- 
 						                    </form>
@@ -826,6 +824,19 @@
 						$('#tab-produzir').addClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
 						
+						$('.cancelar-encomenda').removeAttr('disabled');
+						
+						$('#btn_faturar').removeClass('hidden').removeAttr('disabled');
+						$('#btn_faturar_bypass').addClass('hidden').attr('disabled','disabled');
+						
+						var selectize = $('#cliente')[0].selectize;
+						selectize.enable();
+						
+						$('#inserir-linha').removeClass('disabled').removeAttr('disabled');
+						
+						
+						$('#totalencomenda').val($('#totalprodutos').val());
+						
 						break;
 						
 					case '2':
@@ -851,15 +862,18 @@
 						$('#lista-produtos tr').each(function () {					
 							//Captura os numeros de linhas
 							var linha = this.id.replace('item_', '');
-						
-							
+
 							var selectize = $('#produto_'+linha)[0].selectize;
 							selectize.disable();
 
 							$('#valor_'+linha).attr('disabled','disabled');
 							$('#quantidade_'+linha).attr('disabled','disabled');
 							$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
+							
+							calculaTotalProdutos();
 						});
+						
+						$('#totalencomenda').val($('#totalprodutos').val());
 						
 						break;
 					
