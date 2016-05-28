@@ -185,22 +185,22 @@
 						                <div class="connecting-line"></div>
 						                <ul class="nav nav-tabs" role="tablist">
 						
-						                    <li id="tab-info" role="presentation" class="active">
-						                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Informações da encomenda">
+						                    <li id="tab-info" role="presentation" class="tab active">
+						                        <a href="#step1" id="link-info" data-toggle="tab" aria-controls="step1" role="tab" title="Informações da encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">chrome_reader_mode</i>
 						                            </span>
 						                        </a>
 						                    </li>
 						
-						                    <li id="tab-produtos" role="presentation">
+						                    <li id="tab-produtos" role="presentation" class="tab">
 						                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">shopping_cart</i>
 						                            </span>
 						                        </a>
 						                    </li>
-						                    <li id="tab-faturar" role="presentation" class="disabled">
+						                    <li id="tab-faturar" role="presentation" class="tab disabled">
 						                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Faturar encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">account_balance</i>
@@ -208,7 +208,7 @@
 						                        </a>
 						                    </li>
 						
-						                    <li id="tab-produzir" role="presentation" class="disabled">
+						                    <li id="tab-produzir" role="presentation" class="tab disabled">
 						                        <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Produzir encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">query_builder</i>
@@ -216,7 +216,7 @@
 						                        </a>
 						                    </li>
 						
-						                    <li id="tab-finalizar" role="presentation" class="disabled">
+						                    <li id="tab-finalizar" role="presentation" class="tab disabled">
 						                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Finalizar encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">done</i>
@@ -322,7 +322,7 @@
 								                   
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
 								                    <button type="submit" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-								                    <button type="button" id="btn_faturar" class="btn btn-default" data-toggle="modal" data-target=""><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
+								                    <button type="button" id="btn_faturar" class="btn btn-default" data-toggle="modal"  data-target="#faturar-encomenda"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 								                    <button type="button" id="btn_faturar_bypass" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 						                   		</div>
 						                    <!-- 
@@ -334,7 +334,14 @@
 						                    <!-- 
 						                    <form id="faturar-encomenda" method="POST">
 						                     -->
+						                     
 							                    <div class="row">
+							                    	
+													
+													<div id="errosFatura" class="col-xs-12">
+														
+													</div>
+							                    
 							                        <div class="input-margin col-xs-12 col-sm-6 col-md-4">
 														<label class="control-label" for="datafaturamento">Data de faturamento:</label>
 														<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
@@ -455,6 +462,44 @@
 	<!--
 	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE ENCOMENDA ####################
 	-->
+	
+	
+	
+	
+	<div class="modal fade" id="faturar-encomenda" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="exampleModalLabel">Faturar encomenda</h4>
+					</div>
+					
+					<!--  Corpo do modal -->
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<p>Deseja realmente faturar a encomenda?</p>
+								<p>Após o fechamento não será possível algumas informações da encomenda.</p>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Essa div contem 2 botões -->
+					<div class="modal-footer">
+						<!-- botão de cancelar-->
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+						<button type="button" class="btn btn-default next-step" data-dismiss="modal">Faturar encomenda</button>
+					</div>
+
+				
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
 
 	<!--
 	######################################################### MODAL DE ERRO #########################################################
@@ -791,6 +836,7 @@
 				//Insere o valor total dos produtos.
 				//Trigger aciona um evento para que o campo seja formatado com a mascara.
 				$('#totalprodutos').val(total).trigger('input');
+				$('#totalencomenda').val(total).trigger('input');
 				
 			};		
 
@@ -816,10 +862,13 @@
 			
 			
 			function verificaStatus(status) {
+				
+				//Volta para a primeira telas
+				$('#link-info').click();
+				
 				switch(status){
 					
 					case '1':
-						
 						$('#tab-faturar').addClass('disabled');
 						$('#tab-produzir').addClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
@@ -834,17 +883,15 @@
 						
 						$('#inserir-linha').removeClass('disabled').removeAttr('disabled');
 						
-						
-						$('#totalencomenda').val($('#totalprodutos').val());
-						
 						break;
 						
 					case '2':
 						
+						$('.cancelar-encomenda').attr('disabled','disabled');
+						
 						break;
 					
 					case '3':
-						
 						$('#tab-faturar').removeClass('disabled');
 						$('#tab-produzir').addClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
@@ -858,22 +905,23 @@
 						selectize.disable();
 						
 						$('#inserir-linha').addClass('disabled').attr('disabled','disabled');
-						
-						$('#lista-produtos tr').each(function () {					
-							//Captura os numeros de linhas
-							var linha = this.id.replace('item_', '');
 
-							var selectize = $('#produto_'+linha)[0].selectize;
-							selectize.disable();
+						setTimeout(function(){
+							$('#lista-produtos tr').each(function () {					
+								//Captura os numeros de linhas
+								var linha = this.id.replace('item_', '');
 
-							$('#valor_'+linha).attr('disabled','disabled');
-							$('#quantidade_'+linha).attr('disabled','disabled');
-							$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
-							
-							calculaTotalProdutos();
-						});
+								var selectize = $('#produto_'+linha)[0].selectize;
+								selectize.disable();
+
+								$('#valor_'+linha).attr('readonly','readonly');
+								$('#quantidade_'+linha).attr('readonly','readonly');
+								$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
+								
+								calculaTotalProdutos();
+							});
+						}, 500);
 						
-						$('#totalencomenda').val($('#totalprodutos').val());
 						
 						break;
 					
@@ -967,7 +1015,6 @@
 				    });
 				    
 				    i++;
-				    
 				    
 				}else {
 					alert('Você atingiu o limite máximo de produtos na encomenda');
@@ -1398,7 +1445,16 @@
 				if(parseFloat(valorpago) >= parseFloat(totalencomenda)){
 					$("#valortroco").val((valorpago - totalencomenda).toFixed(2)).trigger('input');
 				}else{
-					alert('O valor pago é inferior ao valor total da encomenda.');
+					var erro = '<div id="erroValorPago" class="alert alert-danger alert-dismissible fade in" role="alert">';
+							erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+							erro +='<strong>Atenção!</strong> O valor pago informado é menor do que o valor total da encomenda.';
+						erro +='</div>';
+					
+					$('#errosFatura').append(erro);
+					
+					setTimeout(function(){
+						$('#erroValorPago').alert('close');
+					}, 5000)
 					
 					$('#valorpago').val("");
 					$("#valortroco").val("");
@@ -1598,8 +1654,8 @@
 			        });
 					
 				});
-
-				setTimeout(function(){verificaStatus(data[2]);}, 500);
+				
+				verificaStatus(data[2]);
 			});
 
 			

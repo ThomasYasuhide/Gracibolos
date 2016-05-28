@@ -48,7 +48,7 @@
 	<select id="select-repo"></select><br>
 	
 	
-		<table id="tabela1" class="display" cellspacing="0" width="100%">
+		<table id="tabela1" class="display table-settings">
 			<thead>		
 				<tr>	
 					<th>id</th>					
@@ -70,7 +70,7 @@
 	</c:forEach>
 	-->
 	
-	<table id="example" class="display" cellspacing="0" width="100%">
+	<table id="example" class="display table-settings">
         <thead>
             <tr>
                	<td>name</td>
