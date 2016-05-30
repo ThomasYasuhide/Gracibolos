@@ -49,9 +49,6 @@
 
 					<!-- ############################################################ CONTEUDO ############################################################ -->
 
-
-
-					
 					<div class="row">
 						<div class="input-margin col-xs-12 col-sm-9 col-md-9 col-lg-9">
 							<label class="control-label">Pesquisar encomenda:</label>
@@ -72,9 +69,9 @@
 						
 						<div class="input-margin col-xs-12 col-sm-3 col-md-3 col-lg-3">
 							<label class="control-label hidden-xs">Listar finalizadas</label>
-							<!-- 
-								Chamada para a controller @RequestMapping 
-							-->
+							
+							<!-- Chamada para a controller @RequestMapping -->
+							
 							<a href="administrativo-listar-encomendas-finalizadas" class="btn btn-default fullwidth">Listar finalizadas</a>
 						</div>
 					</div>
@@ -100,7 +97,7 @@
 										<!-- 12 --><th>Data do cancelamento</th>
 										<!-- 13 --><th>Total</th>
 										<!-- 14 --><th>Obs</th>
-										<!-- 15 --><th>Ações</th>
+										<!-- 15 --><th width="10px">Ações</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -134,7 +131,6 @@
 											<!-- 15 --><td>${encomendas.obs}</td>
 		                					<td>
 		                						<button id="edit-encomenda" class="btn btn-xs btn-default"><i class="material-icons font-xs">mode_edit</i></button>
-		                						<button id="delete-encomenda" class="btn btn-xs btn-default"><i class="material-icons font-xs">clear</i></button>
 		                					</td>
 										</tr>
 									</c:forEach>
@@ -161,18 +157,16 @@
 	############################################################ MODAL DE INCLUSÃO OU ALTERAÇÂO DE ENCOMENDA ############################################################
 
 	-->
+	
 	<div class="modal fade" id="modal-encomenda" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				
-	    
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<h3 id="modal-title">ENCOMENDAS</h3>
 						<h4 id="modal-subtitle"></h4>
 					</div>
-					
-
 					
 					<div class="modal-body">
 						<!-- ################################# CONTEUDO ################################# -->
@@ -230,59 +224,55 @@
 						            <div class="tab-content">
 						            				            	
 						                <div class="tab-pane active" role="tabpanel" id="step1">
-						                    <!--  
-						                    <form id="dados-encomenda" method="POST">
-						                    -->				                    
-							                    <div class="row">
-							                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
-														<label class="control-label" for="id">Nº da encomenda:</label>
-														<input type="text" id="id" name="id" value="${encomenda.id}" class="form-control" readonly />
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-														<label class="control-label" for="dataencomenda">Data da encomenda:</label>
-														<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" value="${encomenda.dataencomenda}" readonly />
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-														<label class="control-label" for="dataentrega">Data de entrega*:</label>
-														<input type="date" id="dataentrega" name="dataentrega" class="form-control" value="${encomenda.dataentrega}" required />
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-6 col-md-3">
-														<label class="control-label" for="datacancelado">Data do cancelamento:</label>
-														<input type="date" id="datacancelado" name="datacancelado" class="form-control" value="${encomenda.datacancelamento}" readonly />
-													</div>
+	                    
+						                    <div class="row">
+						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="id">Nº da encomenda:</label>
+													<input type="text" id="id" name="id" value="${encomenda.id}" class="form-control" readonly />
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="dataencomenda">Data da encomenda:</label>
+													<input type="date" id="dataencomenda" name="dataencomenda" class="form-control" value="${encomenda.dataencomenda}" readonly />
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="dataentrega">Data de entrega*:</label>
+													<input type="date" id="dataentrega" name="dataentrega" class="form-control" value="${encomenda.dataentrega}" required />
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="datacancelado">Data do cancelamento:</label>
+													<input type="date" id="datacancelado" name="datacancelado" class="form-control" value="${encomenda.datacancelamento}" readonly />
+												</div>
 
-													<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-														<label class="control-label" for="cliente">Cliente*:</label>
-														<select id="cliente" name="cliente" class="form-control" placeholder="Insira o nome, RG, CPF, CNPJ ou IE." required></select>
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-12 col-md-6">
-														<label class="control-label" for="responsavel">Responsável pela retirada:</label>
-														<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada." value="${encomenda.responsavel}" class="form-control" maxlength="100"/>
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-12 col-md-12">
-														<label class="control-label" for="obs">Observações:</label>
-														<textarea id="obs" name="obs" rows="5" class="form-control" placeholder="Insira uma observação sobre o cliente">${encomenda.obs}</textarea>
-													</div>
-							                    </div>
+												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+													<label class="control-label" for="cliente">Cliente*:</label>
+													<select id="cliente" name="cliente" class="form-control" placeholder="Insira o nome, RG, CPF, CNPJ ou IE." required></select>
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-12 col-md-6">
+													<label class="control-label" for="responsavel">Responsável pela retirada:</label>
+													<input type="text" id="responsavel" name="responsavel" placeholder="Digite o nome do responsável pela retirada." value="${encomenda.responsavel}" class="form-control" maxlength="100"/>
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+													<label class="control-label" for="obs">Observações:</label>
+													<textarea id="obs" name="obs" rows="5" class="form-control" placeholder="Insira uma observação sobre o cliente">${encomenda.obs}</textarea>
+												</div>
+						                    </div>
 
-							                    <div class="modal-footer modal-margin-top">
-													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-								                    <button type="button" class="btn btn-default cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>               
-								                    <button type="button" class="btn btn-default next-step" id="btn_produtos"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
-						                   		</div>
-					                   		<!-- </form> -->
+						                    <div class="modal-footer modal-margin-top">
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+							                    <button type="button" class="btn btn-default cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>               
+							                   	<button type="submit" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+							                    <button type="button" class="btn btn-default next-step" id="btn_produtos"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
+					                   		</div>
 					                   		
 						                </div>
 							                
 						                <div class="tab-pane" role="tabpanel" id="step2">
-						                    <!-- 
-						                    <form id="produtos-encomenda" method="POST">
-						                     -->
+
 							                    <div class="row">
 							                    	<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							                    		<button type="button" id="inserir-linha"  onclick="return false" class="btn btn-default fullwidth"><i class="material-icons">add_shopping_cart</i>&nbsp;&nbsp;&nbsp;Incluir novo produto</button>
@@ -325,126 +315,109 @@
 								                    <button type="button" id="btn_faturar" class="btn btn-default" data-toggle="modal"  data-target="#faturar-encomenda"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 								                    <button type="button" id="btn_faturar_bypass" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 						                   		</div>
-						                    <!-- 
-						                    </form>
-						                     -->
+
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step3">
-						                    <!-- 
-						                    <form id="faturar-encomenda" method="POST">
-						                     -->
-						                     
-							                    <div class="row">
-							                    	
+											
+						                    <div class="row">
+						                    	
+												
+												<div id="errosFatura" class="col-xs-12">
 													
-													<div id="errosFatura" class="col-xs-12">
-														
+												</div>
+						                    
+						                        <div class="input-margin col-xs-12 col-sm-6 col-md-4">
+													<label class="control-label" for="datafaturamento">Data de faturamento:</label>
+													<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-8">
+													<label class="control-label" for="valortroco">Forma de pagamento:</label>
+													<select class="form-control" id="formapagamento" name="formapagamento">
+														<option value="0" selected disabled>Selecione...</option>
+														<option value="1">Dinheiro</option>
+														<option value="2">Cartão de crédito</option>
+														<option value="3">Cartão de débito</option>
+														<option value="4">Boleto</option>
+														<option value="5">Cheque</option>
+													</select>
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-4">
+													<label class="control-label" for="totalencomenda">Valor total da encomenda:</label>
+													<div class="input-group">
+														<span class="input-group-addon">R$</span>
+														<!-- readonly -->
+														<input type="text" id="totalencomenda" name="totalencomenda" class="form-control" readonly />
 													</div>
-							                    
-							                        <div class="input-margin col-xs-12 col-sm-6 col-md-4">
-														<label class="control-label" for="datafaturamento">Data de faturamento:</label>
-														<input type="date" id="datafaturamento" name="datafaturamento" class="form-control" readonly />
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-6 col-md-4">
+													<label class="control-label" for="valorpago">Valor pago:</label>
+													<div class="input-group">
+														<span class="input-group-addon">R$</span>
+														<input type="text" id="valorpago" placeholder="0,00" name="valorpago" class="form-control" />
 													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-6 col-md-8">
-														<label class="control-label" for="valortroco">Forma de pagamento:</label>
-														<select class="form-control" id="formapagamento" name="formapagamento">
-															<option value="0" selected disabled>Selecione...</option>
-															<option value="1">Dinheiro</option>
-															<option value="2">Cartão de crédito</option>
-															<option value="3">Cheque</option>
-														</select>
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-12 col-md-4">
+													<label class="control-label" for="valortroco">Troco:</label>
+													<div class="input-group">
+														<span class="input-group-addon">R$</span>
+														<input type="text" id="valortroco" name="valortroco" placeholder="0,00" class="form-control" readonly />
 													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-6 col-md-4">
-														<label class="control-label" for="totalencomenda">Valor total da encomenda:</label>
-														<div class="input-group">
-															<span class="input-group-addon">R$</span>
-															<!-- readonly -->
-															<input type="text" id="totalencomenda" name="totalencomenda" class="form-control" readonly />
-														</div>
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-6 col-md-4">
-														<label class="control-label" for="valorpago">Valor pago:</label>
-														<div class="input-group">
-															<span class="input-group-addon">R$</span>
-															<input type="text" id="valorpago" placeholder="0,00" name="valorpago" class="form-control" />
-														</div>
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-12 col-md-4">
-														<label class="control-label" for="valortroco">Troco:</label>
-														<div class="input-group">
-															<span class="input-group-addon">R$</span>
-															<input type="text" id="valortroco" name="valortroco" placeholder="0,00" class="form-control" readonly />
-														</div>
-													</div>
-													
-													<div class="input-margin col-xs-12 col-sm-12 col-md-12">
-														<label class="control-label" for="obs">Observações do pagamento:</label>
-														<textarea id="obspagamento" name="obspagamento" rows="3" class="form-control" placeholder="Insira uma observação sobre o pagamento"></textarea>
-													</div>
-													
-							                    </div>
-							                    
-							                    <div class="modal-footer modal-margin-top">
-													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-								                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
-								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="submit" id="btn_submit_faturar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Produzir</button>
-						                   		</div>
-						                   	<!-- 	
-						                   	</form>
-						                   	 -->
+												</div>
+												
+												<div class="input-margin col-xs-12 col-sm-12 col-md-12">
+													<label class="control-label" for="obs">Observações do pagamento:</label>
+													<textarea id="obspagamento" name="obspagamento" rows="3" class="form-control" placeholder="Insira uma observação sobre o pagamento"></textarea>
+												</div>
+												
+						                    </div>
+						                    
+						                    <div class="modal-footer modal-margin-top">
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+							                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+							                    <button type="submit" id="btn_submit_faturar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+							                    <button type="button" id="btn_produzir" class="btn btn-default" data-toggle="modal" data-target="#produzir-encomenda"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Produzir</button>
+							                    <button type="button" id="btn_produzir_bypass" class="btn btn-default next-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Produzir</button>
+					                   		</div>
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="step4">
-						                    <!-- 
-						                    <form id="produzir-encomenda" method="POST">
-						                     -->
-							                    <div class="row">
-							                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
-														<label class="control-label" for="dataproducao">Data da produção:</label>
-														<input type="date" id="dataproducao" name="dataproducao" class="form-control" readonly />
-													</div>
-							                    </div>
-							                    
-							                    <div class="modal-footer modal-margin-top">
-													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-								                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
-								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="submit" id="btn_submit_produzir" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-								                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">done</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
-						                   		</div>
-						                   	<!-- 	
-						                   	</form>
-						                   	 -->
+						                    <div class="row">
+						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="dataproducao">Data da produção:</label>
+													<input type="date" id="dataproducao" name="dataproducao" class="form-control" readonly />
+												</div>
+						                    </div>
+						                    
+						                    <div class="modal-footer modal-margin-top">
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+							                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+							                    <button type="submit" id="btn_submit_produzir" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+							                    <button type="submit" class="btn btn-default next-step"><i class="material-icons">done</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
+					                   		</div>
 						                </div>
 						
 						                <div class="tab-pane" role="tabpanel" id="complete">
-						                	<!-- 
-						                    <form id="finalizar-encomenda" method="POST">
-						                	 -->
-							                    <div class="row">
-							                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
-														<label class="control-label" for="datafinalizado">Data da finalização:</label>
-														<input type="date" id="datafinalizado" name="datafinalizado" class="form-control" readonly />
-													</div>
-							                    </div>
-							                    
-							                    <div class="modal-footer modal-margin-top">
-													<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
-								                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
-								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="submit" id="btn_submit_finalizar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-								                    <button type="submit" class="btn btn-default" id="finalizar-encomenda" disabled><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
-						                   		</div>
-						                   	<!-- 	
-						                   	</form>
-						                   	 -->
+						                    <div class="row">
+						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
+													<label class="control-label" for="datafinalizado">Data da finalização:</label>
+													<input type="date" id="datafinalizado" name="datafinalizado" class="form-control" readonly />
+												</div>
+						                    </div>
+						                    
+						                    <div class="modal-footer modal-margin-top">
+												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
+							                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
+							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Voltar</button>
+							                    <button type="submit" id="btn_submit_finalizar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+							                    <button type="submit" class="btn btn-default" id="finalizar-encomenda" disabled><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
+					                   		</div>
 						                </div>
 						                
 						            </div>
@@ -460,11 +433,10 @@
 	</div>
 
 	<!--
+	
 	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE ENCOMENDA ####################
+	
 	-->
-	
-	
-	
 	
 	<div class="modal fade" id="faturar-encomenda" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
@@ -487,8 +459,8 @@
 					<!-- Essa div contem 2 botões -->
 					<div class="modal-footer">
 						<!-- botão de cancelar-->
-						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-						<button type="button" class="btn btn-default next-step" data-dismiss="modal">Faturar encomenda</button>
+						<button type="button" class="btn btn-default faturar_btn" data-dismiss="modal">Fechar</button>
+						<button type="button" class="btn btn-default faturar_btn next-step" data-dismiss="modal">Faturar encomenda</button>
 					</div>
 
 				
@@ -496,13 +468,46 @@
 		</div>
 	</div>
 	
-	
-	
-	
-	
-
 	<!--
+	
+	######################################################### FIM DO MODAL DE INCLUSÃO OU ALTERAÇÂO DE ENCOMENDA ####################
+	
+	-->
+	
+	<div class="modal fade" id="produzir-encomenda" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="exampleModalLabel">Produzir encomenda</h4>
+					</div>
+					
+					<!--  Corpo do modal -->
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<p>Deseja realmente produzir a encomenda?</p>
+								<p>Após a confirmação não será possível algumas informações da encomenda e do faturamento.</p>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Essa div contem 2 botões -->
+					<div class="modal-footer">
+						<!-- botão de cancelar-->
+						<button type="button" class="btn btn-default produzir_btn" data-dismiss="modal">Fechar</button>
+						<button type="button" class="btn btn-default produzir_btn next-step" data-dismiss="modal">Produzir encomenda</button>
+					</div>
+
+				
+			</div>
+		</div>
+	</div>
+	
+	<!--
+	
 	######################################################### MODAL DE ERRO #########################################################
+	
 	-->
 	
 	<div class="modal fade" id="modal_erro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -625,52 +630,6 @@
 	############################################################ FIM DO MODAL DE ERRO ############################################################
 	-->
 
-
-	<!--
-	############################################################ MODAL DE EXCLUSÃO DE ENCOMENDA ############################################################
-	-->
-
-
-
-	<!-- Modal de confirmação de exclusão de cliente
-		<div class="modal fade" id="excluir-cliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<form id="cliente-delete-form" action="administrativo-remover-cliente" method="POST">
-	
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">Excluir cliente</h4>
-						</div>
-						
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	
-									<div class="hidden">
-										<label class="control-label" for="id">Nº cliente:</label>
-										<input type="text" id="id_delete" name="id" placeholder="Digite o numero de ID" class="form-control" readonly />
-									</div>
-	
-									<p>Deseja realmente excluir o cliente selecionado?</p>
-								</div>
-							</div>
-	
-							
-						</div>
-	
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Não, quero manter</button>
-							<button type="submit" class="btn btn-default">Sim, quero excluir</button>
-						</div>
-	
-					</form>
-				</div>
-			</div>
-		</div>
-	 -->
-
-
 	<!-- Importação dos arquivos java script -->
 	<script src="resources/js/jquery-2.1.4.js"></script>
 	<script src="resources/js/datatables.js"></script>
@@ -682,20 +641,9 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
-			/*
-			* MENSAGENS DE ERRO
-			*/
-			$('#msg1').hide();
-			$('#msg2').hide();
-			$('#msg3').hide();
-			$('#msg4').hide();
-			$('#msg5').hide();
-			$('#msg6').hide();
-			$('#msg7').hide();
-			$('#msg8').hide();
-			$('#msg9').hide();
 			
 			/*
+			*
 			* INDICADOR DE PAGINA DO MENU
 			*
 			*/
@@ -705,7 +653,7 @@
 			
 			/*
 			*
-			* Define os campos que receberam as mascaras.
+			* CONFIGURA MASCARAS
 			*
 			*/
 			
@@ -901,6 +849,9 @@
 						$('#btn_faturar').addClass('hidden').attr('disabled','disabled');
 						$('#btn_faturar_bypass').removeClass('hidden').removeAttr('disabled');
 						
+						$('#btn_produzir').removeClass('hidden').removeAttr('disabled');
+						$('#btn_produzir_bypass').addClass('hidden').attr('disabled','disabled');
+						
 						var selectize = $('#cliente')[0].selectize;
 						selectize.disable();
 						
@@ -922,16 +873,59 @@
 							});
 						}, 500);
 						
+						$('#formapagamento option').each(function () {					
+							if($(this).val() != 0){
+								$(this).removeAttr('disabled');
+							}
+						});
+						
+						$('#valorpago').removeAttr('readonly');
 						
 						break;
 					
 					case '4':
 						
-
 						$('#tab-faturar').removeClass('disabled');
 						$('#tab-produzir').removeClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
+						
+						$('.cancelar-encomenda').removeAttr('disabled');
+						
+						$('#btn_faturar').addClass('hidden').attr('disabled','disabled');
+						$('#btn_faturar_bypass').removeClass('hidden').removeAttr('disabled');
+						
+						$('#btn_produzir').addClass('hidden').attr('disabled','disabled');
+						$('#btn_produzir_bypass').removeClass('hidden').removeAttr('disabled');
+						
+						var selectize = $('#cliente')[0].selectize;
+						selectize.disable();
+						
+						$('#inserir-linha').addClass('disabled').attr('disabled','disabled');
+
+						setTimeout(function(){
+							$('#lista-produtos tr').each(function () {					
+								//Captura os numeros de linhas
+								var linha = this.id.replace('item_', '');
+
+								var selectize = $('#produto_'+linha)[0].selectize;
+								selectize.disable();
+
+								$('#valor_'+linha).attr('readonly','readonly');
+								$('#quantidade_'+linha).attr('readonly','readonly');
+								$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
+								
+								calculaTotalProdutos();
+							});
+						}, 500);
 												
+						$('#formapagamento option').each(function () {					
+							if($(this).val() != 4){
+								$(this).attr('disabled','disabled');
+							}
+						});
+						
+						$('#valorpago').attr('readonly','readonly');
+						
 						break;
 						
 					case '5':
@@ -1498,18 +1492,28 @@
                 ]
             });
             
-            function resetCampos(){
-            	//Reset autmaticamente todos os campos do formulário.				
+          //Reset autmaticamente todos os campos do formulário.
+           function resetCampos(){
+				
+				$('#tab-faturar').addClass('disabled');
+				$('#tab-produzir').addClass('disabled');
+				$('#tab-finalizar').addClass('disabled');
+				
+				$('.cancelar-encomenda').attr('disabled','disabled');
+				
 				$('#id').val('');
-				//$('#dataencomenda').val('');//Não limpar, dataproducao e datafinalizado				
 				$('#dataentrega').val('');
 				$('#datacancelado').val('');
 				
 				var selectize = $('#cliente')[0].selectize;//Autocomplete
+                selectize.enable();
                 selectize.clearOptions();
                
 				$('#responsavel').val('');
 				$('#obs').val('');
+				
+
+				$('#inserir-linha').removeClass('disabled').removeAttr('disabled');
 				
 				$("#lista-produtos tr").each(function(){//itens produtos
 					$(this).remove();
@@ -1517,6 +1521,21 @@
 				
 				$('#totalprodutos').val('');
 				$('#total').val('');
+				
+				$('#btn_faturar').removeClass('hidden').removeAttr('disabled');
+				$('#btn_faturar_bypass').addClass('hidden').attr('disabled','disabled');
+				
+				$('#btn_produzir').removeClass('hidden').removeAttr('disabled');
+				$('#btn_produzir_bypass').addClass('hidden').attr('disabled','disabled');
+				
+				$('#formapagamento option').each(function () {					
+					if($(this).val() != 0){
+						$(this).removeAttr('disabled');
+					}
+				});
+				
+				$('#valorpago').removeAttr('readonly');
+				
             }
 
           	//------settando a data de hoje---------------------------------
@@ -1534,8 +1553,8 @@
             $('#incluir-encomenda-modal').click(function() {
             	
             	resetCampos();
-				
-				inserir_item();					
+
+				inserir_item();	
 
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
@@ -1678,6 +1697,55 @@
 				$('#excluir-encomenda').modal('show');
 
             });
+			
+			
+			
+			
+			
+			
+            /*
+			*
+			* REALIZA A SUBSTITUIÇÃO DO MODAL QUANDO OUTRO É INVOCADO
+			*
+			*/
+
+			//Remove o modal de encomenda
+			$('#btn_faturar').on('click', function(){
+				$('#modal-encomenda').addClass('hidden');
+			});
+			
+			//Remove o modal de encomenda
+			$('#btn_produzir').on('click', function(){
+				$('#modal-encomenda').addClass('hidden');
+			});
+			
+			//Adiciona o modal de encomenda
+			$('.faturar_btn').on('click', function(){
+				$('#modal-encomenda').removeClass('hidden');
+			});
+
+			//Adiciona o modal de encomenda
+			$('.produzir_btn').on('click', function(){
+				$('#modal-encomenda').removeClass('hidden');
+			});
+			
+			
+			
+			
+			
+            /*
+			 MENSAGENS DE ERRO
+			*/
+			$('#msg1').hide();
+			$('#msg2').hide();
+			$('#msg3').hide();
+			$('#msg4').hide();
+			$('#msg5').hide();
+			$('#msg6').hide();
+			$('#msg7').hide();
+			$('#msg8').hide();
+			$('#msg9').hide();
+			
 
             
             

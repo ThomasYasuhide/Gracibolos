@@ -35,7 +35,7 @@ public class CaixaInserirRecebimento {
 			//gasto = 0, recebimento = 1
 			c.setGastoRecebimento(1);
 			//forma
-			c.setForma(gc.ranForma());
+			c.setForma(1);
 			//parcela
 			c.setParcela(1);
 			//descricao

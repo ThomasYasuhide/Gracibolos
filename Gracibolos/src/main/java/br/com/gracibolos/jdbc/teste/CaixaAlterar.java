@@ -17,7 +17,7 @@ public class CaixaAlterar {
 		c.setFornecedorId(1);
 		BigDecimal valor = new BigDecimal(336.00);
 		c.setValor(valor);		
-		c.setForma("debito");
+		c.setForma(3);
 		c.setParcela(1);
 		//LocalDate data = LocalDate.of(2016, 05, 06);
 		//c.setData(data);
