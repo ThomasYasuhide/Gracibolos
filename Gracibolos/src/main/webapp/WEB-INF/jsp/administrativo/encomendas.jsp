@@ -814,7 +814,7 @@
 			        if (!query.length) return callback();
 			        $.ajax({
 			            
-			            url: 'http://localhost:8080/Gracibolos/rest-clientes/' + encodeURIComponent(query),
+			            url: '../Gracibolos/rest-clientes/' + encodeURIComponent(query),
 			            type: 'GET',
 			            error: function() {
 			                callback();
@@ -1160,7 +1160,7 @@
 				        if (!query.length) return callback();
 				        $.ajax({
 				            
-				            url: 'http://localhost:8080/Gracibolos/rest-pesquisar-produto-nome/' + encodeURIComponent(query),
+				            url: '../Gracibolos/rest-pesquisar-produto-nome/' + encodeURIComponent(query),
 				            type: 'GET',
 				            error: function() {
 				                callback();
