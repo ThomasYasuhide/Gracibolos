@@ -394,6 +394,130 @@
 												</div>
 						                    </div>
 						                    
+						                    <div class="row">
+						                    	<div class="col-xs-12">
+						                    		<table class="table table-hover display table-settings">
+														<thead>
+															<tr>
+																<td>Selecione os produtos já produzidos.</td>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
+																	<label class="google-checkbox input-brown">
+																		<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																		<i class="material-icons checked">check_box</i>
+																		<i class="material-icons unchecked">check_box_outline_blank</i>
+																		Item 1: | Torta de maçã
+																	</label>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	<label class="google-checkbox input-brown">
+																		<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																		<i class="material-icons checked">check_box</i>
+																		<i class="material-icons unchecked">check_box_outline_blank</i>
+																		Item 2: | Bolo de maracujá 1/9
+																	</label>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	<label class="google-checkbox input-brown">
+																		<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																		<i class="material-icons checked">check_box</i>
+																		<i class="material-icons unchecked">check_box_outline_blank</i>
+																		Item 2: | Bolo de maracujá 2/9
+																	</label>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	<label class="google-checkbox input-brown">
+																		<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																		<i class="material-icons checked">check_box</i>
+																		<i class="material-icons unchecked">check_box_outline_blank</i>
+																		Item 2: | Bolo de maracujá 3/9
+																	</label>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	<label class="google-checkbox input-brown">
+																		<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																		<i class="material-icons checked">check_box</i>
+																		<i class="material-icons unchecked">check_box_outline_blank</i>
+																		Item 2: | Bolo de maracujá 4/9
+																	</label>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	<label class="google-checkbox input-brown">
+																		<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																		<i class="material-icons checked">check_box</i>
+																		<i class="material-icons unchecked">check_box_outline_blank</i>
+																		Item 2: | Bolo de maracujá 5/9
+																	</label>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	<label class="google-checkbox input-brown">
+																		<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																		<i class="material-icons checked">check_box</i>
+																		<i class="material-icons unchecked">check_box_outline_blank</i>
+																		Item 2: | Bolo de maracujá 6/9
+																	</label>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	<label class="google-checkbox input-brown">
+																		<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																		<i class="material-icons checked">check_box</i>
+																		<i class="material-icons unchecked">check_box_outline_blank</i>
+																		Item 2: | Bolo de maracujá 7/9
+																	</label>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	<label class="google-checkbox input-brown">
+																		<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																		<i class="material-icons checked">check_box</i>
+																		<i class="material-icons unchecked">check_box_outline_blank</i>
+																		Item 2: | Bolo de maracujá 8/9
+																	</label>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	<label class="google-checkbox input-brown">
+																		<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																		<i class="material-icons checked">check_box</i>
+																		<i class="material-icons unchecked">check_box_outline_blank</i>
+																		Item 2: | Bolo de maracujá 9/9
+																	</label>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	<label class="google-checkbox input-brown">
+																		<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																		<i class="material-icons checked">check_box</i>
+																		<i class="material-icons unchecked">check_box_outline_blank</i>
+																		Item 3: | Torta holandeza
+																	</label>
+																</td>
+															</tr>
+														</tbody>
+													</table>				                    	
+						                    	</div>
+						                    </div>
+						                    
 						                    <div class="modal-footer modal-margin-top">
 												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 							                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
