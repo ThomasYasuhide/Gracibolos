@@ -396,6 +396,74 @@
 						                    
 						                    <div class="row">
 						                    	<div class="col-xs-12">
+						                    	
+						                    		<div class="panel-group" role="tablist">
+														<div class="panel panel-default">
+															<div class="panel-heading" role="tab" id="collapseListGroupHeading1">
+																<h4 class="panel-title">
+																	<a class="" role="button" data-toggle="collapse" href="#item1" aria-expanded="true" aria-controls="collapseListGroup1">Item 1</a>
+																</h4>
+															</div>
+															<div id="item1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading1" aria-expanded="true">
+																<ul class="list-group">
+																	<li class="list-group-item">
+																		<label class="google-checkbox input-brown">
+																			<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																			<i class="material-icons checked">check_box</i>
+																			<i class="material-icons unchecked">check_box_outline_blank</i>
+																			Bolo de maracujá 1/3
+																		</label>
+																	</li>
+																	<li class="list-group-item">
+																		<label class="google-checkbox input-brown">
+																			<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																			<i class="material-icons checked">check_box</i>
+																			<i class="material-icons unchecked">check_box_outline_blank</i>
+																			Bolo de maracujá 2/3
+																		</label>
+																	</li>
+																	<li class="list-group-item">
+																		<label class="google-checkbox input-brown">
+																			<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																			<i class="material-icons checked">check_box</i>
+																			<i class="material-icons unchecked">check_box_outline_blank</i>
+																			Bolo de maracujá 3/3
+																		</label>
+																	</li>
+																</ul>
+															</div>
+														</div>
+														<div class="panel panel-default">
+															<div class="panel-heading" role="tab" id="collapseListGroupHeading1">
+																<h4 class="panel-title">
+																	<a class="" role="button" data-toggle="collapse" href="#item2" aria-expanded="true" aria-controls="collapseListGroup1">Item 2</a>
+																</h4>
+															</div>
+															<div id="item2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading1" aria-expanded="true">
+																<ul class="list-group">
+																	<li class="list-group-item">
+																		<label class="google-checkbox input-brown">
+																			<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																			<i class="material-icons checked">check_box</i>
+																			<i class="material-icons unchecked">check_box_outline_blank</i>
+																			Bolo de prestígio 1/2
+																		</label>
+																	</li>
+																	<li class="list-group-item">
+																		<label class="google-checkbox input-brown">
+																			<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
+																			<i class="material-icons checked">check_box</i>
+																			<i class="material-icons unchecked">check_box_outline_blank</i>
+																			Bolo de prestígio 2/2
+																		</label>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+						                    		
+						                    		<!-- 
+						                    	
 						                    		<table class="table table-hover display table-settings">
 														<thead>
 															<tr>
@@ -415,12 +483,7 @@
 															</tr>
 															<tr>
 																<td>
-																	<label class="google-checkbox input-brown">
-																		<input type="checkbox" name="lembrarsenha" <c:if test="${cookie.lembrarsenha.value == 'true'}">checked="checked"</c:if> value="true">
-																		<i class="material-icons checked">check_box</i>
-																		<i class="material-icons unchecked">check_box_outline_blank</i>
-																		Item 2: | Bolo de maracujá 1/9
-																	</label>
+																	
 																</td>
 															</tr>
 															<tr>
@@ -514,9 +577,14 @@
 																</td>
 															</tr>
 														</tbody>
-													</table>				                    	
+													</table>
+													
+													
+						                     		-->
+															                    	
 						                    	</div>
 						                    </div>
+						                    
 						                    
 						                    <div class="modal-footer modal-margin-top">
 												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
@@ -774,6 +842,8 @@
 			
 			$('#menu-mob-encomendas').addClass('active');
 			$('#menu-encomendas').addClass('active');
+			
+			$('.panel-group').collapse()
 			
 			/*
 			*
