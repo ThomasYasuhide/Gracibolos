@@ -36,7 +36,7 @@ public class CaixaInserirGasto {
 			//gasto = 0, recebimento = 1
 			c.setGastoRecebimento(0);
 			//forma
-			c.setForma(2);
+			c.setForma("dinheiro");
 			//parcela
 			c.setParcela(null);
 			//descricao

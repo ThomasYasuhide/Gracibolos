@@ -41,7 +41,7 @@ public class Caixa implements Serializable{
     private Long encomendaId; //encomenda Id ou materia Prima Id
     private BigDecimal valor; // valor recebido da encomenda, ou valor gasto na compra de materia prima    
     private BigDecimal saldo;
-    private Integer forma; // de pagamento
+    private String forma; // de pagamento
     private Integer parcela;
     @JsonDeserialize(using = LocalDateDeserializer.class)  
     @JsonSerialize(using = LocalDateSerializer.class)  
@@ -91,10 +91,10 @@ public class Caixa implements Serializable{
 	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
 	}
-	public Integer getForma() {
+	public String getForma() {
 		return forma;
 	}
-	public void setForma(Integer forma) {
+	public void setForma(String forma) {
 		this.forma = forma;
 	}
 	public Integer getParcela() {

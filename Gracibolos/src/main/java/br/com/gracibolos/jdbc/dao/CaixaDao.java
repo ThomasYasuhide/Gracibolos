@@ -64,7 +64,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			
 			ps.setBigDecimal(4, caixa.getValor());
 			ps.setBigDecimal(5, caixa.getSaldo());			
-			ps.setInt(6, caixa.getForma());			
+			ps.setString(6, caixa.getForma());			
 			ps.setInt(7, caixa.getParcela());
 			if(caixa.getDataTransacao()!=null){
 				ps.setDate(8, Date.valueOf(hoje));//Data da transação sempre hoje
@@ -128,7 +128,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 			}
 			ps.setBigDecimal(4, caixa.getValor());
 			ps.setBigDecimal(5, caixa.getSaldo());			
-			ps.setInt(6, caixa.getForma());			
+			ps.setString(6, caixa.getForma());			
 			ps.setInt(7, caixa.getParcela());
 			ps.setDate(8, Date.valueOf(caixa.getDataTransacao()));
 			if(caixa.getDataOperacao()!=null){
@@ -335,7 +335,7 @@ public class CaixaDao implements GenericoDao<Caixa>{
 				caixa.setEncomendaId(rs.getLong("encomendaId"));
 				caixa.setValor(rs.getBigDecimal("valor"));
 				//caixa.setSaldo(rs.getBigDecimal("saldo"));					
-				caixa.setForma(rs.getInt("forma"));
+				caixa.setForma(rs.getString("forma"));
 				caixa.setParcela(rs.getInt("parcela"));
 				if(rs.getDate("dataTransacao")!=null)
 					caixa.setDataTransacao(rs.getDate("dataTransacao").toLocalDate());

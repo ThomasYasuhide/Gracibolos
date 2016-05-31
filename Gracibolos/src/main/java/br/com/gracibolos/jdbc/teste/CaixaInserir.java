@@ -17,7 +17,7 @@ public class CaixaInserir {
 		c.setEncomendaId(null);
 		c.setFornecedorId(146);
 		c.setValor(big);
-		c.setForma(1);
+		c.setForma("dinheiro");
 		c.setParcela(1);
 		//c.setData(LocalDate.now());
 		c.setDescricao("teste");

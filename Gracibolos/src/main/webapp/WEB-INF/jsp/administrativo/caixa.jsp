@@ -582,6 +582,12 @@
                 var now = moment().format('YYYY-MM-DD');
                 $('#dataTransacao').val(now);                
 
+                $('#valor').removeAttr('readonly');
+
+				$("#gastoRecebimento option[value=0]").removeAttr('disabled');
+				$("#gastoRecebimento option[value=1]").attr('disabled', 'disabled');
+          		
+				
 				// DESABILITA O CAMPO
 				var gastoRecebimento = $("#gastoRecebimento");
 				var fornecedorDiv = $("#fornecedorDiv");
@@ -594,7 +600,9 @@
 					encomendaDiv.show();
 					fornecedorDiv.hide();
 				}
-				              
+
+
+				          
 			});
 
             /*
