@@ -1585,6 +1585,10 @@
 					$(this).remove();
 				});
 				
+				$("#lista-producao div").each(function(){
+					$(this).remove();
+				});
+				
 				$('#totalprodutos').val('');
 				$('#total').val('');
 				
@@ -1617,6 +1621,8 @@
 			*	btn-incluir nova encomenda
 			*/
             $('#incluir-encomenda-modal').click(function() {
+            	
+            	verificaStatus(1);
             	
             	resetCampos();
 
@@ -1739,7 +1745,6 @@
 							pesquisarValor(linha);
 						});
 						
-
 						inserir_item_producao(data[i].nomeProduto, data[i].quantidade);
 						
 			        });
