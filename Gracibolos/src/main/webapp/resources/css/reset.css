@@ -288,3 +288,8 @@ h1, h2, h3, h4, h5 {
     border: 1px solid #6B5344 !important;
 }
 
+.panel-default > .panel-heading {
+    color: #fff !important;
+    background-color: #6B5344 !important;
+    border-color: #6B5344 !important;
+}
