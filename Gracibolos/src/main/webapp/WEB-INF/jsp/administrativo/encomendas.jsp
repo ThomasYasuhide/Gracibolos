@@ -168,6 +168,91 @@
 						<h4 id="modal-subtitle"></h4>
 					</div>
 					
+					<!-- msg erro -->
+					<!-- ################################# ALERTAS ################################# -->				
+						<div class="row" id="msg1" >
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda iniciada com sucesso.
+								</div>
+							</div>
+						</div>
+					
+						<div class="row" id="msg2">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar incluir a nova encomenda, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					
+						<div class="row" id="msg3">
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Alteração efetuada com sucesso.
+								</div>
+							</div>
+						</div>
+					
+						<div class="row" id="msg4">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar alterar a encomenda, favor tente novamente.
+								</div>
+							</div>
+						</div>
+					
+						<div class="row" id="msg5">
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda foi excluida com sucesso!
+								</div>
+							</div>
+						</div>
+					
+						<div class="row" id="msg6">
+							<div class="col-xs-12">
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Erro!</strong> Houve algum erro ao tentar excluir a encomenda, favor tente novamente.
+								</div>
+							</div>
+						</div>
+						
+						<div class="row" id="msg7" >
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda faturada com sucesso.
+								</div>
+							</div>
+						</div>
+						
+						<div class="row" id="msg8" >
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda produzindo com sucesso.
+								</div>
+							</div>
+						</div>
+						
+						<div class="row" id="msg9" >
+							<div class="col-xs-12">
+								<div class="alert alert-success alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <strong>Sucesso!</strong> Encomenda finalizada com sucesso.
+								</div>
+							</div>
+						</div>
+					
+					<!-- ################################# FIM DOS ALERTAS ################################# -->
+					
 					<div class="modal-body">
 						<!-- ################################# CONTEUDO ################################# -->
 												
@@ -265,7 +350,7 @@
 						                    <div class="modal-footer modal-margin-top">
 												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 							                    <button type="button" class="btn btn-default cancelar-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>               
-							                   	<button type="submit" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+							                   	<button type="button" id="btn_submit_informacoes" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 							                    <button type="button" class="btn btn-default next-step" id="btn_produtos"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Produtos</button>
 					                   		</div>
 					                   		
@@ -311,7 +396,7 @@
 								                    <button type="button" class="btn btn-default cancelar-encomenda" id="cancelar-itens-encomenda" disabled><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 								                   
 								                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-								                    <button type="submit" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+								                    <button type="button" id="btn_submit_produtos" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 								                    <button type="button" id="btn_faturar" class="btn btn-default" data-toggle="modal"  data-target="#faturar-encomenda"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 								                    <button type="button" id="btn_faturar_bypass" class="btn btn-default next-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Faturar</button>
 						                   		</div>
@@ -333,14 +418,14 @@
 												</div>
 												
 												<div class="input-margin col-xs-12 col-sm-6 col-md-8">
-													<label class="control-label" for="valortroco">Forma de pagamento:</label>
+													<label class="control-label" for="formapagamento">Forma de pagamento:</label>
 													<select class="form-control" id="formapagamento" name="formapagamento">
 														<option value="0" selected disabled>Selecione...</option>
-														<option value="1">Dinheiro</option>
-														<option value="2">Cartão de crédito</option>
-														<option value="3">Cartão de débito</option>
-														<option value="4">Boleto</option>
-														<option value="5">Cheque</option>
+														<option value="dinheiro">Dinheiro</option>
+														<option value="crédito">Cartão de crédito</option>
+														<option value="débto">Cartão de débito</option>
+														<option value="cheque">Cheque</option>
+														<option value="boleto">Boleto</option>
 													</select>
 												</div>
 												
@@ -380,7 +465,7 @@
 												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 							                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-							                    <button type="submit" id="btn_submit_faturar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+							                    <button type="button" id="btn_submit_faturar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 							                    <button type="button" id="btn_produzir" class="btn btn-default" data-toggle="modal" data-target="#produzir-encomenda"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Produzir</button>
 							                    <button type="button" id="btn_produzir_bypass" class="btn btn-default next-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Produzir</button>
 					                   		</div>
@@ -410,7 +495,7 @@
 												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 							                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">account_balance</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-							                    <button type="submit" id="btn_submit_produzir" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+							                    <button type="button" id="btn_submit_produzir" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
 							                    <button type="button" id="finalizar_btn" class="btn btn-default disabled next-step" disabled><i class="material-icons">done</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
 					                   		</div>
 						                </div>
@@ -427,8 +512,8 @@
 												<button type="button" class="btn btn-default" data-dismiss="modal"><i class="material-icons">close</i>&nbsp;&nbsp;&nbsp;Fechar</button>
 							                    <button type="button" class="btn btn-default cancelar-encomenda"><i class="material-icons">cancel</i>&nbsp;&nbsp;&nbsp;Cancelar</button>
 							                    <button type="button" class="btn btn-default prev-step"><i class="material-icons">query_builder</i>&nbsp;&nbsp;&nbsp;Voltar</button>
-							                    <button type="submit" id="btn_submit_finalizar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
-							                    <button type="submit" class="btn btn-default" id="finalizar-encomenda" disabled><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
+							                    <button type="button" id="btn_submit_finalizar" class="btn btn-default"><i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar</button>
+							                    <button type="button" class="btn btn-default" id="finalizar-encomenda" disabled><i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar</button>
 					                   		</div>
 						                </div>
 						                
@@ -543,89 +628,6 @@
 						</div>
 					</div>
 					
-						<!-- ################################# ALERTAS ################################# -->				
-						<div class="row" id="msg1" >
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda iniciada com sucesso.
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg2">
-							<div class="col-xs-12">
-								<div class="alert alert-danger alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar incluir a nova encomenda, favor tente novamente.
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg3">
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Alteração efetuada com sucesso.
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg4">
-							<div class="col-xs-12">
-								<div class="alert alert-danger alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar alterar a encomenda, favor tente novamente.
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg5">
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda foi excluida com sucesso!
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg6">
-							<div class="col-xs-12">
-								<div class="alert alert-danger alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar excluir a encomenda, favor tente novamente.
-								</div>
-							</div>
-						</div>
-						
-						<div class="row" id="msg7" >
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda faturada com sucesso.
-								</div>
-							</div>
-						</div>
-						
-						<div class="row" id="msg8" >
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda produzindo com sucesso.
-								</div>
-							</div>
-						</div>
-						
-						<div class="row" id="msg9" >
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda finalizada com sucesso.
-								</div>
-							</div>
-						</div>
-					
-					<!-- ################################# FIM DOS ALERTAS ################################# -->
 					<!-- Essa div contem 2 botões -->
 					<div class="modal-footer">
 						<!-- botão de cancelar-->
@@ -1214,21 +1216,6 @@
 				}
 			};
 
-			function recarregar(){
-				window.location.href = "../Gracibolos/administrativo-encomendas";
-			};
-			
-			function verificaFormaPag(){//Não funciona
-				if(($('#formapagamento').val() == '')){
-					document.getElementById("formapagamento").focus();
-					//alert('forma pagamento não existe');
-					return false;
-				}else{
-					//alert('nome existe');
-					return true;
-				}
-			};
-
 			$('#btn_faturar').click(function(){
             	var totalprodutos = $('#totalprodutos').val();     
 				$('#totalencomenda').val(totalprodutos);
@@ -1237,18 +1224,13 @@
 			function recarregar(){
 				window.location.href = "../Gracibolos/administrativo-encomendas";
 			};
-			
-			function recarregar(){
-				window.location.href = "../Gracibolos/administrativo-encomendas";
-			};
-			
 			/*
 			*
-			* INCLUIR ENCOMENDA---------------------------------------
+			* INCLUIR ENCOMENDA - informacoes---------------------------------------
 			*
 			*/
-
-			function inserirEncomenda(status, callback){
+			function inserirInfoEncomenda(status){
+				//alert("Salvar");
 				//recupera os valores da encomenda
 				var enc = new Object();
 				if(status==3){
@@ -1263,12 +1245,28 @@
 				enc.responsavel = $('#responsalvel').val();
 				enc.obs = $('#obs').val();
 
-	
-				enc.listItemEncomenda = [];
+				//colocar ajax
+			};
+			
+			$('#btn_submit_informacoes').click(function(){
+					
+				inserirInfoEncomenda();
+			});
+			/*
+			*
+			* INCLUIR ENCOMENDA - produtos---------------------------------------
+			*
+			*/
 
+			function inserirItemEncomenda(callback){
+				
+				inserirInfoEncomenda();
+	
+				listItemEncomenda = [];
+				
 				
 				$('#lista-produtos tr').each(function () {
-					
+					var itemencomenda = new Object();
 					//Captura os numeros de linhas
 					var linha = this.id.replace("item_", "");
 					
@@ -1279,9 +1277,10 @@
 				
 	                 // Criar objeto para armazenar os dados
 	                 var itemencomenda = new Object();
-	                 
+
+	                 itemencomenda.encomendaId = $('#id').val();//encomendaId
 	                 itemencomenda.produtoId = produto.val(); // valor da coluna id do Produto
-	                 itemencomenda.quantidade = quantidade.val(); // Valor da coluna Quantidade
+	                 itemencomenda.qtd = quantidade.val(); // Valor da coluna Quantidade
 	                 				
 	                 var valor_temp = valor.val(); // Valor da coluna Quantidade
 	 				 valor_temp = valor_temp.split(".").join("");//Retirar a máscara
@@ -1293,7 +1292,7 @@
 	                 itemencomenda.total = valor_temp.split(",").join(".");//Retirar a máscara
 
 	                 //Insere todos os itens no list
-	                 enc.listItemEncomenda[linha] = itemencomenda;
+	                 listItemEncomenda[linha] = itemencomenda;
 
 				});		
 	
@@ -1302,12 +1301,17 @@
 				//alert(enc);
 				
 				$.ajax({
-		            url: "../Gracibolos/rest-encomenda/",
+		            url: "../Gracibolos/rest-encomenda/",// CONSERTAR
 		            type: 'POST',    
 		            data: js,
 		            contentType: "application/json; charset=utf-8",
-		            success: function(result) {   
-		                $('#id').val(result);//Com o retorno do numero da encomenda, preencho o campo id
+		            error: function() {
+     	                callback();
+     	            },
+		            success: function(result) {
+						//Desuso  
+		                //$('#id').val(result);//Com o retorno do numero da encomenda, preencho o campo id
+		                //Novo -  Ao Incluir nova encomenda carrega o número da encomenda.
 		                callback(result);                
 		            }
 		        });
@@ -1323,13 +1327,14 @@
 					function resposta(result){//essa resposta é uma função
 
 						$('#msg1').show();//Encomenda inicializada
-						console.log('resposta '+result);
-						$('#title_modal_erro').text('Número da encomenda : ');
-		                $('#msg1_modal_erro').text(result);
-						$('#modal_erro').modal('show');
-						$('#btn_ok_modal_erro').click(function(){
-							setTimeout(function(){recarregar();}, 500	);	
-						});
+// 						console.log('resposta '+result);
+// 						$('#title_modal_erro').text('Número da encomenda : ');
+// 		                $('#msg1_modal_erro').text(result);
+// 						$('#modal_erro').modal('show');
+// 						$('#btn_ok_modal_erro').click(function(){
+// 							setTimeout(function(){recarregar();}, 500	);	
+// 						});
+						setTimeout(function(){$('#msg1').hide();}, 5000	);
 					}
 										
 				}else{
@@ -1368,6 +1373,9 @@
 		            type: 'POST',    
 		            data: js,
 		            contentType: "application/json; charset=utf-8",
+		            error: function() {
+     	                callback();
+     	            },
 		            success: function(msg) {
 		                //alert(msg);   
 		                console.log('ajax faturada'+msg)               
@@ -1384,19 +1392,20 @@
 
 						//$('#msg1').show();//Encomenda inicializada
 						$('#msg7').show(); //Faturada
+						setTimeout(function(){$('#msg7').hide();}, 5000 );
 						console.log('resposta iniciada'+result);
-						$('#title_modal_erro').text('Número da encomenda : ');
-		                $('#msg1_modal_erro').text(result);
-						$('#modal_erro').modal('show');
-						$('#btn_ok_modal_erro').click(function(){
+						//$('#title_modal_erro').text('Número da encomenda : ');
+		                //$('#msg1_modal_erro').text(result);
+						//$('#modal_erro').modal('show');
+// 						$('#btn_ok_modal_erro').click(function(){
 							
-							faturar(resposta);//função faturar com callback 
-							function resposta(result){
-								console.log('callback faturada'+result)							
-								setTimeout(function(){recarregar();}, 500 );	
-							}						
+// 							faturar(resposta);//função faturar com callback 
+// 							function resposta(result){
+// 								console.log('callback faturada'+result)							
+// 								setTimeout(function(){recarregar();}, 500 );	
+// 							}						
 							
-						});
+// 						});
 					}							
 					
 				}else{
@@ -1411,28 +1420,35 @@
 			* PRODUZIR ENCOMENDA---------------------------------------
 			*
 			*/
-			$("#btn_submit_produzir").click(function() {
-
-				var id = $('#id').val();//encomendaId
-				var js = JSON.stringify(id);
-				
+			function produzirAjax(callback){
+				var id = $('#id').val();//encomendaId		
 				$.ajax({
 		            url: "../Gracibolos/rest-encomenda/prod/",
 		            type: 'PUT',    
 		            data: JSON.stringify(id),
 		            contentType: "application/json; charset=utf-8",
+		            error: function() {
+     	                callback();
+     	            },
 		            success: function(result) {
 		                //alert(result);
-		            	$('#msg8').show(); 
-		            	$('#msg1_modal_erro').text(result);
-		            	$('#modal_erro').modal('show'); 
-						$('#btn_ok_modal_erro').click(function(){		
-							setTimeout(function(){recarregar();}, 500 );
-						});          
+		            	
+// 		            	$('#msg1_modal_erro').text(result);
+// 		            	$('#modal_erro').modal('show'); 
+// 						$('#btn_ok_modal_erro').click(function(){		
+// 							setTimeout(function(){recarregar();}, 500 );
+// 						});  
+		            	callback(result);
 		            }
 		        });
-				     
-				
+			};
+			$("#btn_submit_produzir").click(function() {
+
+				produzirAjax(resultado);
+				function resultado(result){
+					$('#msg8').show(); 
+					setTimeout(function(){$('#msg8').hide();}, 5000 );
+				}			
 				//setTimeout(function(){resetCampos();}, 1500	);		
 			});
 			//FIM - PRODUZIR ENCOMENDA---------------------------------------
@@ -1443,25 +1459,38 @@
 			* FINALIZAR ENCOMENDA---------------------------------------
 			*
 			*/
-			$("#btn_submit_finalizar").click(function() {
-
+			function finalizarAjax(callback){
 				var id = $('#id').val();//encomendaId
-				
 				$.ajax({
 		            url: "../Gracibolos/rest-encomenda/fin/",
 		            type: 'PUT',    
 		            data: JSON.stringify(id),
 		            contentType: "application/json; charset=utf-8",
+		            error: function() {
+     	                callback();
+     	            },
 		            success: function(result) {
 		                //alert(result);
-		            	$('#msg9').show();   
-		            	$('#msg1_modal_erro').text(result);
-		            	$('#modal_erro').modal('show');   
-		            	$('#btn_ok_modal_erro').click(function(){		
-		            		setTimeout(function(){recarregar();}, 500 );
-						});                 
+		            	  
+// 		            	$('#msg1_modal_erro').text(result);
+// 		            	$('#modal_erro').modal('show');   
+// 		            	$('#btn_ok_modal_erro').click(function(){		
+// 		            		setTimeout(function(){recarregar();}, 500 );
+// 						});  
+		            	callback(result);
 		            }
 		        });
+			}
+			
+			$("#btn_submit_finalizar").click(function() {
+
+				
+				finalizarAjax(resposta);
+				function resposta(result){
+					$('#msg9').show(); 
+					setTimeout(function(){$('#msg9').hide();}, 5000 );
+				};
+				
 				
 				
 				//setTimeout(function(){resetCampos();}, 1500	);		
@@ -1614,6 +1643,20 @@
             $('#dataencomenda').val(now);
             $('#dataproducao').val(now);
             $('#datafinalizado').val(now);
+
+            function novoNumero(callback){//Chamada para o rest, me retorne o numero da encomenda 
+            	$.ajax({//Neste endereço
+     	            url: '../Gracibolos/rest-encomenda-num/',
+     	            type: 'GET',
+     	            error: function() {
+     	                callback();
+     	            },
+     	            success: function(res) {
+     	                callback(res);
+     	                //alert(res);
+     	            }
+      	        });
+            };
             
             /*
 			*
@@ -1621,12 +1664,18 @@
 			*	btn-incluir nova encomenda
 			*/
             $('#incluir-encomenda-modal').click(function() {
+				//callback
+           	  	novoNumero(resposta);//Chamada para gerar um novo numero
+           	  	function resposta(result){
+					//alert(result);
+					$('#id').val(result);//Com o retorno do numero da encomenda, preencho o campo id
+           	  	};
             	
             	verificaStatus(1);
             	
             	resetCampos();
 
-				inserir_item();	
+				//inserir_item(); - quando for para produtos - consertar
 
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
@@ -1639,8 +1688,7 @@
 				$("#btn_submit_produzir").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Produzir');
 				//Nome do botão do finalizar.
 				$("#btn_submit_finalizar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar');   
-				               
-				$("#btn_submit_finalizar").html('<i class="material-icons">done_all</i>&nbsp;&nbsp;&nbsp;Finalizar');
+				  
 
             });
           

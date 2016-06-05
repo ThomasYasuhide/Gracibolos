@@ -488,6 +488,25 @@ public class EncomendaDao{
 		return tam;
 	}
 	
+	public Long numeroEncomenda(){
+		Long num=0l;
+		String sql = "SELECT id FROM gracibolos.encomenda order by id desc limit 1";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int tam = 0;
+		  
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+		  ps = conn.prepareStatement(sql);
+		  rs = ps.executeQuery();
+		  rs.next();
+		  num = rs.getLong("id");
+		  System.out.println("Número da encomenda : "+num);
+		}catch (Exception e) {
+			//handle exception
+		}
+		return ++num;
+	}
+	
 	public List<Encomenda> finalizadas() throws Exception{
 		
 		//ENCOMENDAS FINALIZADAS

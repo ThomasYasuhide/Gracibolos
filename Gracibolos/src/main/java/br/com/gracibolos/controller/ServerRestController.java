@@ -176,6 +176,12 @@ public class ServerRestController {
 	
 	// ---------------------ENCOMEDA---------------------------------------------------------
 	
+	@RequestMapping(value = "/rest-encomenda-num/", method = RequestMethod.GET)
+	public Long numeroEncomenda(){
+		daoEnc = new EncomendaDao();		
+		return daoEnc.numeroEncomenda();
+	}
+	
 	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.POST) 
 	public ResponseEntity<String> createEncomenda(@RequestBody Encomenda encomenda){
 
