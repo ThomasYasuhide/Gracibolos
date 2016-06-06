@@ -170,86 +170,51 @@
 					
 					<!-- msg erro -->
 					<!-- ################################# ALERTAS ################################# -->				
-						<div class="row" id="msg1" >
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda iniciada com sucesso.
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg2">
-							<div class="col-xs-12">
-								<div class="alert alert-danger alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar incluir a nova encomenda, favor tente novamente.
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg3">
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Alteração efetuada com sucesso.
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg4">
-							<div class="col-xs-12">
-								<div class="alert alert-danger alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar alterar a encomenda, favor tente novamente.
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg5">
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda foi excluida com sucesso!
-								</div>
-							</div>
-						</div>
-					
-						<div class="row" id="msg6">
-							<div class="col-xs-12">
-								<div class="alert alert-danger alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Erro!</strong> Houve algum erro ao tentar excluir a encomenda, favor tente novamente.
-								</div>
-							</div>
-						</div>
 						
-						<div class="row" id="msg7" >
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda faturada com sucesso.
-								</div>
-							</div>
-						</div>
-						
-						<div class="row" id="msg8" >
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda produzindo com sucesso.
-								</div>
-							</div>
-						</div>
-						
-						<div class="row" id="msg9" >
-							<div class="col-xs-12">
-								<div class="alert alert-success alert-dismissible" role="alert">
-								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								  <strong>Sucesso!</strong> Encomenda finalizada com sucesso.
-								</div>
-							</div>
-						</div>
+					<div id="msg1" class="alert alert-success alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Sucesso!</strong> Encomenda iniciada com sucesso.
+					</div>
+										
+					<div id="msg2" class="alert alert-danger alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Erro!</strong> Houve algum erro ao tentar incluir a nova encomenda, favor tente novamente.
+					</div>												
+					
+					<div id="msg3" class="alert alert-success alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Sucesso!</strong> Alteração efetuada com sucesso.
+					</div>									
+					
+					<div id="msg4" class="alert alert-danger alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Erro!</strong> Houve algum erro ao tentar alterar a encomenda, favor tente novamente.
+					</div>
+																	
+					<div id="msg5" class="alert alert-success alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Sucesso!</strong> Encomenda foi excluida com sucesso!
+					</div>
+											
+					<div id="msg6" class="alert alert-danger alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Erro!</strong> Houve algum erro ao tentar excluir a encomenda, favor tente novamente.
+					</div>								
+			
+					<div id="msg7" class="alert alert-success alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Sucesso!</strong> Encomenda faturada com sucesso.
+					</div>
+			
+					<div id="msg8" class="alert alert-success alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Sucesso!</strong> Encomenda produzindo com sucesso.
+					</div>
+				
+					<div id="msg9" class="alert alert-success alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Sucesso!</strong> Encomenda finalizada com sucesso.
+					</div>							
 					
 					<!-- ################################# FIM DOS ALERTAS ################################# -->
 					
@@ -1334,7 +1299,9 @@
 // 						$('#btn_ok_modal_erro').click(function(){
 // 							setTimeout(function(){recarregar();}, 500	);	
 // 						});
-						setTimeout(function(){$('#msg1').hide();}, 5000	);
+						setTimeout(function(){
+							$('#msg1').alert('close');
+							}, 5000	);
 					}
 										
 				}else{
@@ -1447,7 +1414,9 @@
 				produzirAjax(resultado);
 				function resultado(result){
 					$('#msg8').show(); 
-					setTimeout(function(){$('#msg8').hide();}, 5000 );
+					setTimeout(function(){
+						$('#msg8').alert('close');
+						}, 5000 );
 				}			
 				//setTimeout(function(){resetCampos();}, 1500	);		
 			});
@@ -1488,7 +1457,9 @@
 				finalizarAjax(resposta);
 				function resposta(result){
 					$('#msg9').show(); 
-					setTimeout(function(){$('#msg9').hide();}, 5000 );
+					setTimeout(function(){
+						$('#msg9').alert('close');
+						}, 5000 );
 				};
 				
 				
