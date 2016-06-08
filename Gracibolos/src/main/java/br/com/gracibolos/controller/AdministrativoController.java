@@ -1464,7 +1464,7 @@ public class AdministrativoController {
 		Status status = new Status();	
 		try {
 			//se o método inserir passando uma encomenda, for executado corretamente, status recebe verdadeiro
-			status = dao.inserir(encomenda);
+			//status = dao.inserir(encomenda);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

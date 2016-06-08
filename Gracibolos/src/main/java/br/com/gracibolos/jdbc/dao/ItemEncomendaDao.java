@@ -10,14 +10,49 @@ import java.util.List;
 import br.com.gracibolos.jdbc.connection.ConnectionProvider;
 import br.com.gracibolos.jdbc.model.ItemEncomenda;
 
-
 public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
-
-	public boolean inserir(ItemEncomenda itemEncomenda) throws Exception{
-		
-		return true;
+	
+	@Override
+	public boolean inserir(ItemEncomenda e) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
+	public int inserirList(List<ItemEncomenda> ListItemEncomenda) throws Exception{
+		int cont=0;
+		//---INSIRO OS ITENS DA ENCOMENDA----------------------------------------------------
+		String sqlIe = " INSERT INTO itemEncomenda(produtoId, encomendaId, qtd, valor, total)"
+				   + " VALUES (?, ?, ?, ?, ?)";
+		PreparedStatement ps = null;
+		//Inserir todos os itens da encomenda
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()){
+			for(ItemEncomenda ie : ListItemEncomenda)
+			{			
+				ps = conn.prepareStatement(sqlIe);
+				ps.setLong(1, ie.getProdutoId());
+				ps.setLong(2, ie.getEncomendaId());//encomendaId
+				ps.setInt(3, ie.getQuantidade());	
+				ps.setBigDecimal(4, ie.getValor());
+				ps.setBigDecimal(5, ie.getTotal());
+				
+				//Insiro os itens da encomenda
+				if(ps.executeUpdate() != 0) {
+					++cont;
+					//status.setStatus2(true);
+				}else{
+					//status.setStatus2(false);
+				}
+			}
+			ps.close();	
+			conn.close();
+			
+		} catch (Exception e) {
+			System.out.println("sem itens\n"+e);
+		}
+		return cont;
+	}
+	
+	@Override
 	public boolean alterar(ItemEncomenda itemEncomenda) throws Exception{
 		boolean status = false;
 		String sql = "UPDATE itemEncomenda SET produtoId=?, encomendaId=?, qtd=?, valor=?, total=? where id=?";
@@ -45,7 +80,8 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 		}
 		return status;
 	}
-
+	
+	@Override
 	public boolean excluir(ItemEncomenda itemEncomenda) throws Exception{
 		boolean status = false;
 		String sql = "DELETE FROM itemEncomenda WHERE id = ?";
@@ -70,11 +106,45 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 		
 		return status;
 	}
-
-	public List<ItemEncomenda> listar() throws Exception{
 	
+	@Override
+	public List<ItemEncomenda> listar() throws Exception{
+		String sql = "SELECT itemencomenda.id, itemencomenda.produtoId, itemencomenda.encomendaId, itemencomenda.qtd, "
+				+ "itemencomenda.valor, itemencomenda.total, produto.nome as nomeProduto," 
+				+" produto.codigo, produto.id as produtoIdproduto, produto.valor as valorp"
+				+" FROM gracibolos.itemencomenda"
+				+" inner join gracibolos.produto on itemencomenda.produtoId = produto.id";
 		
-		return null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ItemEncomenda> listaDeItemEncomenda= null;
+		Connection conn = ConnectionProvider.getInstance().getConnection();
+		ps = conn.prepareStatement(sql);
+		rs = ps.executeQuery();
+		listaDeItemEncomenda = new ArrayList<ItemEncomenda>();
+		
+		while(rs.next())
+		{
+			ItemEncomenda itemEncomenda = new ItemEncomenda();
+			
+			itemEncomenda.setId(rs.getLong("id"));//itemEncomenda
+			itemEncomenda.setProdutoId(rs.getLong("produtoId"));//itemEncomenda
+			itemEncomenda.setProdutoIdProduto(rs.getLong("produtoIdproduto"));//Produto
+			itemEncomenda.setEncomendaId(rs.getLong("encomendaId"));//itemEncomenda
+			itemEncomenda.setQuantidade(rs.getInt("qtd"));//itemEncomenda
+			itemEncomenda.setNomeProduto(rs.getString("nomeProduto"));//Produto
+			itemEncomenda.setValor(rs.getBigDecimal("valor"));//itemEncomenda
+			itemEncomenda.setValorp(rs.getBigDecimal("valorp"));//produto
+			itemEncomenda.setTotal(rs.getBigDecimal("total"));//itemEncomenda
+			
+			listaDeItemEncomenda.add(itemEncomenda);
+			
+		}//while itens
+		
+		rs = null;
+		ps = null;
+		
+		return listaDeItemEncomenda;
 	}
 
 	
@@ -106,8 +176,8 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 			itemEncomenda.setEncomendaId(rsItens.getLong("encomendaId"));//itemEncomenda
 			itemEncomenda.setQuantidade(rsItens.getInt("qtd"));//itemEncomenda
 			itemEncomenda.setNomeProduto(rsItens.getString("nomeProduto"));//Produto
-			itemEncomenda.setValor(rsItens.getBigDecimal("valor"));//Produto
-			itemEncomenda.setTotal(rsItens.getBigDecimal("total"));//Produto
+			itemEncomenda.setValor(rsItens.getBigDecimal("valor"));//itemEncomenda
+			itemEncomenda.setTotal(rsItens.getBigDecimal("total"));//itemEncomenda
 			
 			listaDeItemEncomenda.add(itemEncomenda);
 			
@@ -118,5 +188,4 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 		
 		return listaDeItemEncomenda;
 	}
-
 }

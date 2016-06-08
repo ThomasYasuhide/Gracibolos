@@ -18,7 +18,7 @@ public class ItemEncomendaAlterar {
 		ItemEncomendaDao dao = new ItemEncomendaDao();
 		
 		try {
-			if(dao.alterar(itemEncomenda) == true){
+			if(dao.alterar(itemEncomenda)){
 				System.out.println("alterado com sucesso");
 			}else{
 				System.out.println("falha");

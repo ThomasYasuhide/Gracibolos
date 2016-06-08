@@ -3,7 +3,7 @@ package br.com.gracibolos.jdbc.teste;
 
 import br.com.gracibolos.jdbc.dao.EncomendaDao;
 import br.com.gracibolos.jdbc.model.Encomenda;
-import br.com.gracibolos.jdbc.model.Status;
+//import br.com.gracibolos.jdbc.model.Status;
 
 //funcionando
 public class EncomendaInserir {
@@ -13,9 +13,10 @@ public class EncomendaInserir {
 		Encomenda encomenda = null;
 		Gerador g = new Gerador();
 		EncomendaDao dao = null;
+		
 		//List<ItemEncomenda> listIe = null;
 		//ItemEncomenda itemEncomenda = null;
-		Status status = new Status();
+		//Status status = new Status();
 		
 		for(int i=0;i<1;i++){
 					encomenda = new Encomenda();
@@ -66,9 +67,8 @@ public class EncomendaInserir {
 					
 					dao = new EncomendaDao();
 					try {
-						status = dao.inserir(encomenda);
-						if((status.getStatus1() && status.getStatus2()) == true){
-							System.out.println("inserido com sucesso"+ status.getNumeroEncomenda());
+						if(dao.inserir(encomenda)){
+							System.out.println("inserido com sucesso");
 						}else{
 							System.out.println("falha");
 						}

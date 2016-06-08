@@ -44,7 +44,7 @@ public class ServerRestController {
 	private List<ItemEncomenda> listItemEnc;
 	private CaixaDao caixaDao;
 	private EncomendaDao daoEnc;
-	private Status status;
+	private boolean status = false;
 	private String msg="";
 	
 	// AJAX
@@ -206,26 +206,20 @@ public class ServerRestController {
 					);
 		}
 		
-		status = new Status();
+		status = false;
 		try {
-			status = daoEnc.inserir(encomenda);
-			if(status.getStatus1()){//Encomenda
+			if(daoEnc.inserir(encomenda)){//Encomenda
 				
 			}else{
 				
 			}
-			if(status.getStatus2()){//ListItemEncomenda
-				
-			}else{
-				
-			}
-			System.out.println("Numero da encomenda : "+status.getNumeroEncomenda());
+			System.out.println("Numero da encomenda : "+status);
 		} catch (Exception e) {
 			System.out.println("ERRO - rest inserir encomenda.");
 			e.printStackTrace();
 		}
 		
-		return new ResponseEntity<String>(status.getNumeroEncomenda().toString(), HttpStatus.OK);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/rest-encomenda/prod/", method = RequestMethod.PUT) 
