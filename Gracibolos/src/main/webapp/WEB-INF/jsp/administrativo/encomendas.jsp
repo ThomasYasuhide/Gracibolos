@@ -1040,7 +1040,7 @@
 				    produtos.append(item);
 				    
 				    addSelectize(i, function(){
-				    	//callback(i);
+				    	callback(i);
 				    });
 				    
 				    i++;
@@ -1283,7 +1283,6 @@
 			function inserirItemEncomenda(callback){
 				
 				listItemEncomenda = [];
-				
 				
 				$('#lista-produtos tr').each(function () {
 					var itemencomenda = new Object();
@@ -1814,13 +1813,17 @@
 					
 					$.each(data, function(i, field){
 						$('#produtos').off('change', '.produto');
-						
+												
 						inserir_item(function(linha){
 							
 							selectize = $('#produto_'+linha)[0].selectize;
 			                selectize.clearOptions();
 			                selectize.addOption({id:data[i].produtoId, codigo:'código', nome:data[i].nomeProduto});
 			                selectize.setValue(data[i].produtoId);
+			                
+			                alert(data[i].quantidade);
+			                alert(data[i].valor);
+			                alert(data[i].total);
 			                
 							$('#quantidade_' + linha).val(data[i].quantidade).trigger('input');
 							$('#valor_' + linha).val(parseFloat(data[i].valor).toFixed(2).replace(".", ",")).trigger('input');
