@@ -276,6 +276,9 @@
 						                <div class="tab-pane active" role="tabpanel" id="step1">
 	                    
 						                    <div class="row">
+						                    	<div id="msg-informacoes" class="col-xs-12">													
+												</div>
+												
 						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
 													<label class="control-label" for="id">Nº da encomenda:</label>
 													<input type="text" id="id" name="id" value="${encomenda.id}" class="form-control" readonly />
@@ -324,6 +327,9 @@
 						                <div class="tab-pane" role="tabpanel" id="step2">
 
 							                    <div class="row">
+							                    	<div id="msg-produtos" class="col-xs-12">													
+													</div>
+													
 							                    	<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							                    		<button type="button" id="inserir-linha"  onclick="return false" class="btn btn-default fullwidth"><i class="material-icons">add_shopping_cart</i>&nbsp;&nbsp;&nbsp;Incluir novo produto</button>
 													</div>
@@ -372,9 +378,9 @@
 											
 						                    <div class="row">
 						                    	
-												
-												<div id="errosFatura" class="col-xs-12">
-													
+												<div id="msg-faturada" class="col-xs-12">													
+												</div>
+												<div id="errosFatura" class="col-xs-12">	
 												</div>
 						                    
 						                        <div class="input-margin col-xs-12 col-sm-6 col-md-4">
@@ -1236,20 +1242,27 @@
 			$('#btn_submit_informacoes').click(function(){
 				if(verificaCliente() && verificaDataEntr()){	
 					inserirInfoEncomenda(1,function(result){
-						console.log('submit_informações : '+result)
-						$('#msg1').show();//Mensagem Encomenda inicializada
-						setTimeout(function(){//Fechar a mensagem
-							$('#msg1').alert('close');
-							}, 5000	//em 5 segundos
-						);
-						//bloquear os campos
-					});
+						
+						if(result == 'ok'){
+							console.log('submit_informações : '+result)						
+							var erro = '<div id="msg13" class="alert alert-success alert-dismissible fade in" role="alert">';
+										erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+										erro +='<strong>Sucesso!</strong> Encomenda inicializada com sucesso';
+									erro +='</div>';
+							
+							$('#msg-informacoes').append(erro);
+							
+							setTimeout(function(){
+								$('#msg13').alert('close');
+							}, 5000);
+						}//end if
+					});//end inserirInfoEncomenda
 				}
 			});
 
 			$('#btn_produtos').click(function(){//Next page
 				console.log('btn_produtos :');
-				inserir_item(); // Inserir uma linha nos itens 
+				 
 			});
 
 			/*
@@ -1296,7 +1309,7 @@
 	
 				//Parse para json		
 				var js = JSON.stringify(listItemEncomenda);
-				alert(js);
+				//alert(js);
 				
 				$.ajax({
 		            url: "../Gracibolos/rest-itensencomenda/",
@@ -1324,12 +1337,7 @@
 							msg = msg + 'iniciada';
 							console.log(msg);
 						}
-// 						$('#msg1').show();//Mensagem Encomenda inicializada
-// 						setTimeout(function(){//Fechar a mensagem
-// 							$('#msg1').alert('close');
-// 							}, 5000	//em 5 segundos
-// 						);
-// 						//bloquear os campos
+
 					});
 					
 					inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
@@ -1337,17 +1345,18 @@
 						console.log(result);
 						msg = msg + ' com '+result+' iten(s)';
 						console.log(msg);
-						$('#msg1').show();//Encomenda inicializada
-// 						console.log('resposta '+result);
-// 						$('#title_modal_erro').text('Número da encomenda : ');
-// 		                $('#msg1_modal_erro').text(result);
-// 						$('#modal_erro').modal('show');
-// 						$('#btn_ok_modal_erro').click(function(){
-// 							setTimeout(function(){recarregar();}, 500	);	
-// 						});
+						
+						var erro = '<div id="msg12" class="alert alert-success alert-dismissible fade in" role="alert">';
+									erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+									erro +='<strong>Sucesso!</strong> '+msg;
+								erro +='</div>';
+						
+						$('#msg-produtos').append(erro);
+						
 						setTimeout(function(){
-							$('#msg1').alert('close');
-							}, 5000	);
+							$('#msg12').alert('close');
+						}, 5000)
+						
 					});
 										
 // 				}else{
@@ -1389,41 +1398,52 @@
 		            error: function() {
      	                callback();
      	            },
-		            success: function(msg) {
-		                //alert(msg);   
-		                console.log('ajax faturada'+msg)               
+		            success: function(msg){
+		                console.log('ajax faturada : '+msg)               
 		                callback(msg);            
 		            }
 		        });
 			};
 			
 			$("#btn_submit_faturar").click(function() {
-				if(verificaCliente() && verificaProdutos() && verificaTotalP() && verificaValorPago()){
+				//if(verificaCliente() && verificaProdutos() && verificaTotalP() && verificaValorPago()){
+				
+					var msg = '';
 					
-					inserirEncomenda(3, resposta);//insiro a encomenda e espero a resposta (callback)
-					function resposta(result){//essa resposta é uma função
+						inserirInfoEncomenda(3,function(result){
+							console.log('submit_informações : '+result)
+							if(result == 'ok'){
+								msg = msg + 'iniciada';
+								console.log(msg);
+							}
+						});
+						
+						inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
+							if(result != 0){
+								msg = msg + ' com '+result+' iten(s)';
+								console.log(msg);
+							}
+						});
 
-						//$('#msg1').show();//Encomenda inicializada
-						$('#msg7').show(); //Faturada
-						setTimeout(function(){$('#msg7').hide();}, 5000 );
-						console.log('resposta iniciada'+result);
-						//$('#title_modal_erro').text('Número da encomenda : ');
-		                //$('#msg1_modal_erro').text(result);
-						//$('#modal_erro').modal('show');
-// 						$('#btn_ok_modal_erro').click(function(){
-							
-// 							faturar(resposta);//função faturar com callback 
-// 							function resposta(result){
-// 								console.log('callback faturada'+result)							
-// 								setTimeout(function(){recarregar();}, 500 );	
-// 							}						
-							
-// 						});
-					}							
-					
-				}else{
-
-				}			
+						faturar(function(result){ 
+							//console.log('callback faturada'+result);
+							if(result == 'ok'){
+								msg = msg + ' e faturada';
+								console.log(msg);
+								
+								var erro = '<div id="msg11" class="alert alert-success alert-dismissible fade in" role="alert">';
+									erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+									erro +='<strong>Sucesso!</strong> '+msg;
+								erro +='</div>';
+						
+								$('#msg-faturada').append(erro);
+								
+								setTimeout(function(){
+									$('#msg11').alert('close');
+								}, 5000)
+							}
+																
+						});							
 				
 			});
 			//FIM - FATURAR ENCOMENDA---------------------------------------
@@ -1681,16 +1701,15 @@
 			*/
             $('#incluir-encomenda-modal').click(function() {
 				//callback
-           	  	novoNumero(resposta);//Chamada para gerar um novo numero
-           	  	function resposta(result){
+           	  	novoNumero(function(result){         	  	
 					//alert(result);
 					$('#id').val(result);//Com o retorno do numero da encomenda, preencho o campo id
-           	  	};
-            	
+           	  	});
+           	  	
             	verificaStatus(1);
-            	
             	resetCampos();
-
+            	inserir_item(); // Inserir uma linha nos itens
+            	
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
 				

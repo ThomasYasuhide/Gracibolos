@@ -255,9 +255,9 @@ public class ServerRestController {
 		daoEnc  = new EncomendaDao();
 		try {
 			if(daoEnc.alterarProduzindo(id)){
-				msg="produzindo";
+				msg="ok";
 			}else{
-				msg="erroproduzindo";
+				msg="erro";
 			}
 		} catch (Exception e) {
 			
@@ -273,9 +273,9 @@ public class ServerRestController {
 		daoEnc  = new EncomendaDao();
 		try {
 			if(daoEnc.alterarFinalizado(id)){
-				msg="finalizado";
+				msg="ok";
 			}else{
-				msg="errofinalizado";
+				msg="erro";
 			}
 		} catch (Exception e) {
 			
@@ -307,9 +307,9 @@ public class ServerRestController {
 				);
 		try {
 			if(caixaDao.inserir(caixa)){
-				msg = "faturado";
+				msg = "ok";
 			}else{
-				msg = "errofaturado";
+				msg = "erro";
 			}
 		} catch (Exception e) {
 			// Auto-generated catch block
