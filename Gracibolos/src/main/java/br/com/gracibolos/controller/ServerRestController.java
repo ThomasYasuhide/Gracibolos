@@ -26,7 +26,7 @@ import br.com.gracibolos.jdbc.model.Fornecedor;
 import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Produto;
-import br.com.gracibolos.jdbc.model.Status;
+//import br.com.gracibolos.jdbc.model.Status;
 
 @RestController
 public class ServerRestController {
@@ -174,6 +174,38 @@ public class ServerRestController {
 		return listItemEnc;
 	}
 	
+	@RequestMapping(value = "/rest-itensencomenda/", method = RequestMethod.POST)
+	public ResponseEntity<String> createItemEncomenda(@RequestBody List<ItemEncomenda> list){
+		
+		ItemEncDao = new ItemEncomendaDao();
+		for(ItemEncomenda ie : list){
+			System.out.println(//"id : "+ie.getId() //mysql ignora
+							"\nprodutoId : "+ie.getProdutoId()
+							+"\nencomendaId "+ie.getEncomendaId()
+							+"\nqtd "+ie.getQuantidade()
+							+"\nvalor "+ie.getValor()
+							+"\ntotal "+ie.getTotal()						
+					);
+		}
+		try {
+			int qtd = ItemEncDao.inserirList(list); //Inserir a lista de itens que retorna a quantidade de registros
+			if(qtd != 0){
+				System.out.println(qtd+" itens inseridos");
+				msg = Integer.toString(qtd);//Conversão de inteiro para String
+			}else{
+				System.out.println("ERRO - rest itens inseridos.");
+				msg = "erro";
+			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		return new ResponseEntity<String>(msg, HttpStatus.OK);
+	}
+	
 	// ---------------------ENCOMEDA---------------------------------------------------------
 	
 	@RequestMapping(value = "/rest-encomenda-num/", method = RequestMethod.GET)
@@ -186,7 +218,8 @@ public class ServerRestController {
 	public ResponseEntity<String> createEncomenda(@RequestBody Encomenda encomenda){
 
 		daoEnc = new EncomendaDao();
-		System.out.println("nomerazao : "+encomenda.getNomerazao()
+		System.out.println("Número : "+encomenda.getId()
+						+"\nnomerazao : "+encomenda.getNomerazao()
 						+"\nsattus "+encomenda.getStatus()
 						+"\nDataencomenda "+encomenda.getDataencomenda()
 						+"\nDataentrega "+encomenda.getDataentrega()
@@ -197,29 +230,22 @@ public class ServerRestController {
 						+"\nTotal "+encomenda.getTotalprodutos()
 						
 				);
-			for(ItemEncomenda ie : encomenda.getListItemEncomenda()){
-				System.out.println("\n\tprodutoId : "+ie.getProdutoId()
-								+"\n\tquantidade : "+ie.getQuantidade()
-								+"\n\tvalor : "+ie.getValor()
-								+"\n\tTotal : "+ie.getTotal()
-						
-					);
-		}
 		
-		status = false;
 		try {
 			if(daoEnc.inserir(encomenda)){//Encomenda
-				
+				System.out.println("Encomenda inicializada");
+				msg = "ok";
 			}else{
-				
+				System.out.println("ERRO - rest inserir encomenda.");
+				msg = "erro";
 			}
-			System.out.println("Numero da encomenda : "+status);
+			
 		} catch (Exception e) {
-			System.out.println("ERRO - rest inserir encomenda.");
+			
 			e.printStackTrace();
 		}
 		
-		return new ResponseEntity<String>(HttpStatus.OK);
+		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/rest-encomenda/prod/", method = RequestMethod.PUT) 

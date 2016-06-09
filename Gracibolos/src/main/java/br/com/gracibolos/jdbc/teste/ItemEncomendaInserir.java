@@ -20,15 +20,17 @@ public class ItemEncomendaInserir {
 			itemEncomenda = new ItemEncomenda();
 			itemEncomenda.setProdutoId(g.ranIdLong(g.idsProduto()));
 			//itemEncomenda.setEncomendaId(g.ranIdLong(g.IdsEnc()));
-			itemEncomenda.setEncomendaId(173l);
+			itemEncomenda.setEncomendaId(61l);
 			itemEncomenda.setQuantidade(g.randBetween(1, 4));		
 			
 			list.add(itemEncomenda);
 		
 		}
 		try {
-			if(dao.inserirList(list)!=0){
-				System.out.println("inserido com sucesso");
+			int qtd = 0;
+			qtd = dao.inserirList(list);
+			if(qtd != 0){
+				System.out.println(qtd+" inserido com sucesso");
 			}else{
 				System.out.println("falha");
 			}

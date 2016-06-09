@@ -18,7 +18,7 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 		return false;
 	}
 
-	public int inserirList(List<ItemEncomenda> ListItemEncomenda) throws Exception{
+	public int inserirList(List<ItemEncomenda> list) throws Exception{
 		int cont=0;
 		//---INSIRO OS ITENS DA ENCOMENDA----------------------------------------------------
 		String sqlIe = " INSERT INTO itemEncomenda(produtoId, encomendaId, qtd, valor, total)"
@@ -26,7 +26,7 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 		PreparedStatement ps = null;
 		//Inserir todos os itens da encomenda
 		try(Connection conn = ConnectionProvider.getInstance().getConnection()){
-			for(ItemEncomenda ie : ListItemEncomenda)
+			for(ItemEncomenda ie : list)
 			{			
 				ps = conn.prepareStatement(sqlIe);
 				ps.setLong(1, ie.getProdutoId());

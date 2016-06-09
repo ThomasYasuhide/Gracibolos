@@ -76,8 +76,7 @@ public class EncomendaDao{
 				ps.setNull(9, Types.DATE);
 			}
 			ps.setBigDecimal(10, encomenda.getTotalprodutos());
-			ps.setString(11, encomenda.getObs());
-			
+			ps.setString(11, encomenda.getObs());	
 			
 			//Insiro a encomenda
 			if(ps.executeUpdate() != 0) {
