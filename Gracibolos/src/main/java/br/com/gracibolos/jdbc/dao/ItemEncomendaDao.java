@@ -14,7 +14,6 @@ public class ItemEncomendaDao implements GenericoDao<ItemEncomenda>{
 	
 	@Override
 	public boolean inserir(ItemEncomenda e) throws Exception {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

@@ -44,7 +44,7 @@ public class ServerRestController {
 	private List<ItemEncomenda> listItemEnc;
 	private CaixaDao caixaDao;
 	private EncomendaDao daoEnc;
-	private boolean status = false;
+	//private boolean status = false;
 	private String msg="";
 	
 	// AJAX

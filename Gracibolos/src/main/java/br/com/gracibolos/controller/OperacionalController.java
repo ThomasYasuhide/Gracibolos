@@ -1288,7 +1288,7 @@ public class OperacionalController {
 		//reclara um status como falso, pra depois verificar se a condição foi atendida ou não.
 		//boolean status = false;
 		//cria uma nova instância DAO da encomenda
-		EncomendaDao dao = new EncomendaDao();			
+		//EncomendaDao dao = new EncomendaDao();			
 		Status status = new Status();
 		
 		try {
