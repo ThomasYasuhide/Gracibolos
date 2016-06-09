@@ -1219,7 +1219,7 @@
 				enc.dataentrega = $('#dataentrega').val();
 				enc.datacancelado = $('#datacancelado').val();
 				enc.clienteid = $('#cliente').val();
-				enc.responsavel = $('#responsalvel').val();
+				enc.responsavel = $('#responsavel').val();
 				enc.obs = $('#obs').val();
 				//Parse para json		
 				var js = JSON.stringify(enc);
@@ -1255,7 +1255,16 @@
 							setTimeout(function(){
 								$('#msg13').alert('close');
 							}, 5000);
-						}//end if
+						}else {
+							
+							var erro = '<div id="msg13" class="alert alert-danger alert-dismissible fade in" role="alert">';
+							erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+							erro +='<strong>Sucesso!</strong> Houve algum erro ao cadastrar a encomenda.';
+							erro +='</div>';
+					
+							$('#msg-informacoes').append(erro);
+							
+						}
 					});//end inserirInfoEncomenda
 				}
 			});
