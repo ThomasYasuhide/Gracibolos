@@ -14,7 +14,7 @@ public class EncomendaPesquisar {
 		//Long id = g.ranIdLong(ids);
 		
 		try {
-				e = dao.pesquisarId("9");
+				e = dao.pesquisarId("23");
 				System.out.println(	  
 								"encomendaId : "+e.getId()
 							   +"\nClienteId : "+e.getClienteid()
