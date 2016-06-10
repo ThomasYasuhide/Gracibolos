@@ -377,54 +377,54 @@ public class EncomendaDao{
 			//seta a string para fazer a busca
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			rs.next();
-			//da um get nos atributos do objeto encomenda
-			encomenda = new Encomenda();
-			encomenda.setId(rs.getLong("id"));
-			encomenda.setClienteid(rs.getInt("cliente"));	
-			encomenda.setStatus(rs.getInt("status"));
-			encomenda.setResponsavel(rs.getString("responsavel"));
-			if(rs.getDate("dataencomenda")!=null)
-				encomenda.setDataencomenda(rs.getDate("dataencomenda").toLocalDate());
-			if(rs.getDate("dataentrega")!=null)
-				encomenda.setDataentrega(rs.getDate("dataentrega").toLocalDate());
-			if(rs.getDate("datafaturamento")!=null)
-				encomenda.setDatafaturamento(rs.getDate("datafaturamento").toLocalDate());
-			if(rs.getDate("dataproducao")!=null)
-				encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
-			if(rs.getDate("datafinalizado")!=null)
-				encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
-			if(rs.getDate("datacancelado")!=null)
-				encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
-			encomenda.setTotalprodutos(rs.getBigDecimal("total"));
-			encomenda.setObs(rs.getString("obs"));
-			encomenda.setNomerazao(rs.getString("nomerazao"));
-			encomenda.setClienteId(rs.getLong("clienteId"));
-			encomenda.setCpfcnpj(rs.getString("cpfcnpj"));
-			
-			
-			//------Itens da encomenda---------------------------------------------------------
-			ps = conn.prepareStatement(sqlItem);
-			rs = ps.executeQuery();
-			listaDeItemEncomenda = new ArrayList<ItemEncomenda>();
-			while(rs.next())
-			{
-				ItemEncomenda itemEncomenda = new ItemEncomenda();
+			if(rs.next()){
+				//da um get nos atributos do objeto encomenda
+				encomenda = new Encomenda();
+				encomenda.setId(rs.getLong("id"));
+				encomenda.setClienteid(rs.getInt("cliente"));	
+				encomenda.setStatus(rs.getInt("status"));
+				encomenda.setResponsavel(rs.getString("responsavel"));
+				if(rs.getDate("dataencomenda")!=null)
+					encomenda.setDataencomenda(rs.getDate("dataencomenda").toLocalDate());
+				if(rs.getDate("dataentrega")!=null)
+					encomenda.setDataentrega(rs.getDate("dataentrega").toLocalDate());
+				if(rs.getDate("datafaturamento")!=null)
+					encomenda.setDatafaturamento(rs.getDate("datafaturamento").toLocalDate());
+				if(rs.getDate("dataproducao")!=null)
+					encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
+				if(rs.getDate("datafinalizado")!=null)
+					encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
+				if(rs.getDate("datacancelado")!=null)
+					encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
+				encomenda.setTotalprodutos(rs.getBigDecimal("total"));
+				encomenda.setObs(rs.getString("obs"));
+				encomenda.setNomerazao(rs.getString("nomerazao"));
+				encomenda.setClienteId(rs.getLong("clienteId"));
+				encomenda.setCpfcnpj(rs.getString("cpfcnpj"));
 				
-				itemEncomenda.setId(rs.getLong("id"));//itemEncomenda
-				itemEncomenda.setProdutoId(rs.getLong("produtoId"));//itemEncomenda
-				itemEncomenda.setProdutoIdProduto(rs.getLong("produtoIdproduto"));//Produto
-				itemEncomenda.setEncomendaId(rs.getLong("encomendaId"));//itemEncomenda
-				itemEncomenda.setQuantidade(rs.getInt("qtd"));//itemEncomenda
-				itemEncomenda.setNomeProduto(rs.getString("nomeProduto"));//Produto
-				itemEncomenda.setValor(rs.getBigDecimal("valor"));//Produto
 				
-				listaDeItemEncomenda.add(itemEncomenda);
+				//------Itens da encomenda---------------------------------------------------------
+				ps = conn.prepareStatement(sqlItem);
+				rs = ps.executeQuery();
+				listaDeItemEncomenda = new ArrayList<ItemEncomenda>();
+				while(rs.next())
+				{
+					ItemEncomenda itemEncomenda = new ItemEncomenda();
+					
+					itemEncomenda.setId(rs.getLong("id"));//itemEncomenda
+					itemEncomenda.setProdutoId(rs.getLong("produtoId"));//itemEncomenda
+					itemEncomenda.setProdutoIdProduto(rs.getLong("produtoIdproduto"));//Produto
+					itemEncomenda.setEncomendaId(rs.getLong("encomendaId"));//itemEncomenda
+					itemEncomenda.setQuantidade(rs.getInt("qtd"));//itemEncomenda
+					itemEncomenda.setNomeProduto(rs.getString("nomeProduto"));//Produto
+					itemEncomenda.setValor(rs.getBigDecimal("valor"));//Produto
+					
+					listaDeItemEncomenda.add(itemEncomenda);
+					
+				}
 				
+				encomenda.setListItemEncomenda(listaDeItemEncomenda);
 			}
-			
-			encomenda.setListItemEncomenda(listaDeItemEncomenda);
-			
 			ps.close();
 			conn.close();			
 		} 

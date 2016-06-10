@@ -216,21 +216,28 @@ public class ServerRestController {
 	}
 	
 	@RequestMapping(value = "/rest-encomenda/{encomenda}", method = RequestMethod.GET) 
-	public String pesquisarEncomenda(@PathVariable String encomenda
+	public String pesquisarEncomenda(@PathVariable("encomenda") String encomenda
 			, HttpServletResponse response){
 		System.out.println("rest-pesquisar-encomenda : "+encomenda);
 		daoEnc = new EncomendaDao();
 		e = new Encomenda();
 		msg="";
 		try {
-			e = daoEnc.pesquisarId(encomenda);
+			if(daoEnc.pesquisarId(encomenda) == null){
+				System.out.println("nulo");
+				msg="nulo";
+			}else{
+				e = daoEnc.pesquisarId(encomenda);
+				msg=Long.toString(e.getId());
+				System.out.println("numero : "+msg);
+			}
 		} catch (Exception e) {
-			System.out.println("ERRO - rest itensencomenda, lista de itensencomenda.");
+			System.out.println("ERRO - rest pesquisar encomenda\n");
 			e.printStackTrace();
 		}
-		colocarAcesso(response);
-		System.out.println(e.getId());
-		return msg=Long.toString(e.getId());
+		//colocarAcesso(response);
+		System.out.println(msg);
+		return msg;
 	}
 	
 	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.POST) 
