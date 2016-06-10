@@ -1386,7 +1386,6 @@
 					}else{
 						console.log('não existe');
 						
-						
 						//if(verificaCliente() && verificaDataEntr()){
 						inserirInfoEncomenda(1,function(result){
 							console.log('submit_informações : '+result)
