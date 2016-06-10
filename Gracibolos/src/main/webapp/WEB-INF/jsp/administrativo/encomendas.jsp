@@ -807,7 +807,6 @@
 				}
 			}
 			
-			
 			function verificaStatus(status) {
 				
 				//Volta para a primeira telas
@@ -815,30 +814,56 @@
 				
 				switch(status){
 					
-					case '1':
+					case '1'://Iniciado
 						$('#tab-faturar').addClass('disabled');
 						$('#tab-produzir').addClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
 						
-						$('.cancelar-encomenda').removeAttr('disabled');
-						
+						$('.cancelar-encomenda').removeAttr('disabled');						
 						$('#btn_faturar').removeClass('hidden').removeAttr('disabled');
 						$('#btn_faturar_bypass').addClass('hidden').attr('disabled','disabled');
 						
 						var selectize = $('#cliente')[0].selectize;
-						selectize.enable();
+						selectize.disable();
+						var linha='';
 						
-						$('#inserir-linha').removeClass('disabled').removeAttr('disabled');
+						setTimeout(function(){//verifica se tem itens
+							$('#lista-produtos tr').each(function () {					
+								//Captura os numeros de linhas
+								linha = this.id.replace('item_', '');			
+							});
+							if(linha == ''){
+								console.log('sem itens');
+							}else{
+								console.log('com itens');
+								var selectize = $('#produto_'+linha)[0].selectize;
+								selectize.disable();
+
+								$('#valor_'+linha).attr('readonly','readonly');
+								$('#quantidade_'+linha).attr('readonly','readonly');
+								$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
+								
+								calculaTotalProdutos();
+								
+							}
+							//callback(linha);
+						},500);
+						
+						if(linha == ''){
+							$('#inserir-linha').removeClass('disabled').removeAttr('disabled');
+						}else{
+							$('#inserir-linha').addClass('disabled').attr('disabled','disabled');
+						}
 						
 						break;
 						
-					case '2':
+					case '2'://Cancelado
 						
 						$('.cancelar-encomenda').attr('disabled','disabled');
 						
 						break;
 					
-					case '3':
+					case '3'://Faturado
 						$('#tab-faturar').removeClass('disabled');
 						$('#tab-produzir').addClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
@@ -882,7 +907,7 @@
 						
 						break;
 					
-					case '4':
+					case '4'://Produzindo
 						
 						$('#tab-faturar').removeClass('disabled');
 						$('#tab-produzir').removeClass('disabled');
@@ -927,7 +952,7 @@
 						
 						break;
 						
-					case '5':
+					case '5'://Finalizado
 						
 						$('#tab-faturar').removeClass('disabled');
 						$('#tab-produzir').removeClass('disabled');
@@ -1152,22 +1177,22 @@
 			};
 
 			function verificaItemProdutoNome(){
-				var status;
 				$('#lista-produtos tr').each(function () {					
 					//Captura os numeros de linhas
 					var linha = this.id.replace('item_', '');
 					var produto = $('#produto_' + linha);
 					if(produto.val() == ''){
 						console.log('item nome do produto '+linha+' não existe');
-						return  status = false;
+						return  false;
 						alert('item nome do produto '+linha+' não existe');
 					}else{
-						return status = true;
+						return true;
 					}							
 					//var quantidade = $('#quantidade_' + linha);
 					//var valor = $('#valor_' + linha);
 					//var total = $('#total_' + linha);				
 				});
+				
 				
 			};
 
