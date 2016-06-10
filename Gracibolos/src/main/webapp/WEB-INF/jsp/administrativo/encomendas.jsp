@@ -1875,10 +1875,6 @@
 			                selectize.addOption({id:data[i].produtoId, codigo:'código', nome:data[i].nomeProduto});
 			                selectize.setValue(data[i].produtoId);
 			                
-			                alert(data[i].quantidade);
-			                alert(data[i].valor);
-			                alert(data[i].total);
-			                
 							$('#quantidade_' + linha).val(data[i].quantidade).trigger('input');
 							$('#valor_' + linha).val(parseFloat(data[i].valor).toFixed(2).replace(".", ",")).trigger('input');
 							$('#total_' + linha).val(parseFloat(data[i].total).toFixed(2).replace(".", ",")).trigger('input');
@@ -1923,11 +1919,6 @@
 
             });
 			
-			
-			
-			
-			
-			
             /*
 			*
 			* REALIZA A SUBSTITUIÇÃO DO MODAL QUANDO OUTRO É INVOCADO
@@ -1947,17 +1938,25 @@
 			//Adiciona o modal de encomenda
 			$('.faturar_btn').on('click', function(){
 				$('#modal-encomenda').removeClass('hidden');
-			});
 
+				//DESCREVER AQUI AS AÇÕES
+			});
+			
+			$('#faturar-encomenda').on('hidden.bs.modal', function () {
+				$('#modal-encomenda').removeClass('hidden');
+			})
+			
 			//Adiciona o modal de encomenda
 			$('.produzir_btn').on('click', function(){
 				$('#modal-encomenda').removeClass('hidden');
+				
+				//DESCREVER AQUI AS AÇÕES
 			});
 			
-			
-			
-			
-			
+			$('#produzir-encomenda').on('hidden.bs.modal', function () {
+				$('#modal-encomenda').removeClass('hidden');
+			})
+						
             /*
 			 MENSAGENS DE ERRO
 			*/
@@ -1971,12 +1970,8 @@
 			$('#msg8').hide();
 			$('#msg9').hide();
 			
-
-            
-            
 		});
 	</script>
-	
 	
 </body>
 </html>
