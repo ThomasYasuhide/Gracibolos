@@ -43,6 +43,7 @@ public class ServerRestController {
 	private ItemEncomendaDao ItemEncDao;
 	private List<ItemEncomenda> listItemEnc;
 	private CaixaDao caixaDao;
+	private Caixa c;
 	private EncomendaDao daoEnc;
 	private Encomenda e;
 	//private boolean status = false;
@@ -209,13 +210,13 @@ public class ServerRestController {
 	
 	// ---------------------ENCOMEDA---------------------------------------------------------
 	
-	@RequestMapping(value = "/rest-encomenda-num/", method = RequestMethod.GET)
+	@RequestMapping(value = "/rest-encomenda-num/", method = RequestMethod.GET)//Preencher com o numero da encomenda
 	public Long numeroEncomenda(){
 		daoEnc = new EncomendaDao();		
 		return daoEnc.numeroEncomenda();
 	}
 	
-	@RequestMapping(value = "/rest-encomenda/{encomenda}", method = RequestMethod.GET) 
+	@RequestMapping(value = "/rest-encomenda/{encomenda}", method = RequestMethod.GET)//Pesquisar
 	public String pesquisarEncomenda(@PathVariable("encomenda") String encomenda
 			, HttpServletResponse response){
 		System.out.println("rest-pesquisar-encomenda : "+encomenda);
@@ -235,12 +236,12 @@ public class ServerRestController {
 			System.out.println("ERRO - rest pesquisar encomenda\n");
 			e.printStackTrace();
 		}
-		//colocarAcesso(response);
+
 		System.out.println(msg);
 		return msg;
 	}
 	
-	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.POST) 
+	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.POST)//Inserir
 	public ResponseEntity<String> createEncomenda(@RequestBody Encomenda encomenda){
 
 		daoEnc = new EncomendaDao();
@@ -274,7 +275,7 @@ public class ServerRestController {
 		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/rest-encomenda/prod/", method = RequestMethod.PUT) 
+	@RequestMapping(value = "/rest-encomenda/prod/", method = RequestMethod.PUT)//Alterar para produzindo
 	public ResponseEntity<String> updateEncomendaProd (@RequestBody String id){
 		
 		System.out.println("Numero da encomenda : "+id);
@@ -292,7 +293,7 @@ public class ServerRestController {
 		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/rest-encomenda/fin/", method = RequestMethod.PUT) 
+	@RequestMapping(value = "/rest-encomenda/fin/", method = RequestMethod.PUT)//Alterar para finalizado
 	public ResponseEntity<String> updateEncomendaFin (@RequestBody String id){
 		
 		System.out.println("Numero da encomenda : "+id);
@@ -310,7 +311,7 @@ public class ServerRestController {
 		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/rest-encomenda/{id}", method = RequestMethod.DELETE) 
+	@RequestMapping(value = "/rest-encomenda/{id}", method = RequestMethod.DELETE)//Apagar
 	public ResponseEntity<String> deleteEncomenda (@PathVariable String id){
 		
 		System.out.println("Numero da encomenda : "+id);
@@ -344,4 +345,19 @@ public class ServerRestController {
 	return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/rest-caixa/{caixa}", method = RequestMethod.GET) //Pesquisar
+	public Caixa pesquisarcaixa(@PathVariable String caixa){
+		caixaDao = new CaixaDao();
+		c = new Caixa();
+		try {
+			if(caixaDao.pesquisar1(caixa) != null){
+				c = caixaDao.pesquisar1(caixa);
+			}
+		} catch (Exception e) {
+			System.out.println("ERRO - rest pesquisar caixa\n"+e);
+			e.printStackTrace();
+		}
+		
+		return c;
+	}
 }

@@ -838,6 +838,13 @@
 							}else{//Com itens
 								console.log('com itens');
 
+								var selectize = $('#produto_'+linha)[0].selectize;
+								selectize.disable();
+								  
+								$('#valor_'+linha).attr('readonly','readonly');
+								$('#quantidade_'+linha).attr('readonly','readonly');
+								$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
+								
 								calculaTotalProdutos();
 								
 								if(linha == 0){//não tiver nenhum item
@@ -1583,12 +1590,6 @@
      	            },
 		            success: function(result) {
 		                //alert(result);
-		            	
-// 		            	$('#msg1_modal_erro').text(result);
-// 		            	$('#modal_erro').modal('show'); 
-// 						$('#btn_ok_modal_erro').click(function(){		
-// 							setTimeout(function(){recarregar();}, 500 );
-// 						});  
 		            	callback(result);
 		            }
 		        });
@@ -1624,12 +1625,6 @@
      	            },
 		            success: function(result) {
 		                //alert(result);
-		            	  
-// 		            	$('#msg1_modal_erro').text(result);
-// 		            	$('#modal_erro').modal('show');   
-// 		            	$('#btn_ok_modal_erro').click(function(){		
-// 		            		setTimeout(function(){recarregar();}, 500 );
-// 						});  
 		            	callback(result);
 		            }
 		        });
@@ -1843,7 +1838,20 @@
 				  
 
             });
-          
+            
+            function pesqCaixa(callback){//Verificar se a encomenda existe 
+				$.ajax({
+		            url: "../Gracibolos/rest-caixa/"+$('#id').val(),
+		            type: 'GET',    
+		            error: function() {
+     	                
+     	            },
+		            success: function(caixa) {
+		                callback(caixa); //retorno, se existe ou não 
+	            
+		            }
+				});
+             };
             /*
 			*
 			* ALTERAÇÃO DE ENCOMENDA
@@ -1949,11 +1957,21 @@
 						
 			        });
 					
-				});
+				});//fim getJson
 				
-				//
-				$('#formapagamento').val('crédito');
-				$('#valorpago').val('200,00');
+				pesqCaixa(function(caixa){//Traz as informações de pagamneto
+
+					console.log(caixa.dataTransação);
+					console.log(caixa.forma);
+					console.log(caixa.valor);
+					console.log(caixa.descricao);
+					
+					$('#datafaturamento').val(caixa.dataTransação);
+					$('#formapagamento').val(caixa.forma);
+					$('#valorpago').val(caixa.valor);
+					$('#obspagamento').val(caixa.descricao);
+					
+				});
 				
 				verificaStatus(data[2]);
 				

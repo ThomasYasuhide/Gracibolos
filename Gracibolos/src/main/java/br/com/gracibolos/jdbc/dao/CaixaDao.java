@@ -257,9 +257,48 @@ public class CaixaDao implements GenericoDao<Caixa>{
 	 * 
 	 * */
 	
-	@Override
 	public List<Caixa> pesquisar(String pesquisa) throws Exception {
 		return null;
+	}
+
+	public Caixa pesquisar1(String pesquisa) throws Exception {
+		//string query do banco
+			String sql = "SELECT id, fornecedorId, encomendaId, valor, gastoRecebimento, forma, descricao, dataTransacao "
+					+ "FROM gracibolos.caixa where encomendaId="+pesquisa;
+			
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			Caixa caixa = new Caixa();
+			//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
+			try(Connection conn = ConnectionProvider.getInstance().getConnection())
+			{			
+				ps = conn.prepareStatement(sql);
+				rs = ps.executeQuery();			
+				if(rs.next())
+				{
+					//da um get nos atributos do objeto caixa
+					caixa.setId(rs.getLong("id"));
+					caixa.setGastoRecebimento(rs.getInt("gastoRecebimento"));
+					caixa.setFornecedorId(rs.getInt("fornecedorId"));
+					caixa.setEncomendaId(rs.getLong("encomendaId"));
+					caixa.setValor(rs.getBigDecimal("valor"));				
+					caixa.setForma(rs.getString("forma"));
+					if(rs.getDate("dataTransacao")!=null)
+						caixa.setDataTransacao(rs.getDate("dataTransacao").toLocalDate());
+					caixa.setDescricao(rs.getString("descricao"));													
+				}
+				
+				//fecha as conexões
+				ps.close();
+				conn.close();
+			}
+			//trata, caso de uma exceção
+			catch (SQLException e) 
+			{
+				System.out.println("Erro ao listar caixa\n"+e);
+			}
+			//retorna o array
+		return caixa;
 	}
 	
 	public static boolean updateSaldo(BigDecimal saldo) throws Exception{
