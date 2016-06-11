@@ -326,7 +326,7 @@ public class ServerRestController {
 		caixaDao = new CaixaDao();
 		System.out.println("gastoRecebimento : "+caixa.getGastoRecebimento()
 						+"\nencomendaId "+caixa.getEncomendaId()
-						+"\nDataTransacao "+caixa.getDataTransacao()
+						+"\nDataTransacao "+caixa.getDataTransacao()+" - insere no Dao"
 						+"\nValor "+caixa.getValor()
 						+"\nForma "+caixa.getForma()
 						

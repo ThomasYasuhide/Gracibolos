@@ -1175,22 +1175,44 @@
 			};
 
 			function verificaItemProdutoNome(){
-				$('#lista-produtos tr').each(function () {					
-					//Captura os numeros de linhas
-					var linha = this.id.replace('item_', '');
-					var produto = $('#produto_' + linha);
-					if(produto.val() == ''){
-						console.log('item nome do produto '+linha+' não existe');
-						return  false;
-						alert('item nome do produto '+linha+' não existe');
-					}else{
-						return true;
-					}							
-					//var quantidade = $('#quantidade_' + linha);
-					//var valor = $('#valor_' + linha);
-					//var total = $('#total_' + linha);				
-				});
+				setTimeout(function(){
+					$('#lista-produtos tr').each(function () {					
+						//Captura os numeros de linhas
+						var linha = this.id.replace('item_', '');
+						var produto = $('#produto_' + linha);
+						if(produto.val() == ''){
+							console.log('item nome do produto '+linha+' não existe');
+							return  false;
+							alert('item nome do produto '+linha+' não existe');
+						}else{
+							return true;
+						}							
+						//var quantidade = $('#quantidade_' + linha);
+						//var valor = $('#valor_' + linha);
+						//var total = $('#total_' + linha);				
+					});
+				},500);
 				
+			};
+
+			function verificaItemquantidade(){
+				setTimeout(function(){
+					$('#lista-produtos tr').each(function () {					
+						//Captura os numeros de linhas
+						var linha = this.id.replace('item_', '');
+						var quantidade = $('#quantidade_' + linha);
+						if(quantidade.val() == ''){
+							console.log('item quantidade '+linha+' não existe');
+							return  false;
+							alert('item quantidade '+linha+' não existe');
+						}else{
+							return true;
+						}							
+						//var quantidade = $('#quantidade_' + linha);
+						//var valor = $('#valor_' + linha);
+						//var total = $('#total_' + linha);				
+					});
+				},1000);
 				
 			};
 
@@ -1278,7 +1300,9 @@
 			};
 			
 			$('#btn_submit_informacoes').click(function(){
-				if(verificaCliente() && verificaDataEntr()){	
+				
+				if(verificaCliente() && verificaDataEntr()){//verificação dos campos
+						
 					inserirInfoEncomenda(1,function(result){
 						
 						if(result == 'ok'){
@@ -1304,9 +1328,12 @@
 							
 						}
 					});//end inserirInfoEncomenda
-				}
-				//Fechar modal
-				$('#modal-encomenda').modal('hide');
+					
+					//Fechar modal
+					$('#modal-encomenda').modal('hide');
+					
+				}//fim if verificação
+				
 			});
 
 
@@ -1386,6 +1413,7 @@
              };
 			
 			$("#btn_submit_produtos").click(function() {
+				
 				pesqEncomenda(function(numero){//Verificar se a encomenda existe
 					var id = $('#id').val();
 					var msg = '';
@@ -1393,8 +1421,10 @@
 					if(numero == id){
 						console.log('Encomenda existe');
 
-						inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
-							//essa resposta é uma função
+						//if(verificaItemProdutoNome()){//verificação dos campos
+
+							inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
+								//essa resposta é uma função
 								console.log(result);
 								msg = msg +result+' iten(s) inserido(s) com sucesso';
 								console.log(msg);
@@ -1409,44 +1439,52 @@
 								setTimeout(function(){
 									$('#msg12').alert('close');
 								}, 5000);
-								
-							});
+									
+							});//fim inserirItemEncomenda
+						//};//fim da verificação
 					}else{
 						console.log('não existe');
 						
-						//if(verificaCliente() && verificaDataEntr()){
-						inserirInfoEncomenda(1,function(result){
-							console.log('submit_informações : '+result);
-							if(result == 'ok'){
-								msg = msg + 'iniciada';
+						//if(verificaCliente() && verificaDataEntr() && verificaItemProdutoNome() && verificaItemquantidade()){
+						if(verificaCliente() && verificaDataEntr()){
+						//verificação dos campos
+							
+							inserirInfoEncomenda(1,function(result){
+								console.log('submit_informações : '+result);
+								if(result == 'ok'){
+									msg = msg + 'iniciada';
+									console.log(msg);
+								}
+	
+							});//fiminserirInfoEncomenda
+								
+							inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
+							//essa resposta é uma função
+								console.log(result);
+								msg = msg + ' com '+result+' iten(s)';
 								console.log(msg);
-							}
-
-						});
+								
+								var erro = '<div id="msg12" class="alert alert-success alert-dismissible fade in" role="alert">';
+											erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+											erro +='<strong>Sucesso!</strong> '+msg;
+										erro +='</div>';
+								
+								$('#msg-produtos').append(erro);
+								
+								setTimeout(function(){
+									$('#msg12').alert('close');
+								}, 5000);
+								
+							});//fim inserirItemEncomenda
 							
-						inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
-						//essa resposta é uma função
-							console.log(result);
-							msg = msg + ' com '+result+' iten(s)';
-							console.log(msg);
+							//Fechar modal
+							$('#modal-encomenda').modal('hide');
 							
-							var erro = '<div id="msg12" class="alert alert-success alert-dismissible fade in" role="alert">';
-										erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-										erro +='<strong>Sucesso!</strong> '+msg;
-									erro +='</div>';
-							
-							$('#msg-produtos').append(erro);
-							
-							setTimeout(function(){
-								$('#msg12').alert('close');
-							}, 5000);
-							
-						});
-					}
-					//Fechar modal
-					$('#modal-encomenda').modal('hide');
-				});
-				
+						};//fim if validação
+					};	//fim else
+					
+					
+				});//fim pesqEncomenda
 			});//fim - INCLUIR ENCOMENDA - produtos ---------------------------------------
 
 
@@ -1472,7 +1510,7 @@
 				caixa.forma = $('#formapagamento').val();//forma
 				
 				var js = JSON.stringify(caixa);
-				//alert(js);
+				alert(js);
 			
 				$.ajax({//Enviando o caixa
 		            url: "../Gracibolos/rest-caixa/",
@@ -1490,7 +1528,7 @@
 			};
 			
 			$("#btn_submit_faturar").click(function() {
-				//if(verificaCliente() && verificaProdutos() && verificaTotalP() && verificaValorPago()){
+				if(verificaCliente() && verificaProdutos() && verificaTotalP() && verificaValorPago()){
 				
 					var msg = '';
 					
@@ -1530,7 +1568,7 @@
 						});	
 						//Fechar modal
 						$('#modal-encomenda').modal('hide');						
-				
+				}//fim if
 			});
 			//FIM - FATURAR ENCOMENDA---------------------------------------
 
