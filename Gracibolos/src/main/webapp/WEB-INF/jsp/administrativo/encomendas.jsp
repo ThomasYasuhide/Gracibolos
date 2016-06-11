@@ -837,13 +837,7 @@
 								$('#inserir-linha').removeClass('disabled').removeAttr('disabled');//habilitar insersão
 							}else{//Com itens
 								console.log('com itens');
-								var selectize = $('#produto_'+linha)[0].selectize;
-								selectize.disable();
 
-								$('#valor_'+linha).attr('readonly','readonly');
-								$('#quantidade_'+linha).attr('readonly','readonly');
-								$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
-								
 								calculaTotalProdutos();
 								
 								if(linha == 0){//não tiver nenhum item
@@ -941,7 +935,7 @@
 						}, 500);
 												
 						$('#formapagamento option').each(function () {					
-							if($(this).val() != 4){
+							if($(this).val() != $('#formapagamento').val()){
 								$(this).attr('disabled','disabled');
 							}
 						});
@@ -1957,6 +1951,10 @@
 					
 				});
 				
+				//
+				$('#formapagamento').val('crédito');
+				$('#valorpago').val('200,00');
+				
 				verificaStatus(data[2]);
 				
 			});
@@ -2001,7 +1999,28 @@
 			//Adiciona o modal de encomenda
 			$('.faturar_btn').on('click', function(){
 				$('#modal-encomenda').removeClass('hidden');
+				
+				$('#cliente').attr('readonly','readonly');
+				$('#dataentrega').attr('readonly','readonly');
+				
+				$('#inserir-linha').addClass('disabled').attr('disabled','disabled');
 
+				setTimeout(function(){
+					$('#lista-produtos tr').each(function () {					
+						//Captura os numeros de linhas
+						var linha = this.id.replace('item_', '');
+
+						var selectize = $('#produto_'+linha)[0].selectize;
+						selectize.disable();
+
+						$('#valor_'+linha).attr('readonly','readonly');
+						$('#quantidade_'+linha).attr('readonly','readonly');
+						$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
+						
+						calculaTotalProdutos();
+					});
+				}, 500);
+				
 				//DESCREVER AQUI AS AÇÕES
 			});
 			
@@ -2014,6 +2033,36 @@
 				$('#modal-encomenda').removeClass('hidden');
 				
 				//DESCREVER AQUI AS AÇÕES
+				
+				$('#cliente').attr('readonly','readonly');
+				$('#dataentrega').attr('readonly','readonly');
+				
+				$('#inserir-linha').addClass('disabled').attr('disabled','disabled');
+
+				setTimeout(function(){
+					$('#lista-produtos tr').each(function () {					
+						//Captura os numeros de linhas
+						var linha = this.id.replace('item_', '');
+
+						var selectize = $('#produto_'+linha)[0].selectize;
+						selectize.disable();
+
+						$('#valor_'+linha).attr('readonly','readonly');
+						$('#quantidade_'+linha).attr('readonly','readonly');
+						$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
+						
+						calculaTotalProdutos();
+					});
+				}, 500);
+				
+				$('#formapagamento option').each(function () {
+					if($(this).val() != $('#formapagamento').val()){
+						$(this).attr('disabled','disabled');
+					}
+				});
+				
+				$('#valorpago').attr('readonly','readonly');
+				
 			});
 			
 			$('#produzir-encomenda').on('hidden.bs.modal', function () {
