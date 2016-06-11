@@ -241,7 +241,7 @@ public class ServerRestController {
 		return msg;
 	}
 	
-	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.POST)//Inserir
+	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.POST)// Inserir
 	public ResponseEntity<String> createEncomenda(@RequestBody Encomenda encomenda){
 
 		daoEnc = new EncomendaDao();
@@ -275,10 +275,28 @@ public class ServerRestController {
 		return new ResponseEntity<String>(msg, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/rest-encomenda/fat/", method = RequestMethod.PUT)//Alterar para faturado
+	public ResponseEntity<String> updateEncomendaFat (@RequestBody String id){
+		
+		System.out.println("Numero da encomenda : "+id+", alterado para faturado");
+		daoEnc  = new EncomendaDao();
+		try {
+			if(daoEnc.alterarFaturado(id)){
+				msg="ok";
+			}else{
+				msg="erro";
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		return new ResponseEntity<String>(msg, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/rest-encomenda/prod/", method = RequestMethod.PUT)//Alterar para produzindo
 	public ResponseEntity<String> updateEncomendaProd (@RequestBody String id){
 		
-		System.out.println("Numero da encomenda : "+id);
+		System.out.println("Numero da encomenda : "+id+", alterado para produzindo");
 		daoEnc  = new EncomendaDao();
 		try {
 			if(daoEnc.alterarProduzindo(id)){
@@ -296,7 +314,7 @@ public class ServerRestController {
 	@RequestMapping(value = "/rest-encomenda/fin/", method = RequestMethod.PUT)//Alterar para finalizado
 	public ResponseEntity<String> updateEncomendaFin (@RequestBody String id){
 		
-		System.out.println("Numero da encomenda : "+id);
+		System.out.println("Numero da encomenda : "+id+", alterado para finalizado");
 		daoEnc  = new EncomendaDao();
 		try {
 			if(daoEnc.alterarFinalizado(id)){
@@ -314,7 +332,7 @@ public class ServerRestController {
 	@RequestMapping(value = "/rest-encomenda/{id}", method = RequestMethod.DELETE)//Apagar
 	public ResponseEntity<String> deleteEncomenda (@PathVariable String id){
 		
-		System.out.println("Numero da encomenda : "+id);
+		System.out.println("Numero da encomenda : "+id+", será deletado");
 		
 		return new ResponseEntity<String>("", HttpStatus.OK);
 	}

@@ -110,6 +110,36 @@ public class EncomendaDao{
 	
 	private static LocalDate hoje = LocalDate.now();
 	
+public boolean alterarFaturado(String id)throws Exception{
+		
+		boolean status = false;
+		
+		//string query do banco
+		String sql = " UPDATE encomenda SET status=3, datafaturamento='"+hoje+"' WHERE id="+id;
+		
+		PreparedStatement  ps = null;
+		
+		//chama uma instância da Connection e tenta realizar uma conexão com o banco através do AutoCloseable
+		try(Connection conn = ConnectionProvider.getInstance().getConnection()) {
+			
+			//seta os atributos do objeto encomenda, fazendo a alteração.
+			ps = conn.prepareStatement(sql);
+			
+			if(ps.executeUpdate() != 0) {
+				status = true;
+			}
+			ps.close();	
+			conn.close();			
+		}
+		//trata, caso de uma exceção
+		catch (SQLException e) 
+		{
+			System.out.println("Erro ao alterar a produção encomenda\n"+e);
+		}
+		//retorna true ou false, dizendo se o metodo foi executado com sucesso.
+		return status;
+	}
+	
 	public boolean alterarProduzindo(String id)throws Exception{
 		
 		boolean status = false;

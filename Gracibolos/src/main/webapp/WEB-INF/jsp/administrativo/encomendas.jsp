@@ -898,11 +898,11 @@
 						
 						$('#formapagamento option').each(function () {					
 							if($(this).val() != 0){
-								$(this).removeAttr('disabled');
+								$(this).attr('disabled','disabled');
 							}
 						});
 						
-						$('#valorpago').removeAttr('readonly');
+						$('#valorpago').attr('disabled','disabled');
 						
 						break;
 					
@@ -1213,7 +1213,7 @@
 						//var valor = $('#valor_' + linha);
 						//var total = $('#total_' + linha);				
 					});
-				},1000);
+				},500);
 				
 			};
 
@@ -1285,7 +1285,7 @@
 				//Parse para json		
 				var js = JSON.stringify(enc);
 				//alert(enc);
-				
+				console.log('Antes de inserir\ninfo encomenda : '+js);
 				$.ajax({
 		            url: "../Gracibolos/rest-encomenda/",
 		            type: 'POST',    
@@ -1307,7 +1307,8 @@
 					inserirInfoEncomenda(1,function(result){
 						
 						if(result == 'ok'){
-							console.log('submit_informações : '+result);				
+							console.log('submit_informações : '+result+', salvar como iniciada, só com as informações');	
+										
 							var erro = '<div id="msg13" class="alert alert-success alert-dismissible fade in" role="alert">';
 										erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 										erro +='<strong>Sucesso!</strong> Encomenda inicializada com sucesso';
@@ -1343,59 +1344,65 @@
 			* INCLUIR ENCOMENDA - produtos---------------------------------------
 			*
 			*/
+			function getEncomenda(callback){
+				listItemEncomenda = [];
+				
+					$('#lista-produtos tr').each(function () {
+						var itemencomenda = new Object();
+						//Captura os numeros de linhas
+						var linha = this.id.replace("item_", "");
+						
+						var produto = $('#produto_' + linha);
+						var quantidade = $('#quantidade_' + linha);
+						var valor = $('#valor_' + linha);
+						var total = $('#total_' + linha);
+					
+		                 // Criar objeto para armazenar os dados
+		                 var itemencomenda = new Object();
+	
+		                 itemencomenda.encomendaId = $('#id').val();//encomendaId
+		                 itemencomenda.produtoId = produto.val(); // valor da coluna id do Produto
+		                 itemencomenda.quantidade = quantidade.val(); // Valor da coluna Quantidade
+		                 				
+		                 var valor_temp = valor.val(); // Valor da coluna Quantidade
+		 				 valor_temp = valor_temp.split(".").join("");//Retirar a máscara
+		 				 itemencomenda.valor = valor_temp.split(",").join(".");//Retirar a máscara
+	
+	 					 valor_temp = '';
+		 				 valor_temp = total.val();//total
+		 				 valor_temp = valor_temp.split(".").join("");//Retirar a máscara	
+		                 itemencomenda.total = valor_temp.split(",").join(".");//Retirar a máscara
+	
+		                 //Insere todos os itens no list
+		                 listItemEncomenda[linha] = itemencomenda;
+	
+					});		
+				
+				callback(listItemEncomenda);
+			};
 
 			function inserirItemEncomenda(callback){
 				
-				listItemEncomenda = [];
+				getEncomenda(function(listItemEncomenda){
+					//Parse para json		
+					var js = JSON.stringify(listItemEncomenda);
+					//alert(js);
+					console.log('Antes de inserir\nitensencomenda : '+js);
+					$.ajax({
+			            url: "../Gracibolos/rest-itensencomenda/",
+			            type: 'POST',    
+			            data: js,
+			            contentType: "application/json; charset=utf-8",
+			            error: function() {
+	     	                //console.log('erro : inserir ItemEncomenda - ajax');
+	     	            },
+			            success: function(result) {
+			                callback(result);  
+		            
+			            }
+			        });
+				});
 				
-				$('#lista-produtos tr').each(function () {
-					var itemencomenda = new Object();
-					//Captura os numeros de linhas
-					var linha = this.id.replace("item_", "");
-					
-					var produto = $('#produto_' + linha);
-					var quantidade = $('#quantidade_' + linha);
-					var valor = $('#valor_' + linha);
-					var total = $('#total_' + linha);
-				
-	                 // Criar objeto para armazenar os dados
-	                 var itemencomenda = new Object();
-
-	                 itemencomenda.encomendaId = $('#id').val();//encomendaId
-	                 itemencomenda.produtoId = produto.val(); // valor da coluna id do Produto
-	                 itemencomenda.quantidade = quantidade.val(); // Valor da coluna Quantidade
-	                 				
-	                 var valor_temp = valor.val(); // Valor da coluna Quantidade
-	 				 valor_temp = valor_temp.split(".").join("");//Retirar a máscara
-	 				 itemencomenda.valor = valor_temp.split(",").join(".");//Retirar a máscara
-
- 					 valor_temp = '';
-	 				 valor_temp = total.val();//total
-	 				 valor_temp = valor_temp.split(".").join("");//Retirar a máscara	
-	                 itemencomenda.total = valor_temp.split(",").join(".");//Retirar a máscara
-
-	                 //Insere todos os itens no list
-	                 listItemEncomenda[linha] = itemencomenda;
-
-				});		
-	
-				//Parse para json		
-				var js = JSON.stringify(listItemEncomenda);
-				//alert(js);
-				
-				$.ajax({
-		            url: "../Gracibolos/rest-itensencomenda/",
-		            type: 'POST',    
-		            data: js,
-		            contentType: "application/json; charset=utf-8",
-		            error: function() {
-     	                //console.log('erro : inserir ItemEncomenda - ajax');
-     	            },
-		            success: function(result) {
-		                callback(result);  
-	            
-		            }
-		        });
 				
 			};// FIM INSERIR ENCOMENDA --------------------------------------------------------------
 
@@ -1418,9 +1425,11 @@
 				pesqEncomenda(function(numero){//Verificar se a encomenda existe
 					var id = $('#id').val();
 					var msg = '';
-					console.log('btn_submit_produtos'+numero);
+					console.log('btn_submit_produtos.click : '+numero+' pesquisa');
+					
 					if(numero == id){
-						console.log('Encomenda existe');
+						
+						console.log('Encomenda existe, salvar só os itens');
 
 						//if(verificaItemProdutoNome()){//verificação dos campos
 
@@ -1443,8 +1452,13 @@
 									
 							});//fim inserirItemEncomenda
 						//};//fim da verificação
+						
+						//Fechar modal
+						$('#modal-encomenda').modal('hide');
+						
 					}else{
-						console.log('não existe');
+						
+						console.log('Encomenda não existe, salvar como iniciada com itens');
 						
 						//if(verificaCliente() && verificaDataEntr() && verificaItemProdutoNome() && verificaItemquantidade()){
 						if(verificaCliente() && verificaDataEntr()){
@@ -1511,8 +1525,9 @@
 				caixa.forma = $('#formapagamento').val();//forma
 				
 				var js = JSON.stringify(caixa);
-				alert(js);
-			
+				//alert(js);
+				console.log(js);
+				
 				$.ajax({//Enviando o caixa
 		            url: "../Gracibolos/rest-caixa/",
 		            type: 'POST',    
@@ -1527,31 +1542,46 @@
 		            }
 		        });
 			};
+
+			function faturadoAjax(callback){//Alterar esta encomenda para faturado
+				
+				var id = $('#id').val();//encomendaId	
+				console.log('enviando esse id : '+id+' para faturado');	
+				
+				$.ajax({
+		            url: "../Gracibolos/rest-encomenda/fat/",
+		            type: 'PUT',    
+		            data: JSON.stringify(id),
+		            contentType: "application/json; charset=utf-8",
+		            error: function() {
+     	                callback();
+     	            },
+		            success: function(result) {
+		                //alert(result);
+		            	callback(result);
+		            }
+		        });
+			};
 			
 			$("#btn_submit_faturar").click(function() {
-				if(verificaCliente() && verificaProdutos() && verificaTotalP() && verificaValorPago()){
 				
-					var msg = '';
+				pesqEncomenda(function(numero){//Verificar se a encomenda existe
 					
-						inserirInfoEncomenda(3,function(result){
-							console.log('submit_informações : '+result)
-							if(result == 'ok'){
-								msg = msg + 'iniciada';
-								console.log(msg);
-							}
+					var id = $('#id').val();
+					var msg = '';
+					console.log('btn_submit_produtos.click : '+numero+' pesquisa');
+					
+					if(numero == id){
+						console.log('Encomenda existe, salvar só no caixa');
+
+						faturadoAjax(function(result){
+							console.log('retorno - alterado para faturado : '+result);
 						});
 						
-						inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
-							if(result != 0){
-								msg = msg + ' com '+result+' iten(s)';
-								console.log(msg);
-							}
-						});
-
 						faturar(function(result){ 
-							//console.log('callback faturada'+result);
+							console.log('retorno - inserir no caixa : '+result);
 							if(result == 'ok'){
-								msg = msg + ' e faturada';
+								msg = msg + 'Faturada com sucesso';
 								console.log(msg);
 								
 								var erro = '<div id="msg11" class="alert alert-success alert-dismissible fade in" role="alert">';
@@ -1567,9 +1597,59 @@
 							}
 																
 						});	
+						
 						//Fechar modal
-						$('#modal-encomenda').modal('hide');						
-				}//fim if
+						$('#modal-encomenda').modal('hide');	
+						
+					}else{
+						
+						console.log('Encomenda não existe, salvar como faturada');
+
+						if(verificaCliente() && verificaProdutos() && verificaTotalP() && verificaValorPago()){
+							
+							var msg = '';
+							
+								inserirInfoEncomenda(3,function(result){
+									console.log('submit_informações : '+result)
+									if(result == 'ok'){
+										msg = msg + 'iniciada';
+										console.log(msg);
+									}
+								});
+								
+								inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
+									if(result != 0){
+										msg = msg + ' com '+result+' iten(s)';
+										console.log(msg);
+									}
+								});
+								
+								faturar(function(result){ 
+									//console.log('callback faturada'+result);
+									if(result == 'ok'){
+										msg = msg + ' e faturada';
+										console.log(msg);
+										
+										var erro = '<div id="msg11" class="alert alert-success alert-dismissible fade in" role="alert">';
+											erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+											erro +='<strong>Sucesso!</strong> '+msg;
+										erro +='</div>';
+								
+										$('#msg-faturada').append(erro);
+										
+										setTimeout(function(){
+											$('#msg11').alert('close');
+										}, 5000);
+									}
+																		
+								});	
+								//Fechar modal
+								$('#modal-encomenda').modal('hide');	
+													
+						}//fim if
+					}
+				}); //fim pesqEncomenda	
+				
 			});
 			//FIM - FATURAR ENCOMENDA---------------------------------------
 
@@ -1603,7 +1683,7 @@
 						$('#msg8').alert('close');
 						}, 5000 );
 				}			
-				//setTimeout(function(){resetCampos();}, 1500	);		
+				
 			});
 			//FIM - PRODUZIR ENCOMENDA---------------------------------------
 
@@ -1639,10 +1719,7 @@
 						$('#msg9').alert('close');
 						}, 5000 );
 				};
-				
-				
-				
-				//setTimeout(function(){resetCampos();}, 1500	);		
+		
 			});
 			//FIM - FINALIZAR ENCOMENDA---------------------------------------
 			
@@ -1735,7 +1812,8 @@
                     }
                 ]
             });
-            
+
+           
           //Reset autmaticamente todos os campos do formulário.
            function resetCampos(){
 				
@@ -1786,6 +1864,10 @@
 				
             }
 
+           	$('#modalencomenda').on('hidden.bs.modal', function(){//Ao fechar o modal
+           		resetCampos();
+       	 	})
+      		
           	//------settando a data de hoje---------------------------------
 			var now = moment().format('YYYY-MM-DD');        
 			$('#datafaturamento').val(now);//Colocar a data de hoje
@@ -1814,6 +1896,9 @@
 			*	btn-incluir nova encomenda
 			*/
             $('#incluir-encomenda-modal').click(function() {
+                
+            	$('.nav-tabs a[href="#step1"]').tab('show');//Abrir no formulario dados da encomenda
+                
 				//callback
            	  	novoNumero(function(result){         	  	
 					//alert(result);
@@ -1859,7 +1944,7 @@
 			*/
 			
             //Define uma ação ao apertar o botão editar de algum item da tabela.
-            $('#lista-encomendas tbody').on( 'click', '#edit-encomenda', function () {
+            $('#lista-encomendas tbody').on( 'click', '#edit-encomenda', function () {     	
             	        	
             	 //Altera dinamicamente o titulo do modal.
             	$('#modal-subtitle').text("Alterar encomenda");
@@ -1961,10 +2046,10 @@
 				
 				pesqCaixa(function(caixa){//Traz as informações de pagamneto
 
-					console.log(caixa.dataTransação);
-					console.log(caixa.forma);
-					console.log(caixa.valor);
-					console.log(caixa.descricao);
+					console.log('caixa.dataTransação : '+caixa.dataTransação);
+					console.log('caixa.forma : '+caixa.forma);
+					console.log('caixa.valor : '+caixa.valor);
+					console.log('caixa.descricao : '+caixa.descricao);
 					
 					$('#datafaturamento').val(caixa.dataTransação);
 					$('#formapagamento').val(caixa.forma);
@@ -1974,6 +2059,15 @@
 				});
 				
 				verificaStatus(data[2]);
+				
+				console.log('status : '+data[2]);
+            	if(data[2] == 1){
+            		$('.nav-tabs a[href="#step2"]').tab('show');//Abrir no formulario dados da encomenda
+               	}else if(data[2] == 3){
+               		$('.nav-tabs a[href="#step3"]').tab('show');//Abrir no formulario dados da encomenda
+               	}else if(data[2] == 4){
+               		$('.nav-tabs a[href="#step4"]').tab('show');//Abrir no formulario dados da encomenda
+               	}     
 				
 			});
 
