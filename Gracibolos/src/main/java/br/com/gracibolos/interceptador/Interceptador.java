@@ -13,36 +13,36 @@ public class Interceptador extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object controller) throws Exception {
 		
-		nivel = 0;
-		
-		String uri = request.getRequestURI();
-		HttpSession session = request.getSession(false);
-		
-		if(uri.contains("/administrativo-") || uri.contains("/operacional-")){
-			
-            if(session != null){
-            	
-            	if(session.getAttribute("nivel") != null){
-            		nivel = (Integer) session.getAttribute("nivel");
-                    
-                    if((nivel == 1 && uri.contains("/operacional-")) || (nivel == 2 && uri.contains("/administrativo-"))){
-                        return true;
-                    }else{
-                		response.sendRedirect("loginview");
-                    	return false;
-                    }
-            	}else {
-            		response.sendRedirect("loginview");
-            		return false;
-            	}
-            	
-            }else{
-            	return true;
-            }
-            
-        } else {
-        	return true;
-        }
-				
+//		nivel = 0;
+//		
+//		String uri = request.getRequestURI();
+//		HttpSession session = request.getSession(false);
+//		
+//		if(uri.contains("/administrativo-") || uri.contains("/operacional-")){
+//			
+//            if(session != null){
+//            	
+//            	if(session.getAttribute("nivel") != null){
+//            		nivel = (Integer) session.getAttribute("nivel");
+//                    
+//                    if((nivel == 1 && uri.contains("/operacional-")) || (nivel == 2 && uri.contains("/administrativo-"))){
+//                        return true;
+//                    }else{
+//                		response.sendRedirect("loginview");
+//                    	return false;
+//                    }
+//            	}else {
+//            		response.sendRedirect("loginview");
+//            		return false;
+//            	}
+//            	
+//            }else{
+//            	return true;
+//            }
+//            
+//        } else {
+//        	return true;
+//        }
+		return true;	
 	}
 }

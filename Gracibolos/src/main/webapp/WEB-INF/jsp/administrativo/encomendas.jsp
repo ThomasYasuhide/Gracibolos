@@ -45,12 +45,96 @@
 						<h4 class="">Lista de encomendas</h4>
 					</header>
 					
-					<div id="msg-faturada" class="col-xs-12"></div>
-					<div id="msg-informacoes" class="col-xs-12"></div>
-					<div id="msg-produtos" class="col-xs-12"></div>
+					<script type="text/javascript">						
+						console.log("Variáveis de sessão info : ${respostaInfo}");					
+						console.log("Variáveis de sessão item : ${respostaItem}");
+						console.log("Variáveis de sessão item : ${mensagemItem}");
+						console.log("Variáveis de sessão caixa : ${respostaCaixa}");
+						
+					</script>				
+						
+					<c:if test="${respostaInfo == 'ok'}">	
+						<div id="msg1" class="alert alert-success alert-dismissible" role="alert">
+						 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>Sucesso!</strong> As Informações da encomenda foram armazenadas com sucesso.
+						</div>
+						<c:remove var="respostaInfo"/>
+					  	<script type="text/javascript">
+						  	setTimeout(function(){
+								$('#msg1').alert('close');
+							}, 5000)
+					  </script>
+					</c:if>
+					
+					<c:if test="${respostaInfo == 'erro'}">							
+						<div id="msg2" class="alert alert-danger alert-dismissible" role="alert">
+						  	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>Erro!</strong> Houve algum erro ao tentar incluir uma nova encomenda, favor tente novamente.
+						</div>	
+						<c:remove var="respostaInfo"/>							
+						<script type="text/javascript">
+						 	setTimeout(function(){
+								$('#msg2').alert('close');
+							}, 5000)
+						</script>															
+					</c:if>
+					
+					<c:if test="${(respostaItem == 'ok')}">	
+						<div id="msg3" class="alert alert-success alert-dismissible" role="alert">
+						 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>Sucesso!</strong> 
+						  	<c:out value="${mensagemItem}"></c:out>, armazenado(s) com sucesso.
+						</div>
+						<c:remove var="respostaItem"/>
+					  	<c:remove var="mensagemItem"/>
+					  	<script type="text/javascript">
+						  	setTimeout(function(){
+								$('#msg3').alert('close');
+							}, 5000)
+						  </script>
+					</c:if>
+					
+					<c:if test="${respostaItem == 'erro'}">							
+						<div id="msg4" class="alert alert-danger alert-dismissible" role="alert">
+						  	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>Erro!</strong> Houve algum erro ao tentar incluir um item da encomenda, favor tente novamente.
+						</div>	
+						<c:remove var="respostaItem"/>							
+						<script type="text/javascript">
+						 	setTimeout(function(){
+								$('#msg4').alert('close');
+							}, 5000)
+						</script>															
+					</c:if>
+					
+					<c:if test="${(respostaCaixa == 'ok')}">	
+						<div id="msg5" class="alert alert-success alert-dismissible" role="alert">
+						 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>Sucesso!</strong> Transação armazenado com sucesso.
+						</div>
+						<c:remove var="respostaCaixa"/>
+					  	<script type="text/javascript">
+						  	setTimeout(function(){
+								$('#msg5').alert('close');
+							}, 5000)
+						  </script>
+					</c:if>
+					
+					<c:if test="${respostaCaixa == 'erro'}">							
+						<div id="msg6" class="alert alert-danger alert-dismissible" role="alert">
+						  	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>Erro!</strong> Houve algum erro ao tentar incluir uma nova transação, favor tente novamente.
+						</div>	
+						<c:remove var="respostaCaixa"/>							
+						<script type="text/javascript">
+						 	setTimeout(function(){
+								$('#msg6').alert('close');
+							}, 5000)
+						</script>															
+					</c:if>
 					
 					<hr/>
-
+					
 					<!-- ############################################################ CONTEUDO ############################################################ -->
 
 					<div class="row">
@@ -171,56 +255,6 @@
 						<h3 id="modal-title">ENCOMENDAS</h3>
 						<h4 id="modal-subtitle"></h4>
 					</div>
-					
-					<!-- msg erro -->
-					<!-- ################################# ALERTAS ################################# -->				
-						
-					<div id="msg1" class="alert alert-success alert-dismissible" role="alert">
-					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					  <strong>Sucesso!</strong> Encomenda iniciada com sucesso.
-					</div>
-										
-					<div id="msg2" class="alert alert-danger alert-dismissible" role="alert">
-					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					  <strong>Erro!</strong> Houve algum erro ao tentar incluir a nova encomenda, favor tente novamente.
-					</div>												
-					
-					<div id="msg3" class="alert alert-success alert-dismissible" role="alert">
-					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					  <strong>Sucesso!</strong> Alteração efetuada com sucesso.
-					</div>									
-					
-					<div id="msg4" class="alert alert-danger alert-dismissible" role="alert">
-					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					  <strong>Erro!</strong> Houve algum erro ao tentar alterar a encomenda, favor tente novamente.
-					</div>
-																	
-					<div id="msg5" class="alert alert-success alert-dismissible" role="alert">
-					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					  <strong>Sucesso!</strong> Encomenda foi excluida com sucesso!
-					</div>
-											
-					<div id="msg6" class="alert alert-danger alert-dismissible" role="alert">
-					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					  <strong>Erro!</strong> Houve algum erro ao tentar excluir a encomenda, favor tente novamente.
-					</div>								
-			
-					<div id="msg7" class="alert alert-success alert-dismissible" role="alert">
-					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					  <strong>Sucesso!</strong> Encomenda faturada com sucesso.
-					</div>
-			
-					<div id="msg8" class="alert alert-success alert-dismissible" role="alert">
-					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					  <strong>Sucesso!</strong> Encomenda produzindo com sucesso.
-					</div>
-				
-					<div id="msg9" class="alert alert-success alert-dismissible" role="alert">
-					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					  <strong>Sucesso!</strong> Encomenda finalizada com sucesso.
-					</div>							
-					
-					<!-- ################################# FIM DOS ALERTAS ################################# -->
 					
 					<div class="modal-body">
 						<!-- ################################# CONTEUDO ################################# -->
@@ -1266,7 +1300,8 @@
 			* INCLUIR ENCOMENDA - informacoes---------------------------------------
 			*
 			*/
-			function inserirInfoEncomenda(status, callback){
+
+			function getEncomenda(callback){
 				//alert("Salvar");
 				//recupera os valores da encomenda
 				var enc = new Object();
@@ -1282,22 +1317,32 @@
 				enc.clienteid = $('#cliente').val();
 				enc.responsavel = $('#responsavel').val();
 				enc.obs = $('#obs').val();
-				//Parse para json		
-				var js = JSON.stringify(enc);
-				//alert(enc);
-				console.log('Antes de inserir\ninfo encomenda : '+js);
-				$.ajax({
-		            url: "../Gracibolos/rest-encomenda/",
-		            type: 'POST',    
-		            data: js,
-		            contentType: "application/json; charset=utf-8",
-		            error: function() {
-     	           
-     	            },
-		            success: function(result) {
-		                callback(result);                
-		            }
-		        });
+
+				callback(enc);
+			};
+			
+			function inserirInfoEncomenda(status, callback){
+				
+				getEncomenda(function(enc){
+					//Parse para json		
+					var js = JSON.stringify(enc);
+					//alert(enc);
+					console.log('Antes de inserir\ninfo encomenda : '+js);
+					
+					$.ajax({//Inserir encomenda - Dao
+			            url: "../Gracibolos/rest-encomenda/",
+			            type: 'POST',    
+			            data: js,
+			            contentType: "application/json; charset=utf-8",
+			            error: function() {
+	     	           
+	     	            },
+			            success: function(result) {
+			                callback(result);                
+			            }
+			        });
+				});
+				
 			};
 			
 			$('#btn_submit_informacoes').click(function(){
@@ -1307,32 +1352,16 @@
 					inserirInfoEncomenda(1,function(result){
 						
 						if(result == 'ok'){
-							console.log('submit_informações : '+result+', salvar como iniciada, só com as informações');	
-										
-							var erro = '<div id="msg13" class="alert alert-success alert-dismissible fade in" role="alert">';
-										erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-										erro +='<strong>Sucesso!</strong> Encomenda inicializada com sucesso';
-									erro +='</div>';
-							
-							$('#msg-informacoes').append(erro);
-							
-							setTimeout(function(){
-								$('#msg13').alert('close');
-							}, 5000);
+							console.log('submit_informações : '+result+', salvar como iniciada, só com as informações');
 						}else {
-							
-							var erro = '<div id="msg13" class="alert alert-danger alert-dismissible fade in" role="alert">';
-							erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-							erro +='<strong>Sucesso!</strong> Houve algum erro ao cadastrar a encomenda.';
-							erro +='</div>';
-					
-							$('#msg-informacoes').append(erro);
-							
+						
 						}
 					});//end inserirInfoEncomenda
 					
-					//Fechar modal
-					$('#modal-encomenda').modal('hide');
+					setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+						recarregar();
+					}, 500);
+					
 					
 				}//fim if verificação
 				
@@ -1344,9 +1373,11 @@
 			* INCLUIR ENCOMENDA - produtos---------------------------------------
 			*
 			*/
-			function getEncomenda(callback){
-				listItemEncomenda = [];
+			function getItem(callback){
 				
+				listItemEncomenda = [];
+				//setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+					
 					$('#lista-produtos tr').each(function () {
 						var itemencomenda = new Object();
 						//Captura os numeros de linhas
@@ -1377,18 +1408,19 @@
 		                 listItemEncomenda[linha] = itemencomenda;
 	
 					});		
-				
+				//}, 500);//fim settimeout
 				callback(listItemEncomenda);
 			};
 
 			function inserirItemEncomenda(callback){
 				
-				getEncomenda(function(listItemEncomenda){
+				getItem(function(listItemEncomenda){
 					//Parse para json		
 					var js = JSON.stringify(listItemEncomenda);
 					//alert(js);
 					console.log('Antes de inserir\nitensencomenda : '+js);
-					$.ajax({
+					
+					$.ajax({//Inserir itens - Dao
 			            url: "../Gracibolos/rest-itensencomenda/",
 			            type: 'POST',    
 			            data: js,
@@ -1407,7 +1439,8 @@
 			};// FIM INSERIR ENCOMENDA --------------------------------------------------------------
 
 			function pesqEncomenda(callback){//Verificar se a encomenda existe 
-				$.ajax({
+				
+				$.ajax({//Pesquisar - Dao
 		            url: "../Gracibolos/rest-encomenda/"+$('#id').val(),
 		            type: 'GET',    
 		            error: function() {
@@ -1423,6 +1456,7 @@
 			$("#btn_submit_produtos").click(function() {
 				
 				pesqEncomenda(function(numero){//Verificar se a encomenda existe
+					
 					var id = $('#id').val();
 					var msg = '';
 					console.log('btn_submit_produtos.click : '+numero+' pesquisa');
@@ -1434,27 +1468,13 @@
 						//if(verificaItemProdutoNome()){//verificação dos campos
 
 							inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
-								//essa resposta é uma função
-								console.log(result);
-								msg = msg +result+' iten(s) inserido(s) com sucesso';
-								console.log(msg);
 								
-								var erro = '<div id="msg12" class="alert alert-success alert-dismissible fade in" role="alert">';
-											erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-											erro +='<strong>Sucesso!</strong> '+msg;
-										erro +='</div>';
-								
-								$('#msg-produtos').append(erro);
-								
-								setTimeout(function(){
-									$('#msg12').alert('close');
-								}, 5000);
-									
 							});//fim inserirItemEncomenda
 						//};//fim da verificação
 						
-						//Fechar modal
-						$('#modal-encomenda').modal('hide');
+						setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+							recarregar();
+						}, 500);
 						
 					}else{
 						
@@ -1466,34 +1486,15 @@
 							
 							inserirInfoEncomenda(1,function(result){
 								console.log('submit_informações : '+result);
-								if(result == 'ok'){
-									msg = msg + 'iniciada';
-									console.log(msg);
-								}
-	
 							});//fiminserirInfoEncomenda
 								
 							inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
-							//essa resposta é uma função
-								console.log(result);
-								msg = msg + ' com '+result+' iten(s)';
-								console.log(msg);
-								
-								var erro = '<div id="msg12" class="alert alert-success alert-dismissible fade in" role="alert">';
-											erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-											erro +='<strong>Sucesso!</strong> '+msg;
-										erro +='</div>';
-								
-								$('#msg-produtos').append(erro);
-								
-								setTimeout(function(){
-									$('#msg12').alert('close');
-								}, 5000);
 								
 							});//fim inserirItemEncomenda
 							
-							//Fechar modal
-							$('#modal-encomenda').modal('hide');
+							setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+								recarregar();
+							}, 600);
 							
 						};//fim if validação
 					};	//fim else
@@ -1508,8 +1509,7 @@
 			* FATURAR ENCOMENDA---------------------------------------
 			*
 			*/
-
-			function faturar(callback){
+			function getCaixa(callback){			
 				//alert('faturar');
 				var caixa = new Object();
 
@@ -1523,28 +1523,35 @@
 				caixa.valor = valor_temp.split(",").join(".");//Retirar a máscara
 				 
 				caixa.forma = $('#formapagamento').val();//forma
-				
-				var js = JSON.stringify(caixa);
-				//alert(js);
-				console.log(js);
-				
-				$.ajax({//Enviando o caixa
-		            url: "../Gracibolos/rest-caixa/",
-		            type: 'POST',    
-		            data: js,
-		            contentType: "application/json; charset=utf-8",
-		            error: function() {
-     	                callback();
-     	            },
-		            success: function(msg){
-		                console.log('ajax faturada : '+msg)               
-		                callback(msg);            
-		            }
-		        });
+				callback(caixa);
 			};
 
-			function faturadoAjax(callback){//Alterar esta encomenda para faturado
-				
+			function faturar(callback){
+								
+				getCaixa(function(caixa){
+					
+					var js = JSON.stringify(caixa);
+					//alert(js);
+					console.log(js);
+					
+					$.ajax({//Inserir o caixa - Dao
+			            url: "../Gracibolos/rest-caixa/",
+			            type: 'POST',    
+			            data: js,
+			            contentType: "application/json; charset=utf-8",
+			            error: function() {
+	     	                callback();
+	     	            },
+			            success: function(msg){
+			                console.log('ajax faturada : '+msg)               
+			                callback(msg);            
+			            }
+			        });
+				});				
+			};
+
+			function faturadoAjax(callback){//Alterar - Dao		
+						
 				var id = $('#id').val();//encomendaId	
 				console.log('enviando esse id : '+id+' para faturado');	
 				
@@ -1563,10 +1570,10 @@
 		        });
 			};
 			
-			$("#btn_submit_faturar").click(function() {
-				
-				pesqEncomenda(function(numero){//Verificar se a encomenda existe
-					
+			$("#btn_submit_faturar").click(function() {		
+						
+				pesqEncomenda(function(numero){//Verificar se a encomenda existe	
+								
 					var id = $('#id').val();
 					var msg = '';
 					console.log('btn_submit_produtos.click : '+numero+' pesquisa');
@@ -1579,27 +1586,12 @@
 						});
 						
 						faturar(function(result){ 
-							console.log('retorno - inserir no caixa : '+result);
-							if(result == 'ok'){
-								msg = msg + 'Faturada com sucesso';
-								console.log(msg);
-								
-								var erro = '<div id="msg11" class="alert alert-success alert-dismissible fade in" role="alert">';
-									erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-									erro +='<strong>Sucesso!</strong> '+msg;
-								erro +='</div>';
-						
-								$('#msg-faturada').append(erro);
-								
-								setTimeout(function(){
-									$('#msg11').alert('close');
-								}, 5000);
-							}
-																
+							console.log('retorno - inserir no caixa : '+result);			
 						});	
 						
-						//Fechar modal
-						$('#modal-encomenda').modal('hide');	
+						setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+							recarregar();
+						}, 500);
 						
 					}else{
 						
@@ -1624,27 +1616,17 @@
 									}
 								});
 								
-								faturar(function(result){ 
+								faturar(function(result){ //Alterar o status para faturado
 									//console.log('callback faturada'+result);
 									if(result == 'ok'){
 										msg = msg + ' e faturada';
 										console.log(msg);
-										
-										var erro = '<div id="msg11" class="alert alert-success alert-dismissible fade in" role="alert">';
-											erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-											erro +='<strong>Sucesso!</strong> '+msg;
-										erro +='</div>';
-								
-										$('#msg-faturada').append(erro);
-										
-										setTimeout(function(){
-											$('#msg11').alert('close');
-										}, 5000);
-									}
-																		
+									};						
 								});	
-								//Fechar modal
-								$('#modal-encomenda').modal('hide');	
+								
+								setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+									recarregar();
+								}, 600);
 													
 						}//fim if
 					}
@@ -2062,11 +2044,11 @@
 				
 				console.log('status : '+data[2]);
             	if(data[2] == 1){
-            		$('.nav-tabs a[href="#step2"]').tab('show');//Abrir no formulario dados da encomenda
+            		$('.nav-tabs a[href="#step2"]').tab('show');//Abrir no formulario produtos
                	}else if(data[2] == 3){
-               		$('.nav-tabs a[href="#step3"]').tab('show');//Abrir no formulario dados da encomenda
+               		$('.nav-tabs a[href="#step3"]').tab('show');//Abrir no formulario pagamento
                	}else if(data[2] == 4){
-               		$('.nav-tabs a[href="#step4"]').tab('show');//Abrir no formulario dados da encomenda
+               		$('.nav-tabs a[href="#step4"]').tab('show');//Abrir no formulario produção
                	}     
 				
 			});
@@ -2181,20 +2163,20 @@
 				$('#modal-encomenda').removeClass('hidden');
 			})
 						
-            /*
-			 MENSAGENS DE ERRO
-			*/
-			$('#msg1').hide();
-			$('#msg2').hide();
-			$('#msg3').hide();
-			$('#msg4').hide();
-			$('#msg5').hide();
-			$('#msg6').hide();
-			$('#msg7').hide();
-			$('#msg8').hide();
-			$('#msg9').hide();
+//             /*
+// 			 MENSAGENS DE ERRO
+// 			*/
+// 			$('#msg1').hide();
+// 			$('#msg2').hide();
+// 			$('#msg3').hide();
+// 			$('#msg4').hide();
+// 			$('#msg5').hide();
+// 			$('#msg6').hide();
+// 			$('#msg7').hide();
+// 			$('#msg8').hide();
+// 			$('#msg9').hide();
 			
-		});
+ 		});
 	</script>
 	
 </body>

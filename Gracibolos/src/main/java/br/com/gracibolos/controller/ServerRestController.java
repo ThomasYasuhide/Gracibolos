@@ -3,6 +3,7 @@ package br.com.gracibolos.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -177,7 +178,8 @@ public class ServerRestController {
 	}
 	
 	@RequestMapping(value = "/rest-itensencomenda/", method = RequestMethod.POST)
-	public ResponseEntity<String> createItemEncomenda(@RequestBody List<ItemEncomenda> list){
+	public ResponseEntity<String> createItemEncomenda(@RequestBody List<ItemEncomenda> list
+			,HttpSession session){
 		
 		ItemEncDao = new ItemEncomendaDao();
 		for(ItemEncomenda ie : list){
@@ -193,10 +195,13 @@ public class ServerRestController {
 			int qtd = ItemEncDao.inserirList(list); //Inserir a lista de itens que retorna a quantidade de registros
 			if(qtd != 0){
 				System.out.println(qtd+" itens inseridos");
-				msg = Integer.toString(qtd);//Conversão de inteiro para String
+				msg = Integer.toString(qtd);//Conversão de inteiro para String			
+				session.setAttribute("respostaItem", "ok");
+				session.setAttribute("mensagemItem", msg);
 			}else{
 				System.out.println("ERRO - rest itens inseridos.");
-				msg = "erro";
+				msg = "erro";			
+				session.setAttribute("respostaItem", msg);
 			}
 			
 		} catch (Exception e) {
@@ -242,8 +247,11 @@ public class ServerRestController {
 	}
 	
 	@RequestMapping(value = "/rest-encomenda/", method = RequestMethod.POST)// Inserir
-	public ResponseEntity<String> createEncomenda(@RequestBody Encomenda encomenda){
-
+	public ResponseEntity<String> createEncomenda(HttpSession session, 
+			@RequestBody Encomenda encomenda){
+		
+		//session.setAttribute("respostaStatus", "ok");
+		
 		daoEnc = new EncomendaDao();
 		System.out.println("Número : "+encomenda.getId()
 						+"\nnomerazao : "+encomenda.getNomerazao()
@@ -262,9 +270,16 @@ public class ServerRestController {
 			if(daoEnc.inserir(encomenda)){//Encomenda
 				System.out.println("Encomenda inicializada");
 				msg = "ok";
+				
+				System.out.println("New session: " + session.getId());
+				session.setAttribute("respostaInfo", msg);				
+				session.setAttribute("mensagemInfo", "Encomenda inicializada");
+				
 			}else{
 				System.out.println("ERRO - rest inserir encomenda.");
 				msg = "erro";
+				
+				session.setAttribute("resposta", msg);
 			}
 			
 		} catch (Exception e) {
@@ -340,7 +355,7 @@ public class ServerRestController {
 	// ---------------------CAIXA---------------------------------------------------------
 	
 	@RequestMapping(value = "/rest-caixa/", method = RequestMethod.POST) 
-	public ResponseEntity<String> createCaixa(@RequestBody Caixa caixa){
+	public ResponseEntity<String> createCaixa(@RequestBody Caixa caixa, HttpSession session){
 		msg = "";	
 		caixaDao = new CaixaDao();
 		System.out.println("gastoRecebimento : "+caixa.getGastoRecebimento()
@@ -353,8 +368,10 @@ public class ServerRestController {
 		try {
 			if(caixaDao.inserir(caixa)){
 				msg = "ok";
+				session.setAttribute("respostaCaixa", msg);
 			}else{
 				msg = "erro";
+				session.setAttribute("respostaCaixa", msg);
 			}
 		} catch (Exception e) {
 			// Auto-generated catch block

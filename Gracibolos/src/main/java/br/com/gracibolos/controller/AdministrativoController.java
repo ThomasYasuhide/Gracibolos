@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -38,7 +39,6 @@ import br.com.gracibolos.jdbc.model.Colaborador;
 import br.com.gracibolos.jdbc.model.Encomenda;
 import br.com.gracibolos.jdbc.model.Estado;
 import br.com.gracibolos.jdbc.model.Fornecedor;
-import br.com.gracibolos.jdbc.model.ItemEncomenda;
 import br.com.gracibolos.jdbc.model.MateriaPrima;
 import br.com.gracibolos.jdbc.model.Meses;
 import br.com.gracibolos.jdbc.model.Produto;
@@ -1352,6 +1352,7 @@ public class AdministrativoController {
 	
 	@RequestMapping("/administrativo-listar-encomendas-finalizadas")
 	public ModelAndView listarEncomendasFinalizadas(){
+		
 		EncomendaDao daoEnc = new EncomendaDao();
 		ModelAndView mv = new ModelAndView();
 		try {
@@ -1366,43 +1367,13 @@ public class AdministrativoController {
 	
 	//ENCOMENDA
 	@RequestMapping("/administrativo-encomendas")
-	public ModelAndView encomenda(){
+	public ModelAndView encomenda(
+			//HttpSession session
+			){
 		System.out.println("Entrou na servlet de listagem das encomendas");
-			
-			//TESTES
-				Encomenda encomenda = new Encomenda();
-				encomenda.setId((long) 667);
-				encomenda.setClienteid(5);
-				encomenda.setClientenome("Breno Rufino");
-				encomenda.setClientecpfcnpj("212.542.288-21");
-				encomenda.setTotalprodutos(new BigDecimal("300.00"));
-				encomenda.setResponsavel("Rogério Yudi");
-				encomenda.setDataencomenda(LocalDate.now());
-				encomenda.setDataentrega(LocalDate.now().plusDays(2));
-				encomenda.setObs("Nenhuma observação");
 		
-				List<ItemEncomenda> itens = new ArrayList<ItemEncomenda>();
+		//session.setAttribute("respostaStatus", "ok");
 		
-				ItemEncomenda item = new ItemEncomenda();
-				item.setId((long) 1);
-				item.setNumero(1);
-				item.setProdutoId(3l);
-				item.setQuantidade(20);
-				item.setValor(new BigDecimal("10.00"));
-				item.setTotal(new BigDecimal("200.00"));
-				
-				ItemEncomenda item2 = new ItemEncomenda();
-				item2.setId((long) 2);
-				item2.setNumero(2);
-				item2.setProdutoId(2l);
-				item2.setQuantidade(20);
-				item2.setValor(new BigDecimal("5.00"));
-				item2.setTotal(new BigDecimal("100.00"));
-				
-				itens.add(item);
-				itens.add(item2);
-			//FIM DOS TESTES
-				
 		EncomendaDao dao = new EncomendaDao();
 				
 		//instância uma nova modelView
@@ -1412,7 +1383,6 @@ public class AdministrativoController {
 		//passa os dados da encomenda para a Expression Language chamada encomenda
 		try {//Passando as encomendas em aberto - status >= 3
 			mv.addObject("encomendas", dao.emAberto());
-			mv.addObject("itens", itens);
 		} catch (Exception e) {
 			// Auto-generated catch block
 			e.printStackTrace();
