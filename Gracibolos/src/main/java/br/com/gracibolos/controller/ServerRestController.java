@@ -291,15 +291,17 @@ public class ServerRestController {
 	}
 	
 	@RequestMapping(value = "/rest-encomenda/fat/", method = RequestMethod.PUT)//Alterar para faturado
-	public ResponseEntity<String> updateEncomendaFat (@RequestBody String id){
+	public ResponseEntity<String> updateEncomendaFat (@RequestBody String id, HttpSession session){
 		
 		System.out.println("Numero da encomenda : "+id+", alterado para faturado");
 		daoEnc  = new EncomendaDao();
 		try {
 			if(daoEnc.alterarFaturado(id)){
 				msg="ok";
+				session.setAttribute("respostaFat", msg);
 			}else{
 				msg="erro";
+				session.setAttribute("respostaFat", msg);
 			}
 		} catch (Exception e) {
 			
@@ -309,15 +311,17 @@ public class ServerRestController {
 	}
 	
 	@RequestMapping(value = "/rest-encomenda/prod/", method = RequestMethod.PUT)//Alterar para produzindo
-	public ResponseEntity<String> updateEncomendaProd (@RequestBody String id){
+	public ResponseEntity<String> updateEncomendaProd (@RequestBody String id, HttpSession session){
 		
 		System.out.println("Numero da encomenda : "+id+", alterado para produzindo");
 		daoEnc  = new EncomendaDao();
 		try {
 			if(daoEnc.alterarProduzindo(id)){
 				msg="ok";
+				session.setAttribute("respostaProd", msg);
 			}else{
 				msg="erro";
+				session.setAttribute("respostaProd", msg);
 			}
 		} catch (Exception e) {
 			
@@ -327,15 +331,17 @@ public class ServerRestController {
 	}
 	
 	@RequestMapping(value = "/rest-encomenda/fin/", method = RequestMethod.PUT)//Alterar para finalizado
-	public ResponseEntity<String> updateEncomendaFin (@RequestBody String id){
+	public ResponseEntity<String> updateEncomendaFin (@RequestBody String id, HttpSession session){
 		
 		System.out.println("Numero da encomenda : "+id+", alterado para finalizado");
 		daoEnc  = new EncomendaDao();
 		try {
 			if(daoEnc.alterarFinalizado(id)){
 				msg="ok";
+				session.setAttribute("respostaFin", msg);
 			}else{
 				msg="erro";
+				session.setAttribute("respostaFin", msg);
 			}
 		} catch (Exception e) {
 			

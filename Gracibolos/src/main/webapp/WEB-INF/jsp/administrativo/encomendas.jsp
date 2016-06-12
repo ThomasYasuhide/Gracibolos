@@ -50,6 +50,7 @@
 						console.log("Variáveis de sessão item : ${respostaItem}");
 						console.log("Variáveis de sessão item : ${mensagemItem}");
 						console.log("Variáveis de sessão caixa : ${respostaCaixa}");
+						console.log("Variáveis de sessão encFaturada : ${respostaFat}");
 						
 					</script>				
 						
@@ -133,6 +134,31 @@
 						</script>															
 					</c:if>
 					
+					<c:if test="${(respostaFat == 'ok')}">	
+						<div id="msg7" class="alert alert-success alert-dismissible" role="alert">
+						 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>Sucesso!</strong>  Alteração para faturafa efetuada com sucesso.
+						</div>
+						<c:remove var="respostaFat"/>
+					  	<script type="text/javascript">
+						  	setTimeout(function(){
+								$('#msg7').alert('close');
+							}, 5000)
+						  </script>
+					</c:if>
+					
+					<c:if test="${respostaFat == 'erro'}">							
+						<div id="msg8" class="alert alert-danger alert-dismissible" role="alert">
+						  	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>Erro!</strong> Houve algum erro ao tentar alterar para faturada, favor tente novamente.
+						</div>	
+						<c:remove var="respostaFat"/>							
+						<script type="text/javascript">
+						 	setTimeout(function(){
+								$('#msg8').alert('close');
+							}, 5000)
+						</script>															
+					</c:if>
 					<hr/>
 					
 					<!-- ############################################################ CONTEUDO ############################################################ -->
@@ -860,30 +886,54 @@
 						var selectize = $('#cliente')[0].selectize;
 						selectize.disable();
 						var linha='';
+						
 						setTimeout(function(){//verifica se tem itens
 							$('#lista-produtos tr').each(function () {					
 								//Captura os numeros de linhas
 								linha = this.id.replace('item_', '');			
 							});
-							if(linha == ''){//Sem itens
+							if(linha == ''){// -------------------Sem itens
+								
 								console.log('sem itens');
+								
 								$('#totalprodutos').val('');//limpa o total dos produtos
 								$('#inserir-linha').removeClass('disabled').removeAttr('disabled');//habilitar insersão
-							}else{//Com itens
+								$('#btn_submit_produtos').removeClass('disabled').removeAttr('disabled');//Salvar itens da encomenda
+								$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação
+
+								//Colocar a data de faturamento - hoje
+								var now = moment().format('YYYY-MM-DD');        
+								$('#datafaturamento').val(now);//Colocar a data de hoje
+								
+							}else{// -----------------------------Com itens
+								
 								console.log('com itens');
 
-								var selectize = $('#produto_'+linha)[0].selectize;
-								selectize.disable();
-								  
-								$('#valor_'+linha).attr('readonly','readonly');
-								$('#quantidade_'+linha).attr('readonly','readonly');
-								$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
+								setTimeout(function(){
+									$('#lista-produtos tr').each(function () {					
+										//Captura os numeros de linhas
+										var linha = this.id.replace('item_', '');
+
+										var selectize = $('#produto_'+linha)[0].selectize;
+										selectize.disable();
+
+										$('#valor_'+linha).attr('readonly','readonly');
+										$('#quantidade_'+linha).attr('readonly','readonly');
+										$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
+										
+										calculaTotalProdutos();
+									});
+								}, 600);
 								
-								calculaTotalProdutos();
+								$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação - habilitar
+								$('#btn_submit_produtos').addClass('disabled').attr('disabled','disabled');//Salvar itens da encomenda - desabilitar
+								$('#formapagamento option').each(function () {//forma de pagamento - habilitar				
+									if($(this).val() != 0){
+										$(this).removeAttr('disabled');
+									}
+								});
 								
-								if(linha == 0){//não tiver nenhum item
-									$('#inserir-linha').addClass('disabled').attr('disabled','disabled');
-								}
+								$('#valorpago').removeAttr('readonly');//valor pago - habilitar
 							}
 							
 						},500);
@@ -897,6 +947,10 @@
 						break;
 					
 					case '3'://Faturado
+						
+						$('#btn_submit_informacoes').addClass('disabled').attr('disabled','disabled');//Salvar informações da encomenda
+						$('#btn_submit_produtos').addClass('disabled').attr('disabled','disabled');//Salvar itens da encomenda
+						$('#btn_submit_faturar').addClass('disabled').attr('disabled','disabled');//Salvar transação
 						$('#tab-faturar').removeClass('disabled');
 						$('#tab-produzir').addClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
@@ -907,7 +961,7 @@
 						$('#btn_faturar_bypass').removeClass('hidden').removeAttr('disabled');
 						
 						$('#btn_produzir').removeClass('hidden').removeAttr('disabled');
-						$('#btn_produzir_bypass').addClass('hidden').attr('disabled','disabled');
+						$('#btn_produzir_bypass').addClass('hidden').attr('disabled','disabled');//Escondido
 						
 						var selectize = $('#cliente')[0].selectize;
 						selectize.disable();
@@ -931,17 +985,20 @@
 						}, 500);
 						
 						$('#formapagamento option').each(function () {					
-							if($(this).val() != 0){
+							if($(this).val() != $('#formapagamento').val()){
 								$(this).attr('disabled','disabled');
 							}
 						});
 						
-						$('#valorpago').attr('disabled','disabled');
+						$('#valorpago').attr('readonly','readonly');
 						
 						break;
 					
 					case '4'://Produzindo
-						
+
+						$('#btn_submit_informacoes').addClass('disabled').attr('disabled','disabled');//Salvar informações da encomenda - desabilitar
+						$('#btn_submit_produtos').addClass('disabled').attr('disabled','disabled');//Salvar itens da encomenda - desabilitar
+						$('#btn_submit_faturar').addClass('disabled').attr('disabled','disabled');//Salvar transação - desabilitar
 						$('#tab-faturar').removeClass('disabled');
 						$('#tab-produzir').removeClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
@@ -1448,7 +1505,7 @@
      	            },
 		            success: function(numero) {
 		                callback(numero); //retorno, se existe ou não 
-	            
+          
 		            }
 				});
              };
@@ -1836,14 +1893,17 @@
 				$('#btn_produzir').removeClass('hidden').removeAttr('disabled');
 				$('#btn_produzir_bypass').addClass('hidden').attr('disabled','disabled');
 				
-				$('#formapagamento option').each(function () {					
+				$('#formapagamento option').each(function () {//forma de pagamento - habilitar				
 					if($(this).val() != 0){
 						$(this).removeAttr('disabled');
 					}
 				});
 				
-				$('#valorpago').removeAttr('readonly');
-				
+				$('#dataentrega').removeClass('disabled').removeAttr('disabled');
+				$('#valorpago').removeAttr('readonly');//valor pago - habilitar
+				$('#btn_submit_informacoes').removeClass('disabled').removeAttr('disabled');//Salvar informações da encomenda
+				$('#btn_submit_produtos').removeClass('disabled').removeAttr('disabled');//Salvar itens da encomenda
+				$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação
             }
 
            	$('#modalencomenda').on('hidden.bs.modal', function(){//Ao fechar o modal
