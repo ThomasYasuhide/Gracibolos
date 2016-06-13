@@ -938,11 +938,6 @@
 							
 						},600);
 						
-						//Colocar a data de faturamento - hoje
-						var hoje = moment().format('YYYY-MM-DD');        
-						console.log('data de hoje para - datafaturamento : '+hoje);
-						$('#datafaturamento').val(hoje);//Colocar a data de hoje
-						
 						break;
 						
 					case '2'://Cancelado
@@ -1045,6 +1040,9 @@
 						
 						$('#valorpago').attr('readonly','readonly');
 						
+						var now = moment().format('YYYY-MM-DD');        
+			 			$('#dataproducao').val(now);//Colocar a data de hoje
+
 						break;
 						
 					case '5'://Finalizado
@@ -1913,6 +1911,7 @@
 				$('#valorpago').val('');
 				$('#formapagamento').val('');
 				$('#datafaturamento').val('');
+				$('#datafaturamento').removeClass('disabled').removeAttr('disabled');
             }
 
 //            	$('#modalencomenda').on('hidden.bs.modal', function(){//Ao fechar o modal
@@ -1920,11 +1919,11 @@
 //        	 	})
       		
           	//------settando a data de hoje---------------------------------
-			var now = moment().format('YYYY-MM-DD');        
-			$('#datafaturamento').val(now);//Colocar a data de hoje
-            $('#dataencomenda').val(now);
-            $('#dataproducao').val(now);
-            $('#datafinalizado').val(now);
+// 			var now = moment().format('YYYY-MM-DD');        
+// 			$('#datafaturamento').val(now);//Colocar a data de hoje
+//             $('#dataencomenda').val(now);
+//             $('#dataproducao').val(now);
+//             $('#datafinalizado').val(now);
 
             function novoNumero(callback){//Chamada para o rest, me retorne o numero da encomenda 
             	$.ajax({//Neste endereço
@@ -2048,8 +2047,8 @@
                 $('#dataencomenda').val(data[7]);
    				$('#dataentrega').val(data[9]);
                 //$('#datafaturamento').val(data[10]); // É dataTransacao do caixa, e não da encomenda 
-                //$('#dataproducao').val(data[9]);
-                //$('#datafinalizado').val(data[11]);
+                $('#dataproducao').val(data[9]);
+                $('#datafinalizado').val(data[11]);
    				$('#datacancelado').val(data[12]);
    				$('#total').val(data[13]);
    				$('#obs').val(data[14]);
