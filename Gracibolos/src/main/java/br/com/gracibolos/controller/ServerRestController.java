@@ -393,6 +393,13 @@ public class ServerRestController {
 		try {
 			if(caixaDao.pesquisar1(caixa) != null){
 				c = caixaDao.pesquisar1(caixa);
+				System.out.println("gastoRecebimento : "+c.getGastoRecebimento()
+									+"\nencomendaId "+c.getEncomendaId()
+									+"\nDataTransacao "+c.getDataTransacao()
+									+"\nValor "+c.getValor()
+									+"\nForma "+c.getForma()
+									
+							);
 			}
 		} catch (Exception e) {
 			System.out.println("ERRO - rest pesquisar caixa\n"+e);

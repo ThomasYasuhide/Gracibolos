@@ -875,6 +875,7 @@
 				switch(status){
 					
 					case '1'://Iniciado
+						
 						$('#tab-faturar').addClass('disabled');
 						$('#tab-produzir').addClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
@@ -888,6 +889,7 @@
 						var linha='';
 						
 						setTimeout(function(){//verifica se tem itens
+							
 							$('#lista-produtos tr').each(function () {					
 								//Captura os numeros de linhas
 								linha = this.id.replace('item_', '');			
@@ -901,9 +903,7 @@
 								$('#btn_submit_produtos').removeClass('disabled').removeAttr('disabled');//Salvar itens da encomenda
 								$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação
 
-								//Colocar a data de faturamento - hoje
-								var now = moment().format('YYYY-MM-DD');        
-								$('#datafaturamento').val(now);//Colocar a data de hoje
+								
 								
 							}else{// -----------------------------Com itens
 								
@@ -923,7 +923,7 @@
 										
 										calculaTotalProdutos();
 									});
-								}, 600);
+								}, 500);
 								
 								$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação - habilitar
 								$('#btn_submit_produtos').addClass('disabled').attr('disabled','disabled');//Salvar itens da encomenda - desabilitar
@@ -936,7 +936,11 @@
 								$('#valorpago').removeAttr('readonly');//valor pago - habilitar
 							}
 							
-						},500);
+						},600);
+						
+						//Colocar a data de faturamento - hoje
+						var hoje = moment().format('YYYY-MM-DD');        
+						$('#datafaturamento').val(hoje);//Colocar a data de hoje
 						
 						break;
 						
@@ -1906,9 +1910,9 @@
 				$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação
             }
 
-           	$('#modalencomenda').on('hidden.bs.modal', function(){//Ao fechar o modal
-           		resetCampos();
-       	 	})
+//            	$('#modalencomenda').on('hidden.bs.modal', function(){//Ao fechar o modal
+//            		resetCampos();
+//        	 	})
       		
           	//------settando a data de hoje---------------------------------
 			var now = moment().format('YYYY-MM-DD');        
@@ -2085,15 +2089,33 @@
 			        });
 					
 				});//fim getJson
+
+				function dataFormatada(date){
+				    var data = new Date(date);   
+				    var dia = data.getDate();
+				    if (dia.toString().length == 1)
+				      dia = "0"+dia;
+				    var mes = data.getMonth()+1;
+				    if (mes.toString().length == 1)
+				      mes = "0"+mes;
+				    var ano = data.getFullYear();  
+				
+				    return ano+"-"+mes+"-"+dia;
+				}
 				
 				pesqCaixa(function(caixa){//Traz as informações de pagamneto
 
-					console.log('caixa.dataTransação : '+caixa.dataTransação);
+					console.log('caixa.id : '+caixa.id);
+					console.log('caixa.encomendaId : '+caixa.encomendaId); 
+					console.log('caixa.dataTransação : '+caixa.dataTransacao);
+				
+					console.log('caixa.dataTransação : '+dataFormatada(caixa.dataTransacao)+' com parse');
+					
 					console.log('caixa.forma : '+caixa.forma);
 					console.log('caixa.valor : '+caixa.valor);
 					console.log('caixa.descricao : '+caixa.descricao);
 					
-					$('#datafaturamento').val(caixa.dataTransação);
+					$('#datafaturamento').val(dataFormatada(caixa.dataTransacao));
 					$('#formapagamento').val(caixa.forma);
 					$('#valorpago').val(caixa.valor);
 					$('#obspagamento').val(caixa.descricao);
