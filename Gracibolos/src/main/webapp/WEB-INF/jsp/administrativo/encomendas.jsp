@@ -1269,25 +1269,23 @@
 				}
 			};
 
-			function verificaItemProdutoNome(){
+			function verificaItemProdutoNome(callback){
+				var status;
 				setTimeout(function(){
 					$('#lista-produtos tr').each(function () {					
 						//Captura os numeros de linhas
 						var linha = this.id.replace('item_', '');
-						var produto = $('#produto_' + linha);
-						if(produto.val() == ''){
+						
+						if($('#produto_' + linha).val() == ''){
 							console.log('item nome do produto '+linha+' não existe');
-							return  false;
+							status =  false;
 							alert('item nome do produto '+linha+' não existe');
 						}else{
-							return true;
-						}							
-						//var quantidade = $('#quantidade_' + linha);
-						//var valor = $('#valor_' + linha);
-						//var total = $('#total_' + linha);				
+							status = true;
+						}										
 					});
 				},500);
-				
+				callback(status);
 			};
 
 			function verificaItemquantidade(){
@@ -1295,17 +1293,14 @@
 					$('#lista-produtos tr').each(function () {					
 						//Captura os numeros de linhas
 						var linha = this.id.replace('item_', '');
-						var quantidade = $('#quantidade_' + linha);
-						if(quantidade.val() == ''){
+						
+						if($('#quantidade_' + linha).val() == ''){
 							console.log('item quantidade '+linha+' não existe');
 							return  false;
 							alert('item quantidade '+linha+' não existe');
 						}else{
 							return true;
-						}							
-						//var quantidade = $('#quantidade_' + linha);
-						//var valor = $('#valor_' + linha);
-						//var total = $('#total_' + linha);				
+						}									
 					});
 				},500);
 				
