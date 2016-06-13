@@ -110,7 +110,7 @@ public class EncomendaDao{
 	
 	private static LocalDate hoje = LocalDate.now();
 	
-public boolean alterarFaturado(String id)throws Exception{
+	public boolean alterarFaturado(String id)throws Exception{
 		
 		boolean status = false;
 		
@@ -545,40 +545,48 @@ public boolean alterarFaturado(String id)throws Exception{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
-			while(rs.next())
-			{
-				//da um get nos atributos do objeto encomenda
-				encomenda = new Encomenda();
+			if(rs != null){
+				
+				System.out.println("Listar encomendas : em aberto");
+				while(rs.next())
+				{
+					//da um get nos atributos do objeto encomenda
+					encomenda = new Encomenda();
+				
+					encomenda.setId(rs.getLong("id"));
+					encomenda.setClienteid(rs.getInt("cliente"));	
+					encomenda.setStatus(rs.getInt("status"));
+					encomenda.setResponsavel(rs.getString("responsavel"));
+					if(rs.getDate("dataencomenda")!=null)
+						encomenda.setDataencomenda(rs.getDate("dataencomenda").toLocalDate());
+					if(rs.getDate("dataentrega")!=null)
+						encomenda.setDataentrega(rs.getDate("dataentrega").toLocalDate());
+					if(rs.getDate("datafaturamento")!=null)
+						encomenda.setDatafaturamento(rs.getDate("datafaturamento").toLocalDate());
+					if(rs.getDate("dataproducao")!=null)
+						encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
+					if(rs.getDate("datafinalizado")!=null)
+						encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
+					if(rs.getDate("datacancelado")!=null)
+						encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
+					encomenda.setTotalprodutos(rs.getBigDecimal("total"));
+					encomenda.setObs(rs.getString("obs"));
+					encomenda.setNomerazao(rs.getString("nomerazao"));
+					encomenda.setClienteId(rs.getLong("clienteId"));
+					encomenda.setCpfcnpj(rs.getString("cpfcnpj"));
+				
+					//------Itens da encomenda---------------------------------------------------------
+					 		
+					
+					
+					listEnc.add(encomenda);
+					
+				}//while encomenda
+			}else{
+				System.out.println("Nenhum registro necontrado ou sem conexão");
+			}
 			
-				encomenda.setId(rs.getLong("id"));
-				encomenda.setClienteid(rs.getInt("cliente"));	
-				encomenda.setStatus(rs.getInt("status"));
-				encomenda.setResponsavel(rs.getString("responsavel"));
-				if(rs.getDate("dataencomenda")!=null)
-					encomenda.setDataencomenda(rs.getDate("dataencomenda").toLocalDate());
-				if(rs.getDate("dataentrega")!=null)
-					encomenda.setDataentrega(rs.getDate("dataentrega").toLocalDate());
-				if(rs.getDate("datafaturamento")!=null)
-					encomenda.setDatafaturamento(rs.getDate("datafaturamento").toLocalDate());
-				if(rs.getDate("dataproducao")!=null)
-					encomenda.setDataproducao(rs.getDate("dataproducao").toLocalDate());
-				if(rs.getDate("datafinalizado")!=null)
-					encomenda.setDatafinalizado(rs.getDate("datafinalizado").toLocalDate());
-				if(rs.getDate("datacancelado")!=null)
-					encomenda.setDatacancelamento(rs.getDate("datacancelado").toLocalDate());
-				encomenda.setTotalprodutos(rs.getBigDecimal("total"));
-				encomenda.setObs(rs.getString("obs"));
-				encomenda.setNomerazao(rs.getString("nomerazao"));
-				encomenda.setClienteId(rs.getLong("clienteId"));
-				encomenda.setCpfcnpj(rs.getString("cpfcnpj"));
 			
-				//------Itens da encomenda---------------------------------------------------------
-				 		
-				
-				
-				listEnc.add(encomenda);
-				
-			}//while encomenda
 			
 			conn.close();
 			ps.close();

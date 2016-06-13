@@ -308,7 +308,7 @@
 						                            </span>
 						                        </a>
 						                    </li>
-						                    <li id="tab-faturar" role="presentation" class="tab disabled">
+						                    <li id="tab-faturar" role="presentation" class="tab">
 						                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Faturar encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">account_balance</i>
@@ -316,7 +316,7 @@
 						                        </a>
 						                    </li>
 						
-						                    <li id="tab-produzir" role="presentation" class="tab disabled">
+						                    <li id="tab-produzir" role="presentation" class="tab">
 						                        <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Produzir encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">query_builder</i>
@@ -324,7 +324,7 @@
 						                        </a>
 						                    </li>
 						
-						                    <li id="tab-finalizar" role="presentation" class="tab disabled">
+						                    <li id="tab-finalizar" role="presentation" class="tab">
 						                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Finalizar encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">done</i>
@@ -439,9 +439,8 @@
 											
 						                    <div class="row">
 						                    	
-												
-												<div id="errosFatura" class="col-xs-12">	
-												</div>
+												<div id="avisoCaixa" class="col-xs-12"></div>
+												<div id="errosFatura" class="col-xs-12"></div>
 						                    
 						                        <div class="input-margin col-xs-12 col-sm-6 col-md-4">
 													<label class="control-label" for="datafaturamento">Data de faturamento:</label>
@@ -909,32 +908,17 @@
 							}else{// -----------------------------Com itens
 								
 								console.log('com itens');
-								$('#inserir-linha').addClass('disabled').attr('disabled','disabled');
-								setTimeout(function(){
-									$('#lista-produtos tr').each(function () {					
-										//Captura os numeros de linhas
-										var linha = this.id.replace('item_', '');
 
-										var selectize = $('#produto_'+linha)[0].selectize;
-										selectize.disable();
-
-										$('#valor_'+linha).attr('readonly','readonly');
-										$('#quantidade_'+linha).attr('readonly','readonly');
-										$('#delete-produto_'+linha).addClass('disabled').attr('disabled','disabled');
-										
-										calculaTotalProdutos();
-									});
-								}, 500);
 								
-								$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação - habilitar
-								$('#btn_submit_produtos').addClass('disabled').attr('disabled','disabled');//Salvar itens da encomenda - desabilitar
-								$('#formapagamento option').each(function () {//forma de pagamento - habilitar				
-									if($(this).val() != 0){
-										$(this).removeAttr('disabled');
-									}
-								});
+// 								$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação - habilitar
+// 								$('#btn_submit_produtos').addClass('disabled').attr('disabled','disabled');//Salvar itens da encomenda - desabilitar
+// 								$('#formapagamento option').each(function () {//forma de pagamento - habilitar				
+// 									if($(this).val() != 0){
+// 										$(this).removeAttr('disabled');
+// 									}
+// 								});
 								
-								$('#valorpago').removeAttr('readonly');//valor pago - habilitar
+// 								$('#valorpago').removeAttr('readonly');//valor pago - habilitar
 							}
 							
 						},600);
@@ -1240,7 +1224,7 @@
 					document.getElementById("cliente").focus();
 					console.log('campo o nome cliente vazio');
 					
-					var erro = '<div id="avisoDataEntr" class="alert alert-warning  alert-dismissible fade in" role="alert">';
+					var erro = '<div id="avisoCliente" class="alert alert-warning  alert-dismissible fade in" role="alert">';
 					erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 					erro +='<strong>Aviso!</strong> O campo nome do cliente é de preenchimento obrigatório.';
 					erro +='</div>';
@@ -1248,7 +1232,7 @@
 					$('#avisoInfo').append(erro);
 				
 					setTimeout(function(){
-						$('#avisoDataEntr').alert('close');
+						$('#avisoCliente').alert('close');
 					}, 5000);
 					return false;
 				}else{
@@ -1298,7 +1282,17 @@
 				if(($('#formapagamento').val() == '')){
 					document.getElementById("formapagamento").focus();
 					console.log('campo o forma de pagamento vazio');
-					//alert('forma pagamento não existe');
+					
+					var erro = '<div id="avisoForma" class="alert alert-warning  alert-dismissible fade in" role="alert">';
+					erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+					erro +='<strong>Aviso!</strong> O campo nome do cliente é de preenchimento obrigatório.';
+					erro +='</div>';
+				
+					$('#avisoCaixa').append(erro);
+				
+					setTimeout(function(){
+						$('#avisoForma').alert('close');
+					}, 5000);
 					return false;
 				}else{
 					//alert('nome existe');
@@ -1333,7 +1327,17 @@
 				if($('#valorpago').val() == ''){
 					document.getElementById("valorpago").focus();
 					console.log('campo o valor pago vazio');
-					//alert('valor pago não existe');
+					
+					var erro = '<div id="avisoValorPago" class="alert alert-warning  alert-dismissible fade in" role="alert">';
+					erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+					erro +='<strong>Aviso!</strong> O campo nome do cliente é de preenchimento obrigatório.';
+					erro +='</div>';
+				
+					$('#avisoCaixa').append(erro);
+				
+					setTimeout(function(){
+						$('#avisoValorPago').alert('close');
+					}, 5000);
 					return false;
 				}else{
 					//alert('nome existe');
@@ -1399,36 +1403,6 @@
 				
 			};
 
-//				var i = 0;
-			
-//				$('#lista-produtos tr').each(function() {
-//					var linha = this.id.replace('item_', '');
-			
-//					i++;
-				
-//					//Verifica se todos os produtos está preenchidos.
-//					if($('#produto_'+linha).val() != ''){
-					
-//						if($('#quantidade_'+linha).val() != '' && $('#quantidade_'+linha).val() > 0){
-						
-//							if($('#valor_'+linha).val() != '' && $('#valor_'+linha).val().split(",").join(".") > 0.00){
-							
-//								//AQUI VAI O CÓDIGO SE TUDO ESTIVER PREENCHIDO
-//								alert('TODOS OS PRODUTOS ESTÃO PREENCHIDOS');
-							
-//							} else {
-//								alert('O valor do produto ' + $('#produto_'+linha).text() + ' está em branco.');
-//							}
-						
-//						} else {
-//							alert('A quantidade de itens do produto ' + $('#produto_'+linha).text() + ' está vazia.');
-//						}
-					
-//					} else {						
-//						alert('Nenhum produto selecionado no item de numero ' + i + '.');
-//					}
-				
-//				});
 
 			
 			$('#btn_submit_informacoes').click(function(){
@@ -1686,7 +1660,7 @@
 						
 						console.log('Encomenda não existe, salvar como faturada');
 
-						if(verificaCliente() && verificaProdutos() && verificaTotalP() && verificaValorPago()){
+						if(verificaCliente() && verificaValorPago()){
 							
 							var msg = '';
 							
@@ -1697,6 +1671,7 @@
 										console.log(msg);
 									}
 								});
+								
 								setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
 									inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
 										if(result != 0){
@@ -1705,7 +1680,6 @@
 										}
 									});
 								}, 400);
-								
 								
 								faturar(function(result){ //Alterar o status para faturado
 									//console.log('callback faturada'+result);
@@ -1742,19 +1716,20 @@
      	                callback();
      	            },
 		            success: function(result) {
-		                //alert(result);
+		                //alert(result);-
 		            	callback(result);
 		            }
 		        });
 			};
 			$("#btn_submit_produzir").click(function() {
-
+				console.log('#btn_submit_produzir - click');
 				produzirAjax(resultado);
 				function resultado(result){
-					$('#msg8').show(); 
-					setTimeout(function(){
-						$('#msg8').alert('close');
-						}, 5000 );
+					
+// 					$('#msg8').show(); 
+// 					setTimeout(function(){
+// 						$('#msg8').alert('close');
+// 						}, 5000 );
 				}			
 				
 			});
@@ -1784,13 +1759,14 @@
 			}
 			
 			$("#btn_submit_finalizar").click(function() {
-				
+				console.log('#btn_submit_finalizar - click');
 				finalizarAjax(resposta);
 				function resposta(result){
-					$('#msg9').show(); 
-					setTimeout(function(){
-						$('#msg9').alert('close');
-						}, 5000 );
+					
+// 					$('#msg9').show(); 
+// 					setTimeout(function(){
+// 						$('#msg9').alert('close');
+// 						}, 5000 );
 				};
 		
 			});
