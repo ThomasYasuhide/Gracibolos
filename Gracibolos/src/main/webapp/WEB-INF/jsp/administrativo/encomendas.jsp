@@ -1412,9 +1412,9 @@
 					//Verifica se todos os produtos está preenchidos.
 					if($('#produto_'+linha).val() != ''){
 						
-						if($('#quantidade_'+linha).val() != ''){
+						if($('#quantidade_'+linha).val() != '' && $('#quantidade_'+linha).val() > 0){
 							
-							if($('#valor_'+linha).val() != ''){
+							if($('#valor_'+linha).val() != '' && $('#valor_'+linha).val().split(",").join(".") > 0.00){
 								
 								//AQUI VAI O CÓDIGO SE TUDO ESTIVER PREENCHIDO
 								alert('TODOS OS PRODUTOS ESTÃO PREENCHIDOS');
