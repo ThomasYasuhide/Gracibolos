@@ -880,7 +880,7 @@
 						$('#tab-produzir').addClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
 						
-						$('.cancelar-encomenda').removeAttr('disabled');						
+						$('.cancelar-encomenda').removeAttr('disabled');
 						$('#btn_faturar').removeClass('hidden').removeAttr('disabled');
 						$('#btn_faturar_bypass').addClass('hidden').attr('disabled','disabled');
 						
@@ -1408,6 +1408,37 @@
 			};
 			
 			$('#btn_submit_informacoes').click(function(){
+				
+				var i = 0;
+				
+				$('#lista-produtos tr').each(function() {
+					var linha = this.id.replace('item_', '');
+					
+					i++;
+					
+					//Verifica se todos os produtos está preenchidos.
+					if($('#produto_'+linha).val() != ''){
+						
+						if($('#quantidade_'+linha).val() != ''){
+							
+							if($('#valor_'+linha).val() != ''){
+								
+								//AQUI VAI O CÓDIGO SE TUDO ESTIVER PREENCHIDO
+								alert('TODOS OS PRODUTOS ESTÃO PREENCHIDOS');
+								
+							} else {
+								alert('O valor do produto ' + $('#produto_'+linha).text() + ' está em branco.');
+							}
+							
+						} else {
+							alert('A quantidade de itens do produto ' + $('#produto_'+linha).text() + ' está vazia.');
+						}
+						
+					} else {						
+						alert('Nenhum produto selecionado no item de numero ' + i + '.');
+					}
+					
+				});
 				
 				if(verificaCliente() && verificaDataEntr()){//verificação dos campos
 						
