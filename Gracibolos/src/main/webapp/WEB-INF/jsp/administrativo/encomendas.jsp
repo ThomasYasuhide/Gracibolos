@@ -940,6 +940,7 @@
 						
 						//Colocar a data de faturamento - hoje
 						var hoje = moment().format('YYYY-MM-DD');        
+						console.log('data de hoje para - datafaturamento : '+hoje);
 						$('#datafaturamento').val(hoje);//Colocar a data de hoje
 						
 						break;
@@ -1908,6 +1909,10 @@
 				$('#btn_submit_informacoes').removeClass('disabled').removeAttr('disabled');//Salvar informações da encomenda
 				$('#btn_submit_produtos').removeClass('disabled').removeAttr('disabled');//Salvar itens da encomenda
 				$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação
+
+				$('#valorpago').val('');
+				$('#formapagamento').val('');
+				$('#datafaturamento').val('');
             }
 
 //            	$('#modalencomenda').on('hidden.bs.modal', function(){//Ao fechar o modal
@@ -1954,7 +1959,8 @@
             	resetCampos();
             	//Chama o método para inserção
 				inserir_item(function(linha){}); // Inserir uma linha nos itens
-            	
+				var now = moment().format('YYYY-MM-DD');        
+				$('#datafaturamento').val(now);//Colocar a data de hoje
             	//Altera dinamicamente o titulo do modal.
 				$('#modal-subtitle').text("Incluir nova encomenda");
 				
@@ -2000,9 +2006,6 @@
 				
 				//Altera o nome do botão do modal.
 				$("#btn_submit_produtos").html('<i class="material-icons">save</i>&nbsp;&nbsp;&nbsp;Salvar'); 
-				
-				//Pega os dados de determinada linha da tabela.
-                var data = table.row( $(this).parents('tr') ).data();
 
            		//Apresenta o modal de exclusão na tela.
            		$('#modal-encomenda').modal('show');
@@ -2029,6 +2032,9 @@
         		*/
            		
 				//Preenche os determinados campos com os conteudos.
+				//Pega os dados de determinada linha da tabela.
+                var data = table.row( $(this).parents('tr') ).data();
+                
                 $('#id').val(data[0]);
                 $('#status').val(data[2]);
                 
@@ -2041,7 +2047,7 @@
                 $('#responsavel').val(data[6]);
                 $('#dataencomenda').val(data[7]);
    				$('#dataentrega').val(data[9]);
-                $('#datafaturamento').val(data[10]);
+                //$('#datafaturamento').val(data[10]); // É dataTransacao do caixa, e não da encomenda 
                 //$('#dataproducao').val(data[9]);
                 //$('#datafinalizado').val(data[11]);
    				$('#datacancelado').val(data[12]);
@@ -2090,7 +2096,7 @@
 					
 				});//fim getJson
 
-				function dataFormatada(date){
+				function dataFormatada(date){// Parse date para yyyy-MM-dd
 				    var data = new Date(date);   
 				    var dia = data.getDate();
 				    if (dia.toString().length == 1)
@@ -2115,7 +2121,7 @@
 					console.log('caixa.valor : '+caixa.valor);
 					console.log('caixa.descricao : '+caixa.descricao);
 					
-					$('#datafaturamento').val(dataFormatada(caixa.dataTransacao));
+					$('#datafaturamento').val(dataFormatada(caixa.dataTransacao));//O campo data de faturamento é dataTransacao do caixa
 					$('#formapagamento').val(caixa.forma);
 					$('#valorpago').val(caixa.valor);
 					$('#obspagamento').val(caixa.descricao);
@@ -2244,19 +2250,6 @@
 			$('#produzir-encomenda').on('hidden.bs.modal', function () {
 				$('#modal-encomenda').removeClass('hidden');
 			})
-						
-//             /*
-// 			 MENSAGENS DE ERRO
-// 			*/
-// 			$('#msg1').hide();
-// 			$('#msg2').hide();
-// 			$('#msg3').hide();
-// 			$('#msg4').hide();
-// 			$('#msg5').hide();
-// 			$('#msg6').hide();
-// 			$('#msg7').hide();
-// 			$('#msg8').hide();
-// 			$('#msg9').hide();
 			
  		});
 	</script>
