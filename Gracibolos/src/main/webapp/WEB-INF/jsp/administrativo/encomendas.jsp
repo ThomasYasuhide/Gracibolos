@@ -875,7 +875,8 @@
 				switch(status){
 					
 					case '1'://Iniciado
-						
+
+						$('#dataentrega').removeClass('disabled').removeAttr('disabled');//Salvar transação
 						$('#tab-faturar').addClass('disabled');
 						$('#tab-produzir').addClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
@@ -908,7 +909,7 @@
 							}else{// -----------------------------Com itens
 								
 								console.log('com itens');
-
+								$('#inserir-linha').addClass('disabled').attr('disabled','disabled');
 								setTimeout(function(){
 									$('#lista-produtos tr').each(function () {					
 										//Captura os numeros de linhas
@@ -947,7 +948,8 @@
 						break;
 					
 					case '3'://Faturado
-						
+
+						$('#dataentrega').addClass('disabled').attr('disabled','disabled');
 						$('#btn_submit_informacoes').addClass('disabled').attr('disabled','disabled');//Salvar informações da encomenda
 						$('#btn_submit_produtos').addClass('disabled').attr('disabled','disabled');//Salvar itens da encomenda
 						$('#btn_submit_faturar').addClass('disabled').attr('disabled','disabled');//Salvar transação
@@ -996,6 +998,7 @@
 					
 					case '4'://Produzindo
 
+						$('#dataentrega').addClass('disabled').attr('disabled','disabled');
 						$('#btn_submit_informacoes').addClass('disabled').attr('disabled','disabled');//Salvar informações da encomenda - desabilitar
 						$('#btn_submit_produtos').addClass('disabled').attr('disabled','disabled');//Salvar itens da encomenda - desabilitar
 						$('#btn_submit_faturar').addClass('disabled').attr('disabled','disabled');//Salvar transação - desabilitar
@@ -1356,7 +1359,7 @@
 			*
 			*/
 
-			function getEncomenda(callback){
+			function getEncomenda(status, callback){
 				//alert("Salvar");
 				//recupera os valores da encomenda
 				var enc = new Object();
@@ -1378,7 +1381,7 @@
 			
 			function inserirInfoEncomenda(status, callback){
 				
-				getEncomenda(function(enc){
+				getEncomenda(status, function(enc){
 					//Parse para json		
 					var js = JSON.stringify(enc);
 					//alert(enc);
@@ -1399,40 +1402,41 @@
 				});
 				
 			};
+
+//				var i = 0;
+			
+//				$('#lista-produtos tr').each(function() {
+//					var linha = this.id.replace('item_', '');
+			
+//					i++;
+				
+//					//Verifica se todos os produtos está preenchidos.
+//					if($('#produto_'+linha).val() != ''){
+					
+//						if($('#quantidade_'+linha).val() != '' && $('#quantidade_'+linha).val() > 0){
+						
+//							if($('#valor_'+linha).val() != '' && $('#valor_'+linha).val().split(",").join(".") > 0.00){
+							
+//								//AQUI VAI O CÓDIGO SE TUDO ESTIVER PREENCHIDO
+//								alert('TODOS OS PRODUTOS ESTÃO PREENCHIDOS');
+							
+//							} else {
+//								alert('O valor do produto ' + $('#produto_'+linha).text() + ' está em branco.');
+//							}
+						
+//						} else {
+//							alert('A quantidade de itens do produto ' + $('#produto_'+linha).text() + ' está vazia.');
+//						}
+					
+//					} else {						
+//						alert('Nenhum produto selecionado no item de numero ' + i + '.');
+//					}
+				
+//				});
+
 			
 			$('#btn_submit_informacoes').click(function(){
-				
-				var i = 0;
-				
-				$('#lista-produtos tr').each(function() {
-					var linha = this.id.replace('item_', '');
-					
-					i++;
-					
-					//Verifica se todos os produtos está preenchidos.
-					if($('#produto_'+linha).val() != ''){
-						
-						if($('#quantidade_'+linha).val() != '' && $('#quantidade_'+linha).val() > 0){
-							
-							if($('#valor_'+linha).val() != '' && $('#valor_'+linha).val().split(",").join(".") > 0.00){
 								
-								//AQUI VAI O CÓDIGO SE TUDO ESTIVER PREENCHIDO
-								alert('TODOS OS PRODUTOS ESTÃO PREENCHIDOS');
-								
-							} else {
-								alert('O valor do produto ' + $('#produto_'+linha).text() + ' está em branco.');
-							}
-							
-						} else {
-							alert('A quantidade de itens do produto ' + $('#produto_'+linha).text() + ' está vazia.');
-						}
-						
-					} else {						
-						alert('Nenhum produto selecionado no item de numero ' + i + '.');
-					}
-					
-				});
-				
 				if(verificaCliente() && verificaDataEntr()){//verificação dos campos
 						
 					inserirInfoEncomenda(1,function(result){
@@ -1574,9 +1578,12 @@
 								console.log('submit_informações : '+result);
 							});//fiminserirInfoEncomenda
 								
-							inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
-								
-							});//fim inserirItemEncomenda
+							setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+								inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
+									
+								});//fim inserirItemEncomenda
+							}, 400);
+							
 							
 							setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
 								recarregar();
@@ -1694,13 +1701,15 @@
 										console.log(msg);
 									}
 								});
+								setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+									inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
+										if(result != 0){
+											msg = msg + ' com '+result+' iten(s)';
+											console.log(msg);
+										}
+									});
+								}, 400);
 								
-								inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
-									if(result != 0){
-										msg = msg + ' com '+result+' iten(s)';
-										console.log(msg);
-									}
-								});
 								
 								faturar(function(result){ //Alterar o status para faturado
 									//console.log('callback faturada'+result);
