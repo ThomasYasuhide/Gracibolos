@@ -340,7 +340,7 @@
 						                <div class="tab-pane active" role="tabpanel" id="step1">
 	                    
 						                    <div class="row">
-						                    	
+						                    	<div id="avisoInfo" class="col-xs-12"></div>
 												
 						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
 													<label class="control-label" for="id">Nº da encomenda:</label>
@@ -1235,36 +1235,21 @@
 // 				return false;
 // 			});
 
-			//Verifica se existe algum item de produto
-			function verificaProdutos(){
-				
-				if($('#lista-produtos tr').length){
-					//alert('produtos existe');
-					return true;
-				}else{
-					document.getElementById("step2").focus();
-					//alert('produtos não existe');
-					return false;
-				}
-			};
-			
-			function verificaTotalP(){
-				if($('#totalprodutos').val() == ''){
-					document.getElementById("totalprodutos").focus();
-					console.log('campo o total vazio');
-					//alert('total não existe');
-					return false;
-				}else{
-					//alert('nome existe');
-					return true;
-				}
-			};
-
 			function verificaCliente(){
 				if($('#cliente').val() == ''){
 					document.getElementById("cliente").focus();
 					console.log('campo o nome cliente vazio');
-					//alert('nome não existe');
+					
+					var erro = '<div id="avisoDataEntr" class="alert alert-warning  alert-dismissible fade in" role="alert">';
+					erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+					erro +='<strong>Aviso!</strong> O campo nome do cliente é de preenchimento obrigatório.';
+					erro +='</div>';
+				
+					$('#avisoInfo').append(erro);
+				
+					setTimeout(function(){
+						$('#avisoDataEntr').alert('close');
+					}, 5000);
 					return false;
 				}else{
 					//alert('nome existe');
@@ -1325,7 +1310,18 @@
 				if($('#dataentrega').val() == ''){
 					document.getElementById("dataentrega").focus();
 					console.log('campo o data entrega vazio');
-					//alert('data entrega não existe');
+
+					var erro = '<div id="avisoDataEntr" class="alert alert-warning  alert-dismissible fade in" role="alert">';
+					erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+					erro +='<strong>Aviso!</strong> O campo data de entrega é de preenchimento obrigatório.';
+					erro +='</div>';
+				
+					$('#avisoInfo').append(erro);
+				
+					setTimeout(function(){
+						$('#avisoDataEntr').alert('close');
+					}, 5000);
+					
 					return false;
 				}else{
 					//alert('nome existe');
@@ -1381,7 +1377,7 @@
 			
 			function inserirInfoEncomenda(status, callback){
 				
-				getEncomenda(status, function(enc){
+				getEncomenda(status, function(enc){//Repasso o estatus
 					//Parse para json		
 					var js = JSON.stringify(enc);
 					//alert(enc);
@@ -1837,7 +1833,7 @@
 				if(parseFloat(valorpago) >= parseFloat(totalencomenda)){
 					$("#valortroco").val((valorpago - totalencomenda).toFixed(2)).trigger('input');
 				}else{
-					var erro = '<div id="erroValorPago" class="alert alert-danger alert-dismissible fade in" role="alert">';
+					var erro = '<div id="erroValorPago" class="alert alert-warning  alert-dismissible fade in" role="alert">';
 							erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 							erro +='<strong>Atenção!</strong> O valor pago informado é menor do que o valor total da encomenda.';
 						erro +='</div>';
