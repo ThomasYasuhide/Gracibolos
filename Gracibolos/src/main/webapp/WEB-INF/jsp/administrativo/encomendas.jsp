@@ -1035,7 +1035,6 @@
 						$('#link-finalizar').click();
 			            var now = moment().format('YYYY-MM-DD'); //data finalizado - settando a data de hoje
 			            $('#datafinalizado').val(now);
-			            $('#dataproducao').val(data[9]);//Insere a data de produção
 
 						$('#dataentrega').addClass('disabled').attr('disabled','disabled');
 						$('#btn_submit_informacoes').addClass('disabled').attr('disabled','disabled');//Salvar informações da encomenda - desabilitar
@@ -1081,9 +1080,6 @@
 						});
 						
 						$('#valorpago').attr('readonly','readonly');
-						
-						var now = moment().format('YYYY-MM-DD');        
-			 			$('#dataproducao').val(now);//Colocar a data de hoje
 
 						break;
 						
@@ -2187,6 +2183,8 @@
    				$('#total').val(data[13]);
    				$('#obs').val(data[14]);
 
+				console.log('obs : '+data[14]);
+				
 				//carrega os itens à partir do número da encomenda
 				var url = '/Gracibolos/rest-itensencomenda/'+data[0];
 				$.getJSON(url).done(function(data){
