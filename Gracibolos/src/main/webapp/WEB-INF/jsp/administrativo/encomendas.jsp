@@ -932,6 +932,10 @@
 						break;
 					
 					case '3'://Faturado
+						
+						//------settando a data de hoje---------------------------------
+						var now = moment().format('YYYY-MM-DD'); 
+			            $('#dataproducao').val(now);
 
 						$('#dataentrega').addClass('disabled').attr('disabled','disabled');
 						$('#btn_submit_informacoes').addClass('disabled').attr('disabled','disabled');//Salvar informações da encomenda
@@ -981,6 +985,10 @@
 						break;
 					
 					case '4'://Produzindo
+						
+						//------settando a data de hoje---------------------------------
+			            var now = moment().format('YYYY-MM-DD'); 
+			            $('#datafinalizado').val(now);
 
 						$('#dataentrega').addClass('disabled').attr('disabled','disabled');
 						$('#btn_submit_informacoes').addClass('disabled').attr('disabled','disabled');//Salvar informações da encomenda - desabilitar
@@ -1921,16 +1929,10 @@
 				$('#datafaturamento').removeClass('disabled').removeAttr('disabled');
             }
 
-//            	$('#modalencomenda').on('hidden.bs.modal', function(){//Ao fechar o modal
-//            		resetCampos();
-//        	 	})
-      		
-          	//------settando a data de hoje---------------------------------
-// 			var now = moment().format('YYYY-MM-DD');        
-// 			$('#datafaturamento').val(now);//Colocar a data de hoje
-//             $('#dataencomenda').val(now);
-//             $('#dataproducao').val(now);
-//             $('#datafinalizado').val(now);
+           	$('#modalencomenda').on('hidden.bs.modal', function(){//Ao fechar o modal
+           		//resetCampos();
+           		console.log('ao fechar o modal - resetar os campos');
+       	 	})
 
             function novoNumero(callback){//Chamada para o rest, me retorne o numero da encomenda 
             	$.ajax({//Neste endereço
@@ -1955,7 +1957,12 @@
             $('#incluir-encomenda-modal').click(function() {
                 
             	$('.nav-tabs a[href="#step1"]').tab('show');//Abrir no formulario dados da encomenda
-                
+
+            	//------settando a data de hoje---------------------------------
+    			var now = moment().format('YYYY-MM-DD'); 
+    			$('#dataencomenda').val(now);       
+    			$('#datafaturamento').val(now);//Colocar a data de hoje
+    			
 				//callback
            	  	novoNumero(function(result){         	  	
 					//alert(result);

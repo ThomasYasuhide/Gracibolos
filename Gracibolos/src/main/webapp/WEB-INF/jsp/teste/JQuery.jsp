@@ -30,9 +30,11 @@
 <body>
 	<div id="dialog" title="Aviso do sistema">
 		<p>Hello!</p>
+		<p>sessão : ${sessao }</p>
 	</div>
 	
 	<button id="btn_carregar">Carregar</button>
+	<button id="btn_limpar">limpar</button>
 	
 	<input type="text" id="topic_title" /><br>
 	
@@ -108,8 +110,8 @@
 		
 	<script type="text/javascript">
 
-	$(document).ready(function() {
-	    $('#example').DataTable( {
+	//$(document).ready(function() {
+	   var table = $('#example').DataTable( {
 	        "ajax": '../Gracibolos/resources/arrays1.txt',
 	        "columns": [
 	                    { "data": "name" },
@@ -120,7 +122,7 @@
 	                    { "data": "salary" }
 	                ]
 	    } );
-	} );
+	//} );
 	
 	//-----------------------------------------------------------------------------------------------
 	var url = '/Gracibolos/rest-itensencomenda/55';
@@ -152,7 +154,19 @@
 	$('#btn_carregar').click(function(){
 		//alert('Botão ok');
 		//$('#dialog').dialog();
-		document.getElementById("div1").style.display = "block";
+		//document.getElementById("div1").style.display = "block";
+		table.ajax.reload ();
+
+		//table.clear().draw();
+	});
+
+	$('#btn_limpar').click(function(){
+		//alert('Botão ok');
+		//$('#dialog').dialog();
+		//document.getElementById("div1").style.display = "block";
+		//table.ajax.reload ();
+
+		table.clear().draw();
 	});
 
 	//Gera estilo da tabela
@@ -193,7 +207,7 @@
 	
 	//-----------------------------------------------------------------------------------------------	
 	var urlProduto = 'rest-produtos';
-	var url = "http://localhost:8080/Gracibolos/rest-pesquisar-produto-id/16";
+	var url = "../Gracibolos/rest-pesquisar-produto-id/16";
 	//-----------------------------------------------------------------------------------------------	
 	
 	//-----------------------autocompletar-nome-de-produtos-------------------------------------	

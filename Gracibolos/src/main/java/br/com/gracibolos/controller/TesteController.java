@@ -1,5 +1,7 @@
 package br.com.gracibolos.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,7 +12,9 @@ import br.com.gracibolos.jdbc.dao.ProdutoDao;
 public class TesteController {
 	
 	@RequestMapping("/teste-jquery")
-	public ModelAndView teste()	{
+	public ModelAndView teste(HttpSession session)	{
+		
+		session.setAttribute("sessao", "sessao - teste");
 		
 		//EncomendaDao daoEnc = new EncomendaDao();
 		ProdutoDao daoPro = new ProdutoDao();
