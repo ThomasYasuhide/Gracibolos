@@ -958,10 +958,13 @@
 								linha = this.id.replace('item_', '');			
 							});
 							if(linha == ''){// -------------------Sem itens
-								inserir_item();
+								
+								inserir_item(function(linha){});
 								console.log('sem itens');
 								$('#link-produto').click();//Abre na aba produtos
+								
 							}else{// -----------------------------com itens
+								
 								$('#link-faturar').click();//Abre na aba faturar
 							}
 
