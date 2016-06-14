@@ -84,7 +84,7 @@
 						<div id="msg3" class="alert alert-success alert-dismissible" role="alert">
 						 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						  	<strong>Sucesso!</strong> 
-						  	<c:out value="${mensagemItem}"></c:out>, armazenado(s) com sucesso.
+						  	<c:out value="${mensagemItem}"></c:out> iten(s), armazenado(s) com sucesso.
 						</div>
 						<c:remove var="respostaItem"/>
 					  	<c:remove var="mensagemItem"/>
@@ -390,6 +390,8 @@
 						                <div class="tab-pane" role="tabpanel" id="step2">
 
 							                    <div class="row">
+							                    
+													<div id="validaProdutos" class="col-xs-12"></div>
 													
 							                    	<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							                    		<button type="button" id="inserir-linha"  onclick="return false" class="btn btn-default fullwidth"><i class="material-icons">add_shopping_cart</i>&nbsp;&nbsp;&nbsp;Incluir novo produto</button>
@@ -1330,6 +1332,70 @@
 					return true;
 				}
 			};
+			
+			function verificaItens(callback){
+				var i = 0;
+				var status = false;
+				
+				$('#lista-produtos tr').each(function() {
+					
+					var linha = this.id.replace('item_', '');
+					status = false;
+					i++;
+					
+					//Verifica se todos os produtos está preenchidos.
+					if($('#produto_'+linha).val() != ''){
+						
+						if($('#quantidade_'+linha).val() != '' && $('#quantidade_'+linha).val() > 0){
+							
+							if($('#valor_'+linha).val() != '' && $('#valor_'+linha).val().split(",").join(".") > 0.00){
+								
+								status = true;
+								
+							} else {
+								var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
+								erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+								erro +='<strong>Atenção!</strong> O valor do produto ' + $('#produto_'+linha).text() + ' está em branco.';
+								erro +='</div>';
+							
+								$('#validaProdutos').append(erro);
+								
+								setTimeout(function(){
+									$('.alert').alert('close');
+								}, 5000);
+							}
+							
+						} else {
+							var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
+							erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+							erro +='<strong>Atenção!</strong> A quantidade de itens do produto ' + $('#produto_'+linha).text() + ' está vazia.';
+							erro +='</div>';
+						
+							$('#validaProdutos').append(erro);
+							
+							setTimeout(function(){
+								$('.alert').alert('close');
+							}, 5000);
+						}
+						
+					} else {
+						
+						var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
+						erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+						erro +='<strong>Atenção!</strong> Nenhum produto selecionado no item de numero ' + i + '.';
+						erro +='</div>';
+					
+						$('#validaProdutos').append(erro);
+						
+						setTimeout(function(){
+							$('.alert').alert('close');
+						}, 5000);
+					}
+					
+				});
+				
+				callback(status);
+			}
 
 			function verificaValorPago(){
 				if($('#valorpago').val() == ''){
@@ -1523,55 +1589,60 @@
 			
 			$("#btn_submit_produtos").click(function() {
 				
-				pesqEncomenda(function(numero){//Verificar se a encomenda existe
-					
-					var id = $('#id').val();
-					var msg = '';
-					console.log('btn_submit_produtos.click : '+numero+' pesquisa');
-					
-					if(numero == id){
-						
-						console.log('Encomenda existe, salvar só os itens');
-
-						//if(verificaItemProdutoNome()){//verificação dos campos
-
-							inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
-								
-							});//fim inserirItemEncomenda
-						//};//fim da verificação
-						
-						setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
-							recarregar();
-						}, 500);
-						
-					}else{
-						
-						console.log('Encomenda não existe, salvar como iniciada com itens');
-						
-						//if(verificaCliente() && verificaDataEntr() && verificaItemProdutoNome() && verificaItemquantidade()){
-						if(verificaCliente() && verificaDataEntr()){
-						//verificação dos campos
+				verificaItens(function(status) {
+					if(status == true){
+						pesqEncomenda(function(numero){//Verificar se a encomenda existe
 							
-							inserirInfoEncomenda(1,function(result){
-								console.log('submit_informações : '+result);
-							});//fiminserirInfoEncomenda
+							var id = $('#id').val();
+							var msg = '';
+							console.log('btn_submit_produtos.click : '+numero+' pesquisa');
+							
+							if(numero == id){
 								
-							setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+								console.log('Encomenda existe, salvar só os itens');
+							
 								inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
 									
 								});//fim inserirItemEncomenda
-							}, 400);
+								
+								setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+									recarregar();
+								}, 500);
+								
+							}else{
+								
+								console.log('Encomenda não existe, salvar como iniciada com itens');
+								
+								//if(verificaCliente() && verificaDataEntr() && verificaItemProdutoNome() && verificaItemquantidade()){
+								if(verificaCliente() && verificaDataEntr()){
+								//verificação dos campos
+									
+									inserirInfoEncomenda(1,function(result){
+										console.log('submit_informações : '+result);
+									});//fiminserirInfoEncomenda
+										
+									setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+										inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
+											
+										});//fim inserirItemEncomenda
+									}, 400);
+									
+									
+									setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+										recarregar();
+									}, 600);
+									
+								};//fim if validação
+							};	//fim else
 							
 							
-							setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
-								recarregar();
-							}, 600);
-							
-						};//fim if validação
-					};	//fim else
+						});//fim pesqEncomenda
+					} else {
+						
+					}
 					
-					
-				});//fim pesqEncomenda
+				});
+				
 			});//fim - INCLUIR ENCOMENDA - produtos ---------------------------------------
 
 
