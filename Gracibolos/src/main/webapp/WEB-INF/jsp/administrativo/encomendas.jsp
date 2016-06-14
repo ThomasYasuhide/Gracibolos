@@ -339,7 +339,7 @@
 												
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								
+	
 								<div class="wizard">
 						            <div class="wizard-inner">
 						                <div class="connecting-line"></div>
@@ -386,13 +386,14 @@
 						
 						                </ul>
 						            </div>
-						
+						            
+									<div id="alertas" class="col-xs-12"></div>
+									
 						            <div class="tab-content">
-						            				            	
+						            	
 						                <div class="tab-pane active" role="tabpanel" id="step1">
 	                    
 						                    <div class="row">
-						                    	<div id="avisoInfo" class="col-xs-12"></div>
 												
 						                        <div class="input-margin col-xs-12 col-sm-6 col-md-3">
 													<label class="control-label" for="id">Nº da encomenda:</label>
@@ -897,12 +898,11 @@
 				//Trigger aciona um evento para que o campo seja formatado com a mascara.
 				$('#totalprodutos').val(total).trigger('input');
 				$('#totalencomenda').val(total).trigger('input');
-				$('#valorpago').val('').trigger('input');
 				$('#valortroco').val('').trigger('input');
 				
 			};		
 
-			function pesquisarValor(linha){//Está quebrando o código
+			function pesquisarValor(linha){
 				
 				var produto = $('#produto_' + linha);
 				var valor = $('#valor_' + linha);
@@ -979,6 +979,7 @@
 						break;
 					
 					case '3'://Faturado
+						
 						$('#link-produzir').click();
 						var now = moment().format('YYYY-MM-DD');// data produção - Settando a data de hoje 
 			            $('#dataproducao').val(now);
@@ -1276,15 +1277,15 @@
 					document.getElementById("cliente").focus();
 					console.log('campo o nome cliente vazio');
 					
-					var erro = '<div id="avisoCliente" class="alert alert-warning  alert-dismissible fade in" role="alert">';
+					var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
 					erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 					erro +='<strong>Aviso!</strong> O campo nome do cliente é de preenchimento obrigatório.';
 					erro +='</div>';
 				
-					$('#avisoInfo').append(erro);
+					$('#alertas').append(erro);
 				
 					setTimeout(function(){
-						$('#avisoCliente').alert('close');
+						$('.alert').alert('close');
 					}, 5000);
 					return false;
 				}else{
@@ -1335,15 +1336,15 @@
 					document.getElementById("formapagamento").focus();
 					console.log('campo o forma de pagamento vazio');
 					
-					var erro = '<div id="avisoForma" class="alert alert-warning  alert-dismissible fade in" role="alert">';
+					var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
 					erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 					erro +='<strong>Aviso!</strong> O campo nome do cliente é de preenchimento obrigatório.';
 					erro +='</div>';
 				
-					$('#avisoCaixa').append(erro);
+					$('#alertas').append(erro);
 				
 					setTimeout(function(){
-						$('#avisoForma').alert('close');
+						$('.alert').alert('close');
 					}, 5000);
 					return false;
 				}else{
@@ -1357,15 +1358,15 @@
 					document.getElementById("dataentrega").focus();
 					console.log('campo o data entrega vazio');
 
-					var erro = '<div id="avisoDataEntr" class="alert alert-warning  alert-dismissible fade in" role="alert">';
+					var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
 					erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 					erro +='<strong>Aviso!</strong> O campo data de entrega é de preenchimento obrigatório.';
 					erro +='</div>';
 				
-					$('#avisoInfo').append(erro);
+					$('#alertas').append(erro);
 				
 					setTimeout(function(){
-						$('#avisoDataEntr').alert('close');
+						$('.alert').alert('close');
 					}, 5000);
 					
 					return false;
@@ -1400,7 +1401,7 @@
 								erro +='<strong>Atenção!</strong> O valor do produto ' + $('#produto_'+linha).text() + ' está em branco.';
 								erro +='</div>';
 							
-								$('#validaProdutos').append(erro);
+								$('#alertas').append(erro);
 								
 								setTimeout(function(){
 									$('.alert').alert('close');
@@ -1413,7 +1414,7 @@
 							erro +='<strong>Atenção!</strong> A quantidade de itens do produto ' + $('#produto_'+linha).text() + ' está vazia.';
 							erro +='</div>';
 						
-							$('#validaProdutos').append(erro);
+							$('#alertas').append(erro);
 							
 							setTimeout(function(){
 								$('.alert').alert('close');
@@ -1427,7 +1428,7 @@
 						erro +='<strong>Atenção!</strong> Nenhum produto selecionado no item de numero ' + i + '.';
 						erro +='</div>';
 					
-						$('#validaProdutos').append(erro);
+						$('#alertas').append(erro);
 						
 						setTimeout(function(){
 							$('.alert').alert('close');
@@ -1440,19 +1441,19 @@
 			}
 
 			function verificaValorPago(){
-				if($('#valorpago').val() == ''){
+				if($('#valorpago').val() == '' && $('#valorpago').val() < $('#totalencomenda').val()){
 					document.getElementById("valorpago").focus();
 					console.log('campo o valor pago vazio');
 					
-					var erro = '<div id="avisoValorPago" class="alert alert-warning  alert-dismissible fade in" role="alert">';
+					var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
 					erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-					erro +='<strong>Aviso!</strong> O campo nome do cliente é de preenchimento obrigatório.';
+					erro +='<strong>Aviso!</strong> O valor informado é menor ao valor da encomenda ou está em branco.';
 					erro +='</div>';
 				
-					$('#avisoCaixa').append(erro);
+					$('#alertas').append(erro);
 				
 					setTimeout(function(){
-						$('#avisoValorPago').alert('close');
+						$('.alert').alert('close');
 					}, 5000);
 					return false;
 				}else{
@@ -1755,7 +1756,7 @@
 			};
 			
 			$("#btn_submit_faturar").click(function() {		
-						
+				
 				pesqEncomenda(function(numero){//Verificar se a encomenda existe	
 								
 					var id = $('#id').val();
@@ -1933,15 +1934,15 @@
 				if(parseFloat(valorpago) >= parseFloat(totalencomenda)){
 					$("#valortroco").val((valorpago - totalencomenda).toFixed(2)).trigger('input');
 				}else{
-					var erro = '<div id="erroValorPago" class="alert alert-warning  alert-dismissible fade in" role="alert">';
+					var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
 							erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 							erro +='<strong>Atenção!</strong> O valor pago informado é menor do que o valor total da encomenda.';
 						erro +='</div>';
 					
-					$('#errosFatura').append(erro);
+					$('#alertas').append(erro);
 					
 					setTimeout(function(){
-						$('#erroValorPago').alert('close');
+						$('.alert').alert('close');
 					}, 5000)
 					
 					$('#valorpago').val("");
@@ -2032,8 +2033,6 @@
 						$(this).removeAttr('disabled');
 					}
 				});
-				
-				$('#formapagamento').val('0');
 				
 				$('#dataentrega').removeClass('disabled').removeAttr('disabled');
 				$('#valorpago').removeAttr('readonly');//valor pago - habilitar
