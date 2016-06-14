@@ -84,7 +84,7 @@
 						<div id="msg3" class="alert alert-success alert-dismissible" role="alert">
 						 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						  	<strong>Sucesso!</strong> 
-						  	<c:out value="${mensagemItem}"></c:out>, armazenado(s) com sucesso.
+						  	<c:out value="${mensagemItem}"></c:out> iten(s), armazenado(s) com sucesso.
 						</div>
 						<c:remove var="respostaItem"/>
 					  	<c:remove var="mensagemItem"/>
@@ -442,6 +442,8 @@
 						                <div class="tab-pane" role="tabpanel" id="step2">
 
 							                    <div class="row">
+							                    
+													<div id="validaProdutos" class="col-xs-12"></div>
 													
 							                    	<div class="input-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							                    		<button type="button" id="inserir-linha"  onclick="return false" class="btn btn-default fullwidth"><i class="material-icons">add_shopping_cart</i>&nbsp;&nbsp;&nbsp;Incluir novo produto</button>
@@ -516,7 +518,7 @@
 													<div class="input-group">
 														<span class="input-group-addon">R$</span>
 														<!-- readonly -->
-														<input type="text" id="totalencomenda" name="totalencomenda" class="form-control" readonly />
+														<input type="text" id="totalencomenda" placeholder="0,00" name="totalencomenda" class="form-control" readonly />
 													</div>
 												</div>
 												
@@ -895,6 +897,8 @@
 				//Trigger aciona um evento para que o campo seja formatado com a mascara.
 				$('#totalprodutos').val(total).trigger('input');
 				$('#totalencomenda').val(total).trigger('input');
+				$('#valorpago').val('').trigger('input');
+				$('#valortroco').val('').trigger('input');
 				
 			};		
 
@@ -926,12 +930,11 @@
 				switch(status){
 					
 					case '1'://Iniciado
-						$('#link-produto').click();//Abre na aba produtos
+						
 						var now = moment().format('YYYY-MM-DD');// data produção - Settando a data de hoje 
 			            $('#datafaturado').val(now);
 
 						$('#dataentrega').removeClass('disabled').removeAttr('disabled');//Salvar transação
-						$('#tab-faturar').addClass('disabled');
 						$('#tab-produzir').addClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
 						
@@ -940,12 +943,29 @@
 						$('#btn_faturar_bypass').addClass('hidden').attr('disabled','disabled');
 						
 						var selectize = $('#cliente')[0].selectize;
-						selectize.disable();
+						selectize.enable();
 
 						$('#totalprodutos').val('');//limpa o total dos produtos
 						$('#inserir-linha').removeClass('disabled').removeAttr('disabled');//habilitar insersão
 						$('#btn_submit_produtos').removeClass('disabled').removeAttr('disabled');//Salvar itens da encomenda
 						$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação
+						var linha='';
+						
+						setTimeout(function(){//verifica se tem itens
+							
+							$('#lista-produtos tr').each(function () {					
+								//Captura os numeros de linhas
+								linha = this.id.replace('item_', '');			
+							});
+							if(linha == ''){// -------------------Sem itens
+								inserir_item();
+								console.log('sem itens');
+								$('#link-produto').click();//Abre na aba produtos
+							}else{// -----------------------------com itens
+								$('#link-faturar').click();//Abre na aba faturar
+							}
+
+						},500);
 						
 						break;
 						
@@ -956,7 +976,7 @@
 						break;
 					
 					case '3'://Faturado
-						$('#link-faturar').click();
+						$('#link-produzir').click();
 						var now = moment().format('YYYY-MM-DD');// data produção - Settando a data de hoje 
 			            $('#dataproducao').val(now);
 						
@@ -1009,7 +1029,7 @@
 					
 					case '4'://Produzindo
 						
-						$('#link-produzir').click();
+						$('#link-finalizar').click();
 			            var now = moment().format('YYYY-MM-DD'); //data finalizado - settando a data de hoje
 			            $('#datafinalizado').val(now);
 			            $('#dataproducao').val(data[9]);//Insere a data de produção
@@ -1182,7 +1202,7 @@
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].total" id="total_'+i+'" class="form-control total" readonly="readonly" />';
+				    item += 				'<input type="text" name="item['+i+'].total" id="total_'+i+'" placeholder="0,00" class="form-control total" readonly="readonly" />';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
@@ -1312,7 +1332,7 @@
 			};
 
 			function verificaFormaPag(){
-				if(($('#formapagamento').val() == '')){
+				if(($('#formapagamento').val() != '0')){
 					document.getElementById("formapagamento").focus();
 					console.log('campo o forma de pagamento vazio');
 					
@@ -1355,6 +1375,70 @@
 					return true;
 				}
 			};
+			
+			function verificaItens(callback){
+				var i = 0;
+				var status = false;
+				
+				$('#lista-produtos tr').each(function() {
+					
+					var linha = this.id.replace('item_', '');
+					status = false;
+					i++;
+					
+					//Verifica se todos os produtos está preenchidos.
+					if($('#produto_'+linha).val() != ''){
+						
+						if($('#quantidade_'+linha).val() != '' && $('#quantidade_'+linha).val() > 0){
+							
+							if($('#valor_'+linha).val() != '' && $('#valor_'+linha).val().split(",").join(".") > 0.00){
+								
+								status = true;
+								
+							} else {
+								var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
+								erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+								erro +='<strong>Atenção!</strong> O valor do produto ' + $('#produto_'+linha).text() + ' está em branco.';
+								erro +='</div>';
+							
+								$('#validaProdutos').append(erro);
+								
+								setTimeout(function(){
+									$('.alert').alert('close');
+								}, 5000);
+							}
+							
+						} else {
+							var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
+							erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+							erro +='<strong>Atenção!</strong> A quantidade de itens do produto ' + $('#produto_'+linha).text() + ' está vazia.';
+							erro +='</div>';
+						
+							$('#validaProdutos').append(erro);
+							
+							setTimeout(function(){
+								$('.alert').alert('close');
+							}, 5000);
+						}
+						
+					} else {
+						
+						var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
+						erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+						erro +='<strong>Atenção!</strong> Nenhum produto selecionado no item de numero ' + i + '.';
+						erro +='</div>';
+					
+						$('#validaProdutos').append(erro);
+						
+						setTimeout(function(){
+							$('.alert').alert('close');
+						}, 5000);
+					}
+					
+				});
+				
+				callback(status);
+			}
 
 			function verificaValorPago(){
 				if($('#valorpago').val() == ''){
@@ -1548,55 +1632,60 @@
 			
 			$("#btn_submit_produtos").click(function() {
 				
-				pesqEncomenda(function(numero){//Verificar se a encomenda existe
-					
-					var id = $('#id').val();
-					var msg = '';
-					console.log('btn_submit_produtos.click : '+numero+' pesquisa');
-					
-					if(numero == id){
-						
-						console.log('Encomenda existe, salvar só os itens');
-
-						//if(verificaItemProdutoNome()){//verificação dos campos
-
-							inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
-								
-							});//fim inserirItemEncomenda
-						//};//fim da verificação
-						
-						setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
-							recarregar();
-						}, 500);
-						
-					}else{
-						
-						console.log('Encomenda não existe, salvar como iniciada com itens');
-						
-						//if(verificaCliente() && verificaDataEntr() && verificaItemProdutoNome() && verificaItemquantidade()){
-						if(verificaCliente() && verificaDataEntr()){
-						//verificação dos campos
+				verificaItens(function(status) {
+					if(status == true){
+						pesqEncomenda(function(numero){//Verificar se a encomenda existe
 							
-							inserirInfoEncomenda(1,function(result){
-								console.log('submit_informações : '+result);
-							});//fiminserirInfoEncomenda
+							var id = $('#id').val();
+							var msg = '';
+							console.log('btn_submit_produtos.click : '+numero+' pesquisa');
+							
+							if(numero == id){
 								
-							setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+								console.log('Encomenda existe, salvar só os itens');
+							
 								inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
 									
 								});//fim inserirItemEncomenda
-							}, 400);
+								
+								setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+									recarregar();
+								}, 500);
+								
+							}else{
+								
+								console.log('Encomenda não existe, salvar como iniciada com itens');
+								
+								//if(verificaCliente() && verificaDataEntr() && verificaItemProdutoNome() && verificaItemquantidade()){
+								if(verificaCliente() && verificaDataEntr()){
+								//verificação dos campos
+									
+									inserirInfoEncomenda(1,function(result){
+										console.log('submit_informações : '+result);
+									});//fiminserirInfoEncomenda
+										
+									setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+										inserirItemEncomenda(function(result){//insiro os itens da encomenda e espero a resposta (callback)
+											
+										});//fim inserirItemEncomenda
+									}, 400);
+									
+									
+									setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+										recarregar();
+									}, 600);
+									
+								};//fim if validação
+							};	//fim else
 							
 							
-							setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
-								recarregar();
-							}, 600);
-							
-						};//fim if validação
-					};	//fim else
+						});//fim pesqEncomenda
+					} else {
+						
+					}
 					
-					
-				});//fim pesqEncomenda
+				});
+				
 			});//fim - INCLUIR ENCOMENDA - produtos ---------------------------------------
 
 
@@ -1945,6 +2034,8 @@
 					}
 				});
 				
+				$('#formapagamento').val('0');
+				
 				$('#dataentrega').removeClass('disabled').removeAttr('disabled');
 				$('#valorpago').removeAttr('readonly');//valor pago - habilitar
 				$('#btn_submit_informacoes').removeClass('disabled').removeAttr('disabled');//Salvar informações da encomenda
@@ -1952,7 +2043,7 @@
 				$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação
 
 				$('#valorpago').val('');
-				$('#formapagamento').val('');
+				$('#formapagamento').val('0');
 				$('#datafaturamento').val('');
 				$('#datafaturamento').removeClass('disabled').removeAttr('disabled');
             }
