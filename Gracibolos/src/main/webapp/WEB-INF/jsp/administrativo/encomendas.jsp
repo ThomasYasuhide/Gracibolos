@@ -466,7 +466,7 @@
 													<div class="input-group">
 														<span class="input-group-addon">R$</span>
 														<!-- readonly -->
-														<input type="text" id="totalencomenda" name="totalencomenda" class="form-control" readonly />
+														<input type="text" id="totalencomenda" placeholder="0,00" name="totalencomenda" class="form-control" readonly />
 													</div>
 												</div>
 												
@@ -845,6 +845,8 @@
 				//Trigger aciona um evento para que o campo seja formatado com a mascara.
 				$('#totalprodutos').val(total).trigger('input');
 				$('#totalencomenda').val(total).trigger('input');
+				$('#valorpago').val('').trigger('input');
+				$('#valortroco').val('').trigger('input');
 				
 			};		
 
@@ -878,7 +880,6 @@
 					case '1'://Iniciado
 
 						$('#dataentrega').removeClass('disabled').removeAttr('disabled');//Salvar transação
-						$('#tab-faturar').addClass('disabled');
 						$('#tab-produzir').addClass('disabled');
 						$('#tab-finalizar').addClass('disabled');
 						
@@ -887,7 +888,8 @@
 						$('#btn_faturar_bypass').addClass('hidden').attr('disabled','disabled');
 						
 						var selectize = $('#cliente')[0].selectize;
-						selectize.disable();
+						selectize.enable();
+						
 						var linha='';
 						
 						setTimeout(function(){//verifica se tem itens
@@ -898,6 +900,8 @@
 							});
 							if(linha == ''){// -------------------Sem itens
 								
+								inserir_item();
+							
 								console.log('sem itens');
 								
 								$('#totalprodutos').val('');//limpa o total dos produtos
@@ -1159,7 +1163,7 @@
 				    item +=			'<td>';
 				    item += 			'<div class="input-group">';
 				    item += 				'<span class="input-group-addon">R$</span>';
-				    item += 				'<input type="text" name="item['+i+'].total" id="total_'+i+'" class="form-control total" readonly="readonly" />';
+				    item += 				'<input type="text" name="item['+i+'].total" id="total_'+i+'" placeholder="0,00" class="form-control total" readonly="readonly" />';
 				    item += 			'</div>';
 				    item += 		'</td>';
 				    item +=			'<td>';
@@ -1289,7 +1293,7 @@
 			};
 
 			function verificaFormaPag(){
-				if(($('#formapagamento').val() == '')){
+				if(($('#formapagamento').val() != '0')){
 					document.getElementById("formapagamento").focus();
 					console.log('campo o forma de pagamento vazio');
 					
@@ -1988,6 +1992,8 @@
 					}
 				});
 				
+				$('#formapagamento').val('0');
+				
 				$('#dataentrega').removeClass('disabled').removeAttr('disabled');
 				$('#valorpago').removeAttr('readonly');//valor pago - habilitar
 				$('#btn_submit_informacoes').removeClass('disabled').removeAttr('disabled');//Salvar informações da encomenda
@@ -1995,7 +2001,7 @@
 				$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação
 
 				$('#valorpago').val('');
-				$('#formapagamento').val('');
+				$('#formapagamento').val('0');
 				$('#datafaturamento').val('');
 				$('#datafaturamento').removeClass('disabled').removeAttr('disabled');
             }
