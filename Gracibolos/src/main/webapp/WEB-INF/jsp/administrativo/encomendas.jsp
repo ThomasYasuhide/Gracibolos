@@ -137,7 +137,7 @@
 					<c:if test="${(respostaFat == 'ok')}">	
 						<div id="msg7" class="alert alert-success alert-dismissible" role="alert">
 						 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						  	<strong>Sucesso!</strong>  Alteração para faturafa efetuada com sucesso.
+						  	<strong>Sucesso!</strong>  Alteração para faturada efetuada com sucesso.
 						</div>
 						<c:remove var="respostaFat"/>
 					  	<script type="text/javascript">
@@ -159,8 +159,60 @@
 							}, 5000)
 						</script>															
 					</c:if>
-					<hr/>
 					
+					<c:if test="${(respostaProd == 'ok')}">	
+						<div id="msg9" class="alert alert-success alert-dismissible" role="alert">
+						 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>Sucesso!</strong>  Alteração para produzindo efetuada com sucesso.
+						</div>
+						<c:remove var="respostaProd"/>
+					  	<script type="text/javascript">
+						  	setTimeout(function(){
+								$('#msg9').alert('close');
+							}, 5000)
+						  </script>
+					</c:if>
+					
+					<c:if test="${respostaProd == 'erro'}">							
+						<div id="msg10" class="alert alert-danger alert-dismissible" role="alert">
+						  	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>Erro!</strong> Houve algum erro ao tentar alterar para produzindo, favor tente novamente.
+						</div>	
+						<c:remove var="respostaProd"/>							
+						<script type="text/javascript">
+						 	setTimeout(function(){
+								$('#msg10').alert('close');
+							}, 5000)
+						</script>															
+					</c:if>
+					
+					<c:if test="${(respostaFin == 'ok')}">	
+						<div id="msg11" class="alert alert-success alert-dismissible" role="alert">
+						 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>Sucesso!</strong>  Alteração para finalizado efetuada com sucesso.
+						</div>
+						<c:remove var="respostaFin"/>
+					  	<script type="text/javascript">
+						  	setTimeout(function(){
+								$('#msg11').alert('close');
+							}, 5000)
+						  </script>
+					</c:if>
+					
+					<c:if test="${respostaFin == 'erro'}">							
+						<div id="msg12" class="alert alert-danger alert-dismissible" role="alert">
+						  	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>Erro!</strong> Houve algum erro ao tentar alterar para finalizado, favor tente novamente.
+						</div>	
+						<c:remove var="respostaFin"/>							
+						<script type="text/javascript">
+						 	setTimeout(function(){
+								$('#msg12').alert('close');
+							}, 5000)
+						</script>															
+					</c:if>
+					
+					<hr/>			
 					<!-- ############################################################ CONTEUDO ############################################################ -->
 
 					<div class="row">
@@ -302,22 +354,22 @@
 						                    </li>
 						
 						                    <li id="tab-produtos" role="presentation" class="tab">
-						                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
+						                        <a href="#step2" id="link-produto" data-toggle="tab" aria-controls="step2" role="tab" title="Informações do produto">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">shopping_cart</i>
 						                            </span>
 						                        </a>
 						                    </li>
 						                    <li id="tab-faturar" role="presentation" class="tab">
-						                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Faturar encomenda">
+						                        <a href="#step3" id="link-faturar" data-toggle="tab" aria-controls="step3" role="tab" title="Faturar encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">account_balance</i>
 						                            </span>
 						                        </a>
 						                    </li>
 						
-						                    <li id="tab-produzir" role="presentation" class="tab">
-						                        <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Produzir encomenda">
+						                    <li id="tab-produzir"  role="presentation" class="tab">
+						                        <a href="#step4" id="link-produzir" data-toggle="tab" aria-controls="step4" role="tab" title="Produzir encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">query_builder</i>
 						                            </span>
@@ -325,7 +377,7 @@
 						                    </li>
 						
 						                    <li id="tab-finalizar" role="presentation" class="tab">
-						                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Finalizar encomenda">
+						                        <a href="#complete" id="link-finalizar" data-toggle="tab" aria-controls="complete" role="tab" title="Finalizar encomenda">
 						                            <span class="round-tab">
 						                                <i class="material-icons timeline">done</i>
 						                            </span>
@@ -864,16 +916,19 @@
 			            }
 			        });
 				}
-			}
-			
+			};  
+           	
 			function verificaStatus(status) {
 				
 				//Volta para a primeira telas
-				$('#link-info').click();
+				//$('#link-info').click();
 				
 				switch(status){
 					
 					case '1'://Iniciado
+						$('#link-produto').click();//Abre na aba produtos
+						var now = moment().format('YYYY-MM-DD');// data produção - Settando a data de hoje 
+			            $('#datafaturado').val(now);
 
 						$('#dataentrega').removeClass('disabled').removeAttr('disabled');//Salvar transação
 						$('#tab-faturar').addClass('disabled');
@@ -886,42 +941,11 @@
 						
 						var selectize = $('#cliente')[0].selectize;
 						selectize.disable();
-						var linha='';
-						
-						setTimeout(function(){//verifica se tem itens
-							
-							$('#lista-produtos tr').each(function () {					
-								//Captura os numeros de linhas
-								linha = this.id.replace('item_', '');			
-							});
-							if(linha == ''){// -------------------Sem itens
-								
-								console.log('sem itens');
-								
-								$('#totalprodutos').val('');//limpa o total dos produtos
-								$('#inserir-linha').removeClass('disabled').removeAttr('disabled');//habilitar insersão
-								$('#btn_submit_produtos').removeClass('disabled').removeAttr('disabled');//Salvar itens da encomenda
-								$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação
 
-								
-								
-							}else{// -----------------------------Com itens
-								
-								console.log('com itens');
-
-								
-// 								$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação - habilitar
-// 								$('#btn_submit_produtos').addClass('disabled').attr('disabled','disabled');//Salvar itens da encomenda - desabilitar
-// 								$('#formapagamento option').each(function () {//forma de pagamento - habilitar				
-// 									if($(this).val() != 0){
-// 										$(this).removeAttr('disabled');
-// 									}
-// 								});
-								
-// 								$('#valorpago').removeAttr('readonly');//valor pago - habilitar
-							}
-							
-						},600);
+						$('#totalprodutos').val('');//limpa o total dos produtos
+						$('#inserir-linha').removeClass('disabled').removeAttr('disabled');//habilitar insersão
+						$('#btn_submit_produtos').removeClass('disabled').removeAttr('disabled');//Salvar itens da encomenda
+						$('#btn_submit_faturar').removeClass('disabled').removeAttr('disabled');//Salvar transação
 						
 						break;
 						
@@ -932,11 +956,10 @@
 						break;
 					
 					case '3'://Faturado
-						
-						//------settando a data de hoje---------------------------------
-						var now = moment().format('YYYY-MM-DD'); 
+						$('#link-faturar').click();
+						var now = moment().format('YYYY-MM-DD');// data produção - Settando a data de hoje 
 			            $('#dataproducao').val(now);
-
+						
 						$('#dataentrega').addClass('disabled').attr('disabled','disabled');
 						$('#btn_submit_informacoes').addClass('disabled').attr('disabled','disabled');//Salvar informações da encomenda
 						$('#btn_submit_produtos').addClass('disabled').attr('disabled','disabled');//Salvar itens da encomenda
@@ -986,9 +1009,10 @@
 					
 					case '4'://Produzindo
 						
-						//------settando a data de hoje---------------------------------
-			            var now = moment().format('YYYY-MM-DD'); 
+						$('#link-produzir').click();
+			            var now = moment().format('YYYY-MM-DD'); //data finalizado - settando a data de hoje
 			            $('#datafinalizado').val(now);
+			            $('#dataproducao').val(data[9]);//Insere a data de produção
 
 						$('#dataentrega').addClass('disabled').attr('disabled','disabled');
 						$('#btn_submit_informacoes').addClass('disabled').attr('disabled','disabled');//Salvar informações da encomenda - desabilitar
@@ -1042,6 +1066,7 @@
 						
 					case '5'://Finalizado
 						
+						$('#link-info').click();
 						$('#tab-faturar').removeClass('disabled');
 						$('#tab-produzir').removeClass('disabled');
 						$('#tab-finalizar').removeClass('disabled');
@@ -1731,15 +1756,16 @@
 			};
 			$("#btn_submit_produzir").click(function() {
 				console.log('#btn_submit_produzir - click');
-				produzirAjax(resultado);
-				function resultado(result){
-					
-// 					$('#msg8').show(); 
-// 					setTimeout(function(){
-// 						$('#msg8').alert('close');
-// 						}, 5000 );
-				}			
 				
+				produzirAjax(function(result){
+					if(result == 'ok'){
+						console.log('Alterado para produzindo com sucesso');
+					}	
+				});		
+
+				setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+					recarregar();
+				}, 600);
 			});
 			//FIM - PRODUZIR ENCOMENDA---------------------------------------
 
@@ -1768,15 +1794,17 @@
 			
 			$("#btn_submit_finalizar").click(function() {
 				console.log('#btn_submit_finalizar - click');
-				finalizarAjax(resposta);
-				function resposta(result){
-					
-// 					$('#msg9').show(); 
-// 					setTimeout(function(){
-// 						$('#msg9').alert('close');
-// 						}, 5000 );
-				};
-		
+				
+				finalizarAjax(function(result){
+					if(result == 'ok'){
+						console.log('Alterado para produzindo com sucesso');
+					}
+				});
+				
+				setTimeout(function(){// REQUEST PARA LISTA DE ENCOMENDAS
+					recarregar();
+				}, 600);
+				
 			});
 			//FIM - FINALIZAR ENCOMENDA---------------------------------------
 			
@@ -1957,11 +1985,6 @@
             $('#incluir-encomenda-modal').click(function() {
                 
             	$('.nav-tabs a[href="#step1"]').tab('show');//Abrir no formulario dados da encomenda
-
-            	//------settando a data de hoje---------------------------------
-    			var now = moment().format('YYYY-MM-DD'); 
-    			$('#dataencomenda').val(now);       
-    			$('#datafaturamento').val(now);//Colocar a data de hoje
     			
 				//callback
            	  	novoNumero(function(result){         	  	
@@ -1972,9 +1995,12 @@
             	resetCampos();
             	//Chama o método para inserção
 				inserir_item(function(linha){}); // Inserir uma linha nos itens
-				var now = moment().format('YYYY-MM-DD');        
+				
+				var now = moment().format('YYYY-MM-DD'); 
+				$('#dataencomenda').val(now);          
 				$('#datafaturamento').val(now);//Colocar a data de hoje
             	//Altera dinamicamente o titulo do modal.
+            	
 				$('#modal-subtitle').text("Incluir nova encomenda");
 				
 				//Nome do botão incluir encomenda
@@ -2141,16 +2167,7 @@
 					
 				});
 				
-				verificaStatus(data[2]);
-				
-				console.log('status : '+data[2]);
-            	if(data[2] == 1){
-            		$('.nav-tabs a[href="#step2"]').tab('show');//Abrir no formulario produtos
-               	}else if(data[2] == 3){
-               		$('.nav-tabs a[href="#step3"]').tab('show');//Abrir no formulario pagamento
-               	}else if(data[2] == 4){
-               		$('.nav-tabs a[href="#step4"]').tab('show');//Abrir no formulario produção
-               	}     
+				verificaStatus(data[2]);  
 				
 			});
 
