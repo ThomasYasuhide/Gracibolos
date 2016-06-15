@@ -26,12 +26,22 @@ public class CaixaDao implements GenericoDao<Caixa>{
 	
 	public boolean inserir(Caixa caixa) throws Exception{
 		
-		//Atualização do saldo
-		if(updateSaldo(getSaldo().add(caixa.getValor()))){
-			System.out.println("Valor incluso");
-		}else{
-			System.out.println("Erro ao incluir saldo");
+		if(caixa.getGastoRecebimento() == 1){//Recebimento - somar
+			//Atualização do saldo
+			if(updateSaldo(getSaldo().add(caixa.getValor()))){
+				System.out.println("Valor incluso");
+			}else{
+				System.out.println("Erro ao incluir saldo");
+			}
+		}else if(caixa.getGastoRecebimento() == 0){//Gasto - subtrair
+			
+			if(updateSaldo(getSaldo().subtract(caixa.getValor()))){
+				System.out.println("gasto incluso");
+			}else{
+				System.out.println("Erro ao incluir saldo");
+			}
 		}
+		
 		
 		boolean status = false;
 		
