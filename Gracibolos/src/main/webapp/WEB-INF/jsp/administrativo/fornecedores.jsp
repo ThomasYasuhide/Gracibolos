@@ -243,6 +243,8 @@
 					<div class="modal-body">
 						<!-- ################################# CONTEUDO ################################# -->
 						<div class="row">
+						
+							<div id="alertas" class="col-xs-12"></div>
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 								<div class="hidden">
@@ -537,8 +539,20 @@
                 handler: '#cpfcnpj_inp',
                 ifValid: function () { },
                 ifInvalid: function () { 
-                	$('#modal_erro').modal('show');
-                    $('#erro_msg').text('CPF ou CNPJ inválido, favor tente novamente.');
+
+                	var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
+					erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+					erro +='<strong>Atenção!</strong> CPF ou CNPJ inválido, favor tente novamente.';
+						erro +='</div>';
+					
+					$('#alertas').append(erro);
+					
+					setTimeout(function(){
+						$('.alert').alert('close');
+					}, 5000);
+					
+                	//$('#modal_erro').modal('show');
+                    //$('#erro_msg').text('CPF ou CNPJ inválido, favor tente novamente.');
                     $('#cpfcnpj_inp').val(""); 
                 }
             });
@@ -619,19 +633,43 @@
                                 
                             } //end if.
                             else {
+
+                            	var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
+            					erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+            					erro +='<strong>Atenção!</strong> O CEP digitado não foi encontrado, favor tente novamente.';
+            						erro +='</div>';
+            					
+            					$('#alertas').append(erro);
+            					
+            					setTimeout(function(){
+            						$('.alert').alert('close');
+            					}, 5000);
+            					
                             	//CEP pesquisado não foi encontrado.                            
-                                $('#modal_erro').modal('show');
+                                //$('#modal_erro').modal('show');
                               	//Altera dinamicamente o titulo do modal.
-                				$('#erro_msg').text("ERRO! CEP não encontrado.");
+                				//$('#erro_msg').text("ERRO! CEP não encontrado.");
                 				$('#cep').val('');
                             }
                         });
                     } //end if.
                     else {
+
+                    	var erro = '<div class="alert alert-warning  alert-dismissible fade in" role="alert">';
+    					erro +='<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+    					erro +='<strong>Atenção!</strong> Formato de CEP inválido.';
+    						erro +='</div>';
+    					
+    					$('#alertas').append(erro);
+    					
+    					setTimeout(function(){
+    						$('.alert').alert('close');
+    					}, 5000);
+    					
                     	//cep é inválido.                       
        					//modal de erro
-                        $('#modal_erro').modal('show');
-                        $('#erro_msg').text("O CEP digitado não foi encontrado, favor tente novamente.");
+                        //$('#modal_erro').modal('show');
+                        //$('#erro_msg').text("Formato de CEP inválido.");
         				$('#cep').val('');
         				$('#endereco').val('');
         				$('#bairro').val('');
