@@ -311,13 +311,13 @@
 								</div>
 
 								<!-- Campo  endereço -->
-								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="endereco">Endereço*:</label>
 									<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" required/>
 								</div>
 
 								<!-- Campo número da casa -->
-								<div class="input-margin col-xs-12 col-sm-3 col-md-2">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
 									<label class="control-label" for="numero">Numero*:</label>
 									<input type="text" id="numero" name="numero" placeholder="0" class="form-control" required/>
 								</div>

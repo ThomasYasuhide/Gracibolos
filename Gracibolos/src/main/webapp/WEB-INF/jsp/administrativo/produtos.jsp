@@ -277,7 +277,7 @@
 											</div> 
 
 											<!-- Campo nome -->
-											<div class="input-margin col-xs-12 col-sm-12 col-md-9">
+											<div class="input-margin col-xs-12 col-sm-6 col-md-9">
 												<label class="control-label" for="nome">Nome*:</label>
 												<input type="text" id="nome" class="form-control" maxlength="100" placeholder="Digite o nome do produto" name="nome" required>
 											</div>

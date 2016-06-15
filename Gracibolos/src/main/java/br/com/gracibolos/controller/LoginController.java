@@ -84,13 +84,13 @@ public class LoginController {
 	                case 1:
 	                    System.out.println("Nível de acesso operador");
 	                    status = true; //Altera o status de login válido
-	                    page = "redirect:operacional-clientes"; //Direciona para a pagina do operador/clientes
+	                    page = "redirect:operacional-encomendas"; //Direciona para a pagina do operador/clientes
 	                    break;
 	                
 	                case 2:
 	                    System.out.println("Nível de acesso administrador");
 	                    status = true; //Altera o status de login válido
-	                    page = "redirect:administrativo-encomendas";  //Direciona para a pagina do administrador/dashboard
+	                    page = "redirect:administrativo-dashboard";  //Direciona para a pagina do administrador/dashboard
 	                    break;
 	            }
 	            

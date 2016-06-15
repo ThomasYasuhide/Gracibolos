@@ -276,7 +276,7 @@
 									1 Para recebimento.
 								 -->
 								 
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="gastoRecebimento">Tipo:</label>
 									<select id="gastoRecebimento" name="gastoRecebimento" class="form-control">
 										<option value="0" selected>Gasto</option>
@@ -284,17 +284,17 @@
 									</select> 
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="dataOperacao">Data da Operação:</label>
 									<input type="date" id="dataOperacao" name="dataOperacao" class="form-control" readonly/>
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="dataTransacao">Data da transação*:</label>
 									<input type="date" id="dataTransacao" name="dataTransacao" class="form-control" required/>
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="forma">Forma de pagamento*:</label>
 									<select class="form-control" id="forma" name="forma">										
 										<option value="0" selected disabled>Selecione...</option>
@@ -306,12 +306,12 @@
 									</select>
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="parcela">Número de Parcelas:</label>
 									<input id="parcela" name="parcela" type="number" class="form-control" min=1 max=6 pattern="[0-9]+" maxlength="1" value="1">
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-4 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="valor">Valor*:</label>
 									<div class="input-group">
 										<span class="input-group-addon">R$</span>
@@ -319,12 +319,12 @@
 									</div>
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-6 col-md-12" id="fornecedorDiv">
+								<div class="input-margin col-xs-12 col-sm-12 col-md-12" id="fornecedorDiv">
 									<label class="control-label" for="fornecedorId" id="lbl_fornecedorId">Fornecedor:</label>			 						
  									<select name="fornecedorId" id="fornecedorId" class="form-control" placeholder="Digite o nome do fornecedor."></select>
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-6 col-md-12" id="encomendaDiv">
+								<div class="input-margin col-xs-12 col-sm-12 col-md-12" id="encomendaDiv">
  									<label class="control-label" for="encomendaId" >Numero da encomenda:</label>
  									<input type="text" name="encomendaId" id="encomendaId"  class="form-control" readonly/>
 								</div>

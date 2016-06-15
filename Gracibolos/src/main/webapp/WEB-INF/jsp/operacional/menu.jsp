@@ -12,14 +12,14 @@
 
 					<div class="collapse navbar-collapse" id="navbar-collapse">
 						<ul class="nav navbar-nav">
-							<li id="menu-mob-dashboard"><a href="administrativo-dashboard"><i class="material-icons">trending_up</i>&nbsp;&nbsp;Dashboard</a></li>
-							<li id="menu-mob-caixa"><a href="administrativo-caixa"><i class="material-icons">account_balance</i>&nbsp;&nbsp;Caixa</a></li>
+							<!-- <li id="menu-mob-dashboard"><a href="administrativo-dashboard"><i class="material-icons">trending_up</i>&nbsp;&nbsp;Dashboard</a></li> -->
+							<!-- <li id="menu-mob-caixa"><a href="administrativo-caixa"><i class="material-icons">account_balance</i>&nbsp;&nbsp;Caixa</a></li> -->
 							<li id="menu-mob-encomendas"><a href="administrativo-encomendas"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;Encomendas</a></li>
 							<li id="menu-mob-clientes"><a href="administrativo-clientes"><i class="material-icons">people</i>&nbsp;&nbsp;Clientes</a></li>
 							<li id="menu-mob-produtos"><a href="administrativo-produtos"><i class="material-icons">local_grocery_store</i>&nbsp;&nbsp;Produtos</a></li>
-							<li id="menu-mob-materiasprimas"><a href="administrativo-materiasprimas"><i class="material-icons">cake</i>&nbsp;&nbsp;Matérias-primas</a></li>
+							<!-- <li id="menu-mob-materiasprimas"><a href="administrativo-materiasprimas"><i class="material-icons">cake</i>&nbsp;&nbsp;Matérias-primas</a></li>-->
 							<li id="menu-mob-fornecedores"><a href="administrativo-fornecedores"><i class="material-icons">shopping_basket</i>&nbsp;&nbsp; Fornecedores</a></li>
-							<li id="menu-mob-colaboradores"><a href="administrativo-colaboradores"><i class="material-icons">person</i>&nbsp;&nbsp;Colaboradores</a></li>
+							<!-- <li id="menu-mob-colaboradores"><a href="administrativo-colaboradores"><i class="material-icons">person</i>&nbsp;&nbsp;Colaboradores</a></li> -->
 							<!-- O href está vazio para o botão não perder o tipo de ponteiro (Deixar assim) -->
 							<li><a href="" data-toggle="modal" data-target="#myModal"><i class="material-icons">exit_to_app</i>&nbsp;&nbsp;Sair do sistema</a></li>
 						</ul>
@@ -37,14 +37,14 @@
 				</div>
 
 				<ul class="nav nav-pills nav-stacked">
-					<li id="menu-dashboard" class="hidden"><a href="administrativo-dashboard"><i class="material-icons">trending_up</i>&nbsp;&nbsp;Dashboard</a></li>
-					<li id="menu-caixa" class="hidden"><a href="administrativo-caixa"><i class="material-icons">account_balance</i>&nbsp;&nbsp;Caixa</a></li>
+					<!-- <li id="menu-dashboard" class="hidden"><a href="administrativo-dashboard"><i class="material-icons">trending_up</i>&nbsp;&nbsp;Dashboard</a></li> -->
+					<!-- <li id="menu-caixa" class="hidden"><a href="administrativo-caixa"><i class="material-icons">account_balance</i>&nbsp;&nbsp;Caixa</a></li> -->
 					<li id="menu-encomendas"><a href="operacional-encomendas"><i class="material-icons">chrome_reader_mode</i>&nbsp;&nbsp;Encomendas</a></li>
 					<li id="menu-clientes"><a href="operacional-clientes"><i class="material-icons">people</i>&nbsp;&nbsp;Clientes</a></li>
 					<li id="menu-produtos"><a href="operacional-produtos"><i class="material-icons">local_grocery_store</i>&nbsp;&nbsp;Produtos</a></li>
-					<li id="menu-materiasprimas"><a href="operacional-materiasprimas"><i class="material-icons">cake</i>&nbsp;&nbsp;Matérias-primas</a></li>
+					<!-- <li id="menu-materiasprimas"><a href="operacional-materiasprimas"><i class="material-icons">cake</i>&nbsp;&nbsp;Matérias-primas</a></li> -->
 					<li id="menu-fornecedores"><a href="operacional-fornecedores"><i class="material-icons">shopping_basket</i>&nbsp;&nbsp; Fornecedores</a></li>
-					<li id="menu-colaboradores" class="hidden"><a href="administrativo-colaboradores"><i class="material-icons">person</i>&nbsp;&nbsp;Colaboradores</a></li>
+					<!-- <li id="menu-colaboradores" class="hidden"><a href="administrativo-colaboradores"><i class="material-icons">person</i>&nbsp;&nbsp;Colaboradores</a></li> -->
 					<!-- O href está vazio para o botão não perder o tipo de ponteiro (Deixar assim) -->
 					<li><a href="" data-toggle="modal" data-target="#myModal"><i class="material-icons">exit_to_app</i>&nbsp;&nbsp;Sair do sistema</a></li>
 				</ul>
