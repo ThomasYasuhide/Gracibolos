@@ -286,12 +286,12 @@
 		<!-- id="cep" -->			<input type="text" id="cep" name="cep" placeholder="00000-000" class="form-control" maxlength="9" required/>
 								</div>
 								
-								<div class="input-margin col-xs-12 col-sm-9 col-md-4">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-4">
 									<label class="control-label" for="endereco">Endereço*:</label>
 	<!-- id="endereco" -->			<input type="text" id="endereco" name="endereco" placeholder="Digite aqui o seu endereço" class="form-control" maxlength="120" required/>
 								</div>
 
-								<div class="input-margin col-xs-12 col-sm-3 col-md-2">
+								<div class="input-margin col-xs-12 col-sm-6 col-md-2">
 									<label class="control-label" for="numero">Numero*:</label>
 		<!-- id="numero" -->		<input type="text" id="numero" name="numero" placeholder="0000" class="form-control" required/>
 								</div>
